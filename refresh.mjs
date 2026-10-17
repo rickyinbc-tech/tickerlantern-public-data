@@ -7211,6 +7211,10 @@ function industryForSIC(sic) {
   ];
   return ranges.find(([a, b]) => n >= a && n <= b)?.[2] || "Total Market";
 }
+var canadianSystemicBanks = /* @__PURE__ */ new Set(["TSX:RY", "TSX:TD", "TSX:BMO", "TSX:BNS", "TSX:CM", "TSX:NA"]);
+function industryForListing(item, sic) {
+  return canadianSystemicBanks.has(item.symbol) ? "Bank (Money Center)" : industryForSIC(sic);
+}
 var cached;
 async function loadReferences(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
   if (!cached) cached = Promise.all(Object.entries(referenceURLs).map(async ([k, url]) => {
@@ -7233,11 +7237,12 @@ async function listingReferences(item, cik, fetcher2 = fetch, now2 = /* @__PURE_
     if (Number(d.cik) === Number(cik)) issuer = { sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, source: { name: "SEC issuer SIC classification", url } };
   } catch {
   }
-  const domicile = issuer?.country?.replace(/\s*\(.*\)/, "").trim().toLowerCase();
+  const domicile = issuer?.country?.replace(/\s*\(.*\)/, "").split(",").at(-1).trim().toLowerCase();
   const country = base.countries.find((c) => c.name.toLowerCase() === domicile) || base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency]);
   const countryBasis = country?.name.toLowerCase() === domicile ? "SEC business-address country proxy" : "Listing-currency country proxy; business-country match unavailable";
-  const industry = base.industries.find((r) => key(r.name) === key(industryForSIC(issuer?.sic))) || base.industries.find((r) => r.name === "Total Market");
-  return { asOf: base.asOf, checkedAt: base.checkedAt, sources: base.sources, country, countryBasis, currencyDefaultSpread: base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency])?.defaultSpread || 0, industry, issuer, classificationBasis: issuer ? "SEC SIC mapped to an approximate US industry proxy" : "Broad US market proxy; no validated issuer industry classification" };
+  const industry = base.industries.find((r) => key(r.name) === key(industryForListing(item, issuer?.sic))) || base.industries.find((r) => r.name === "Total Market");
+  const bank = canadianSystemicBanks.has(item.symbol);
+  return { asOf: base.asOf, checkedAt: base.checkedAt, sources: { ...base.sources, ...bank ? { classification: { name: "OSFI \xB7 Canadian systemically important banks", url: "https://www.osfi-bsif.gc.ca/en/supervision/financial-institutions/banks/systemically-important-banks" } } : {} }, country, countryBasis, currencyDefaultSpread: base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency])?.defaultSpread || 0, industry, issuer, classificationBasis: bank ? "OSFI domestic systemic bank mapped to a large-bank US industry proxy" : issuer ? "SEC SIC mapped to an approximate US industry proxy" : "Broad US market proxy; no validated issuer industry classification" };
 }
 
 // worker/valuation-data.js
