@@ -7034,6 +7034,7 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
   if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY3) return { recent: null, ttm: null };
   const make = (r) => ({ value: r.val, asOf: r.end, filed: r.filed, unit: r.unit, basis: instantMetrics.has(r.metric) ? "Reported period-end balance" : "Reported year-to-date filing fact", source: { name: "SEC EDGAR", tag: r.namespace + ":" + r.tag, url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${r.accn.replaceAll("-", "")}/${r.accn}-index.html`, accession: r.accn } });
   const latest = {}, prior = {}, ttm = {};
+  let priorPeriod = null;
   for (const [metric2, rows3] of Object.entries(series)) {
     const c = rows3.find((r) => r.end === anchor.end && (instantMetrics.has(metric2) || r.start === anchor.start));
     if (!c) continue;
@@ -7043,7 +7044,10 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       continue;
     }
     const p = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY3).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && r.tag === c.tag && r.namespace === c.namespace).sort((a2, b) => Number(b.accn === c.accn) - Number(a2.accn === c.accn) || b.filed.localeCompare(a2.filed))[0];
-    if (p) prior[metric2] = make({ ...p, metric: metric2 });
+    if (p) {
+      prior[metric2] = make({ ...p, metric: metric2 });
+      if (!priorPeriod || metric2 === "revenue") priorPeriod = p;
+    }
     if (metric2 === "shares") {
       ttm.shares = { ...latest.shares, basis: "Latest reported YTD weighted-average diluted share count used as a valuation proxy; not current fully diluted or reconstructed TTM shares" };
       continue;
@@ -7071,8 +7075,8 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
   }
   const growth = {};
   for (const k of Object.keys(latest)) if (!instantMetrics.has(k) && prior[k]?.value > 0) growth[k] = { value: latest[k].value / prior[k].value - 1, basis: "Year-to-date change versus comparable prior-year period", source: latest[k].source };
-  const earliest = new Date(Date.parse(anchor.end) - 364 * DAY3).toISOString().slice(0, 10);
-  return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest, prior: { metrics: prior }, growth, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
+  const earliest = new Date(priorPeriod?.end ? Date.parse(priorPeriod.end) + DAY3 : Date.parse(anchor.end) - 364 * DAY3).toISOString().slice(0, 10);
+  return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest, prior: { start: priorPeriod?.start, end: priorPeriod?.end, metrics: prior }, growth, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
 }
 
 // worker/market-provider.js
@@ -8359,6 +8363,9 @@ function forecastStatements(input) {
   );
   return bounded({ openingEquity, rows: rows3, warnings: warnings2 });
 }
+
+// src/valuation-report.js
+var finite3 = Number.isFinite;
 
 // src/valuation-view.js
 var pct = (v) => v == null ? "\u2014" : `${num(v * 100, 2)}%`;
