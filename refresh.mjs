@@ -6327,109 +6327,13 @@ async function refreshIndexes(previous = {}, fetcher2 = fetch, now2 = /* @__PURE
   return { schema: 1, checkedAt: now2.toISOString(), indexes };
 }
 
-// src/macro-data.js
-function parseTreasuryXML(text) {
-  if (!text.includes("DailyTreasuryYieldCurveRateData")) throw new Error("The Treasury source returned an unexpected format.");
-  const rows2 = [];
-  for (const match of text.matchAll(/<entry>[\s\S]*?<\/entry>/g)) {
-    const body = match[0];
-    const field = (name) => body.match(new RegExp(`<d:${name}[^>]*>([^<]+)</d:${name}>`))?.[1];
-    const date = field("NEW_DATE")?.slice(0, 10);
-    const two = Number(field("BC_2YEAR")), ten = Number(field("BC_10YEAR"));
-    if (validDate(date) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows2.push({ date, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
-  }
-  if (!rows2.length) throw new Error("The Treasury source has no complete observations.");
-  return rows2.sort((a, b) => a.date.localeCompare(b.date)).slice(-520);
-}
-
-// src/issuer-dividends.js
-function parseRBCDividend(article, id, now2 = /* @__PURE__ */ new Date()) {
-  const d = article?.data;
-  if (String(d?.id) !== String(id) || !/Royal Bank of Canada/i.test(d.headline || ""))
-    throw new Error("Issuer article mismatch");
-  const text = String(d.body || "").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ");
-  if (!/\(TSX:\s*RY\)/i.test(text) || !/\(NYSE:\s*RY\)/i.test(text))
-    throw new Error("Share class not verified");
-  const match = text.match(
-    /declared\s+a\s+quarterly\s+common\s+share\s+dividend\s+of\s+\$(\d+(?:\.\d+)?)\s+per\s+share/i
-  );
-  const quarterly = Number(match?.[1]), timestamp = Date.parse(d.releaseDate);
-  const date = Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : "";
-  if (!Number.isFinite(quarterly) || quarterly <= 0 || quarterly > 25 || !validDate(date) || timestamp > +now2 || (+now2 - timestamp) / 864e5 > 180)
-    throw new Error("No recent regular common dividend");
-  return {
-    status: "ready",
-    value: quarterly * 4,
-    currency: "CAD",
-    basis: "current",
-    kind: "annualized-quarterly",
-    quarterly,
-    periodStart: date,
-    asOf: date,
-    filed: date,
-    description: "Latest issuer-declared regular quarterly common dividend \xD7 4, CAD. Annualization is a starting assumption, not a forecast of four future declarations.",
-    source: {
-      name: "RBC Investor Relations \xB7 public dividend release",
-      url: "https://www.rbc.com/newsroom/news/article.html?article=" + id,
-      tag: "Regular quarterly common share dividend"
-    },
-    historicalGrowth: null,
-    warnings: [
-      "Future dividend declarations remain subject to board approval."
-    ]
-  };
-}
-
-// worker/issuer-dividends.js
-async function issuerDividend(item, fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
-  if (item.symbol !== "TSX:RY") return null;
-  try {
-    const r = await fetcher2(
-      "https://www.rbc.com/investor-relations/share-information.html",
-      {
-        signal: AbortSignal.timeout(15e3),
-        cf: { cacheTtl: 3600, cacheEverything: true }
-      }
-    );
-    if (!r.ok) throw new Error();
-    const html = await r.text();
-    if (html.length > 15e5) throw new Error();
-    const ids = [
-      ...new Set(
-        [
-          ...html.replace(/<!--[\s\S]*?-->/g, "").matchAll(
-            /href=["'][^"']*newsroom\/news\/article\.html\?article=(\d+)["'][^>]*>\s*Read the latest RBC Dividend Press Release/gi
-          )
-        ].map((m) => m[1])
-      )
-    ].sort((a, b) => Number(b) - Number(a)).slice(0, 3);
-    const dividends = [];
-    for (const id of ids) {
-      const article = await fetcher2(
-        "https://www.rbc.com/cgi-bin/newsroom-proxy/multi-proxy.cgi/api/search/article",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            format: "json",
-            lang: "EN",
-            id
-          }).toString(),
-          signal: AbortSignal.timeout(15e3)
-        }
-      );
-      if (!article.ok) continue;
-      const body = await article.text();
-      if (body.length > 1e6) continue;
-      try {
-        dividends.push(parseRBCDividend(JSON.parse(body), id, now2));
-      } catch {
-      }
-    }
-    return dividends.sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
-  } catch {
-    return null;
-  }
+// src/currency-conversion.js
+function convertUSDToCAD(financials, dividend, fx) {
+  if (financials.currency !== "USD" || fx?.currency !== "CAD/USD" || !(fx.value > 0) || !Number.isFinite(fx.value)) throw Error("Invalid currency conversion");
+  const convert = (f) => ({ ...f, value: f.value * fx.value, unit: f.unit?.replace("USD", "CAD"), original: { value: f.value, unit: f.unit }, conversion: fx, basis: (f.basis || "Reported fact") + `; converted USD to CAD at ${fx.value} CAD/USD (${fx.asOf}); constant FX scenario` });
+  const converted = { ...financials, currency: "CAD", reportingCurrency: "USD", conversion: fx, annual: financials.annual.map((a) => ({ ...a, metrics: Object.fromEntries(Object.entries(a.metrics).map(([k, f]) => [k, f.unit === "USD" || f.unit === "USD/shares" ? convert(f) : { ...f }])) })), warnings: [...financials.warnings || [], "USD financial facts translated to CAD at the dated daily average exchange rate. Forecasts assume that exchange rate stays constant; these are not originally reported CAD amounts."] };
+  const d = dividend?.status === "ready" && dividend.currency === "USD" ? { ...dividend, value: dividend.value * fx.value, currency: "CAD", kind: "fx-converted", original: { value: dividend.value, currency: "USD" }, conversion: fx, description: dividend.description + ` Translated at ${fx.value} CAD/USD, Bank of Canada daily average ${fx.asOf}; constant FX assumption.` } : dividend;
+  return { financials: converted, dividend: d };
 }
 
 // src/ddm-data.js
@@ -6542,166 +6446,150 @@ function findSECListing(payload, item) {
   return String(cik).padStart(10, "0");
 }
 
-// src/fundamentals.js
-var DAY2 = 864e5;
-var forms = /* @__PURE__ */ new Set([
-  "10-K",
-  "10-K/A",
-  "40-F",
-  "40-F/A",
-  "20-F",
-  "20-F/A",
-  "6-K",
-  "6-K/A"
-]);
-var tags = {
-  revenue: [
-    "RevenueFromContractWithCustomerExcludingAssessedTax",
-    "Revenues",
-    "SalesRevenueNet",
-    "Revenue"
-  ],
-  ebit: ["OperatingIncomeLoss", "ProfitLossFromOperatingActivities"],
-  eps: ["EarningsPerShareDiluted", "DilutedEarningsLossPerShare"],
-  netIncome: [
-    "NetIncomeLossAvailableToCommonStockholdersBasic",
-    "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
-    "NetIncomeLoss"
-  ],
-  da: [
-    "DepreciationDepletionAndAmortization",
-    "DepreciationAndAmortization",
-    "DepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
-    "DepreciationAndAmortisationExpense"
-  ],
-  depreciation: ["Depreciation"],
-  amortization: ["AmortizationOfIntangibleAssets"],
-  nonoperating: ["NonoperatingIncomeExpense"],
-  capex: [
-    "PaymentsToAcquirePropertyPlantAndEquipment",
-    "PaymentsToAcquireProductiveAssets",
-    "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities"
-  ],
-  tax: ["IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations"],
-  pretax: [
-    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
-    "ProfitLossBeforeTax"
-  ],
-  shares: [
-    "WeightedAverageNumberOfDilutedSharesOutstanding",
-    "AdjustedWeightedAverageShares"
-  ],
-  cash: ["CashAndCashEquivalentsAtCarryingValue", "CashAndCashEquivalents"],
-  ppe: ["PropertyPlantAndEquipmentNet", "PropertyPlantAndEquipment", "PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization"],
-  receivables: [
-    "AccountsReceivableNetCurrent",
-    "TradeAndOtherCurrentReceivables"
-  ],
-  inventory: ["InventoryNet", "Inventories"],
-  payables: ["AccountsPayableCurrent", "AccountsPayableTradeCurrent", "TradeAndOtherCurrentPayables"],
-  debt: [
-    "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
-    "LongTermDebtCurrentAndNoncurrent",
-    "Borrowings"
-  ],
-  currentLongDebt: ["LongTermDebtCurrent", "CurrentBorrowings"],
-  commercialPaper: ["CommercialPaper"],
-  shortDebt: ["DebtCurrent", "ShortTermBorrowings"],
-  longDebt: ["LongTermDebtNoncurrent", "NoncurrentBorrowings"],
-  equity: ["StockholdersEquity", "EquityAttributableToOwnersOfParent"],
-  commonEquity: ["CommonStockholdersEquity"],
-  preferredEquity: ["PreferredStockValue", "PreferredStockCarryingValue", "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount"],
-  commonShares: ["CommonStockSharesOutstanding"]
+// src/issuer-map.js
+var canadian = {
+  "RY.TO": [1000275, "RY", "NYSE"],
+  // ROYAL BANK OF CANADA
+  "TD.TO": [947263, "TD", "NYSE"],
+  // TORONTO DOMINION BANK
+  "CM.TO": [1045520, "CM", "NYSE"],
+  // CANADIAN IMPERIAL BANK OF COMMERCE /CAN/
+  "BMO.TO": [927971, "BMO", "NYSE"],
+  // BANK OF MONTREAL /CAN/
+  "BNS.TO": [9631, "BNS", "NYSE"],
+  // BANK OF NOVA SCOTIA
+  "ENB.TO": [895728, "ENB", "NYSE"],
+  // ENBRIDGE INC
+  "SHOP.TO": [1594805, "SHOP", "NASDAQ"],
+  // SHOPIFY INC.
+  "CNQ.TO": [1017413, "CNQ", "NYSE"],
+  // CANADIAN NATURAL RESOURCES Ltd
+  "SU.TO": [311337, "SU", "NYSE"],
+  // SUNCOR ENERGY INC
+  "AEM.TO": [2809, "AEM", "NYSE"],
+  // AGNICO EAGLE MINES LTD
+  "BN.TO": [1001085, "BN", "NYSE"],
+  // BROOKFIELD Corp /ON/
+  "CP.TO": [16875, "CP", "NYSE"],
+  // CANADIAN PACIFIC KANSAS CITY LTD/CN
+  "MFC.TO": [1086888, "MFC", "NYSE"],
+  // MANULIFE FINANCIAL CORP
+  "ABX.TO": [756894, "B", "NYSE"],
+  // BARRICK MINING CORP
+  "CNR.TO": [16868, "CNI", "NYSE"],
+  // CANADIAN NATIONAL RAILWAY CO
+  "TRP.TO": [1232384, "TRP", "NYSE"],
+  // TC ENERGY CORP
+  "WPM.TO": [1323404, "WPM", "NYSE"],
+  // Wheaton Precious Metals Corp.
+  "FNV.TO": [1456346, "FNV", "NYSE"],
+  // FRANCO NEVADA Corp
+  "SLF.TO": [1097362, "SLF", "NYSE"],
+  // SUN LIFE FINANCIAL INC
+  "CVE.TO": [1475260, "CVE", "NYSE"],
+  // CENOVUS ENERGY INC.
+  "WCN.TO": [1318220, "WCN", "NYSE"],
+  // Waste Connections, Inc.
+  "CLS.TO": [1030894, "CLS", "NYSE"],
+  // CELESTICA INC
+  "CCO.TO": [1009001, "CCJ", "NYSE"],
+  // CAMECO CORP
+  "NTR.TO": [1725964, "NTR", "NYSE"],
+  // Nutrien Ltd.
+  "TECK.B.TO": [886986, "TECK", "NYSE"],
+  // TECK RESOURCES LTD
+  "K.TO": [701818, "KGC", "NYSE"],
+  // KINROSS GOLD CORP
+  "PPL.TO": [1546066, "PBA", "NYSE"],
+  // PEMBINA PIPELINE CORP
+  "FTS.TO": [1666175, "FTS", "NYSE"],
+  // Fortis Inc.
+  "QSR.TO": [1618756, "QSR", "NYSE"],
+  // Restaurant Brands International Inc.
+  "IMO.TO": [49938, "IMO", "NYSE"],
+  // IMPERIAL OIL LTD
+  "BCE.TO": [718940, "BCE", "NYSE"],
+  // BCE INC
+  "BAM.TO": [1937926, "BAM", "NYSE"],
+  // Brookfield Asset Management Ltd.
+  "BIP.UN.TO": [1406234, "BIP", "NYSE"],
+  // Brookfield Infrastructure Partners L.P.
+  "MG.TO": [749098, "MGA", "NYSE"],
+  // MAGNA INTERNATIONAL INC
+  "GIB.A.TO": [1061574, "GIB", "NYSE"],
+  // CGI INC
+  "TRI.TO": [1075124, "TRI", "NASDAQ"],
+  // THOMSON REUTERS CORP /CAN/
+  "T.TO": [868675, "TU", "NYSE"],
+  // TELUS CORP
+  "RCI.B.TO": [733099, "RCI", "NYSE"],
+  // ROGERS COMMUNICATIONS INC
+  "GIL.TO": [1061894, "GIL", "NYSE"],
+  // Gildan Activewear Inc.
+  "CAE.TO": [1173382, "CAE", "NASDAQ"],
+  // CAE INC
+  "OTEX.TO": [1002638, "OTEX", "NASDAQ"],
+  // OPEN TEXT CORP
+  "FSV.TO": [1637810, "FSV", "NASDAQ"]
+  // FirstService Corp
 };
-var instant = /* @__PURE__ */ new Set([
-  "cash",
-  "ppe",
-  "receivables",
-  "inventory",
-  "payables",
-  "debt",
-  "shortDebt",
-  "currentLongDebt",
-  "commercialPaper",
-  "longDebt",
-  "equity",
-  "commonEquity",
-  "preferredEquity",
-  "commonShares"
-]);
-function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date()) {
-  if (Number(payload?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
-  const today = now2.toISOString().slice(0, 10), series = {};
-  for (const [metric2, names] of Object.entries(tags)) {
-    const unit = metric2 === "eps" ? currency + "/shares" : ["shares", "commonShares"].includes(metric2) ? "shares" : currency;
-    const all = [];
-    for (const name of names)
-      for (const namespace of ["us-gaap", "ifrs-full"])
-        for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit] || []) {
-          if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || !forms.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
-            continue;
-          const days = (Date.parse(row.end) - Date.parse(row.start)) / DAY2 + 1;
-          if (instant.has(metric2) ? !!row.start : !validDate(row.start) || days < 330 || days > 385)
-            continue;
-          all.push({ ...row, tag: name, namespace, unit });
-        }
-    all.sort(
-      (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag)
-    );
-    series[metric2] = [
-      ...new Map(
-        all.slice().reverse().map((r) => [r.end, r])
-      ).values()
-    ].sort((a, b) => b.end.localeCompare(a.end));
-  }
-  const ends = [
-    ...new Set([...series.revenue, ...series.eps].map((r) => r.end))
-  ].sort().reverse().slice(0, 3);
-  const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY2 <= 1400).map((end) => {
-    const metrics = {};
-    for (const [metric2, rows2] of Object.entries(series)) {
-      const r = rows2.find((r2) => r2.end === end);
-      if (!r) continue;
-      metrics[metric2] = {
-        value: r.val,
-        asOf: r.end,
-        filed: r.filed,
-        unit: r.unit,
-        basis: metric2 === "capex" && r.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric2 === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric2 === "shares" ? "Reported annual weighted-average share count; not current diluted shares" : "Reported filing fact",
-        source: {
-          name: "SEC EDGAR",
-          tag: r.namespace + ":" + r.tag,
-          url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${r.accn.replaceAll("-", "")}/${r.accn}-index.html`
-        }
-      };
-    }
-    const derive = (key, components, fn, basis) => {
-      if (metrics[key] || !components.every((k) => metrics[k])) return;
-      const facts = components.map((k) => metrics[k]);
-      if (!facts.every((f) => f.source.url === facts[0].source.url)) return;
-      const value = fn(...facts.map((f) => f.value));
-      if (!Number.isFinite(value)) return;
-      metrics[key] = { ...facts[0], value, basis, source: {
-        ...facts[0].source,
-        tag: facts.map((f) => f.source.tag).join("; "),
-        name: "SEC EDGAR \xB7 derived subtotal"
-      } };
+function secReference(item) {
+  if (canadian[item.ticker]) {
+    const [cik, ticker, providerExchange] = canadian[item.ticker];
+    return {
+      cik: String(cik).padStart(10, "0"),
+      lookup: { ...item, ticker, providerExchange },
+      currency: "CAD",
+      crossListed: true
     };
-    derive("da", ["depreciation", "amortization"], (d, a) => d + a, "Derived D&A = depreciation + intangible amortization, same fiscal year and filing");
-    derive("ebit", ["pretax", "nonoperating"], (p, n) => p - n, "Derived operating income = pretax income \u2212 net nonoperating income, same fiscal year and filing");
-    derive("commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Derived common equity = stockholders equity excluding NCI \u2212 preferred carrying value, same date and filing");
-    return { end, metrics };
+  }
+  if (item.currency === "USD" && ["NASDAQ", "NYSE", "CBOE"].includes(item.providerExchange) && !item.depositaryReceipt && !/\bADR\b/.test(item.name))
+    return { lookup: item, cik: item.cik, currency: "USD", crossListed: false };
+  return null;
+}
+
+// worker/sec-source.js
+async function sourceJSON(url, fetcher2 = fetch, ttl = 3600, token) {
+  const response = await fetcher2(url, {
+    headers: {
+      Accept: "application/json",
+      "User-Agent": "TickerLantern/1.0 (+https://tickerlantern.com)",
+      ...token ? { Authorization: "Bearer " + token } : {}
+    },
+    signal: AbortSignal.timeout(18e3),
+    cf: { cacheTtl: ttl, cacheEverything: true }
   });
-  return {
-    status: !annual.length ? "unavailable" : (+now2 - Date.parse(annual[0].end)) / DAY2 > 550 ? "stale" : "ready",
-    currency,
-    annual,
-    asOf: annual[0]?.end || null,
-    warnings: [
-      "Financial statements may use a different reporting currency from the listing. Values with unmatched currency are withheld.",
-      "Stockholders/owners equity is not automatically treated as common equity. Preferred and AT1 capital require a verified adjustment."
-    ]
-  };
+  if (!response.ok) throw new Error("Source unavailable");
+  const body = await response.text();
+  if (body.length > 12e6) throw new Error("Source too large");
+  return JSON.parse(body);
+}
+async function loadIssuerFacts(item, fetcher2 = fetch) {
+  const reference = secReference(item);
+  if (!reference) throw new Error("No verified issuer reference");
+  const directory2 = await sourceJSON(
+    "https://www.sec.gov/files/company_tickers_exchange.json",
+    fetcher2,
+    86400
+  );
+  const cik = findSECListing(directory2, reference.lookup);
+  if (reference.cik && reference.cik !== cik)
+    throw new Error("Issuer reference changed");
+  const facts = await sourceJSON(
+    `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`,
+    fetcher2
+  );
+  if (Number(facts?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
+  return { cik, facts, reference };
+}
+
+// worker/currency-data.js
+async function usdCadRate(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
+  const url = "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?recent=15";
+  const data = await sourceJSON(url, fetcher2), today = now2.toISOString().slice(0, 10);
+  const row = data.observations?.filter((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.d) && r.d <= today && now2 - Date.parse(r.d) <= 10 * 864e5 && Number(r.FXUSDCAD?.v) > 0).sort((a, b) => b.d.localeCompare(a.d))[0];
+  if (!row) throw Error("No current FX observation");
+  return { value: Number(row.FXUSDCAD.v), currency: "CAD/USD", asOf: row.d, source: { name: "Bank of Canada daily average USD/CAD", url }, basis: "Daily average exchange-rate assumption; not a real-time quote" };
 }
 
 // src/model-fit.js
@@ -6847,141 +6735,274 @@ function modelFit(item) {
   };
 }
 
-// src/issuer-map.js
-var canadian = {
-  "RY.TO": [1000275, "RY", "NYSE"],
-  // ROYAL BANK OF CANADA
-  "TD.TO": [947263, "TD", "NYSE"],
-  // TORONTO DOMINION BANK
-  "CM.TO": [1045520, "CM", "NYSE"],
-  // CANADIAN IMPERIAL BANK OF COMMERCE /CAN/
-  "BMO.TO": [927971, "BMO", "NYSE"],
-  // BANK OF MONTREAL /CAN/
-  "BNS.TO": [9631, "BNS", "NYSE"],
-  // BANK OF NOVA SCOTIA
-  "ENB.TO": [895728, "ENB", "NYSE"],
-  // ENBRIDGE INC
-  "SHOP.TO": [1594805, "SHOP", "NASDAQ"],
-  // SHOPIFY INC.
-  "CNQ.TO": [1017413, "CNQ", "NYSE"],
-  // CANADIAN NATURAL RESOURCES Ltd
-  "SU.TO": [311337, "SU", "NYSE"],
-  // SUNCOR ENERGY INC
-  "AEM.TO": [2809, "AEM", "NYSE"],
-  // AGNICO EAGLE MINES LTD
-  "BN.TO": [1001085, "BN", "NYSE"],
-  // BROOKFIELD Corp /ON/
-  "CP.TO": [16875, "CP", "NYSE"],
-  // CANADIAN PACIFIC KANSAS CITY LTD/CN
-  "MFC.TO": [1086888, "MFC", "NYSE"],
-  // MANULIFE FINANCIAL CORP
-  "ABX.TO": [756894, "B", "NYSE"],
-  // BARRICK MINING CORP
-  "CNR.TO": [16868, "CNI", "NYSE"],
-  // CANADIAN NATIONAL RAILWAY CO
-  "TRP.TO": [1232384, "TRP", "NYSE"],
-  // TC ENERGY CORP
-  "WPM.TO": [1323404, "WPM", "NYSE"],
-  // Wheaton Precious Metals Corp.
-  "FNV.TO": [1456346, "FNV", "NYSE"],
-  // FRANCO NEVADA Corp
-  "SLF.TO": [1097362, "SLF", "NYSE"],
-  // SUN LIFE FINANCIAL INC
-  "CVE.TO": [1475260, "CVE", "NYSE"],
-  // CENOVUS ENERGY INC.
-  "WCN.TO": [1318220, "WCN", "NYSE"],
-  // Waste Connections, Inc.
-  "CLS.TO": [1030894, "CLS", "NYSE"],
-  // CELESTICA INC
-  "CCO.TO": [1009001, "CCJ", "NYSE"],
-  // CAMECO CORP
-  "NTR.TO": [1725964, "NTR", "NYSE"],
-  // Nutrien Ltd.
-  "TECK.B.TO": [886986, "TECK", "NYSE"],
-  // TECK RESOURCES LTD
-  "K.TO": [701818, "KGC", "NYSE"],
-  // KINROSS GOLD CORP
-  "PPL.TO": [1546066, "PBA", "NYSE"],
-  // PEMBINA PIPELINE CORP
-  "FTS.TO": [1666175, "FTS", "NYSE"],
-  // Fortis Inc.
-  "QSR.TO": [1618756, "QSR", "NYSE"],
-  // Restaurant Brands International Inc.
-  "IMO.TO": [49938, "IMO", "NYSE"],
-  // IMPERIAL OIL LTD
-  "BCE.TO": [718940, "BCE", "NYSE"],
-  // BCE INC
-  "BAM.TO": [1937926, "BAM", "NYSE"],
-  // Brookfield Asset Management Ltd.
-  "BIP.UN.TO": [1406234, "BIP", "NYSE"],
-  // Brookfield Infrastructure Partners L.P.
-  "MG.TO": [749098, "MGA", "NYSE"],
-  // MAGNA INTERNATIONAL INC
-  "GIB.A.TO": [1061574, "GIB", "NYSE"],
-  // CGI INC
-  "TRI.TO": [1075124, "TRI", "NASDAQ"],
-  // THOMSON REUTERS CORP /CAN/
-  "T.TO": [868675, "TU", "NYSE"],
-  // TELUS CORP
-  "RCI.B.TO": [733099, "RCI", "NYSE"],
-  // ROGERS COMMUNICATIONS INC
-  "GIL.TO": [1061894, "GIL", "NYSE"],
-  // Gildan Activewear Inc.
-  "CAE.TO": [1173382, "CAE", "NASDAQ"],
-  // CAE INC
-  "OTEX.TO": [1002638, "OTEX", "NASDAQ"],
-  // OPEN TEXT CORP
-  "FSV.TO": [1637810, "FSV", "NASDAQ"]
-  // FirstService Corp
-};
-function secReference(item) {
-  if (canadian[item.ticker]) {
-    const [cik, ticker, providerExchange] = canadian[item.ticker];
-    return {
-      cik: String(cik).padStart(10, "0"),
-      lookup: { ...item, ticker, providerExchange },
-      currency: "CAD",
-      crossListed: true
-    };
+// src/macro-data.js
+function parseTreasuryXML(text) {
+  if (!text.includes("DailyTreasuryYieldCurveRateData")) throw new Error("The Treasury source returned an unexpected format.");
+  const rows2 = [];
+  for (const match of text.matchAll(/<entry>[\s\S]*?<\/entry>/g)) {
+    const body = match[0];
+    const field = (name) => body.match(new RegExp(`<d:${name}[^>]*>([^<]+)</d:${name}>`))?.[1];
+    const date = field("NEW_DATE")?.slice(0, 10);
+    const two = Number(field("BC_2YEAR")), ten = Number(field("BC_10YEAR"));
+    if (validDate(date) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows2.push({ date, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
   }
-  if (item.currency === "USD" && ["NASDAQ", "NYSE", "CBOE"].includes(item.providerExchange) && !item.depositaryReceipt && !/\bADR\b/.test(item.name))
-    return { lookup: item, cik: item.cik, currency: "USD", crossListed: false };
-  return null;
+  if (!rows2.length) throw new Error("The Treasury source has no complete observations.");
+  return rows2.sort((a, b) => a.date.localeCompare(b.date)).slice(-520);
 }
 
-// worker/sec-source.js
-async function sourceJSON(url, fetcher2 = fetch, ttl = 3600, token) {
-  const response = await fetcher2(url, {
-    headers: {
-      Accept: "application/json",
-      "User-Agent": "TickerLantern/1.0 (+https://tickerlantern.com)",
-      ...token ? { Authorization: "Bearer " + token } : {}
+// src/issuer-dividends.js
+function parseRBCDividend(article, id, now2 = /* @__PURE__ */ new Date()) {
+  const d = article?.data;
+  if (String(d?.id) !== String(id) || !/Royal Bank of Canada/i.test(d.headline || ""))
+    throw new Error("Issuer article mismatch");
+  const text = String(d.body || "").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ");
+  if (!/\(TSX:\s*RY\)/i.test(text) || !/\(NYSE:\s*RY\)/i.test(text))
+    throw new Error("Share class not verified");
+  const match = text.match(
+    /declared\s+a\s+quarterly\s+common\s+share\s+dividend\s+of\s+\$(\d+(?:\.\d+)?)\s+per\s+share/i
+  );
+  const quarterly = Number(match?.[1]), timestamp = Date.parse(d.releaseDate);
+  const date = Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : "";
+  if (!Number.isFinite(quarterly) || quarterly <= 0 || quarterly > 25 || !validDate(date) || timestamp > +now2 || (+now2 - timestamp) / 864e5 > 180)
+    throw new Error("No recent regular common dividend");
+  return {
+    status: "ready",
+    value: quarterly * 4,
+    currency: "CAD",
+    basis: "current",
+    kind: "annualized-quarterly",
+    quarterly,
+    periodStart: date,
+    asOf: date,
+    filed: date,
+    description: "Latest issuer-declared regular quarterly common dividend \xD7 4, CAD. Annualization is a starting assumption, not a forecast of four future declarations.",
+    source: {
+      name: "RBC Investor Relations \xB7 public dividend release",
+      url: "https://www.rbc.com/newsroom/news/article.html?article=" + id,
+      tag: "Regular quarterly common share dividend"
     },
-    signal: AbortSignal.timeout(18e3),
-    cf: { cacheTtl: ttl, cacheEverything: true }
-  });
-  if (!response.ok) throw new Error("Source unavailable");
-  const body = await response.text();
-  if (body.length > 12e6) throw new Error("Source too large");
-  return JSON.parse(body);
+    historicalGrowth: null,
+    warnings: [
+      "Future dividend declarations remain subject to board approval."
+    ]
+  };
 }
-async function loadIssuerFacts(item, fetcher2 = fetch) {
-  const reference = secReference(item);
-  if (!reference) throw new Error("No verified issuer reference");
-  const directory2 = await sourceJSON(
-    "https://www.sec.gov/files/company_tickers_exchange.json",
-    fetcher2,
-    86400
-  );
-  const cik = findSECListing(directory2, reference.lookup);
-  if (reference.cik && reference.cik !== cik)
-    throw new Error("Issuer reference changed");
-  const facts = await sourceJSON(
-    `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`,
-    fetcher2
-  );
-  if (Number(facts?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
-  return { cik, facts, reference };
+
+// worker/issuer-dividends.js
+async function issuerDividend(item, fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
+  if (item.symbol !== "TSX:RY") return null;
+  try {
+    const r = await fetcher2(
+      "https://www.rbc.com/investor-relations/share-information.html",
+      {
+        signal: AbortSignal.timeout(15e3),
+        cf: { cacheTtl: 3600, cacheEverything: true }
+      }
+    );
+    if (!r.ok) throw new Error();
+    const html = await r.text();
+    if (html.length > 15e5) throw new Error();
+    const ids = [
+      ...new Set(
+        [
+          ...html.replace(/<!--[\s\S]*?-->/g, "").matchAll(
+            /href=["'][^"']*newsroom\/news\/article\.html\?article=(\d+)["'][^>]*>\s*Read the latest RBC Dividend Press Release/gi
+          )
+        ].map((m) => m[1])
+      )
+    ].sort((a, b) => Number(b) - Number(a)).slice(0, 3);
+    const dividends = [];
+    for (const id of ids) {
+      const article = await fetcher2(
+        "https://www.rbc.com/cgi-bin/newsroom-proxy/multi-proxy.cgi/api/search/article",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            format: "json",
+            lang: "EN",
+            id
+          }).toString(),
+          signal: AbortSignal.timeout(15e3)
+        }
+      );
+      if (!article.ok) continue;
+      const body = await article.text();
+      if (body.length > 1e6) continue;
+      try {
+        dividends.push(parseRBCDividend(JSON.parse(body), id, now2));
+      } catch {
+      }
+    }
+    return dividends.sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
+  } catch {
+    return null;
+  }
+}
+
+// src/fundamentals.js
+var DAY2 = 864e5;
+var forms = /* @__PURE__ */ new Set([
+  "10-K",
+  "10-K/A",
+  "40-F",
+  "40-F/A",
+  "20-F",
+  "20-F/A",
+  "6-K",
+  "6-K/A"
+]);
+var tags = {
+  revenue: [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "Revenues",
+    "SalesRevenueNet",
+    "Revenue"
+  ],
+  ebit: ["OperatingIncomeLoss", "ProfitLossFromOperatingActivities"],
+  eps: ["EarningsPerShareDiluted", "DilutedEarningsLossPerShare"],
+  commonNetIncomeDiluted: ["NetIncomeLossAvailableToCommonStockholdersDiluted"],
+  netIncome: [
+    "NetIncomeLossAvailableToCommonStockholdersBasic",
+    "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+    "NetIncomeLoss"
+  ],
+  da: [
+    "DepreciationDepletionAndAmortization",
+    "DepreciationAndAmortization",
+    "DepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+    "DepreciationAndAmortisationExpense"
+  ],
+  depreciation: ["Depreciation"],
+  amortization: ["AmortizationOfIntangibleAssets"],
+  nonoperating: ["NonoperatingIncomeExpense"],
+  capex: [
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+    "PaymentsToAcquireProductiveAssets",
+    "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities"
+  ],
+  tax: ["IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations"],
+  pretax: [
+    "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "ProfitLossBeforeTax"
+  ],
+  shares: [
+    "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "AdjustedWeightedAverageShares"
+  ],
+  cash: ["CashAndCashEquivalentsAtCarryingValue", "CashAndCashEquivalents"],
+  ppe: ["PropertyPlantAndEquipmentNet", "PropertyPlantAndEquipment", "PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization"],
+  receivables: [
+    "AccountsReceivableNetCurrent",
+    "TradeAndOtherCurrentReceivables"
+  ],
+  inventory: ["InventoryNet", "Inventories"],
+  payables: ["AccountsPayableCurrent", "AccountsPayableTradeCurrent", "TradeAndOtherCurrentPayables"],
+  debt: [
+    "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+    "LongTermDebtCurrentAndNoncurrent",
+    "Borrowings"
+  ],
+  currentLongDebt: ["LongTermDebtCurrent", "LongTermDebtAndCapitalLeaseObligationsCurrent", "CurrentBorrowings"],
+  commercialPaper: ["CommercialPaper"],
+  shortDebt: ["DebtCurrent", "ShortTermBorrowings"],
+  longDebt: ["LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations", "NoncurrentBorrowings"],
+  equity: ["StockholdersEquity", "EquityAttributableToOwnersOfParent"],
+  commonEquity: ["CommonStockholdersEquity"],
+  preferredEquity: ["PreferredStockValue", "PreferredStockCarryingValue", "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount"],
+  commonShares: ["CommonStockSharesOutstanding"]
+};
+var instant = /* @__PURE__ */ new Set([
+  "cash",
+  "ppe",
+  "receivables",
+  "inventory",
+  "payables",
+  "debt",
+  "shortDebt",
+  "currentLongDebt",
+  "commercialPaper",
+  "longDebt",
+  "equity",
+  "commonEquity",
+  "preferredEquity",
+  "commonShares"
+]);
+function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date()) {
+  if (Number(payload?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
+  const today = now2.toISOString().slice(0, 10), series = {};
+  for (const [metric2, names] of Object.entries(tags)) {
+    const unit = metric2 === "eps" ? currency + "/shares" : ["shares", "commonShares"].includes(metric2) ? "shares" : currency;
+    const all = [];
+    for (const name of names)
+      for (const namespace of ["us-gaap", "ifrs-full"])
+        for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit] || []) {
+          if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || !forms.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
+            continue;
+          const days = (Date.parse(row.end) - Date.parse(row.start)) / DAY2 + 1;
+          if (instant.has(metric2) ? !!row.start : !validDate(row.start) || days < 330 || days > 385)
+            continue;
+          all.push({ ...row, tag: name, namespace, unit });
+        }
+    all.sort(
+      (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag)
+    );
+    series[metric2] = [
+      ...new Map(
+        all.slice().reverse().map((r) => [r.end, r])
+      ).values()
+    ].sort((a, b) => b.end.localeCompare(a.end));
+  }
+  const ends = [
+    ...new Set([...series.revenue, ...series.eps].map((r) => r.end))
+  ].sort().reverse().slice(0, 3);
+  const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY2 <= 1400).map((end) => {
+    const metrics = {};
+    for (const [metric2, rows2] of Object.entries(series)) {
+      const r = rows2.find((r2) => r2.end === end);
+      if (!r) continue;
+      metrics[metric2] = {
+        value: r.val,
+        asOf: r.end,
+        filed: r.filed,
+        unit: r.unit,
+        basis: metric2 === "capex" && r.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric2 === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric2 === "shares" ? "Reported annual weighted-average share count; not current diluted shares" : "Reported filing fact",
+        source: {
+          name: "SEC EDGAR",
+          tag: r.namespace + ":" + r.tag,
+          url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${r.accn.replaceAll("-", "")}/${r.accn}-index.html`
+        }
+      };
+    }
+    const derive = (key, components, fn, basis) => {
+      if (metrics[key] || !components.every((k) => metrics[k])) return;
+      const facts = components.map((k) => metrics[k]);
+      if (!facts.every((f) => f.source.url === facts[0].source.url)) return;
+      const value = fn(...facts.map((f) => f.value));
+      if (!Number.isFinite(value)) return;
+      metrics[key] = { ...facts[0], value, basis, source: {
+        ...facts[0].source,
+        tag: facts.map((f) => f.source.tag).join("; "),
+        name: "SEC EDGAR \xB7 derived subtotal"
+      } };
+    };
+    derive("eps", ["commonNetIncomeDiluted", "shares"], (income, shares) => shares > 0 ? income / shares : NaN, "Derived diluted EPS = income available to common shareholders, diluted / weighted-average diluted shares, same fiscal year and filing");
+    if (metrics.eps && !series.eps.some((r) => r.end === end)) metrics.eps.unit = currency + "/shares";
+    derive("da", ["depreciation", "amortization"], (d, a) => d + a, "Derived D&A = depreciation + intangible amortization, same fiscal year and filing");
+    derive("ebit", ["pretax", "nonoperating"], (p, n) => p - n, "Derived operating income = pretax income \u2212 net nonoperating income, same fiscal year and filing");
+    derive("commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Derived common equity = stockholders equity excluding NCI \u2212 preferred carrying value, same date and filing");
+    return { end, metrics };
+  });
+  return {
+    status: !annual.length ? "unavailable" : (+now2 - Date.parse(annual[0].end)) / DAY2 > 550 ? "stale" : "ready",
+    currency,
+    annual,
+    asOf: annual[0]?.end || null,
+    warnings: [
+      "Financial statements may use a different reporting currency from the listing. Values with unmatched currency are withheld.",
+      "Stockholders/owners equity is not automatically treated as common equity. Preferred and AT1 capital require a verified adjustment."
+    ]
+  };
 }
 
 // worker/market-provider.js
@@ -7173,6 +7194,15 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
     data.dividend = parseSECDividends(facts, cik, now2, {
       currency: item.currency
     });
+    if (data.financials.status !== "ready" && item.currency === "CAD" && secReference(item)?.crossListed) {
+      const usd = parseFinancials(facts, cik, "USD", now2);
+      if (usd.status === "ready") try {
+        const converted = convertUSDToCAD(usd, parseSECDividends(facts, cik, now2, { currency: "USD" }), await usdCadRate(fetcher2, now2));
+        data.financials = converted.financials;
+        if (data.dividend.status !== "ready" && converted.dividend?.status === "ready") data.dividend = converted.dividend;
+      } catch {
+      }
+    }
     const latest = data.financials.status === "ready" && data.financials.annual[0];
     const common = latest?.metrics?.commonEquity, shares = latest?.metrics?.commonShares;
     if (common && shares?.value > 0 && common.value > 0 && common.source.url === shares.source.url)
@@ -7208,7 +7238,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
   const put = (key, v, origin) => {
     if (Number.isFinite(v) || typeof v === "string") {
       patches[key] = String(v);
-      origins[key] = origin;
+      origins[key] = origin + (snapshot.financials?.conversion ? ` \xB7 USD\u2192CAD ${snapshot.financials.conversion.value} (${snapshot.financials.conversion.asOf}); constant FX assumption` : "");
     }
   };
   const fact = (key, metric2, scale = 1) => {
@@ -7495,7 +7525,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
     patches.priceDate = snapshot.price.asOf;
   }
   if (latest && view !== "ee") patches.asOf ||= latest.end;
-  patches.source ||= latest ? "SEC filing facts with explicit forecast assumptions. " + Object.values(m)[0]?.source.url : "";
+  patches.source ||= latest ? "SEC filing facts with explicit forecast assumptions. " + Object.values(m)[0]?.source.url + (snapshot.financials?.conversion ? ` USD financials translated to CAD at ${snapshot.financials.conversion.value} CAD/USD (${snapshot.financials.conversion.asOf}); constant FX scenario. ${snapshot.financials.conversion.source.url}` : "") : "";
   return { patches, origins, gaps: [...new Set(gaps)], fit };
 }
 
@@ -7587,6 +7617,11 @@ function calculateDDM(input) {
 
 // src/valuation-answer.js
 function valuationAnswer(item, snapshot, engine) {
+  const answer = selectAnswer(item, snapshot, engine), fx = snapshot?.financials?.conversion || snapshot?.dividend?.conversion;
+  if (fx && Number.isFinite(answer.value)) answer.assumptions += ` USD financial facts translated at ${fx.value} CAD/USD (Bank of Canada daily average ${fx.asOf}); constant FX assumption.`;
+  return answer;
+}
+function selectAnswer(item, snapshot, engine) {
   const fit = modelFit(item);
   const pending = { method: "review", title: "Review the company financials", reason: fit.reason, assumptions: fit.caution };
   if (!snapshot || snapshot.instrument?.symbol !== item.symbol || snapshot.instrument?.currency !== item.currency) return pending;
