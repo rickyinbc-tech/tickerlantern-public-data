@@ -5743,6 +5743,14 @@ function applyCoverage(snapshot) {
   return coverageState;
 }
 applyCoverage(coverageState);
+var esc = (s) => String(s ?? "").replace(
+  /[&<>"']/g,
+  (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]
+);
+var num = (n, d = 2) => Number.isFinite(n) ? n.toLocaleString("en-US", {
+  minimumFractionDigits: d,
+  maximumFractionDigits: d
+}) : "\u2014";
 
 // ../tickerlantern-terminal/node_modules/fflate/esm/index.mjs
 import { createRequire } from "module";
@@ -6394,17 +6402,17 @@ function revenueScopeRequests(payload, cik, currency, now2 = /* @__PURE__ */ new
       if (prior) periods.push(rows3.filter((r) => r.end === prior.end && r.start === prior.start).sort((a, b) => Number(b.accn === current.accn) - Number(a.accn === current.accn) || b.filed.localeCompare(a.filed) || revenueTags.indexOf(a.tag) - revenueTags.indexOf(b.tag)));
     }
   }
-  const result = [];
+  const result2 = [];
   for (const period2 of periods) {
     const candidates = revenueScopeCandidates(period2, currency);
     if (!revenueScopeNeeded(candidates, { force })) continue;
     const first = candidates[0];
     if (!first) continue;
     const key4 = revenueScopeKey(currency, first.start, first.end, first.accn);
-    if (result.some((r) => r.key === key4)) continue;
-    result.push({ key: key4, cik: Number(cik), currency, start: first.start, end: first.end, accession: first.accn, candidates });
+    if (result2.some((r) => r.key === key4)) continue;
+    result2.push({ key: key4, cik: Number(cik), currency, start: first.start, end: first.end, accession: first.accn, candidates });
   }
-  return result;
+  return result2;
 }
 
 // src/fundamentals.js
@@ -6504,15 +6512,15 @@ var instantMetrics = /* @__PURE__ */ new Set([
   "commonShares"
 ]);
 var shareMetrics = /* @__PURE__ */ new Set(["shares", "commonShares", "preferredSharesOutstanding", "preferredSharesIssued"]);
-function financialFact(row, metric, cik) {
+function financialFact(row, metric2, cik) {
   return {
     value: row.val,
     asOf: row.end,
     filed: row.filed,
     unit: row.unit,
     ...row.start ? { start: row.start } : {},
-    ...metric === "netIncome" ? { label: row.tag === "NetIncomeLossAvailableToCommonStockholdersBasic" ? "Net income available to common shareholders \xB7 basic" : row.tag === "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity" ? "Profit attributable to ordinary equity holders" : "Reported net income / loss" } : {},
-    basis: metric === "netIncome" && row.tag === "NetIncomeLossAvailableToCommonStockholdersBasic" ? "Reported basic common-income numerator after preferred dividends; not total company net income or the diluted EPS numerator" : metric === "netIncome" && row.tag === "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity" ? "Reported profit attributable to ordinary equity holders of the parent; not consolidated profit before other ownership claims" : metric === "capex" && row.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric === "shares" ? "Reported weighted-average diluted share count; not current fully diluted shares" : instantMetrics.has(metric) ? "Reported period-end balance" : "Reported filing fact",
+    ...metric2 === "netIncome" ? { label: row.tag === "NetIncomeLossAvailableToCommonStockholdersBasic" ? "Net income available to common shareholders \xB7 basic" : row.tag === "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity" ? "Profit attributable to ordinary equity holders" : "Reported net income / loss" } : {},
+    basis: metric2 === "netIncome" && row.tag === "NetIncomeLossAvailableToCommonStockholdersBasic" ? "Reported basic common-income numerator after preferred dividends; not total company net income or the diluted EPS numerator" : metric2 === "netIncome" && row.tag === "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity" ? "Reported profit attributable to ordinary equity holders of the parent; not consolidated profit before other ownership claims" : metric2 === "capex" && row.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric2 === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric2 === "shares" ? "Reported weighted-average diluted share count; not current fully diluted shares" : instantMetrics.has(metric2) ? "Reported period-end balance" : "Reported filing fact",
     source: {
       name: "SEC EDGAR",
       tag: row.namespace + ":" + row.tag,
@@ -6735,8 +6743,8 @@ function normalizeMetricQuality(metrics, { payload, cik, series = {} }) {
 function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date()) {
   if (Number(payload?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
   const today2 = now2.toISOString().slice(0, 10), series = {};
-  for (const [metric, names] of Object.entries(financialTags)) {
-    const unit2 = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
+  for (const [metric2, names] of Object.entries(financialTags)) {
+    const unit2 = metric2 === "eps" ? currency + "/shares" : shareMetrics.has(metric2) ? "shares" : currency;
     const all = [];
     for (const name of names)
       for (const namespace of ["us-gaap", "ifrs-full"])
@@ -6744,14 +6752,14 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
           if (!validDate(row.end) || !validDate(row.filed) || row.end > today2 || row.filed > today2 || row.filed < row.end || !forms2.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
             continue;
           const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY2 + 1;
-          if (instantMetrics.has(metric) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
+          if (instantMetrics.has(metric2) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
             continue;
           all.push({ ...row, tag: name, namespace, unit: unit2 });
         }
     all.sort(
       (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag)
     );
-    series[metric] = all;
+    series[metric2] = all;
   }
   const ends = [
     ...new Set([...series.revenue, ...series.eps].map((r) => r.end))
@@ -6760,18 +6768,18 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
   const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY2 <= 2700).map((end) => {
     const metrics = {}, qualityIssues2 = [];
     const anchor = series.revenue.find((r) => r.end === end) || series.eps.find((r) => r.end === end);
-    for (const [metric, rows3] of Object.entries(series)) {
-      const matches = rows3.filter((r2) => r2.end === end && (instantMetrics.has(metric) || r2.start === anchor.start));
-      let r = metric === "da" && reconciledDATag ? matches.find((r2) => r2.namespace + ":" + r2.tag === reconciledDATag) || matches[0] : matches[0];
+    for (const [metric2, rows3] of Object.entries(series)) {
+      const matches = rows3.filter((r2) => r2.end === end && (instantMetrics.has(metric2) || r2.start === anchor.start));
+      let r = metric2 === "da" && reconciledDATag ? matches.find((r2) => r2.namespace + ":" + r2.tag === reconciledDATag) || matches[0] : matches[0];
       let revenueProof;
-      if (metric === "revenue" && r) {
+      if (metric2 === "revenue" && r) {
         const selection = selectRevenueRow(matches, payload, cik);
         r = selection.row;
         revenueProof = selection.proof;
         if (selection.issue) qualityIssues2.push(selection.issue);
       }
       if (!r) continue;
-      metrics[metric] = metric === "revenue" ? attachRevenueProof(financialFact(r, metric, cik), revenueProof) : financialFact(r, metric, cik);
+      metrics[metric2] = metric2 === "revenue" ? attachRevenueProof(financialFact(r, metric2, cik), revenueProof) : financialFact(r, metric2, cik);
     }
     const derive = (key4, components, fn, basis) => {
       if (metrics[key4] || !components.every((k) => metrics[k])) return;
@@ -6829,43 +6837,43 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
 }
 
 // src/growth-policy.js
-var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v2";
+var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v3";
 var validDate2 = (x2) => /^\d{4}-\d{2}-\d{2}$/.test(x2 || "") && Number.isFinite(Date.parse(x2));
 function cagr(begin, end, years) {
   if (![begin, end, years].every(Number.isFinite) || begin <= 0 || end <= 0 || years <= 0) return null;
   return (end / begin) ** (1 / years) - 1;
 }
-function growthEvidence(annual, metric, { asOf, eligible = () => true } = {}) {
+function growthEvidence(annual, metric2, { asOf, eligible = () => true } = {}) {
   const groups2 = /* @__PURE__ */ new Map();
   for (const row of annual || []) {
-    const f = row?.metrics?.[metric];
+    const f = row?.metrics?.[metric2];
     if (!validDate2(row.end) || asOf && row.end > asOf || !Number.isFinite(f?.value) || !eligible(f)) continue;
     if (!groups2.has(row.end)) groups2.set(row.end, []);
     groups2.get(row.end).push({ ...row, fact: f });
   }
   const rows3 = [...groups2.values()].filter((g) => new Set(g.map((r) => r.fact.value)).size === 1).map((g) => g[0]).sort((a, b) => b.end.localeCompare(a.end));
-  const latest2 = rows3[0], result = { metric, asOf: latest2?.end || null, yoy: null, cagr3: null, cagr5: null, inputs: [], flags: [] };
-  if (!latest2) return result;
+  const latest2 = rows3[0], result2 = { metric: metric2, asOf: latest2?.end || null, yoy: null, cagr3: null, cagr5: null, inputs: [], flags: [] };
+  if (!latest2) return result2;
   for (const [key4, n] of [["yoy", 1], ["cagr3", 3], ["cagr5", 5]]) {
     const prior = rows3.find((r) => Math.abs((Date.parse(latest2.end) - Date.parse(r.end)) / 864e5 - 365.25 * n) <= 16);
     if (!prior) continue;
     const between = rows3.filter((r) => r.end >= prior.end && r.end <= latest2.end);
     if (between.length !== n + 1 || between.some((r, i2) => i2 && Math.abs((Date.parse(between[i2 - 1].end) - Date.parse(r.end)) / 864e5 - 365.25) > 20)) {
-      result.flags.push(key4 + "_incomplete_history");
+      result2.flags.push(key4 + "_incomplete_history");
       continue;
     }
     if (prior.fact.unit && latest2.fact.unit && prior.fact.unit !== latest2.fact.unit) {
-      result.flags.push(key4 + "_incompatible_units");
+      result2.flags.push(key4 + "_incompatible_units");
       continue;
     }
     const value = cagr(prior.fact.value, latest2.fact.value, n);
     if (value == null) {
-      result.flags.push(key4 + "_nonpositive_endpoint");
+      result2.flags.push(key4 + "_nonpositive_endpoint");
       continue;
     }
-    result[key4] = { value, years: n, start: prior.end, end: latest2.end, category: "calculated_historical_metric", formula: "(ending / beginning)^(1 / fiscal years) - 1", inputIds: [metric + ":" + prior.end, metric + ":" + latest2.end], sources: [prior.fact.source, latest2.fact.source] };
+    result2[key4] = { value, years: n, start: prior.end, end: latest2.end, category: "calculated_historical_metric", formula: "(ending / beginning)^(1 / fiscal years) - 1", inputIds: [metric2 + ":" + prior.end, metric2 + ":" + latest2.end], sources: [prior.fact.source, latest2.fact.source] };
   }
-  return result;
+  return result2;
 }
 function revenueGrowthPolicy(evidence, { sectorGrowth, sectorName, weights = { cagr3: 0.6, cagr5: 0.4 } } = {}) {
   const parts = Object.entries(weights).filter(([key4, w]) => w > 0 && Number.isFinite(evidence[key4]?.value));
@@ -6888,12 +6896,12 @@ function revenueGrowthPolicy(evidence, { sectorGrowth, sectorName, weights = { c
 function normalizedOperatingDrivers(annual, metricBase, { cyclical = false } = {}) {
   const usable = (annual || []).filter((r) => r.metrics?.revenue?.value > 0).slice(0, cyclical ? 5 : 3);
   if (!usable.length && metricBase?.revenue?.value > 0) usable.push({ metrics: metricBase });
-  const median = (v) => {
+  const median2 = (v) => {
     const a = v.sort((x2, y) => x2 - y);
     return a.length ? a.length % 2 ? a[(a.length - 1) / 2] : (a[a.length / 2 - 1] + a[a.length / 2]) / 2 : null;
   };
-  const ratio = (key4) => median(usable.map((r) => r.metrics[key4]?.value / r.metrics.revenue.value).filter(Number.isFinite));
-  return { margin: ratio("ebit"), daRate: ratio("da"), depreciationRate: ratio("depreciation"), capexRate: ratio("capex"), nwcRate: median(usable.filter((r) => ["receivables", "inventory", "payables"].every((k) => Number.isFinite(r.metrics[k]?.value))).map((r) => (r.metrics.receivables.value + r.metrics.inventory.value - r.metrics.payables.value) / r.metrics.revenue.value)), periods: usable.map((r) => r.end).filter(Boolean), method: `Median of up to ${cyclical ? "five cycle-normalization" : "three"} comparable reported annual operating ratios; no undocumented outlier exclusions`, policyVersion: GROWTH_POLICY_VERSION };
+  const ratio = (key4) => median2(usable.map((r) => r.metrics[key4]?.value / r.metrics.revenue.value).filter(Number.isFinite));
+  return { margin: ratio("ebit"), daRate: ratio("da"), depreciationRate: ratio("depreciation"), capexRate: ratio("capex"), nwcRate: median2(usable.filter((r) => ["receivables", "inventory", "payables"].every((k) => Number.isFinite(r.metrics[k]?.value))).map((r) => (r.metrics.receivables.value + r.metrics.inventory.value - r.metrics.payables.value) / r.metrics.revenue.value)), periods: usable.map((r) => r.end).filter(Boolean), method: `Median of up to ${cyclical ? "five cycle-normalization" : "three"} comparable reported annual operating ratios; no undocumented outlier exclusions`, policyVersion: GROWTH_POLICY_VERSION };
 }
 function cyclicalRevenuePolicy(annual, options = {}) {
   const evidence = growthEvidence(annual, "revenue", options), ordered2 = [...annual || []].sort((a, b) => b.end.localeCompare(a.end));
@@ -6901,6 +6909,73 @@ function cyclicalRevenuePolicy(annual, options = {}) {
   if (changes.length < 4) return { ...revenueGrowthPolicy(evidence, options), flags: ["cyclical_low_history", "not_full_cycle"], description: "Insufficient comparable cycle history: conditional growth starting point, not a verified mid-cycle forecast. " + revenueGrowthPolicy(evidence, options).description };
   const value = changes.length % 2 ? changes[(changes.length - 1) / 2] : (changes[changes.length / 2 - 1] + changes[changes.length / 2]) / 2;
   return { value, status: "available", category: "model_assumption", policyVersion: GROWTH_POLICY_VERSION, method: "Median of up to five comparable annual revenue growth rates, fading to nominal terminal policy", description: `Cycle-normalization assumption: median of ${changes.length} comparable annual revenue growth rates through ${evidence.asOf}; ${GROWTH_POLICY_VERSION}. This history may not span an entire economic cycle.`, flags: ["cycle_length_uncertain"], inputIds: ordered2.slice(0, 6).map((r) => "revenue:" + r.end) };
+}
+
+// src/data-quality.js
+var DATA_QUALITY_VERSION = 2;
+
+// src/snapshot-parts.js
+var DAY3 = 864e5;
+function snapshotPartCheckedAt(snapshot, key4) {
+  const own = snapshot?.sync?.parts?.[key4]?.checkedAt || snapshot?.[key4]?.checkedAt;
+  if (own) return own;
+  const checked = snapshot?.checkedAt, success = snapshot?.sync?.lastSuccess;
+  return !snapshot?.sync?.parts && ["last_known", "refresh_failed"].includes(snapshot?.sync?.state) && Number.isFinite(Date.parse(success)) && Date.parse(success) < Date.parse(checked) ? success : checked;
+}
+function snapshotPartCurrent(snapshot, key4, now2 = /* @__PURE__ */ new Date()) {
+  const age2 = +now2 - Date.parse(snapshotPartCheckedAt(snapshot, key4)), field = snapshot?.[key4], periodAge = +now2 - Date.parse(field?.asOf);
+  return snapshot?.dataQualityVersion === DATA_QUALITY_VERSION && field?.status === "ready" && age2 >= 0 && age2 < 3 * DAY3 && periodAge >= 0 && periodAge <= 550 * DAY3;
+}
+function retainSnapshotParts(current, previous, item, now2 = /* @__PURE__ */ new Date()) {
+  const matches = (s) => s?.schema === 1 && s.dataQualityVersion === DATA_QUALITY_VERSION && s.instrument?.symbol === item.symbol && s.instrument.currency === item.currency;
+  const incoming = matches(current) ? current : { schema: 1, dataQualityVersion: DATA_QUALITY_VERSION, instrument: { symbol: item.symbol, ticker: item.ticker, currency: item.currency }, checkedAt: now2.toISOString(), financials: { status: "unavailable", annual: [], reason: "The exact dated public-data snapshot could not be retrieved." }, dividend: { status: "unavailable" } };
+  const old = matches(previous) ? previous : null, out = { ...incoming }, parts = {};
+  for (const key4 of ["financials", "dividend"]) {
+    const latest2 = snapshotPartCurrent(incoming, key4, now2), retained2 = !latest2 && snapshotPartCurrent(old, key4, now2), selected = latest2 ? incoming : retained2 ? old : null;
+    if (selected) {
+      out[key4] = selected[key4];
+      const inherited = selected.sync?.parts?.[key4], lastKnown = retained2 || inherited?.state === "last_known" || !selected.sync?.parts && ["last_known", "refresh_failed"].includes(selected.sync?.state);
+      parts[key4] = {
+        state: lastKnown ? "last_known" : "ready",
+        checkedAt: snapshotPartCheckedAt(selected, key4),
+        lastAttempt: incoming.sync?.lastAttempt || incoming.checkedAt,
+        ...lastKnown ? { reason: retained2 ? incoming[key4]?.reason || "Latest source check did not provide an eligible replacement." : inherited?.reason || "Upstream retained dated last-known data." } : {}
+      };
+      if (key4 === "financials" && retained2) {
+        if (old.commonBookValuePerShare) out.commonBookValuePerShare = old.commonBookValuePerShare;
+        else delete out.commonBookValuePerShare;
+      }
+    } else {
+      if (out[key4]?.status === "ready") out[key4] = { ...out[key4], status: "stale", reason: "This section is outside the permitted source/observation age. Another section\u2019s refresh cannot renew it." };
+      parts[key4] = { state: out[key4]?.status || "unavailable", checkedAt: snapshotPartCheckedAt(incoming, key4) || null, lastAttempt: incoming.sync?.lastAttempt || incoming.checkedAt };
+    }
+  }
+  const sourceCurrent = (snapshot, key4) => {
+    if (!snapshot) return false;
+    const f = snapshot[key4], age2 = +now2 - Date.parse(snapshotPartCheckedAt(snapshot, key4));
+    const date4 = key4 === "references" ? /^\d{4}-\d{2}$/.test(f?.asOf || "") ? f.asOf + "-01" : null : f?.asOf;
+    const observed = +now2 - Date.parse(date4), limit = key4 === "references" ? 550 : key4 === "riskFree" ? 10 : 7;
+    return age2 >= 0 && age2 < 3 * DAY3 && observed >= 0 && observed <= limit * DAY3 && (key4 === "references" ? f?.status !== "stale" : f?.status === "ready" && Number.isFinite(f.value) && (!f.currency || f.currency === item.currency) && /^https:\/\//.test(f.source?.url || "") && (!f.filed || Date.parse(f.filed) <= +now2));
+  };
+  for (const key4 of ["references", "riskFree", "price", "marketCap"]) {
+    const latest2 = sourceCurrent(incoming, key4), retained2 = !latest2 && sourceCurrent(old, key4), selected = latest2 ? incoming : retained2 ? old : null;
+    if (selected) {
+      out[key4] = selected[key4];
+      const inherited = selected.sync?.parts?.[key4], lastKnown = retained2 || inherited?.state === "last_known" || !selected.sync?.parts && ["last_known", "refresh_failed"].includes(selected.sync?.state);
+      parts[key4] = { state: lastKnown ? "last_known" : "ready", checkedAt: snapshotPartCheckedAt(selected, key4), lastAttempt: incoming.sync?.lastAttempt || incoming.checkedAt };
+    } else if (out[key4] && (key4 === "references" || out[key4].status === "ready")) out[key4] = { ...out[key4], status: "stale" };
+  }
+  const available = Object.values(parts).filter((p) => ["ready", "last_known"].includes(p.state)), retained = available.some((p) => p.state === "last_known");
+  const lastSuccess = available.map((p) => p.checkedAt).filter((v) => Number.isFinite(Date.parse(v))).sort((a, b) => Date.parse(a) - Date.parse(b))[0] || null;
+  out.sync = {
+    ...incoming.sync,
+    state: retained ? "last_known" : available.length ? "ready" : "unavailable",
+    parts,
+    lastAttempt: incoming.sync?.lastAttempt || incoming.checkedAt,
+    lastSuccess,
+    complete: ["financials", "dividend"].every((key4) => parts[key4].state === "ready") && !retained
+  };
+  return out;
 }
 
 // src/financial-contract.js
@@ -6912,10 +6987,10 @@ var accession = (url) => {
   const part = String(url || "").match(/\/data\/\d+\/(\d{18})\//)?.[1];
   return part ? part.slice(0, 10) + "-" + part.slice(10, 12) + "-" + part.slice(12) : null;
 };
-function normalizedInput(id, fact, { item, period: period2 = {}, snapshot = {}, category = "reported_actual", status, method, formula, inputs = [], policyVersion, fallbackReason } = {}) {
+function normalizedInput(id, fact, { item, period: period2 = {}, snapshot = {}, category = "reported_actual", status, method, formula, inputs = [], policyVersion, fallbackReason, retrievedAt } = {}) {
   const value = finite(fact?.value) ? fact.value : null, source2 = fact?.source || {}, rawStatus = status || fact?.status;
   const resolved = rawStatus === "ready" ? "available" : DATA_STATUSES.includes(rawStatus) ? rawStatus : value === null ? "missing" : rawStatus && rawStatus !== "available" ? "missing" : "available";
-  const metric = id.split(":")[0], start = fact?.periodStart || fact?.start || period2.start || null;
+  const metric2 = id.split(":")[0], start = fact?.periodStart || fact?.start || period2.start || null;
   const monetaryCurrency = String(fact?.unit || "").match(/^([A-Z]{3})(?:\/shares)?$/)?.[1];
   const currency = fact?.unit === "shares" ? null : fact?.currency || monetaryCurrency || snapshot.instrument?.currency || item?.currency || null;
   const derived = category === "calculated_historical_metric" || /derived|reconciled/i.test(source2.name || "");
@@ -6923,28 +6998,28 @@ function normalizedInput(id, fact, { item, period: period2 = {}, snapshot = {}, 
     id,
     identity: { symbol: item?.symbol || snapshot.instrument?.symbol || null, ticker: item?.ticker || null, exchange: item?.exchange || null, shareClass: fact?.shareClass || snapshot.instrument?.shareClass || null, issuerId: fact?.cik || snapshot.references?.issuer?.cik || snapshot.issuer?.cik || source2.url?.match(/\/data\/(\d+)\//)?.[1] || null, providerId: item?.symbol || null, adrRatio: fact?.adrRatio ?? null, quoteUnit: fact?.quoteUnit ?? item?.currency ?? null },
     value,
-    unit: fact?.unit || (["price", "dividend", "commonBookValuePerShare"].includes(metric) ? currency + "/shares" : metric === "riskFree" ? "percent" : null),
+    unit: fact?.unit || (["price", "dividend", "commonBookValuePerShare"].includes(metric2) ? currency + "/shares" : metric2 === "riskFree" ? "percent" : null),
     scale: fact?.scale ?? 1,
     currency,
-    period: { start: instantMetrics.has(metric) ? null : start, end: fact?.asOf || period2.end || null, type: instantMetrics.has(metric) ? "instant" : start ? "duration" : null, fiscalYear: fact?.fy || period2.fiscalYear || null, fiscalPeriod: fact?.fp || period2.fiscalPeriod || null, basis: period2.basis || fact?.kind || null },
-    source: { provider: source2.name || source2.namespace || null, url: source2.url || null, accession: source2.accession || source2.accn || fact?.accn || accession(source2.url), concept: source2.tag || null, publicationDate: fact?.filed || null, observationDate: fact?.asOf || null, retrievedAt: snapshot.checkedAt || null },
-    market: { eventTime: fact?.eventTime || fact?.observationTime || null, retrievedAt: snapshot.checkedAt || null, tradingDate: fact?.tradingDate || null, session: fact?.marketSession || null, delay: fact?.delay ?? null, entitlement: fact?.entitlement || null, freshness: resolved },
+    period: { start: instantMetrics.has(metric2) ? null : start, end: fact?.asOf || period2.end || null, type: instantMetrics.has(metric2) ? "instant" : start ? "duration" : null, fiscalYear: fact?.fy || period2.fiscalYear || null, fiscalPeriod: fact?.fp || period2.fiscalPeriod || null, basis: period2.basis || fact?.kind || null },
+    source: { provider: source2.name || source2.namespace || null, url: source2.url || null, accession: source2.accession || source2.accn || fact?.accn || accession(source2.url), concept: source2.tag || null, publicationDate: fact?.filed || null, observationDate: fact?.asOf || null, retrievedAt: retrievedAt || snapshot.checkedAt || null },
+    market: { eventTime: fact?.eventTime || fact?.observationTime || null, retrievedAt: retrievedAt || snapshot.checkedAt || null, tradingDate: fact?.tradingDate || null, session: fact?.marketSession || null, delay: fact?.delay ?? null, entitlement: fact?.entitlement || null, freshness: resolved },
     category: derived ? "calculated_historical_metric" : category,
     status: resolved,
-    calculation: { method: method || fact?.basis || fact?.normalization?.kind || null, formula: formula || fact?.formula || null, inputIds: inputs.length ? inputs : (source2.components || fact?.components || []).map((c, i2) => c.id || `${source2.tag || metric}:${c.asOf || period2.end}:component${i2}`), policyVersion: policyVersion || null, fallbackReason: fallbackReason || fact?.reason || null },
-    qualityFlags: [...fact?.qualityFlags || [], ...fact?.normalization ? ["normalized_original_retained"] : [], ...fact?.conversion ? ["translated_currency_constant_fx"] : [], ...!start && !instantMetrics.has(metric) ? ["duration_unknown"] : [], ...metric === "shares" ? ["weighted_average_diluted_not_current_outstanding"] : []],
+    calculation: { method: method || fact?.basis || fact?.normalization?.kind || null, formula: formula || fact?.formula || null, inputIds: inputs.length ? inputs : (source2.components || fact?.components || []).map((c, i2) => c.id || `${source2.tag || metric2}:${c.asOf || period2.end}:component${i2}`), policyVersion: policyVersion || null, fallbackReason: fallbackReason || fact?.reason || null },
+    qualityFlags: [...fact?.qualityFlags || [], ...fact?.normalization ? ["normalized_original_retained"] : [], ...fact?.conversion ? ["translated_currency_constant_fx"] : [], ...!start && !instantMetrics.has(metric2) ? ["duration_unknown"] : [], ...metric2 === "shares" ? ["weighted_average_diluted_not_current_outstanding"] : []],
     original: fact || null
   };
 }
 function normalizeFinancialSnapshot(snapshot, item, { asOf = day(snapshot?.valuationDate || snapshot?.checkedAt) } = {}) {
   if (snapshot?.instrument?.symbol !== item?.symbol || snapshot?.instrument?.currency !== item?.currency) return { schema: 1, status: "invalid", reason: "Exact listing and currency identity do not match.", fields: {} };
   const fields = {};
-  for (const [basis, periods] of [["annual", snapshot.financials?.annual || []], ["ttm", [snapshot.financials?.ttm]], ["interim", [snapshot.financials?.recent]], ["interim_comparable", [snapshot.financials?.recent?.prior]]]) for (const p of periods.filter(Boolean)) for (const [metric, fact] of Object.entries(p.metrics || {})) {
-    const id = metric + ":" + p.end + ":" + basis;
+  for (const [basis, periods] of [["annual", snapshot.financials?.annual || []], ["ttm", [snapshot.financials?.ttm]], ["interim", [snapshot.financials?.recent]], ["interim_comparable", [snapshot.financials?.recent?.prior]]]) for (const p of periods.filter(Boolean)) for (const [metric2, fact] of Object.entries(p.metrics || {})) {
+    const id = metric2 + ":" + p.end + ":" + basis;
     const future = asOf && (fact.filed > asOf || fact.asOf > asOf);
-    fields[id] = normalizedInput(id, fact, { item, snapshot, period: { ...p, basis }, category: basis === "ttm" ? "calculated_historical_metric" : "reported_actual", status: future ? "invalid" : snapshot.financials.status === "stale" ? "stale" : void 0, formula: basis === "ttm" ? "Comparable FY + current YTD \u2212 prior comparable YTD" : void 0 });
+    fields[id] = normalizedInput(id, fact, { item, snapshot, period: { ...p, basis }, retrievedAt: snapshotPartCheckedAt(snapshot, "financials"), category: basis === "ttm" ? "calculated_historical_metric" : "reported_actual", status: future ? "invalid" : snapshot.financials.status === "stale" ? "stale" : void 0, formula: basis === "ttm" ? "Comparable FY + current YTD \u2212 prior comparable YTD" : void 0 });
   }
-  for (const key4 of ["dividend", "riskFree", "price", "marketCap", "commonBookValuePerShare"]) if (snapshot[key4]) fields[key4] = normalizedInput(key4, snapshot[key4], { item, snapshot, category: key4 === "commonBookValuePerShare" ? "calculated_historical_metric" : "reported_actual" });
+  for (const key4 of ["dividend", "riskFree", "price", "marketCap", "commonBookValuePerShare"]) if (snapshot[key4]) fields[key4] = normalizedInput(key4, snapshot[key4], { item, snapshot, retrievedAt: snapshotPartCheckedAt(snapshot, key4 === "commonBookValuePerShare" ? "financials" : key4), category: key4 === "commonBookValuePerShare" ? "calculated_historical_metric" : "reported_actual" });
   return { schema: FINANCIAL_CONTRACT_VERSION, valuationDate: asOf, identity: snapshot.instrument, status: Object.values(fields).some((f) => f.status === "available") ? "partial" : "missing", fields };
 }
 
@@ -15047,9 +15122,6 @@ function applySparseSupplement(entry, item, snapshot, asOf) {
   return out;
 }
 
-// src/data-quality.js
-var DATA_QUALITY_VERSION = 2;
-
 // src/currency-conversion.js
 function convertUSDToCAD(financials, dividend, fx) {
   if (financials.currency !== "USD" || fx?.currency !== "CAD/USD" || !(fx.value > 0) || !Number.isFinite(fx.value)) throw Error("Invalid currency conversion");
@@ -16225,7 +16297,7 @@ function classifyBusiness(item, snapshot = {}) {
   if (!selected && (basisChange || scopeChange || calendarChange)) selected = { group: "operating", sector: "operating", source: (basisChange || scopeChange || calendarChange).source };
   if (!selected) return null;
   const policy = policies[selected.group];
-  const result = {
+  const result2 = {
     ...policy,
     ...selected,
     dividendEarningsCap: selected.sector === "bdc" ? false : policy.dividendEarningsCap !== false,
@@ -16235,10 +16307,10 @@ function classifyBusiness(item, snapshot = {}) {
     verifiedAt: selected.source || exchanges[item.ticker] ? "2026-10-17" : snapshot.checkedAt?.slice(0, 10) || null
   };
   if (basisChange) {
-    result.perShareBasisChange = basisChange;
-    result.reason += ` ${basisChange.reason}`;
+    result2.perShareBasisChange = basisChange;
+    result2.reason += ` ${basisChange.reason}`;
     const eps = snapshot.financials?.annual?.[0]?.metrics?.eps;
-    if (!perShareFactCompatible(eps, basisChange, snapshot.checkedAt?.slice(0, 10))) result.earningsPower = false;
+    if (!perShareFactCompatible(eps, basisChange, snapshot.checkedAt?.slice(0, 10))) result2.earningsPower = false;
   }
   if (scopeChange && snapshot.checkedAt?.slice(0, 10) >= scopeChange.effectiveDate) {
     const annual = snapshot.financials?.annual?.[0]?.metrics || {};
@@ -16248,17 +16320,17 @@ function classifyBusiness(item, snapshot = {}) {
     const shareProxy = snapshot.financials?.recent?.metrics?.shares || operating.shares || annual.shares;
     const operatingCompatible = keys2.every((key4) => businessScopeFactCompatible(operating[key4], scopeChange)) && (!scopeChange.requirePostCombinationPeriod || businessScopeFactCompatible(shareProxy, scopeChange));
     const capitalActions = (scopeChange.capitalActions || []).filter((action) => cutoff >= action.effectiveDate && cutoff >= action.source.publishedAt);
-    result.businessScopeChange = { ...scopeChange, ...scopeChange.capitalActions ? { capitalActions } : {}, operatingBasisCompatible: operatingCompatible };
-    result.reason += ` ${scopeChange.reason}`;
-    for (const action of capitalActions) result.reason += ` ${action.reason}`;
-    if (!operatingCompatible) result.operatingDCF = false;
-    if (!businessScopeFactCompatible(annual.eps, scopeChange)) result.earningsPower = false;
+    result2.businessScopeChange = { ...scopeChange, ...scopeChange.capitalActions ? { capitalActions } : {}, operatingBasisCompatible: operatingCompatible };
+    result2.reason += ` ${scopeChange.reason}`;
+    for (const action of capitalActions) result2.reason += ` ${action.reason}`;
+    if (!operatingCompatible) result2.operatingDCF = false;
+    if (!businessScopeFactCompatible(annual.eps, scopeChange)) result2.earningsPower = false;
   }
   if (calendarChange) {
-    result.reportingCalendarChange = calendarChange;
-    result.reason += ` ${calendarChange.reason}`;
+    result2.reportingCalendarChange = calendarChange;
+    result2.reason += ` ${calendarChange.reason}`;
   }
-  return result;
+  return result2;
 }
 
 // src/model-fit.js
@@ -16409,12 +16481,12 @@ function modelFit(item, snapshot) {
 }
 
 // src/dividend-quality.js
-var DAY3 = 864e5;
+var DAY4 = 864e5;
 var annualForms = /* @__PURE__ */ new Set(["10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A", "6-K", "6-K/A"]);
 var forms3 = /* @__PURE__ */ new Set([...annualForms, "10-Q", "10-Q/A"]);
 var dividendTags = [["us-gaap", "CommonStockDividendsPerShareDeclared"], ["us-gaap", "CommonStockDividendsPerShareCashPaid"], ["ifrs-full", "DividendsPaidOrdinarySharesPerShare"], ["ifrs-full", "DividendsRecognisedAsDistributionsToOwnersPerShare"]];
-var nextDay2 = (d) => new Date(Date.parse(d) + DAY3).toISOString().slice(0, 10);
-var dividendDuration = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY3 + 1;
+var nextDay2 = (d) => new Date(Date.parse(d) + DAY4).toISOString().slice(0, 10);
+var dividendDuration = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY4 + 1;
 var equal = (a, b) => Math.abs(a - b) <= Math.max(1e-8, Math.max(Math.abs(a), Math.abs(b)) * 1e-6);
 function dividendSeries(payload, currency, now2) {
   const today2 = now2.toISOString().slice(0, 10);
@@ -16465,7 +16537,7 @@ function assessDividendScope(row, series, cik, options = {}) {
   return { row };
 }
 function verifiedDividendHistory(payload, cik, currency, latest2, options = {}) {
-  const result = [];
+  const result2 = [];
   for (const p of dividend_scope_evidence_default.records.filter((p2) => p2.tag === latest2.namespace + ":" + latest2.tag && Number(p2.cik) === Number(cik) && p2.currency === currency && p2.accession === latest2.accn && (!p2.symbol || p2.symbol === options.item?.symbol))) {
     for (const original of p.originals) {
       const [namespace, tag2] = original.tag.split(":"), raw = (payload.facts?.[namespace]?.[tag2]?.units?.[currency + "/shares"] || []).find((r) => (r.start === p.start || p.acceptInstantSource && !r.start) && r.end === p.end && r.filed === p.filed && r.accn === p.accession && equal(r.val, original.value));
@@ -16473,12 +16545,12 @@ function verifiedDividendHistory(payload, cik, currency, latest2, options = {}) 
       const row = { ...raw, start: p.start, namespace, tag: tag2, currency }, checked = assessDividendScope(row, [{ namespace, tag: tag2, rows: [row] }], cik, options);
       if (checked.row) {
         checked.normalization.original = dividendFact({ ...row, start: raw.start }, cik);
-        result.push({ row: checked.row, checked });
+        result2.push({ row: checked.row, checked });
         break;
       }
     }
   }
-  return result;
+  return result2;
 }
 function paidDividendTTM(payload, cik, currency, series, now2, { item } = {}) {
   if (!item) return { status: "not-derived", reason: "A verified listing and its share/business basis are required for a trailing per-share calculation." };
@@ -16489,7 +16561,7 @@ function paidDividendTTM(payload, cik, currency, series, now2, { item } = {}) {
     if (!originalAnnual) continue;
     const current = s.rows.find((r) => r.start === nextDay2(originalAnnual.end) && r.end > originalAnnual.end && dividendDuration(r) < 310);
     if (!current) continue;
-    const prior = s.rows.find((r) => r.start === originalAnnual.start && r.accn === current.accn && Math.abs(dividendDuration(r) - dividendDuration(current)) < 14 && Math.abs((Date.parse(current.end) - Date.parse(r.end)) / DAY3 - 365.25) < 14);
+    const prior = s.rows.find((r) => r.start === originalAnnual.start && r.accn === current.accn && Math.abs(dividendDuration(r) - dividendDuration(current)) < 14 && Math.abs((Date.parse(current.end) - Date.parse(r.end)) / DAY4 - 365.25) < 14);
     if (!prior) continue;
     const annual = s.rows.find((r) => r.start === originalAnnual.start && r.end === originalAnnual.end && r.accn === current.accn) || originalAnnual;
     const raw = [annual, current, prior], checked = raw.map((r) => assessDividendScope(r, series, cik, { item }));
@@ -16505,7 +16577,7 @@ function paidDividendTTM(payload, cik, currency, series, now2, { item } = {}) {
     let splitSignal = false;
     for (const tag2 of ["StockholdersEquityNoteStockSplitConversionRatio1", "StockholdersEquityNoteStockSplitConversionRatio", "StockIssuedDuringPeriodSharesStockSplits", "StockIssuedDuringPeriodSharesReverseStockSplits"]) for (const rows3 of Object.values(payload.facts?.["us-gaap"]?.[tag2]?.units || {})) if (rows3.some((r) => validDate(r.end) && validDate(r.filed) && r.end > prior.end && r.end <= current.end && r.filed <= now2.toISOString().slice(0, 10) && r.val > 0 && r.val !== 1)) splitSignal = true;
     if (splitSignal) continue;
-    const value = components[0].val + components[1].val - components[2].val, days2 = (Date.parse(current.end) - Date.parse(prior.end)) / DAY3;
+    const value = components[0].val + components[1].val - components[2].val, days2 = (Date.parse(current.end) - Date.parse(prior.end)) / DAY4;
     if (!Number.isFinite(value) || value < 0 || days2 < 350 || days2 > 385) continue;
     const facts = components.map((r, index) => ({ ...dividendFact(r, cik), ...checked[index].normalization ? { normalization: checked[index].normalization } : {}, scopeEvidence: { status: checks[index].status, components: checks[index].components.map((r2) => dividendFact(r2, cik)) } }));
     possibilities.push({
@@ -16528,23 +16600,23 @@ function paidDividendTTM(payload, cik, currency, series, now2, { item } = {}) {
 }
 
 // src/ddm-data.js
-var DAY4 = 864e5;
+var DAY5 = 864e5;
 function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), options = {}) {
   if (Number(payload?.cik) !== Number(cik)) throw Error("The filing entity does not match this listing.");
   const currency = options.currency || "USD", series = dividendSeries(payload, currency, now2), candidates = series.filter((s) => s.annual.length).sort((a, b) => b.annual[0].end.localeCompare(a.annual[0].end));
   if (!candidates.length) return { status: "unavailable", reason: "No supported annual matching-currency ordinary/common-dividend-per-share disclosure was found. Missing data does not establish that the company pays no dividend." };
   const original = candidates[0].annual[0];
-  if ((+now2 - Date.parse(original.end)) / DAY4 > 550) return { status: "stale", reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.", asOf: original.end };
+  if ((+now2 - Date.parse(original.end)) / DAY5 > 550) return { status: "stale", reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.", asOf: original.end };
   const assessment = assessDividendScope(original, series, cik, options);
   if (!assessment.row) return { status: "unavailable", asOf: original.end, reason: assessment.reason, qualityIssues: [{ metric: "dividend", severity: "material", code: assessment.code, message: assessment.reason, facts: assessment.facts || [dividendFact(original, cik)] }] };
   const latest2 = assessment.row;
-  if ((+now2 - Date.parse(latest2.end)) / DAY4 > 550) return { status: "stale", reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.", asOf: latest2.end };
+  if ((+now2 - Date.parse(latest2.end)) / DAY5 > 550) return { status: "stale", reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.", asOf: latest2.end };
   const normalizedFact = (row, checked) => ({ ...dividendFact(row, cik), ...checked.normalization ? { normalization: checked.normalization } : {}, ...checked.proof ? { source: { ...dividendFact(row, cik).source, ...checked.proof.source, accession: row.accn, tag: row.tag, namespace: row.namespace } } : {} });
-  const matching = series.find((s) => s.namespace === latest2.namespace && s.tag === latest2.tag), history2 = verifiedDividendHistory(payload, cik, currency, latest2, options), sameFiling = [...new Map([...(matching?.annual || []).filter((row) => row.accn === latest2.accn).map((row) => {
+  const matching = series.find((s) => s.namespace === latest2.namespace && s.tag === latest2.tag), history = verifiedDividendHistory(payload, cik, currency, latest2, options), sameFiling = [...new Map([...(matching?.annual || []).filter((row) => row.accn === latest2.accn).map((row) => {
     const checked = assessDividendScope(row, series, cik, options);
     return [row.end, checked.row ? normalizedFact(checked.row, checked) : null];
-  }), ...history2.map(({ row, checked }) => [row.end, normalizedFact(row, checked)])]).values()].filter(Boolean).sort((a, b) => a.asOf.localeCompare(b.asOf));
-  const first = sameFiling[0], years = first ? Math.round((Date.parse(latest2.end) - Date.parse(first.asOf)) / DAY4 / 365.25) : 0;
+  }), ...history.map(({ row, checked }) => [row.end, normalizedFact(row, checked)])]).values()].filter(Boolean).sort((a, b) => a.asOf.localeCompare(b.asOf));
+  const first = sameFiling[0], years = first ? Math.round((Date.parse(latest2.end) - Date.parse(first.asOf)) / DAY5 / 365.25) : 0;
   const historicalGrowth = years >= 1.5 && first.value > 0 && latest2.val > 0 ? (latest2.val / first.value) ** (1 / years) - 1 : null;
   const reported = normalizedFact(latest2, assessment), growth = Number.isFinite(historicalGrowth) ? { value: historicalGrowth, start: first.asOf, end: latest2.end, years, description: "Annual dividend CAGR from comparative years in the same filing; historical, not a forecast.", components: sameFiling } : null;
   const annual = {
@@ -16840,25 +16912,25 @@ async function issuerDividend(item, fetcher2 = fetch, now2 = /* @__PURE__ */ new
 }
 
 // src/recent-financials.js
-var DAY5 = 864e5;
-var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY5 + 1;
+var DAY6 = 864e5;
+var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY6 + 1;
 var forms4 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
-var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY5 <= n;
+var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY6 <= n;
 function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE__ */ new Date(), { latestStatement } = {}) {
   if (Number(payload?.cik) !== Number(cik)) throw Error("Issuer mismatch");
   const today2 = now2.toISOString().slice(0, 10), fy = annual?.annual?.[0];
   const series = {};
-  for (const [metric, names] of Object.entries(financialTags)) {
-    const unit2 = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
+  for (const [metric2, names] of Object.entries(financialTags)) {
+    const unit2 = metric2 === "eps" ? currency + "/shares" : shareMetrics.has(metric2) ? "shares" : currency;
     const rows3 = [];
     for (const tag2 of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[unit2] || []) {
       if (!validDate(r.end) || !validDate(r.filed) || r.end > today2 || r.filed > today2 || r.filed < r.end || !forms4.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
-      if (instantMetrics.has(metric) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
+      if (instantMetrics.has(metric2) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
       rows3.push({ ...r, tag: tag2, namespace, unit: unit2 });
     }
-    series[metric] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
+    series[metric2] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
   }
-  const nextDay3 = (end) => new Date(Date.parse(end) + DAY5).toISOString().slice(0, 10);
+  const nextDay3 = (end) => new Date(Date.parse(end) + DAY6).toISOString().slice(0, 10);
   const anchors = [...series.revenue || [], ...series.eps || []];
   let anchor = fy && anchors.filter((r) => r.end > fy.end && days(r) < 310 && r.start === nextDay3(fy.end)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
   const exactFiling = latestStatement && ["10-Q", "10-Q/A"].includes(latestStatement.form) && validDate(latestStatement.end) && validDate(latestStatement.filed) && latestStatement.filed <= today2 && latestStatement.end <= latestStatement.filed && /^\d{10}-\d{2}-\d{6}$/.test(latestStatement.accession || "");
@@ -16867,46 +16939,46 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
     const firstStart = reported.map((r) => r.start).sort()[0];
     anchor = reported.find((r) => r.start === firstStart) || anchor;
   }
-  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY5) return { recent: null, ttm: null };
+  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY6) return { recent: null, ttm: null };
   const contiguous = !!fy && anchor.start === nextDay3(fy.end), standalone = !contiguous;
   const latest2 = {}, prior = {}, ttm = {}, qualityIssues2 = [];
   let priorPeriod = null;
-  for (const [metric, rows3] of Object.entries(series)) {
-    const matches = rows3.filter((r) => r.end === anchor.end && (instantMetrics.has(metric) || r.start === anchor.start) && (!standalone || r.accn === anchor.accn && r.filed === anchor.filed));
-    const annualDA = metric === "da" && contiguous && fy.metrics?.da?.normalization?.kind === "scope-reconciliation" ? fy.metrics.da.source.tag : null;
+  for (const [metric2, rows3] of Object.entries(series)) {
+    const matches = rows3.filter((r) => r.end === anchor.end && (instantMetrics.has(metric2) || r.start === anchor.start) && (!standalone || r.accn === anchor.accn && r.filed === anchor.filed));
+    const annualDA = metric2 === "da" && contiguous && fy.metrics?.da?.normalization?.kind === "scope-reconciliation" ? fy.metrics.da.source.tag : null;
     let c = annualDA && matches.find((r) => r.namespace + ":" + r.tag === annualDA) || matches[0], revenueProof;
-    if (metric === "revenue" && c) {
+    if (metric2 === "revenue" && c) {
       const selection = selectRevenueRow(matches, payload, cik);
       c = selection.row;
       revenueProof = selection.proof;
       if (selection.issue) qualityIssues2.push(selection.issue);
     }
     if (!c) continue;
-    if (metric === "da" && contiguous && (fy.qualityIssues || []).some((i2) => i2.code === "ambiguous_d_and_a_scope" && i2.facts?.[0]?.source.tag === c.namespace + ":" + c.tag)) {
+    if (metric2 === "da" && contiguous && (fy.qualityIssues || []).some((i2) => i2.code === "ambiguous_d_and_a_scope" && i2.facts?.[0]?.source.tag === c.namespace + ":" + c.tag)) {
       qualityIssues2.push({
-        metric,
+        metric: metric2,
         severity: "material",
         code: "unresolved_d_and_a_scope_carries_forward",
         start: c.start,
         end: c.end,
         message: "The same D&A concept failed consolidated-scope reconciliation in the annual statements. Its interim value remains withheld until a source-backed aggregate bridge is available.",
-        facts: [financialFact(c, metric, cik)]
+        facts: [financialFact(c, metric2, cik)]
       });
       continue;
     }
-    latest2[metric] = metric === "revenue" ? attachRevenueProof(financialFact(c, metric, cik), revenueProof) : financialFact(c, metric, cik);
-    if (instantMetrics.has(metric) || standalone) continue;
-    const priorMatches = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY5).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && (metric === "revenue" || r.tag === c.tag && r.namespace === c.namespace)).sort((a, b) => Number(b.accn === c.accn) - Number(a.accn === c.accn) || b.filed.localeCompare(a.filed));
+    latest2[metric2] = metric2 === "revenue" ? attachRevenueProof(financialFact(c, metric2, cik), revenueProof) : financialFact(c, metric2, cik);
+    if (instantMetrics.has(metric2) || standalone) continue;
+    const priorMatches = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY6).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && (metric2 === "revenue" || r.tag === c.tag && r.namespace === c.namespace)).sort((a, b) => Number(b.accn === c.accn) - Number(a.accn === c.accn) || b.filed.localeCompare(a.filed));
     let p = priorMatches[0], priorRevenueProof;
-    if (metric === "revenue" && p) {
+    if (metric2 === "revenue" && p) {
       const selection = selectRevenueRow(priorMatches.filter((r) => r.start === p.start && r.end === p.end), payload, cik);
       p = selection.row;
       priorRevenueProof = selection.proof;
       if (selection.issue) qualityIssues2.push(selection.issue);
     }
     if (p) {
-      prior[metric] = metric === "revenue" ? attachRevenueProof(financialFact(p, metric, cik), priorRevenueProof) : financialFact(p, metric, cik);
-      if (!priorPeriod || metric === "revenue") priorPeriod = p;
+      prior[metric2] = metric2 === "revenue" ? attachRevenueProof(financialFact(p, metric2, cik), priorRevenueProof) : financialFact(p, metric2, cik);
+      if (!priorPeriod || metric2 === "revenue") priorPeriod = p;
     }
   }
   const derive = (m, key4, keys2, fn, basis) => {
@@ -16937,38 +17009,38 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       periodAlignment: { continuousAnnualBase: false, start: anchor.start, end: anchor.end, accession: anchor.accn, filed: anchor.filed, source: { name: "SEC exact reported interim filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${anchor.accn.replaceAll("-", "")}/${anchor.accn}-index.html` }, reason }
     };
   }
-  for (const [metric, c] of Object.entries(latest2)) {
-    if (instantMetrics.has(metric)) {
-      ttm[metric] = c;
+  for (const [metric2, c] of Object.entries(latest2)) {
+    if (instantMetrics.has(metric2)) {
+      ttm[metric2] = c;
       continue;
     }
-    if (metric === "shares") {
+    if (metric2 === "shares") {
       ttm.shares = { ...c, basis: c.basis + "; latest YTD share-count proxy, not a reconstructed TTM average" };
       continue;
     }
-    if (metric === "eps") continue;
-    const p = prior[metric], a = fy.metrics?.[metric];
+    if (metric2 === "eps") continue;
+    const p = prior[metric2], a = fy.metrics?.[metric2];
     if (!p || !a) continue;
     const fiscalStart = fy.start || a.start;
     if (!fiscalStart || p.start !== fiscalStart || a.start !== p.start || a.source.tag !== c.source.tag || p.source.tag !== c.source.tag || a.unit !== c.unit || p.unit !== c.unit) {
-      qualityIssues2.push({ metric, severity: "material", code: "ttm_fiscal_basis_mismatch", message: "TTM was withheld because annual and comparable YTD facts do not share the same fiscal start, unit and accounting concept.", facts: [a, c, p] });
+      qualityIssues2.push({ metric: metric2, severity: "material", code: "ttm_fiscal_basis_mismatch", message: "TTM was withheld because annual and comparable YTD facts do not share the same fiscal start, unit and accounting concept.", facts: [a, c, p] });
       continue;
     }
-    const span = (Date.parse(c.asOf) - Date.parse(p.asOf)) / DAY5;
+    const span = (Date.parse(c.asOf) - Date.parse(p.asOf)) / DAY6;
     if (span < 330 || span > 385) continue;
     const value = a.value + c.value - p.value;
     if (!Number.isFinite(value)) continue;
-    const components = [a, c, p], warnings = [];
+    const components = [a, c, p], warnings2 = [];
     if (p.source.url !== c.source.url) {
-      warnings.push("The prior YTD comparative is from a different filing; restatement comparability is unverified.");
-      qualityIssues2.push({ metric, severity: "review", code: "ttm_comparative_filing_mismatch", message: warnings[0], facts: [c, p] });
+      warnings2.push("The prior YTD comparative is from a different filing; restatement comparability is unverified.");
+      qualityIssues2.push({ metric: metric2, severity: "review", code: "ttm_comparative_filing_mismatch", message: warnings2[0], facts: [c, p] });
     }
-    ttm[metric] = { ...c, value, start: nextDay3(p.asOf), basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; matching fiscal start and accounting concept", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.source.tag, url: c.source.url, components }, ...warnings.length ? { warnings } : {} };
+    ttm[metric2] = { ...c, value, start: nextDay3(p.asOf), basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; matching fiscal start and accounting concept", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.source.tag, url: c.source.url, components }, ...warnings2.length ? { warnings: warnings2 } : {} };
   }
   deriveSubtotals(ttm);
   const growth = {};
   for (const k of Object.keys(latest2)) if (!instantMetrics.has(k) && prior[k]?.value > 0 && latest2[k].start === anchor.start && prior[k].start === (fy.start || fy.metrics?.[k]?.start)) growth[k] = { value: latest2[k].value / prior[k].value - 1, basis: "Year-to-date change versus comparable prior-year period", source: latest2[k].source };
-  const earliest = priorPeriod?.end ? nextDay3(priorPeriod.end) : new Date(Date.parse(anchor.end) - 364 * DAY5).toISOString().slice(0, 10);
+  const earliest = priorPeriod?.end ? nextDay3(priorPeriod.end) : new Date(Date.parse(anchor.end) - 364 * DAY6).toISOString().slice(0, 10);
   return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest2, prior: { start: priorPeriod?.start, end: priorPeriod?.end, metrics: prior }, growth, qualityIssues: qualityIssues2, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, qualityIssues: qualityIssues2, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
 }
 
@@ -17057,15 +17129,15 @@ function validateRelative(r, item, now2) {
   ) : [];
   if (peers.length > 4 || new Set(peers.map((p) => p.name.trim().toLowerCase())).size !== peers.length)
     return null;
-  const history2 = Array.isArray(r.history) ? r.history.filter(
+  const history = Array.isArray(r.history) ? r.history.filter(
     (h) => validDate(h.date) && h.date <= r.asOf && Number.isFinite(h.multiple) && h.multiple > 0
   ) : [];
-  if (history2.length > 120 || new Set(history2.map((h) => h.date)).size !== history2.length || !peers.length && !history2.length)
+  if (history.length > 120 || new Set(history.map((h) => h.date)).size !== history.length || !peers.length && !history.length)
     return null;
   return {
     ...r,
     peers,
-    history: history2.sort((a, b) => a.date.localeCompare(b.date))
+    history: history.sort((a, b) => a.date.localeCompare(b.date))
   };
 }
 
@@ -17075,9 +17147,9 @@ function latestStatementFiling(submissions, cik, now2 = /* @__PURE__ */ new Date
   if (!recent || Number(submissions.cik) !== Number(cik)) return null;
   const rows3 = [];
   for (let i2 = 0; i2 < (recent.form || []).length; i2++) {
-    const form = recent.form[i2], end = recent.reportDate?.[i2], filed = recent.filingDate?.[i2], accn = recent.accessionNumber?.[i2], document = recent.primaryDocument?.[i2];
-    if (!["10-Q", "10-K", "10-Q/A", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A"].includes(form) || !validDate(end) || !validDate(filed) || end > today2 || filed > today2 || !/^\d{10}-\d{2}-\d{6}$/.test(accn || "") || !/^[\w.-]+\.(?:htm|html)$/i.test(document || "")) continue;
-    rows3.push({ form, end, filed, accession: accn, source: { name: "SEC latest periodic statement filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accn.replaceAll("-", "")}/${document}` } });
+    const form = recent.form[i2], end = recent.reportDate?.[i2], filed = recent.filingDate?.[i2], accn = recent.accessionNumber?.[i2], document2 = recent.primaryDocument?.[i2];
+    if (!["10-Q", "10-K", "10-Q/A", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A"].includes(form) || !validDate(end) || !validDate(filed) || end > today2 || filed > today2 || !/^\d{10}-\d{2}-\d{6}$/.test(accn || "") || !/^[\w.-]+\.(?:htm|html)$/i.test(document2 || "")) continue;
+    rows3.push({ form, end, filed, accession: accn, source: { name: "SEC latest periodic statement filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accn.replaceAll("-", "")}/${document2}` } });
   }
   return rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0] || null;
 }
@@ -17086,9 +17158,9 @@ function latestResultsDisclosure(submissions, cik, now2 = /* @__PURE__ */ new Da
   if (Number(submissions.cik) !== Number(cik) || !r) return null;
   const rows3 = [];
   for (let i2 = 0; i2 < (r.form || []).length; i2++) {
-    const form = r.form[i2], filed = r.filingDate?.[i2], accn = r.accessionNumber?.[i2], document = r.primaryDocument?.[i2];
-    if (!["8-K", "8-K/A"].includes(form) || !/(?:^|[,\s])2\.02(?:$|[,\s])/.test(r.items?.[i2] || "") || !validDate(filed) || filed > today2 || !/^\d{10}-\d{2}-\d{6}$/.test(accn || "") || !/^[\w.-]+\.(?:htm|html)$/i.test(document || "")) continue;
-    rows3.push({ form, filed, accession: accn, basis: "Results-of-operations disclosure; filing date is not a fiscal period end", source: { name: "SEC results-of-operations disclosure \xB7 Item 2.02", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accn.replaceAll("-", "")}/${document}` } });
+    const form = r.form[i2], filed = r.filingDate?.[i2], accn = r.accessionNumber?.[i2], document2 = r.primaryDocument?.[i2];
+    if (!["8-K", "8-K/A"].includes(form) || !/(?:^|[,\s])2\.02(?:$|[,\s])/.test(r.items?.[i2] || "") || !validDate(filed) || filed > today2 || !/^\d{10}-\d{2}-\d{6}$/.test(accn || "") || !/^[\w.-]+\.(?:htm|html)$/i.test(document2 || "")) continue;
+    rows3.push({ form, filed, accession: accn, basis: "Results-of-operations disclosure; filing date is not a fiscal period end", source: { name: "SEC results-of-operations disclosure \xB7 Item 2.02", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accn.replaceAll("-", "")}/${document2}` } });
   }
   return rows3.sort((a, b) => b.filed.localeCompare(a.filed))[0] || null;
 }
@@ -17104,7 +17176,7 @@ function parseReferences(html, now2 = /* @__PURE__ */ new Date()) {
   const asOf = dates[0][2] + "-" + String(months[dates[0][1]]).padStart(2, "0");
   if (asOf > now2.toISOString().slice(0, 7) || now2 - Date.parse(asOf + "-01") > 550 * 864e5) throw Error("Risk and growth references are stale or future dated");
   const beta = rows(html.beta), capital = rows(html.capital), growth = rows(html.growth), countries = rows(html.country);
-  for (const [table, marker] of [[beta, "Unlevered beta"], [capital, "Cost of Debt"], [growth, "Expected Growth in Revenues"], [countries, "Equity Risk Premium"]]) if (!table.some((r) => r.join(" ").includes(marker))) throw Error("Reference table schema changed");
+  for (const [table2, marker] of [[beta, "Unlevered beta"], [capital, "Cost of Debt"], [growth, "Expected Growth in Revenues"], [countries, "Equity Risk Premium"]]) if (!table2.some((r) => r.join(" ").includes(marker))) throw Error("Reference table schema changed");
   const countryRows = countries.filter((r) => r.length >= 6 && number(r[4]) > 0 && number(r[4]) < 1 && Number.isFinite(number(r[5])) && number(r[5]) >= 0 && number(r[5]) < 0.6).map((r) => ({ name: r[0], defaultSpread: number(r[2]), equityRiskPremium: number(r[4]), taxRate: number(r[5]) }));
   if (countryRows.length < 100 || !["United States", "Canada", "Hong Kong"].every((n) => countryRows.some((r) => r.name === n)) || countryRows.some((r) => !(r.equityRiskPremium > 0 && r.equityRiskPremium < 1 && r.taxRate >= 0 && r.taxRate < 0.6))) throw Error("Country reference incomplete");
   const samples = capital.map((r) => [number(r[2]), number(r[3])]).filter(([b, k]) => b > 0 && k > 0);
@@ -17256,9 +17328,9 @@ function headerDate(text2) {
   const months = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, sept: 9, oct: 10, nov: 11, dec: 12 };
   return `${match[3]}-${String(months[match[1].toLowerCase()]).padStart(2, "0")}-${match[2].padStart(2, "0")}`;
 }
-function statementColumns(table) {
+function statementColumns(table2) {
   let durations = [], dates = [];
-  for (const row of table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+  for (const row of table2.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
     if (/<td\b/i.test(row[1])) break;
     const cells = [...row[1].matchAll(/<th\b([^>]*)>([\s\S]*?)<\/th>/gi)].filter((c) => /class=["'][^"']*\bth\b/.test(c[1]));
     const group = cells.flatMap((c) => {
@@ -17277,18 +17349,18 @@ function statementColumns(table) {
   });
 }
 function statementRevenueProofs(html, request, { url, reportName, summaryURL: summaryURL2, checkedAt, diagnostics = {} }) {
-  const table = html.match(/<table\b[^>]*class=["'][^"']*\breport\b[^"']*["'][^>]*>([\s\S]*?)<\/table>/i)?.[1];
-  if (!table) {
+  const table2 = html.match(/<table\b[^>]*class=["'][^"']*\breport\b[^"']*["'][^>]*>([\s\S]*?)<\/table>/i)?.[1];
+  if (!table2) {
     diagnostics.reasonCode = "statement_table_unrecognized";
     return [];
   }
-  const heading = plain(table.slice(0, Math.min(table.indexOf("</th>") + 1e3, 4e3))), currency = heading.match(/\b(USD|CAD|EUR|GBP|JPY|CNY|HKD)\s*\(/)?.[1];
+  const heading = plain(table2.slice(0, Math.min(table2.indexOf("</th>") + 1e3, 4e3))), currency = heading.match(/\b(USD|CAD|EUR|GBP|JPY|CNY|HKD)\s*\(/)?.[1];
   if (currency && currency !== request.currency) {
     diagnostics.reasonCode = "statement_currency_mismatch";
     return [];
   }
   const scale = /\$\s*in\s*billions/i.test(heading) ? 1e9 : /\$\s*in\s*millions/i.test(heading) ? 1e6 : /\$\s*in\s*thousands/i.test(heading) ? 1e3 : 1;
-  const columns = statementColumns(table), days2 = (Date.parse(request.end) - Date.parse(request.start)) / 864e5 + 1;
+  const columns = statementColumns(table2), days2 = (Date.parse(request.end) - Date.parse(request.start)) / 864e5 + 1;
   const eligibleColumns = columns.filter((c) => c.end === request.end && Number.isFinite(c.months) && Math.abs(days2 - c.months * 365.25 / 12) <= 20);
   if (!eligibleColumns.length) {
     diagnostics.reasonCode = "statement_period_column_unmatched";
@@ -17296,7 +17368,7 @@ function statementRevenueProofs(html, request, { url, reportName, summaryURL: su
   }
   const found = [];
   let highestVisibleScore = 0, highestRow;
-  for (const row of table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+  for (const row of table2.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
     const cell = row[1].match(/<td\b[^>]*class=["'][^"']*\bpl\b[^"']*["'][^>]*>([\s\S]*?)<\/td>/i)?.[1];
     if (!cell) continue;
     const concept = cell.match(/defref_([a-z][a-z0-9-]*)_([A-Za-z0-9]+)/i), label = plain(cell), score = rowScore(label);
@@ -17642,8 +17714,8 @@ function parsePrimaryFilingFacts(input, options = {}) {
     diagnostics.rejected[reason] = (diagnostics.rejected[reason] || 0) + 1;
     if (diagnostics.samples.length < 30) diagnostics.samples.push({ reason, name: fact?.attrs.name || null, id: fact?.attrs.id || null, url: fact?.url || null });
   };
-  for (const document of documents) {
-    const url = filingURL(document.url || meta.url, meta.cik, meta.accession), html = document.html;
+  for (const document2 of documents) {
+    const url = filingURL(document2.url || meta.url, meta.cik, meta.accession), html = document2.html;
     if (typeof html !== "string") throw Error("Filing HTML is missing");
     const size = new TextEncoder().encode(html).byteLength;
     bytes += size;
@@ -17659,7 +17731,7 @@ function parsePrimaryFilingFacts(input, options = {}) {
         }
         if (IX.has(frame.uri) && frame.local === "nonFraction") {
           if (++diagnostics.numericElements > bounds.maxFacts) throw Error("Filing numeric-fact limit exceeded");
-          active.push({ ...frame, text: "", url, excluded: 0, documentSetSource: document.documentSetSource });
+          active.push({ ...frame, text: "", url, excluded: 0, documentSetSource: document2.documentSetSource });
         }
         if (IX.has(frame.uri) && frame.local === "exclude") for (const f of active) f.excluded++;
       },
@@ -17781,10 +17853,10 @@ function parsePrimaryFilingFacts(input, options = {}) {
 }
 function mergePrimaryFilingFacts(original, parsed) {
   if (Number(original?.cik) !== Number(parsed?.cik)) throw Error("Primary filing issuer mismatch");
-  const result = { ...original, facts: { ...original.facts } }, diagnostics = { appended: 0, duplicates: 0, augmented: 0, retainedNewer: 0, conflicts: [], supersededConflicts: [] };
+  const result2 = { ...original, facts: { ...original.facts } }, diagnostics = { appended: 0, duplicates: 0, augmented: 0, retainedNewer: 0, conflicts: [], supersededConflicts: [] };
   const writable = (namespace, tag2, unit2) => {
-    const previous = result.facts[namespace]?.[tag2], target = { ...previous, units: { ...previous?.units, [unit2]: [...previous?.units?.[unit2] || []] } };
-    result.facts[namespace] = { ...result.facts[namespace], [tag2]: target };
+    const previous = result2.facts[namespace]?.[tag2], target = { ...previous, units: { ...previous?.units, [unit2]: [...previous?.units?.[unit2] || []] } };
+    result2.facts[namespace] = { ...result2.facts[namespace], [tag2]: target };
     return target.units[unit2];
   };
   const conflict = (detail, primary) => {
@@ -17794,14 +17866,14 @@ function mergePrimaryFilingFacts(original, parsed) {
       diagnostics.supersededConflicts.push({ ...detail, primary });
       return;
     }
-    result.facts[detail.namespace][detail.tag].units[detail.unit] = rows3.filter((r) => !removed.includes(r));
+    result2.facts[detail.namespace][detail.tag].units[detail.unit] = rows3.filter((r) => !removed.includes(r));
     diagnostics.conflicts.push({ ...detail, existing: removed, primary });
   };
   for (const detail of parsed.primaryFiling?.diagnostics?.factConflicts || []) conflict(detail, detail.observations);
   for (const [namespace, tags] of Object.entries(parsed.facts || {})) for (const [tag2, concept] of Object.entries(tags)) for (const [unit2, observations] of Object.entries(concept.units || {})) {
     writable(namespace, tag2, unit2);
     for (const row of observations) {
-      const rows3 = result.facts[namespace][tag2].units[unit2];
+      const rows3 = result2.facts[namespace][tag2].units[unit2];
       const same = rows3.filter((r) => FORMS.has(r.form) && r.start === row.start && r.end === row.end);
       if (same.some((r) => r.filed > row.filed)) {
         diagnostics.retainedNewer++;
@@ -17814,7 +17886,7 @@ function mergePrimaryFilingFacts(original, parsed) {
       }
       if (exact.some((r) => r.val === row.val)) {
         diagnostics.duplicates++;
-        result.facts[namespace][tag2].units[unit2] = rows3.map((existing) => exact.includes(existing) && !existing.primaryFiling ? { ...existing, primaryFiling: row.primaryFiling } : existing);
+        result2.facts[namespace][tag2].units[unit2] = rows3.map((existing) => exact.includes(existing) && !existing.primaryFiling ? { ...existing, primaryFiling: row.primaryFiling } : existing);
         diagnostics.augmented += exact.filter((existing) => !existing.primaryFiling).length;
         continue;
       }
@@ -17822,11 +17894,11 @@ function mergePrimaryFilingFacts(original, parsed) {
         conflict({ namespace, tag: tag2, unit: unit2, start: row.start || null, end: row.end, filed: row.filed, reason: "different-accession-same-date-conflict" }, [row]);
         continue;
       }
-      result.facts[namespace][tag2].units[unit2].push(row);
+      result2.facts[namespace][tag2].units[unit2].push(row);
       diagnostics.appended++;
     }
   }
-  return { facts: result, diagnostics, primaryFiling: parsed.primaryFiling };
+  return { facts: result2, diagnostics, primaryFiling: parsed.primaryFiling };
 }
 async function readBounded(response, limit) {
   const length = Number(response.headers.get("content-length"));
@@ -17895,11 +17967,11 @@ async function fetchPrimaryFilingFacts(latestStatement, cik, { fetcher: fetcher2
     if (!parsed.primaryFiling.latestPeriodRepresented) {
       const metadataURL = summaryURL(meta);
       try {
-        const xml = await get(metadataURL, null, true), declared = summaryInputFiles(xml, meta), already = new Set(documents.map((document) => document.url)), additional = declared.filter((document) => !already.has(document.url));
+        const xml = await get(metadataURL, null, true), declared = summaryInputFiles(xml, meta), already = new Set(documents.map((document2) => document2.url)), additional = declared.filter((document2) => !already.has(document2.url));
         if (documents.length + additional.length > limits.maxDocuments) throw Error("Declared inline document-set count exceeded");
-        for (const document of additional) await get(document.url, document.documentSetSource);
+        for (const document2 of additional) await get(document2.url, document2.documentSetSource);
         if (additional.length) parsed = parsePrimaryFilingFacts(documents, { ...meta, periodEnd: meta.end, now: now2, bounds: limits });
-        parsed.primaryFiling.diagnostics.documentSetDiscovery = { status: "ready", url: metadataURL, declared: declared.map((document) => document.url), fetched: additional.map((document) => document.url) };
+        parsed.primaryFiling.diagnostics.documentSetDiscovery = { status: "ready", url: metadataURL, declared: declared.map((document2) => document2.url), fetched: additional.map((document2) => document2.url) };
       } catch (error) {
         parsed.primaryFiling.diagnostics.documentSetDiscovery = { status: "unavailable", url: metadataURL, reason: error.message };
       }
@@ -17930,7 +18002,7 @@ async function latestFilingFacts(payload, cik, currencies, latestStatement, fetc
     severity: "material",
     start: conflict.start,
     end: conflict.end,
-    metrics: Object.entries(financialTags).filter(([, tags]) => tags.includes(conflict.tag)).map(([metric]) => metric),
+    metrics: Object.entries(financialTags).filter(([, tags]) => tags.includes(conflict.tag)).map(([metric2]) => metric2),
     message: `Conflicting ${conflict.namespace}:${conflict.tag} observations for the same unit and reporting period were withheld; neither source wins by input order.`,
     facts: [...conflict.existing || [], ...conflict.primary || []].map((row) => financialFact({ ...row, namespace: conflict.namespace, tag: conflict.tag, unit: conflict.unit }, "sourceEvidence", cik))
   }));
@@ -18119,7 +18191,7 @@ function fraction(value, label) {
     throw new Error(`${label} must be between 0% and 100%.`);
   return value;
 }
-function bounded2(result) {
+function bounded2(result2) {
   const walk = (v) => {
     if (typeof v === "number" && !Number.isFinite(v))
       throw new Error(
@@ -18127,8 +18199,8 @@ function bounded2(result) {
       );
     if (v && typeof v === "object") Object.values(v).forEach(walk);
   };
-  walk(result);
-  return result;
+  walk(result2);
+  return result2;
 }
 function priceDifference(value, price) {
   if (price == null) return null;
@@ -18161,7 +18233,7 @@ function calculateDCF(input) {
     return { year, fcff, factor, pv: fcff * factor };
   });
   let terminalValue, terminalFCFF = null;
-  const warnings = [];
+  const warnings2 = [];
   if (terminalMethod === "growth") {
     const g = finite3(input.terminalGrowth, "perpetual growth");
     if (g <= -1 || g >= wacc)
@@ -18169,16 +18241,16 @@ function calculateDCF(input) {
     terminalFCFF = input.terminalFCFF == null ? positive(flows.at(-1), "Final forecast FCFF for a growing perpetuity") * (1 + g) : positive(input.terminalFCFF, "First perpetual-year FCFF");
     terminalValue = terminalFCFF / (wacc - g);
     if (wacc - g < 0.01)
-      warnings.push(
+      warnings2.push(
         "The discount rate is less than 1 percentage point above perpetual growth; value is highly sensitive."
       );
     if (g > 0.05)
-      warnings.push(
+      warnings2.push(
         "Perpetual growth above 5% needs a strong long-run economic justification in this currency."
       );
   } else if (terminalMethod === "exit") {
     terminalValue = positive(input.terminalEbitda, "Final-year EBITDA") * positive(input.exitMultiple, "Exit EV/EBITDA multiple");
-    warnings.push(
+    warnings2.push(
       "Exit multiples import a market-pricing assumption into DCF; this is not a pure perpetual cash-flow valuation."
     );
   } else throw new Error("Choose a supported terminal-value method.");
@@ -18188,15 +18260,15 @@ function calculateDCF(input) {
   const bridge = equityCashFlows ? { equity: operatingValue, enterpriseValue: null, value: operatingValue / positive(input.shares, "Current common share basis") } : equityBridge(input, operatingValue);
   const terminalWeight = operatingValue > 0 ? pvTerminal / operatingValue : null;
   if (terminalWeight >= 0.8)
-    warnings.push(
+    warnings2.push(
       "At least 80% of model value comes from terminal value; long-run assumptions dominate."
     );
   if (flows.some((v) => v < 0))
-    warnings.push(
+    warnings2.push(
       "Negative forecast cash flow is included without flooring; check the funding and path to sustainable cash flow."
     );
   if (bridge.equity <= 0)
-    warnings.push(
+    warnings2.push(
       "The model gives non-positive common equity. This signals a failed equity case, not a tradable negative stock price."
     );
   return bounded2({
@@ -18208,8 +18280,28 @@ function calculateDCF(input) {
     pvTerminal,
     terminalWeight,
     upside: priceDifference(bridge.value, input.price),
-    warnings
+    warnings: warnings2
   });
+}
+function dcfSensitivity(input) {
+  const rates = [-0.01, -5e-3, 0, 5e-3, 0.01].map((d) => (input.cashFlowType === "fcfe" ? input.costEquity : input.wacc) + d);
+  const growth = input.terminalMethod === "growth";
+  const assumptions = (growth ? [-0.01, -5e-3, 0, 5e-3, 0.01] : [-2, -1, 0, 1, 2]).map((d) => (growth ? input.terminalGrowth : input.exitMultiple) + d);
+  const values = rates.map(
+    (wacc) => assumptions.map((a) => {
+      try {
+        return calculateDCF({
+          ...input,
+          wacc,
+          costEquity: input.cashFlowType === "fcfe" ? wacc : input.costEquity,
+          [growth ? "terminalGrowth" : "exitMultiple"]: a
+        }).value;
+      } catch {
+        return null;
+      }
+    })
+  );
+  return { rates, assumptions, values };
 }
 function calculateWACC(input) {
   const { riskFree: riskFree2, beta, equityRiskPremium, costDebt, taxRate, equity, debt } = input;
@@ -18238,6 +18330,118 @@ function calculateWACC(input) {
     warnings: [
       "Common equity, interest-bearing debt and any explicitly entered preferred capital use consistent values. Debt tax shields apply only when available; leases and constrained deductions require review."
     ]
+  });
+}
+function median(values) {
+  if (!values.length)
+    throw new Error("At least one usable observation is needed.");
+  const sorted = values.slice().sort((a, b) => a - b), n = sorted.length;
+  return sorted.length % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
+}
+function isDate(value) {
+  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
+}
+function calculateRelative(input) {
+  if (!["pe", "pb", "evEbitda", "evRevenue"].includes(input.metric))
+    throw new Error("Choose P/E, P/B, EV/EBITDA or EV/revenue.");
+  positive(
+    input.fundamental,
+    "Target company's matching EPS, book value per share or EBITDA"
+  );
+  const peers = input.peers.filter(
+    (p) => Number.isFinite(p.multiple) && p.multiple > 0 && p.name?.trim()
+  );
+  const names = peers.map((p) => p.name.trim().toLowerCase());
+  if (new Set(names).size !== names.length)
+    throw new Error(
+      "Use each peer once; duplicate peer names would distort the median."
+    );
+  const minimumPeers = 3;
+  const peerMedian = peers.length >= minimumPeers ? median(peers.map((p) => p.multiple)) : null;
+  const cutoff = input.asOf || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+  const history = input.history.filter((v) => typeof v !== "object" || isDate(v.date) && v.date <= cutoff).map((v) => typeof v === "object" ? v.multiple : v).filter((v) => Number.isFinite(v) && v > 0);
+  const historicalMedian = history.length >= 3 ? median(history) : null;
+  if (peerMedian == null && historicalMedian == null)
+    throw new Error(
+      "A peer benchmark needs at least 3 distinct comparable positive peers, or supply at least three separate historical observations. Negative or zero denominators are not meaningful here."
+    );
+  const valueAt = (multiple2) => ["evEbitda", "evRevenue"].includes(input.metric) ? equityBridge(input, multiple2 * input.fundamental).value : multiple2 * input.fundamental;
+  let currentMultiple = null;
+  if (input.price != null) {
+    positive(input.price, "Comparison price");
+    if (["evEbitda", "evRevenue"].includes(input.metric)) {
+      equityBridge(input, 0);
+      currentMultiple = (input.price * input.shares + input.debt - input.cash - input.otherAssets + input.claims) / input.fundamental;
+    } else currentMultiple = input.price / input.fundamental;
+  }
+  const historySorted = history.slice().sort((a, b) => a - b);
+  const historicalPercentile = currentMultiple == null || !history.length ? null : (history.filter((v) => v < currentMultiple).length + history.filter((v) => v === currentMultiple).length * 0.5) / history.length;
+  return bounded2({
+    historicalPercentile,
+    minimumPeers,
+    eligiblePeerCount: peers.length,
+    peerDispersion: peers.length ? { min: Math.min(...peers.map((p) => p.multiple)), max: Math.max(...peers.map((p) => p.multiple)) } : null,
+    historicalLow: historySorted[0] ?? null,
+    historicalHigh: historySorted.at(-1) ?? null,
+    peers,
+    excluded: input.peers.filter((p) => p.name?.trim() || p.multiple != null).length - peers.length,
+    peerMedian,
+    historicalMedian,
+    historicalCount: history.length,
+    currentMultiple,
+    peerValue: peerMedian == null ? null : valueAt(peerMedian),
+    historicalValue: historicalMedian == null ? null : valueAt(historicalMedian),
+    peerPremium: currentMultiple == null || peerMedian == null ? null : currentMultiple / peerMedian - 1,
+    historicalPremium: currentMultiple == null || historicalMedian == null ? null : currentMultiple / historicalMedian - 1,
+    warnings: [
+      "Relative discounts can reflect weaker growth, returns, accounting quality or higher risk. They do not establish intrinsic value.",
+      ...peers.length > 0 && peers.length < minimumPeers ? [
+        "Fewer than three eligible peers: peer benchmark withheld. Historical context, when supplied, remains separate."
+      ] : [],
+      ...currentMultiple != null && currentMultiple <= 0 ? [
+        "The current enterprise multiple is non-positive. A conventional multiple premium/discount is not economically meaningful."
+      ] : [],
+      ...[peerMedian, historicalMedian].filter((v) => v != null).some((v) => valueAt(v) <= 0) ? [
+        "An implied equity value is non-positive; treat it as a failed equity case, not a negative tradable share price."
+      ] : []
+    ]
+  });
+}
+function calculateTargets(input) {
+  const rows3 = input.rows.filter(
+    (row) => row.name?.trim() || row.target != null || row.date
+  );
+  if (!rows3.length)
+    throw new Error("Enter at least one analyst, target and observation date.");
+  const names = [];
+  const cutoff = input.asOf || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+  if (!isDate(cutoff)) throw new Error("Record a valid valuation date.");
+  const horizons = new Set(rows3.map((r) => r.horizon || input.horizon || "12 months"));
+  if (horizons.size > 1) throw new Error("Analyst target horizons must match.");
+  for (const row of rows3) {
+    if (!row.name?.trim())
+      throw new Error("Name the broker or analyst for every target.");
+    positive(row.target, "Analyst price target");
+    if (!isDate(row.date))
+      throw new Error("Record a valid calendar date for every target.");
+    if (row.date > cutoff) throw new Error("Analyst target is future information at this valuation date cutoff.");
+    if ((Date.parse(cutoff) - Date.parse(row.date)) / 864e5 > (input.maxAgeDays ?? 90)) throw new Error("Analyst target is stale under the 90-day observation policy; refresh the evidence.");
+    if (row.currency && input.currency && row.currency !== input.currency) throw new Error("Analyst target currencies must match.");
+    names.push(row.name.trim().toLowerCase());
+  }
+  if (new Set(names).size !== names.length)
+    throw new Error(
+      "Keep one target per broker/analyst; remove duplicate entries."
+    );
+  const targets = rows3.map((r) => r.target), mean = targets.reduce((a, b) => a + b, 0) / rows3.length;
+  return bounded2({
+    rows: rows3,
+    count: rows3.length,
+    mean,
+    median: median(targets),
+    low: Math.min(...targets),
+    high: Math.max(...targets),
+    upside: priceDifference(mean, input.price)
   });
 }
 function calculateRI(input) {
@@ -18288,6 +18492,96 @@ function calculateRI(input) {
       ] : []
     ]
   });
+}
+function forecastStatements(input) {
+  let revenue = positive(input.revenue, "Starting annual revenue");
+  if (input.financingPolicy && !["none", "revolver"].includes(input.financingPolicy)) throw new Error("Choose an explicit none or end-year revolver financing policy.");
+  if (input.minimumCash != null) nonnegative(input.minimumCash, "Minimum cash");
+  const growth = input.growthRates ? 0 : finite3(input.growth, "annual revenue growth");
+  if (input.growthRates && (!Array.isArray(input.growthRates) || input.growthRates.length !== 5 || input.growthRates.some((g) => !Number.isFinite(g) || g <= -1))) throw new Error("Supply five valid annual revenue growth rates above \u2212100%.");
+  if (growth <= -1) throw new Error("Revenue growth must exceed \u2212100%.");
+  const margin = finite3(input.margin, "EBIT margin"), tax = fraction(input.taxRate, "Tax rate");
+  const daRate = fraction(input.daRate, "D&A / revenue"), capexRate = fraction(input.capexRate, "Capex / revenue"), nwcRate = finite3(input.nwcRate, "Operating working capital / revenue"), payout = fraction(input.payout, "Dividend payout");
+  const depreciationRate = input.depreciationRate == null ? daRate : fraction(input.depreciationRate, "Property depreciation / revenue");
+  if (depreciationRate > daRate) throw Error("Property depreciation cannot exceed aggregate D&A; reconcile their source periods and scope.");
+  let cash = nonnegative(input.cash, "Opening cash"), ppe = nonnegative(input.ppe, "Opening net PP&E"), nwc = finite3(input.nwc, "Opening operating working capital");
+  let debt = nonnegative(input.debt, "Debt");
+  const kd = nonnegative(input.costDebt, "Pre-tax borrowing rate");
+  let otherNetAssets = input.otherNetAssets ?? 0;
+  finite3(otherNetAssets, "Other net assets");
+  if (Math.abs(nwcRate) > 1)
+    throw new Error(
+      "Operating working capital/revenue must be between \u2212100% and 100%."
+    );
+  let equity = cash + ppe + nwc + otherNetAssets - debt;
+  if (equity <= 0)
+    throw new Error(
+      "Opening net assets must exceed debt in this simplified model."
+    );
+  const openingEquity = equity, rows3 = [], warnings2 = [];
+  for (let year = 1; year <= 5; year++) {
+    revenue *= 1 + (input.growthRates?.[year - 1] ?? growth);
+    const ebit = revenue * margin, da = revenue * daRate, depreciation = revenue * depreciationRate, otherDA = da - depreciation, capex = revenue * capexRate;
+    const interest = debt * kd, pretax = ebit - interest, taxes = Math.max(0, pretax) * tax, netIncome = pretax - taxes;
+    const nextNwc = revenue * nwcRate, deltaNwc = nextNwc - nwc, dividend = Math.max(0, netIncome) * payout;
+    const cfo = netIncome + da - deltaNwc, cfi = -capex, cffBeforeFinancing = -dividend + (input.issuance?.[year - 1] ?? 0) - (input.repurchases?.[year - 1] ?? 0);
+    const issuance = nonnegative(input.issuance?.[year - 1] ?? 0, "Share issuance"), repurchases = nonnegative(input.repurchases?.[year - 1] ?? 0, "Share repurchases"), oci = finite3(input.oci?.[year - 1] ?? 0, "Other comprehensive income adjustment");
+    const borrowing = input.financingPolicy === "revolver" ? Math.max(0, (input.minimumCash ?? 0) - cash - cfo - cfi - cffBeforeFinancing) : 0;
+    const cff = cffBeforeFinancing + borrowing;
+    debt += borrowing;
+    const openingCash = cash;
+    cash += cfo + cfi + cff;
+    ppe += capex - depreciation;
+    nwc = nextNwc;
+    equity += netIncome - dividend + issuance - repurchases + oci;
+    if (ppe < 0)
+      throw new Error(
+        `Year ${year} net PP&E becomes negative. Revise depreciation, capex or opening assets.`
+      );
+    otherNetAssets += oci - otherDA;
+    const fcff = ebit - Math.max(0, ebit) * tax + da - capex - deltaNwc;
+    rows3.push({
+      year,
+      revenue,
+      ebit,
+      da,
+      depreciation,
+      otherDA,
+      ebitda: ebit + da,
+      interest,
+      taxes,
+      netIncome,
+      dividend,
+      issuance,
+      repurchases,
+      borrowing,
+      oci,
+      capex,
+      deltaNwc,
+      cfo,
+      cfi,
+      cff,
+      openingCash,
+      cash,
+      ppe,
+      nwc,
+      otherNetAssets,
+      debt,
+      equity,
+      fcff,
+      balance: cash + ppe + nwc + otherNetAssets - debt - equity
+    });
+  }
+  if (rows3.some((r) => r.cash < 0))
+    warnings2.push(
+      "Cash becomes negative: the forecast requires financing. No automatic debt or equity plug hides that deficit."
+    );
+  warnings2.push(
+    input.depreciationRate == null ? "Property depreciation split unavailable: this reduced scenario assumes all D&A reduces PP&E; reconcile acquired-intangible amortization before relying on the asset schedule." : "Property depreciation reduces PP&E; the remaining aggregate D&A reduces the reconciled other-net-asset pool. This is a reduced asset allocation scenario, not an acquired-intangible schedule.",
+    "Simplified linked statements: cash, trade working capital, net PP&E, debt and owners equity; other net assets reconcile to the reported opening equity basis. Issuance, repurchases and OCI are explicit scenario schedules (zero unless entered). No acquisitions or loss-tax credits are inferred; preferred/NCI claims still need reconciliation before a common-equity appraisal.",
+    input.financingPolicy === "revolver" ? "Financing policy: end-year revolver funds the stated minimum cash; incremental interest begins next year, resolving circularity explicitly." : "Financing policy: no new financing; any negative cash is an unfunded deficit, never a hidden balancing plug."
+  );
+  return bounded2({ openingEquity, rows: rows3, warnings: warnings2 });
 }
 
 // src/model-state.js
@@ -18342,18 +18636,18 @@ function debtEvidence(metrics = {}) {
   if (!entries.length) return { value: null, asOf: null, basis: "No supported debt balance", warnings: ["A complete borrowing bridge is not established."], components: [] };
   const latest2 = entries.map(([, f]) => f.asOf).filter(Boolean).sort().at(-1);
   const m = Object.fromEntries(entries.filter(([, f]) => !latest2 || f.asOf === latest2)), v = (k) => m[k]?.value;
-  const warnings = [];
+  const warnings2 = [];
   const verified = debt_reconciliations_default.rows.find((r) => r.period === latest2 && Object.entries(r.expected).every(([key4, value]) => m[key4]?.value === value && m[key4].unit === r.currency && m[key4].source?.url?.includes(`/data/${r.cik}/${r.filing}/`)));
-  if (verified) return { value: verified.value, asOf: latest2, basis: verified.basis, components: Object.keys(verified.expected).map((k) => m[k]), complete: true, warnings, source: verified.source, verifiedAt: debt_reconciliations_default.verifiedAt };
-  const result = (value, basis, components, complete = false) => ({ value, asOf: latest2 || null, basis, components: components.map((k) => m[k]), complete, warnings });
+  if (verified) return { value: verified.value, asOf: latest2, basis: verified.basis, components: Object.keys(verified.expected).map((k) => m[k]), complete: true, warnings: warnings2, source: verified.source, verifiedAt: debt_reconciliations_default.verifiedAt };
+  const result2 = (value, basis, components, complete = false) => ({ value, asOf: latest2 || null, basis, components: components.map((k) => m[k]), complete, warnings: warnings2 });
   const sum = (parts, basis, complete = false) => {
     const facts = parts.map((k) => m[k]);
     const currencies = new Set(facts.map((f) => f.unit).filter(Boolean));
     const filings = new Set(facts.map((f) => f.source?.url).filter(Boolean));
-    if (currencies.size > 1 || filings.size > 1) return result(null, "Debt components do not share one currency and filing basis", parts);
-    return result(parts.reduce((s, k) => s + v(k), 0), basis, parts, complete);
+    if (currencies.size > 1 || filings.size > 1) return result2(null, "Debt components do not share one currency and filing basis", parts);
+    return result2(parts.reduce((s, k) => s + v(k), 0), basis, parts, complete);
   };
-  if (m.debt && (tag(m.debt) === "Borrowings" || m.debt.scope === "total-borrowings")) return result(v("debt"), "Reported total borrowings; verify leases, restricted subsidiaries and other claims", ["debt"], true);
+  if (m.debt && (tag(m.debt) === "Borrowings" || m.debt.scope === "total-borrowings")) return result2(v("debt"), "Reported total borrowings; verify leases, restricted subsidiaries and other claims", ["debt"], true);
   const current = m.debtCurrentTotal || (tag(m.shortDebt) === "DebtCurrent" || tag(m.shortDebt) === "CurrentBorrowings" ? m.shortDebt : null);
   if (current) m.debtCurrentTotal = current;
   const short = m.shortBorrowings || (tag(m.shortDebt) === "ShortTermBorrowings" ? m.shortDebt : null);
@@ -18362,24 +18656,81 @@ function debtEvidence(metrics = {}) {
     return sum(["debtCurrentTotal", "longDebt"], "Total current debt + noncurrent debt; commercial paper is not added again", true);
   if (m.debt) {
     if (short && short.value > 0 || m.commercialPaper?.value > 0 || current && current.value > 0) {
-      warnings.push("A long-term-debt subtotal overlaps with separately reported current borrowings or commercial paper. The full debt note must establish inclusion and any refinancing reclassification; no automatic addition is made.");
-      return result(null, "Unreconciled borrowing scope", ["debt", ...short ? ["shortBorrowings"] : [], ...current ? ["debtCurrentTotal"] : [], ...m.commercialPaper ? ["commercialPaper"] : []]);
+      warnings2.push("A long-term-debt subtotal overlaps with separately reported current borrowings or commercial paper. The full debt note must establish inclusion and any refinancing reclassification; no automatic addition is made.");
+      return result2(null, "Unreconciled borrowing scope", ["debt", ...short ? ["shortBorrowings"] : [], ...current ? ["debtCurrentTotal"] : [], ...m.commercialPaper ? ["commercialPaper"] : []]);
     }
-    warnings.push("Only a reported long-term-debt subtotal is established; short-term facilities, leases and other financing claims require review.");
-    return result(v("debt"), "Reported long-term-debt subtotal used as a provisional debt proxy", ["debt"]);
+    warnings2.push("Only a reported long-term-debt subtotal is established; short-term facilities, leases and other financing claims require review.");
+    return result2(v("debt"), "Reported long-term-debt subtotal used as a provisional debt proxy", ["debt"]);
   }
   if (m.currentLongDebt && m.longDebt) {
     if (m.commercialPaper?.value > 0) {
-      warnings.push("Commercial-paper inclusion in the current portion is unverified; adding it could double count borrowings.");
-      return result(null, "Current/noncurrent debt and commercial paper need source reconciliation", ["currentLongDebt", "longDebt", "commercialPaper"]);
+      warnings2.push("Commercial-paper inclusion in the current portion is unverified; adding it could double count borrowings.");
+      return result2(null, "Current/noncurrent debt and commercial paper need source reconciliation", ["currentLongDebt", "longDebt", "commercialPaper"]);
     }
     const parts = ["currentLongDebt", "longDebt", ...short ? ["shortBorrowings"] : []];
-    warnings.push("The current/noncurrent debt bridge is a reported financing proxy; unreported facilities and leases remain subject to review.");
+    warnings2.push("The current/noncurrent debt bridge is a reported financing proxy; unreported facilities and leases remain subject to review.");
     return sum(parts, "Current long-term maturities + noncurrent debt" + (short ? " + separate short-term borrowings" : ""));
   }
   if (m.shortDebt && m.longDebt && !tag(m.shortDebt)) return sum(["shortDebt", "longDebt"], "Provider-labelled current + noncurrent debt; source scope requires review");
-  warnings.push("The latest debt period lacks a complete current/noncurrent borrowing bridge. Older balances are not silently mixed into the new date.");
-  return result(null, "Latest borrowing evidence is incomplete", Object.keys(m));
+  warnings2.push("The latest debt period lacks a complete current/noncurrent borrowing bridge. Older balances are not silently mixed into the new date.");
+  return result2(null, "Latest borrowing evidence is incomplete", Object.keys(m));
+}
+
+// src/share-basis-evidence.js
+function comparableEPSHistory(annual, { cutoff, eligible = () => true } = {}) {
+  const rows3 = [...annual || []].sort((a2, b3) => String(b3.end).localeCompare(String(a2.end))), retained = [];
+  let reason = "";
+  for (const row of rows3) {
+    const eps = row.metrics?.eps, shares = row.metrics?.shares;
+    if (!validDate(row.end) || cutoff && row.end > cutoff || !Number.isFinite(eps?.value) || eps.value <= 0) {
+      reason = "Non-positive, missing or unstable EPS interrupts the comparable positive history";
+      break;
+    }
+    if (!eligible(eps) || !eligible(shares)) {
+      reason = "Share or business basis evidence is incompatible with the current company";
+      break;
+    }
+    if (!(shares?.value > 0) || shares.unit !== "shares") {
+      reason = "A comparable weighted-share denominator is unavailable; share-unit evidence requires review";
+      break;
+    }
+    if ([eps, shares].some((f) => f.filed && cutoff && f.filed > cutoff)) {
+      reason = "A source publication follows the valuation cutoff";
+      break;
+    }
+    const newer = retained.at(-1);
+    if (newer) {
+      const gap = (Date.parse(newer.end) - Date.parse(row.end)) / 864e5;
+      const ratio = newer.metrics.shares.value / shares.value;
+      if (gap < 330 || gap > 385) {
+        reason = "An annual gap interrupts comparable EPS history";
+        break;
+      }
+      if (eps.unit !== newer.metrics.eps.unit) {
+        reason = "Historical EPS units are incompatible";
+        break;
+      }
+      if (ratio > 1.25 || ratio < 0.8) {
+        reason = "A material weighted-share denominator discontinuity requires a reconciled share-unit/capital-action basis";
+        break;
+      }
+    }
+    retained.push(row);
+  }
+  const a = retained[0], b = retained.at(-1), years = a && b ? (Date.parse(a.end) - Date.parse(b.end)) / 864e5 / 365.25 : 0;
+  if (retained.length < 4 || years < 2.8) return { value: null, periods: retained.map((r) => r.end), reason: reason || "Insufficient comparable positive EPS history: at least three contiguous fiscal years and supported share denominators are required" };
+  return {
+    value: (a.metrics.eps.value / b.metrics.eps.value) ** (1 / years) - 1,
+    periods: retained.map((r) => r.end),
+    source: a.metrics.eps.source,
+    description: `EPS historical CAGR ${b.end} \u2192 ${a.end}; contiguous positive EPS and weighted-share denominator screening; ${reason ? `older history excluded: ${reason}` : "compatible share-unit evidence screened; capital actions and restatements still require review"}`,
+    reason
+  };
+}
+function constantShareRIEligibility(current, prior) {
+  const a = current?.commonShares, b = prior?.commonShares;
+  if (a?.value > 0 && b?.value > 0 && Math.abs(a.value / b.value - 1) > 0.02) return { eligible: false, reason: "Material changes in common shares require a reconciled issuance/repurchase and common-equity roll-forward. The fixed-share automatic RI is withheld; no constant-share identity is assumed." };
+  return { eligible: true, reason: "Constant shares remain a scenario assumption; full common-equity movements still require reconciliation." };
 }
 
 // src/forecast-assumptions.js
@@ -18419,24 +18770,12 @@ function matchingCompanyEstimates(snapshot, item) {
 }
 function currentReferences(snapshot) {
   const ref = snapshot.references, checked = Date.parse(snapshot.valuationDate || snapshot.checkedAt) || Date.now();
+  if (ref?.status === "stale") return null;
   const dated = /^\d{4}-\d{2}$/.test(ref?.asOf || "") && Date.parse(ref.asOf + "-01");
   return dated && checked >= dated && checked - dated <= 550 * 864e5 ? ref : null;
 }
 function reportedDebt(m = {}) {
   return debtEvidence(m).value;
-}
-function history(snapshot, metric, change2, scopeChange) {
-  const rows3 = (snapshot.financials?.status === "ready" ? snapshot.financials.annual : []) || [];
-  const a = rows3[0], b = rows3.filter((r) => r.metrics?.[metric]?.value > 0).at(-1);
-  const years = a && b ? (Date.parse(a.end) - Date.parse(b.end)) / 864e5 / 365.25 : 0;
-  if (!(a?.metrics?.[metric]?.value > 0 && b && years > 0.8)) return null;
-  if (scopeChange && (!businessScopeFactCompatible(a.metrics[metric], scopeChange) || !businessScopeFactCompatible(b.metrics[metric], scopeChange))) return null;
-  if (metric === "eps" && change2 && perShareFactCompatible(a.metrics[metric], change2, (snapshot.valuationDate || snapshot.checkedAt)?.slice(0, 10)) !== perShareFactCompatible(b.metrics[metric], change2, (snapshot.valuationDate || snapshot.checkedAt)?.slice(0, 10))) return null;
-  return {
-    value: (a.metrics[metric].value / b.metrics[metric].value) ** (1 / years) - 1,
-    description: `${metric} historical CAGR ${b.end} \u2192 ${a.end}; check restatements and share splits`,
-    source: a.metrics[metric].source
-  };
 }
 function capitalAssumptions(snapshot, item) {
   const linked = linkedCapital(item, snapshot);
@@ -18486,9 +18825,9 @@ function capitalAssumptions(snapshot, item) {
   origins.taxShield = taxShieldAvailable ? "Scenario assumes an available marginal tax shield; loss carryforwards/deduction limits require review" : "Reported pretax loss: no automatic immediate debt tax shield";
   let ke = Number.isFinite(patches.riskFree) && Number.isFinite(patches.beta) && Number.isFinite(patches.equityRiskPremium) ? (patches.riskFree + patches.beta * patches.equityRiskPremium) / 100 : null, wacc = null;
   try {
-    const result = calculateWACC({ ...Object.fromEntries(Object.entries(patches).filter(([, v]) => Number.isFinite(v)).map(([k, v]) => [k, ["beta", "equity", "debt", "preferred"].includes(k) ? v : v / 100])), taxShield: taxShieldAvailable });
-    ke = result.costEquity;
-    wacc = result.wacc;
+    const result2 = calculateWACC({ ...Object.fromEntries(Object.entries(patches).filter(([, v]) => Number.isFinite(v)).map(([k, v]) => [k, ["beta", "equity", "debt", "preferred"].includes(k) ? v : v / 100])), taxShield: taxShieldAvailable });
+    ke = result2.costEquity;
+    wacc = result2.wacc;
   } catch {
   }
   return {
@@ -18525,7 +18864,11 @@ function forecastAssumptions(snapshot, item, years = 5) {
   const policyOptions = { asOf: cutoff, eligible: eligibleRevenue, sectorGrowth: sector?.revenueGrowth2y, sectorName: sector?.name, weights: modelAssumptionPolicy(item, snapshot)?.revenueWeights || snapshot.assumptionPolicy?.revenueWeights };
   const revenuePolicy = cyclical ? cyclicalRevenuePolicy(snapshot.financials?.annual || [], policyOptions) : revenueGrowthPolicy(revenueHistoryEvidence, policyOptions);
   const revenueHistory = revenuePolicy.value == null ? null : { value: revenuePolicy.value, description: revenuePolicy.description, source: revenueHistoryEvidence.cagr3?.sources.at(-1) || revenueHistoryEvidence.yoy?.sources.at(-1) };
-  const epsHistory = history(snapshot, "eps", basisChange, scopeChange);
+  const epsHistoryEvidence = comparableEPSHistory(snapshot.financials?.status === "ready" ? snapshot.financials.annual : [], {
+    cutoff,
+    eligible: (f) => perShareFactCompatible(f, basisChange, cutoff) && businessScopeFactCompatible(f, scopeChange)
+  });
+  const epsHistory = epsHistoryEvidence.value == null ? null : epsHistoryEvidence;
   const dh = snapshot.dividend?.historicalGrowth;
   const dividendHistory = finite5(dh?.value) && perShareGrowthCompatible(dh, basisChange, cutoff) && businessScopeFactCompatible(dh, scopeChange) ? { value: dh.value, description: `Company dividend historical CAGR ${dh.start} \u2192 ${dh.end}`, source: snapshot.dividend.source } : null;
   const blend = (own, industry) => finite5(own?.value) && finite5(industry) ? (own.value + industry) / 2 : own?.value ?? industry;
@@ -18549,16 +18892,16 @@ function forecastAssumptions(snapshot, item, years = 5) {
   const industryBasis = sector ? `NYU Stern ${sector.name} sector outlook (${ref.asOf}); US industry proxy` : "no industry outlook";
   const revenue = path(revenueStart, revenueTerminal, years, `${revenueHistory?.description || "Company revenue history unavailable"}; ${industryBasis}; ${revenuePolicy.method || "missing supported growth history"}`, ref?.sources?.growth || revenueHistory?.source, 0.5);
   for (const row of revenue) row.historySource = revenueHistory?.source;
-  const earnings = path(epsStart, Math.min(0.02, epsStart ?? 0.02), years, `${epsHistory?.description || "Company EPS history unavailable"}; ${industryBasis}; ${epsPolicy}; model scenario, not consensus`, ref?.sources?.growth || epsHistory?.source, 0.5);
+  const earnings = path(epsStart, Math.min(0.02, epsStart ?? 0.02), years, `${epsHistory?.description || "Company EPS history unavailable: " + epsHistoryEvidence.reason}; ${industryBasis}; ${epsPolicy}; model scenario, not consensus`, ref?.sources?.growth || epsHistory?.source, 0.5);
   for (const row of earnings) row.historySource = epsHistory?.source;
   const estimates = matchingCompanyEstimates(snapshot, item);
-  for (const [metric, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
+  for (const [metric2, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
     let previous = base;
     for (let i2 = 0; i2 < Math.min(rows3.length, estimates.length); i2++) {
       const e = estimates[i2];
-      if (finite5(e[metric])) {
-        rows3[i2] = { ...rows3[i2], growth: previous > 0 ? e[metric] / previous - 1 : rows3[i2].growth, amount: e[metric], kind: "consensus", fiscalEnd: e.fiscalEnd, source: e.source, description: `Company consensus ${metric} \xB7 ${e.fiscalEnd} \xB7 ${e.asOf} \xB7 ${e.basis}; fiscal forecast used as annual valuation step (timing approximation)` };
-        previous = e[metric];
+      if (finite5(e[metric2])) {
+        rows3[i2] = { ...rows3[i2], growth: previous > 0 ? e[metric2] / previous - 1 : rows3[i2].growth, amount: e[metric2], kind: "consensus", fiscalEnd: e.fiscalEnd, source: e.source, description: `Company consensus ${metric2} \xB7 ${e.fiscalEnd} \xB7 ${e.asOf} \xB7 ${e.basis}; fiscal forecast used as annual valuation step (timing approximation)` };
+        previous = e[metric2];
       } else break;
     }
   }
@@ -18592,7 +18935,7 @@ function forecastAssumptions(snapshot, item, years = 5) {
     if (snapshot.dividend?.basis !== "forward" || i2 > 0) row.growth = Math.min(row.growth, dividendCoverage.maximumGrowth);
     row.description = dividendBasis + `; constrained annual path, followed by ${(dividendTerminal * 100).toFixed(2)}% stable dividend growth scenario`;
   }
-  return { cyclical, terminalPolicy, policyVersion: GROWTH_POLICY_VERSION, revenueHistory: revenueHistoryEvidence, revenuePolicy, dividendBasisCompatible, epsBasisCompatible, perShareBasisChange: basisChange, capital, revenue, earnings, dividends, dividendCoverage, revenueTerminal, dividendTerminal, terminalDescription: terminalPolicy.value == null ? terminalPolicy.basis : `${terminalPolicy.basis}: 2% cap, further limited by the company growth path; negative growth is retained. Dividend terminal growth is also limited by the compatible model EPS terminal path. This fixed policy is an editable model assumption, not fetched data. Discount rates are never altered to force a valid perpetuity.`, taxRate: capital.patches.taxRate / 100, payout };
+  return { cyclical, terminalPolicy, policyVersion: GROWTH_POLICY_VERSION, revenueHistory: revenueHistoryEvidence, epsHistoryEvidence, revenuePolicy, dividendBasisCompatible, epsBasisCompatible, perShareBasisChange: basisChange, capital, revenue, earnings, dividends, dividendCoverage, revenueTerminal, dividendTerminal, terminalDescription: terminalPolicy.value == null ? terminalPolicy.basis : `${terminalPolicy.basis}: 2% cap, further limited by the company growth path; negative growth is retained. Dividend terminal growth is also limited by the compatible model EPS terminal path. This fixed policy is an editable model assumption, not fetched data. Discount rates are never altered to force a valid perpetuity.`, taxRate: capital.patches.taxRate / 100, payout };
 }
 
 // src/terminal-reinvestment.js
@@ -18682,17 +19025,17 @@ function calculateDDM(input) {
   const upside = price == null ? null : value / price - 1;
   const marginOfSafety = price == null ? null : 1 - price / value;
   const terminalWeight = two ? pvTerminal / value : null;
-  const warnings = [];
+  const warnings2 = [];
   if (r - g < 0.01)
-    warnings.push(
+    warnings2.push(
       "Less than 1 percentage point separates required return and perpetual growth. Small changes can move value sharply."
     );
   if (g > 0.05)
-    warnings.push(
+    warnings2.push(
       "Perpetual growth above 5% is an aggressive assumption. Check its sustainability in the valuation currency."
     );
   if (terminalWeight >= 0.8)
-    warnings.push(
+    warnings2.push(
       "At least 80% of this estimate comes from terminal value. Long-run assumptions dominate the result."
     );
   return {
@@ -18706,7 +19049,7 @@ function calculateDDM(input) {
     rows: rows3,
     upside,
     marginOfSafety,
-    warnings
+    warnings: warnings2
   };
 }
 
@@ -18722,7 +19065,6 @@ var number2 = (value) => value.toLocaleString("en-US", { maximumFractionDigits: 
 var money = (value, currency) => `${currency} ${number2(value)}`;
 var sourceURL = (value) => typeof value === "string" && /^https?:\/\//i.test(value);
 var valueOf = (metrics, key4) => metrics?.[key4]?.value;
-var clamp = (value, low, high) => Math.min(high, Math.max(low, value));
 var unique = (values) => [...new Set(values.filter(Boolean))];
 var DURATION_KEYS = ["revenue", "ebit", "da", "capex"];
 var FACTS = [
@@ -18817,8 +19159,8 @@ function factBlocked(issues, key4, fact) {
   const own = issues.some((issue) => issue.blocking && issue.metrics.includes(key4) && (!issue.scopeEnds.length || issue.scopeEnds.includes(day2(fact.asOf))) && (!issue.start || !fact.start || issue.start === fact.start));
   return own || (fact.components || fact.source?.components || []).some((component) => factBlocked(issues, key4, component));
 }
-function scenarioResult(name, result, inputs, assumptions) {
-  const rawValue = result.value;
+function scenarioResult(name, result2, inputs, assumptions) {
+  const rawValue = result2.value;
   return {
     name,
     status: rawValue > 0 ? "calculated" : "non-positive",
@@ -18826,7 +19168,7 @@ function scenarioResult(name, result, inputs, assumptions) {
     rawValue,
     inputs,
     assumptions,
-    calculation: result
+    calculation: result2
   };
 }
 function failedScenario(name, error, assumptions) {
@@ -19144,9 +19486,9 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
   }
   if (capital.wacc) assumption("DCF discount rate / WACC", capital.wacc, "rate", capital.description, [capital.source]);
   if (capital.costEquity) assumption("Equity discount rate", capital.costEquity, "rate", "CAPM cost of equity for residual income and dividends. Equity cash flows are not discounted at WACC.", [capital.source]);
-  for (const [metric, path2] of [["Revenue", forecast.revenue], ["EPS", forecast.earnings], ["Dividend", forecast.dividends]])
+  for (const [metric2, path2] of [["Revenue", forecast.revenue], ["EPS", forecast.earnings], ["Dividend", forecast.dividends]])
     for (const row of path2) assumption(
-      `${metric} growth \xB7 Year ${row.year}`,
+      `${metric2} growth \xB7 Year ${row.year}`,
       row.growth,
       "rate",
       `${row.kind === "consensus" ? "Dated company consensus" : "Modelled scenario"}: ${row.description}`,
@@ -19284,8 +19626,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
           claims: Math.max(0, valueOf(balanceMetrics, "preferredEquity") || 0),
           shares
         };
-        const result = calculateDCF(inputs);
-        return { ...scenarioResult(name, result, inputs, assumptions), forecastRows: rows3, terminal };
+        const result2 = calculateDCF(inputs);
+        return { ...scenarioResult(name, result2, inputs, assumptions), forecastRows: rows3, terminal };
       } catch (error) {
         return failedScenario(name, error, assumptions);
       }
@@ -19384,6 +19726,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     if (results[1].terminal.reinvestment <= 0) report.limitations.push("Stable cash flow depends on negative or zero net reinvestment, including the sourced working-capital financing pattern. Customer/supplier financing must remain scalable; this is not evidence of a measured positive reinvestment return.");
   }
   function residualIncome() {
+    const sharesEligibility = constantShareRIEligibility(am, annual[1]?.metrics);
+    if (!sharesEligibility.eligible) throw Error(sharesEligibility.reason);
     const book = snapshot.commonBookValuePerShare, d = cleaned.dividend;
     if (![book, am.eps, d].every((fact) => perShareFactCompatible(fact, fit.perShareBasisChange, reportDate)))
       throw Error("Common book value, EPS or the dividend predates a verified corporate action. Residual income requires all per-share inputs on one compatible share basis.");
@@ -19396,8 +19740,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       const direction = index - 1, costEquity = capital.costEquity - direction * 0.015, persistence = 0;
       let e = eps, dividend = d.value;
       const rows3 = forecast.earnings.map((driver, i2) => {
-        e = driver.kind === "consensus" && finite6(driver.amount) ? driver.amount * (1 + direction * 0.02) ** driver.year : e * (1 + clamp(driver.growth + direction * 0.02, -0.9, 1));
-        if (!(i2 === 0 && d.basis === "forward")) dividend *= 1 + clamp(forecast.dividends[i2]?.growth || 0, -0.9, 1);
+        e = driver.kind === "consensus" && finite6(driver.amount) ? driver.amount * (1 + direction * 0.02) ** driver.year : e * (1 + driver.growth + direction * 0.02);
+        if (!(i2 === 0 && d.basis === "forward")) dividend *= 1 + (forecast.dividends[i2]?.growth ?? 0);
         return { eps: e, dividend };
       });
       const inputs = { book: book.value, costEquity, persistence, rows: rows3 };
@@ -20643,7 +20987,7 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
     const factCurrency = fact.currency || (/^[A-Z]{3}(?:\/shares)?$/.test(fact.unit || "") ? fact.unit.split("/")[0] : null);
     if (sourceOK(fact, assessedAt) && (!factCurrency || factCurrency === item.currency)) observed.push({ key: key4, ...fact, location: "connected-model-facts" });
   }
-  const metric = (key4) => observed.filter((f) => f.key === key4).sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
+  const metric2 = (key4) => observed.filter((f) => f.key === key4).sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
   const latestStatementPeriod = latest(statementRows.filter((row) => observed.some((f) => f.asOf === row.end)).map((row) => row.end));
   const release = verifiedCurrentRelease(item, assessedAt, options.releases || current_releases_default.rows);
   const external = (release?.observations || []).filter((f) => sourceOK(f, assessedAt)).map((f) => ({ ...f, location: "verified-release-only" }));
@@ -20673,7 +21017,7 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
       standard: rule.standard ? researchStandards[rule.standard] : null
     };
   });
-  const shares = metric("shares"), commonShares = metric("commonShares");
+  const shares = metric2("shares"), commonShares = metric2("commonShares");
   const shareBasis = {
     kind: shares?.value > 0 ? "weighted-average-diluted-proxy" : commonShares?.value > 0 ? "period-end-common-only" : "unavailable",
     asOf: shares?.asOf || commonShares?.asOf || null,
@@ -20800,6 +21144,951 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
   };
 }
 
+// src/analyst-consensus.js
+function verifiedTargetConsensus(target, item, asOf) {
+  if (!target || !validDate(asOf) || !validDate(target.asOf) || target.asOf > asOf || (Date.parse(asOf) - Date.parse(target.asOf)) / 864e5 > 45 || target.currency !== item.currency || !target.horizon?.trim() || !Number.isInteger(target.contributors) || target.contributors < 1 || ![target.mean, target.low, target.high].every(Number.isFinite) || target.low <= 0 || target.low > target.mean || target.mean > target.high || !target.source?.name || !/^https:\/\//.test(target.source.url || "")) return null;
+  return target;
+}
+
+// src/model-readiness.js
+var MODEL_CODES = ["dcf", "ddm", "wacc", "rv", "eqrv", "anr", "ee", "ri", "x3sm"];
+function modelApplicability(item, snapshot, model) {
+  if (!item?.supported || item.assetType !== "Equity") return { status: "not_applicable", reason: "A verified ordinary company share is required. Funds, indices, FX and unverified identities do not use company valuation models." };
+  const fit = modelFit(item, snapshot);
+  if (["bank", "insurer", "broker", "consumer-finance", "holding"].includes(fit.group) && ["dcf", "x3sm", "wacc"].includes(model)) return { status: "not_applicable", reason: fit.reason + " Industrial FCFF/financing weights do not model regulatory capital or investment liabilities; use a supported equity framework." };
+  if (["dcf", "x3sm"].includes(model) && fit.operatingDCF === false) return { status: "not_applicable", reason: fit.reason + " The required sector/ownership bridge is not established for this industrial model." };
+  if (model === "ddm" && snapshot?.dividend?.status === "ready" && snapshot.dividend.value === 0) return { status: "not_applicable", reason: "No current dividend basis for automatic DDM. Confirmed zero dividends are distinct from missing dividend evidence; buybacks are not silently included." };
+  if (model === "ri" && (fit.residualIncome === false || snapshot?.commonBookValuePerShare?.value <= 0)) return { status: "not_applicable", reason: "Positive, reconciled common book equity and a clean-surplus/current-share roll-forward are required for automatic RI." };
+  if (!validatedValuationSnapshot(item, snapshot)) return { status: "missing", reason: "Exact listing, currency and valuation-date evidence required." };
+  return { status: "applicable", reason: fit.reason };
+}
+
+// src/valuation-autofill.js
+function fiscalRevenueBridge(snapshot, annual, growth, scopeChange) {
+  if (snapshot.financials?.periodAlignment?.continuousAnnualBase === false) return null;
+  const recent = snapshot.financials?.recent, prior = recent?.prior;
+  const a = annual?.metrics?.revenue, c = recent?.metrics?.revenue, p = prior?.metrics?.revenue;
+  if (!a || !c || !p) return null;
+  if (![a, c, p].every((f) => businessScopeFactCompatible(f, scopeChange))) return { reason: "YTD revenue bridge withheld: predecessor and current business scope must be reconciled for every annual and interim component." };
+  if (!a.source?.tag || ![c, p].every((f) => f.source?.tag === a.source.tag)) return { reason: "YTD revenue bridge withheld: annual and interim revenue use different accounting concepts. A verified same-scope reconciliation is required; annual-only scenarios remain separately labelled." };
+  const dates = [annual?.start || a?.start, annual?.end, recent?.start || c?.start, recent?.end, prior?.start || p?.start, prior?.end];
+  if (!dates.every(validDate) || !Number.isFinite(growth) || growth <= -1 || ![a, c, p].every((f) => Number.isFinite(f?.value) && f.value >= 0 && f.unit === a?.unit)) return null;
+  const [start, end, currentStart, currentEnd, priorStart, priorEnd] = dates.map(Date.parse);
+  const day3 = 864e5, duration2 = (currentEnd - currentStart) / day3, priorDuration = (priorEnd - priorStart) / day3;
+  if (currentStart !== end + day3 || priorStart !== start || a.start !== dates[0] || c.start !== dates[2] || p.start !== dates[4]) return { reason: "YTD revenue bridge withheld: the annual and comparable YTD fiscal starts must match exactly and current YTD must begin immediately after the annual end. Calendar changes require a verified reconciliation." };
+  if (currentEnd <= end || (currentEnd - end) / day3 > 350 || priorEnd >= end || duration2 < 30 || duration2 > 350 || Math.abs(duration2 - priorDuration) > 16 || a.value < p.value) return null;
+  const value = c.value + (a.value - p.value) * (1 + growth);
+  return Number.isFinite(value) ? { value, description: `Model scenario: reported YTD revenue through ${recent.end} + comparable prior fiscal-year remaining revenue \xD7 (1 + disclosed growth). The reported YTD amount is retained; only the remaining portion is forecast, not annualized.` } : null;
+}
+function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBasis, cashFlowType = "fcff") {
+  const evidence = validatedValuationSnapshot(item, snapshot);
+  if (!evidence) return { patches: {}, origins: {}, gaps: ["Automatic inputs require the exact company listing, matching currency and a dated evidence cutoff."], fit: modelFit(item) };
+  snapshot = evidence;
+  const applicability = modelApplicability(item, snapshot, view);
+  if (applicability.status === "not_applicable") return { patches: {}, origins: {}, gaps: [applicability.reason], fit: modelFit(item, snapshot), status: applicability.status };
+  const fit = modelFit(item, snapshot), annual = snapshot.financials?.status === "ready" ? snapshot.financials.annual[0] : null, previous = snapshot.financials?.annual?.[1];
+  const ttm = snapshot.financials?.ttm;
+  const useTTM = ["dcf", "x3sm"].includes(view) && annual && ttm && ["revenue", "ebit", "da", "capex"].every((k) => Number.isFinite(ttm.metrics?.[k]?.value));
+  const latest2 = useTTM ? ttm : annual;
+  const m = { ...latest2?.metrics }, prev = previous?.metrics || {};
+  if (["dcf", "x3sm"].includes(view) && annual) {
+    for (const [key4, fact2] of Object.entries(snapshot.financials.recent?.metrics || {})) if (instantMetrics.has(key4) || key4 === "shares") m[key4] = fact2;
+  }
+  const value = (k) => m[k]?.value, patches = {}, origins = {}, gaps = [];
+  const put = (key4, v, origin) => {
+    if (Number.isFinite(v) || typeof v === "string") {
+      patches[key4] = String(v);
+      origins[key4] = origin + (snapshot.financials?.conversion ? ` \xB7 USD\u2192CAD ${snapshot.financials.conversion.value} (${snapshot.financials.conversion.asOf}); constant FX assumption` : "");
+    }
+  };
+  const fact = (key4, metric2, scale = 1) => {
+    if (m[metric2] && ["eps", "shares", "commonShares"].includes(metric2) && !perShareFactCompatible(m[metric2], fit.perShareBasisChange, snapshot.checkedAt?.slice(0, 10))) {
+      gaps.push(metric2 + " requires a verified current-share basis after the corporate action");
+      return;
+    }
+    if (m[metric2])
+      put(
+        key4,
+        value(metric2) / scale,
+        (useTTM && !instantMetrics.has(metric2) && metric2 !== "shares" ? "Calculated TTM \xB7 " : "Reported \xB7 ") + (m[metric2].asOf || latest2?.end) + " \xB7 " + m[metric2].source.tag
+      );
+    else gaps.push(metric2);
+  };
+  const assumption = (key4, v, why) => put(key4, v, "Scenario assumption \xB7 " + why);
+  const million = 1e6, dividend = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null;
+  if (!latest2 && snapshot.financials?.reason) gaps.push(snapshot.financials.reason);
+  const forecast = forecastAssumptions(snapshot, item), capital = forecast.capital;
+  const growth = forecast.revenue[0]?.growth;
+  const reportedDebt2 = reportedDebt(m);
+  if (view === "x3sm") {
+    fact("revenue", "revenue", million);
+    fact("cash", "cash", million);
+    fact("ppe", "ppe", million);
+    if (forecast.revenue.length === 5) {
+      put("growth", growth * 100, forecast.revenue[0].description);
+      forecast.revenue.forEach((driver, i2) => put("growth" + i2, driver.growth * 100, driver.description));
+    }
+  }
+  if (view === "dcf" && cashFlowType === "fcfe") {
+    put("wacc", capital.costEquity == null ? NaN : capital.costEquity * 100, "CAPM cost of equity for FCFE; " + capital.description);
+    fact("shares", "shares", million);
+    return { patches, origins, gaps: ["Automatic FCFE requires reconciled CFO interest classifications and a forecast financing/net-borrowing policy. FCFF is never substituted. Enter five verified FCFE scenarios or choose FCFF."], fit };
+  }
+  if (view === "dcf") {
+    fact("shares", "shares", million);
+    if (Number.isFinite(reportedDebt2) && reportedDebt2 >= 0) put("debt", reportedDebt2 / million, "Reported book debt proxy; market value and lease treatment require review");
+    put("wacc", capital.wacc == null ? NaN : capital.wacc * 100, capital.description + "; same dated inputs as the WACC tool");
+    put("terminalGrowth", forecast.revenueTerminal == null ? NaN : forecast.revenueTerminal * 100, forecast.terminalDescription);
+    const report = buildValuationReport(item, snapshot), base = report.scenarios.find((s) => s.name === "Base");
+    if (report.method.key !== "dcf" || !base?.inputs) return { patches, origins, gaps: [...report.analysis.find((s) => s.heading === "Why this valuation method")?.paragraphs || [], ...report.limitations], fit };
+    const input = base.inputs;
+    for (const key4 of ["debt", "cash", "otherAssets", "claims", "shares", "terminalFCFF"]) put(key4, input[key4] / million, "Same validated base-case input as the statement report; " + report.financials.valuationBasis.end);
+    put("terminalFCFF", input.terminalFCFF / million, "Model assumption \xB7 " + report.audit.terminal.description);
+    put("wacc", input.wacc * 100, "Same dated WACC as the statement report; " + capital.description);
+    put("terminalGrowth", input.terminalGrowth * 100, forecast.terminalDescription);
+    input.flows.forEach((flow, i2) => put("fcff" + i2, flow / million, "Same validated Year " + (i2 + 1) + " FCFF as the statement report; " + report.audit.rows[i2].growthBasis));
+    report.audit.rows.forEach((row, i2) => put("growth" + i2, row.growth * 100, row.growthBasis));
+    const final = report.audit.rows.at(-1);
+    put("terminalEbitda", (final.ebit + final.da) / million, "Year5 operating EBITDA from the same statement scenario; no exit multiple is inferred");
+    if (snapshot.price?.status === "ready") {
+      put("price", snapshot.price.value, "Dated closing price \xB7 " + snapshot.price.asOf);
+      patches.priceDate = snapshot.price.asOf;
+    }
+    patches.asOf = report.financials.valuationBasis.end;
+    patches.source = (item.symbol === "TSX:CNR" ? "Five-year automated statement scenario; separate from the dated ten-year CN review. " : "Statement report base case; ") + report.sources.map((s) => s.url).filter(Boolean).join("; ");
+    if (item.symbol === "TSX:CNR") gaps.push("This five-year automated DCF uses a different horizon and assumptions from the dated ten-year CN review. Inspect the full reviewed forecast and bridge inside that report; these are separate scenarios.");
+    gaps.push(...report.limitations, "An exit EBITDA multiple requires a dated comparable-company or transaction reference; no universal multiple is supplied.");
+    return { patches, origins, gaps: [...new Set(gaps)], fit };
+  }
+  if (view === "dcf" || view === "x3sm") {
+    const required = [
+      "revenue",
+      "ebit",
+      "da",
+      "capex"
+    ];
+    const complete = required.every((k) => Number.isFinite(value(k))) && value("revenue") > 0;
+    const debt = reportedDebt2;
+    if (Number.isFinite(debt) && debt >= 0)
+      put(
+        "debt",
+        debt / million,
+        "Reported book debt proxy; review leases and market value"
+      );
+    else gaps.push("consistent debt balance");
+    if (view === "dcf") {
+      fact("shares", "shares", million);
+      assumption(
+        "cash",
+        0,
+        "excess cash not verified; reported total cash is not assumed excess"
+      );
+      assumption("otherAssets", 0, "other non-operating assets require review");
+      assumption(
+        "claims",
+        Number.isFinite(value("preferredEquity")) ? Math.max(0, value("preferredEquity")) / million : 0,
+        Number.isFinite(value("preferredEquity")) ? "Reported preferred carrying value used as a proxy; NCI, pensions and other claims still require reconciliation" : "Preferred/NCI/other claims require review; zero is an unverified bridge assumption"
+      );
+      put("wacc", capital.wacc == null ? NaN : capital.wacc * 100, capital.description + "; same inputs as WACC tool");
+      if (capital.wacc == null) gaps.push("Sourced risk inputs unavailable; no default discount rate is substituted.");
+      put("terminalGrowth", forecast.revenueTerminal * 100, forecast.terminalDescription);
+      gaps.push("An exit EBITDA multiple requires a dated comparable-company or transaction reference; no universal multiple is supplied.");
+    }
+    if (complete && forecast.revenue.length === 5 && Number.isFinite(forecast.taxRate) && fit.group !== "bank" && fit.group !== "insurer" && fit.group !== "holding" && fit.operatingDCF !== false) {
+      const drivers = normalizedOperatingDrivers(snapshot.financials.annual, m, { cyclical: forecast.cyclical });
+      const revenue = value("revenue"), margin = drivers.margin, daRate = drivers.daRate, capexRate = drivers.capexRate;
+      const tradeComplete = ["receivables", "inventory", "payables"].every((k) => Number.isFinite(value(k)));
+      const nwc = tradeComplete ? value("receivables") + value("inventory") - value("payables") : 0, nwcRate = drivers.nwcRate ?? nwc / revenue;
+      if (!tradeComplete) return { patches, origins, gaps: [...gaps, "Operating working-capital evidence is incomplete: receivables, inventory and trade payables are required. No zero opening balance or zero reinvestment is inferred."], fit };
+      let r = revenue, working = nwc;
+      for (let i2 = 0; i2 < 5; i2++) {
+        const driver = forecast.revenue[i2];
+        const previousRevenue = r;
+        r = driver.kind === "consensus" && Number.isFinite(driver.amount) ? driver.amount : r * (1 + driver.growth);
+        put("growth" + i2, (r / previousRevenue - 1) * 100, driver.description);
+        const nextWorking = r * nwcRate;
+        const fcff = r * margin - Math.max(0, r * margin) * forecast.taxRate + r * daRate - r * capexRate - (nextWorking - working);
+        working = nextWorking;
+        put(
+          "fcff" + i2,
+          fcff / million,
+          "Forecast scenario \xB7 " + (useTTM ? "derived TTM" : "annual") + " reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "ASSUMED zero working-capital change; source balances incomplete") + "; revenue growth " + (driver.growth * 100).toFixed(3) + "% (see growth evidence); tax " + (forecast.taxRate * 100).toFixed(2) + "% statutory-rate proxy; no assumed immediate tax benefit on operating losses"
+        );
+      }
+      put(
+        "terminalEbitda",
+        (r * margin + r * daRate) / million,
+        "Forecast EBITDA, not analyst consensus"
+      );
+      if (view === "x3sm") {
+        fact("revenue", "revenue", million);
+        fact("cash", "cash", million);
+        fact("ppe", "ppe", million);
+        put(
+          "nwc",
+          nwc / million,
+          tradeComplete ? "Derived trade working capital = receivables + inventory \u2212 payables; excludes other operating balances" : "Scenario assumption \xB7 opening operating NWC is zero because the source balances are incomplete; not a reported balance"
+        );
+        put(
+          "growth",
+          growth * 100,
+          forecast.revenue[0].description + "; constant override; separate annual growth rates take precedence"
+        );
+        forecast.revenue.forEach((driver, i2) => put("growth" + i2, driver.growth * 100, driver.description));
+        put(
+          "margin",
+          margin * 100,
+          drivers.method + "; EBIT margin; periods " + drivers.periods.join(", ")
+        );
+        put(
+          "daRate",
+          daRate * 100,
+          drivers.method + "; D&A / revenue"
+        );
+        if (Number.isFinite(drivers.depreciationRate) && drivers.depreciationRate >= 0 && drivers.depreciationRate <= daRate)
+          put("depreciationRate", drivers.depreciationRate * 100, drivers.method + "; separately reported property depreciation; remaining D&A reduces other net assets");
+        else gaps.push("Property depreciation split unavailable: the reduced asset schedule assumes all D&A reduces PP&E until a sourced split is entered.");
+        put(
+          "capexRate",
+          capexRate * 100,
+          drivers.method + "; capex / revenue"
+        );
+        put("nwcRate", nwcRate * 100, tradeComplete ? "Trade working-capital/revenue scenario" : "Scenario assumption \xB7 zero working-capital investment; review missing source balances");
+        put("taxRate", capital.patches.taxRate, capital.origins.taxRate);
+        put("costDebt", capital.patches.costDebt, capital.origins.costDebt);
+        if (Number.isFinite(forecast.payout) && forecast.payout >= 0 && forecast.payout <= 1)
+          put("payout", forecast.payout * 100, "Reported annual common dividend / annual diluted EPS continued as a payout scenario; reconcile dates and buybacks");
+        else if (dividend === 0) put("payout", 0, "Sourced zero common dividend continued as a scenario; buybacks excluded");
+        else gaps.push("A sustainable common-dividend payout ratio needs review; no universal payout percentage is supplied.");
+        if (Number.isFinite(value("equity")) && Number.isFinite(debt) && Number.isFinite(value("cash")) && Number.isFinite(value("ppe")))
+          put(
+            "otherNetAssets",
+            (value("equity") + debt - value("cash") - value("ppe") - nwc) / million,
+            "Opening reconciliation to reported owners equity; other net assets reduce by non-property D&A where a depreciation split is entered"
+          );
+      }
+    } else
+      gaps.push(
+        "a consistent revenue/EBIT/D&A/capex set; financial firms require a different framework"
+      );
+  }
+  if (view === "ri") {
+    gaps.push("RI is a conditional constant-share clean-surplus scenario. Forecast OCI, issuance, repurchases and other common-equity movements must be reconciled before treating it as a complete common-equity appraisal.");
+    put("costEquity", capital.costEquity == null ? NaN : capital.costEquity * 100, "CAPM cost of equity from the same sourced WACC inputs; " + capital.description);
+    const sharesEligibility = constantShareRIEligibility(m, prev);
+    if (!sharesEligibility.eligible) return { patches, origins, gaps: [sharesEligibility.reason], fit };
+    if (fit.residualIncome === false) {
+      gaps.push(fit.reason + " No automatic residual-income appraisal is supported for this framework.");
+      return { patches, origins, gaps };
+    }
+    put("costEquity", capital.costEquity == null ? NaN : capital.costEquity * 100, "CAPM cost of equity from the same sourced WACC inputs; " + capital.description);
+    assumption(
+      "persistence",
+      0,
+      "no continuation after year five until reviewed"
+    );
+    const bv = snapshot.commonBookValuePerShare;
+    const bookPeriod = snapshot.financials?.annual?.find((row) => row.end === bv?.asOf);
+    const preferredPar = /(?:^|;\s*)(?:us-gaap:)?PreferredStockValue(?:;|$)/.test(bookPeriod?.metrics?.commonEquity?.source?.tag || "");
+    if (bv?.status === "ready" && !preferredPar && perShareFactCompatible(bv, fit.perShareBasisChange, snapshot.checkedAt?.slice(0, 10)))
+      put("book", bv.value, "Common book value per share \xB7 " + (bv.asOf || "date unavailable") + " \xB7 " + (bv.basis || "verified common-only basis"));
+    else gaps.push("common book value excluding preferred/AT1 and NCI");
+    if (forecast.epsBasisCompatible !== false && value("eps") > 0 && forecast.earnings.length === 5) {
+      let eps = value("eps");
+      for (let i2 = 0; i2 < 5; i2++) {
+        const driver = forecast.earnings[i2];
+        eps = driver.kind === "consensus" && Number.isFinite(driver.amount) ? driver.amount : eps * (1 + driver.growth);
+        put("eps" + i2, eps, driver.description);
+      }
+    } else gaps.push("positive comparable diluted EPS and supported company growth path; losses require operating drivers, never mechanical negative-EPS compounding");
+    if (dividend != null && forecast.dividends.length === 5) {
+      let d = dividend;
+      for (let i2 = 0; i2 < 5; i2++) {
+        if (!(i2 === 0 && snapshot.dividend.basis === "forward")) d *= 1 + forecast.dividends[i2].growth;
+        put("dividend" + i2, d, forecast.dividends[i2].description);
+      }
+    } else if (dividend === 0) for (let i2 = 0; i2 < 5; i2++) put("dividend" + i2, 0, "Reported zero annual dividend continued as a scenario; buybacks excluded");
+    else gaps.push("sourced ordinary/common dividends and supported growth path");
+  }
+  if (view === "wacc") {
+    const capitalBasis = selectedCapitalBasis || capital.capitalBasis;
+    patches.capitalBasis = capitalBasis;
+    for (const [key4, v] of Object.entries(capital.patches))
+      if (!["equity", "debt"].includes(key4) || capitalBasis === capital.capitalBasis) put(key4, v, capital.origins[key4]);
+    if (capitalBasis !== capital.capitalBasis) gaps.push("Enter capital values for the selected basis; the automatic basis is " + capital.capitalBasis);
+    if (capital.preferredRequired) gaps.push("Reported preferred capital requires a consistent equity/debt/preferred value basis and preferred financing cost. A two-claim WACC is withheld.");
+    if (capital.wacc == null) gaps.push("A complete dated risk-free / beta / risk premium / tax / financing reference is required. Defaults are not substituted.");
+    if (capital.capitalBasis === "scenario") gaps.push(capital.description);
+  }
+  if (view === "rv" || view === "eqrv") {
+    const metric2 = selectedMetric || fit.metric || "pe";
+    patches.metric = metric2;
+    if (metric2 === "pe") fact("fundamental", "eps");
+    else if (metric2 === "evEbitda" && Number.isFinite(value("ebit")) && Number.isFinite(value("da")))
+      put(
+        "fundamental",
+        (value("ebit") + value("da")) / million,
+        "Derived annual EBITDA \xB7 " + latest2.end
+      );
+    else if (metric2 === "evRevenue") fact("fundamental", "revenue", million);
+    else if (metric2 === "pb" && snapshot.commonBookValuePerShare?.status === "ready" && perShareFactCompatible(snapshot.commonBookValuePerShare, fit.perShareBasisChange, snapshot.checkedAt.slice(0, 10)))
+      put(
+        "fundamental",
+        snapshot.commonBookValuePerShare.value,
+        "Verified common book value"
+      );
+    else gaps.push(metric2 === "evEbitda" ? "Matching annual operating income and D&A are required for EBITDA; book value is not substituted." : metric2 === "pb" ? "Verified current-basis common book value is required." : "Matching valuation fundamental is unavailable.");
+    patches.period = "Reported fiscal year " + (latest2?.end || "not available") + "; peer ratios must use the same period and accounting basis";
+    const relative = snapshot.feed?.relative;
+    const cutoff = snapshot.checkedAt.slice(0, 10);
+    const relativeValid = relative && relative.currency === item.currency && validDate(relative.asOf) && relative.asOf <= cutoff && Date.parse(cutoff) - Date.parse(relative.asOf) <= 10 * 864e5 && validDate(relative.fiscalEnd) && relative.basis?.trim() && relative.source?.name && /^https:\/\//.test(relative.source?.url || "") && relative.fundamental > 0 && Array.isArray(relative.peers) && Array.isArray(relative.history) && (!["pe", "pb"].includes(metric2) || perShareFactCompatible({ asOf: relative.asOf, source: relative.source }, fit.perShareBasisChange, cutoff)) && (!["evEbitda", "evRevenue"].includes(metric2) || fit.operatingDCF !== false && relative.bridge && ["debt", "cash", "otherAssets", "claims", "shares"].every((k) => Number.isFinite(relative.bridge[k]) && relative.bridge[k] >= 0) && relative.bridge.shares > 0);
+    if (relativeValid && relative.metric === metric2) {
+      put(
+        "fundamental",
+        relative.fundamental,
+        "Connected matching-basis target \xB7 " + relative.asOf
+      );
+      patches.period = relative.basis + "; fiscal end " + relative.fiscalEnd;
+      patches.asOf = relative.asOf;
+      patches.source = relative.source.name + " \xB7 " + relative.source.url;
+      for (const [i2, p] of relative.peers.entries()) {
+        put("peerName" + i2, p.name, "Connected peer \xB7 " + relative.asOf);
+        put("peerMultiple" + i2, p.multiple, "Matching " + relative.basis);
+      }
+      put(
+        "history",
+        relative.history.map((h) => h.date + ":" + h.multiple).join(", "),
+        "Dated equally weighted observations \xB7 " + relative.basis
+      );
+      if (relative.bridge)
+        for (const [k, v] of Object.entries(relative.bridge))
+          put(k, v, "Connected enterprise-to-equity bridge \xB7 " + relative.asOf);
+      if (!relative.peers.length) gaps.push("matching peer multiples");
+      if (!relative.history.length)
+        gaps.push("historical multiple observations");
+    } else
+      gaps.push("matching peer multiples and historical multiple observations");
+  }
+  if (view === "anr" && !verifiedTargetConsensus(snapshot.feed?.targets, item, (snapshot.valuationDate || snapshot.checkedAt).slice(0, 10)))
+    gaps.push(
+      "Analyst targets unavailable from configured free sources. Dated, permitted original observations are required; no DCF-derived targets or analyst counts are generated."
+    );
+  if (view === "ee") {
+    const estimates = matchingCompanyEstimates(snapshot, item);
+    if (estimates.length) {
+      patches.estimateKind = "consensus";
+      patches.period = estimates[0].basis;
+      patches.asOf = estimates[0].asOf;
+      patches.source = estimates.map((e) => e.source.name + " \xB7 " + e.source.url).join("; ");
+      for (const [i2, e] of estimates.slice(0, 3).entries()) {
+        patches["fiscal" + i2] = e.fiscalEnd;
+        for (const k of ["eps", "revenue", "ebitda"])
+          if (Number.isFinite(e[k]))
+            put(
+              k + i2,
+              e[k] / (k === "eps" ? 1 : 1e6),
+              "Connected consensus \xB7 " + e.asOf
+            );
+        put("count" + i2, e.contributors, "Provider contributor count");
+      }
+    } else if (latest2) {
+      patches.estimateKind = "model";
+      patches.period = "Company-specific scenarios from reported " + latest2.end + " figures and dated industry outlook, fading each year; constant operating margin and D&A/revenue. Not company guidance or company analyst consensus.";
+      patches.asOf = snapshot.checkedAt.slice(0, 10);
+      const [year, month, day3] = latest2.end.split("-").map(Number);
+      const revenueScopeCompatible = businessScopeFactCompatible(m.revenue, fit.businessScopeChange);
+      const ebitdaScopeCompatible = ["revenue", "ebit", "da"].every((k) => businessScopeFactCompatible(m[k], fit.businessScopeChange));
+      let projectedRevenue = revenueScopeCompatible ? value("revenue") : NaN, projectedEPS = forecast.epsBasisCompatible && value("eps") > 0 ? value("eps") : NaN, projectedEBITDA = value("ebit") + value("da");
+      const bridge = fiscalRevenueBridge(snapshot, latest2, forecast.revenue[0]?.growth, fit.businessScopeChange);
+      const currentFiscalRevenue = Number.isFinite(bridge?.value) ? bridge : null;
+      if (bridge?.reason) gaps.push(bridge.reason);
+      if (!revenueScopeCompatible || !ebitdaScopeCompatible) gaps.push("The annual base contains predecessor business scope. Revenue and EBITDA forecasts require compatible post-event or source-reconciled annual facts; predecessor compounding is withheld.");
+      const ebitdaMargin = revenueScopeCompatible && ebitdaScopeCompatible && value("revenue") > 0 ? projectedEBITDA / value("revenue") : NaN;
+      if (!(value("revenue") > 0)) gaps.push("A sourced positive revenue base is required for the constant-margin EBITDA forecast. EBITDA alone cannot establish its revenue margin; the unsupported forecast is withheld.");
+      if (currentFiscalRevenue) patches.period += " First fiscal-year revenue retains reported YTD actuals and forecasts only the comparable remaining portion; EBITDA uses the separately disclosed constant-margin assumption.";
+      const endedPeriods = [];
+      if (!(value("eps") > 0)) gaps.push("Loss-making or unstable EPS is not mechanically compounded. A reconciled operating and share/financing forecast is required for model EPS; revenue scenarios may remain available.");
+      if (!forecast.epsBasisCompatible) gaps.push("EPS projections require a verified current-share basis after the corporate action");
+      for (let i2 = 0; i2 < 3; i2++) {
+        const y = year + i2 + 1, last = new Date(Date.UTC(y, month, 0)).getUTCDate();
+        patches["fiscal" + i2] = `${y}-${String(month).padStart(2, "0")}-${String(Math.min(day3, last)).padStart(2, "0")}`;
+        origins["fiscal" + i2] = "Assumed fiscal year-end from latest annual filing; confirm issuer calendar";
+        if (patches["fiscal" + i2] <= snapshot.checkedAt.slice(0, 10)) {
+          endedPeriods.push(patches["fiscal" + i2]);
+          origins["fiscal" + i2] += "; ended fiscal period shown as a modelled estimate, not a reported actual or future period";
+        }
+        if (forecast.revenue[i2] && Number.isFinite(projectedRevenue)) {
+          const driver = forecast.revenue[i2];
+          projectedRevenue = i2 === 0 && currentFiscalRevenue ? currentFiscalRevenue.value : driver.kind === "consensus" && Number.isFinite(driver.amount) ? driver.amount : projectedRevenue * (1 + driver.growth);
+          put("revenue" + i2, projectedRevenue / million, (i2 === 0 && currentFiscalRevenue ? currentFiscalRevenue.description + " " : "") + driver.description);
+        }
+        if (forecast.earnings[i2] && Number.isFinite(projectedEPS)) {
+          const driver = forecast.earnings[i2];
+          projectedEPS = driver.kind === "consensus" && Number.isFinite(driver.amount) ? driver.amount : projectedEPS * (1 + driver.growth);
+          put("eps" + i2, projectedEPS, driver.description);
+        }
+        if (forecast.revenue[i2] && Number.isFinite(ebitdaMargin) && Number.isFinite(projectedRevenue)) {
+          projectedEBITDA = projectedRevenue * ebitdaMargin;
+          put("ebitda" + i2, projectedEBITDA / million, "Constant reported EBITDA margin applied to the same fiscal revenue forecast; " + forecast.revenue[i2].description);
+        }
+      }
+      if (endedPeriods.length) patches.period += ` Ended fiscal period${endedPeriods.length > 1 ? "s" : ""} ${endedPeriods.join(", ")} ${endedPeriods.length > 1 ? "are" : "is"} shown as a modelled estimate, not a reported actual or future period. Evidence cutoff ${snapshot.checkedAt.slice(0, 10)}; no extra compounding or date shift is applied.`;
+      gaps.push("analyst consensus and contributor counts are unavailable; populated figures are explicit scenarios");
+    } else gaps.push("matching-currency filing drivers and licensed consensus estimates are unavailable");
+  }
+  if (snapshot.price?.status === "ready") {
+    put(
+      "price",
+      snapshot.price.value,
+      "Daily closing price \xB7 " + snapshot.price.asOf
+    );
+    patches.priceDate = snapshot.price.asOf;
+  }
+  if (latest2 && view !== "ee") patches.asOf ||= latest2.end;
+  patches.source ||= latest2 ? "SEC filing facts with explicit forecast assumptions. " + Object.values(m)[0]?.source.url + (snapshot.financials?.conversion ? ` USD financials translated to CAD at ${snapshot.financials.conversion.value} CAD/USD (${snapshot.financials.conversion.asOf}); constant FX scenario. ${snapshot.financials.conversion.source.url}` : "") : "";
+  return { patches, origins, gaps: [...new Set(gaps)], fit };
+}
+
+// src/valuation-view.js
+var pct = (v) => v == null ? "\u2014" : `${num(v * 100, 2)}%`;
+var money2 = (v, c) => v == null ? "\u2014" : `${esc(c)} ${num(v, 2)}`;
+var multiple = (v) => v == null ? "\u2014" : `${num(v, 2)}\xD7`;
+var note = (s) => `<p class="ddm-help">${s}</p>`;
+var table = (caption, headers, rows3, cls = "") => `<div class="ddm-table-wrap" tabindex="0" role="region" aria-label="${esc(caption)}"><table class="ddm-table ${cls}"><caption>${caption}</caption><thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows3.map((row) => `<tr>${row.map((c, i2) => i2 ? `<td>${c}</td>` : `<th scope="row">${c}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+var panel = (title, body) => `<section class="panel"><div class="panel-head"><h2>${title}</h2></div>${body}</section>`;
+var warnings = (items) => items?.length ? `<ul class="ddm-warnings">${items.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>` : "";
+var metric = (label, value) => `<div><span>${label}</span><b>${value}</b></div>`;
+var result = (label, value, body) => panel(
+  label,
+  `<div class="ddm-result-body"><strong id="val-value" class="val-value">${value}</strong>${body}</div>`
+);
+var cf = "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/";
+var valuationDefaults = (view) => ({
+  method: "growth",
+  metric: "pe",
+  terminalMethod: "growth",
+  estimateKind: "user",
+  example: false,
+  auto: true,
+  ...view === "ri" ? { persistence: "0" } : {}
+});
+var sourceReferences = {
+  dcf: ["FCFF valuation and WACC", cf + "free-cash-flow-valuation"],
+  wacc: [
+    "FCFF discount rate and capital weights",
+    cf + "free-cash-flow-valuation"
+  ],
+  ri: ["Residual income valuation", cf + "residual-income-valuation"],
+  rv: [
+    "Equity valuation approaches",
+    cf + "equity-valuation-concepts-basic-tools"
+  ],
+  eqrv: [
+    "Bloomberg \xB7 relative valuation context",
+    "https://data.bloomberglp.com/professional/sites/10/IR-Essentials-guide.pdf"
+  ],
+  anr: [
+    "Bloomberg \xB7 analyst targets navigation",
+    "https://data.bloomberglp.com/professional/sites/10/Getting-Started-Guide-for-Students-English.pdf"
+  ],
+  ee: [
+    "Bloomberg \xB7 earnings and estimates",
+    "https://assets.bbhub.io/professional/sites/10/RMB-Equity-Solutions.pdf"
+  ],
+  x3sm: [
+    "Bloomberg \xB7 Excel template context",
+    "https://data.bloomberglp.com/professional/sites/10/Education-Brochure.pdf"
+  ]
+};
+function readInput(view, d) {
+  const n = (k) => d[k] == null || String(d[k]).trim() === "" ? null : Number(d[k]);
+  const rate2 = (k) => n(k) == null ? null : n(k) / 100;
+  const bridge = Object.fromEntries(
+    ["debt", "cash", "otherAssets", "claims", "shares", "price"].map((k) => [
+      k,
+      n(k)
+    ])
+  );
+  if (view === "dcf")
+    return {
+      ...bridge,
+      flows: Array.from({ length: 5 }, (_, i2) => n("fcff" + i2)),
+      wacc: rate2("wacc"),
+      cashFlowType: d.cashFlowType || "fcff",
+      costEquity: d.cashFlowType === "fcfe" ? rate2("wacc") : null,
+      terminalGrowth: rate2("terminalGrowth"),
+      terminalFCFF: n("terminalFCFF"),
+      terminalMethod: d.terminalMethod,
+      terminalEbitda: n("terminalEbitda"),
+      exitMultiple: n("exitMultiple")
+    };
+  if (view === "wacc")
+    return {
+      preferred: n("preferred") ?? 0,
+      costPreferred: rate2("costPreferred"),
+      taxShield: d.taxShield !== "unavailable",
+      riskFree: rate2("riskFree"),
+      beta: n("beta"),
+      equityRiskPremium: rate2("equityRiskPremium"),
+      costDebt: rate2("costDebt"),
+      taxRate: rate2("taxRate"),
+      equity: n("equity"),
+      debt: n("debt")
+    };
+  if (["rv", "eqrv"].includes(view)) {
+    if (!d.period?.trim())
+      throw new Error(
+        "Record the matching fiscal period and accounting basis."
+      );
+    const history = (d.history || "").trim() ? d.history.split(/[,;\s]+/).filter(Boolean).map((token) => /^\d{4}-\d{2}-\d{2}:/.test(token) ? { date: token.slice(0, 10), multiple: Number(token.slice(11)) } : Number(token)) : [];
+    if (history.some((v) => !Number.isFinite(typeof v === "object" ? v.multiple : v) || (typeof v === "object" ? v.multiple : v) <= 0))
+      throw new Error(
+        "Historical multiples must be positive numbers, separated by commas or spaces."
+      );
+    return {
+      ...bridge,
+      metric: d.metric,
+      fundamental: n("fundamental"),
+      peers: Array.from({ length: 4 }, (_, i2) => ({
+        name: d["peerName" + i2],
+        multiple: n("peerMultiple" + i2)
+      })),
+      history,
+      asOf: d.valuationDate || d.asOf || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10)
+    };
+  }
+  if (view === "anr") {
+    if (!d.horizon?.trim())
+      throw new Error("Record a common target horizon and share basis.");
+    return {
+      price: n("price"),
+      asOf: d.valuationDate || (/* @__PURE__ */ new Date()).toISOString().slice(0, 10),
+      horizon: d.horizon,
+      rows: Array.from({ length: 4 }, (_, i2) => ({
+        name: d["analyst" + i2],
+        target: n("target" + i2),
+        date: d["targetDate" + i2],
+        rating: d["rating" + i2] || "Not recorded"
+      }))
+    };
+  }
+  if (view === "ri")
+    return {
+      book: n("book"),
+      costEquity: rate2("costEquity"),
+      persistence: rate2("persistence"),
+      price: n("price"),
+      rows: Array.from({ length: 5 }, (_, i2) => ({
+        eps: n("eps" + i2),
+        dividend: n("dividend" + i2)
+      }))
+    };
+  if (view === "x3sm")
+    return { ...Object.fromEntries(
+      [
+        "revenue",
+        "growth",
+        "margin",
+        "taxRate",
+        "costDebt",
+        "daRate",
+        "depreciationRate",
+        "capexRate",
+        "nwcRate",
+        "payout",
+        "cash",
+        "debt",
+        "ppe",
+        "nwc",
+        "otherNetAssets"
+      ].map((k) => [
+        k,
+        ["revenue", "cash", "debt", "ppe", "nwc", "otherNetAssets"].includes(k) ? n(k) : rate2(k)
+      ])
+    ), ...Array.from({ length: 5 }, (_, i2) => d["growth" + i2]).some((v) => v != null && v !== "") ? { growthRates: Array.from({ length: 5 }, (_, i2) => rate2("growth" + i2)) } : {}, financingPolicy: d.financingPolicy || "none", minimumCash: n("minimumCash") ?? 0 };
+  if (view === "ee") {
+    if (!d.period?.trim())
+      throw new Error(
+        "Record the accounting and share basis of these estimates."
+      );
+    const rows3 = Array.from({ length: 3 }, (_, i2) => ({
+      fiscal: d["fiscal" + i2],
+      revenue: n("revenue" + i2),
+      eps: n("eps" + i2),
+      ebitda: n("ebitda" + i2),
+      count: n("count" + i2)
+    })).filter(
+      (row) => row.fiscal || [row.revenue, row.eps, row.ebitda, row.count].some((v) => v != null)
+    );
+    if (!rows3.length)
+      throw new Error(
+        "Enter a fiscal year-end and at least one forecast metric."
+      );
+    rows3.forEach((row) => {
+      if (!isDate(row.fiscal))
+        throw new Error("Each forecast needs a valid fiscal year-end date.");
+      if ([row.revenue, row.eps, row.ebitda].every((v) => v == null))
+        throw new Error("Each fiscal period needs at least one metric.");
+      if ([row.revenue, row.eps, row.ebitda].some(
+        (v) => v != null && !Number.isFinite(v)
+      ))
+        throw new Error("Estimates must be finite numbers.");
+      if (row.revenue != null && row.revenue < 0)
+        throw new Error("Revenue cannot be negative.");
+      if (row.count != null && (!Number.isInteger(row.count) || row.count < 1))
+        throw new Error(
+          "Contributor counts must be positive whole numbers or blank."
+        );
+    });
+    if (new Set(rows3.map((r) => r.fiscal)).size !== rows3.length)
+      throw new Error("Use each fiscal period once.");
+    const price = n("price");
+    if (price != null && (!Number.isFinite(price) || price <= 0))
+      throw new Error("Comparison price must be positive or blank.");
+    return {
+      rows: rows3.sort((a, b) => a.fiscal.localeCompare(b.fiscal)),
+      price
+    };
+  }
+}
+function evaluateValuationDraft(view, d, currency) {
+  const input = readInput(view, d);
+  return { input, ...renderResult(view, input, d, currency) };
+}
+function renderResult(view, input, d, currency) {
+  if (view === "dcf") {
+    const r = calculateDCF(input), s = dcfSensitivity(input), growth = input.terminalMethod === "growth";
+    return {
+      data: r,
+      html: result(
+        "DCF \xB7 conditional equity value / share",
+        money2(r.value, currency),
+        note(
+          input.cashFlowType === "fcfe" ? "Annual year-end FCFE discounted at cost of equity. These equity cash flows already include financing; debt is not subtracted again." : "Annual year-end FCFF; constant nominal WACC. All totals below are in millions; per-share value is in the selected trading currency."
+        ) + `<div class="ddm-metrics">${metric("vs. entered price", pct(r.upside))}${metric(input.cashFlowType === "fcfe" ? "Equity value \xB7 millions" : "Enterprise value \xB7 millions", num(input.cashFlowType === "fcfe" ? r.equity : r.enterpriseValue, 2))}${metric("PV terminal / enterprise value", pct(r.terminalWeight))}</div>` + warnings(r.warnings)
+      ) + panel(
+        "Cash-flow audit",
+        table(
+          "Five annual FCFF forecasts \xB7 millions",
+          ["Period", "FCFF", "Discount factor", "PV"],
+          r.rows.map((row) => [
+            "Year " + row.year,
+            num(row.fcff, 4),
+            num(row.factor, 6),
+            num(row.pv, 4)
+          ]).concat([
+            [
+              "Terminal \xB7 end year 5",
+              num(r.terminalValue, 4),
+              num((1 + (input.cashFlowType === "fcfe" ? input.costEquity : input.wacc)) ** -5, 6),
+              num(r.pvTerminal, 4)
+            ]
+          ])
+        )
+      ) + (input.cashFlowType === "fcfe" ? panel("Equity cash-flow basis", table("FCFE discounted at cost of equity", ["Component", "Value"], [["PV equity cash flows + terminal", num(r.equity, 4)], ["Debt deducted again", "No"], ["Common shares", num(input.shares, 4)], ["Value / share", num(r.value, 4)]])) : panel(
+        "Enterprise-to-common-equity bridge",
+        table(
+          "All totals and diluted shares in millions",
+          ["Component", "Value"],
+          [
+            ["PV explicit FCFF", num(r.pvFlows, 4)],
+            ["+ PV terminal", num(r.pvTerminal, 4)],
+            ["= Enterprise value", num(r.enterpriseValue, 4)],
+            ["\u2212 Debt", num(input.debt, 4)],
+            ["+ Excess cash", num(input.cash, 4)],
+            ["+ Other non-operating assets", num(input.otherAssets, 4)],
+            ["\u2212 Preferred / NCI / other claims", num(input.claims, 4)],
+            ["= Common equity", num(r.equity, 4)],
+            ["\xF7 Diluted shares", num(input.shares, 4)],
+            ["= Value per share", num(r.value, 4)]
+          ]
+        )
+      )) + panel(
+        `Sensitivity \xB7 ${input.cashFlowType === "fcfe" ? "cost of equity" : "WACC"} \xD7 ${growth ? "perpetual growth" : "exit multiple"}`,
+        `<div class="ddm-table-wrap"><table class="ddm-table"><caption>Value per share \xB7 ${esc(currency)} \xB7 other inputs fixed</caption><thead><tr><th scope="col">WACC \u2193 / ${growth ? "g" : "EV/EBITDA"} \u2192</th>${s.assumptions.map((a) => `<th scope="col">${growth ? pct(a) : multiple(a)}</th>`).join("")}</tr></thead><tbody>${s.rates.map((rate2, i2) => `<tr><th scope="row">${pct(rate2)}</th>${s.values[i2].map((v, j) => `<td ${i2 === 2 && j === 2 ? 'class="ddm-base"' : ""}>${v == null ? "\u2014" : num(v, 2)}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="ddm-table-note">Amber is the base case. \u2014 is an invalid combination. Rates vary by \xB10.5 / \xB11 percentage point; exit multiples by \xB11\xD7 / \xB12\xD7.</p>`
+      )
+    };
+  }
+  if (view === "wacc") {
+    const r = calculateWACC(input);
+    return {
+      data: r,
+      html: result(
+        d.capitalBasis === "scenario" ? "Scenario WACC \xB7 assumed financing mix" : "Weighted average cost of capital",
+        pct(r.wacc),
+        `<div class="ddm-metrics">${metric("CAPM cost of equity", pct(r.costEquity))}${metric("After-tax debt cost", pct(r.afterTaxDebt))}${metric("Equity / debt weights", `${pct(r.equityWeight)} / ${pct(r.debtWeight)}`)}</div>` + note(
+          "k\u2091 = risk-free rate + levered beta \xD7 equity risk premium. WACC = E/(E+D) \xD7 k\u2091 + D/(E+D) \xD7 k\u1D48 \xD7 (1\u2212tax). Use k\u2091 for DDM and RI; WACC for unlevered FCFF."
+        ) + warnings(r.warnings) + `<button id="val-transfer" class="primary" type="button">Use this WACC in DCF \u2192</button>`
+      )
+    };
+  }
+  if (["rv", "eqrv"].includes(view)) {
+    const r = calculateRelative(input);
+    const validValue = r.peerValue ?? r.historicalValue;
+    return {
+      data: r,
+      html: result(
+        view === "eqrv" ? "Relative historical context" : "Peer-implied value / share",
+        view === "eqrv" ? r.historicalPercentile == null ? "Current dated price or history unavailable" : pct(r.historicalPercentile) + " historical percentile" : money2(validValue, currency),
+        note(
+          `Benchmark: ${r.peerValue != null ? "entered peer median" : "entered historical median"}. ${esc(d.period)}. A multiple-based implied price is not an intrinsic-value estimate.`
+        ) + `<div class="ddm-metrics">${view === "eqrv" ? metric("Historical range", multiple(r.historicalLow) + " \u2013 " + multiple(r.historicalHigh)) : ""}${metric("Current multiple", multiple(r.currentMultiple))}${metric("Peer median", multiple(r.peerMedian))}${metric("Historical median", multiple(r.historicalMedian))}</div>` + warnings(r.warnings)
+      ) + panel(
+        "Comparison audit",
+        table(
+          "Benchmarks are kept separate",
+          [
+            "Benchmark",
+            "Observations",
+            "Multiple",
+            "Implied price",
+            "Current multiple / benchmark \u2212 1"
+          ],
+          [
+            [
+              "Peers",
+              String(r.peers.length),
+              multiple(r.peerMedian),
+              money2(r.peerValue, currency),
+              pct(r.peerPremium)
+            ],
+            [
+              "History",
+              String(r.historicalCount),
+              multiple(r.historicalMedian),
+              money2(r.historicalValue, currency),
+              pct(r.historicalPremium)
+            ]
+          ]
+        ) + note(
+          `Positive percentages mean a multiple premium; negative means a discount. ${r.excluded} incomplete or non-positive peer observations excluded. Historical observations use a median, not time-series regression. EV/EBITDA implied prices use the entered enterprise-to-equity bridge.`
+        )
+      ) + panel(
+        "Included peers",
+        table(
+          esc(d.period),
+          ["Peer", "Multiple"],
+          r.peers.map((p) => [esc(p.name), multiple(p.multiple)])
+        )
+      )
+    };
+  }
+  if (view === "anr") {
+    const r = calculateTargets(input);
+    return {
+      data: r,
+      html: result(
+        "Mean of your entered analyst targets",
+        money2(r.mean, currency),
+        note(`Entered sample only \xB7 ${esc(d.horizon)}.`) + `<div class="ddm-metrics">${metric("Median target", money2(r.median, currency))}${metric("Low / high", `${num(r.low, 2)} / ${num(r.high, 2)}`)}${metric("Mean vs. entered price", pct(r.upside))}</div>` + note(
+          `${r.count} observations. Targets are analyst opinions, not intrinsic values or assured returns. Check stale targets, sample selection and broker-specific rating definitions.`
+        )
+      ) + panel(
+        "Target observations",
+        table(
+          `All targets in ${esc(currency)} / share`,
+          ["Broker / analyst", "Date", "Target", "Original rating"],
+          r.rows.map((row) => [
+            esc(row.name),
+            esc(row.date),
+            num(row.target, 2),
+            esc(row.rating)
+          ])
+        )
+      )
+    };
+  }
+  if (view === "ri") {
+    const r = calculateRI(input);
+    return {
+      data: r,
+      html: result(
+        "Residual income \xB7 equity value / share",
+        money2(r.value, currency),
+        `<div class="ddm-metrics">${metric("Opening book value", money2(input.book, currency))}${metric("PV explicit residual income", money2(r.pvRI, currency))}${metric("vs. entered price", pct(r.upside))}</div>` + note(
+          `V\u2080 = B\u2080 + \u03A3[RI\u209C/(1+r)\u1D57] + TV\u2085/(1+r)\u2075. RI\u2085\u208A\u2096 = RI\u2085 \xD7 \u03C9\u1D4F; TV\u2085 = RI\u2085 \xD7 \u03C9 / (1+r\u2212\u03C9). \u03C9 = ${pct(input.persistence)}. No debt/cash adjustment is applied to per-share common equity.`
+        ) + warnings(r.warnings)
+      ) + panel(
+        "Clean-surplus and residual-income audit",
+        table(
+          `${esc(currency)} / share \xB7 annual year-end`,
+          [
+            "Year",
+            "Opening book",
+            "EPS",
+            "Dividend",
+            "Equity charge",
+            "RI",
+            "Closing book",
+            "PV RI"
+          ],
+          r.rows.map((row) => [
+            String(row.year),
+            num(row.openingBook, 4),
+            num(row.eps, 4),
+            num(row.dividend, 4),
+            num(row.charge, 4),
+            num(row.ri, 4),
+            num(row.closingBook, 4),
+            num(row.pv, 4)
+          ])
+        )
+      ) + panel(
+        "Valuation bridge",
+        table(
+          "Book value plus excess earnings",
+          ["Component", "Per share"],
+          [
+            ["Opening common book", num(input.book, 4)],
+            ["+ PV years 1\u20135 RI", num(r.pvRI, 4)],
+            ["+ PV continuation", num(r.pvTerminal, 4)],
+            ["= Model common equity", num(r.value, 4)]
+          ]
+        )
+      )
+    };
+  }
+  if (view === "x3sm") {
+    const r = forecastStatements(input), headers = ["Line item", ...r.rows.map((row) => "Year " + row.year)];
+    const line = (label, key4) => [
+      label,
+      ...r.rows.map((row) => num(row[key4], 4))
+    ];
+    return {
+      data: r,
+      html: result(
+        "Five-year linked forecast",
+        `${num(r.rows.at(-1).fcff, 2)} million`,
+        note(
+          `Year-5 unlevered FCFF \xB7 ${esc(currency)}. Opening simplified equity = ${num(r.openingEquity, 2)} million. No valuation is implied until you choose discount rates, terminal assumptions and an equity bridge.`
+        ) + warnings(r.warnings) + `<button id="val-transfer" class="primary" type="button">Use projected FCFF in DCF \u2192</button>`
+      ) + panel(
+        "Income statement",
+        table(`All totals in ${esc(currency)} millions`, headers, [
+          line("Revenue", "revenue"),
+          line("EBITDA", "ebitda"),
+          line("\u2212 D&A", "da"),
+          line("EBIT", "ebit"),
+          line("\u2212 Interest", "interest"),
+          line("\u2212 Cash income taxes", "taxes"),
+          line("Net income", "netIncome")
+        ])
+      ) + panel(
+        "Cash-flow statement",
+        table("Annual cash movements \xB7 no financing plug", headers, [
+          line("Net income", "netIncome"),
+          line("+ D&A", "da"),
+          line("\u2212 Increase in operating NWC", "deltaNwc"),
+          line("CFO", "cfo"),
+          line("Investing CF (\u2212capex)", "cfi"),
+          line("Financing CF (\u2212dividends)", "cff"),
+          line("Opening cash", "openingCash"),
+          line("Closing cash / funding gap", "cash"),
+          line("Unlevered FCFF", "fcff")
+        ])
+      ) + panel(
+        "Balance sheet",
+        table("Assets less liabilities equals simplified owners equity", headers, [
+          line("Cash / funding gap", "cash"),
+          line("Net PP&E", "ppe"),
+          line("Other net assets", "otherNetAssets"),
+          line("Operating NWC (net)", "nwc"),
+          line("Debt", "debt"),
+          line("Simplified equity", "equity"),
+          line("Balance check \xB7 should be 0", "balance")
+        ])
+      )
+    };
+  }
+  if (view === "ee") {
+    const rows3 = input.rows, classification = d.imported && d.estimateKind === "consensus" ? "Connected provider consensus; source metadata validated" : {
+      user: "Your forecast assumptions",
+      guidance: "Company guidance transcribed by you",
+      consensus: "Third-party consensus transcribed by you"
+    }[d.estimateKind];
+    return {
+      data: { rows: rows3, classification },
+      html: result(
+        "Estimate notebook",
+        `${rows3.length} fiscal period${rows3.length === 1 ? "" : "s"}`,
+        note(
+          `${esc(classification)}. ${esc(d.period)}. Review the source, fiscal horizon and accounting basis; a manual consensus label alone is not verification.`
+        )
+      ) + panel(
+        "Forecast snapshot",
+        table(
+          `Revenue / EBITDA in ${esc(currency)} millions; EPS in ${esc(currency)} / share`,
+          [
+            "Fiscal year-end",
+            "Revenue",
+            "EPS",
+            "EBITDA",
+            "Contributors",
+            "Price / EPS"
+          ],
+          rows3.map((row) => [
+            esc(row.fiscal),
+            row.revenue == null ? "\u2014" : num(row.revenue, 2),
+            row.eps == null ? "\u2014" : num(row.eps, 4),
+            row.ebitda == null ? "\u2014" : num(row.ebitda, 2),
+            row.count ?? "\u2014",
+            row.eps > 0 && input.price != null ? multiple(input.price / row.eps) : "\u2014"
+          ])
+        )
+      ) + note(
+        "Price / EPS is calculated only for positive EPS and a positive entered price. No multiple is shown for a loss. No figures are automatically transferred into FCFF: EPS and EBITDA are not cash flow."
+      )
+    };
+  }
+}
+
+// src/dividend-autofill.js
+function automaticDividendEvidence(item, data, years = 5) {
+  const snapshot = validatedValuationSnapshot(item, data);
+  if (!snapshot) return { reason: "Exact listing, currency and dated dividend evidence required." };
+  const forecast = forecastAssumptions(snapshot, item, years), dividend = snapshot.dividend;
+  const reason = dividend?.status !== "ready" ? "Comparable ordinary dividend evidence is missing, stale or incompatible; absence is not confirmed zero." : forecast.dividendBasisCompatible === false ? "Dividend share or business basis requires a verified reconciliation after the corporate action." : dividend.value === 0 ? "No current dividend basis for automatic DDM. Zero dividends do not imply zero company value." : null;
+  return { snapshot, forecast, dividend, basis: dividend?.basis === "forward" ? "forward" : "current", reason };
+}
+
+// src/automatic-model-audit.js
+function auditAutomaticModel(item, data, model) {
+  const evidence = validatedValuationSnapshot(item, data);
+  if (!evidence && item?.supported && item.assetType === "Equity") return { status: "missing", reason: "Exact listing, currency and dated source evidence required." };
+  data = evidence || data;
+  const eligibility = modelApplicability(item, data, model);
+  if (eligibility.status !== "applicable") return eligibility;
+  let gaps = [], automaticInputCount = null;
+  try {
+    let result2;
+    if (model === "ddm") {
+      const evidence2 = automaticDividendEvidence(item, data), f = evidence2.forecast;
+      if (evidence2.reason) throw Error(evidence2.reason);
+      automaticInputCount = 9;
+      result2 = calculateDDM({ model: "two-stage", basis: evidence2.basis, dividend: evidence2.dividend.value, requiredReturn: f.capital.costEquity, terminalGrowth: f.dividendTerminal, growthRates: f.dividends.map((x2) => Number((x2.growth * 100).toFixed(6)) / 100), years: 5 });
+      if (f.capital.capitalBasis === "scenario") gaps.push("Industry cost-of-equity proxy; company regression beta is not supplied.");
+    } else {
+      const fill = automaticInputs(model, data, item);
+      gaps = fill.gaps;
+      automaticInputCount = Object.keys(fill.patches).length;
+      if (model === "anr" && !data.feed?.targets) throw Error("Analyst targets unavailable from configured free sources.");
+      result2 = evaluateValuationDraft(model, { ...valuationDefaults(model), ...fill.patches }, item.currency).data;
+    }
+    const value = result2.value ?? result2.wacc ?? result2.mean ?? null;
+    if (value !== null && !Number.isFinite(value)) throw Error("Nonfinite result rejected");
+    const partial = gaps.some((g) => /unverified|unavailable|require review|requires review|industry|claims|partial|not reconciled|scenario/i.test(g)) || ["dcf", "wacc", "ri", "x3sm"].includes(model) && data?.references?.industry;
+    return { status: partial ? "partial" : "valid", value, automaticInputCount, reason: partial ? "Supported conditional calculation with disclosed proxies or incomplete supporting evidence." : "Calculation supported by the configured evidence and disclosed policy.", gaps };
+  } catch (e) {
+    return { status: "missing", reason: e.message, automaticInputCount, gaps };
+  }
+}
+function auditAutomaticModels(item, data) {
+  return Object.fromEntries(MODEL_CODES.map((model) => [model, auditAutomaticModel(item, data, model)]));
+}
+function modelAuditCounts(records) {
+  return Object.fromEntries(MODEL_CODES.map((m) => [m, Object.fromEntries(["valid", "partial", "missing", "not_applicable"].map((s) => [s, records.filter((r) => r.models[m].status === s).length]))]));
+}
+
 // scripts/build-financial-snapshots.mjs
 import { createHash } from "node:crypto";
 var output = process.env.PUBLIC_DATA_OUTPUT || "data";
@@ -20842,26 +22131,19 @@ applyCoverage(directory);
 await writeFile(output + "/coverage.json", JSON.stringify(directory));
 var listings = catalog.filter((x2) => x2.assetType === "Equity");
 var rows2 = [];
+var modelRecords = [];
 var cursor = 0;
 async function refresh(item) {
   const file = output + "/" + item.symbol.replaceAll(":", "_") + ".json";
+  let old = null;
+  try {
+    old = JSON.parse(await readFile(file, "utf8"));
+  } catch {
+  }
   let d = await fetchValuationData(item, { PUBLIC_DATA_PUBLISHER: "enabled" }, fetcher, now);
-  if (!d.references) try {
-    const old = JSON.parse(await readFile(file, "utf8"));
-    const age2 = now - Date.parse(old.references?.asOf + "-01");
-    if (old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && age2 >= 0 && age2 <= 550 * 864e5) {
-      d.references = { ...old.references, syncState: "last_known", lastAttempt: now.toISOString() };
-      d.referenceStatus = "Latest reference-source check failed; using the dated last-known industry and risk reference.";
-    }
-  } catch {
-  }
-  const useful = d.financials.status === "ready" || d.dividend.status === "ready";
-  d.sync = { state: useful ? "ready" : "unavailable", lastAttempt: now.toISOString(), lastSuccess: useful ? now.toISOString() : null, cadence: "Public company facts refreshed every six hours; source publication dates remain unchanged.", publisher: "TickerLantern public financial data" };
-  if (!useful) try {
-    const old = JSON.parse(await readFile(file, "utf8"));
-    if (old.dataQualityVersion === DATA_QUALITY_VERSION && old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && now - Date.parse(old.checkedAt) < 3 * 864e5 && (old.financials?.status === "ready" || old.dividend?.status === "ready")) d = { ...old, sync: { ...old.sync, state: "last_known", lastAttempt: now.toISOString() } };
-  } catch {
-  }
+  d = retainSnapshotParts(d, old, item, now);
+  d.sync = { ...d.sync, cadence: "Public company facts refreshed every six hours; source publication dates remain unchanged.", publisher: "TickerLantern public financial data" };
+  d.financialContract = normalizeFinancialSnapshot(d, item);
   await writeFile(file, JSON.stringify(d));
   const forecast = forecastAssumptions(d, item);
   const report = buildValuationReport(item, d), readiness = assessResearchReadiness(item, d, { report, asOf: now.toISOString() });
@@ -20869,6 +22151,9 @@ async function refresh(item) {
   if (d.dataQualityVersion !== DATA_QUALITY_VERSION || d.instrument?.symbol !== item.symbol || d.instrument?.currency !== item.currency || report.statementDate && report.statementDate > now.toISOString().slice(0, 10) || calculated.some((value, index) => !Number.isFinite(value) || value <= 0 || index > 0 && value < calculated[index - 1]))
     throw Error("Publication integrity check failed for " + item.symbol + "; retain the previous verified batch.");
   const answer = { method: report.method.key, value: report.valuation?.base };
+  const models = auditAutomaticModels(item, d);
+  if (Object.values(models).some((m) => m.value != null && !Number.isFinite(m.value))) throw Error("Nonfinite automatic model result for " + item.symbol);
+  modelRecords.push({ symbol: item.symbol, currency: item.currency, sourceCheckedAt: d.checkedAt, sync: d.sync, models });
   rows2.push({ revenueProofs: [...d.financials.annual || [], d.financials.recent, d.financials.recent?.prior].filter((p) => p?.metrics?.revenue?.normalization?.kind === "consolidated-statement-revenue-scope").length, research: { method: report.method.key, valueKind: report.valuation?.kind || "review", qualityConditions: report.qualityIssues.length, latestKnownPeriodic: readiness.freshness.latestKnownPeriodicPeriod, newerPeriodicNotInModel: readiness.freshness.newerPeriodicFilingVerified, newerResultsDisclosure: readiness.freshness.newerResultsDisclosure, newerVerifiedRelease: readiness.freshness.newerReleaseVerified, institutionalUnderwritingEstablished: false }, latestInterim: d.financials.recent?.end, ttm: d.financials.ttm?.end, industry: d.references?.industry?.name, sic: d.references?.issuer?.sic, referenceAsOf: d.references?.asOf, wacc: forecast.capital.wacc, costEquity: forecast.capital.costEquity, revenueGrowth: forecast.revenue.map((r) => r.growth), dividendGrowth: forecast.dividends.map((r) => r.growth), symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
   if (rows2.length % 25 === 0) console.log(`Refreshed ${rows2.length} / ${listings.length} company listings`);
 }
@@ -20876,7 +22161,11 @@ await Promise.all(Array.from({ length: 3 }, async () => {
   while (cursor < listings.length) await refresh(listings[cursor++]);
 }));
 rows2.sort((a, b) => a.symbol.localeCompare(b.symbol));
+modelRecords.sort((a, b) => a.symbol.localeCompare(b.symbol));
+var modelAudit = { schema: 1, generatedAt: now.toISOString(), scope: "Every supported stock, all nine automatic tools using the same validated evidence and calculation engines as the website. Missing evidence and unsuitable models remain explicit.", stocks: modelRecords.length, counts: modelAuditCounts(modelRecords), records: modelRecords };
 var manifest = { schema: 1, providerHealth: transport.health(), requestBudget: transport.policy, dataQualityVersion: DATA_QUALITY_VERSION, verifiedRevenuePeriods: rows2.reduce((n, r) => n + r.revenueProofs, 0), generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, researchAudit: { scope: "Automated source and calculation controls; not a certification of individual company underwriting", institutionallyUnderwritten: 0, conditionalValuationScenarios: rows2.filter((r) => r.research.valueKind === "intrinsic-scenario").length, limitedCrossChecks: rows2.filter((r) => r.research.valueKind === "cross-check").length, evidenceReviews: rows2.filter((r) => r.research.valueKind === "review").length, withSourceConditions: rows2.filter((r) => r.research.qualityConditions > 0).length, newerPeriodicNotInModel: rows2.filter((r) => r.research.newerPeriodicNotInModel).length, newerResultsDisclosure: rows2.filter((r) => r.research.newerResultsDisclosure).length }, interimReady: rows2.filter((r) => r.latestInterim).length, ttmReady: rows2.filter((r) => r.ttm).length, referencesReady: rows2.filter((r) => r.referenceAsOf).length, waccReady: rows2.filter((r) => Number.isFinite(r.wacc)).length, companyIndustryMappings: rows2.filter((r) => r.sic).length, revenuePaths: rows2.filter((r) => r.revenueGrowth.length === 5).length, dividendPaths: rows2.filter((r) => r.dividendGrowth.length === 5).length, financialsReady: rows2.filter((r) => r.financials === "ready").length, numericalAnswers: rows2.filter((r) => r.numericalAnswer).length, rows: rows2 };
+manifest.modelAudit = { ...modelAudit, records: void 0, file: "model-audit.json" };
+await writeFile(output + "/model-audit.json", JSON.stringify(modelAudit));
 await writeFile(output + "/manifest.json", JSON.stringify(manifest, null, 2));
 console.log(JSON.stringify({ total: manifest.totalListings, financials: manifest.financialsReady, numericalAnswers: manifest.numericalAnswers }));
 if (manifest.financialsReady < 400) throw Error("Refresh coverage fell below the publication threshold; existing published snapshot will remain in place.");
