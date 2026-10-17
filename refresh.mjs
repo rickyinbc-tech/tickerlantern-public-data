@@ -6331,7 +6331,10 @@ async function refreshIndexes(previous = {}, fetcher2 = fetch, now2 = /* @__PURE
 function convertUSDToCAD(financials, dividend, fx) {
   if (financials.currency !== "USD" || fx?.currency !== "CAD/USD" || !(fx.value > 0) || !Number.isFinite(fx.value)) throw Error("Invalid currency conversion");
   const convert = (f) => ({ ...f, value: f.value * fx.value, unit: f.unit?.replace("USD", "CAD"), original: { value: f.value, unit: f.unit }, conversion: fx, basis: (f.basis || "Reported fact") + `; converted USD to CAD at ${fx.value} CAD/USD (${fx.asOf}); constant FX scenario` });
-  const converted = { ...financials, currency: "CAD", reportingCurrency: "USD", conversion: fx, annual: financials.annual.map((a) => ({ ...a, metrics: Object.fromEntries(Object.entries(a.metrics).map(([k, f]) => [k, f.unit === "USD" || f.unit === "USD/shares" ? convert(f) : { ...f }])) })), warnings: [...financials.warnings || [], "USD financial facts translated to CAD at the dated daily average exchange rate. Forecasts assume that exchange rate stays constant; these are not originally reported CAD amounts."] };
+  const convertMetrics = (m) => Object.fromEntries(Object.entries(m || {}).map(([k, f]) => [k, f.unit === "USD" || f.unit === "USD/shares" ? convert(f) : { ...f }]));
+  const converted = { ...financials, currency: "CAD", reportingCurrency: "USD", conversion: fx, annual: financials.annual.map((a) => ({ ...a, metrics: convertMetrics(a.metrics) })), warnings: [...financials.warnings || [], "USD financial facts translated to CAD at the dated daily average exchange rate. Forecasts assume that exchange rate stays constant; these are not originally reported CAD amounts."] };
+  if (financials.ttm) converted.ttm = { ...financials.ttm, metrics: convertMetrics(financials.ttm.metrics) };
+  if (financials.recent) converted.recent = { ...financials.recent, metrics: convertMetrics(financials.recent.metrics), prior: { ...financials.recent.prior, metrics: convertMetrics(financials.recent.prior?.metrics) } };
   const d = dividend?.status === "ready" && dividend.currency === "USD" ? { ...dividend, value: dividend.value * fx.value, currency: "CAD", kind: "fx-converted", original: { value: dividend.value, currency: "USD" }, conversion: fx, description: dividend.description + ` Translated at ${fx.value} CAD/USD, Bank of Canada daily average ${fx.asOf}; constant FX assumption.` } : dividend;
   return { financials: converted, dividend: d };
 }
@@ -6852,7 +6855,7 @@ var forms = /* @__PURE__ */ new Set([
   "6-K",
   "6-K/A"
 ]);
-var tags = {
+var financialTags = {
   revenue: [
     "RevenueFromContractWithCustomerExcludingAssessedTax",
     "Revenues",
@@ -6881,6 +6884,8 @@ var tags = {
     "PaymentsToAcquireProductiveAssets",
     "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities"
   ],
+  cfo: ["NetCashProvidedByUsedInOperatingActivities", "CashFlowsFromUsedInOperatingActivities"],
+  interestExpense: ["InterestExpenseNonOperating", "InterestExpenseDebt", "InterestExpense", "FinanceCosts"],
   tax: ["IncomeTaxExpenseBenefit", "IncomeTaxExpenseContinuingOperations"],
   pretax: [
     "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
@@ -6912,7 +6917,7 @@ var tags = {
   preferredEquity: ["PreferredStockValue", "PreferredStockCarryingValue", "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount"],
   commonShares: ["CommonStockSharesOutstanding"]
 };
-var instant = /* @__PURE__ */ new Set([
+var instantMetrics = /* @__PURE__ */ new Set([
   "cash",
   "ppe",
   "receivables",
@@ -6931,7 +6936,7 @@ var instant = /* @__PURE__ */ new Set([
 function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date()) {
   if (Number(payload?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
   const today = now2.toISOString().slice(0, 10), series = {};
-  for (const [metric2, names] of Object.entries(tags)) {
+  for (const [metric2, names] of Object.entries(financialTags)) {
     const unit = metric2 === "eps" ? currency + "/shares" : ["shares", "commonShares"].includes(metric2) ? "shares" : currency;
     const all = [];
     for (const name of names)
@@ -6939,8 +6944,8 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
         for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit] || []) {
           if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || !forms.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
             continue;
-          const days = (Date.parse(row.end) - Date.parse(row.start)) / DAY2 + 1;
-          if (instant.has(metric2) ? !!row.start : !validDate(row.start) || days < 330 || days > 385)
+          const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY2 + 1;
+          if (instantMetrics.has(metric2) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
             continue;
           all.push({ ...row, tag: name, namespace, unit });
         }
@@ -7003,6 +7008,71 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
       "Stockholders/owners equity is not automatically treated as common equity. Preferred and AT1 capital require a verified adjustment."
     ]
   };
+}
+
+// src/recent-financials.js
+var DAY3 = 864e5;
+var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY3 + 1;
+var forms2 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
+var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY3 <= n;
+function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE__ */ new Date()) {
+  if (Number(payload?.cik) !== Number(cik)) throw Error("Issuer mismatch");
+  const today = now2.toISOString().slice(0, 10), fy = annual?.annual?.[0];
+  if (!fy) return { recent: null, ttm: null };
+  const series = {};
+  for (const [metric2, names] of Object.entries(financialTags)) {
+    const unit = metric2 === "eps" ? currency + "/shares" : ["shares", "commonShares"].includes(metric2) ? "shares" : currency;
+    const rows3 = [];
+    for (const tag of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag]?.units?.[unit] || []) {
+      if (!validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || !forms2.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
+      if (instantMetrics.has(metric2) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
+      rows3.push({ ...r, tag, namespace, unit });
+    }
+    series[metric2] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
+  }
+  const anchor = [...series.revenue || [], ...series.eps || []].filter((r) => r.end > fy.end && days(r) < 310 && nearby(r.start, new Date(Date.parse(fy.end) + DAY3).toISOString().slice(0, 10), 10)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
+  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY3) return { recent: null, ttm: null };
+  const make = (r) => ({ value: r.val, asOf: r.end, filed: r.filed, unit: r.unit, basis: instantMetrics.has(r.metric) ? "Reported period-end balance" : "Reported year-to-date filing fact", source: { name: "SEC EDGAR", tag: r.namespace + ":" + r.tag, url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${r.accn.replaceAll("-", "")}/${r.accn}-index.html`, accession: r.accn } });
+  const latest = {}, prior = {}, ttm = {};
+  for (const [metric2, rows3] of Object.entries(series)) {
+    const c = rows3.find((r) => r.end === anchor.end && (instantMetrics.has(metric2) || r.start === anchor.start));
+    if (!c) continue;
+    latest[metric2] = make({ ...c, metric: metric2 });
+    if (instantMetrics.has(metric2)) {
+      ttm[metric2] = latest[metric2];
+      continue;
+    }
+    const p = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY3).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && r.tag === c.tag && r.namespace === c.namespace).sort((a2, b) => Number(b.accn === c.accn) - Number(a2.accn === c.accn) || b.filed.localeCompare(a2.filed))[0];
+    if (p) prior[metric2] = make({ ...p, metric: metric2 });
+    if (metric2 === "shares") {
+      ttm.shares = { ...latest.shares, basis: "Latest reported YTD weighted-average diluted share count used as a valuation proxy; not current fully diluted or reconstructed TTM shares" };
+      continue;
+    }
+    if (metric2 === "eps" || !p) continue;
+    const a = rows3.find((r) => r.end === fy.end && days(r) >= 330 && days(r) <= 385 && r.tag === c.tag && r.namespace === c.namespace);
+    if (!a) continue;
+    const value = a.val + c.val - p.val;
+    const components = [make({ ...a, metric: metric2 }), make({ ...c, metric: metric2 }), make({ ...p, metric: metric2 })];
+    if (!Number.isFinite(value)) continue;
+    ttm[metric2] = { ...latest[metric2], value, basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; review restatements", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.namespace + ":" + c.tag, url: latest[metric2].source.url, components } };
+  }
+  const derive = (m, key2, keys, fn, basis) => {
+    if (m[key2] || !keys.every((k) => m[k])) return;
+    const f = keys.map((k) => m[k]);
+    if (!f.every((x2) => x2.source.url === f[0].source.url)) return;
+    const value = fn(...f.map((x2) => x2.value));
+    if (!Number.isFinite(value)) return;
+    m[key2] = { ...f[0], value, basis, source: { name: "SEC EDGAR \xB7 derived subtotal", url: f[0].source.url, tag: f.map((x2) => x2.source.tag).join("; "), components: f } };
+  };
+  for (const m of [latest, prior, ttm]) {
+    derive(m, "da", ["depreciation", "amortization"], (d, a) => d + a, "Derived D&A = depreciation + amortization, matching reporting period and filing");
+    derive(m, "ebit", ["pretax", "nonoperating"], (p, n) => p - n, "Derived EBIT = pretax income \u2212 net nonoperating income, matching reporting period and filing");
+    derive(m, "commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Common equity = owners equity \u2212 preferred carrying value, matching period-end and filing");
+  }
+  const growth = {};
+  for (const k of Object.keys(latest)) if (!instantMetrics.has(k) && prior[k]?.value > 0) growth[k] = { value: latest[k].value / prior[k].value - 1, basis: "Year-to-date change versus comparable prior-year period", source: latest[k].source };
+  const earliest = new Date(Date.parse(anchor.end) - 364 * DAY3).toISOString().slice(0, 10);
+  return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest, prior: { metrics: prior }, growth, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
 }
 
 // worker/market-provider.js
@@ -7334,11 +7404,13 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
   if (filing.status === "fulfilled") {
     const { facts, cik } = filing.value;
     data.financials = parseFinancials(facts, cik, item.currency, now2);
+    Object.assign(data.financials, parseRecentFinancials(facts, cik, item.currency, data.financials, now2));
     data.dividend = parseSECDividends(facts, cik, now2, {
       currency: item.currency
     });
     if (data.financials.status !== "ready" && item.currency === "CAD" && secReference(item)?.crossListed) {
       const usd = parseFinancials(facts, cik, "USD", now2);
+      Object.assign(usd, parseRecentFinancials(facts, cik, "USD", usd, now2));
       if (usd.status === "ready") try {
         const converted = convertUSDToCAD(usd, parseSECDividends(facts, cik, now2, { currency: "USD" }), await usdCadRate(fetcher2, now2));
         data.financials = converted.financials;
@@ -8831,14 +8903,14 @@ async function refresh(item) {
   await writeFile(file, JSON.stringify(d));
   const forecast = forecastAssumptions(d, item);
   const answer = valuationAnswer(item, d, { evaluate: evaluateValuationDraft, defaults: valuationDefaults });
-  rows2.push({ industry: d.references?.industry?.name, sic: d.references?.issuer?.sic, referenceAsOf: d.references?.asOf, wacc: forecast.capital.wacc, costEquity: forecast.capital.costEquity, revenueGrowth: forecast.revenue.map((r) => r.growth), dividendGrowth: forecast.dividends.map((r) => r.growth), symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
+  rows2.push({ latestInterim: d.financials.recent?.end, ttm: d.financials.ttm?.end, industry: d.references?.industry?.name, sic: d.references?.issuer?.sic, referenceAsOf: d.references?.asOf, wacc: forecast.capital.wacc, costEquity: forecast.capital.costEquity, revenueGrowth: forecast.revenue.map((r) => r.growth), dividendGrowth: forecast.dividends.map((r) => r.growth), symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
   if (rows2.length % 25 === 0) console.log(`Refreshed ${rows2.length} / ${listings.length} company listings`);
 }
 await Promise.all(Array.from({ length: 3 }, async () => {
   while (cursor < listings.length) await refresh(listings[cursor++]);
 }));
 rows2.sort((a, b) => a.symbol.localeCompare(b.symbol));
-var manifest = { schema: 1, generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, referencesReady: rows2.filter((r) => r.referenceAsOf).length, waccReady: rows2.filter((r) => Number.isFinite(r.wacc)).length, companyIndustryMappings: rows2.filter((r) => r.sic).length, revenuePaths: rows2.filter((r) => r.revenueGrowth.length === 5).length, dividendPaths: rows2.filter((r) => r.dividendGrowth.length === 5).length, financialsReady: rows2.filter((r) => r.financials === "ready").length, numericalAnswers: rows2.filter((r) => r.numericalAnswer).length, rows: rows2 };
+var manifest = { schema: 1, generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, interimReady: rows2.filter((r) => r.latestInterim).length, ttmReady: rows2.filter((r) => r.ttm).length, referencesReady: rows2.filter((r) => r.referenceAsOf).length, waccReady: rows2.filter((r) => Number.isFinite(r.wacc)).length, companyIndustryMappings: rows2.filter((r) => r.sic).length, revenuePaths: rows2.filter((r) => r.revenueGrowth.length === 5).length, dividendPaths: rows2.filter((r) => r.dividendGrowth.length === 5).length, financialsReady: rows2.filter((r) => r.financials === "ready").length, numericalAnswers: rows2.filter((r) => r.numericalAnswer).length, rows: rows2 };
 await writeFile(output + "/manifest.json", JSON.stringify(manifest, null, 2));
 console.log(JSON.stringify({ total: manifest.totalListings, financials: manifest.financialsReady, numericalAnswers: manifest.numericalAnswers }));
 if (manifest.financialsReady < 400) throw Error("Refresh coverage fell below the publication threshold; existing published snapshot will remain in place.");
