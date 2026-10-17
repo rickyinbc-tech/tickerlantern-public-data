@@ -116,14 +116,14 @@
   },
   "dataQualityVersion": 2,
   "verifiedRevenuePeriods": 488,
-  "generatedAt": "2026-10-17T21:17:41.635Z",
+  "generatedAt": "2026-10-17T21:50:59.291Z",
   "cadence": "Every six hours",
   "totalListings": 581,
   "researchAudit": {
     "scope": "Automated source and calculation controls; not a certification of individual company underwriting",
     "institutionallyUnderwritten": 0,
-    "conditionalValuationScenarios": 183,
-    "limitedCrossChecks": 339,
+    "conditionalValuationScenarios": 184,
+    "limitedCrossChecks": 338,
     "evidenceReviews": 59,
     "withSourceConditions": 552,
     "newerPeriodicNotInModel": 5,
@@ -1241,11 +1241,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Machinery",
+      "industry": "Oilfield Svcs/Equip.",
       "sic": "3533",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0856546995327805,
-      "costEquity": 0.091416,
+      "wacc": 0.07885810569958075,
+      "costEquity": 0.09097,
       "revenueGrowth": [
         0.08073426538442141,
         0.06858741230753714,
@@ -1254,11 +1254,11 @@
         0.03214685307688429
       ],
       "dividendGrowth": [
-        0.1355,
-        0.1124,
-        0.0893,
-        0.06620000000000001,
-        0.0431
+        0.0347,
+        0.031760000000000004,
+        0.028820000000000002,
+        0.02588,
+        0.022940000000000002
       ],
       "symbol": "NASDAQ:BKR",
       "currency": "USD",
@@ -1323,24 +1323,24 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Food Processing",
+      "industry": "Beverage (Soft)",
       "sic": "2086",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06636812845140598,
-      "costEquity": 0.075806,
+      "wacc": 0.07190299394602366,
+      "costEquity": 0.07714399999999999,
       "revenueGrowth": [
-        0.057300000000000004,
-        0.04984,
-        0.04238,
-        0.03492000000000001,
-        0.027460000000000005
+        0.09820000000000001,
+        0.08256000000000001,
+        0.06692000000000001,
+        0.051280000000000006,
+        0.035640000000000005
       ],
       "dividendGrowth": [
-        0.026600000000000002,
-        0.02528,
-        0.023960000000000002,
-        0.02264,
-        0.02132
+        0.15439999999999998,
+        0.12752,
+        0.10063999999999998,
+        0.07375999999999998,
+        0.04687999999999999
       ],
       "symbol": "NASDAQ:CCEP",
       "currency": "USD",
@@ -1533,11 +1533,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Telecom. Services",
+      "industry": "Cable TV",
       "sic": "4841",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06187205864998005,
-      "costEquity": 0.076698,
+      "wacc": 0.059700251217832914,
+      "costEquity": 0.081604,
       "revenueGrowth": [
         -0.0056458200962149485,
         -0.0056458200962149485,
@@ -1546,11 +1546,11 @@
         -0.0056458200962149485
       ],
       "dividendGrowth": [
-        0.25,
-        0.20400000000000001,
-        0.158,
-        0.11199999999999999,
-        0.066
+        0.17786268722119358,
+        0.14629014977695487,
+        0.11471761233271614,
+        0.08314507488847742,
+        0.0515725374442387
       ],
       "symbol": "NASDAQ:CHTR",
       "currency": "USD",
@@ -1617,11 +1617,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Telecom. Services",
+      "industry": "Cable TV",
       "sic": "4841",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06187205864998005,
-      "costEquity": 0.076698,
+      "wacc": 0.059700251217832914,
+      "costEquity": 0.081604,
       "revenueGrowth": [
         0.018205880816850994,
         0.018205880816850994,
@@ -2945,11 +2945,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Telecom. Services",
+      "industry": "Broadcasting",
       "sic": "4833",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06187205864998005,
-      "costEquity": 0.076698,
+      "wacc": 0.05888239940086895,
+      "costEquity": 0.069562,
       "revenueGrowth": [
         0.05158626826161115,
         0.045269014609288914,
@@ -2958,11 +2958,11 @@
         0.026317253652322226
       ],
       "dividendGrowth": [
-        0.25,
-        0.20400000000000001,
-        0.158,
-        0.11199999999999999,
-        0.066
+        0.08171922127178502,
+        0.06937537701742802,
+        0.05703153276307101,
+        0.04468768850871401,
+        0.032343844254357004
       ],
       "symbol": "NASDAQ:FOX",
       "currency": "USD",
@@ -2985,11 +2985,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Telecom. Services",
+      "industry": "Broadcasting",
       "sic": "4833",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06187205864998005,
-      "costEquity": 0.076698,
+      "wacc": 0.05888239940086895,
+      "costEquity": 0.069562,
       "revenueGrowth": [
         0.05158626826161115,
         0.045269014609288914,
@@ -2998,11 +2998,11 @@
         0.026317253652322226
       ],
       "dividendGrowth": [
-        0.25,
-        0.20400000000000001,
-        0.158,
-        0.11199999999999999,
-        0.066
+        0.08171922127178502,
+        0.06937537701742802,
+        0.05703153276307101,
+        0.04468768850871401,
+        0.032343844254357004
       ],
       "symbol": "NASDAQ:FOXA",
       "currency": "USD",
@@ -3982,11 +3982,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Food Processing",
+      "industry": "Beverage (Soft)",
       "sic": "2080",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06636812845140598,
-      "costEquity": 0.075806,
+      "wacc": 0.07190299394602366,
+      "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.06384025365746568,
         0.05507220292597254,
@@ -4522,11 +4522,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Food Processing",
+      "industry": "Beverage (Soft)",
       "sic": "2086",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06636812845140598,
-      "costEquity": 0.075806,
+      "wacc": 0.07190299394602366,
+      "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.10730177214679687,
         0.0898414177174375,
@@ -4535,11 +4535,11 @@
         0.03746035442935938
       ],
       "dividendGrowth": [
-        0.026600000000000002,
-        0.02528,
-        0.023960000000000002,
-        0.02264,
-        0.02132
+        0.15439999999999998,
+        0.12752,
+        0.10063999999999998,
+        0.07375999999999998,
+        0.04687999999999999
       ],
       "symbol": "NASDAQ:MNST",
       "currency": "USD",
@@ -5893,11 +5893,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Auto & Truck",
+      "industry": "Aerospace/Defense",
       "sic": "3760",
       "referenceAsOf": "2026-01",
-      "wacc": 0.10519577225284821,
-      "costEquity": 0.11371599999999998,
+      "wacc": 0.08705714043987024,
+      "costEquity": 0.09097,
       "revenueGrowth": [
         0.5,
         0.404,
@@ -5906,11 +5906,11 @@
         0.11599999999999999
       ],
       "dividendGrowth": [
-        0.10220000000000001,
-        0.08576,
-        0.06932,
-        0.05288,
-        0.03644
+        0.25,
+        0.20400000000000001,
+        0.158,
+        0.11199999999999999,
+        0.066
       ],
       "symbol": "NASDAQ:RKLB",
       "currency": "USD",
@@ -6632,11 +6632,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.037822149901771504,
         0.034257719921417205,
@@ -8054,24 +8054,24 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
-        0.1507,
-        0.12456,
-        0.09842,
-        0.07228,
-        0.04613999999999999
+        0.2022,
+        0.16576,
+        0.12932,
+        0.09287999999999999,
+        0.05643999999999999
       ],
       "dividendGrowth": [
-        0.1880326537205029,
-        0.15442612297640232,
-        0.12081959223230174,
-        0.08721306148820115,
-        0.05360653074410057
+        0.1615326537205029,
+        0.13322612297640232,
+        0.10491959223230174,
+        0.07661306148820116,
+        0.04830653074410057
       ],
       "symbol": "NYSE:AMP",
       "currency": "USD",
@@ -8348,11 +8348,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.5,
         0.404,
@@ -8390,11 +8390,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Auto & Truck",
+      "industry": "Auto Parts",
       "sic": "3714",
       "referenceAsOf": "2026-01",
-      "wacc": 0.10039267801386469,
-      "costEquity": 0.11035800000000001,
+      "wacc": 0.08901393441984036,
+      "costEquity": 0.10528200000000001,
       "revenueGrowth": [
         0.11979766935587133,
         0.09983813548469705,
@@ -8403,11 +8403,11 @@
         0.03995953387117426
       ],
       "dividendGrowth": [
-        -0.0681875313125355,
-        -0.0681875313125355,
-        -0.0681875313125355,
-        -0.0681875313125355,
-        -0.0681875313125355
+        -0.039437531312535495,
+        -0.039437531312535495,
+        -0.039437531312535495,
+        -0.039437531312535495,
+        -0.039437531312535495
       ],
       "symbol": "NYSE:APTV",
       "currency": "USD",
@@ -8474,11 +8474,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.4419041897085061,
         0.3575233517668049,
@@ -8487,11 +8487,11 @@
         0.10438083794170122
       ],
       "dividendGrowth": [
-        0.203,
-        0.1664,
-        0.1298,
-        0.0932,
-        0.056599999999999984
+        0.15,
+        0.124,
+        0.09799999999999999,
+        0.072,
+        0.045999999999999985
       ],
       "symbol": "NYSE:ARES",
       "currency": "USD",
@@ -8810,11 +8810,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Construction Supplies",
+      "industry": "Packaging & Container",
       "sic": "3411",
       "referenceAsOf": "2026-01",
-      "wacc": 0.09163616633013674,
-      "costEquity": 0.09988999999999999,
+      "wacc": 0.07566933147007737,
+      "costEquity": 0.09409200000000001,
       "revenueGrowth": [
         0.005787882245088194,
         0.005787882245088194,
@@ -9014,11 +9014,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.049818648763732966,
         0.04385491901098637,
@@ -9027,11 +9027,11 @@
         0.025963729752746592
       ],
       "dividendGrowth": [
-        -0.0425787897590455,
-        -0.0425787897590455,
-        -0.0425787897590455,
-        -0.0425787897590455,
-        -0.0425787897590455
+        -0.06419419789642589,
+        -0.06419419789642589,
+        -0.06419419789642589,
+        -0.06419419789642589,
+        -0.06419419789642589
       ],
       "symbol": "NYSE:BEN",
       "currency": "USD",
@@ -9056,24 +9056,24 @@
       },
       "latestInterim": "2026-07-31",
       "ttm": "2026-07-31",
-      "industry": "Food Processing",
+      "industry": "Beverage (Alcoholic)",
       "sic": "2080",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06636812845140598,
-      "costEquity": 0.075806,
+      "wacc": 0.07314860899541625,
+      "costEquity": 0.084726,
       "revenueGrowth": [
-        0.057300000000000004,
-        0.04984,
-        0.04238,
-        0.03492000000000001,
-        0.027460000000000005
+        -0.0481,
+        -0.0481,
+        -0.0481,
+        -0.0481,
+        -0.0481
       ],
       "dividendGrowth": [
         0.039612313936521204,
-        0.032417379669890896,
-        0.02522244540326058,
-        0.01802751113663027,
-        0.010832576869999961
+        0.03364737966989089,
+        0.027682445403260585,
+        0.021717511136630275,
+        0.01575257686999996
       ],
       "symbol": "NYSE:BF.B",
       "currency": "USD",
@@ -9432,11 +9432,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.19087016186919548,
         0.15669612949535638,
@@ -9445,11 +9445,11 @@
         0.05417403237383908
       ],
       "dividendGrowth": [
-        0.04023680759437975,
-        0.04023680759437975,
-        0.04023680759437975,
-        0.04023680759437975,
-        0.04023680759437975
+        0.02510140534682037,
+        0.02510140534682037,
+        0.02510140534682037,
+        0.02510140534682037,
+        0.02510140534682037
       ],
       "symbol": "NYSE:BX",
       "currency": "USD",
@@ -9928,11 +9928,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Chemical (Diversified)",
+      "industry": "Household Products",
       "sic": "2840",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.07922291484211619,
+      "costEquity": 0.085172,
       "revenueGrowth": [
         0.04872385053423427,
         0.04297908042738741,
@@ -10054,11 +10054,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Chemical (Diversified)",
+      "industry": "Household Products",
       "sic": "2844",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.07922291484211619,
+      "costEquity": 0.085172,
       "revenueGrowth": [
         0.04317317163294328,
         0.03853853730635462,
@@ -10067,11 +10067,11 @@
         0.024634634326588654
       ],
       "dividendGrowth": [
-        0.040278753158380365,
-        0.03336192632670718,
-        0.023169716251236937,
-        0.012977506175766696,
-        0.0027852961002964513
+        0.043554136402177424,
+        0.03884330912174194,
+        0.034132481841306454,
+        0.02942165456087097,
+        0.024710827280435485
       ],
       "symbol": "NYSE:CL",
       "currency": "USD",
@@ -10094,11 +10094,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Chemical (Diversified)",
+      "industry": "Household Products",
       "sic": "2842",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.07922291484211619,
+      "costEquity": 0.085172,
       "revenueGrowth": [
         -0.025692586556000773,
         -0.025692586556000773,
@@ -10107,11 +10107,11 @@
         -0.025692586556000773
       ],
       "dividendGrowth": [
-        -0.07415803017970624,
-        -0.07415803017970624,
-        -0.07415803017970624,
-        -0.07415803017970624,
-        -0.07415803017970624
+        -0.0002859984809326921,
+        -0.0002859984809326921,
+        -0.0002859984809326921,
+        -0.0002859984809326921,
+        -0.0002859984809326921
       ],
       "symbol": "NYSE:CLX",
       "currency": "USD",
@@ -11004,11 +11004,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Rubber& Tires",
+      "industry": "Shoe",
       "sic": "3021",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05206730758861103,
-      "costEquity": 0.072238,
+      "wacc": 0.08900763582847525,
+      "costEquity": 0.09409200000000001,
       "revenueGrowth": [
         0.15430530681423607,
         0.12744424545138885,
@@ -11017,11 +11017,11 @@
         0.046861061362847206
       ],
       "dividendGrowth": [
-        0.19297345201629212,
-        0.15837876161303371,
-        0.12378407120977528,
-        0.08918938080651684,
-        0.05459469040325843
+        0.18412345201629213,
+        0.15129876161303368,
+        0.11847407120977527,
+        0.08564938080651685,
+        0.052824690403258406
       ],
       "symbol": "NYSE:DECK",
       "currency": "USD",
@@ -11130,11 +11130,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Hospitals/Healthcare Facilities",
+      "industry": "Healthcare Support Services",
       "sic": "8071",
       "referenceAsOf": "2026-01",
-      "wacc": 0.07010171802070923,
-      "costEquity": 0.08428,
+      "wacc": 0.07668659634047915,
+      "costEquity": 0.08740200000000001,
       "revenueGrowth": [
         0.03517395130599423,
         0.03213916104479539,
@@ -11143,11 +11143,11 @@
         0.023034790261198847
       ],
       "dividendGrowth": [
-        0.1033119082226958,
-        0.08664952657815664,
-        0.06998714493361749,
-        0.05332476328907832,
-        0.036662381644539166
+        0.0912619082226958,
+        0.07700952657815664,
+        0.06275714493361748,
+        0.04850476328907832,
+        0.034252381644539164
       ],
       "symbol": "NYSE:DGX",
       "currency": "USD",
@@ -11670,11 +11670,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Chemical (Diversified)",
+      "industry": "Chemical (Specialty)",
       "sic": "2840",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.08103095757012328,
+      "costEquity": 0.091862,
       "revenueGrowth": [
         0.021586390028841107,
         0.021269112023072887,
@@ -11754,11 +11754,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Business & Consumer Services",
+      "industry": "Information Services",
       "sic": "7320",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0811290520850035,
-      "costEquity": 0.088294,
+      "wacc": 0.07846210113002046,
+      "costEquity": 0.08963199999999999,
       "revenueGrowth": [
         0.06723115546216815,
         0.05778492436973452,
@@ -11878,11 +11878,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Chemical (Diversified)",
+      "industry": "Household Products",
       "sic": "2844",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.07922291484211619,
+      "costEquity": 0.085172,
       "revenueGrowth": [
         -0.016950399814082927,
         -0.016950399814082927,
@@ -13374,8 +13374,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 17,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -13409,7 +13409,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T21:17:41.635Z"
     },
@@ -13553,11 +13553,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Oil/Gas (Production and Exploration)",
+      "industry": "Oilfield Svcs/Equip.",
       "sic": "1389",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0708983764717848,
-      "costEquity": 0.080712,
+      "wacc": 0.07885810569958075,
+      "costEquity": 0.09097,
       "revenueGrowth": [
         0.05884389061959161,
         0.051075112495673286,
@@ -13566,11 +13566,11 @@
         0.027768778123918324
       ],
       "dividendGrowth": [
-        0.049,
-        0.0432,
-        0.0374,
-        0.0316,
-        0.0258
+        0.0347,
+        0.031760000000000004,
+        0.028820000000000002,
+        0.02588,
+        0.022940000000000002
       ],
       "symbol": "NYSE:HAL",
       "currency": "USD",
@@ -14561,11 +14561,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.07715156855935651,
-      "costEquity": 0.100782,
+      "wacc": 0.07352325852341518,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.013630140351825037,
         0.013630140351825037,
@@ -14981,11 +14981,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": 0.06984442629256139,
+      "costEquity": 0.078036,
       "revenueGrowth": [
         0.44607935934962883,
         0.3608634874797031,
@@ -15023,11 +15023,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Utility (General)",
+      "industry": "Oil/Gas Distribution",
       "sic": "4922",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0516427025996756,
-      "costEquity": 0.059303999999999996,
+      "wacc": 0.06604327424810741,
+      "costEquity": 0.078482,
       "revenueGrowth": [
         0.12165562913907291,
         0.10132450331125833,
@@ -15065,11 +15065,11 @@
       },
       "latestInterim": "2026-07-03",
       "ttm": "2026-07-03",
-      "industry": "Food Processing",
+      "industry": "Beverage (Soft)",
       "sic": "2080",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06636812845140598,
-      "costEquity": 0.075806,
+      "wacc": 0.07190299394602366,
+      "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.053118711990264966,
         0.04649496959221197,
@@ -15149,11 +15149,11 @@
       },
       "latestInterim": "2026-06-28",
       "ttm": "2026-06-28",
-      "industry": "Chemical (Diversified)",
+      "industry": "Household Products",
       "sic": "2844",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.07922291484211619,
+      "costEquity": 0.085172,
       "revenueGrowth": [
         0.0038646439492577844,
         0.0038646439492577844,
@@ -15162,11 +15162,11 @@
         0.0038646439492577844
       ],
       "dividendGrowth": [
-        -0.1246019232426342,
-        -0.1246019232426342,
-        -0.1246019232426342,
-        -0.1246019232426342,
-        -0.1246019232426342
+        -0.03099326646552414,
+        -0.03099326646552414,
+        -0.03099326646552414,
+        -0.03099326646552414,
+        -0.03099326646552414
       ],
       "symbol": "NYSE:KVUE",
       "currency": "USD",
@@ -15317,11 +15317,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Hospitals/Healthcare Facilities",
+      "industry": "Healthcare Support Services",
       "sic": "8071",
       "referenceAsOf": "2026-01",
-      "wacc": 0.07010171802070923,
-      "costEquity": 0.08428,
+      "wacc": 0.07668659634047915,
+      "costEquity": 0.08740200000000001,
       "revenueGrowth": [
         0.03315862611399805,
         0.03052690089119844,
@@ -15485,11 +15485,11 @@
       },
       "latestInterim": "2026-06-28",
       "ttm": "2026-06-28",
-      "industry": "Auto & Truck",
+      "industry": "Aerospace/Defense",
       "sic": "3760",
       "referenceAsOf": "2026-01",
-      "wacc": 0.10264925868963615,
-      "costEquity": 0.11371599999999998,
+      "wacc": 0.08497194057990268,
+      "costEquity": 0.09097,
       "revenueGrowth": [
         0.02516896541178637,
         0.024135172329429095,
@@ -15947,11 +15947,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Business & Consumer Services",
+      "industry": "Information Services",
       "sic": "7320",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0811290520850035,
-      "costEquity": 0.088294,
+      "wacc": 0.07846210113002046,
+      "costEquity": 0.08963199999999999,
       "revenueGrowth": [
         0.10312448060414563,
         0.0864995844833165,
@@ -16829,11 +16829,11 @@
       },
       "latestInterim": "2026-08-31",
       "ttm": "2026-08-31",
-      "industry": "Rubber& Tires",
+      "industry": "Shoe",
       "sic": "3021",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05206730758861103,
-      "costEquity": 0.072238,
+      "wacc": 0.08900763582847525,
+      "costEquity": 0.09409200000000001,
       "revenueGrowth": [
         -0.016154578108676286,
         -0.016154578108676286,
@@ -17541,11 +17541,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Chemical (Diversified)",
+      "industry": "Household Products",
       "sic": "2840",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
-      "costEquity": 0.08651,
+      "wacc": 0.07922291484211619,
+      "costEquity": 0.085172,
       "revenueGrowth": [
         0.022879624962411207,
         0.022303699969928967,
@@ -18838,17 +18838,17 @@
         "institutionalUnderwritingEstablished": false
       },
       "latestInterim": "2026-06-30",
-      "industry": "Telecom. Services",
+      "industry": "Broadcasting",
       "sic": "4833",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06187205864998005,
-      "costEquity": 0.076698,
+      "wacc": 0.05888239940086895,
+      "costEquity": 0.069562,
       "revenueGrowth": [
-        0.5,
-        0.404,
-        0.308,
-        0.21200000000000002,
-        0.11599999999999999
+        -0.0098,
+        -0.0098,
+        -0.0098,
+        -0.0098,
+        -0.0098
       ],
       "dividendGrowth": [],
       "symbol": "NYSE:SKYD",
@@ -18874,11 +18874,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Oil/Gas (Production and Exploration)",
+      "industry": "Oilfield Svcs/Equip.",
       "sic": "1389",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0708983764717848,
-      "costEquity": 0.080712,
+      "wacc": 0.07885810569958075,
+      "costEquity": 0.09097,
       "revenueGrowth": [
         0.09518635883506876,
         0.08014908706805501,
@@ -18887,11 +18887,11 @@
         0.03503727176701375
       ],
       "dividendGrowth": [
-        0.10205518502284153,
-        0.08564414801827322,
-        0.06923311101370491,
-        0.05282207400913662,
-        0.03641103700456831
+        0.09490518502284154,
+        0.07992414801827323,
+        0.06494311101370492,
+        0.04996207400913662,
+        0.03498103700456831
       ],
       "symbol": "NYSE:SLB",
       "currency": "USD",
@@ -19084,11 +19084,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Business & Consumer Services",
+      "industry": "Information Services",
       "sic": "7320",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0811290520850035,
-      "costEquity": 0.088294,
+      "wacc": 0.07846210113002046,
+      "costEquity": 0.08963199999999999,
       "revenueGrowth": [
         0.12888243567409624,
         0.10710594853927699,
@@ -19252,24 +19252,24 @@
       },
       "latestInterim": "2026-08-31",
       "ttm": "2026-08-31",
-      "industry": "Food Processing",
+      "industry": "Beverage (Alcoholic)",
       "sic": "2080",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06636812845140598,
-      "costEquity": 0.075806,
+      "wacc": 0.07314860899541625,
+      "costEquity": 0.084726,
       "revenueGrowth": [
-        0.057300000000000004,
-        0.04984,
-        0.04238,
-        0.03492000000000001,
-        0.027460000000000005
+        -0.0481,
+        -0.0481,
+        -0.0481,
+        -0.0481,
+        -0.0481
       ],
       "dividendGrowth": [
-        0.026600000000000002,
-        0.02528,
-        0.023960000000000002,
-        0.02264,
-        0.02132
+        0.038900000000000004,
+        0.035120000000000005,
+        0.03134,
+        0.02756,
+        0.023780000000000003
       ],
       "symbol": "NYSE:STZ",
       "currency": "USD",
@@ -19962,11 +19962,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Utility (General)",
+      "industry": "Oil/Gas Distribution",
       "sic": "4922",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0516427025996756,
-      "costEquity": 0.059303999999999996,
+      "wacc": 0.06604327424810741,
+      "costEquity": 0.078482,
       "revenueGrowth": [
         0.039483563776210984,
         0.035586851020968785,
@@ -21132,11 +21132,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Auto & Truck",
+      "industry": "Machinery",
       "sic": "3743",
       "referenceAsOf": "2026-01",
-      "wacc": 0.10264925868963615,
-      "costEquity": 0.11371599999999998,
+      "wacc": 0.0856546995327805,
+      "costEquity": 0.091416,
       "revenueGrowth": [
         0.07336984602666119,
         0.06269587682132895,
@@ -21378,11 +21378,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Utility (General)",
+      "industry": "Oil/Gas Distribution",
       "sic": "4922",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0516427025996756,
-      "costEquity": 0.059303999999999996,
+      "wacc": 0.06604327424810741,
+      "costEquity": 0.078482,
       "revenueGrowth": [
         0.1377701609064077,
         0.11421612872512615,
@@ -21957,11 +21957,11 @@
       },
       "latestInterim": "2026-06-30",
       "ttm": "2026-06-30",
-      "industry": "Brokerage & Investment Banking",
+      "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05827451083054072,
-      "costEquity": 0.08779100000000001,
+      "wacc": 0.058896119030834464,
+      "costEquity": 0.066218,
       "revenueGrowth": [
         0.2103015075376884,
         0.1722412060301507,
@@ -21970,11 +21970,11 @@
         0.05806030150753766
       ],
       "dividendGrowth": [
-        0.203,
-        0.1664,
-        0.1298,
-        0.0932,
-        0.056599999999999984
+        0.15,
+        0.124,
+        0.09799999999999999,
+        0.072,
+        0.045999999999999985
       ],
       "symbol": "TSX:BAM",
       "currency": "CAD",
@@ -23269,11 +23269,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Auto & Truck",
+      "industry": "Auto Parts",
       "sic": "3714",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0898704317611537,
-      "costEquity": 0.10005800000000001,
+      "wacc": 0.07831794428811031,
+      "costEquity": 0.09498200000000001,
       "revenueGrowth": [
         0.04409248937696586,
         0.03927399150157269,
@@ -23282,11 +23282,11 @@
         0.024818497875393173
       ],
       "dividendGrowth": [
-        0.00007618482440716057,
-        0.00007618482440716057,
-        0.00007618482440716057,
-        0.00007618482440716057,
-        0.00007618482440716057
+        0.02882618482440716,
+        0.027060947859525727,
+        0.025295710894644295,
+        0.023530473929762864,
+        0.021765236964881432
       ],
       "symbol": "TSX:MG",
       "currency": "CAD",
@@ -23508,11 +23508,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Oil/Gas (Production and Exploration)",
+      "industry": "Oil/Gas Distribution",
       "sic": "1382",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05994436401373367,
-      "costEquity": 0.068756,
+      "wacc": 0.055513893116656186,
+      "costEquity": 0.066641,
       "revenueGrowth": [
         0.16632443531827512,
         0.1370595482546201,
@@ -23521,11 +23521,11 @@
         0.04926488706365502
       ],
       "dividendGrowth": [
-        0.06212213894617317,
-        0.053697711156938534,
-        0.0452732833677039,
-        0.036848855578469265,
-        0.02842442778923463
+        0.10107213894617316,
+        0.08485771115693852,
+        0.0686432833677039,
+        0.05242885557846927,
+        0.03621442778923463
       ],
       "symbol": "TSX:PPL",
       "currency": "CAD",
@@ -23590,24 +23590,24 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Telecom. Services",
+      "industry": "Cable TV",
       "sic": "4841",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05180646205450036,
-      "costEquity": 0.064949,
+      "wacc": 0.04990784152332186,
+      "costEquity": 0.069602,
       "revenueGrowth": [
-        0.5,
-        0.404,
-        0.308,
-        0.21200000000000002,
-        0.11599999999999999
+        -0.0548,
+        -0.0548,
+        -0.0548,
+        -0.0548,
+        -0.0548
       ],
       "dividendGrowth": [
-        0.25,
-        0.20400000000000001,
-        0.158,
-        0.11199999999999999,
-        0.066
+        0.1343716396548793,
+        0.11149731172390345,
+        0.08862298379292759,
+        0.06574865586195172,
+        0.04287432793097587
       ],
       "symbol": "TSX:RCI.B",
       "currency": "CAD",
@@ -24033,11 +24033,11 @@
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "industry": "Utility (General)",
+      "industry": "Oil/Gas Distribution",
       "sic": "4922",
       "referenceAsOf": "2026-01",
-      "wacc": 0.04195916096096053,
-      "costEquity": 0.048452,
+      "wacc": 0.055513893116656186,
+      "costEquity": 0.066641,
       "revenueGrowth": [
         0.10660082782659219,
         0.08928066226127376,
@@ -24222,16 +24222,16 @@
   ],
   "modelAudit": {
     "schema": 1,
-    "generatedAt": "2026-10-17T21:29:08.403Z",
+    "generatedAt": "2026-10-17T21:54:36.571Z",
     "sourceBatchGeneratedAt": "2026-10-17T21:17:41.635Z",
-    "policyVersion": "tl-growth-2026-10-v5",
-    "scope": "Every supported stock in all nine tools; shared calculation engines, dated free facts and explicit conditional/missing/N/A results.",
+    "policyVersion": "tl-growth-2026-10-v6",
+    "scope": "Every supported stock in all nine tools; corrected industry proxies and independent input autofill, unchanged corporate observations and source dates.",
     "stocks": 581,
     "counts": {
       "dcf": {
         "valid": 0,
-        "partial": 175,
-        "missing": 299,
+        "partial": 176,
+        "missing": 298,
         "not_applicable": 107
       },
       "ddm": {
@@ -24248,14 +24248,14 @@
       },
       "rv": {
         "valid": 0,
-        "partial": 501,
-        "missing": 80,
+        "partial": 504,
+        "missing": 77,
         "not_applicable": 0
       },
       "eqrv": {
         "valid": 0,
-        "partial": 501,
-        "missing": 80,
+        "partial": 504,
+        "missing": 77,
         "not_applicable": 0
       },
       "anr": {
@@ -24278,11 +24278,21 @@
       },
       "x3sm": {
         "valid": 0,
-        "partial": 138,
-        "missing": 336,
+        "partial": 143,
+        "missing": 331,
         "not_applicable": 107
       }
     },
     "file": "model-audit.json"
+  },
+  "sourceFinancialBatchGeneratedAt": "2026-10-17T21:17:41.635Z",
+  "referenceUpdate": {
+    "kind": "Refined industry proxy mapping and refreshed free industry references",
+    "checkedAt": "2026-10-17T21:42:22.532Z",
+    "asOf": "2026-01",
+    "classificationVersion": "tl-industry-2026-10-v2",
+    "financialFactsRechecked": false,
+    "financialSourceDatesPreserved": true,
+    "providerRequests": 9
   }
 }

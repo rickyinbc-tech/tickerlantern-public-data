@@ -6838,7 +6838,7 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
 }
 
 // src/growth-policy.js
-var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v5";
+var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v6";
 var validDate2 = (x2) => /^\d{4}-\d{2}-\d{2}$/.test(x2 || "") && Number.isFinite(Date.parse(x2));
 function cagr(begin, end, years) {
   if (![begin, end, years].every(Number.isFinite) || begin <= 0 || end <= 0 || years <= 0) return null;
@@ -6894,15 +6894,31 @@ function revenueGrowthPolicy(evidence, { sectorGrowth, sectorName, weights = { c
   } else return { value: null, status: "missing", policyVersion: GROWTH_POLICY_VERSION, flags: ["insufficient_comparable_positive_history"], description: "No valid comparable revenue growth history or justified industry proxy." };
   return { value, status: "available", category: "model_assumption", method, policyVersion: GROWTH_POLICY_VERSION, weights, flags, inputIds: parts.flatMap(([key3]) => evidence[key3].inputIds), description: `Model assumption based on ${method}; history through FY ${evidence.asOf || "unknown"}; policy version ${GROWTH_POLICY_VERSION}. Historical growth is not management guidance or analyst consensus.` };
 }
-function normalizedOperatingDrivers(annual, metricBase, { cyclical = false } = {}) {
-  const usable = (annual || []).filter((r) => r.metrics?.revenue?.value > 0).slice(0, cyclical ? 5 : 3);
-  if (!usable.length && metricBase?.revenue?.value > 0) usable.push({ metrics: metricBase });
-  const median2 = (v) => {
-    const a = v.sort((x2, y) => x2 - y);
+function normalizedOperatingDrivers(annual, metricBase, { cyclical = false, eligible = () => true } = {}) {
+  const clean2 = (metrics) => Object.fromEntries(Object.entries(metrics || {}).filter(([, fact]) => eligible(fact)));
+  const usable = (annual || []).map((r) => ({ ...r, metrics: clean2(r.metrics) })).filter((r) => r.metrics.revenue?.value > 0).slice(0, cyclical ? 5 : 3);
+  const base = clean2(metricBase), baseEnd = base.revenue?.asOf;
+  const median2 = (values) => {
+    const a = values.sort((x2, y) => x2 - y);
     return a.length ? a.length % 2 ? a[(a.length - 1) / 2] : (a[a.length / 2 - 1] + a[a.length / 2]) / 2 : null;
   };
-  const ratio = (key3) => median2(usable.map((r) => r.metrics[key3]?.value / r.metrics.revenue.value).filter(Number.isFinite));
-  return { margin: ratio("ebit"), daRate: ratio("da"), depreciationRate: ratio("depreciation"), capexRate: ratio("capex"), nwcRate: median2(usable.filter((r) => ["receivables", "inventory", "payables"].every((k) => Number.isFinite(r.metrics[k]?.value))).map((r) => (r.metrics.receivables.value + r.metrics.inventory.value - r.metrics.payables.value) / r.metrics.revenue.value)), periods: usable.map((r) => r.end).filter(Boolean), method: `Median of up to ${cyclical ? "five cycle-normalization" : "three"} comparable reported annual operating ratios; no undocumented outlier exclusions`, policyVersion: GROWTH_POLICY_VERSION };
+  const method = `Median of up to ${cyclical ? "five cycle-normalization" : "three"} comparable reported annual operating ratios; no undocumented outlier exclusions`;
+  const ratioPeriods = {}, ratioMethods = {};
+  const ratio = (key3) => {
+    const rows2 = usable.filter((r) => Number.isFinite(r.metrics[key3]?.value));
+    ratioPeriods[key3] = rows2.map((r) => r.end).filter(Boolean);
+    ratioMethods[key3] = method;
+    if (rows2.length) return median2(rows2.map((r) => r.metrics[key3].value / r.metrics.revenue.value));
+    if (base.revenue?.value > 0 && Number.isFinite(base[key3]?.value)) {
+      ratioPeriods[key3] = [baseEnd].filter(Boolean);
+      ratioMethods[key3] = "Selected compatible reported base (" + (baseEnd || "dated source") + "); no compatible annual normalization history for " + key3;
+      return base[key3].value / base.revenue.value;
+    }
+    return null;
+  };
+  const result2 = { margin: ratio("ebit"), daRate: ratio("da"), depreciationRate: ratio("depreciation"), capexRate: ratio("capex") };
+  const tradeRows = usable.filter((r) => ["receivables", "inventory", "payables"].every((k) => Number.isFinite(r.metrics[k]?.value)));
+  return { ...result2, nwcRate: median2(tradeRows.map((r) => (r.metrics.receivables.value + r.metrics.inventory.value - r.metrics.payables.value) / r.metrics.revenue.value)), periods: [...new Set(Object.values(ratioPeriods).flat())], ratioPeriods, ratioMethods, method, policyVersion: GROWTH_POLICY_VERSION };
 }
 function cyclicalRevenuePolicy(annual, options = {}) {
   const evidence = growthEvidence(annual, "revenue", options), ordered2 = [...annual || []].sort((a, b) => b.end.localeCompare(a.end));
@@ -17682,6 +17698,92 @@ function parseIndustryMultiples(html, sourceKey, now2 = /* @__PURE__ */ new Date
   return { metric: c.metric, asOf, checkedAt: now2.toISOString(), source: { name: "NYU Stern / Aswath Damodaran \xB7 US industry " + c.metric + " aggregate", url: c.url }, rows: table2.filter((r) => r.length === c.length && referenceNumber(r[1]) > 0).map((r) => ({ name: r[0], firms: referenceNumber(r[1]), multiple: referenceNumber(r[c.index]), metric: c.metric, basis: c.basis })) };
 }
 
+// src/research/industry-proxy-overrides.json
+var industry_proxy_overrides_default = {
+  schema: 1,
+  verifiedAt: "2026-10-17",
+  scope: "Issuer-supported model proxy choices for ambiguous SEC industry codes; not NYU constituent assignments or segment valuations.",
+  rows: [
+    {
+      symbol: "NYSE:KO",
+      cik: 21344,
+      sic: "2080",
+      industry: "Beverage (Soft)",
+      reason: "Nonalcoholic beverage portfolio; the soft-beverage aggregate is a closer scenario proxy than food processing.",
+      source: {
+        name: "Coca-Cola FY2025 Form 10-K \xB7 business",
+        url: "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+      }
+    },
+    {
+      symbol: "NASDAQ:KDP",
+      cik: 1418135,
+      sic: "2080",
+      industry: "Beverage (Soft)",
+      reason: "Nonalcoholic drinks and coffee portfolio; the soft-beverage aggregate is a broad proxy and does not separately value coffee, acquisitions or a future separation.",
+      source: {
+        name: "Keurig Dr Pepper \xB7 company and product scope",
+        url: "https://www.keurigdrpepper.com/about-us/"
+      }
+    },
+    {
+      symbol: "NYSE:BF.B",
+      cik: 14693,
+      sic: "2080",
+      industry: "Beverage (Alcoholic)",
+      reason: "Spirits business; an alcoholic-beverage proxy is used instead of food processing.",
+      source: {
+        name: "Brown-Forman \xB7 business overview",
+        url: "https://www.brown-forman.com/about-us"
+      }
+    },
+    {
+      symbol: "NYSE:STZ",
+      cik: 16918,
+      sic: "2080",
+      industry: "Beverage (Alcoholic)",
+      reason: "Beer, wine and spirits businesses; an alcoholic-beverage proxy is used instead of food processing.",
+      source: {
+        name: "Constellation Brands FY2026 Form 10-K \xB7 business",
+        url: "https://www.sec.gov/Archives/edgar/data/16918/000001691826000011/stz-20260228.htm"
+      }
+    },
+    {
+      symbol: "NASDAQ:PEP",
+      cik: 77476,
+      sic: "2080",
+      industry: "Food Processing",
+      reason: "Mixed convenient-food and beverage portfolio. The retained food-processing proxy is a broad scenario, not a pure-play soft-drink classification; segment weights and separate valuations require review.",
+      source: {
+        name: "PepsiCo \xB7 food and beverage portfolio",
+        url: "https://contact.pepsico.com/pepsi/about-us"
+      }
+    },
+    {
+      symbol: "TSX:PPL",
+      cik: 1546066,
+      sic: "1382",
+      industry: "Oil/Gas Distribution",
+      reason: "Pipeline transportation, processing, storage and midstream logistics; the broad oil-field-services SIC does not establish its current business mix. A midstream distribution proxy is used.",
+      source: {
+        name: "Pembina \xB7 operating business and assets",
+        url: "https://www.pembina.com/operations/"
+      }
+    },
+    {
+      symbol: "NYSE:ECL",
+      cik: 31462,
+      sic: "2840",
+      industry: "Chemical (Specialty)",
+      reason: "Industrial and institutional water, hygiene and infection-prevention chemistry and services; specialty chemicals are used as a closer proxy than household consumer products. Services and business mix still require review.",
+      source: {
+        name: "Ecolab \xB7 business expertise and services",
+        url: "https://www.ecolab.com/en-us/expertise-and-innovation/people-planet-business-health"
+      }
+    }
+  ]
+};
+
 // worker/forecast-references.js
 function latestStatementFiling(submissions, cik, now2 = /* @__PURE__ */ new Date()) {
   const recent = submissions.filings?.recent, today2 = now2.toISOString().slice(0, 10);
@@ -17763,6 +17865,24 @@ function parseReferences(html, now2 = /* @__PURE__ */ new Date()) {
   if (industries.length < 80 || !industries.some((r) => r.name === "Total Market")) throw Error("Industry coverage incomplete");
   return { asOf, sourceDates, checkedAt: now2.toISOString(), industries, countries: countryRows, referenceRiskFree, workingCapitalStatus, relativeBenchmarkStatus, sources: Object.fromEntries(Object.entries(referenceURLs).map(([k, url]) => [k, { name: "NYU Stern / Aswath Damodaran \xB7 processed industry and country data", url, ...sourceDates[k] ? { asOf: sourceDates[k] } : {} }])) };
 }
+var INDUSTRY_MAPPING_VERSION = "tl-industry-2026-10-v2";
+var specificIndustries = [
+  [1380, 1389, "Oilfield Svcs/Equip."],
+  [2086, 2086, "Beverage (Soft)"],
+  [2840, 2844, "Household Products"],
+  [3021, 3021, "Shoe"],
+  [3411, 3412, "Packaging & Container"],
+  [3533, 3533, "Oilfield Svcs/Equip."],
+  [3714, 3714, "Auto Parts"],
+  [3743, 3743, "Machinery"],
+  [3760, 3769, "Aerospace/Defense"],
+  [4830, 4833, "Broadcasting"],
+  [4841, 4841, "Cable TV"],
+  [4922, 4922, "Oil/Gas Distribution"],
+  [6282, 6282, "Investments & Asset Management"],
+  [7320, 7320, "Information Services"],
+  [8071, 8071, "Healthcare Support Services"]
+];
 function industryForSIC(sic) {
   const n = Number(sic);
   if (!n) return "Total Market";
@@ -17839,7 +17959,7 @@ function industryForSIC(sic) {
     [8200, 8299, "Education"],
     [8700, 8799, "Information Services"]
   ];
-  return ranges.find(([a, b]) => n >= a && n <= b)?.[2] || "Total Market";
+  return [...specificIndustries, ...ranges].find(([a, b]) => n >= a && n <= b)?.[2] || "Total Market";
 }
 var canadianSystemicBanks = /* @__PURE__ */ new Set(["TSX:RY", "TSX:TD", "TSX:BMO", "TSX:BNS", "TSX:CM", "TSX:NA"]);
 function industryForListing(item, sic) {
@@ -17872,12 +17992,16 @@ async function listingReferences(item, cik, fetcher2 = fetch, now2 = /* @__PURE_
     if (Number(d.cik) === Number(cik)) issuer = { cik: String(cik).padStart(10, "0"), sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, latestStatement: latestStatementFiling(d, cik, now2), latestResultsDisclosure: latestResultsDisclosure(d, cik, now2), source: { name: "SEC issuer SIC classification", url } };
   } catch {
   }
+  return referencesForIssuer(item, base, issuer);
+}
+function referencesForIssuer(item, base, issuer = null) {
   const domicile = issuer?.country?.replace(/\s*\(.*\)/, "").split(",").at(-1).trim().toLowerCase();
   const country = base.countries.find((c) => c.name.toLowerCase() === domicile) || base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency]);
   const countryBasis = country?.name.toLowerCase() === domicile ? "SEC business-address country proxy" : "Listing-currency country proxy; business-country match unavailable";
-  const industry = base.industries.find((r) => referenceKey(r.name) === referenceKey(industryForListing(item, issuer?.sic))) || base.industries.find((r) => r.name === "Total Market");
+  const proxy = base.checkedAt?.slice(0, 10) >= industry_proxy_overrides_default.verifiedAt && industry_proxy_overrides_default.rows.find((r) => r.symbol === item.symbol && r.cik === Number(issuer?.cik) && r.sic === String(issuer?.sic));
+  const industry = base.industries.find((r) => referenceKey(r.name) === referenceKey(proxy?.industry || industryForListing(item, issuer?.sic))) || base.industries.find((r) => r.name === "Total Market");
   const bank = canadianSystemicBanks.has(item.symbol);
-  return { asOf: base.asOf, sourceDates: base.sourceDates, checkedAt: base.checkedAt, workingCapitalStatus: base.workingCapitalStatus, relativeBenchmarkStatus: base.relativeBenchmarkStatus, sources: { ...base.sources, ...bank ? { classification: { name: "OSFI \xB7 Canadian systemically important banks", url: "https://www.osfi-bsif.gc.ca/en/supervision/financial-institutions/banks/systemically-important-banks" } } : {} }, country, countryBasis, currencyDefaultSpread: base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency])?.defaultSpread || 0, industry, issuer, classificationBasis: bank ? "OSFI domestic systemic bank mapped to a large-bank US industry proxy" : issuer ? "SEC SIC mapped to an approximate US industry proxy" : "Broad US market proxy; no validated issuer industry classification" };
+  return { asOf: base.asOf, sourceDates: base.sourceDates, checkedAt: base.checkedAt, workingCapitalStatus: base.workingCapitalStatus, relativeBenchmarkStatus: base.relativeBenchmarkStatus, sources: { ...base.sources, ...bank ? { classification: { name: "OSFI \xB7 Canadian systemically important banks", url: "https://www.osfi-bsif.gc.ca/en/supervision/financial-institutions/banks/systemically-important-banks" } } : {}, ...proxy ? { classification: { ...proxy.source, checkedAt: industry_proxy_overrides_default.verifiedAt } } : {} }, country, countryBasis, currencyDefaultSpread: base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency])?.defaultSpread || 0, industry, issuer, classificationVersion: INDUSTRY_MAPPING_VERSION, classificationBasis: proxy ? "Issuer-supported proxy choice reviewed " + industry_proxy_overrides_default.verifiedAt + ": " + proxy.reason + " Not a verified NYU constituent assignment." : bank ? "OSFI domestic systemic bank mapped to a large-bank US industry proxy" : issuer ? "SEC SIC mapped to an approximate US industry proxy; narrow business types take precedence. This does not verify NYU constituent membership or the issuer\u2019s full business mix." : "Broad US market proxy; no validated issuer industry classification" };
 }
 
 // worker/revenue-scope.js
@@ -19722,7 +19846,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     if (missing.length || !(startRevenue > 0) || !(shares > 0) || !finite6(debt) || debt < 0 || !capital.wacc || !finite6(forecast.taxRate) || forecast.revenue.length !== 5)
       throw Error(`Operating DCF needs ${unique([...missing, !(shares > 0) && "a sourced diluted-share proxy", (!finite6(debt) || debt < 0) && "consistent reported debt", !capital.wacc && "dated financing/risk inputs", forecast.revenue.length !== 5 && "a supported five-year revenue path"]).join(", ") || "consistent positive revenue and tax inputs"}.`);
     if (valueOf(m, "da") < 0 || valueOf(m, "capex") < 0) throw Error("D&A and capex require a verified positive expense/investment sign convention.");
-    const drivers = normalizedOperatingDrivers(annual, m, { cyclical: forecast.cyclical });
+    const drivers = normalizedOperatingDrivers(annual, m, { cyclical: forecast.cyclical, eligible: (fact) => businessScopeFactCompatible(fact, fit.businessScopeChange) });
     const baseMargin = drivers.margin, daRate = drivers.daRate, capexRate = drivers.capexRate;
     if (options.terminalReinvestmentPolicy === "reported-ratios" && forecast.revenueTerminal >= 0 && valueOf(m, "capex") < valueOf(m, "da")) throw Error("Maintenance investment is not reconciled: the latest operating period has capex below aggregate D&A. Reported-ratio mode requires a reconciled terminal investment schedule.");
     const workingCapital = workingCapitalInputs(balanceMetrics, cleaned, { revenue: startRevenue, reportedRatio: drivers.nwcRate, reportedMethod: drivers.method, allowIndustry: options.workingCapitalPolicy !== "company-only" });
@@ -19802,9 +19926,9 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       "The cash-flow model uses historical operating ratios and an explicit terminal investment scenario; it is not a management forecast."
     ] };
     assumption("Valuation operating base", startRevenue, "money", `${ttmComplete ? "Complete sourced trailing-twelve-month set" : "Reported annual set"} ending ${operatingBase.end}; revenue base.`, [m.revenue.source]);
-    assumption("Operating margin", baseMargin, "rate", `${drivers.method}; periods ${drivers.periods.join(", ")}; held constant in the base scenario.`, [m.ebit.source, m.revenue.source]);
-    assumption("D&A / revenue", daRate, "rate", drivers.method + "; D&A ratio held constant; not a company depreciation forecast.", [m.da.source]);
-    assumption("Capex / revenue", capexRate, "rate", drivers.method + "; capex ratio held constant; no unsupported maintenance-capex adjustment.", [m.capex.source]);
+    assumption("Operating margin", baseMargin, "rate", `${drivers.ratioMethods.ebit}; periods ${drivers.ratioPeriods.ebit.join(", ")}; held constant in the base scenario.`, [m.ebit.source, m.revenue.source]);
+    assumption("D&A / revenue", daRate, "rate", drivers.ratioMethods.da + "; periods " + drivers.ratioPeriods.da.join(", ") + "; D&A ratio held constant; not a company depreciation forecast.", [m.da.source]);
+    assumption("Capex / revenue", capexRate, "rate", drivers.ratioMethods.capex + "; periods " + drivers.ratioPeriods.capex.join(", ") + "; capex ratio held constant; no unsupported maintenance-capex adjustment.", [m.capex.source]);
     assumption("Operating working capital / revenue", nwcRate, "rate", workingCapital.description, workingCapital.sources);
     report.audit.workingCapital = workingCapital;
     assumption("Diluted-share denominator", shares, "shares", sharesFact.basis || "Dated weighted-average diluted-share proxy; not a verified current fully diluted share count.", [sharesFact.source]);
@@ -21395,15 +21519,23 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
   const million = 1e6, dividend = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null;
   if (!latest2 && snapshot.financials?.reason) gaps.push(snapshot.financials.reason);
   const forecast = forecastAssumptions(snapshot, item), capital = forecast.capital;
-  const growth = forecast.revenue[0]?.growth;
   const reportedDebt2 = reportedDebt(m);
   if (view === "x3sm") {
     fact("revenue", "revenue", million);
     fact("cash", "cash", million);
     fact("ppe", "ppe", million);
     if (forecast.revenue.length === 5) {
-      put("growth", growth * 100, forecast.revenue[0].description);
-      forecast.revenue.forEach((driver, i2) => put("growth" + i2, driver.growth * 100, driver.description));
+      let projected = value("revenue");
+      forecast.revenue.forEach((driver, i2) => {
+        const next = driver.kind === "consensus" && Number.isFinite(driver.amount) ? driver.amount : projected * (1 + driver.growth);
+        const rate2 = projected > 0 && Number.isFinite(next) ? (next / projected - 1) * 100 : driver.kind !== "consensus" && Number.isFinite(driver.growth) ? driver.growth * 100 : NaN;
+        if (Number.isFinite(rate2)) {
+          const origin = driver.description + (projected > 0 ? "; growth measured from the selected opening / preceding forecast revenue" : "; model rate retained independently; opening company revenue is unavailable");
+          put("growth" + i2, rate2, origin);
+          if (i2 === 0) put("growth", rate2, origin);
+        }
+        projected = next;
+      });
     }
   }
   if (view === "dcf" && cashFlowType === "fcfe") {
@@ -21437,118 +21569,42 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
     gaps.push(...report.limitations, "An exit EBITDA multiple requires a dated comparable-company or transaction reference; no universal multiple is supplied.");
     return { patches, origins, gaps: [...new Set(gaps)], fit };
   }
-  if (view === "dcf" || view === "x3sm") {
-    const required = [
-      "revenue",
-      "ebit",
-      "da",
-      "capex"
-    ];
-    const complete = required.every((k) => Number.isFinite(value(k))) && value("revenue") > 0;
-    const debt = reportedDebt2;
-    if (Number.isFinite(debt) && debt >= 0)
-      put(
-        "debt",
-        debt / million,
-        "Reported book debt proxy; review leases and market value"
-      );
-    else gaps.push("consistent debt balance");
-    if (view === "dcf") {
-      fact("shares", "shares", million);
-      assumption(
-        "cash",
-        0,
-        "excess cash not verified; reported total cash is not assumed excess"
-      );
-      assumption("otherAssets", 0, "other non-operating assets require review");
-      assumption(
-        "claims",
-        Number.isFinite(value("preferredEquity")) ? Math.max(0, value("preferredEquity")) / million : 0,
-        Number.isFinite(value("preferredEquity")) ? "Reported preferred carrying value used as a proxy; NCI, pensions and other claims still require reconciliation" : "Preferred/NCI/other claims require review; zero is an unverified bridge assumption"
-      );
-      put("wacc", capital.wacc == null ? NaN : capital.wacc * 100, capital.description + "; same inputs as WACC tool");
-      if (capital.wacc == null) gaps.push("Sourced risk inputs unavailable; no default discount rate is substituted.");
-      put("terminalGrowth", forecast.revenueTerminal * 100, forecast.terminalDescription);
-      gaps.push("An exit EBITDA multiple requires a dated comparable-company or transaction reference; no universal multiple is supplied.");
-    }
-    if (complete && forecast.revenue.length === 5 && Number.isFinite(forecast.taxRate) && fit.group !== "bank" && fit.group !== "insurer" && fit.group !== "holding" && fit.operatingDCF !== false) {
-      const drivers = normalizedOperatingDrivers(snapshot.financials.annual, m, { cyclical: forecast.cyclical });
-      const revenue = value("revenue"), margin = drivers.margin, daRate = drivers.daRate, capexRate = drivers.capexRate;
-      const workingCapital = workingCapitalInputs(m, snapshot, { revenue, reportedRatio: drivers.nwcRate, reportedMethod: drivers.method });
-      if (workingCapital.status === "missing") return { patches, origins, gaps: [...gaps, workingCapital.reason], fit };
-      const tradeComplete = workingCapital.kind === "company-trade-balance", nwc = workingCapital.opening, nwcRate = workingCapital.ratio;
-      if (!tradeComplete) gaps.push(workingCapital.description);
-      let r = revenue, working = nwc;
-      for (let i2 = 0; i2 < 5; i2++) {
-        const driver = forecast.revenue[i2];
-        const previousRevenue = r;
-        r = driver.kind === "consensus" && Number.isFinite(driver.amount) ? driver.amount : r * (1 + driver.growth);
-        put("growth" + i2, (r / previousRevenue - 1) * 100, driver.description);
-        const nextWorking = r * nwcRate;
-        const fcff = r * margin - Math.max(0, r * margin) * forecast.taxRate + r * daRate - r * capexRate - (nextWorking - working);
-        working = nextWorking;
-        put(
-          "fcff" + i2,
-          fcff / million,
-          "Forecast scenario \xB7 " + (useTTM ? "derived TTM" : "annual") + " reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "dated industry non-cash working-capital scenario; company balances incomplete or use different dates") + "; revenue growth " + (driver.growth * 100).toFixed(3) + "% (see growth evidence); tax " + (forecast.taxRate * 100).toFixed(2) + "% statutory-rate proxy; no assumed immediate tax benefit on operating losses"
-        );
+  if (view === "x3sm") {
+    const debt = debtEvidence(m);
+    if (Number.isFinite(debt.value) && debt.value >= 0)
+      put("debt", debt.value / million, "Reported book debt proxy; review leases and market value");
+    else gaps.push("A consistent debt balance is required.");
+    if (latest2) {
+      const drivers = normalizedOperatingDrivers(snapshot.financials.annual, m, { cyclical: forecast.cyclical, eligible: (fact2) => businessScopeFactCompatible(fact2, fit.businessScopeChange) });
+      for (const [input, ratio, key3] of [["margin", drivers.margin, "ebit"], ["daRate", drivers.daRate, "da"], ["capexRate", drivers.capexRate, "capex"]]) {
+        if (Number.isFinite(ratio)) put(input, ratio * 100, drivers.ratioMethods[key3] + "; " + key3 + " / revenue; periods " + (drivers.ratioPeriods[key3].join(", ") || latest2.end));
+        else gaps.push("No compatible reported " + key3 + " / revenue ratio is available.");
       }
-      put(
-        "terminalEbitda",
-        (r * margin + r * daRate) / million,
-        "Forecast EBITDA, not analyst consensus"
-      );
-      if (view === "x3sm") {
-        fact("revenue", "revenue", million);
-        fact("cash", "cash", million);
-        fact("ppe", "ppe", million);
-        put(
-          "nwc",
-          nwc / million,
-          workingCapital.description
-        );
-        put(
-          "growth",
-          growth * 100,
-          forecast.revenue[0].description + "; constant override; separate annual growth rates take precedence"
-        );
-        forecast.revenue.forEach((driver, i2) => put("growth" + i2, driver.growth * 100, driver.description));
-        put(
-          "margin",
-          margin * 100,
-          drivers.method + "; EBIT margin; periods " + drivers.periods.join(", ")
-        );
-        put(
-          "daRate",
-          daRate * 100,
-          drivers.method + "; D&A / revenue"
-        );
-        if (Number.isFinite(drivers.depreciationRate) && drivers.depreciationRate >= 0 && drivers.depreciationRate <= daRate)
-          put("depreciationRate", drivers.depreciationRate * 100, drivers.method + "; separately reported property depreciation; remaining D&A reduces other net assets");
-        else gaps.push("Property depreciation split unavailable: the reduced asset schedule assumes all D&A reduces PP&E until a sourced split is entered.");
-        put(
-          "capexRate",
-          capexRate * 100,
-          drivers.method + "; capex / revenue"
-        );
-        put("nwcRate", nwcRate * 100, workingCapital.description);
-        put("taxRate", capital.patches.taxRate, capital.origins.taxRate);
-        put("costDebt", capital.patches.costDebt, capital.origins.costDebt);
-        if (Number.isFinite(forecast.payout) && forecast.payout >= 0 && forecast.payout <= 1)
-          put("payout", forecast.payout * 100, "Reported annual common dividend / annual diluted EPS continued as a payout scenario; reconcile dates and buybacks");
-        else if (dividend === 0) put("payout", 0, "Sourced zero common dividend continued as a scenario; buybacks excluded");
-        else gaps.push("A sustainable common-dividend payout ratio needs review; no universal payout percentage is supplied.");
-        if (Number.isFinite(value("equity")) && Number.isFinite(debt) && Number.isFinite(value("cash")) && Number.isFinite(value("ppe")))
+      if (Number.isFinite(drivers.depreciationRate) && drivers.depreciationRate >= 0 && Number.isFinite(drivers.daRate) && drivers.depreciationRate <= drivers.daRate)
+        put("depreciationRate", drivers.depreciationRate * 100, drivers.ratioMethods.depreciation + "; separately reported property depreciation; remaining D&A reduces other net assets; periods " + (drivers.ratioPeriods.depreciation.join(", ") || latest2.end));
+      else gaps.push("Property depreciation split unavailable: the reduced asset schedule assumes all D&A reduces PP&E until a sourced split is entered.");
+      const revenue = value("revenue"), working = workingCapitalInputs(m, snapshot, { revenue, reportedRatio: drivers.nwcRate, reportedMethod: drivers.method });
+      if (working.status === "missing") gaps.push(working.reason);
+      else {
+        put("nwc", working.opening / million, working.description);
+        put("nwcRate", working.ratio * 100, working.description);
+        const balances = [m.cash, m.ppe, m.equity, ...debt.components];
+        const sameBalanceDate = balances.every((f) => Number.isFinite(f?.value) && validDate(f.asOf) && f.unit === item.currency) && new Set(balances.map((f) => f.asOf)).size === 1 && (working.kind !== "company-trade-balance" || working.asOf === balances[0]?.asOf);
+        if (Number.isFinite(debt.value) && sameBalanceDate)
           put(
             "otherNetAssets",
-            (value("equity") + debt - value("cash") - value("ppe") - nwc) / million,
-            "Opening reconciliation to reported owners equity using the selected company/industry working-capital scenario; other net assets reduce by non-property D&A where a depreciation split is entered"
+            (value("equity") + debt.value - value("cash") - value("ppe") - working.opening) / million,
+            "Opening reconciliation to reported owners equity at one balance date (" + balances[0].asOf + "); selected company/industry working-capital scenario; other net assets reduce by non-property D&A where a depreciation split is entered"
           );
+        else gaps.push("Opening reconciliation requires cash, property, owners equity and debt from the same balance date and currency; company trade NWC must match that date.");
       }
-    } else
-      gaps.push(
-        "a consistent revenue/EBIT/D&A/capex set; financial firms require a different framework"
-      );
+    }
+    put("taxRate", capital.patches.taxRate, capital.origins.taxRate);
+    put("costDebt", capital.patches.costDebt, capital.origins.costDebt);
+    if (Number.isFinite(forecast.payout) && forecast.payout >= 0 && forecast.payout <= 1)
+      put("payout", forecast.payout * 100, "Reported annual common dividend / annual diluted EPS continued as a payout scenario; reconcile dates and buybacks");
+    else if (dividend === 0) put("payout", 0, "Sourced zero common dividend continued as a scenario; buybacks excluded");
+    else gaps.push("A sustainable common-dividend payout ratio needs review; no universal payout percentage is supplied.");
   }
   if (view === "ri") {
     gaps.push("RI is a conditional constant-share clean-surplus scenario. Forecast OCI, issuance, repurchases and other common-equity movements must be reconciled before treating it as a complete common-equity appraisal.");
