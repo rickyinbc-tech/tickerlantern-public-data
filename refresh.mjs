@@ -7359,7 +7359,7 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
   const market = feed.status === "fulfilled" ? feed.value : { status: "unavailable" };
   data.feed = market;
   try {
-    data.references = await listingReferences(item, filing.status === "fulfilled" ? filing.value.cik : null, fetcher2, now2);
+    data.references = await listingReferences(item, filing.status === "fulfilled" ? filing.value.cik : item.cik || secReference(item)?.cik, fetcher2, now2);
   } catch {
     data.referenceStatus = "Industry outlook and risk source unavailable; unsupported automatic rates are withheld.";
   }
@@ -7375,6 +7375,11 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
 
 // src/forecast-assumptions.js
 var finite = Number.isFinite;
+function currentReferences(snapshot) {
+  const ref = snapshot.references, checked = Date.parse(snapshot.checkedAt) || Date.now();
+  const dated = /^\d{4}-\d{2}$/.test(ref?.asOf || "") && Date.parse(ref.asOf + "-01");
+  return dated && checked >= dated && checked - dated <= 550 * 864e5 ? ref : null;
+}
 var clamp = (x2, lo, hi) => Math.min(hi, Math.max(lo, x2));
 function reportedDebt(m = {}) {
   const v = (k) => m[k]?.value;
@@ -7395,7 +7400,7 @@ function history(snapshot, metric2) {
   };
 }
 function capitalAssumptions(snapshot, item) {
-  const ref = snapshot.references, sector = ref?.industry, country = ref?.country;
+  const ref = currentReferences(snapshot), sector = ref?.industry, country = ref?.country;
   const origins = {}, patches = {};
   const sovereignSpread = ref?.currencyDefaultSpread ?? (country?.defaultSpread || 0);
   const put = (key2, v, why) => {
@@ -7448,7 +7453,7 @@ function path(start, terminal, n, origin, source2, cap) {
   }));
 }
 function forecastAssumptions(snapshot, item, years = 5) {
-  const capital = capitalAssumptions(snapshot, item), ref = snapshot.references, sector = ref?.industry;
+  const capital = capitalAssumptions(snapshot, item), ref = currentReferences(snapshot), sector = ref?.industry;
   const annual = snapshot.financials?.status === "ready" ? snapshot.financials.annual?.[0] : null, m = annual?.metrics || {};
   const revenueHistory = history(snapshot, "revenue"), epsHistory = history(snapshot, "eps");
   const dh = snapshot.dividend?.historicalGrowth;
@@ -7482,7 +7487,9 @@ function forecastAssumptions(snapshot, item, years = 5) {
   const dividendTerminal = Math.min(macroCap, finite(dividendStart) ? dividendStart : macroCap, capital.costEquity ? capital.costEquity - 0.01 : macroCap);
   const industryBasis = sector ? `NYU Stern ${sector.name} sector outlook (${ref.asOf}); US industry proxy` : "no industry outlook";
   const revenue = path(revenueStart, revenueTerminal, years, `${revenueHistory?.description || "Company revenue history unavailable"}; ${industryBasis}; ${revenueHistory && finite(sector?.revenueGrowth2y) ? "50/50 company-history / sector-expectation blend" : "available source only"}`, ref?.sources?.growth || revenueHistory?.source, 0.5);
+  for (const row of revenue) row.historySource = revenueHistory?.source;
   const earnings = path(epsStart, Math.min(0.02, epsStart ?? 0.02), years, `${epsHistory?.description || "Company EPS history unavailable"}; ${industryBasis}; historical/company-sector scenario`, ref?.sources?.growth || epsHistory?.source, 0.5);
+  for (const row of earnings) row.historySource = epsHistory?.source;
   const dividends = path(dividendStart, dividendTerminal, years, dividendBasis || "Dividend forecast unavailable", dividendHistory?.source || ref?.sources?.growth, 0.25);
   const estimates = (snapshot.feed?.estimates || []).filter((e) => e.currency === item.currency && e.fiscalEnd > snapshot.checkedAt?.slice(0, 10) && e.source?.url && e.asOf <= snapshot.checkedAt.slice(0, 10)).sort((a, b) => a.fiscalEnd.localeCompare(b.fiscalEnd));
   for (const [metric2, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
@@ -7574,7 +7581,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
         put(
           "fcff" + i2,
           fcff / million,
-          "Forecast scenario \xB7 reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "ASSUMED zero working-capital change; source balances incomplete") + "; growth " + (driver.growth * 100).toFixed(3) + "%: " + driver.description + "; tax " + (forecast.taxRate * 100).toFixed(2) + "% statutory-rate proxy"
+          "Forecast scenario \xB7 reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "ASSUMED zero working-capital change; source balances incomplete") + "; revenue growth " + (driver.growth * 100).toFixed(3) + "% (see growth evidence); tax " + (forecast.taxRate * 100).toFixed(2) + "% statutory-rate proxy"
         );
       }
       put(
@@ -8800,6 +8807,15 @@ var cursor = 0;
 async function refresh(item) {
   const file = output + "/" + item.symbol.replaceAll(":", "_") + ".json";
   let d = await fetchValuationData(item, {}, fetcher, now);
+  if (!d.references) try {
+    const old = JSON.parse(await readFile(file, "utf8"));
+    const age = now - Date.parse(old.references?.asOf + "-01");
+    if (old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && age >= 0 && age <= 550 * 864e5) {
+      d.references = { ...old.references, syncState: "last_known", lastAttempt: now.toISOString() };
+      d.referenceStatus = "Latest reference-source check failed; using the dated last-known industry and risk reference.";
+    }
+  } catch {
+  }
   const useful = d.financials.status === "ready" || d.dividend.status === "ready";
   d.sync = { state: useful ? "ready" : "unavailable", lastAttempt: now.toISOString(), lastSuccess: useful ? now.toISOString() : null, cadence: "Public company facts refreshed every six hours; source publication dates remain unchanged.", publisher: "TickerLantern public financial data" };
   if (!useful) try {
