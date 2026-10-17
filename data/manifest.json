@@ -2,28 +2,28 @@
   "schema": 1,
   "dataQualityVersion": 2,
   "verifiedRevenuePeriods": 488,
-  "generatedAt": "2026-10-17T09:40:09.428Z",
+  "generatedAt": "2026-10-17T10:24:45.811Z",
   "cadence": "Every six hours",
   "totalListings": 581,
   "researchAudit": {
     "scope": "Automated source and calculation controls; not a certification of individual company underwriting",
     "institutionallyUnderwritten": 0,
-    "conditionalValuationScenarios": 77,
-    "limitedCrossChecks": 441,
-    "evidenceReviews": 63,
-    "withSourceConditions": 547,
-    "newerPeriodicNotInModel": 74,
-    "newerResultsDisclosure": 108
+    "conditionalValuationScenarios": 80,
+    "limitedCrossChecks": 440,
+    "evidenceReviews": 61,
+    "withSourceConditions": 551,
+    "newerPeriodicNotInModel": 5,
+    "newerResultsDisclosure": 44
   },
-  "interimReady": 489,
-  "ttmReady": 487,
+  "interimReady": 493,
+  "ttmReady": 486,
   "referencesReady": 581,
   "waccReady": 579,
   "companyIndustryMappings": 560,
   "revenuePaths": 581,
-  "dividendPaths": 571,
-  "financialsReady": 549,
-  "numericalAnswers": 518,
+  "dividendPaths": 570,
+  "financialsReady": 555,
+  "numericalAnswers": 520,
   "rows": [
     {
       "revenueProofs": 0,
@@ -65,7 +65,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -183,7 +183,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -225,7 +225,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -267,7 +267,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -309,7 +309,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -351,7 +351,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -391,7 +391,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -433,7 +433,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -442,13 +442,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -475,7 +475,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -517,7 +517,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -559,7 +559,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -601,7 +601,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -643,7 +643,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -685,7 +685,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -727,7 +727,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -769,7 +769,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -811,7 +811,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -853,7 +853,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -895,7 +895,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1015,7 +1015,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1057,7 +1057,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1066,13 +1066,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 8,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Drugs (Pharmaceutical)",
       "sic": "2836",
       "referenceAsOf": "2026-01",
@@ -1099,7 +1099,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1135,7 +1135,7 @@
       "dividend": "ready",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1177,7 +1177,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1219,7 +1219,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1268,13 +1268,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 4,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Software (System & Application)",
       "sic": "7372",
       "referenceAsOf": "2026-01",
@@ -1301,7 +1301,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1343,7 +1343,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -1385,7 +1385,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1427,7 +1427,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -1469,7 +1469,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1511,7 +1511,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1553,7 +1553,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1595,7 +1595,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1637,7 +1637,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1679,7 +1679,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1719,7 +1719,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 2,
@@ -1759,7 +1759,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1795,7 +1795,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1837,7 +1837,7 @@
       "dividend": "ready",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1877,7 +1877,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 4,
@@ -1919,7 +1919,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -1961,7 +1961,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2003,22 +2003,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 4,
+        "qualityConditions": 5,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Computer Services",
       "sic": "7371",
       "referenceAsOf": "2026-01",
@@ -2045,7 +2045,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2087,7 +2087,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2129,7 +2129,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -2171,7 +2171,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2213,7 +2213,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2255,7 +2255,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2297,7 +2297,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -2339,7 +2339,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2381,7 +2381,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2423,7 +2423,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -2432,13 +2432,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4931",
       "referenceAsOf": "2026-01",
@@ -2465,7 +2465,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2474,13 +2474,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4931",
       "referenceAsOf": "2026-01",
@@ -2507,7 +2507,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2549,7 +2549,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2591,7 +2591,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2633,7 +2633,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2675,7 +2675,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2757,7 +2757,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -2799,7 +2799,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2841,7 +2841,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2881,7 +2881,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2921,7 +2921,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -2963,7 +2963,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3005,7 +3005,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3014,13 +3014,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Healthcare Products",
       "sic": "3844",
       "referenceAsOf": "2026-01",
@@ -3047,7 +3047,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3089,7 +3089,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3131,7 +3131,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3173,7 +3173,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3215,7 +3215,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -3257,7 +3257,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3266,13 +3266,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Bank (Money Center)",
       "sic": "6021",
       "referenceAsOf": "2026-01",
@@ -3299,7 +3299,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3335,20 +3335,21 @@
       "dividend": "ready",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "review",
         "valueKind": "review",
-        "qualityConditions": 0,
+        "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-27",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
+      "latestInterim": "2026-06-27",
       "industry": "Aerospace/Defense",
       "sic": "3724",
       "referenceAsOf": "2026-01",
@@ -3370,12 +3371,12 @@
       ],
       "symbol": "NASDAQ:HONA",
       "currency": "USD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2026-06-27",
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": null
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3417,7 +3418,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3459,7 +3460,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3501,7 +3502,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -3543,7 +3544,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3585,7 +3586,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3627,22 +3628,22 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "earnings",
         "valueKind": "cross-check",
-        "qualityConditions": 4,
+        "qualityConditions": 5,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Information Services",
       "sic": "8731",
       "referenceAsOf": "2026-01",
@@ -3669,7 +3670,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3711,7 +3712,7 @@
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3751,7 +3752,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -3793,7 +3794,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3835,7 +3836,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3875,7 +3876,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3917,7 +3918,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3957,7 +3958,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -3999,7 +4000,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4041,7 +4042,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4081,7 +4082,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -4090,13 +4091,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4931",
       "referenceAsOf": "2026-01",
@@ -4123,7 +4124,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4163,7 +4164,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4205,7 +4206,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4247,7 +4248,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4289,7 +4290,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4298,13 +4299,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Food Processing",
       "sic": "2000",
       "referenceAsOf": "2026-01",
@@ -4331,7 +4332,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -4373,7 +4374,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4415,7 +4416,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4457,7 +4458,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4499,7 +4500,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4541,7 +4542,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4583,7 +4584,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4623,7 +4624,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4665,7 +4666,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4705,7 +4706,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4745,7 +4746,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4787,7 +4788,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4829,7 +4830,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4871,7 +4872,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -4913,7 +4914,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4955,7 +4956,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -4997,7 +4998,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5037,7 +5038,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5077,22 +5078,22 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 7,
+        "qualityConditions": 6,
         "latestKnownPeriodic": "2026-06-28",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-29",
-      "ttm": "2026-03-29",
+      "latestInterim": "2026-06-28",
+      "ttm": "2026-06-28",
       "industry": "Semiconductor",
       "sic": "3674",
       "referenceAsOf": "2026-01",
@@ -5119,7 +5120,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5161,7 +5162,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5203,7 +5204,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5245,7 +5246,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5285,7 +5286,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -5327,7 +5328,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5369,7 +5370,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5450,7 +5451,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5459,13 +5460,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Insurance (General)",
       "sic": "6321",
       "referenceAsOf": "2026-01",
@@ -5492,7 +5493,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5534,7 +5535,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5576,7 +5577,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5618,7 +5619,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5627,13 +5628,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 9,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Business & Consumer Services",
       "sic": "7389",
       "referenceAsOf": "2026-01",
@@ -5660,7 +5661,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5702,7 +5703,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -5711,13 +5712,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -5744,7 +5745,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5786,7 +5787,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5828,7 +5829,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5870,7 +5871,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5912,7 +5913,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -5948,7 +5949,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -5990,7 +5991,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6032,7 +6033,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6072,7 +6073,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6112,7 +6113,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6154,20 +6155,21 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "review",
         "valueKind": "review",
-        "qualityConditions": 0,
+        "qualityConditions": 1,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
+      "latestInterim": "2026-06-30",
       "industry": "Computer Services",
       "sic": "7370",
       "referenceAsOf": "2026-01",
@@ -6189,12 +6191,12 @@
       ],
       "symbol": "NASDAQ:SPCX",
       "currency": "USD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": null
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6236,7 +6238,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6276,7 +6278,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6318,7 +6320,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6358,7 +6360,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6400,7 +6402,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6442,7 +6444,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6482,7 +6484,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6524,7 +6526,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6566,7 +6568,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6608,7 +6610,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6650,7 +6652,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6692,7 +6694,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6734,7 +6736,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6776,7 +6778,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6818,22 +6820,22 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Computer Services",
       "sic": "7374",
       "referenceAsOf": "2026-01",
@@ -6858,9 +6860,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6902,7 +6904,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -6944,7 +6946,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -6986,7 +6988,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7028,7 +7030,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7068,7 +7070,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -7110,7 +7112,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -7152,7 +7154,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 4,
@@ -7194,7 +7196,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7236,7 +7238,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7278,7 +7280,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7320,7 +7322,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7362,22 +7364,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 2,
+        "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Drugs (Pharmaceutical)",
       "sic": "2834",
       "referenceAsOf": "2026-01",
@@ -7404,7 +7406,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7444,7 +7446,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -7486,7 +7488,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7528,7 +7530,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 4,
@@ -7570,7 +7572,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7612,7 +7614,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7654,7 +7656,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7696,7 +7698,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7738,7 +7740,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7780,7 +7782,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7822,7 +7824,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7864,7 +7866,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7904,7 +7906,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7946,7 +7948,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -7988,7 +7990,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8030,7 +8032,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8072,7 +8074,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8114,7 +8116,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8156,7 +8158,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8198,7 +8200,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8240,7 +8242,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8282,7 +8284,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8324,7 +8326,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8366,7 +8368,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8408,7 +8410,7 @@
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8450,7 +8452,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8492,7 +8494,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8534,7 +8536,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8576,7 +8578,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8618,7 +8620,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8660,7 +8662,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8702,7 +8704,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8744,7 +8746,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8786,7 +8788,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8828,7 +8830,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8864,7 +8866,7 @@
       "dividend": "ready",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8873,13 +8875,13 @@
         "valueKind": "review",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Electrical Equipment",
       "sic": "3620",
       "referenceAsOf": "2026-01",
@@ -8906,7 +8908,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8948,7 +8950,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -8990,7 +8992,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -8999,13 +9001,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Food Processing",
       "sic": "2070",
       "referenceAsOf": "2026-01",
@@ -9032,7 +9034,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9074,7 +9076,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9116,7 +9118,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9158,7 +9160,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9198,7 +9200,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -9240,7 +9242,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9282,7 +9284,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9324,7 +9326,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9366,7 +9368,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -9402,20 +9404,22 @@
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "earnings",
         "valueKind": "cross-check",
-        "qualityConditions": 8,
+        "qualityConditions": 9,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
+        "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": true,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Bank (Money Center)",
       "sic": "6021",
       "referenceAsOf": "2026-01",
@@ -9442,7 +9446,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9482,7 +9486,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9491,13 +9495,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Machinery",
       "sic": "3585",
       "referenceAsOf": "2026-01",
@@ -9524,7 +9528,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -9566,7 +9570,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9575,13 +9579,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Insurance (Prop/Cas.)",
       "sic": "6331",
       "referenceAsOf": "2026-01",
@@ -9608,7 +9612,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -9650,7 +9654,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -9692,7 +9696,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9734,7 +9738,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9776,7 +9780,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9818,7 +9822,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9860,7 +9864,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9902,7 +9906,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9944,7 +9948,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -9986,49 +9990,47 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 2,
+        "qualityConditions": 8,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
       "industry": "Chemical (Diversified)",
       "sic": "2842",
       "referenceAsOf": "2026-01",
       "wacc": 0.05990160702644342,
       "costEquity": 0.08651,
       "revenueGrowth": [
-        0.002119063518979421,
-        0.002119063518979421,
-        0.002119063518979421,
-        0.002119063518979421,
-        0.002119063518979421
+        -0.00148330487914952,
+        -0.00148330487914952,
+        -0.00148330487914952,
+        -0.00148330487914952,
+        -0.00148330487914952
       ],
       "dividendGrowth": [
-        0.01680789979461994,
-        0.01680789979461994,
-        0.01680789979461994,
-        0.01680789979461994,
-        0.01680789979461994
+        0.016530045465127152,
+        0.016530045465127152,
+        0.016530045465127152,
+        0.016530045465127152,
+        0.016530045465127152
       ],
       "symbol": "NYSE:CLX",
       "currency": "USD",
       "financials": "ready",
-      "financialPeriod": "2025-06-30",
+      "financialPeriod": "2026-06-30",
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10070,7 +10072,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10112,7 +10114,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -10154,7 +10156,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -10196,22 +10198,22 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
-      "revenueProofs": 4,
+      "revenueProofs": 5,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 6,
+        "qualityConditions": 5,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -10238,7 +10240,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10280,7 +10282,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10320,7 +10322,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10362,7 +10364,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10404,7 +10406,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10446,7 +10448,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -10488,7 +10490,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10530,7 +10532,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10572,7 +10574,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10614,7 +10616,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -10650,7 +10652,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10692,7 +10694,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -10734,7 +10736,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -10743,13 +10745,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 9,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -10776,7 +10778,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10818,7 +10820,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -10854,7 +10856,7 @@
       "dividend": "ready",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10896,7 +10898,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -10938,7 +10940,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -10980,7 +10982,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11022,7 +11024,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11064,7 +11066,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11106,7 +11108,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11148,7 +11150,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -11190,7 +11192,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11199,13 +11201,13 @@
         "valueKind": "review",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -11226,7 +11228,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -11268,7 +11270,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11310,7 +11312,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11319,13 +11321,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 9,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Chemical (Diversified)",
       "sic": "2821",
       "referenceAsOf": "2026-01",
@@ -11352,7 +11354,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11394,7 +11396,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -11403,13 +11405,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
+        "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": true,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -11436,7 +11438,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -11445,13 +11447,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4931",
       "referenceAsOf": "2026-01",
@@ -11478,7 +11480,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11520,7 +11522,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -11562,7 +11564,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -11604,7 +11606,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -11613,13 +11615,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 4,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4931",
       "referenceAsOf": "2026-01",
@@ -11646,7 +11648,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11688,7 +11690,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11730,7 +11732,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11739,13 +11741,13 @@
         "valueKind": "intrinsic-scenario",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -11772,7 +11774,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11812,7 +11814,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11854,7 +11856,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11896,7 +11898,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11938,7 +11940,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -11980,7 +11982,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12022,7 +12024,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -12064,7 +12066,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -12106,7 +12108,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12148,22 +12150,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 2,
+        "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -12190,7 +12192,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12232,7 +12234,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12274,7 +12276,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -12316,7 +12318,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12325,13 +12327,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Auto & Truck",
       "sic": "3711",
       "referenceAsOf": "2026-01",
@@ -12358,7 +12360,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -12400,7 +12402,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12442,7 +12444,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12482,7 +12484,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12522,7 +12524,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12531,13 +12533,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -12564,22 +12566,21 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 2,
+        "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2025-10-31",
-      "ttm": "2025-10-31",
+      "latestInterim": "2026-06-30",
       "industry": "Retail (Distributors)",
       "sic": "5070",
       "referenceAsOf": "2026-01",
@@ -12602,11 +12603,11 @@
       "symbol": "NYSE:FERG",
       "currency": "USD",
       "financials": "ready",
-      "financialPeriod": "2025-07-31",
+      "financialPeriod": "2026-06-30",
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12648,7 +12649,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12690,7 +12691,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12732,7 +12733,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12774,7 +12775,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -12783,13 +12784,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -12816,7 +12817,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12825,13 +12826,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-07-03",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-04-03",
-      "ttm": "2026-04-03",
+      "latestInterim": "2026-07-03",
+      "ttm": "2026-07-03",
       "industry": "Electronics (General)",
       "sic": "3823",
       "referenceAsOf": "2026-01",
@@ -12858,7 +12859,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12867,13 +12868,13 @@
         "valueKind": "intrinsic-scenario",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-07-05",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-04-05",
-      "ttm": "2026-04-05",
+      "latestInterim": "2026-07-05",
+      "ttm": "2026-07-05",
       "industry": "Shipbuilding & Marine",
       "sic": "3730",
       "referenceAsOf": "2026-01",
@@ -12900,7 +12901,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12942,7 +12943,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -12984,7 +12985,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13026,7 +13027,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13068,7 +13069,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13110,7 +13111,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13152,7 +13153,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -13194,7 +13195,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13236,7 +13237,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13278,7 +13279,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13320,7 +13321,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13329,13 +13330,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-27",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-28",
-      "ttm": "2026-03-28",
+      "latestInterim": "2026-06-27",
+      "ttm": "2026-06-27",
       "industry": "Electronics (General)",
       "sic": "3812",
       "referenceAsOf": "2026-01",
@@ -13362,7 +13363,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13404,7 +13405,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13446,7 +13447,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13488,7 +13489,7 @@
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13497,13 +13498,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 4,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Hospitals/Healthcare Facilities",
       "sic": "8062",
       "referenceAsOf": "2026-01",
@@ -13530,7 +13531,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13572,7 +13573,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -13614,7 +13615,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13656,7 +13657,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13698,7 +13699,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -13740,7 +13741,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13782,7 +13783,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13824,7 +13825,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13866,7 +13867,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13875,13 +13876,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Electrical Equipment",
       "sic": "3670",
       "referenceAsOf": "2026-01",
@@ -13908,22 +13909,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 9,
+        "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Insurance (General)",
       "sic": "6324",
       "referenceAsOf": "2026-01",
@@ -13950,7 +13951,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -13992,7 +13993,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -14034,7 +14035,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14076,7 +14077,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14118,7 +14119,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14160,7 +14161,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -14202,7 +14203,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14244,7 +14245,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14253,13 +14254,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Information Services",
       "sic": "8731",
       "referenceAsOf": "2026-01",
@@ -14286,7 +14287,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14328,7 +14329,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14370,7 +14371,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14412,7 +14413,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14454,7 +14455,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14496,7 +14497,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14538,7 +14539,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14580,7 +14581,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14589,13 +14590,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Machinery",
       "sic": "3585",
       "referenceAsOf": "2026-01",
@@ -14622,7 +14623,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14664,7 +14665,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -14706,7 +14707,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14748,7 +14749,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -14790,7 +14791,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14832,7 +14833,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -14874,7 +14875,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -14916,7 +14917,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -14958,22 +14959,22 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-07-03",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-04-03",
-      "ttm": "2026-04-03",
+      "latestInterim": "2026-07-03",
+      "ttm": "2026-07-03",
       "industry": "Food Processing",
       "sic": "2080",
       "referenceAsOf": "2026-01",
@@ -14998,9 +14999,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15042,7 +15043,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15084,7 +15085,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15126,7 +15127,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -15168,7 +15169,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15210,7 +15211,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15252,7 +15253,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15294,22 +15295,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 4,
+        "qualityConditions": 5,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Machinery",
       "sic": "3585",
       "referenceAsOf": "2026-01",
@@ -15336,7 +15337,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15378,7 +15379,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15420,7 +15421,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15462,7 +15463,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15504,7 +15505,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15546,7 +15547,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15588,7 +15589,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15630,7 +15631,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15672,7 +15673,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15681,13 +15682,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -15714,22 +15715,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 2,
+        "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Construction Supplies",
       "sic": "3430",
       "referenceAsOf": "2026-01",
@@ -15756,7 +15757,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15798,7 +15799,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15840,7 +15841,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15882,7 +15883,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -15924,7 +15925,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -15966,7 +15967,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16008,7 +16009,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16050,7 +16051,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16092,7 +16093,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16134,7 +16135,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16176,7 +16177,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16218,7 +16219,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16260,7 +16261,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16302,7 +16303,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16344,7 +16345,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16386,7 +16387,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16428,7 +16429,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16470,7 +16471,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16512,7 +16513,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16554,7 +16555,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16596,7 +16597,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -16605,13 +16606,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -16638,7 +16639,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16680,7 +16681,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16722,7 +16723,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16764,7 +16765,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16806,7 +16807,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16848,7 +16849,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -16890,7 +16891,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16932,7 +16933,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -16974,7 +16975,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17016,7 +17017,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17058,7 +17059,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17100,7 +17101,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17109,13 +17110,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 4,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Advertising",
       "sic": "7311",
       "referenceAsOf": "2026-01",
@@ -17142,7 +17143,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17184,7 +17185,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17226,7 +17227,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -17268,7 +17269,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17310,7 +17311,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17352,7 +17353,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -17394,7 +17395,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17436,7 +17437,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17476,7 +17477,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17518,7 +17519,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17558,7 +17559,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17600,7 +17601,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17642,7 +17643,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17651,13 +17652,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 9,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
+        "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": true,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -17684,7 +17685,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17726,7 +17727,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -17768,7 +17769,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17777,13 +17778,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Machinery",
       "sic": "3550",
       "referenceAsOf": "2026-01",
@@ -17810,7 +17811,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17852,7 +17853,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17861,13 +17862,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Chemical (Diversified)",
       "sic": "2851",
       "referenceAsOf": "2026-01",
@@ -17894,7 +17895,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -17903,13 +17904,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -17936,7 +17937,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -17978,7 +17979,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18020,7 +18021,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18062,7 +18063,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18104,7 +18105,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18146,7 +18147,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18188,7 +18189,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18230,7 +18231,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18272,7 +18273,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -18314,7 +18315,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18356,7 +18357,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18396,7 +18397,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18438,7 +18439,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18480,7 +18481,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -18522,7 +18523,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18564,7 +18565,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18606,7 +18607,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18648,7 +18649,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18690,7 +18691,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18732,22 +18733,21 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
-      "revenueProofs": 3,
+      "revenueProofs": 2,
       "research": {
         "method": "review",
         "valueKind": "review",
-        "qualityConditions": 0,
+        "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2025-08-06",
-      "ttm": "2025-08-06",
+      "latestInterim": "2026-06-30",
       "industry": "Telecom. Services",
       "sic": "4833",
       "referenceAsOf": "2026-01",
@@ -18760,21 +18760,15 @@
         0.21200000000000002,
         0.11599999999999999
       ],
-      "dividendGrowth": [
-        0.25,
-        0.20400000000000001,
-        0.158,
-        0.11199999999999999,
-        0.066
-      ],
+      "dividendGrowth": [],
       "symbol": "NYSE:SKYD",
       "currency": "USD",
-      "financials": "stale",
-      "financialPeriod": "2024-12-31",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": null
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18816,7 +18810,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -18858,7 +18852,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -18867,13 +18861,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
@@ -18900,7 +18894,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -18942,7 +18936,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -18984,7 +18978,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -18993,13 +18987,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Business & Consumer Services",
       "sic": "7320",
       "referenceAsOf": "2026-01",
@@ -19026,7 +19020,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -19035,13 +19029,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Utility (General)",
       "sic": "4932",
       "referenceAsOf": "2026-01",
@@ -19068,7 +19062,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19110,7 +19104,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 2,
@@ -19152,7 +19146,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19194,7 +19188,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19236,7 +19230,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19278,7 +19272,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19320,7 +19314,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19362,7 +19356,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19402,7 +19396,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19444,7 +19438,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19486,7 +19480,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19528,7 +19522,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19570,7 +19564,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19612,7 +19606,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19654,7 +19648,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19696,7 +19690,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19738,7 +19732,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19780,7 +19774,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19822,7 +19816,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19862,7 +19856,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19904,7 +19898,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -19946,7 +19940,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20026,7 +20020,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20068,7 +20062,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20110,7 +20104,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20152,7 +20146,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20194,7 +20188,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20236,7 +20230,7 @@
       "dividend": "ready",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -20245,13 +20239,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -20278,7 +20272,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20320,7 +20314,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20362,7 +20356,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20404,7 +20398,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20446,7 +20440,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -20455,13 +20449,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 4,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Business & Consumer Services",
       "sic": "7359",
       "referenceAsOf": "2026-01",
@@ -20488,7 +20482,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20530,7 +20524,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20539,13 +20533,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Business & Consumer Services",
       "sic": "7389",
       "referenceAsOf": "2026-01",
@@ -20572,7 +20566,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20614,7 +20608,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20656,7 +20650,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20698,7 +20692,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20707,13 +20701,13 @@
         "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-07-03",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-04-03",
-      "ttm": "2026-04-03",
+      "latestInterim": "2026-07-03",
+      "ttm": "2026-07-03",
       "industry": "Electronics (General)",
       "sic": "3825",
       "referenceAsOf": "2026-01",
@@ -20740,22 +20734,22 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 4,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Metals & Mining",
       "sic": "1400",
       "referenceAsOf": "2026-01",
@@ -20780,9 +20774,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -20824,7 +20818,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -20866,7 +20860,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -20908,7 +20902,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -20950,7 +20944,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21032,7 +21026,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21074,7 +21068,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21110,7 +21104,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21152,22 +21146,22 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 2,
+        "qualityConditions": 3,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
-      "latestInterim": "2026-03-31",
-      "ttm": "2026-03-31",
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
@@ -21194,7 +21188,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -21236,7 +21230,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21278,7 +21272,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -21320,7 +21314,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -21362,7 +21356,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21404,7 +21398,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21446,7 +21440,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21488,20 +21482,21 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
         "method": "review",
         "valueKind": "review",
-        "qualityConditions": 0,
+        "qualityConditions": 1,
         "latestKnownPeriodic": "2026-06-30",
-        "newerPeriodicNotInModel": true,
-        "newerResultsDisclosure": true,
+        "newerPeriodicNotInModel": false,
+        "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
+      "latestInterim": "2026-06-30",
       "industry": "Oil/Gas (Integrated)",
       "sic": "2911",
       "referenceAsOf": "2026-01",
@@ -21523,12 +21518,12 @@
       ],
       "symbol": "NYSE:XOM",
       "currency": "USD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": null
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -21570,7 +21565,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21612,7 +21607,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21654,7 +21649,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21696,7 +21691,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21738,7 +21733,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21778,7 +21773,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21818,7 +21813,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21898,7 +21893,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21938,7 +21933,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -21978,7 +21973,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22020,7 +22015,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22060,7 +22055,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22102,16 +22097,16 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "review",
-        "valueKind": "review",
+        "method": "earnings",
+        "valueKind": "cross-check",
         "qualityConditions": 2,
         "latestKnownPeriodic": "2026-03-31",
-        "newerPeriodicNotInModel": true,
+        "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
@@ -22122,27 +22117,27 @@
       "wacc": 0.0860663061715968,
       "costEquity": 0.09117499999999999,
       "revenueGrowth": [
-        0.5,
-        0.404,
-        0.308,
-        0.21200000000000002,
-        0.11599999999999999
+        0.4183043938829736,
+        0.33864351510637886,
+        0.25898263632978413,
+        0.17932175755318944,
+        0.09966087877659474
       ],
       "dividendGrowth": [
-        0.1886,
-        0.15488,
-        0.12115999999999999,
-        0.08743999999999999,
-        0.05371999999999999
+        -0.023880716131837565,
+        -0.023880716131837565,
+        -0.023880716131837565,
+        -0.023880716131837565,
+        -0.023880716131837565
       ],
       "symbol": "TSX:CAE",
       "currency": "CAD",
-      "financials": "stale",
-      "financialPeriod": "2025-03-31",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22220,7 +22215,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22262,7 +22257,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22304,7 +22299,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22344,7 +22339,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22355,9 +22350,11 @@
         "latestKnownPeriodic": "2025-12-31",
         "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": false,
-        "newerVerifiedRelease": true,
+        "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
       },
+      "latestInterim": "2026-06-30",
+      "ttm": "2026-06-30",
       "industry": "Transportation (Railroads)",
       "sic": "4011",
       "referenceAsOf": "2026-01",
@@ -22380,11 +22377,11 @@
       "symbol": "TSX:CNR",
       "currency": "CAD",
       "financials": "ready",
-      "financialPeriod": "2025-12-31",
+      "financialPeriod": "2026-06-30",
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -22426,7 +22423,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22542,7 +22539,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22660,7 +22657,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22776,7 +22773,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22816,7 +22813,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 3,
@@ -22856,16 +22853,16 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "review",
-        "valueKind": "review",
+        "method": "earnings",
+        "valueKind": "cross-check",
         "qualityConditions": 0,
         "latestKnownPeriodic": "2025-09-30",
-        "newerPeriodicNotInModel": true,
+        "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": false,
         "newerVerifiedRelease": false,
         "institutionalUnderwritingEstablished": false
@@ -22876,27 +22873,27 @@
       "wacc": 0.06707428558060416,
       "costEquity": 0.077216,
       "revenueGrowth": [
-        0.049400000000000006,
-        0.04352,
-        0.03764000000000001,
-        0.031760000000000004,
-        0.02588
+        0.05218841603252594,
+        0.045750732826020754,
+        0.03931304961951557,
+        0.03287536641301038,
+        0.02643768320650519
       ],
       "dividendGrowth": [
-        0.1012,
-        0.08496000000000001,
-        0.06872,
-        0.05248,
-        0.03624000000000001
+        0.068136957884987,
+        0.0585095663079896,
+        0.0488821747309922,
+        0.039254783153994804,
+        0.029627391576997404
       ],
       "symbol": "TSX:GIB.A",
       "currency": "CAD",
-      "financials": "stale",
-      "financialPeriod": "2024-09-30",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -22936,7 +22933,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23054,7 +23051,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23094,7 +23091,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23174,7 +23171,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23214,7 +23211,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23293,7 +23290,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23333,7 +23330,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23373,7 +23370,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23453,7 +23450,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 5,
@@ -23495,7 +23492,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23535,7 +23532,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23577,7 +23574,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23657,7 +23654,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23698,7 +23695,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23738,7 +23735,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23778,7 +23775,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23820,7 +23817,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23860,7 +23857,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23938,7 +23935,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -23978,7 +23975,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -24020,7 +24017,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
@@ -24098,7 +24095,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T09:40:09.428Z"
+      "lastSuccess": "2026-10-17T10:24:45.811Z"
     },
     {
       "revenueProofs": 0,
