@@ -18432,8 +18432,20 @@ function classify(item, snapshot) {
 }
 var intermediary = (fit) => ["bank", "insurer", "broker", "consumer-finance"].includes(fit.group);
 function qualityIssues(snapshot) {
+  const periods = [...snapshot.financials?.annual || [], snapshot.financials?.recent, snapshot.financials?.recent?.prior, snapshot.financials?.ttm].filter(Boolean);
+  const negativeDA = periods.filter((row) => finite5(row.metrics?.da?.value) && row.metrics.da.value < 0).map((row) => ({
+    code: "negative_d_and_a_reconciliation",
+    metric: "da",
+    severity: "material",
+    blocking: true,
+    start: row.metrics.da.start,
+    end: row.end,
+    message: "The reported or reconstructed D&A amount is negative. Its original source and arithmetic are retained as net-adjustment evidence; a recurring operating D&A add-back is withheld until its components and scope are reconciled.",
+    facts: [row.metrics.da]
+  }));
   const groups2 = [
     [snapshot.financials?.qualityIssues, "Financial statements"],
+    [negativeDA, "D&A sign and operating scope"],
     [snapshot.dividend?.qualityIssues, "Common dividend", snapshot.dividend?.asOf],
     ...(snapshot.financials?.annual || []).map((row) => [row.qualityIssues, `Annual ${row.end}`, row.end]),
     [snapshot.financials?.recent?.qualityIssues, "Latest interim", snapshot.financials?.recent?.end],
@@ -18490,9 +18502,10 @@ function validatedValuationSnapshot(item, snapshot = {}) {
   const observation = (field, days2, positive2 = false) => field?.status === "ready" && field.currency === currency && finite5(field.value) && (positive2 ? field.value > 0 : field.value >= 0) && fresh(field.asOf, days2) && (!field.filed || datedNotFuture(field.filed, cutoff)) && sourceURL(field.source?.url) ? field : { status: "unavailable" };
   const annualFresh = fresh(annual[0]?.end, 550), ttmFresh = fresh(ttm?.end, 550), recentFresh = fresh(recent?.end, 550);
   const status = issues.some((issue) => issue.blocking && !issue.metrics.length) ? "unavailable" : snapshot.financials?.status === "ready" && !annualFresh && !ttmFresh && !recentFresh ? "stale" : snapshot.financials?.status;
+  const retainedIssues = [...snapshot.financials?.qualityIssues || [], ...issues.filter((issue) => issue.code === "negative_d_and_a_reconciliation")];
   return {
     ...snapshot,
-    financials: { ...snapshot.financials, status, annual, recent, ttm },
+    financials: { ...snapshot.financials, status, annual, recent, ttm, qualityIssues: retainedIssues },
     price: observation(snapshot.price, 7, true),
     marketCap: observation(snapshot.marketCap, 7, true),
     commonBookValuePerShare: observation(snapshot.commonBookValuePerShare, 550, true),

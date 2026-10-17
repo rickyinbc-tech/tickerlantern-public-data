@@ -17944,7 +17944,7 @@
       "research": {
         "method": "ddm",
         "valueKind": "cross-check",
-        "qualityConditions": 4,
+        "qualityConditions": 5,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
         "newerResultsDisclosure": true,
