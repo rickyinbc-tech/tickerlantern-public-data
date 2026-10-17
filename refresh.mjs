@@ -13084,7 +13084,7 @@ function convertUSDToCAD(financials, dividend, fx) {
   if (financials.currency !== "USD" || fx?.currency !== "CAD/USD" || !(fx.value > 0) || !Number.isFinite(fx.value)) throw Error("Invalid currency conversion");
   const convert = (f) => {
     const monetary = f?.unit === "USD" || f?.unit === "USD/shares";
-    const out = monetary ? { ...f, value: f.value * fx.value, unit: f.unit.replace("USD", "CAD"), original: { value: f.value, unit: f.unit }, conversion: fx, basis: (f.basis || "Reported fact") + `; converted USD to CAD at ${fx.value} CAD/USD (${fx.asOf}); constant FX scenario` } : { ...f };
+    const out = monetary ? { ...f, value: f.value * fx.value, unit: f.unit.replace("USD", "CAD"), ...f.currency === "USD" ? { currency: "CAD" } : {}, original: { value: f.value, unit: f.unit }, conversion: fx, basis: (f.basis || "Reported fact") + `; converted USD to CAD at ${fx.value} CAD/USD (${fx.asOf}); constant FX scenario` } : { ...f };
     if (f?.source?.components) out.source = { ...f.source, components: f.source.components.map(convert) };
     return out;
   };
@@ -13094,265 +13094,800 @@ function convertUSDToCAD(financials, dividend, fx) {
   const converted = { ...financials, currency: "CAD", reportingCurrency: "USD", conversion: fx, annual: financials.annual.map(convertPeriod), ...financials.qualityIssues ? { qualityIssues: convertIssues(financials.qualityIssues) } : {}, warnings: [...financials.warnings || [], "USD financial facts translated to CAD at the dated daily average exchange rate. Forecasts assume that exchange rate stays constant; these are not originally reported CAD amounts."] };
   if (financials.ttm) converted.ttm = convertPeriod(financials.ttm);
   if (financials.recent) converted.recent = { ...convertPeriod(financials.recent), prior: convertPeriod(financials.recent.prior || {}) };
-  const d = dividend?.status === "ready" && dividend.currency === "USD" ? { ...dividend, value: dividend.value * fx.value, currency: "CAD", kind: "fx-converted", original: { value: dividend.value, currency: "USD" }, conversion: fx, description: dividend.description + ` Translated at ${fx.value} CAD/USD, Bank of Canada daily average ${fx.asOf}; constant FX assumption.` } : dividend;
+  const convertDividend = (d2) => {
+    if (d2?.status !== "ready" || d2.currency !== "USD") return d2;
+    return {
+      ...d2,
+      value: d2.value * fx.value,
+      currency: "CAD",
+      ...d2.unit ? { unit: d2.unit.replace("USD", "CAD") } : {},
+      kind: d2.kind || "fx-converted",
+      ...Number.isFinite(d2.quarterly) ? { quarterly: d2.quarterly * fx.value } : {},
+      original: { value: d2.value, currency: "USD" },
+      conversion: fx,
+      description: (d2.description || "Historical common dividend") + ` Translated at ${fx.value} CAD/USD, Bank of Canada daily average ${fx.asOf}; constant FX assumption.`,
+      ...d2.components ? { components: d2.components.map(convert) } : {},
+      ...d2.source?.components ? { source: { ...d2.source, components: d2.source.components.map(convert) } } : {},
+      ...d2.annualBase ? { annualBase: convertDividend(d2.annualBase) } : {}
+    };
+  };
+  const d = convertDividend(dividend);
   return { financials: converted, dividend: d };
 }
 
-// src/ddm-data.js
-var DAY = 864e5;
-var duration = (row) => (Date.parse(row.end) - Date.parse(row.start)) / DAY + 1;
-var accession = (value) => /^\d{10}-\d{2}-\d{6}$/.test(value || "");
-function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), options = {}) {
-  if (Number(payload?.cik) !== Number(cik))
-    throw new Error("The filing entity does not match this listing.");
-  const today = now2.toISOString().slice(0, 10);
-  const currency = options.currency || "USD";
-  const candidates = [];
-  for (const [namespace2, tag3] of [
-    ["us-gaap", "CommonStockDividendsPerShareDeclared"],
-    ["us-gaap", "CommonStockDividendsPerShareCashPaid"],
-    ["ifrs-full", "DividendsPaidOrdinarySharesPerShare"],
-    ["ifrs-full", "DividendsRecognisedAsDistributionsToOwnersPerShare"]
-  ]) {
-    const rows3 = payload.facts?.[namespace2]?.[tag3]?.units?.[currency + "/shares"];
-    if (!Array.isArray(rows3)) continue;
-    const annual2 = rows3.filter(
-      (row) => validDate(row.start) && validDate(row.end) && validDate(row.filed) && row.end <= today && row.filed <= today && [
-        "10-K",
-        "10-K/A",
-        "40-F",
-        "40-F/A",
-        "20-F",
-        "20-F/A",
-        "6-K",
-        "6-K/A"
-      ].includes(row.form) && duration(row) >= 330 && duration(row) <= 385 && typeof row.val === "number" && Number.isFinite(row.val) && row.val >= 0 && accession(row.accn)
-    );
-    annual2.sort(
-      (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed)
-    );
-    if (annual2.length)
-      candidates.push({ tag: tag3, namespace: namespace2, latest: annual2[0], annual: annual2 });
-  }
-  candidates.sort((a, b) => b.latest.end.localeCompare(a.latest.end));
-  if (!candidates.length)
-    return {
-      status: "unavailable",
-      reason: "No supported annual matching-currency ordinary/common-dividend-per-share disclosure was found. Missing data does not establish that the company pays no dividend."
-    };
-  const { tag: tag2, namespace, latest: latest2, annual } = candidates[0];
-  if ((+now2 - Date.parse(latest2.end)) / DAY > 550)
-    return {
-      status: "stale",
-      reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.",
-      asOf: latest2.end
-    };
-  const url = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${latest2.accn.replaceAll("-", "")}/${latest2.accn}-index.html`;
-  const sameFiling = [
-    ...new Map(
-      annual.filter((row) => row.accn === latest2.accn).map((row) => [row.end, row])
-    ).values()
-  ].sort((a, b) => a.end.localeCompare(b.end));
-  const first = sameFiling[0];
-  const years = first ? Math.round(
-    (Date.parse(latest2.end) - Date.parse(first.end)) / DAY / 365.25
-  ) : 0;
-  const historicalGrowth = years >= 1.5 && first.val > 0 && latest2.val > 0 ? (latest2.val / first.val) ** (1 / years) - 1 : null;
-  return {
-    status: "ready",
-    value: latest2.val,
-    currency,
-    basis: "current",
-    periodStart: latest2.start,
-    asOf: latest2.end,
-    filed: latest2.filed,
-    description: `Latest full fiscal-year dividends ${tag2.endsWith("Declared") ? "declared" : "paid"} per share; not a current annualized dividend rate.`,
-    source: {
-      name: "SEC EDGAR \xB7 company filing",
-      url,
-      accession: latest2.accn,
-      tag: tag2,
-      namespace
+// src/research/dividend-scope-evidence.json
+var dividend_scope_evidence_default = {
+  schema: 1,
+  scope: "Exact issuer, filing, fiscal period, currency and original dividend fact values. Historical evidence does not validate later periods.",
+  records: [
+    {
+      cik: 1403161,
+      accession: "0001403161-25-000089",
+      filed: "2025-11-06",
+      currency: "USD",
+      start: "2022-10-01",
+      end: "2023-09-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.45
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 0.45
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.8,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://investor.visa.com/stock-information/dividends/default.aspx?LanguageId=1",
+        label: "Visa Class A common stock: four dated payments within the exact fiscal year"
+      },
+      explanation: "The annual-duration XBRL values describe quarterly rates. The issuer Class A payment history provides each actual fiscal-year payment; the annual total is the sum of those dated distributions, not an assumed payment frequency.",
+      verifiedAt: "2026-10-17",
+      shareClass: "NYSE:V \xB7 Class A common",
+      payments: [
+        {
+          date: "2022-12-01",
+          value: 0.45,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2023-03-01",
+          value: 0.45,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2023-06-01",
+          value: 0.45,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2023-09-01",
+          value: 0.45,
+          currency: "USD",
+          shareClass: "Class A"
+        }
+      ],
+      filingURL: "https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm",
+      symbol: "NYSE:V"
     },
-    historicalGrowth: Number.isFinite(historicalGrowth) ? {
-      value: historicalGrowth,
-      start: first.end,
-      end: latest2.end,
-      years,
-      description: "Annual dividend CAGR from comparative years in the same filing; historical, not a forecast."
-    } : null,
-    warnings: [
-      "Reported totals can include special dividends. Check the issuer\u2019s regular payout policy and share basis before relying on a perpetual forecast."
-    ]
-  };
-}
-function findSECListing(payload, item) {
-  if (!Array.isArray(payload?.fields) || !Array.isArray(payload?.data))
-    throw new Error("The SEC listing directory is unavailable.");
-  const positions = Object.fromEntries(
-    payload.fields.map((key2, index) => [key2, index])
-  );
-  if (!["cik", "ticker", "exchange"].every(
-    (key2) => Number.isInteger(positions[key2])
-  ))
-    throw new Error("The SEC listing directory has changed.");
-  const ticker = item.ticker.replaceAll(".", "-");
-  const match = payload.data.find(
-    (row) => row[positions.ticker] === ticker && String(row[positions.exchange]).toUpperCase() === item.providerExchange.toUpperCase()
-  );
-  const cik = match?.[positions.cik];
-  if (!Number.isInteger(cik) || cik <= 0 || cik > 9999999999)
-    throw new Error(
-      "No matching SEC entity and exchange were found for this listing."
-    );
-  return String(cik).padStart(10, "0");
-}
-
-// src/issuer-map.js
-var canadian = {
-  "RY.TO": [1000275, "RY", "NYSE"],
-  // ROYAL BANK OF CANADA
-  "TD.TO": [947263, "TD", "NYSE"],
-  // TORONTO DOMINION BANK
-  "CM.TO": [1045520, "CM", "NYSE"],
-  // CANADIAN IMPERIAL BANK OF COMMERCE /CAN/
-  "BMO.TO": [927971, "BMO", "NYSE"],
-  // BANK OF MONTREAL /CAN/
-  "BNS.TO": [9631, "BNS", "NYSE"],
-  // BANK OF NOVA SCOTIA
-  "ENB.TO": [895728, "ENB", "NYSE"],
-  // ENBRIDGE INC
-  "SHOP.TO": [1594805, "SHOP", "NASDAQ"],
-  // SHOPIFY INC.
-  "CNQ.TO": [1017413, "CNQ", "NYSE"],
-  // CANADIAN NATURAL RESOURCES Ltd
-  "SU.TO": [311337, "SU", "NYSE"],
-  // SUNCOR ENERGY INC
-  "AEM.TO": [2809, "AEM", "NYSE"],
-  // AGNICO EAGLE MINES LTD
-  "BN.TO": [1001085, "BN", "NYSE"],
-  // BROOKFIELD Corp /ON/
-  "CP.TO": [16875, "CP", "NYSE"],
-  // CANADIAN PACIFIC KANSAS CITY LTD/CN
-  "MFC.TO": [1086888, "MFC", "NYSE"],
-  // MANULIFE FINANCIAL CORP
-  "ABX.TO": [756894, "B", "NYSE"],
-  // BARRICK MINING CORP
-  "CNR.TO": [16868, "CNI", "NYSE"],
-  // CANADIAN NATIONAL RAILWAY CO
-  "TRP.TO": [1232384, "TRP", "NYSE"],
-  // TC ENERGY CORP
-  "WPM.TO": [1323404, "WPM", "NYSE"],
-  // Wheaton Precious Metals Corp.
-  "FNV.TO": [1456346, "FNV", "NYSE"],
-  // FRANCO NEVADA Corp
-  "SLF.TO": [1097362, "SLF", "NYSE"],
-  // SUN LIFE FINANCIAL INC
-  "CVE.TO": [1475260, "CVE", "NYSE"],
-  // CENOVUS ENERGY INC.
-  "WCN.TO": [1318220, "WCN", "NYSE"],
-  // Waste Connections, Inc.
-  "CLS.TO": [1030894, "CLS", "NYSE"],
-  // CELESTICA INC
-  "CCO.TO": [1009001, "CCJ", "NYSE"],
-  // CAMECO CORP
-  "NTR.TO": [1725964, "NTR", "NYSE"],
-  // Nutrien Ltd.
-  "TECK.B.TO": [886986, "TECK", "NYSE"],
-  // TECK RESOURCES LTD
-  "K.TO": [701818, "KGC", "NYSE"],
-  // KINROSS GOLD CORP
-  "PPL.TO": [1546066, "PBA", "NYSE"],
-  // PEMBINA PIPELINE CORP
-  "FTS.TO": [1666175, "FTS", "NYSE"],
-  // Fortis Inc.
-  "QSR.TO": [1618756, "QSR", "NYSE"],
-  // Restaurant Brands International Inc.
-  "IMO.TO": [49938, "IMO", "NYSE"],
-  // IMPERIAL OIL LTD
-  "BCE.TO": [718940, "BCE", "NYSE"],
-  // BCE INC
-  "BAM.TO": [1937926, "BAM", "NYSE"],
-  // Brookfield Asset Management Ltd.
-  "BIP.UN.TO": [1406234, "BIP", "NYSE"],
-  // Brookfield Infrastructure Partners L.P.
-  "MG.TO": [749098, "MGA", "NYSE"],
-  // MAGNA INTERNATIONAL INC
-  "GIB.A.TO": [1061574, "GIB", "NYSE"],
-  // CGI INC
-  "TRI.TO": [1075124, "TRI", "NASDAQ"],
-  // THOMSON REUTERS CORP /CAN/
-  "T.TO": [868675, "TU", "NYSE"],
-  // TELUS CORP
-  "RCI.B.TO": [733099, "RCI", "NYSE"],
-  // ROGERS COMMUNICATIONS INC
-  "GIL.TO": [1061894, "GIL", "NYSE"],
-  // Gildan Activewear Inc.
-  "CAE.TO": [1173382, "CAE", "NASDAQ"],
-  // CAE INC
-  "OTEX.TO": [1002638, "OTEX", "NASDAQ"],
-  // OPEN TEXT CORP
-  "FSV.TO": [1637810, "FSV", "NASDAQ"]
-  // FirstService Corp
-};
-function secReference(item) {
-  if (canadian[item.ticker]) {
-    const [cik, ticker, providerExchange] = canadian[item.ticker];
-    return {
-      cik: String(cik).padStart(10, "0"),
-      lookup: { ...item, ticker, providerExchange },
+    {
+      cik: 1403161,
+      accession: "0001403161-25-000089",
+      filed: "2025-11-06",
+      currency: "USD",
+      start: "2023-10-01",
+      end: "2024-09-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.52
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 0.52
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 2.08,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://investor.visa.com/stock-information/dividends/default.aspx?LanguageId=1",
+        label: "Visa Class A common stock: four dated payments within the exact fiscal year"
+      },
+      explanation: "The annual-duration XBRL values describe quarterly rates. The issuer Class A payment history provides each actual fiscal-year payment; the annual total is the sum of those dated distributions, not an assumed payment frequency.",
+      verifiedAt: "2026-10-17",
+      shareClass: "NYSE:V \xB7 Class A common",
+      payments: [
+        {
+          date: "2023-12-01",
+          value: 0.52,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2024-03-01",
+          value: 0.52,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2024-06-03",
+          value: 0.52,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2024-09-03",
+          value: 0.52,
+          currency: "USD",
+          shareClass: "Class A"
+        }
+      ],
+      filingURL: "https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm",
+      symbol: "NYSE:V"
+    },
+    {
+      cik: 1403161,
+      accession: "0001403161-25-000089",
+      filed: "2025-11-06",
+      currency: "USD",
+      start: "2024-10-01",
+      end: "2025-09-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.59
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 0.59
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 2.36,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://investor.visa.com/stock-information/dividends/default.aspx?LanguageId=1",
+        label: "Visa Class A common stock: four dated payments within the exact fiscal year"
+      },
+      explanation: "The annual-duration XBRL values describe quarterly rates. The issuer Class A payment history provides each actual fiscal-year payment; the annual total is the sum of those dated distributions, not an assumed payment frequency.",
+      verifiedAt: "2026-10-17",
+      shareClass: "NYSE:V \xB7 Class A common",
+      payments: [
+        {
+          date: "2024-12-02",
+          value: 0.59,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2025-03-03",
+          value: 0.59,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2025-06-02",
+          value: 0.59,
+          currency: "USD",
+          shareClass: "Class A"
+        },
+        {
+          date: "2025-09-02",
+          value: 0.59,
+          currency: "USD",
+          shareClass: "Class A"
+        }
+      ],
+      filingURL: "https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm",
+      symbol: "NYSE:V"
+    },
+    {
+      cik: 728535,
+      accession: "0001437749-26-005294",
+      filed: "2026-02-24",
+      currency: "USD",
+      start: "2023-01-01",
+      end: "2023-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.42
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 1.68
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.68,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/728535/000143774926005294/jbht20251231_10k.htm",
+        label: "Consolidated statements of stockholders equity: cash dividend declared and paid per share"
+      },
+      explanation: "The declared concept is a prior quarterly rate in the dividend-increase discussion. The equity statement explicitly reports each full-year per-share total; quarterly rates are not treated as annual distributions.",
+      verifiedAt: "2026-10-17",
+      acceptInstantSource: true
+    },
+    {
+      cik: 728535,
+      accession: "0001437749-26-005294",
+      filed: "2026-02-24",
+      currency: "USD",
+      start: "2024-01-01",
+      end: "2024-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.43
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 1.72
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.72,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/728535/000143774926005294/jbht20251231_10k.htm",
+        label: "Consolidated statements of stockholders equity: cash dividend declared and paid per share"
+      },
+      explanation: "The declared concept is a prior quarterly rate in the dividend-increase discussion. The equity statement explicitly reports each full-year per-share total; quarterly rates are not treated as annual distributions.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 728535,
+      accession: "0001437749-26-005294",
+      filed: "2026-02-24",
+      currency: "USD",
+      start: "2025-01-01",
+      end: "2025-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.44
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 1.76
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.76,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/728535/000143774926005294/jbht20251231_10k.htm",
+        label: "Consolidated statements of stockholders equity: cash dividend declared and paid per share"
+      },
+      explanation: "The declared concept is a prior quarterly rate in the dividend-increase discussion. The equity statement explicitly reports each full-year per-share total; quarterly rates are not treated as annual distributions.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1045609,
+      accession: "0001193125-26-051453",
+      filed: "2026-02-13",
+      currency: "USD",
+      start: "2023-01-01",
+      end: "2023-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 3.48
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 3.48,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526051453/pld-20251231.htm",
+        label: "Parent consolidated equity statement: dividends per common share"
+      },
+      explanation: "The declared-tag value is only the qualified-dividend tax component. The parent equity statement reports the complete common dividend per share; tax components and operating-partnership distributions are not substituted for that total.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1045609,
+      accession: "0001193125-26-051453",
+      filed: "2026-02-13",
+      currency: "USD",
+      start: "2024-01-01",
+      end: "2024-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.01
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 3.84
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 3.84,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526051453/pld-20251231.htm",
+        label: "Parent consolidated equity statement: dividends per common share"
+      },
+      explanation: "The declared-tag value is only the qualified-dividend tax component. The parent equity statement reports the complete common dividend per share; tax components and operating-partnership distributions are not substituted for that total.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1045609,
+      accession: "0001193125-26-051453",
+      filed: "2026-02-13",
+      currency: "USD",
+      start: "2025-01-01",
+      end: "2025-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.03
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 4.04
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 4.04,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526051453/pld-20251231.htm",
+        label: "Parent consolidated equity statement: dividends per common share"
+      },
+      explanation: "The declared-tag value is only the qualified-dividend tax component. The parent equity statement reports the complete common dividend per share; tax components and operating-partnership distributions are not substituted for that total.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1751788,
+      accession: "0001751788-26-000018",
+      filed: "2026-02-03",
+      currency: "USD",
+      start: "2023-01-01",
+      end: "2023-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 2.8
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 0.7
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 2.8,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1751788/000175178826000018/dow-20251231.htm",
+        label: "Annual common dividends declared per share; cash dividend payment table"
+      },
+      explanation: "The 0.70 cash-paid-tag fact appears in the stock-option dividend-yield assumption as an older quarterly payment. The annual financial statement explicitly reports the declared common-dividend total; no quarterly rate is multiplied or preferred by size.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1751788,
+      accession: "0001751788-26-000018",
+      filed: "2026-02-03",
+      currency: "USD",
+      start: "2024-01-01",
+      end: "2024-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 2.8
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 0.7
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 2.8,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1751788/000175178826000018/dow-20251231.htm",
+        label: "Annual common dividends declared per share; cash dividend payment table"
+      },
+      explanation: "The 0.70 cash-paid-tag fact appears in the stock-option dividend-yield assumption as an older quarterly payment. The annual financial statement explicitly reports the declared common-dividend total; no quarterly rate is multiplied or preferred by size.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1751788,
+      accession: "0001751788-26-000018",
+      filed: "2026-02-03",
+      currency: "USD",
+      start: "2025-01-01",
+      end: "2025-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 2.1
+        },
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 0.7
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 2.1,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1751788/000175178826000018/dow-20251231.htm",
+        label: "Annual common dividends declared per share; cash dividend payment table"
+      },
+      explanation: "The 0.70 cash-paid-tag fact appears in the stock-option dividend-yield assumption as an older quarterly payment. The annual financial statement explicitly reports the declared common-dividend total; no quarterly rate is multiplied or preferred by size.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 895728,
+      accession: "0001193125-26-049810",
+      filed: "2026-02-13",
       currency: "CAD",
-      crossListed: true
-    };
-  }
-  if (item.currency === "USD" && ["NASDAQ", "NYSE", "CBOE"].includes(item.providerExchange) && !item.depositaryReceipt && !/\bADR\b/.test(item.name))
-    return { lookup: item, cik: item.cik, currency: "USD", crossListed: false };
-  return null;
-}
-
-// worker/sec-source.js
-async function sourceJSON(url, fetcher2 = fetch, ttl = 3600, token) {
-  const response = await fetcher2(url, {
-    headers: {
-      Accept: "application/json",
-      "User-Agent": "TickerLantern/1.0 (+https://tickerlantern.com)",
-      ...token ? { Authorization: "Bearer " + token } : {}
+      start: "2023-01-01",
+      end: "2023-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 3.55
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 3.55,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/895728/000119312526049810/enb-20251231.htm",
+        label: "Consolidated statements of cash flows: dividends paid per common share"
+      },
+      explanation: "The full-year cash-flow statement directly reports the annual common dividend. Inconsistent quarter-tagged cumulative amounts are not allowed to override this verified annual row.",
+      verifiedAt: "2026-10-17"
     },
-    signal: AbortSignal.timeout(18e3),
-    cf: { cacheTtl: ttl, cacheEverything: true }
-  });
-  if (!response.ok) throw new Error("Source unavailable");
-  const body = await response.text();
-  if (body.length > 12e6) throw new Error("Source too large");
-  return JSON.parse(body);
-}
-async function loadIssuerFacts(item, fetcher2 = fetch) {
-  const reference = secReference(item);
-  if (!reference) throw new Error("No verified issuer reference");
-  const directory2 = await sourceJSON(
-    "https://www.sec.gov/files/company_tickers_exchange.json",
-    fetcher2,
-    86400
-  );
-  const cik = findSECListing(directory2, reference.lookup);
-  if (reference.cik && reference.cik !== cik)
-    throw new Error("Issuer reference changed");
-  const facts = await sourceJSON(
-    `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`,
-    fetcher2
-  );
-  if (Number(facts?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
-  return { cik, facts, reference };
-}
-
-// worker/currency-data.js
-async function usdCadRate(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
-  const url = "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?recent=15";
-  const data = await sourceJSON(url, fetcher2), today = now2.toISOString().slice(0, 10);
-  const row = data.observations?.filter((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.d) && r.d <= today && now2 - Date.parse(r.d) <= 10 * 864e5 && Number(r.FXUSDCAD?.v) > 0).sort((a, b) => b.d.localeCompare(a.d))[0];
-  if (!row) throw Error("No current FX observation");
-  return { value: Number(row.FXUSDCAD.v), currency: "CAD/USD", asOf: row.d, source: { name: "Bank of Canada daily average USD/CAD", url }, basis: "Daily average exchange-rate assumption; not a real-time quote" };
-}
+    {
+      cik: 895728,
+      accession: "0001193125-26-049810",
+      filed: "2026-02-13",
+      currency: "CAD",
+      start: "2024-01-01",
+      end: "2024-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 3.66
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 3.66,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/895728/000119312526049810/enb-20251231.htm",
+        label: "Consolidated statements of cash flows: dividends paid per common share"
+      },
+      explanation: "The full-year cash-flow statement directly reports the annual common dividend. Inconsistent quarter-tagged cumulative amounts are not allowed to override this verified annual row.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 895728,
+      accession: "0001193125-26-049810",
+      filed: "2026-02-13",
+      currency: "CAD",
+      start: "2025-01-01",
+      end: "2025-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 3.77
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 3.77,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/895728/000119312526049810/enb-20251231.htm",
+        label: "Consolidated statements of cash flows: dividends paid per common share"
+      },
+      explanation: "The full-year cash-flow statement directly reports the annual common dividend. Inconsistent quarter-tagged cumulative amounts are not allowed to override this verified annual row.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1404912,
+      accession: "0001404912-26-000007",
+      filed: "2026-02-27",
+      currency: "USD",
+      start: "2023-01-01",
+      end: "2023-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.65
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 0.65,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1404912/000140491226000007/kkr-20251231.htm",
+        label: "Consolidated equity statement: common-stock dividends per share"
+      },
+      explanation: "The annual equity statement explicitly reports the total common dividend. Quarter-tagged cumulative amounts cannot establish a conflicting annual sum.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1404912,
+      accession: "0001404912-26-000007",
+      filed: "2026-02-27",
+      currency: "USD",
+      start: "2024-01-01",
+      end: "2024-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.69
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 0.69,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1404912/000140491226000007/kkr-20251231.htm",
+        label: "Consolidated equity statement: common-stock dividends per share"
+      },
+      explanation: "The annual equity statement explicitly reports the total common dividend. Quarter-tagged cumulative amounts cannot establish a conflicting annual sum.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1404912,
+      accession: "0001404912-26-000007",
+      filed: "2026-02-27",
+      currency: "USD",
+      start: "2025-01-01",
+      end: "2025-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.73
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 0.73,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1404912/000140491226000007/kkr-20251231.htm",
+        label: "Consolidated equity statement: common-stock dividends per share"
+      },
+      explanation: "The annual equity statement explicitly reports the total common dividend. Quarter-tagged cumulative amounts cannot establish a conflicting annual sum.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 319201,
+      accession: "0000319201-26-000027",
+      filed: "2026-08-06",
+      currency: "USD",
+      start: "2023-07-01",
+      end: "2024-06-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.565
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 0.565,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/319201/000031920126000027/klac-20260630.htm",
+        label: "Consolidated equity statement: annual cash dividends per share on the filing basis"
+      },
+      explanation: "The annual financial statement explicitly reports this full-year per-share amount. Older quarterly facts can use a different split basis and are not summed against it without reconciliation.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 319201,
+      accession: "0000319201-26-000027",
+      filed: "2026-08-06",
+      currency: "USD",
+      start: "2024-07-01",
+      end: "2025-06-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.675
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 0.675,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/319201/000031920126000027/klac-20260630.htm",
+        label: "Consolidated equity statement: annual cash dividends per share on the filing basis"
+      },
+      explanation: "The annual financial statement explicitly reports this full-year per-share amount. Older quarterly facts can use a different split basis and are not summed against it without reconciliation.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 319201,
+      accession: "0000319201-26-000027",
+      filed: "2026-08-06",
+      currency: "USD",
+      start: "2025-07-01",
+      end: "2026-06-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.8
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+      value: 0.8,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/319201/000031920126000027/klac-20260630.htm",
+        label: "Consolidated equity statement: annual cash dividends per share on the filing basis"
+      },
+      explanation: "The annual financial statement explicitly reports this full-year per-share amount. Older quarterly facts can use a different split basis and are not summed against it without reconciliation.",
+      verifiedAt: "2026-10-17"
+    },
+    {
+      cik: 1868275,
+      accession: "0001868275-26-000032",
+      filed: "2026-02-24",
+      currency: "USD",
+      start: "2023-01-01",
+      end: "2023-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.282
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.128,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://investors.constellationenergy.com/stock-information/dividends-splits/",
+        label: "Four actual quarterly common cash dividends in the exact year"
+      },
+      explanation: "The annual equity annotation uses a quarterly rate. The filing dividend table and issuer payment history identify four actual payments; the annual amount is their sum, not a forward annualization.",
+      verifiedAt: "2026-10-17",
+      payments: [
+        {
+          date: "2023-03-10",
+          value: 0.282,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2023-06-09",
+          value: 0.282,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2023-09-08",
+          value: 0.282,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2023-12-08",
+          value: 0.282,
+          currency: "USD",
+          shareClass: "Common"
+        }
+      ]
+    },
+    {
+      cik: 1868275,
+      accession: "0001868275-26-000032",
+      filed: "2026-02-24",
+      currency: "USD",
+      start: "2024-01-01",
+      end: "2024-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.3525
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.41,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000032/ceg-20251231.htm",
+        label: "Four actual quarterly common cash dividends in the exact year"
+      },
+      explanation: "The annual equity annotation uses a quarterly rate. The filing dividend table and issuer payment history identify four actual payments; the annual amount is their sum, not a forward annualization.",
+      verifiedAt: "2026-10-17",
+      payments: [
+        {
+          date: "2024-03-19",
+          value: 0.3525,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2024-06-10",
+          value: 0.3525,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2024-09-06",
+          value: 0.3525,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2024-12-06",
+          value: 0.3525,
+          currency: "USD",
+          shareClass: "Common"
+        }
+      ]
+    },
+    {
+      cik: 1868275,
+      accession: "0001868275-26-000032",
+      filed: "2026-02-24",
+      currency: "USD",
+      start: "2025-01-01",
+      end: "2025-12-31",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareDeclared",
+          value: 0.3878
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 1.5512,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000032/ceg-20251231.htm",
+        label: "Four actual quarterly common cash dividends in the exact year"
+      },
+      explanation: "The annual equity annotation uses a quarterly rate. The filing dividend table and issuer payment history identify four actual payments; the annual amount is their sum, not a forward annualization.",
+      verifiedAt: "2026-10-17",
+      payments: [
+        {
+          date: "2025-03-18",
+          value: 0.3878,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2025-06-06",
+          value: 0.3878,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2025-09-05",
+          value: 0.3878,
+          currency: "USD",
+          shareClass: "Common"
+        },
+        {
+          date: "2025-12-05",
+          value: 0.3878,
+          currency: "USD",
+          shareClass: "Common"
+        }
+      ]
+    }
+  ]
+};
 
 // src/business-classification.js
 var shareBasisChanges = {
@@ -13420,7 +13955,9 @@ function businessScopeFactCompatible(fact, change2) {
 function perShareFactCompatible(fact, change2, cutoff) {
   if (!change2 || !cutoff || cutoff < change2.effectiveDate) return true;
   const published = (fact?.filed || fact?.source?.publishedAt || fact?.asOf || "").slice(0, 10);
-  return !!published && published >= change2.effectiveDate;
+  if (!published || published < change2.effectiveDate) return false;
+  const components = fact?.components || fact?.source?.components || [];
+  return components.filter((component) => !component.unit || component.unit === "shares" || /\/shares$/.test(component.unit)).every((component) => perShareFactCompatible(component, change2, cutoff));
 }
 var filingIdentity = (url) => {
   if (typeof url !== "string") return null;
@@ -13767,6 +14304,332 @@ function modelFit(item, snapshot) {
   };
 }
 
+// src/dividend-quality.js
+var DAY = 864e5;
+var annualForms = /* @__PURE__ */ new Set(["10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A", "6-K", "6-K/A"]);
+var forms = /* @__PURE__ */ new Set([...annualForms, "10-Q", "10-Q/A"]);
+var dividendTags = [["us-gaap", "CommonStockDividendsPerShareDeclared"], ["us-gaap", "CommonStockDividendsPerShareCashPaid"], ["ifrs-full", "DividendsPaidOrdinarySharesPerShare"], ["ifrs-full", "DividendsRecognisedAsDistributionsToOwnersPerShare"]];
+var nextDay2 = (d) => new Date(Date.parse(d) + DAY).toISOString().slice(0, 10);
+var dividendDuration = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY + 1;
+var equal = (a, b) => Math.abs(a - b) <= Math.max(1e-8, Math.max(Math.abs(a), Math.abs(b)) * 1e-6);
+function dividendSeries(payload, currency, now2) {
+  const today = now2.toISOString().slice(0, 10);
+  return dividendTags.map(([namespace, tag2]) => {
+    const rows3 = (payload.facts?.[namespace]?.[tag2]?.units?.[currency + "/shares"] || []).filter((r) => validDate(r.start) && validDate(r.end) && validDate(r.filed) && r.end <= today && r.filed <= today && r.filed >= r.end && forms.has(r.form) && /^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") && Number.isFinite(r.val) && r.val >= 0 && dividendDuration(r) >= 70 && dividendDuration(r) <= 385).map((r) => ({ ...r, namespace, tag: tag2, currency })).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed));
+    return { namespace, tag: tag2, rows: rows3, annual: rows3.filter((r) => annualForms.has(r.form) && dividendDuration(r) >= 330) };
+  });
+}
+function dividendFact(row, cik) {
+  return { value: row.val, start: row.start, asOf: row.end, filed: row.filed, unit: row.currency + "/shares", currency: row.currency, basis: "Reported common-dividend-per-share fact; declared and paid scopes remain separate", source: { name: "SEC EDGAR \xB7 company filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${row.accn.replaceAll("-", "")}/${row.accn}-index.html`, accession: row.accn, tag: row.tag, namespace: row.namespace } };
+}
+function proofFor(row, cik, { item } = {}) {
+  return dividend_scope_evidence_default.records.find((p) => (!p.symbol || p.symbol === item?.symbol) && Number(p.cik) === Number(cik) && p.currency === row.currency && p.accession === row.accn && p.start === row.start && p.end === row.end && p.filed === row.filed && p.originals.some((o) => o.tag === row.namespace + ":" + row.tag && o.value === row.val) && (!p.payments || new Set(p.payments.map((r) => r.date)).size === p.payments.length && p.payments.every((r) => validDate(r.date) && r.date >= p.start && r.date <= p.end && r.currency === p.currency && Number.isFinite(r.value) && r.value >= 0) && equal(p.payments.reduce((n, r) => n + r.value, 0), p.value)));
+}
+function dividendQuarterEvidence(row, rows3, { sameFiling = false, complete = true } = {}) {
+  if (dividendDuration(row) < 115) return { status: "single-quarter", components: [row], sameFiling: true };
+  const quarterRows = rows3.filter((r) => r.start >= row.start && r.end <= row.end && r.filed <= row.filed && dividendDuration(r) <= 115 && (!sameFiling || r.accn === row.accn));
+  const components = [];
+  let start = row.start;
+  while (start <= row.end) {
+    const options = quarterRows.filter((r) => r.start === start).sort((a, b) => Number(b.accn === row.accn) - Number(a.accn === row.accn) || b.filed.localeCompare(a.filed));
+    const first = options[0];
+    if (!first) break;
+    const peers = options.filter((r) => r.end === first.end && r.accn === first.accn);
+    if (new Set(peers.map((r) => r.val)).size > 1) return { status: "conflicting-quarter-values", components };
+    components.push(first);
+    start = nextDay2(first.end);
+  }
+  if (!components.length || complete && start !== nextDay2(row.end)) return { status: "unproven", components };
+  const sum = components.reduce((n, r) => n + r.val, 0), tolerance = Math.max(1e-8, Math.max(sum, row.val) * 0.01);
+  return { status: complete ? Math.abs(sum - row.val) <= tolerance ? "matched" : "scope-conflict" : sum > row.val + tolerance ? "below-quarter-subtotal" : "partial", sum, components, sameFiling: components.every((r) => r.accn === row.accn) };
+}
+function assessDividendScope(row, series, cik, options = {}) {
+  const own = series.find((s) => s.namespace === row.namespace && s.tag === row.tag), proof = proofFor(row, cik, options);
+  if (proof) {
+    const source2 = dividendFact(row, cik), normalized = { ...row, val: proof.value, namespace: proof.tag.split(":")[0], tag: proof.tag.split(":")[1] };
+    return { row: normalized, proof, normalization: { kind: "verified-dividend-scope", original: source2, evidence: proof } };
+  }
+  const classEvidence = dividend_scope_evidence_default.records.find((p) => p.symbol && Number(p.cik) === Number(cik) && p.currency === row.currency && p.accession === row.accn && p.start === row.start && p.end === row.end && p.filed === row.filed && p.originals.some((o) => o.tag === row.namespace + ":" + row.tag && o.value === row.val));
+  if (classEvidence) return { reason: "This fact is a quarterly rate. The verified annual payment history is bound to a different or unspecified common-share listing; no annual amount is assigned without that identity.", code: "dividend_share_class_unverified", facts: [dividendFact(row, cik)] };
+  const peers = own.rows.filter((r) => r.start === row.start && r.end === row.end && r.accn === row.accn);
+  if (new Set(peers.map((r) => r.val)).size > 1) return { reason: "The same concept, filing and period contain conflicting dividend values.", code: "conflicting_dividend_period_values" };
+  const alternatives = series.flatMap((s) => s.rows).filter((r) => r.namespace === row.namespace && r.tag !== row.tag && r.start === row.start && r.end === row.end && r.accn === row.accn);
+  const conflict = alternatives.find((r) => r.val !== row.val && (Math.min(r.val, row.val) === 0 || Math.max(r.val, row.val) / Math.min(r.val, row.val) >= 1.75));
+  if (conflict) return { reason: "Common dividends declared and cash paid have materially different scopes for the same period and filing. No annual or YTD amount is selected by size.", code: "ambiguous_dividend_scope", facts: [dividendFact(row, cik), dividendFact(conflict, cik)] };
+  const bound = dividendQuarterEvidence(row, own.rows, { complete: false });
+  if (bound.status === "below-quarter-subtotal" && bound.components.length >= 2) return { reason: "The purported aggregate dividend is below independently reported, non-overlapping quarterly amounts. A quarterly rate, tax component or split basis cannot be assumed to be a period total.", code: "dividend_below_quarter_subtotal", facts: [dividendFact(row, cik), ...bound.components.map((r) => dividendFact(r, cik))] };
+  return { row };
+}
+function verifiedDividendHistory(payload, cik, currency, latest2, options = {}) {
+  const result = [];
+  for (const p of dividend_scope_evidence_default.records.filter((p2) => p2.tag === latest2.namespace + ":" + latest2.tag && Number(p2.cik) === Number(cik) && p2.currency === currency && p2.accession === latest2.accn && (!p2.symbol || p2.symbol === options.item?.symbol))) {
+    for (const original of p.originals) {
+      const [namespace, tag2] = original.tag.split(":"), raw = (payload.facts?.[namespace]?.[tag2]?.units?.[currency + "/shares"] || []).find((r) => (r.start === p.start || p.acceptInstantSource && !r.start) && r.end === p.end && r.filed === p.filed && r.accn === p.accession && equal(r.val, original.value));
+      if (!raw) continue;
+      const row = { ...raw, start: p.start, namespace, tag: tag2, currency }, checked = assessDividendScope(row, [{ namespace, tag: tag2, rows: [row] }], cik, options);
+      if (checked.row) {
+        checked.normalization.original = dividendFact({ ...row, start: raw.start }, cik);
+        result.push({ row: checked.row, checked });
+        break;
+      }
+    }
+  }
+  return result;
+}
+function paidDividendTTM(payload, cik, currency, series, now2, { item } = {}) {
+  if (!item) return { status: "not-derived", reason: "A verified listing and its share/business basis are required for a trailing per-share calculation." };
+  if (/\bclass\s+[a-z0-9-]+\b/i.test(item.name || "") || /[.-][A-C](?:\.TO)?$/.test(item.ticker || "")) return { status: "not-derived", reason: "The dividend share class requires an explicit listing-specific reconciliation." };
+  const fit = modelFit(item, { checkedAt: now2.toISOString() }), possibilities = [];
+  for (const s of series.filter((s2) => s2.tag === "CommonStockDividendsPerShareCashPaid" || s2.tag === "DividendsPaidOrdinarySharesPerShare")) {
+    const originalAnnual = s.annual[0];
+    if (!originalAnnual) continue;
+    const current = s.rows.find((r) => r.start === nextDay2(originalAnnual.end) && r.end > originalAnnual.end && dividendDuration(r) < 310);
+    if (!current) continue;
+    const prior = s.rows.find((r) => r.start === originalAnnual.start && r.accn === current.accn && Math.abs(dividendDuration(r) - dividendDuration(current)) < 14 && Math.abs((Date.parse(current.end) - Date.parse(r.end)) / DAY - 365.25) < 14);
+    if (!prior) continue;
+    const annual = s.rows.find((r) => r.start === originalAnnual.start && r.end === originalAnnual.end && r.accn === current.accn) || originalAnnual;
+    const raw = [annual, current, prior], checked = raw.map((r) => assessDividendScope(r, series, cik, { item }));
+    if (checked.some((r) => !r.row)) continue;
+    const components = checked.map((r) => r.row);
+    if (components.some((r) => r.tag !== s.tag || r.namespace !== s.namespace)) continue;
+    const checks = raw.map((r, index) => checked[index].proof ? { status: "source-verified", components: [] } : dividendQuarterEvidence(r, s.rows, { sameFiling: true }));
+    if (checks.some((c) => !["source-verified", "matched", "single-quarter"].includes(c.status))) continue;
+    const oldPrior = s.rows.filter((r) => r.start === prior.start && r.end === prior.end && r.filed <= annual.filed && r.accn !== current.accn).sort((a, b) => b.filed.localeCompare(a.filed))[0];
+    if (annual.accn !== current.accn && (!oldPrior || !equal(oldPrior.val, prior.val))) continue;
+    if (fit.perShareBasisChange && raw.some((r) => r.filed < fit.perShareBasisChange.effectiveDate)) continue;
+    if (fit.businessScopeChange && raw.some((r) => r.filed <= fit.businessScopeChange.lastPredecessorFilingDate)) continue;
+    let splitSignal = false;
+    for (const tag2 of ["StockholdersEquityNoteStockSplitConversionRatio1", "StockholdersEquityNoteStockSplitConversionRatio", "StockIssuedDuringPeriodSharesStockSplits", "StockIssuedDuringPeriodSharesReverseStockSplits"]) for (const rows3 of Object.values(payload.facts?.["us-gaap"]?.[tag2]?.units || {})) if (rows3.some((r) => validDate(r.end) && validDate(r.filed) && r.end > prior.end && r.end <= current.end && r.filed <= now2.toISOString().slice(0, 10) && r.val > 0 && r.val !== 1)) splitSignal = true;
+    if (splitSignal) continue;
+    const value = components[0].val + components[1].val - components[2].val, days2 = (Date.parse(current.end) - Date.parse(prior.end)) / DAY;
+    if (!Number.isFinite(value) || value < 0 || days2 < 350 || days2 > 385) continue;
+    const facts = components.map((r, index) => ({ ...dividendFact(r, cik), ...checked[index].normalization ? { normalization: checked[index].normalization } : {}, scopeEvidence: { status: checks[index].status, components: checks[index].components.map((r2) => dividendFact(r2, cik)) } }));
+    possibilities.push({
+      status: "ready",
+      value,
+      currency,
+      basis: "current",
+      kind: "ttm-paid",
+      periodStart: nextDay2(prior.end),
+      asOf: current.end,
+      filed: current.filed,
+      description: "Derived trailing 12-month common cash dividends paid per share = verified annual + current YTD \u2212 comparable prior YTD. Historical distributions, including any unclassified specials; not a current annualized declaration.",
+      source: { name: "SEC EDGAR \xB7 derived trailing common cash dividends", url: facts[1].source.url, accession: current.accn, namespace: s.namespace, tag: s.tag, components: facts },
+      components: facts,
+      normalization: { kind: "scope-verified-ttm-paid-dividends", formula: "annual + current YTD - prior YTD", scopeEvidence: checks.map(({ components: components2, ...rest }) => rest) },
+      warnings: ["Trailing distributions can include special dividends and do not establish a recurring regular-only payout or a future declaration.", "TTM components retain their own filing dates and common-share basis; this per-share cash distribution sum is not an EPS aggregation."]
+    });
+  }
+  return possibilities.sort((a, b) => b.asOf.localeCompare(a.asOf) || b.filed.localeCompare(a.filed))[0] || { status: "not-derived", reason: "A newer paid-dividend TTM was not established: every annual/YTD component needs independent aggregate scope, additive quarter evidence and a compatible share/business basis." };
+}
+
+// src/ddm-data.js
+var DAY2 = 864e5;
+function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), options = {}) {
+  if (Number(payload?.cik) !== Number(cik)) throw Error("The filing entity does not match this listing.");
+  const currency = options.currency || "USD", series = dividendSeries(payload, currency, now2), candidates = series.filter((s) => s.annual.length).sort((a, b) => b.annual[0].end.localeCompare(a.annual[0].end));
+  if (!candidates.length) return { status: "unavailable", reason: "No supported annual matching-currency ordinary/common-dividend-per-share disclosure was found. Missing data does not establish that the company pays no dividend." };
+  const original = candidates[0].annual[0];
+  if ((+now2 - Date.parse(original.end)) / DAY2 > 550) return { status: "stale", reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.", asOf: original.end };
+  const assessment = assessDividendScope(original, series, cik, options);
+  if (!assessment.row) return { status: "unavailable", asOf: original.end, reason: assessment.reason, qualityIssues: [{ metric: "dividend", severity: "material", code: assessment.code, message: assessment.reason, facts: assessment.facts || [dividendFact(original, cik)] }] };
+  const latest2 = assessment.row;
+  if ((+now2 - Date.parse(latest2.end)) / DAY2 > 550) return { status: "stale", reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.", asOf: latest2.end };
+  const normalizedFact = (row, checked) => ({ ...dividendFact(row, cik), ...checked.normalization ? { normalization: checked.normalization } : {}, ...checked.proof ? { source: { ...dividendFact(row, cik).source, ...checked.proof.source, accession: row.accn, tag: row.tag, namespace: row.namespace } } : {} });
+  const matching = series.find((s) => s.namespace === latest2.namespace && s.tag === latest2.tag), history2 = verifiedDividendHistory(payload, cik, currency, latest2, options), sameFiling = [...new Map([...(matching?.annual || []).filter((row) => row.accn === latest2.accn).map((row) => {
+    const checked = assessDividendScope(row, series, cik, options);
+    return [row.end, checked.row ? normalizedFact(checked.row, checked) : null];
+  }), ...history2.map(({ row, checked }) => [row.end, normalizedFact(row, checked)])]).values()].filter(Boolean).sort((a, b) => a.asOf.localeCompare(b.asOf));
+  const first = sameFiling[0], years = first ? Math.round((Date.parse(latest2.end) - Date.parse(first.asOf)) / DAY2 / 365.25) : 0;
+  const historicalGrowth = years >= 1.5 && first.value > 0 && latest2.val > 0 ? (latest2.val / first.value) ** (1 / years) - 1 : null;
+  const reported = normalizedFact(latest2, assessment), growth = Number.isFinite(historicalGrowth) ? { value: historicalGrowth, start: first.asOf, end: latest2.end, years, description: "Annual dividend CAGR from comparative years in the same filing; historical, not a forecast.", components: sameFiling } : null;
+  const annual = {
+    status: "ready",
+    value: latest2.val,
+    currency,
+    basis: "current",
+    kind: assessment.proof ? "annual-scope-verified" : "annual-reported",
+    periodStart: latest2.start,
+    asOf: latest2.end,
+    filed: latest2.filed,
+    description: `Latest full fiscal-year dividends ${latest2.tag.endsWith("Declared") ? "declared" : "paid"} per share; not a current annualized dividend rate.`,
+    source: reported.source,
+    historicalGrowth: growth,
+    ...assessment.normalization ? { normalization: assessment.normalization } : {},
+    warnings: ["Reported totals can include special dividends. Check the issuer\u2019s regular payout policy and share basis before relying on a perpetual forecast."]
+  };
+  const trailing = paidDividendTTM(payload, cik, currency, series, now2, options);
+  if (trailing.status === "ready" && trailing.asOf > annual.asOf) return { ...trailing, historicalGrowth: growth, annualBase: annual };
+  return { ...annual, trailingObservation: trailing };
+}
+function findSECListing(payload, item) {
+  if (!Array.isArray(payload?.fields) || !Array.isArray(payload?.data))
+    throw new Error("The SEC listing directory is unavailable.");
+  const positions = Object.fromEntries(
+    payload.fields.map((key2, index) => [key2, index])
+  );
+  if (!["cik", "ticker", "exchange"].every(
+    (key2) => Number.isInteger(positions[key2])
+  ))
+    throw new Error("The SEC listing directory has changed.");
+  const ticker = item.ticker.replaceAll(".", "-");
+  const match = payload.data.find(
+    (row) => row[positions.ticker] === ticker && String(row[positions.exchange]).toUpperCase() === item.providerExchange.toUpperCase()
+  );
+  const cik = match?.[positions.cik];
+  if (!Number.isInteger(cik) || cik <= 0 || cik > 9999999999)
+    throw new Error(
+      "No matching SEC entity and exchange were found for this listing."
+    );
+  return String(cik).padStart(10, "0");
+}
+
+// src/issuer-map.js
+var canadian = {
+  "RY.TO": [1000275, "RY", "NYSE"],
+  // ROYAL BANK OF CANADA
+  "TD.TO": [947263, "TD", "NYSE"],
+  // TORONTO DOMINION BANK
+  "CM.TO": [1045520, "CM", "NYSE"],
+  // CANADIAN IMPERIAL BANK OF COMMERCE /CAN/
+  "BMO.TO": [927971, "BMO", "NYSE"],
+  // BANK OF MONTREAL /CAN/
+  "BNS.TO": [9631, "BNS", "NYSE"],
+  // BANK OF NOVA SCOTIA
+  "ENB.TO": [895728, "ENB", "NYSE"],
+  // ENBRIDGE INC
+  "SHOP.TO": [1594805, "SHOP", "NASDAQ"],
+  // SHOPIFY INC.
+  "CNQ.TO": [1017413, "CNQ", "NYSE"],
+  // CANADIAN NATURAL RESOURCES Ltd
+  "SU.TO": [311337, "SU", "NYSE"],
+  // SUNCOR ENERGY INC
+  "AEM.TO": [2809, "AEM", "NYSE"],
+  // AGNICO EAGLE MINES LTD
+  "BN.TO": [1001085, "BN", "NYSE"],
+  // BROOKFIELD Corp /ON/
+  "CP.TO": [16875, "CP", "NYSE"],
+  // CANADIAN PACIFIC KANSAS CITY LTD/CN
+  "MFC.TO": [1086888, "MFC", "NYSE"],
+  // MANULIFE FINANCIAL CORP
+  "ABX.TO": [756894, "B", "NYSE"],
+  // BARRICK MINING CORP
+  "CNR.TO": [16868, "CNI", "NYSE"],
+  // CANADIAN NATIONAL RAILWAY CO
+  "TRP.TO": [1232384, "TRP", "NYSE"],
+  // TC ENERGY CORP
+  "WPM.TO": [1323404, "WPM", "NYSE"],
+  // Wheaton Precious Metals Corp.
+  "FNV.TO": [1456346, "FNV", "NYSE"],
+  // FRANCO NEVADA Corp
+  "SLF.TO": [1097362, "SLF", "NYSE"],
+  // SUN LIFE FINANCIAL INC
+  "CVE.TO": [1475260, "CVE", "NYSE"],
+  // CENOVUS ENERGY INC.
+  "WCN.TO": [1318220, "WCN", "NYSE"],
+  // Waste Connections, Inc.
+  "CLS.TO": [1030894, "CLS", "NYSE"],
+  // CELESTICA INC
+  "CCO.TO": [1009001, "CCJ", "NYSE"],
+  // CAMECO CORP
+  "NTR.TO": [1725964, "NTR", "NYSE"],
+  // Nutrien Ltd.
+  "TECK.B.TO": [886986, "TECK", "NYSE"],
+  // TECK RESOURCES LTD
+  "K.TO": [701818, "KGC", "NYSE"],
+  // KINROSS GOLD CORP
+  "PPL.TO": [1546066, "PBA", "NYSE"],
+  // PEMBINA PIPELINE CORP
+  "FTS.TO": [1666175, "FTS", "NYSE"],
+  // Fortis Inc.
+  "QSR.TO": [1618756, "QSR", "NYSE"],
+  // Restaurant Brands International Inc.
+  "IMO.TO": [49938, "IMO", "NYSE"],
+  // IMPERIAL OIL LTD
+  "BCE.TO": [718940, "BCE", "NYSE"],
+  // BCE INC
+  "BAM.TO": [1937926, "BAM", "NYSE"],
+  // Brookfield Asset Management Ltd.
+  "BIP.UN.TO": [1406234, "BIP", "NYSE"],
+  // Brookfield Infrastructure Partners L.P.
+  "MG.TO": [749098, "MGA", "NYSE"],
+  // MAGNA INTERNATIONAL INC
+  "GIB.A.TO": [1061574, "GIB", "NYSE"],
+  // CGI INC
+  "TRI.TO": [1075124, "TRI", "NASDAQ"],
+  // THOMSON REUTERS CORP /CAN/
+  "T.TO": [868675, "TU", "NYSE"],
+  // TELUS CORP
+  "RCI.B.TO": [733099, "RCI", "NYSE"],
+  // ROGERS COMMUNICATIONS INC
+  "GIL.TO": [1061894, "GIL", "NYSE"],
+  // Gildan Activewear Inc.
+  "CAE.TO": [1173382, "CAE", "NASDAQ"],
+  // CAE INC
+  "OTEX.TO": [1002638, "OTEX", "NASDAQ"],
+  // OPEN TEXT CORP
+  "FSV.TO": [1637810, "FSV", "NASDAQ"]
+  // FirstService Corp
+};
+function secReference(item) {
+  if (canadian[item.ticker]) {
+    const [cik, ticker, providerExchange] = canadian[item.ticker];
+    return {
+      cik: String(cik).padStart(10, "0"),
+      lookup: { ...item, ticker, providerExchange },
+      currency: "CAD",
+      crossListed: true
+    };
+  }
+  if (item.currency === "USD" && ["NASDAQ", "NYSE", "CBOE"].includes(item.providerExchange) && !item.depositaryReceipt && !/\bADR\b/.test(item.name))
+    return { lookup: item, cik: item.cik, currency: "USD", crossListed: false };
+  return null;
+}
+
+// worker/sec-source.js
+async function sourceJSON(url, fetcher2 = fetch, ttl = 3600, token) {
+  const response = await fetcher2(url, {
+    headers: {
+      Accept: "application/json",
+      "User-Agent": "TickerLantern/1.0 (+https://tickerlantern.com)",
+      ...token ? { Authorization: "Bearer " + token } : {}
+    },
+    signal: AbortSignal.timeout(18e3),
+    cf: { cacheTtl: ttl, cacheEverything: true }
+  });
+  if (!response.ok) throw new Error("Source unavailable");
+  const body = await response.text();
+  if (body.length > 12e6) throw new Error("Source too large");
+  return JSON.parse(body);
+}
+async function loadIssuerFacts(item, fetcher2 = fetch) {
+  const reference = secReference(item);
+  if (!reference) throw new Error("No verified issuer reference");
+  const directory2 = await sourceJSON(
+    "https://www.sec.gov/files/company_tickers_exchange.json",
+    fetcher2,
+    86400
+  );
+  const cik = findSECListing(directory2, reference.lookup);
+  if (reference.cik && reference.cik !== cik)
+    throw new Error("Issuer reference changed");
+  const facts = await sourceJSON(
+    `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`,
+    fetcher2
+  );
+  if (Number(facts?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
+  return { cik, facts, reference };
+}
+
+// worker/currency-data.js
+async function usdCadRate(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
+  const url = "https://www.bankofcanada.ca/valet/observations/FXUSDCAD/json?recent=15";
+  const data = await sourceJSON(url, fetcher2), today = now2.toISOString().slice(0, 10);
+  const row = data.observations?.filter((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.d) && r.d <= today && now2 - Date.parse(r.d) <= 10 * 864e5 && Number(r.FXUSDCAD?.v) > 0).sort((a, b) => b.d.localeCompare(a.d))[0];
+  if (!row) throw Error("No current FX observation");
+  return { value: Number(row.FXUSDCAD.v), currency: "CAD/USD", asOf: row.d, source: { name: "Bank of Canada daily average USD/CAD", url }, basis: "Daily average exchange-rate assumption; not a real-time quote" };
+}
+
 // src/macro-data.js
 function parseTreasuryXML(text) {
   if (!text.includes("DailyTreasuryYieldCurveRateData")) throw new Error("The Treasury source returned an unexpected format.");
@@ -13874,10 +14737,10 @@ async function issuerDividend(item, fetcher2 = fetch, now2 = /* @__PURE__ */ new
 
 // src/revenue-scope.js
 var revenueTags = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet", "Revenue", "RealEstateRevenueNet", "OperatingLeaseLeaseIncome", "RevenueFromContractWithCustomerIncludingAssessedTax", "RevenuesNetOfInterestExpense", "RegulatedAndUnregulatedOperatingRevenue"];
-var DAY2 = 864e5;
-var forms = /* @__PURE__ */ new Set(["10-K", "10-K/A", "10-Q", "10-Q/A", "20-F", "20-F/A", "40-F", "40-F/A", "6-K", "6-K/A"]);
-var duration2 = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY2 + 1;
-var revenueScopeKey = (currency, start, end, accession2) => [currency, start, end, accession2].join("|");
+var DAY3 = 864e5;
+var forms2 = /* @__PURE__ */ new Set(["10-K", "10-K/A", "10-Q", "10-Q/A", "20-F", "20-F/A", "40-F", "40-F/A", "6-K", "6-K/A"]);
+var duration = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY3 + 1;
+var revenueScopeKey = (currency, start, end, accession) => [currency, start, end, accession].join("|");
 function revenueScopeCandidates(rows3, currency) {
   if (!rows3.length) return [];
   const first = rows3[0];
@@ -13921,21 +14784,21 @@ function attachRevenueProof(fact, proof) {
 function revenueScopeRequests(payload, cik, currency, now2 = /* @__PURE__ */ new Date(), { force = false } = {}) {
   const today = now2.toISOString().slice(0, 10), rows3 = [];
   for (const tag2 of revenueTags) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[currency] || []) {
-    if (!validDate(r.start) || !validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val) || duration2(r) < 70 || duration2(r) > 385) continue;
+    if (!validDate(r.start) || !validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms2.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val) || duration(r) < 70 || duration(r) > 385) continue;
     rows3.push({ ...r, namespace, tag: tag2, unit: currency });
   }
   rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || revenueTags.indexOf(a.tag) - revenueTags.indexOf(b.tag));
-  const annual = rows3.filter((r) => !r.form.startsWith("10-Q") && duration2(r) >= 330 && now2 - Date.parse(r.end) < 1400 * DAY2), ends = [...new Set(annual.map((r) => r.end))].slice(0, 3), periods = [];
+  const annual = rows3.filter((r) => !r.form.startsWith("10-Q") && duration(r) >= 330 && now2 - Date.parse(r.end) < 1400 * DAY3), ends = [...new Set(annual.map((r) => r.end))].slice(0, 3), periods = [];
   for (const end of ends) {
     const first = annual.find((r) => r.end === end);
     periods.push(rows3.filter((r) => r.end === first.end && r.start === first.start));
   }
   const fy = annual.find((r) => r.end === ends[0]);
   if (fy) {
-    const start = new Date(Date.parse(fy.end) + DAY2).toISOString().slice(0, 10), current = rows3.find((r) => r.end > fy.end && r.start === start && duration2(r) < 310);
+    const start = new Date(Date.parse(fy.end) + DAY3).toISOString().slice(0, 10), current = rows3.find((r) => r.end > fy.end && r.start === start && duration(r) < 310);
     if (current) {
       periods.push(rows3.filter((r) => r.end === current.end && r.start === current.start));
-      const prior = rows3.filter((r) => r.start === fy.start && Math.abs((Date.parse(r.end) - Date.parse(current.end)) / DAY2 + 365.25) < 14 && Math.abs(duration2(r) - duration2(current)) < 14).sort((a, b) => Number(b.accn === current.accn) - Number(a.accn === current.accn) || b.filed.localeCompare(a.filed))[0];
+      const prior = rows3.filter((r) => r.start === fy.start && Math.abs((Date.parse(r.end) - Date.parse(current.end)) / DAY3 + 365.25) < 14 && Math.abs(duration(r) - duration(current)) < 14).sort((a, b) => Number(b.accn === current.accn) - Number(a.accn === current.accn) || b.filed.localeCompare(a.filed))[0];
       if (prior) periods.push(rows3.filter((r) => r.end === prior.end && r.start === prior.start).sort((a, b) => Number(b.accn === current.accn) - Number(a.accn === current.accn) || b.filed.localeCompare(a.filed) || revenueTags.indexOf(a.tag) - revenueTags.indexOf(b.tag)));
     }
   }
@@ -13953,9 +14816,9 @@ function revenueScopeRequests(payload, cik, currency, now2 = /* @__PURE__ */ new
 }
 
 // src/fundamentals.js
-var DAY3 = 864e5;
+var DAY4 = 864e5;
 var SHARE_SCALE_FACTORS = [1e3, 1e6, 1e-3, 1e-6];
-var forms2 = /* @__PURE__ */ new Set([
+var forms3 = /* @__PURE__ */ new Set([
   "10-K",
   "10-K/A",
   "40-F",
@@ -14056,7 +14919,8 @@ function financialFact(row, metric, cik) {
     filed: row.filed,
     unit: row.unit,
     ...row.start ? { start: row.start } : {},
-    basis: metric === "capex" && row.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric === "shares" ? "Reported weighted-average diluted share count; not current fully diluted shares" : instantMetrics.has(metric) ? "Reported period-end balance" : "Reported filing fact",
+    ...metric === "netIncome" ? { label: row.tag === "NetIncomeLossAvailableToCommonStockholdersBasic" ? "Net income available to common shareholders \xB7 basic" : row.tag === "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity" ? "Profit attributable to ordinary equity holders" : "Reported net income / loss" } : {},
+    basis: metric === "netIncome" && row.tag === "NetIncomeLossAvailableToCommonStockholdersBasic" ? "Reported basic common-income numerator after preferred dividends; not total company net income or the diluted EPS numerator" : metric === "netIncome" && row.tag === "ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity" ? "Reported profit attributable to ordinary equity holders of the parent; not consolidated profit before other ownership claims" : metric === "capex" && row.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric === "shares" ? "Reported weighted-average diluted share count; not current fully diluted shares" : instantMetrics.has(metric) ? "Reported period-end balance" : "Reported filing fact",
     source: {
       name: "SEC EDGAR",
       tag: row.namespace + ":" + row.tag,
@@ -14067,6 +14931,68 @@ function financialFact(row, metric, cik) {
 }
 function normalizeMetricQuality(metrics, { payload, cik, series = {} }) {
   const issues = [], samePeriod = (a, b) => a && b && a.asOf === b.asOf && a.start === b.start && a.source.url === b.source.url;
+  const hpeCommonIncome = metrics.commonNetIncomeDiluted;
+  if (Number(cik) === 1645590 && hpeCommonIncome?.unit === "USD" && hpeCommonIncome.value === 57e6 && hpeCommonIncome.start === "2024-11-01" && hpeCommonIncome.asOf === "2025-10-31" && hpeCommonIncome.filed === "2025-12-18" && hpeCommonIncome.source.accession === "0001645590-25-000130" && hpeCommonIncome.source.tag === "us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted") {
+    const evidence = {
+      value: -59e6,
+      unit: "USD",
+      start: "2024-11-01",
+      asOf: "2025-10-31",
+      filed: "2025-12-18",
+      source: {
+        name: "HPE FY2025 Form 10-K \xB7 Note 16 reported diluted EPS numerator",
+        tag: "hpe:NetIncomeLossAvailableToCommonStockholdersDiluted1",
+        accession: "0001645590-25-000130",
+        url: "https://www.sec.gov/Archives/edgar/data/1645590/000164559025000130/hpe-20251031.htm",
+        location: "Note 16: Net (Loss) Earnings Per Share; fiscal 2025 column, diluted numerator"
+      }
+    };
+    metrics.commonNetIncomeDiluted = {
+      ...hpeCommonIncome,
+      value: evidence.value,
+      basis: "Reported HPE FY2025 Note 16 diluted common-income numerator: loss USD59m. Preferred conversion is anti-dilutive; no USD116m preferred-dividend addback is made. This is a source-verified amount, not a calculation from rounded EPS.",
+      source: { ...hpeCommonIncome.source, name: "SEC EDGAR \xB7 source-reviewed HPE EPS note", tag: evidence.source.tag },
+      normalization: { kind: "verified-diluted-common-income-scope", original: hpeCommonIncome, evidence }
+    };
+    if (metrics.eps?.source?.name?.includes("derived")) delete metrics.eps;
+    issues.push({
+      metric: "commonNetIncomeDiluted",
+      severity: "corrected",
+      code: "hpe_diluted_common_income_scope_reconciled",
+      start: hpeCommonIncome.start,
+      end: hpeCommonIncome.asOf,
+      message: "HPE FY2025 uses a custom EPS-note concept for the actual diluted common loss of USD59m. The standard-tagged USD57m belongs to income attributable to HPE before preferred dividends and cannot be the loss-period diluted EPS numerator. The original fact is preserved; directly reported diluted EPS is unchanged.",
+      facts: [hpeCommonIncome, metrics.commonNetIncomeDiluted]
+    });
+  }
+  const investment = metrics.capex;
+  const hartfordPropertyNotes = {
+    "2025-12-31|0000874766-26-000012": "R8.htm",
+    "2024-12-31|0000874766-26-000012": "R8.htm",
+    "2023-12-31|0000874766-26-000012": "R8.htm",
+    "2026-06-30|0000874766-26-000060": "R6.htm",
+    "2025-06-30|0000874766-26-000060": "R6.htm"
+  };
+  const netPropertyNote = Number(cik) === 874766 && investment?.unit === "USD" && investment.source.tag === "us-gaap:PaymentsToAcquirePropertyPlantAndEquipment" && hartfordPropertyNotes[investment.asOf + "|" + investment.source.accession];
+  if (netPropertyNote) {
+    const source2 = { name: "Hartford \xB7 net property additions/disposals cash-flow row", url: `https://www.sec.gov/Archives/edgar/data/874766/${investment.source.accession.replaceAll("-", "")}/${netPropertyNote}` };
+    metrics.netPropertyInvestment = {
+      ...investment,
+      label: "Net property investment \xB7 additions positive, disposals negative",
+      basis: "Reported net property additions/disposals, not verified gross capital expenditure. Negative additions indicate net cash proceeds from property disposals; no absolute-value conversion is applied.",
+      normalization: { kind: "net-property-investment-scope", original: investment, evidence: source2 }
+    };
+    delete metrics.capex;
+    issues.push({
+      metric: "capex",
+      severity: "material",
+      code: "net_property_investment_not_gross_capex",
+      start: investment.start,
+      end: investment.asOf,
+      message: "The tagged PP&E amount is a net additions/disposals cash-flow row. It is retained as signed net property investment and withheld from gross-capex valuation inputs; disposal proceeds cannot be turned into spending by taking an absolute value.",
+      facts: [investment, metrics.netPropertyInvestment]
+    });
+  }
   const cp = metrics.commercialPaper;
   const nxpNotes = {
     "2025-12-31|0001413447-26-000008": "https://www.sec.gov/Archives/edgar/data/1413447/000141344726000008/nxpi-20251231.htm",
@@ -14142,7 +15068,7 @@ function normalizeMetricQuality(metrics, { payload, cik, series = {} }) {
   if (shares?.value > 0 && Number.isFinite(eps?.value) && eps.value !== 0 && !eps.source.name.includes("derived") && Number.isFinite(income?.value) && income.value !== 0 && samePeriod(shares, eps) && samePeriod(shares, income)) {
     const ratio = income.value / (shares.value * eps.value), factor = SHARE_SCALE_FACTORS.find((n) => Math.abs(ratio / n - 1) < 0.1);
     if (factor) {
-      const corroboration = (payload.facts?.dei?.EntityCommonStockSharesOutstanding?.units?.shares || []).filter((r) => r.accn === shares.source.accession && !r.start && Number.isFinite(r.val) && r.val > 0 && validDate(r.end) && r.end <= shares.filed && (Date.parse(shares.filed) - Date.parse(r.end)) / DAY3 < 95 && Math.abs(shares.value * factor / r.val - 1) < 0.2).sort((a, b) => Math.abs(Date.parse(a.end) - Date.parse(shares.asOf)) - Math.abs(Date.parse(b.end) - Date.parse(shares.asOf)))[0];
+      const corroboration = (payload.facts?.dei?.EntityCommonStockSharesOutstanding?.units?.shares || []).filter((r) => r.accn === shares.source.accession && !r.start && Number.isFinite(r.val) && r.val > 0 && validDate(r.end) && r.end <= shares.filed && (Date.parse(shares.filed) - Date.parse(r.end)) / DAY4 < 95 && Math.abs(shares.value * factor / r.val - 1) < 0.2).sort((a, b) => Math.abs(Date.parse(a.end) - Date.parse(shares.asOf)) - Math.abs(Date.parse(b.end) - Date.parse(shares.asOf)))[0];
       if (corroboration) {
         const common = financialFact({ ...corroboration, namespace: "dei", tag: "EntityCommonStockSharesOutstanding", unit: "shares" }, "commonShares", cik);
         metrics.shares = {
@@ -14172,7 +15098,7 @@ function normalizeMetricQuality(metrics, { payload, cik, series = {} }) {
   }
   const unresolvedShares = metrics.shares;
   if (unresolvedShares?.value > 0 && !unresolvedShares.normalization?.factor) {
-    const conflict = (payload.facts?.dei?.EntityCommonStockSharesOutstanding?.units?.shares || []).find((r) => r.accn === unresolvedShares.source.accession && !r.start && r.val > 0 && validDate(r.end) && r.end <= unresolvedShares.filed && (Date.parse(unresolvedShares.filed) - Date.parse(r.end)) / DAY3 < 95 && SHARE_SCALE_FACTORS.some((factor) => Math.abs(r.val / unresolvedShares.value / factor - 1) < 0.2));
+    const conflict = (payload.facts?.dei?.EntityCommonStockSharesOutstanding?.units?.shares || []).find((r) => r.accn === unresolvedShares.source.accession && !r.start && r.val > 0 && validDate(r.end) && r.end <= unresolvedShares.filed && (Date.parse(unresolvedShares.filed) - Date.parse(r.end)) / DAY4 < 95 && SHARE_SCALE_FACTORS.some((factor) => Math.abs(r.val / unresolvedShares.value / factor - 1) < 0.2));
     if (conflict) {
       const rejectedEPS = metrics.eps;
       const directTie = eps && income && !eps.source.name.includes("derived") && samePeriod(unresolvedShares, eps) && samePeriod(unresolvedShares, income) && Math.abs(income.value / (unresolvedShares.value * eps.value) - 1) < 0.1;
@@ -14222,9 +15148,9 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
     for (const name of names)
       for (const namespace of ["us-gaap", "ifrs-full"])
         for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit] || []) {
-          if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || row.filed < row.end || !forms2.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
+          if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || row.filed < row.end || !forms3.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
             continue;
-          const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY3 + 1;
+          const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY4 + 1;
           if (instantMetrics.has(metric) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
             continue;
           all.push({ ...row, tag: name, namespace, unit });
@@ -14238,7 +15164,7 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
     ...new Set([...series.revenue, ...series.eps].map((r) => r.end))
   ].sort().reverse().slice(0, 3);
   let reconciledDATag;
-  const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY3 <= 1400).map((end) => {
+  const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY4 <= 1400).map((end) => {
     const metrics = {}, qualityIssues2 = [];
     const anchor = series.revenue.find((r) => r.end === end) || series.eps.find((r) => r.end === end);
     for (const [metric, rows3] of Object.entries(series)) {
@@ -14297,7 +15223,7 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
     return { start: anchor.start, end, metrics, qualityIssues: qualityIssues2 };
   });
   return {
-    status: !annual.length ? "unavailable" : (+now2 - Date.parse(annual[0].end)) / DAY3 > 550 ? "stale" : "ready",
+    status: !annual.length ? "unavailable" : (+now2 - Date.parse(annual[0].end)) / DAY4 > 550 ? "stale" : "ready",
     currency,
     annual,
     asOf: annual[0]?.end || null,
@@ -14310,10 +15236,10 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
 }
 
 // src/recent-financials.js
-var DAY4 = 864e5;
-var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY4 + 1;
-var forms3 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
-var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY4 <= n;
+var DAY5 = 864e5;
+var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY5 + 1;
+var forms4 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
+var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY5 <= n;
 function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE__ */ new Date()) {
   if (Number(payload?.cik) !== Number(cik)) throw Error("Issuer mismatch");
   const today = now2.toISOString().slice(0, 10), fy = annual?.annual?.[0];
@@ -14323,15 +15249,15 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
     const unit = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
     const rows3 = [];
     for (const tag2 of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[unit] || []) {
-      if (!validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms3.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
+      if (!validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms4.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
       if (instantMetrics.has(metric) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
       rows3.push({ ...r, tag: tag2, namespace, unit });
     }
     series[metric] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
   }
-  const nextDay2 = (end) => new Date(Date.parse(end) + DAY4).toISOString().slice(0, 10);
-  const anchor = [...series.revenue || [], ...series.eps || []].filter((r) => r.end > fy.end && days(r) < 310 && r.start === nextDay2(fy.end)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
-  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY4) return { recent: null, ttm: null };
+  const nextDay3 = (end) => new Date(Date.parse(end) + DAY5).toISOString().slice(0, 10);
+  const anchor = [...series.revenue || [], ...series.eps || []].filter((r) => r.end > fy.end && days(r) < 310 && r.start === nextDay3(fy.end)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
+  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY5) return { recent: null, ttm: null };
   const latest2 = {}, prior = {}, ttm = {}, qualityIssues2 = [];
   let priorPeriod = null;
   for (const [metric, rows3] of Object.entries(series)) {
@@ -14359,7 +15285,7 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
     }
     latest2[metric] = metric === "revenue" ? attachRevenueProof(financialFact(c, metric, cik), revenueProof) : financialFact(c, metric, cik);
     if (instantMetrics.has(metric)) continue;
-    const priorMatches = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY4).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && (metric === "revenue" || r.tag === c.tag && r.namespace === c.namespace)).sort((a, b) => Number(b.accn === c.accn) - Number(a.accn === c.accn) || b.filed.localeCompare(a.filed));
+    const priorMatches = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY5).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && (metric === "revenue" || r.tag === c.tag && r.namespace === c.namespace)).sort((a, b) => Number(b.accn === c.accn) - Number(a.accn === c.accn) || b.filed.localeCompare(a.filed));
     let p = priorMatches[0], priorRevenueProof;
     if (metric === "revenue" && p) {
       const selection = selectRevenueRow(priorMatches.filter((r) => r.start === p.start && r.end === p.end), payload, cik);
@@ -14408,7 +15334,7 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       qualityIssues2.push({ metric, severity: "material", code: "ttm_fiscal_basis_mismatch", message: "TTM was withheld because annual and comparable YTD facts do not share the same fiscal start, unit and accounting concept.", facts: [a, c, p] });
       continue;
     }
-    const span = (Date.parse(c.asOf) - Date.parse(p.asOf)) / DAY4;
+    const span = (Date.parse(c.asOf) - Date.parse(p.asOf)) / DAY5;
     if (span < 330 || span > 385) continue;
     const value = a.value + c.value - p.value;
     if (!Number.isFinite(value)) continue;
@@ -14417,12 +15343,12 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       warnings.push("The prior YTD comparative is from a different filing; restatement comparability is unverified.");
       qualityIssues2.push({ metric, severity: "review", code: "ttm_comparative_filing_mismatch", message: warnings[0], facts: [c, p] });
     }
-    ttm[metric] = { ...c, value, start: nextDay2(p.asOf), basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; matching fiscal start and accounting concept", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.source.tag, url: c.source.url, components }, ...warnings.length ? { warnings } : {} };
+    ttm[metric] = { ...c, value, start: nextDay3(p.asOf), basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; matching fiscal start and accounting concept", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.source.tag, url: c.source.url, components }, ...warnings.length ? { warnings } : {} };
   }
   deriveSubtotals(ttm);
   const growth = {};
   for (const k of Object.keys(latest2)) if (!instantMetrics.has(k) && prior[k]?.value > 0 && latest2[k].start === anchor.start && prior[k].start === (fy.start || fy.metrics?.[k]?.start)) growth[k] = { value: latest2[k].value / prior[k].value - 1, basis: "Year-to-date change versus comparable prior-year period", source: latest2[k].source };
-  const earliest = priorPeriod?.end ? nextDay2(priorPeriod.end) : new Date(Date.parse(anchor.end) - 364 * DAY4).toISOString().slice(0, 10);
+  const earliest = priorPeriod?.end ? nextDay3(priorPeriod.end) : new Date(Date.parse(anchor.end) - 364 * DAY5).toISOString().slice(0, 10);
   return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest2, prior: { start: priorPeriod?.start, end: priorPeriod?.end, metrics: prior }, growth, qualityIssues: qualityIssues2, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, qualityIssues: qualityIssues2, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
 }
 
@@ -14793,8 +15719,8 @@ async function resolveRevenueScopes(payload, cik, currencies, fetcher2, now2 = /
     if (!groups2.has(key2)) groups2.set(key2, []);
     groups2.get(key2).push(request);
   }
-  for (const [accession2, group] of groups2) {
-    const base = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accession2.replaceAll("-", "")}/`, summaryURL = base + "FilingSummary.xml";
+  for (const [accession, group] of groups2) {
+    const base = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accession.replaceAll("-", "")}/`, summaryURL = base + "FilingSummary.xml";
     try {
       const reports = incomeStatementReports(await sourceText(summaryURL, fetcher2));
       if (!reports.length) {
@@ -14821,10 +15747,10 @@ async function resolveRevenueScopes(payload, cik, currencies, fetcher2, now2 = /
         }
         const unique2 = [...deduped.values()];
         const diagnostics = selected?.diagnostics || diagnosticByKey.get(request.key) || {};
-        scopes[request.key] = unique2.length === 1 ? unique2[0] : { schema: 1, status: "unresolved", cik: Number(cik), accession: accession2, start: request.start, end: request.end, currency: request.currency, reasonCode: unique2.length ? "conflicting_consolidated_revenue_rows" : diagnostics.reasonCode || "statement_revenue_unmatched", reason: unique2.length ? "Consolidated income statements contain conflicting eligible revenue rows" : diagnostics.reason || "No statement revenue row matched the reported concept, value, currency and period", source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
+        scopes[request.key] = unique2.length === 1 ? unique2[0] : { schema: 1, status: "unresolved", cik: Number(cik), accession, start: request.start, end: request.end, currency: request.currency, reasonCode: unique2.length ? "conflicting_consolidated_revenue_rows" : diagnostics.reasonCode || "statement_revenue_unmatched", reason: unique2.length ? "Consolidated income statements contain conflicting eligible revenue rows" : diagnostics.reason || "No statement revenue row matched the reported concept, value, currency and period", source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
       }
     } catch (error) {
-      for (const request of group) scopes[request.key] = { schema: 1, status: "unresolved", cik: Number(cik), accession: accession2, start: request.start, end: request.end, currency: request.currency, reasonCode: error.reasonCode || "official_statement_source_unavailable", reason: error.message, source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
+      for (const request of group) scopes[request.key] = { schema: 1, status: "unresolved", cik: Number(cik), accession, start: request.start, end: request.end, currency: request.currency, reasonCode: error.reasonCode || "official_statement_source_unavailable", reason: error.message, source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
     }
   }
   return { ...payload, revenueScopes: scopes, ...force ? { revenueScopePolicy: { requireStatementProof: true } } : {} };
@@ -14924,13 +15850,14 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
     data.financials = parseFinancials(facts, cik, item.currency, now2);
     Object.assign(data.financials, parseRecentFinancials(facts, cik, item.currency, data.financials, now2));
     data.dividend = parseSECDividends(facts, cik, now2, {
-      currency: item.currency
+      currency: item.currency,
+      item
     });
     if (data.financials.status !== "ready" && item.currency === "CAD" && secReference(item)?.crossListed) {
       const usd = parseFinancials(facts, cik, "USD", now2);
       Object.assign(usd, parseRecentFinancials(facts, cik, "USD", usd, now2));
       if (usd.status === "ready") try {
-        const converted = convertUSDToCAD(usd, parseSECDividends(facts, cik, now2, { currency: "USD" }), await usdCadRate(fetcher2, now2));
+        const converted = convertUSDToCAD(usd, parseSECDividends(facts, cik, now2, { currency: "USD", item }), await usdCadRate(fetcher2, now2));
         data.financials = converted.financials;
         if (data.dividend.status !== "ready" && converted.dividend?.status === "ready") data.dividend = converted.dividend;
       } catch {
@@ -15474,6 +16401,7 @@ var FACTS = [
   ["da", "Depreciation & amortization", "money"],
   ["capex", "Capital expenditure", "money"],
   ["cash", "Cash & equivalents", "money"],
+  ["netPropertyInvestment", "Net property investment (additions + / disposals \u2212)", "money"],
   ["debt", "Source-reported debt subtotal", "money"],
   ["commonEquity", "Common equity", "money"],
   ["equity", "Owners equity (not automatically common)", "money"],
@@ -15519,6 +16447,7 @@ var intermediary = (fit) => ["bank", "insurer", "broker", "consumer-finance"].in
 function qualityIssues(snapshot) {
   const groups2 = [
     [snapshot.financials?.qualityIssues, "Financial statements"],
+    [snapshot.dividend?.qualityIssues, "Common dividend", snapshot.dividend?.asOf],
     ...(snapshot.financials?.annual || []).map((row) => [row.qualityIssues, `Annual ${row.end}`, row.end]),
     [snapshot.financials?.recent?.qualityIssues, "Latest interim", snapshot.financials?.recent?.end],
     [snapshot.financials?.ttm?.qualityIssues, "Trailing period", snapshot.financials?.ttm?.end]
@@ -15580,7 +16509,12 @@ function validatedValuationSnapshot(item, snapshot = {}) {
     price: observation(snapshot.price, 7, true),
     marketCap: observation(snapshot.marketCap, 7, true),
     commonBookValuePerShare: observation(snapshot.commonBookValuePerShare, 550, true),
-    dividend: observation(snapshot.dividend, 550),
+    dividend: snapshot.dividend?.status === "ready" ? observation(snapshot.dividend, 550) : {
+      status: snapshot.dividend?.status || "unavailable",
+      reason: snapshot.dividend?.reason,
+      asOf: snapshot.dividend?.asOf,
+      qualityIssues: snapshot.dividend?.qualityIssues
+    },
     riskFree: snapshot.riskFree?.status === "ready" && (!snapshot.riskFree.currency || snapshot.riskFree.currency === currency) && finite5(snapshot.riskFree.value) && fresh(snapshot.riskFree.asOf, 10) && sourceURL(snapshot.riskFree.source?.url) ? snapshot.riskFree : { status: "unavailable" }
   };
 }
@@ -15770,7 +16704,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       value: valueOf(row.metrics, key2) ?? null,
       sourceId: addSource(row.metrics[key2]?.source, { periodEnd: row.end, publishedDate: day(row.metrics[key2]?.filed) })
     }));
-    if (values.some((row) => finite5(row.value))) report.financials.trends.push({ key: key2, label, unit, values });
+    const incomeLabels = key2 === "netIncome" ? unique(annual.map((row) => row.metrics.netIncome?.label)) : [];
+    if (values.some((row) => finite5(row.value))) report.financials.trends.push({ key: key2, label: incomeLabels.length === 1 ? incomeLabels[0] : key2 === "netIncome" ? "Net / common earnings \xB7 source scope retained" : label, unit, values });
   }
   const cleaned = {
     ...snapshot,
@@ -15781,9 +16716,22 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     },
     riskFree: snapshot.riskFree?.status === "ready" && datedNotFuture(snapshot.riskFree.asOf, reportDate) && (!reportDate || Date.parse(reportDate) - Date.parse(day(snapshot.riskFree.asOf)) <= 10 * 864e5) && (!snapshot.riskFree.currency || snapshot.riskFree.currency === currency) && sourceURL(snapshot.riskFree.source?.url) ? snapshot.riskFree : { status: "unavailable" },
     // Date/currency invalid declarations must not seed a forecast path.
-    dividend: snapshot.dividend?.currency === currency && datedNotFuture(snapshot.dividend?.asOf, reportDate) && (!reportDate || Date.parse(reportDate) - Date.parse(day(snapshot.dividend.asOf)) <= 550 * 864e5) && (!snapshot.dividend?.filed || datedNotFuture(snapshot.dividend.filed, reportDate)) && sourceURL(snapshot.dividend?.source?.url) ? snapshot.dividend : { status: "unavailable" }
+    dividend: snapshot.dividend?.status !== "ready" ? snapshot.dividend || { status: "unavailable" } : snapshot.dividend?.currency === currency && datedNotFuture(snapshot.dividend?.asOf, reportDate) && (!reportDate || Date.parse(reportDate) - Date.parse(day(snapshot.dividend.asOf)) <= 550 * 864e5) && (!snapshot.dividend?.filed || datedNotFuture(snapshot.dividend.filed, reportDate)) && sourceURL(snapshot.dividend?.source?.url) ? snapshot.dividend : { status: "unavailable" }
   };
   const dividendHistory = cleaned.dividend.historicalGrowth;
+  const dividendEvidence = cleaned.dividend;
+  if (dividendEvidence.status === "ready") {
+    report.audit.dividendEvidence = dividendEvidence;
+    const collectDividend = (fact) => {
+      addSource(fact.source, { periodEnd: fact.asOf, publishedDate: day(fact.filed), purpose: fact.description || fact.basis || "Historical common dividend evidence" });
+      normalizationSources(fact);
+      if (fact.normalization?.original) addSource(fact.normalization.original.source, { periodEnd: fact.normalization.original.asOf, publishedDate: day(fact.normalization.original.filed), purpose: "Original dividend fact before documented scope reconciliation" });
+      for (const component of fact.components || fact.source?.components || []) collectDividend(component);
+    };
+    collectDividend(dividendEvidence);
+    if (dividendEvidence.annualBase) collectDividend(dividendEvidence.annualBase);
+  } else if (dividendEvidence.reason) report.limitations.push("Common-dividend source: " + dividendEvidence.reason);
+  report.lastFilingDate = report.sources.map((source2) => source2.publishedDate).filter(Boolean).sort().at(-1) || null;
   if (dividendHistory && (!perShareGrowthCompatible(dividendHistory, fit.perShareBasisChange, reportDate) || !businessScopeFactCompatible(dividendHistory, fit.businessScopeChange))) {
     cleaned.dividend = { ...cleaned.dividend, historicalGrowth: null };
     report.limitations.push("Historical dividend growth is withheld because its share-unit or post-separation business basis is not reconciled. A current dividend amount alone does not validate an older growth rate.");
@@ -16105,7 +17053,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       rationale: "A sourced common dividend supports a distribution-based cross-check when a complete enterprise or common-book model cannot be established.",
       limitations: ["This values the modelled dividend stream; buybacks, retained earnings and a future payout-policy change may materially alter total shareholder value."]
     };
-    assumption("Starting annual common dividend", d.value, "per-share", `${d.asOf}; ${d.description || "Source-reported common dividend"}`, [d.source]);
+    assumption("Starting annual common dividend", d.value, "per-share", `${d.asOf}; ${d.description || "Source-reported common dividend"} ${d.normalization?.evidence?.explanation || ""}`, [d.source]);
     assumption("Terminal dividend growth", forecast.dividendTerminal, "rate", forecast.terminalDescription);
     report.audit.formulas = [
       "Annual dividend = prior dividend \xD7 (1 + that year\u2019s disclosed growth rate). A forward D1 input is not grown a second time.",
