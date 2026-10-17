@@ -6472,16 +6472,17 @@ var financialTags = {
   inventory: ["InventoryNet", "Inventories"],
   payables: ["AccountsPayableCurrent", "AccountsPayableTradeCurrent", "TradeAndOtherCurrentPayables"],
   debt: [
+    "DebtAndCapitalLeaseObligations",
     "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
     "LongTermDebtCurrentAndNoncurrent",
     "Borrowings"
   ],
-  currentLongDebt: ["LongTermDebtCurrent", "LongTermDebtAndCapitalLeaseObligationsCurrent", "CurrentBorrowings"],
+  currentLongDebt: ["LongTermDebtCurrent", "LongTermDebtAndCapitalLeaseObligationsCurrent", "CurrentBorrowings", "NotesAndLoansPayableCurrent", "NotesPayableCurrent"],
   commercialPaper: ["CommercialPaper"],
   shortDebt: ["DebtCurrent", "ShortTermBorrowings"],
   debtCurrentTotal: ["DebtCurrent"],
   shortBorrowings: ["ShortTermBorrowings"],
-  longDebt: ["LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations", "NoncurrentBorrowings"],
+  longDebt: ["LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations", "NoncurrentBorrowings", "LongTermNotesAndLoans"],
   equity: ["StockholdersEquity", "EquityAttributableToOwnersOfParent"],
   commonEquity: ["CommonStockholdersEquity"],
   preferredEquity: ["PreferredStockCarryingValue", "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount"],
@@ -6837,7 +6838,7 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
 }
 
 // src/growth-policy.js
-var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v4";
+var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v5";
 var validDate2 = (x2) => /^\d{4}-\d{2}-\d{2}$/.test(x2 || "") && Number.isFinite(Date.parse(x2));
 function cagr(begin, end, years) {
   if (![begin, end, years].every(Number.isFinite) || begin <= 0 || end <= 0 || years <= 0) return null;
@@ -7393,6 +7394,7 @@ function calculateIndustryRelative(input) {
       "The entered sector population and multiple are scenario inputs to verify against the original source, including any overrides. Sector firms are not a named comparable-peer sample or analyst count. No company multiple history or percentile is inferred.",
       ...b.syncState === "last_known" ? [`Last-known industry reference checked ${b.checkedAt}; latest source attempt ${b.lastAttempt}.`] : [],
       ...enterprise ? ["Book debt and unverified excess-cash/other-claim adjustments make the enterprise-to-common-equity bridge provisional."] : [],
+      ...input.metric === "evRevenue" ? ["EV/sales does not establish profitability or cash generation. Review sustainable operating margins and reinvestment before using this sector cross-check."] : [],
       ...value <= 0 ? ["The scenario does not support positive common equity; a non-positive result is not a tradable share-price target."] : []
     ]
   };
@@ -18809,6 +18811,7 @@ function debtEvidence(metrics = {}) {
     return result2(parts.reduce((s, k) => s + v(k), 0), basis, parts, complete);
   };
   if (m.debt && (tag(m.debt) === "Borrowings" || m.debt.scope === "total-borrowings")) return result2(v("debt"), "Reported total borrowings; verify leases, restricted subsidiaries and other claims", ["debt"], true);
+  if (m.debt && tag(m.debt) === "DebtAndCapitalLeaseObligations") return result2(v("debt"), "Reported short-term and long-term debt and lease obligations; book-value proxy, other claims require review", ["debt"], true);
   const current = m.debtCurrentTotal || (tag(m.shortDebt) === "DebtCurrent" || tag(m.shortDebt) === "CurrentBorrowings" ? m.shortDebt : null);
   if (current) m.debtCurrentTotal = current;
   const short = m.shortBorrowings || (tag(m.shortDebt) === "ShortTermBorrowings" ? m.shortDebt : null);
@@ -21318,6 +21321,25 @@ function modelApplicability(item, snapshot, model) {
   return { status: "applicable", reason: fit.reason };
 }
 
+// src/relative-evidence.js
+function connectedRelativeEligible(r, item, fit, cutoff) {
+  if (!r || !["pe", "pb", "evEbitda", "evRevenue"].includes(r.metric) || r.currency !== item.currency || !validDate(cutoff) || !validDate(r.asOf) || r.asOf > cutoff || Date.parse(cutoff) - Date.parse(r.asOf) > 10 * 864e5 || !validDate(r.fiscalEnd) || !r.basis?.trim() || !r.source?.name || !/^https:\/\//.test(r.source.url || "") || !(Number.isFinite(r.fundamental) && r.fundamental > 0) || !Array.isArray(r.peers) || r.peers.length > 4 || !Array.isArray(r.history) || r.history.length > 120 || r.history.some((h) => !validDate(h?.date) || h.date > r.asOf || !(Number.isFinite(h.multiple) && h.multiple > 0)) || new Set(r.history.map((h) => h.date)).size !== r.history.length) return false;
+  const perShare = ["pe", "pb"].includes(r.metric), enterprise = !perShare, published = r.source.publishedAt;
+  const shareChange = perShare && fit.perShareBasisChange && cutoff >= fit.perShareBasisChange.effectiveDate;
+  if (published && (!validDate(published) || published > r.asOf)) return false;
+  if ((shareChange || fit.businessScopeChange) && !validDate(published)) return false;
+  const denominator = { asOf: r.fiscalEnd, filed: published, source: r.source };
+  if (!businessScopeFactCompatible(denominator, fit.businessScopeChange) || perShare && !perShareFactCompatible(denominator, fit.perShareBasisChange, cutoff)) return false;
+  if (r.metric === "pe" && fit.earningsPower === false && !fit.businessScopeChange) return false;
+  if (enterprise && (fit.operatingDCF === false || !r.bridge || !["debt", "cash", "otherAssets", "claims", "shares"].every((k) => Number.isFinite(r.bridge[k]) && r.bridge[k] >= 0) || r.bridge.shares <= 0)) return false;
+  try {
+    calculateRelative({ ...r.bridge, metric: r.metric, fundamental: r.fundamental, peers: r.peers, history: r.history, asOf: r.asOf });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // src/valuation-autofill.js
 function fiscalRevenueBridge(snapshot, annual, growth, scopeChange) {
   if (snapshot.financials?.periodAlignment?.continuousAnnualBase === false) return null;
@@ -21578,26 +21600,46 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
   }
   if (view === "rv" || view === "eqrv") {
     const cutoff = snapshot.valuationDate;
-    const metric2 = selectedMetric || fit.metric || "pe";
+    const book = snapshot.commonBookValuePerShare;
+    const currentShare = (f) => perShareFactCompatible(f, fit.perShareBasisChange, cutoff);
+    const currentBusiness = (f) => businessScopeFactCompatible(f, fit.businessScopeChange);
+    const available = {
+      pe: fit.earningsPower !== false && Number.isFinite(value("eps")) && currentBusiness(m.eps) && currentShare(m.eps),
+      pb: book?.status === "ready" && currentBusiness(book) && currentShare(book),
+      evEbitda: fit.operatingDCF !== false && ["ebit", "da"].every((k) => Number.isFinite(value(k)) && currentBusiness(m[k])),
+      evRevenue: fit.operatingDCF !== false && Number.isFinite(value("revenue")) && currentBusiness(m.revenue)
+    };
+    const fundamentals = { pe: value("eps"), pb: book?.value, evEbitda: value("ebit") + value("da"), evRevenue: value("revenue") };
+    const preferred = selectedMetric || fit.metric || "pe";
+    let metric2 = preferred;
+    const relative = snapshot.feed?.relative, relativeValid = connectedRelativeEligible(relative, item, fit, cutoff);
+    if (!selectedMetric && selectedBenchmarkMode !== "industry" && relativeValid) metric2 = relative.metric;
+    if (!selectedMetric && selectedBenchmarkMode !== "peers" && (selectedBenchmarkMode === "industry" || !relativeValid)) {
+      const bridge = Number.isFinite(reportedDebt2) && reportedDebt2 >= 0 && value("shares") > 0 && currentShare(m.shares);
+      const candidates = [.../* @__PURE__ */ new Set([preferred, "pe", "pb", "evEbitda", "evRevenue"])];
+      const chosen = candidates.find((k) => available[k] && fundamentals[k] > 0 && (!k.startsWith("ev") || bridge) && snapshot.references?.status !== "stale" && snapshot.references?.industry?.relativeBenchmarks?.[k]?.metric === k && industryBenchmarkEligible(snapshot.references.industry.relativeBenchmarks[k], cutoff));
+      if (chosen) {
+        metric2 = chosen;
+        if (metric2 !== preferred) origins.metric = `Automatic industry cross-check fallback: ${preferred} has an unavailable or ineligible company denominator/reference; ${metric2} uses its own sourced financial base and dated industry statistic. It remains a conditional comparison, not an earnings or cash-flow appraisal.`;
+      }
+    }
     patches.metric = metric2;
-    if (metric2 === "pe") fact("fundamental", "eps");
-    else if (metric2 === "evEbitda" && Number.isFinite(value("ebit")) && Number.isFinite(value("da")))
+    if (metric2 === "pe" && available.pe) fact("fundamental", "eps");
+    else if (metric2 === "evEbitda" && available.evEbitda)
       put(
         "fundamental",
         (value("ebit") + value("da")) / million,
         "Derived annual EBITDA \xB7 " + latest2.end
       );
-    else if (metric2 === "evRevenue") fact("fundamental", "revenue", million);
-    else if (metric2 === "pb" && snapshot.commonBookValuePerShare?.status === "ready" && perShareFactCompatible(snapshot.commonBookValuePerShare, fit.perShareBasisChange, cutoff))
+    else if (metric2 === "evRevenue" && available.evRevenue) fact("fundamental", "revenue", million);
+    else if (metric2 === "pb" && available.pb)
       put(
         "fundamental",
         snapshot.commonBookValuePerShare.value,
         "Verified common book value"
       );
-    else gaps.push(metric2 === "evEbitda" ? "Matching annual operating income and D&A are required for EBITDA; book value is not substituted." : metric2 === "pb" ? "Verified current-basis common book value is required." : "Matching valuation fundamental is unavailable.");
+    else gaps.push((metric2 === "evEbitda" ? "Matching annual operating income and D&A are required for EBITDA; book value is not substituted." : metric2 === "pb" ? "Verified current-basis common book value is required." : "Matching valuation fundamental is unavailable.") + " The automatic denominator must match the current business/share scope and a supported financial framework; predecessor figures require source reconciliation.");
     patches.period = "Reported fiscal year " + (latest2?.end || "not available") + "; peer ratios must use the same period and accounting basis";
-    const relative = snapshot.feed?.relative;
-    const relativeValid = relative && relative.currency === item.currency && validDate(relative.asOf) && relative.asOf <= cutoff && Date.parse(cutoff) - Date.parse(relative.asOf) <= 10 * 864e5 && validDate(relative.fiscalEnd) && relative.basis?.trim() && relative.source?.name && /^https:\/\//.test(relative.source?.url || "") && relative.fundamental > 0 && Array.isArray(relative.peers) && Array.isArray(relative.history) && (!["pe", "pb"].includes(metric2) || perShareFactCompatible({ asOf: relative.asOf, source: relative.source }, fit.perShareBasisChange, cutoff)) && (!["evEbitda", "evRevenue"].includes(metric2) || fit.operatingDCF !== false && relative.bridge && ["debt", "cash", "otherAssets", "claims", "shares"].every((k) => Number.isFinite(relative.bridge[k]) && relative.bridge[k] >= 0) && relative.bridge.shares > 0);
     if (selectedBenchmarkMode !== "industry" && relativeValid && relative.metric === metric2) {
       patches.benchmarkMode = "peers";
       put(
@@ -21811,6 +21853,8 @@ function readInput(view, d) {
       debt: n("debt")
     };
   if (["rv", "eqrv"].includes(view)) {
+    if (!["pe", "pb", "evEbitda", "evRevenue"].includes(d.metric) || !["peers", "industry"].includes(d.benchmarkMode))
+      throw new Error("Confirm the metric and comparison basis for saved inputs, or use automatic inputs to replace the saved overrides.");
     if (!d.period?.trim())
       throw new Error(
         "Record the matching fiscal period and accounting basis."
