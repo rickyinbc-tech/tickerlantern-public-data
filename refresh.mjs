@@ -6234,7 +6234,7 @@ function spyHoldings(bytes) {
   const zip = unzipSync(bytes, { filter: (f) => paths.includes(f.name) && f.originalSize < 4e6 });
   if (paths.some((p) => !zip[p])) throw new Error("Holdings workbook changed");
   const strings = [...strFromU8(zip[paths[0]]).matchAll(/<si\b[^>]*>([\s\S]*?)<\/si>/g)].map((m) => [...m[1].matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map((t) => clean(t[1])).join(""));
-  const rows2 = [...strFromU8(zip[paths[1]]).matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)].map((m) => {
+  const rows3 = [...strFromU8(zip[paths[1]]).matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)].map((m) => {
     const cells = {};
     for (const c of m[1].matchAll(/<c\b([^>]*)>([\s\S]*?)<\/c>/g)) {
       const col = c[1].match(/\br="([A-Z]+)\d+"/)?.[1], value = c[2].match(/<v\b[^>]*>([^<]*)<\/v>/)?.[1];
@@ -6242,14 +6242,14 @@ function spyHoldings(bytes) {
     }
     return cells;
   });
-  const header = rows2.find((r) => r.A === "Name" && r.B === "Ticker");
-  const text = rows2.find((r) => r.A === "Holdings:")?.B;
+  const header = rows3.find((r) => r.A === "Name" && r.B === "Ticker");
+  const text = rows3.find((r) => r.A === "Holdings:")?.B;
   const date = text?.match(/^As of (\d{2})-([A-Za-z]{3})-(\d{4})$/);
   const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(date?.[2]) + 1;
   if (header?.H !== "Local Currency" || !date || !month) throw new Error("Holdings schema changed");
   return {
     asOf: `${date[3]}-${String(month).padStart(2, "0")}-${date[1]}`,
-    rows: rows2.filter((r) => r.H === "USD" && /^[A-Z][A-Z0-9.\-]{0,10}$/.test(r.B || "")).map((r) => ({ ticker: r.B, name: r.A, currency: "USD" }))
+    rows: rows3.filter((r) => r.H === "USD" && /^[A-Z][A-Z0-9.\-]{0,10}$/.test(r.B || "")).map((r) => ({ ticker: r.B, name: r.A, currency: "USD" }))
   };
 }
 function tsxHoldings(html, data) {
@@ -6352,9 +6352,9 @@ function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), opti
     ["ifrs-full", "DividendsPaidOrdinarySharesPerShare"],
     ["ifrs-full", "DividendsRecognisedAsDistributionsToOwnersPerShare"]
   ]) {
-    const rows2 = payload.facts?.[namespace2]?.[tag2]?.units?.[currency + "/shares"];
-    if (!Array.isArray(rows2)) continue;
-    const annual2 = rows2.filter(
+    const rows3 = payload.facts?.[namespace2]?.[tag2]?.units?.[currency + "/shares"];
+    if (!Array.isArray(rows3)) continue;
+    const annual2 = rows3.filter(
       (row) => validDate(row.start) && validDate(row.end) && validDate(row.filed) && row.end <= today && row.filed <= today && [
         "10-K",
         "10-K/A",
@@ -6428,10 +6428,10 @@ function findSECListing(payload, item) {
   if (!Array.isArray(payload?.fields) || !Array.isArray(payload?.data))
     throw new Error("The SEC listing directory is unavailable.");
   const positions = Object.fromEntries(
-    payload.fields.map((key, index) => [key, index])
+    payload.fields.map((key2, index) => [key2, index])
   );
   if (!["cik", "ticker", "exchange"].every(
-    (key) => Number.isInteger(positions[key])
+    (key2) => Number.isInteger(positions[key2])
   ))
     throw new Error("The SEC listing directory has changed.");
   const ticker = item.ticker.replaceAll(".", "-");
@@ -6738,16 +6738,16 @@ function modelFit(item) {
 // src/macro-data.js
 function parseTreasuryXML(text) {
   if (!text.includes("DailyTreasuryYieldCurveRateData")) throw new Error("The Treasury source returned an unexpected format.");
-  const rows2 = [];
+  const rows3 = [];
   for (const match of text.matchAll(/<entry>[\s\S]*?<\/entry>/g)) {
     const body = match[0];
     const field = (name) => body.match(new RegExp(`<d:${name}[^>]*>([^<]+)</d:${name}>`))?.[1];
     const date = field("NEW_DATE")?.slice(0, 10);
     const two = Number(field("BC_2YEAR")), ten = Number(field("BC_10YEAR"));
-    if (validDate(date) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows2.push({ date, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
+    if (validDate(date) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows3.push({ date, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
   }
-  if (!rows2.length) throw new Error("The Treasury source has no complete observations.");
-  return rows2.sort((a, b) => a.date.localeCompare(b.date)).slice(-520);
+  if (!rows3.length) throw new Error("The Treasury source has no complete observations.");
+  return rows3.sort((a, b) => a.date.localeCompare(b.date)).slice(-520);
 }
 
 // src/issuer-dividends.js
@@ -6958,8 +6958,8 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
   ].sort().reverse().slice(0, 3);
   const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY2 <= 1400).map((end) => {
     const metrics = {};
-    for (const [metric2, rows2] of Object.entries(series)) {
-      const r = rows2.find((r2) => r2.end === end);
+    for (const [metric2, rows3] of Object.entries(series)) {
+      const r = rows3.find((r2) => r2.end === end);
       if (!r) continue;
       metrics[metric2] = {
         value: r.val,
@@ -6974,13 +6974,13 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
         }
       };
     }
-    const derive = (key, components, fn, basis) => {
-      if (metrics[key] || !components.every((k) => metrics[k])) return;
+    const derive = (key2, components, fn, basis) => {
+      if (metrics[key2] || !components.every((k) => metrics[k])) return;
       const facts = components.map((k) => metrics[k]);
       if (!facts.every((f) => f.source.url === facts[0].source.url)) return;
       const value = fn(...facts.map((f) => f.value));
       if (!Number.isFinite(value)) return;
-      metrics[key] = { ...facts[0], value, basis, source: {
+      metrics[key2] = { ...facts[0], value, basis, source: {
         ...facts[0].source,
         tag: facts.map((f) => f.source.tag).join("; "),
         name: "SEC EDGAR \xB7 derived subtotal"
@@ -7090,16 +7090,154 @@ function validateRelative(r, item, now2) {
   ) : [];
   if (peers.length > 4 || new Set(peers.map((p) => p.name.trim().toLowerCase())).size !== peers.length)
     return null;
-  const history = Array.isArray(r.history) ? r.history.filter(
+  const history2 = Array.isArray(r.history) ? r.history.filter(
     (h) => validDate(h.date) && h.date <= r.asOf && Number.isFinite(h.multiple) && h.multiple > 0
   ) : [];
-  if (history.length > 120 || new Set(history.map((h) => h.date)).size !== history.length || !peers.length && !history.length)
+  if (history2.length > 120 || new Set(history2.map((h) => h.date)).size !== history2.length || !peers.length && !history2.length)
     return null;
   return {
     ...r,
     peers,
-    history: history.sort((a, b) => a.date.localeCompare(b.date))
+    history: history2.sort((a, b) => a.date.localeCompare(b.date))
   };
+}
+
+// worker/forecast-references.js
+var referenceURLs = { beta: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html", capital: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/wacc.html", country: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html", growth: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histgr.html" };
+var clean2 = (s) => s.replace(/<[^>]*>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+var rows = (html) => [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map((r) => [...r[1].matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((x2) => clean2(x2[1])));
+var key = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+var number = (s) => /^-?\d+(\.\d+)?%?$/.test(s || "") ? Number(s.replace("%", "")) / (s.endsWith("%") ? 100 : 1) : null;
+function parseReferences(html, now2 = /* @__PURE__ */ new Date()) {
+  const months = { January: 1, February: 2, March: 3, April: 4, May: 5, June: 6, July: 7, August: 8, September: 9, October: 10, November: 11, December: 12 };
+  const dates = Object.values(html).map((s) => clean2(s).match(/(?:as of|Last Updated[^:]*:)\s*(January|February|March|April|May|June|July|August|September|October|November|December)\s*(?:\d{1,2},?\s*)?(20\d{2})/i)).filter(Boolean);
+  if (dates.length < 3) throw Error("Reference publication dates could not be validated");
+  const asOf = dates[0][2] + "-" + String(months[dates[0][1]]).padStart(2, "0");
+  if (asOf > now2.toISOString().slice(0, 7) || now2 - Date.parse(asOf + "-01") > 550 * 864e5) throw Error("Risk and growth references are stale or future dated");
+  const beta = rows(html.beta), capital = rows(html.capital), growth = rows(html.growth), countries = rows(html.country);
+  for (const [table2, marker] of [[beta, "Unlevered beta"], [capital, "Cost of Debt"], [growth, "Expected Growth in Revenues"], [countries, "Equity Risk Premium"]]) if (!table2.some((r) => r.join(" ").includes(marker))) throw Error("Reference table schema changed");
+  const countryRows = countries.filter((r) => r.length >= 6 && number(r[4]) > 0 && number(r[4]) < 1 && Number.isFinite(number(r[5])) && number(r[5]) >= 0 && number(r[5]) < 0.6).map((r) => ({ name: r[0], defaultSpread: number(r[2]), equityRiskPremium: number(r[4]), taxRate: number(r[5]) }));
+  if (countryRows.length < 100 || !["United States", "Canada", "Hong Kong"].every((n) => countryRows.some((r) => r.name === n)) || countryRows.some((r) => !(r.equityRiskPremium > 0 && r.equityRiskPremium < 1 && r.taxRate >= 0 && r.taxRate < 0.6))) throw Error("Country reference incomplete");
+  const samples = capital.map((r) => [number(r[2]), number(r[3])]).filter(([b, k]) => b > 0 && k > 0);
+  const meanB = samples.reduce((s, r) => s + r[0], 0) / samples.length, meanK = samples.reduce((s, r) => s + r[1], 0) / samples.length;
+  const impliedERP = samples.reduce((s, [b, k]) => s + (b - meanB) * (k - meanK), 0) / samples.reduce((s, [b]) => s + (b - meanB) ** 2, 0);
+  const referenceRiskFree = meanK - impliedERP * meanB;
+  if (!(referenceRiskFree > 0 && referenceRiskFree < 0.15 && impliedERP > 0.01 && impliedERP < 0.15)) throw Error("Risk reference reconciliation failed");
+  const industries = [];
+  for (const row of capital) {
+    const b = beta.find((r2) => key(r2[0]) === key(row[0])), g = growth.find((r2) => key(r2[0]) === key(row[0]));
+    if (!b || !g) continue;
+    const r = { name: row[0], firms: number(row[1]), beta: number(row[2]), equityWeight: number(row[4]), debtSpread: Math.max(0, number(row[6]) - referenceRiskFree), unleveredBeta: number(b[5]), revenueGrowth2y: number(g[4]), revenueGrowth5y: number(g[5]), epsGrowth5y: number(g[6]) };
+    if (r.beta > 0 && r.equityWeight > 0 && r.equityWeight <= 1 && r.unleveredBeta > 0) industries.push(r);
+  }
+  if (industries.length < 80 || !industries.some((r) => r.name === "Total Market")) throw Error("Industry coverage incomplete");
+  return { asOf, checkedAt: now2.toISOString(), industries, countries: countryRows, referenceRiskFree, sources: Object.fromEntries(Object.entries(referenceURLs).map(([k, url]) => [k, { name: "NYU Stern / Aswath Damodaran \xB7 processed industry and country data", url }])) };
+}
+function industryForSIC(sic) {
+  const n = Number(sic);
+  if (!n) return "Total Market";
+  const ranges = [
+    [100, 999, "Farming/Agriculture"],
+    [1e3, 1099, "Metals & Mining"],
+    [1200, 1299, "Coal & Related Energy"],
+    [1300, 1399, "Oil/Gas (Production and Exploration)"],
+    [1400, 1499, "Metals & Mining"],
+    [1500, 1599, "Homebuilding"],
+    [1600, 1799, "Engineering/Construction"],
+    [2e3, 2099, "Food Processing"],
+    [2100, 2199, "Tobacco"],
+    [2200, 2399, "Apparel"],
+    [2400, 2499, "Paper/Forest Products"],
+    [2500, 2599, "Furn/Home Furnishings"],
+    [2600, 2699, "Paper/Forest Products"],
+    [2700, 2799, "Publishing & Newspapers"],
+    [2830, 2836, "Drugs (Pharmaceutical)"],
+    [2800, 2899, "Chemical (Diversified)"],
+    [2900, 2999, "Oil/Gas (Integrated)"],
+    [3e3, 3099, "Rubber& Tires"],
+    [3100, 3199, "Shoe"],
+    [3200, 3299, "Building Materials"],
+    [3300, 3399, "Steel"],
+    [3400, 3499, "Construction Supplies"],
+    [3570, 3579, "Computers/Peripherals"],
+    [3500, 3599, "Machinery"],
+    [3674, 3674, "Semiconductor"],
+    [3660, 3669, "Telecom. Equipment"],
+    [3600, 3699, "Electrical Equipment"],
+    [3720, 3729, "Aerospace/Defense"],
+    [3730, 3739, "Shipbuilding & Marine"],
+    [3700, 3799, "Auto & Truck"],
+    [3840, 3859, "Healthcare Products"],
+    [3800, 3899, "Electronics (General)"],
+    [3900, 3999, "Recreation"],
+    [4010, 4019, "Transportation (Railroads)"],
+    [4100, 4299, "Trucking"],
+    [4400, 4499, "Transportation"],
+    [4500, 4599, "Air Transport"],
+    [4600, 4699, "Oil/Gas Distribution"],
+    [4700, 4799, "Transportation"],
+    [4812, 4812, "Telecom (Wireless)"],
+    [4810, 4899, "Telecom. Services"],
+    [4910, 4939, "Utility (General)"],
+    [4940, 4949, "Utility (Water)"],
+    [4950, 4959, "Environmental & Waste Services"],
+    [4900, 4999, "Power"],
+    [5e3, 5199, "Retail (Distributors)"],
+    [5200, 5299, "Retail (Building Supply)"],
+    [5300, 5399, "Retail (General)"],
+    [5400, 5499, "Retail (Grocery and Food)"],
+    [5500, 5599, "Retail (Automotive)"],
+    [5800, 5899, "Restaurant/Dining"],
+    [5600, 5999, "Retail (Special Lines)"],
+    [6020, 6021, "Bank (Money Center)"],
+    [6e3, 6099, "Banks (Regional)"],
+    [6100, 6199, "Financial Svcs. (Non-bank & Insurance)"],
+    [6200, 6299, "Brokerage & Investment Banking"],
+    [6310, 6319, "Insurance (Life)"],
+    [6330, 6339, "Insurance (Prop/Cas.)"],
+    [6300, 6499, "Insurance (General)"],
+    [6500, 6599, "Real Estate (General/Diversified)"],
+    [6798, 6798, "R.E.I.T."],
+    [6700, 6799, "Investments & Asset Management"],
+    [7e3, 7099, "Hotel/Gaming"],
+    [7310, 7319, "Advertising"],
+    [7372, 7372, "Software (System & Application)"],
+    [7370, 7379, "Computer Services"],
+    [7300, 7399, "Business & Consumer Services"],
+    [7800, 7999, "Entertainment"],
+    [8e3, 8099, "Hospitals/Healthcare Facilities"],
+    [8200, 8299, "Education"],
+    [8700, 8799, "Information Services"]
+  ];
+  return ranges.find(([a, b]) => n >= a && n <= b)?.[2] || "Total Market";
+}
+var cached;
+async function loadReferences(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
+  if (!cached) cached = Promise.all(Object.entries(referenceURLs).map(async ([k, url]) => {
+    const r = await fetcher2(url, { signal: AbortSignal.timeout(18e3) });
+    if (!r.ok) throw Error("Reference source unavailable");
+    const body = await r.text();
+    if (body.length > 15e5) throw Error("Reference size exceeded");
+    return [k, body];
+  })).then((v) => parseReferences(Object.fromEntries(v), now2)).catch((e) => {
+    cached = null;
+    throw e;
+  });
+  return cached;
+}
+async function listingReferences(item, cik, fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
+  const base = await loadReferences(fetcher2, now2);
+  let issuer = null;
+  if (cik) try {
+    const url = "https://data.sec.gov/submissions/CIK" + String(cik).padStart(10, "0") + ".json", d = await sourceJSON(url, fetcher2);
+    if (Number(d.cik) === Number(cik)) issuer = { sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, source: { name: "SEC issuer SIC classification", url } };
+  } catch {
+  }
+  const domicile = issuer?.country?.replace(/\s*\(.*\)/, "").trim().toLowerCase();
+  const country = base.countries.find((c) => c.name.toLowerCase() === domicile) || base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency]);
+  const countryBasis = country?.name.toLowerCase() === domicile ? "SEC business-address country proxy" : "Listing-currency country proxy; business-country match unavailable";
+  const industry = base.industries.find((r) => key(r.name) === key(industryForSIC(issuer?.sic))) || base.industries.find((r) => r.name === "Total Market");
+  return { asOf: base.asOf, checkedAt: base.checkedAt, sources: base.sources, country, countryBasis, currencyDefaultSpread: base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency])?.defaultSpread || 0, industry, issuer, classificationBasis: issuer ? "SEC SIC mapped to an approximate US industry proxy" : "Broad US market proxy; no validated issuer industry classification" };
 }
 
 // worker/valuation-data.js
@@ -7220,14 +7358,144 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
   if (rf.status === "fulfilled") data.riskFree = rf.value;
   const market = feed.status === "fulfilled" ? feed.value : { status: "unavailable" };
   data.feed = market;
-  for (const key of [
+  try {
+    data.references = await listingReferences(item, filing.status === "fulfilled" ? filing.value.cik : null, fetcher2, now2);
+  } catch {
+    data.referenceStatus = "Industry outlook and risk source unavailable; unsupported automatic rates are withheld.";
+  }
+  for (const key2 of [
     "price",
     "marketCap",
     "commonBookValuePerShare",
     "dividend"
   ])
-    if (market[key]?.status === "ready") data[key] = market[key];
+    if (market[key2]?.status === "ready") data[key2] = market[key2];
   return data;
+}
+
+// src/forecast-assumptions.js
+var finite = Number.isFinite;
+var clamp = (x2, lo, hi) => Math.min(hi, Math.max(lo, x2));
+function reportedDebt(m = {}) {
+  const v = (k) => m[k]?.value;
+  if (finite(v("debt"))) return v("debt");
+  for (const keys of [["shortDebt", "longDebt"], ["currentLongDebt", "longDebt", "commercialPaper"]])
+    if (keys.every((k) => finite(v(k)))) return keys.reduce((s, k) => s + v(k), 0);
+  return null;
+}
+function history(snapshot, metric2) {
+  const rows3 = (snapshot.financials?.status === "ready" ? snapshot.financials.annual : []) || [];
+  const a = rows3[0], b = rows3.filter((r) => r.metrics?.[metric2]?.value > 0).at(-1);
+  const years = a && b ? (Date.parse(a.end) - Date.parse(b.end)) / 864e5 / 365.25 : 0;
+  if (!(a?.metrics?.[metric2]?.value > 0 && b && years > 0.8)) return null;
+  return {
+    value: (a.metrics[metric2].value / b.metrics[metric2].value) ** (1 / years) - 1,
+    description: `${metric2} historical CAGR ${b.end} \u2192 ${a.end}; check restatements and share splits`,
+    source: a.metrics[metric2].source
+  };
+}
+function capitalAssumptions(snapshot, item) {
+  const ref = snapshot.references, sector = ref?.industry, country = ref?.country;
+  const origins = {}, patches = {};
+  const sovereignSpread = ref?.currencyDefaultSpread ?? (country?.defaultSpread || 0);
+  const put = (key2, v, why) => {
+    if (finite(v)) {
+      patches[key2] = v;
+      origins[key2] = why;
+    }
+  };
+  if (snapshot.riskFree?.status === "ready") put("riskFree", snapshot.riskFree.value - sovereignSpread * 100, `${snapshot.riskFree.source?.name || "Government"} ten-year yield \xB7 ${snapshot.riskFree.asOf}; less sourced sovereign default spread ${(sovereignSpread * 100).toFixed(2)} pp`);
+  if (sector) {
+    put("beta", sector.beta, `Industry levered beta proxy \xB7 ${sector.name} \xB7 ${ref.asOf}; not measured company beta`);
+    put("equity", sector.equityWeight * 100, `Industry target equity weight \xB7 ${sector.name} \xB7 ${ref.asOf}; normalized units`);
+    put("debt", (1 - sector.equityWeight) * 100, `Industry target debt weight \xB7 ${sector.name} \xB7 ${ref.asOf}; normalized units`);
+    const rf = patches.riskFree / 100;
+    put("costDebt", finite(rf) ? Math.max(rf, rf + sector.debtSpread) * 100 : NaN, `Government yield + industry debt spread (${(sector.debtSpread * 100).toFixed(2)} pp) \xB7 ${ref.asOf}; borrowing-cost proxy`);
+  }
+  put("equityRiskPremium", country?.equityRiskPremium * 100, `Country equity risk premium proxy \xB7 ${country?.name} \xB7 ${ref?.asOf}; ${ref?.countryBasis || "country proxy"}; excludes detailed geographic exposure`);
+  put("taxRate", country?.taxRate * 100, `Country statutory corporate tax proxy \xB7 ${country?.name} \xB7 ${ref?.asOf}; verify issuer marginal rate`);
+  let capitalBasis = "scenario";
+  const m = snapshot.financials?.status === "ready" ? snapshot.financials.annual?.[0]?.metrics || {} : {};
+  const debt = reportedDebt(m);
+  if (snapshot.marketCap?.status === "ready" && snapshot.marketCap.value > 0 && debt >= 0 && finite(patches.taxRate) && sector?.unleveredBeta > 0) {
+    capitalBasis = "market";
+    put("equity", snapshot.marketCap.value / 1e6, `Market capitalization \xB7 ${snapshot.marketCap.asOf}; millions`);
+    put("debt", debt / 1e6, "Reported book debt used as market-debt proxy; millions");
+    put("beta", sector.unleveredBeta * (1 + (1 - patches.taxRate / 100) * debt / snapshot.marketCap.value), `Industry asset beta relevered to company market equity / book-debt proxy \xB7 ${ref.asOf}`);
+  }
+  const ke = (patches.riskFree + patches.beta * patches.equityRiskPremium) / 100;
+  const total = patches.equity + patches.debt;
+  const wacc = ke * patches.equity / total + patches.costDebt / 100 * (1 - patches.taxRate / 100) * patches.debt / total;
+  return {
+    patches,
+    origins,
+    capitalBasis,
+    costEquity: finite(ke) && ke > 0 ? ke : null,
+    wacc: finite(wacc) && wacc > 0 ? wacc : null,
+    description: capitalBasis === "market" ? "Market-equity WACC estimate; industry asset beta and book-debt proxies" : "Industry target-capital WACC scenario; market capitalization unavailable",
+    source: ref?.sources?.capital
+  };
+}
+function path(start, terminal, n, origin, source2, cap) {
+  if (!finite(start)) return [];
+  const bounded2 = clamp(start, -0.5, cap);
+  return Array.from({ length: n }, (_, i2) => ({
+    year: i2 + 1,
+    growth: bounded2 + (terminal - bounded2) * i2 / n,
+    kind: "modelled",
+    source: source2,
+    description: `${origin}; ${bounded2 !== start ? `growth constrained from ${(start * 100).toFixed(2)}% to ${(bounded2 * 100).toFixed(2)}% as an explicit scenario guardrail; ` : ""}linear fade toward ${(terminal * 100).toFixed(2)}% terminal scenario over ${n} years`
+  }));
+}
+function forecastAssumptions(snapshot, item, years = 5) {
+  const capital = capitalAssumptions(snapshot, item), ref = snapshot.references, sector = ref?.industry;
+  const annual = snapshot.financials?.status === "ready" ? snapshot.financials.annual?.[0] : null, m = annual?.metrics || {};
+  const revenueHistory = history(snapshot, "revenue"), epsHistory = history(snapshot, "eps");
+  const dh = snapshot.dividend?.historicalGrowth;
+  const dividendHistory = finite(dh?.value) ? { value: dh.value, description: `Company dividend historical CAGR ${dh.start} \u2192 ${dh.end}`, source: snapshot.dividend.source } : null;
+  const blend = (own, industry) => finite(own?.value) && finite(industry) ? (own.value + industry) / 2 : own?.value ?? industry;
+  const revenueStart = blend(revenueHistory, sector?.revenueGrowth2y);
+  const epsStart = blend(epsHistory, sector?.epsGrowth5y);
+  const d = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null, eps = m.eps?.value;
+  const payout = d >= 0 && eps > 0 ? d / eps : null;
+  let dividendStart = dividendHistory?.value;
+  let dividendBasis = dividendHistory?.description;
+  if (!finite(dividendStart) && finite(epsStart)) {
+    dividendStart = epsStart;
+    dividendBasis = "Dividend growth follows modelled EPS growth at constant payout (company dividend history unavailable)";
+  }
+  if (finite(dividendStart) && finite(epsStart) && payout > 0 && payout <= 1) {
+    const maxCoveredGrowth = (1 + clamp(epsStart, -0.5, 0.5)) * payout ** (-1 / years) - 1;
+    if (dividendStart > maxCoveredGrowth) {
+      dividendStart = maxCoveredGrowth;
+      dividendBasis += "; constrained by modelled earnings coverage over the forecast horizon";
+    }
+  }
+  if (payout > 1) {
+    const correction = payout ** (-1 / years) * (1 + (epsStart ?? 0)) - 1;
+    dividendStart = finite(dividendStart) ? Math.min(dividendStart, correction) : correction;
+    dividendBasis = `Payout ${(payout * 100).toFixed(1)}% of reported EPS: scenario restores 100% coverage over ${years} years; review cyclical earnings and special dividends`;
+  }
+  const macroCap = 0.02;
+  const ceiling = capital.wacc ? Math.max(-0.5, capital.wacc - 0.01) : macroCap;
+  const revenueTerminal = Math.min(macroCap, finite(revenueStart) ? revenueStart : macroCap, ceiling);
+  const dividendTerminal = Math.min(macroCap, finite(dividendStart) ? dividendStart : macroCap, capital.costEquity ? capital.costEquity - 0.01 : macroCap);
+  const industryBasis = sector ? `NYU Stern ${sector.name} sector outlook (${ref.asOf}); US industry proxy` : "no industry outlook";
+  const revenue = path(revenueStart, revenueTerminal, years, `${revenueHistory?.description || "Company revenue history unavailable"}; ${industryBasis}; ${revenueHistory && finite(sector?.revenueGrowth2y) ? "50/50 company-history / sector-expectation blend" : "available source only"}`, ref?.sources?.growth || revenueHistory?.source, 0.5);
+  const earnings = path(epsStart, Math.min(0.02, epsStart ?? 0.02), years, `${epsHistory?.description || "Company EPS history unavailable"}; ${industryBasis}; historical/company-sector scenario`, ref?.sources?.growth || epsHistory?.source, 0.5);
+  const dividends = path(dividendStart, dividendTerminal, years, dividendBasis || "Dividend forecast unavailable", dividendHistory?.source || ref?.sources?.growth, 0.25);
+  const estimates = (snapshot.feed?.estimates || []).filter((e) => e.currency === item.currency && e.fiscalEnd > snapshot.checkedAt?.slice(0, 10) && e.source?.url && e.asOf <= snapshot.checkedAt.slice(0, 10)).sort((a, b) => a.fiscalEnd.localeCompare(b.fiscalEnd));
+  for (const [metric2, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
+    let previous = base;
+    for (let i2 = 0; i2 < Math.min(rows3.length, estimates.length); i2++) {
+      const e = estimates[i2];
+      if (e[metric2] > 0 && previous > 0) {
+        rows3[i2] = { ...rows3[i2], growth: e[metric2] / previous - 1, amount: e[metric2], kind: "consensus", fiscalEnd: e.fiscalEnd, source: e.source, description: `Company consensus ${metric2} \xB7 ${e.fiscalEnd} \xB7 ${e.asOf} \xB7 ${e.basis}; fiscal forecast used as annual valuation step (timing approximation)` };
+        previous = e[metric2];
+      } else break;
+    }
+  }
+  return { capital, revenue, earnings, dividends, revenueTerminal, dividendTerminal, terminalDescription: "Terminal scenario capped at 2% nominal growth and at the company growth path; declining companies retain negative growth. This cap is a modelling assumption, not an analyst forecast.", taxRate: capital.patches.taxRate / 100, payout };
 }
 
 // src/valuation-autofill.js
@@ -7235,37 +7503,27 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
   const fit = modelFit(item), latest = snapshot.financials?.status === "ready" ? snapshot.financials.annual[0] : null, previous = snapshot.financials?.annual?.[1];
   const m = latest?.metrics || {}, prev = previous?.metrics || {};
   const value = (k) => m[k]?.value, patches = {}, origins = {}, gaps = [];
-  const put = (key, v, origin) => {
+  const put = (key2, v, origin) => {
     if (Number.isFinite(v) || typeof v === "string") {
-      patches[key] = String(v);
-      origins[key] = origin + (snapshot.financials?.conversion ? ` \xB7 USD\u2192CAD ${snapshot.financials.conversion.value} (${snapshot.financials.conversion.asOf}); constant FX assumption` : "");
+      patches[key2] = String(v);
+      origins[key2] = origin + (snapshot.financials?.conversion ? ` \xB7 USD\u2192CAD ${snapshot.financials.conversion.value} (${snapshot.financials.conversion.asOf}); constant FX assumption` : "");
     }
   };
-  const fact = (key, metric2, scale = 1) => {
+  const fact = (key2, metric2, scale = 1) => {
     if (m[metric2])
       put(
-        key,
+        key2,
         value(metric2) / scale,
         "Reported \xB7 " + latest.end + " \xB7 " + m[metric2].source.tag
       );
     else gaps.push(metric2);
   };
-  const assumption = (key, v, why) => put(key, v, "Scenario assumption \xB7 " + why);
+  const assumption = (key2, v, why) => put(key2, v, "Scenario assumption \xB7 " + why);
   const million = 1e6, dividend = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null;
   if (!latest && snapshot.financials?.reason) gaps.push(snapshot.financials.reason);
-  const historicalGrowth = (key) => {
-    const a = m[key]?.value, b = prev[key]?.value;
-    return a > 0 && b > 0 ? a / b - 1 : null;
-  };
-  const historic = historicalGrowth("revenue");
-  const growth = Number.isFinite(historic) && historic >= -0.1 && historic <= 0.15 ? historic : fit.growth / 100;
-  let reportedDebt = value("debt");
-  if (!Number.isFinite(reportedDebt) && Number.isFinite(value("shortDebt")) && Number.isFinite(value("longDebt")))
-    reportedDebt = value("shortDebt") + value("longDebt");
-  if (!Number.isFinite(reportedDebt) && ["currentLongDebt", "longDebt", "commercialPaper"].every(
-    (k) => Number.isFinite(value(k))
-  ))
-    reportedDebt = value("currentLongDebt") + value("longDebt") + value("commercialPaper");
+  const forecast = forecastAssumptions(snapshot, item), capital = forecast.capital;
+  const growth = forecast.revenue[0]?.growth;
+  const reportedDebt2 = reportedDebt(m);
   if (view === "dcf" || view === "x3sm") {
     const required = [
       "revenue",
@@ -7274,7 +7532,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
       "capex"
     ];
     const complete = required.every((k) => Number.isFinite(value(k))) && value("revenue") > 0;
-    const debt = reportedDebt;
+    const debt = reportedDebt2;
     if (Number.isFinite(debt) && debt >= 0)
       put(
         "debt",
@@ -7291,33 +7549,32 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
       );
       assumption("otherAssets", 0, "other non-operating assets require review");
       assumption("claims", 0, "preferred/NCI/other claims require review");
-      assumption(
-        "wacc",
-        fit.discount,
-        "discount-rate scenario, not a market-derived WACC"
-      );
-      assumption("terminalGrowth", 3, "long-run nominal growth");
+      put("wacc", capital.wacc == null ? NaN : capital.wacc * 100, capital.description + "; same inputs as WACC tool");
+      if (capital.wacc == null) gaps.push("Sourced risk inputs unavailable; no default discount rate is substituted.");
+      put("terminalGrowth", forecast.revenueTerminal * 100, forecast.terminalDescription);
       assumption(
         "exitMultiple",
         8,
         "illustrative exit multiple; compare sourced peers"
       );
     }
-    if (complete && fit.group !== "bank" && fit.group !== "insurer" && fit.group !== "holding") {
+    if (complete && forecast.revenue.length === 5 && Number.isFinite(forecast.taxRate) && fit.group !== "bank" && fit.group !== "insurer" && fit.group !== "holding") {
       const revenue = value("revenue"), margin = value("ebit") / revenue, daRate = value("da") / revenue, capexRate = value("capex") / revenue;
       const tradeComplete = ["receivables", "inventory", "payables"].every((k) => Number.isFinite(value(k)));
       const nwc = tradeComplete ? value("receivables") + value("inventory") - value("payables") : 0, nwcRate = nwc / revenue;
       if (!tradeComplete) gaps.push("Trade working-capital data is incomplete. Forecasts assume zero change in working capital; linked statements assume opening operating NWC of zero. Review before relying on this scenario.");
       let r = revenue, working = nwc;
       for (let i2 = 0; i2 < 5; i2++) {
-        r *= 1 + growth;
+        const driver = forecast.revenue[i2];
+        r *= 1 + driver.growth;
+        put("growth" + i2, driver.growth * 100, driver.description);
         const nextWorking = r * nwcRate;
-        const fcff = r * margin * 0.75 + r * daRate - r * capexRate - (nextWorking - working);
+        const fcff = r * margin * (1 - forecast.taxRate) + r * daRate - r * capexRate - (nextWorking - working);
         working = nextWorking;
         put(
           "fcff" + i2,
           fcff / million,
-          "Forecast scenario \xB7 reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "ASSUMED zero working-capital change; source balances incomplete") + ", 25% operating cash-tax assumption"
+          "Forecast scenario \xB7 reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "ASSUMED zero working-capital change; source balances incomplete") + "; growth " + (driver.growth * 100).toFixed(3) + "%: " + driver.description + "; tax " + (forecast.taxRate * 100).toFixed(2) + "% statutory-rate proxy"
         );
       }
       put(
@@ -7337,7 +7594,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
         put(
           "growth",
           growth * 100,
-          Number.isFinite(historic) && historic === growth ? "Historical revenue growth used as a forecast assumption" : "Scenario growth assumption"
+          forecast.revenue[0].description + "; linked statement uses year-1 rate throughout; review individual annual forecasts in DCF"
         );
         put(
           "margin",
@@ -7355,8 +7612,8 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
           "Reported capex/revenue used as a forecast assumption"
         );
         put("nwcRate", nwcRate * 100, tradeComplete ? "Trade working-capital/revenue scenario" : "Scenario assumption \xB7 zero working-capital investment; review missing source balances");
-        assumption("taxRate", 25, "operating cash-tax scenario");
-        assumption("costDebt", 5, "borrowing-cost scenario");
+        put("taxRate", capital.patches.taxRate, capital.origins.taxRate);
+        put("costDebt", capital.patches.costDebt, capital.origins.costDebt);
         assumption("payout", 30, "payout scenario");
         if (Number.isFinite(value("equity")) && Number.isFinite(debt) && Number.isFinite(value("cash")) && Number.isFinite(value("ppe")))
           put(
@@ -7371,7 +7628,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
       );
   }
   if (view === "ri") {
-    assumption("costEquity", fit.discount, "required return");
+    put("costEquity", capital.costEquity == null ? NaN : capital.costEquity * 100, "CAPM cost of equity from the same sourced WACC inputs; " + capital.description);
     assumption(
       "persistence",
       0,
@@ -7381,55 +7638,30 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
     if (bv?.status === "ready")
       put("book", bv.value, "Common book value per share \xB7 " + (bv.asOf || "date unavailable") + " \xB7 " + (bv.basis || "verified common-only basis"));
     else gaps.push("common book value excluding preferred/AT1 and NCI");
-    if (Number.isFinite(value("eps")))
-      for (let i2 = 0; i2 < 5; i2++)
-        put(
-          "eps" + i2,
-          value("eps") * (1 + fit.growth / 100) ** (i2 + 1),
-          "Forecast scenario \xB7 reported annual diluted EPS and " + fit.growth + "% growth assumption"
-        );
-    else gaps.push("diluted EPS in listing currency");
-    if (dividend != null)
-      for (let i2 = 0; i2 < 5; i2++)
-        put(
-          "dividend" + i2,
-          dividend * 1.03 ** (i2 + 1),
-          "Forecast scenario \xB7 sourced dividend and 3% growth assumption"
-        );
-    else gaps.push("sourced ordinary/common dividends");
+    if (Number.isFinite(value("eps")) && forecast.earnings.length === 5) {
+      let eps = value("eps");
+      for (let i2 = 0; i2 < 5; i2++) {
+        eps *= 1 + forecast.earnings[i2].growth;
+        put("eps" + i2, eps, forecast.earnings[i2].description);
+      }
+    } else gaps.push("diluted EPS and supported company growth path");
+    if (dividend != null && forecast.dividends.length === 5) {
+      let d = dividend;
+      for (let i2 = 0; i2 < 5; i2++) {
+        d *= 1 + forecast.dividends[i2].growth;
+        put("dividend" + i2, d, forecast.dividends[i2].description);
+      }
+    } else if (dividend === 0) for (let i2 = 0; i2 < 5; i2++) put("dividend" + i2, 0, "Reported zero annual dividend continued as a scenario; buybacks excluded");
+    else gaps.push("sourced ordinary/common dividends and supported growth path");
   }
   if (view === "wacc") {
-    const observedCapital = snapshot.marketCap?.status === "ready";
-    const capitalBasis = selectedCapitalBasis || (observedCapital ? "market" : "scenario");
+    const capitalBasis = selectedCapitalBasis || capital.capitalBasis;
     patches.capitalBasis = capitalBasis;
-    if (snapshot.riskFree?.status === "ready")
-      put(
-        "riskFree",
-        snapshot.riskFree.value,
-        "Government ten-year yield \xB7 " + snapshot.riskFree.asOf
-      );
-    assumption("beta", 1, "beta not measured");
-    assumption("equityRiskPremium", 5, "equity risk-premium scenario");
-    assumption("costDebt", 5, "borrowing-cost scenario");
-    assumption("taxRate", 25, "marginal-tax scenario");
-    if (capitalBasis === "scenario") {
-      assumption("equity", 75, "75% equity / 25% debt financing mix; normalized units, not observed market capitalization");
-      assumption("debt", 25, "25% debt financing mix; normalized units, not the company\u2019s reported debt");
-      gaps.push("actual market capitalization and market debt; WACC uses an explicit financing-mix scenario");
-    } else if (observedCapital)
-      put(
-        "equity",
-        snapshot.marketCap.value / million,
-        "Market equity, millions \xB7 " + snapshot.marketCap.asOf
-      );
-    else gaps.push("market capitalization");
-    if (capitalBasis === "market" && Number.isFinite(reportedDebt) && reportedDebt >= 0)
-      put(
-        "debt",
-        reportedDebt / million,
-        "Reported book debt proxy, millions; verify market debt"
-      );
-    else if (capitalBasis === "market") gaps.push("debt");
+    for (const [key2, v] of Object.entries(capital.patches))
+      if (!["equity", "debt"].includes(key2) || capitalBasis === capital.capitalBasis) put(key2, v, capital.origins[key2]);
+    if (capitalBasis !== capital.capitalBasis) gaps.push("Enter capital values for the selected basis; the automatic basis is " + capital.capitalBasis);
+    if (capital.wacc == null) gaps.push("A complete dated risk-free / beta / risk premium / tax / financing reference is required. Defaults are not substituted.");
+    if (capital.capitalBasis === "scenario") gaps.push(capital.description);
   }
   if (view === "rv" || view === "eqrv") {
     const metric2 = selectedMetric || fit.metric || "pe";
@@ -7501,17 +7733,26 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
       }
     } else if (latest) {
       patches.estimateKind = "user";
-      patches.period = "Automatic scenario from reported " + latest.end + " figures; " + (growth * 100).toFixed(2) + "% annual growth; constant operating margin and D&A/revenue. Not company guidance or analyst consensus.";
+      patches.period = "Company-specific scenarios from reported " + latest.end + " figures and dated industry outlook, fading each year; constant operating margin and D&A/revenue. Not company guidance or company analyst consensus.";
       patches.asOf = latest.end;
       const [year, month, day] = latest.end.split("-").map(Number);
+      let projectedRevenue = value("revenue"), projectedEPS = value("eps"), projectedEBITDA = value("ebit") + value("da");
       for (let i2 = 0; i2 < 3; i2++) {
         const y = year + i2 + 1, last = new Date(Date.UTC(y, month, 0)).getUTCDate();
         patches["fiscal" + i2] = `${y}-${String(month).padStart(2, "0")}-${String(Math.min(day, last)).padStart(2, "0")}`;
         origins["fiscal" + i2] = "Assumed fiscal year-end from latest annual filing; confirm issuer calendar";
-        for (const k of ["revenue", "eps"])
-          if (Number.isFinite(value(k))) put(k + i2, value(k) * (1 + growth) ** (i2 + 1) / (k === "eps" ? 1 : million), "Forecast scenario \xB7 reported " + latest.end + " " + k + "; not consensus");
-        if (Number.isFinite(value("ebit")) && Number.isFinite(value("da")))
-          put("ebitda" + i2, (value("ebit") + value("da")) * (1 + growth) ** (i2 + 1) / million, "Forecast scenario \xB7 constant reported EBIT and D&A margins; not consensus");
+        if (forecast.revenue[i2] && Number.isFinite(projectedRevenue)) {
+          projectedRevenue *= 1 + forecast.revenue[i2].growth;
+          put("revenue" + i2, projectedRevenue / million, forecast.revenue[i2].description);
+        }
+        if (forecast.earnings[i2] && Number.isFinite(projectedEPS)) {
+          projectedEPS *= 1 + forecast.earnings[i2].growth;
+          put("eps" + i2, projectedEPS, forecast.earnings[i2].description);
+        }
+        if (forecast.revenue[i2] && Number.isFinite(projectedEBITDA)) {
+          projectedEBITDA *= 1 + forecast.revenue[i2].growth;
+          put("ebitda" + i2, projectedEBITDA / million, "Constant reported EBITDA margin; " + forecast.revenue[i2].description);
+        }
       }
       gaps.push("analyst consensus and contributor counts are unavailable; populated figures are explicit scenarios");
     } else gaps.push("matching-currency filing drivers and licensed consensus estimates are unavailable");
@@ -7557,24 +7798,28 @@ function calculateDDM(input) {
   const two = model === "two-stage";
   const h = two ? input.initialGrowth : g;
   const n = two ? input.years : 0;
-  if (two && (!Number.isFinite(h) || h <= -1))
+  const rates = two && input.growthRates;
+  if (rates && (!Array.isArray(rates) || rates.length !== n || rates.some((v) => !Number.isFinite(v) || v <= -1)))
+    throw new Error("Provide one valid dividend growth rate above \u2212100% for every forecast year.");
+  if (two && !rates && (!Number.isFinite(h) || h <= -1))
     throw new Error("Enter initial dividend growth above \u2212100%.");
   if (two && (!Number.isInteger(n) || n < 1 || n > 50))
     throw new Error("Initial stage must contain 1\u201350 whole years.");
   const price = input.price;
   if (price != null && (!Number.isFinite(price) || price <= 0))
     throw new Error("Enter a positive comparison price, or leave it blank.");
-  const firstDividend = basis === "forward" ? dividend : dividend * (1 + h);
-  const rows2 = [];
+  const firstDividend = basis === "forward" ? dividend : dividend * (1 + (rates ? rates[0] : h));
+  const rows3 = [];
   let pvDividends = 0;
+  let payment = firstDividend;
   for (let year = 1; year <= n; year++) {
-    const payment = firstDividend * (1 + h) ** (year - 1);
+    if (year > 1) payment *= 1 + (rates ? rates[year - 1] : h);
     const discountFactor = (1 + r) ** -year;
     const pv = payment * discountFactor;
     pvDividends += pv;
-    rows2.push({ year, dividend: payment, discountFactor, pv });
+    rows3.push({ year, growth: rates ? rates[year - 1] : h, dividend: payment, discountFactor, pv });
   }
-  const terminalDividend = two ? rows2.at(-1).dividend * (1 + g) : firstDividend;
+  const terminalDividend = two ? rows3.at(-1).dividend * (1 + g) : firstDividend;
   const terminalValue = terminalDividend / (r - g);
   const pvTerminal = terminalValue / (1 + r) ** n;
   const value = pvDividends + pvTerminal;
@@ -7608,7 +7853,7 @@ function calculateDDM(input) {
     pvDividends,
     pvTerminal,
     terminalWeight,
-    rows: rows2,
+    rows: rows3,
     upside,
     marginOfSafety,
     warnings: warnings2
@@ -7637,13 +7882,14 @@ function selectAnswer(item, snapshot, engine) {
     }
   }
   const d = snapshot.dividend;
-  if (d?.status === "ready" && d.currency === item.currency && d.value > 0) {
-    const r = calculateDDM({ model: "two-stage", basis: "current", dividend: d.value, requiredReturn: fit.discount / 100, terminalGrowth: 0.03, initialGrowth: 0.05, years: 5 });
-    return { method: "ddm", title: "Dividend-based scenario", value: r.value, asOf: d.asOf, source: d.source, assumptions: `Starting annual dividend ${d.value} ${item.currency}; assumed 5% growth for five years, then 3% perpetual growth; ${fit.discount}% required equity return. Dividends may not capture buybacks or retained earnings.`, reason: fit.reason };
+  const f = forecastAssumptions(snapshot, item), ke = f.capital.costEquity;
+  if (d?.status === "ready" && d.currency === item.currency && d.value > 0 && ke && f.dividends.length === 5) {
+    const r = calculateDDM({ model: "two-stage", basis: "current", dividend: d.value, requiredReturn: ke, terminalGrowth: f.dividendTerminal, growthRates: f.dividends.map((r2) => r2.growth), years: 5 });
+    return { method: "ddm", title: "Dividend-based scenario", value: r.value, asOf: d.asOf, source: d.source, assumptions: `Starting annual dividend ${d.value} ${item.currency}; company-specific annual modelled dividend growth ${f.dividends.map((r2) => (r2.growth * 100).toFixed(2) + "%").join(", ")}; ${(f.dividendTerminal * 100).toFixed(2)}% terminal scenario; ${(ke * 100).toFixed(2)}% CAPM equity return from sourced risk inputs. ${f.dividends[0].description}. Dividends may not capture buybacks or retained earnings.`, reason: fit.reason };
   }
   const annual = snapshot.financials?.status === "ready" && snapshot.financials.annual?.[0], eps = annual?.metrics?.eps;
-  if (eps?.value > 0 && eps.source?.url) {
-    const r = fit.discount / 100;
+  if (eps?.value > 0 && eps.source?.url && ke > 0.02) {
+    const r = ke;
     return {
       method: "earnings",
       title: "No-growth earnings-power scenario",
@@ -7652,129 +7898,28 @@ function selectAnswer(item, snapshot, engine) {
       high: eps.value / (r - 0.02),
       asOf: annual.end,
       source: eps.source,
-      assumptions: `Reported annual diluted EPS of ${eps.value} ${item.currency} is assumed sustainable and 100% distributable, with zero growth and a ${fit.discount}% required equity return. Range varies required return by \xB12 percentage points. Earnings are not cash flow; reinvestment, cyclicality and one-off items require review.`,
+      assumptions: `Reported annual diluted EPS of ${eps.value} ${item.currency} is assumed sustainable and 100% distributable, with zero growth and a ${(ke * 100).toFixed(2)}% CAPM equity return from sourced risk inputs. Range varies required return by \xB12 percentage points. Earnings are not cash flow; reinvestment, cyclicality and one-off items require review.`,
       reason: fit.reason
     };
   }
   return { ...pending, reason: annual?.metrics?.eps?.value <= 0 ? "Current earnings do not support a positive no-growth earnings valuation. Review a path to sustainable cash flow and use scenario DCF." : fit.reason };
 }
 
-// src/widgets.js
-var quoteGroups = {
-  global: [
-    {
-      name: "North America",
-      symbols: [
-        { name: "AMEX:SPY", displayName: "SPY \xB7 S&P 500 ETF" },
-        { name: "NASDAQ:QQQ", displayName: "QQQ \xB7 Nasdaq 100 ETF" },
-        { name: "AMEX:DIA", displayName: "DIA \xB7 Dow ETF" },
-        { name: "AMEX:IWM", displayName: "IWM \xB7 Russell 2000 ETF" },
-        { name: "TSX:XIC", displayName: "XIC \xB7 Canada ETF" }
-      ]
-    },
-    {
-      name: "International",
-      symbols: [
-        { name: "AMEX:VEA", displayName: "VEA \xB7 Developed ex-US ETF" },
-        { name: "AMEX:VWO", displayName: "VWO \xB7 Emerging markets ETF" },
-        { name: "AMEX:EWJ", displayName: "EWJ \xB7 Japan ETF" },
-        { name: "AMEX:EWG", displayName: "EWG \xB7 Germany ETF" },
-        { name: "AMEX:EWU", displayName: "EWU \xB7 UK ETF" },
-        { name: "AMEX:EWH", displayName: "EWH \xB7 Hong Kong ETF" }
-      ]
-    }
-  ],
-  sectors: [
-    {
-      name: "US sector ETFs",
-      symbols: [
-        ["XLK", "Technology"],
-        ["XLF", "Financials"],
-        ["XLE", "Energy"],
-        ["XLV", "Health care"],
-        ["XLI", "Industrials"],
-        ["XLY", "Consumer discretionary"],
-        ["XLP", "Consumer staples"],
-        ["XLU", "Utilities"],
-        ["XLB", "Materials"],
-        ["XLRE", "Real estate"],
-        ["XLC", "Communication services"]
-      ].map(([s, n]) => ({ name: `AMEX:${s}`, displayName: `${s} \xB7 ${n}` }))
-    }
-  ],
-  canada: [
-    {
-      name: "Canada \xB7 CAD listings",
-      symbols: [
-        ["XIC", "Canada composite ETF"],
-        ["VFV", "S&P 500 ETF"],
-        ["RY", "Royal Bank"],
-        ["TD", "TD Bank"],
-        ["CM", "CIBC"],
-        ["BMO", "BMO"],
-        ["BNS", "Scotiabank"],
-        ["ENB", "Enbridge"],
-        ["SHOP", "Shopify"],
-        ["CNQ", "Canadian Natural"]
-      ].map(([s, n]) => ({ name: `TSX:${s}`, displayName: `${s} \xB7 ${n}` }))
-    }
-  ],
-  credit: [
-    {
-      name: "Bond & credit ETFs \xB7 price, not yield",
-      symbols: [
-        ["NASDAQ:SHY", "SHY \xB7 1\u20133Y Treasury"],
-        ["NASDAQ:IEF", "IEF \xB7 7\u201310Y Treasury"],
-        ["NASDAQ:TLT", "TLT \xB7 20+Y Treasury"],
-        ["AMEX:LQD", "LQD \xB7 Investment grade"],
-        ["AMEX:HYG", "HYG \xB7 High yield"],
-        ["TSX:XBB", "XBB \xB7 Canada universe"]
-      ].map(([name, displayName]) => ({ name, displayName }))
-    }
-  ],
-  fx: [
-    {
-      name: "Indicative FX \xB7 price per base currency",
-      symbols: [
-        "EURUSD",
-        "GBPUSD",
-        "USDJPY",
-        "USDCAD",
-        "USDCHF",
-        "AUDUSD",
-        "USDHKD"
-      ].map((s) => ({
-        name: `FX_IDC:${s}`,
-        displayName: s.slice(0, 3) + " / " + s.slice(3)
-      }))
-    },
-    {
-      name: "Commodity references",
-      symbols: [
-        { name: "TVC:GOLD", displayName: "Gold \xB7 indicative reference" },
-        { name: "TVC:USOIL", displayName: "WTI \xB7 CFD reference" },
-        { name: "AMEX:SLV", displayName: "SLV \xB7 Silver trust shares" },
-        { name: "AMEX:CPER", displayName: "CPER \xB7 Copper futures fund" }
-      ]
-    }
-  ]
-};
-
 // src/valuation.js
-function finite(value, label) {
+function finite2(value, label) {
   if (!Number.isFinite(value)) throw new Error(`Enter ${label}.`);
   return value;
 }
 function positive(value, label) {
-  if (finite(value, label) <= 0) throw new Error(`${label} must be positive.`);
+  if (finite2(value, label) <= 0) throw new Error(`${label} must be positive.`);
   return value;
 }
 function nonnegative(value, label) {
-  if (finite(value, label) < 0) throw new Error(`${label} cannot be negative.`);
+  if (finite2(value, label) < 0) throw new Error(`${label} cannot be negative.`);
   return value;
 }
 function fraction(value, label) {
-  if (finite(value, label) < 0 || value > 1)
+  if (finite2(value, label) < 0 || value > 1)
     throw new Error(`${label} must be between 0% and 100%.`);
   return value;
 }
@@ -7811,15 +7956,15 @@ function calculateDCF(input) {
   positive(wacc, "WACC");
   if (!Array.isArray(flows) || flows.length < 1 || flows.length > 10)
     throw new Error("Enter 1\u201310 annual FCFF forecasts.");
-  const rows2 = flows.map((fcff, index) => {
-    finite(fcff, `year ${index + 1} FCFF`);
+  const rows3 = flows.map((fcff, index) => {
+    finite2(fcff, `year ${index + 1} FCFF`);
     const year = index + 1, factor = (1 + wacc) ** -year;
     return { year, fcff, factor, pv: fcff * factor };
   });
   let terminalValue;
   const warnings2 = [];
   if (terminalMethod === "growth") {
-    const g = finite(input.terminalGrowth, "perpetual growth");
+    const g = finite2(input.terminalGrowth, "perpetual growth");
     if (g <= -1 || g >= wacc)
       throw new Error("Perpetual growth must exceed \u2212100% and be below WACC.");
     positive(flows.at(-1), "Final forecast FCFF for a growing perpetuity");
@@ -7838,8 +7983,8 @@ function calculateDCF(input) {
       "Exit multiples import a market-pricing assumption into DCF; this is not a pure perpetual cash-flow valuation."
     );
   } else throw new Error("Choose a supported terminal-value method.");
-  const pvFlows = rows2.reduce((sum, row) => sum + row.pv, 0);
-  const pvTerminal = terminalValue * rows2.at(-1).factor;
+  const pvFlows = rows3.reduce((sum, row) => sum + row.pv, 0);
+  const pvTerminal = terminalValue * rows3.at(-1).factor;
   const bridge = equityBridge(input, pvFlows + pvTerminal);
   const terminalWeight = bridge.enterpriseValue > 0 ? pvTerminal / bridge.enterpriseValue : null;
   if (terminalWeight >= 0.8)
@@ -7856,7 +8001,7 @@ function calculateDCF(input) {
     );
   return bounded({
     ...bridge,
-    rows: rows2,
+    rows: rows3,
     pvFlows,
     terminalValue,
     pvTerminal,
@@ -7886,8 +8031,8 @@ function dcfSensitivity(input) {
 }
 function calculateWACC(input) {
   const { riskFree: riskFree2, beta, equityRiskPremium, costDebt, taxRate, equity, debt } = input;
-  finite(riskFree2, "risk-free rate");
-  finite(beta, "levered equity beta");
+  finite2(riskFree2, "risk-free rate");
+  finite2(beta, "levered equity beta");
   nonnegative(equityRiskPremium, "Equity risk premium");
   fraction(taxRate, "Marginal tax rate");
   positive(equity, "Market value of common equity");
@@ -7935,8 +8080,8 @@ function calculateRelative(input) {
       "Use each peer once; duplicate peer names would distort the median."
     );
   const peerMedian = peers.length ? median(peers.map((p) => p.multiple)) : null;
-  const history = input.history.filter((v) => Number.isFinite(v) && v > 0);
-  const historicalMedian = history.length ? median(history) : null;
+  const history2 = input.history.filter((v) => Number.isFinite(v) && v > 0);
+  const historicalMedian = history2.length ? median(history2) : null;
   if (peerMedian == null && historicalMedian == null)
     throw new Error(
       "Enter a named positive peer multiple or a positive historical observation. Negative or zero denominators are not meaningful here."
@@ -7950,8 +8095,8 @@ function calculateRelative(input) {
       currentMultiple = (input.price * input.shares + input.debt - input.cash - input.otherAssets + input.claims) / input.fundamental;
     } else currentMultiple = input.price / input.fundamental;
   }
-  const historySorted = history.slice().sort((a, b) => a - b);
-  const historicalPercentile = currentMultiple == null || !history.length ? null : (history.filter((v) => v < currentMultiple).length + history.filter((v) => v === currentMultiple).length * 0.5) / history.length;
+  const historySorted = history2.slice().sort((a, b) => a - b);
+  const historicalPercentile = currentMultiple == null || !history2.length ? null : (history2.filter((v) => v < currentMultiple).length + history2.filter((v) => v === currentMultiple).length * 0.5) / history2.length;
   return bounded({
     historicalPercentile,
     historicalLow: historySorted[0] ?? null,
@@ -7960,7 +8105,7 @@ function calculateRelative(input) {
     excluded: input.peers.filter((p) => p.name?.trim() || p.multiple != null).length - peers.length,
     peerMedian,
     historicalMedian,
-    historicalCount: history.length,
+    historicalCount: history2.length,
     currentMultiple,
     peerValue: peerMedian == null ? null : valueAt(peerMedian),
     historicalValue: historicalMedian == null ? null : valueAt(historicalMedian),
@@ -7981,13 +8126,13 @@ function calculateRelative(input) {
   });
 }
 function calculateTargets(input) {
-  const rows2 = input.rows.filter(
+  const rows3 = input.rows.filter(
     (row) => row.name?.trim() || row.target != null || row.date
   );
-  if (!rows2.length)
+  if (!rows3.length)
     throw new Error("Enter at least one analyst, target and observation date.");
   const names = [];
-  for (const row of rows2) {
+  for (const row of rows3) {
     if (!row.name?.trim())
       throw new Error("Name the broker or analyst for every target.");
     positive(row.target, "Analyst price target");
@@ -7999,10 +8144,10 @@ function calculateTargets(input) {
     throw new Error(
       "Keep one target per broker/analyst; remove duplicate entries."
     );
-  const targets = rows2.map((r) => r.target), mean = targets.reduce((a, b) => a + b, 0) / rows2.length;
+  const targets = rows3.map((r) => r.target), mean = targets.reduce((a, b) => a + b, 0) / rows3.length;
   return bounded({
-    rows: rows2,
-    count: rows2.length,
+    rows: rows3,
+    count: rows3.length,
     mean,
     median: median(targets),
     low: Math.min(...targets),
@@ -8019,8 +8164,8 @@ function calculateRI(input) {
   );
   if (!Array.isArray(input.rows) || !input.rows.length)
     throw new Error("Enter annual EPS and dividend forecasts.");
-  const rows2 = input.rows.map((row, index) => {
-    const eps = finite(row.eps, `year ${index + 1} EPS`), dividend = nonnegative(row.dividend, `Year ${index + 1} dividend`);
+  const rows3 = input.rows.map((row, index) => {
+    const eps = finite2(row.eps, `year ${index + 1} EPS`), dividend = nonnegative(row.dividend, `Year ${index + 1} dividend`);
     const openingBook = book, charge = r * openingBook, ri = eps - charge;
     book += eps - dividend;
     if (book <= 0)
@@ -8038,11 +8183,11 @@ function calculateRI(input) {
       pv: ri / (1 + r) ** (index + 1)
     };
   });
-  const terminalValue = rows2.at(-1).ri * persistence / (1 + r - persistence);
-  const pvTerminal = terminalValue / (1 + r) ** rows2.length;
-  const pvRI = rows2.reduce((sum, row) => sum + row.pv, 0), value = input.book + pvRI + pvTerminal;
+  const terminalValue = rows3.at(-1).ri * persistence / (1 + r - persistence);
+  const pvTerminal = terminalValue / (1 + r) ** rows3.length;
+  const pvRI = rows3.reduce((sum, row) => sum + row.pv, 0), value = input.book + pvRI + pvTerminal;
   return bounded({
-    rows: rows2,
+    rows: rows3,
     terminalValue,
     pvTerminal,
     pvRI,
@@ -8061,14 +8206,14 @@ function calculateRI(input) {
 }
 function forecastStatements(input) {
   let revenue = positive(input.revenue, "Starting annual revenue");
-  const growth = finite(input.growth, "annual revenue growth");
+  const growth = finite2(input.growth, "annual revenue growth");
   if (growth <= -1) throw new Error("Revenue growth must exceed \u2212100%.");
   const margin = fraction(input.margin, "EBIT margin"), tax = fraction(input.taxRate, "Tax rate");
-  const daRate = fraction(input.daRate, "D&A / revenue"), capexRate = fraction(input.capexRate, "Capex / revenue"), nwcRate = finite(input.nwcRate, "Operating working capital / revenue"), payout = fraction(input.payout, "Dividend payout");
-  let cash = nonnegative(input.cash, "Opening cash"), ppe = nonnegative(input.ppe, "Opening net PP&E"), nwc = finite(input.nwc, "Opening operating working capital");
+  const daRate = fraction(input.daRate, "D&A / revenue"), capexRate = fraction(input.capexRate, "Capex / revenue"), nwcRate = finite2(input.nwcRate, "Operating working capital / revenue"), payout = fraction(input.payout, "Dividend payout");
+  let cash = nonnegative(input.cash, "Opening cash"), ppe = nonnegative(input.ppe, "Opening net PP&E"), nwc = finite2(input.nwc, "Opening operating working capital");
   const debt = nonnegative(input.debt, "Debt"), kd = nonnegative(input.costDebt, "Pre-tax borrowing rate");
   const otherNetAssets = input.otherNetAssets ?? 0;
-  finite(otherNetAssets, "Other net assets");
+  finite2(otherNetAssets, "Other net assets");
   if (Math.abs(nwcRate) > 1)
     throw new Error(
       "Operating working capital/revenue must be between \u2212100% and 100%."
@@ -8078,7 +8223,7 @@ function forecastStatements(input) {
     throw new Error(
       "Opening net assets must exceed debt in this simplified model."
     );
-  const openingEquity = equity, rows2 = [], warnings2 = [];
+  const openingEquity = equity, rows3 = [], warnings2 = [];
   for (let year = 1; year <= 5; year++) {
     revenue *= 1 + growth;
     const ebit = revenue * margin, da = revenue * daRate, capex = revenue * capexRate;
@@ -8095,7 +8240,7 @@ function forecastStatements(input) {
         `Year ${year} net PP&E becomes negative. Revise depreciation, capex or opening assets.`
       );
     const fcff = ebit - Math.max(0, ebit) * tax + da - capex - deltaNwc;
-    rows2.push({
+    rows3.push({
       year,
       revenue,
       ebit,
@@ -8121,14 +8266,14 @@ function forecastStatements(input) {
       balance: cash + ppe + nwc + otherNetAssets - debt - equity
     });
   }
-  if (rows2.some((r) => r.cash < 0))
+  if (rows3.some((r) => r.cash < 0))
     warnings2.push(
       "Cash becomes negative: the forecast requires financing. No automatic debt or equity plug hides that deficit."
     );
   warnings2.push(
     "Simplified linked statements: only cash, operating working capital, net PP&E, fixed debt and common equity are modeled. No new financing, acquisitions, OCI or loss-tax credits. This is not Bloomberg X3SM."
   );
-  return bounded({ openingEquity, rows: rows2, warnings: warnings2 });
+  return bounded({ openingEquity, rows: rows3, warnings: warnings2 });
 }
 
 // src/valuation-view.js
@@ -8136,7 +8281,7 @@ var pct = (v) => v == null ? "\u2014" : `${num(v * 100, 2)}%`;
 var money = (v, c) => v == null ? "\u2014" : `${esc(c)} ${num(v, 2)}`;
 var multiple = (v) => v == null ? "\u2014" : `${num(v, 2)}\xD7`;
 var note = (s) => `<p class="ddm-help">${s}</p>`;
-var table = (caption, headers, rows2, cls = "") => `<div class="ddm-table-wrap" tabindex="0" role="region" aria-label="${esc(caption)}"><table class="ddm-table ${cls}"><caption>${caption}</caption><thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows2.map((row) => `<tr>${row.map((c, i2) => i2 ? `<td>${c}</td>` : `<th scope="row">${c}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+var table = (caption, headers, rows3, cls = "") => `<div class="ddm-table-wrap" tabindex="0" role="region" aria-label="${esc(caption)}"><table class="ddm-table ${cls}"><caption>${caption}</caption><thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows3.map((row) => `<tr>${row.map((c, i2) => i2 ? `<td>${c}</td>` : `<th scope="row">${c}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 var panel = (title, body) => `<section class="panel"><div class="panel-head"><h2>${title}</h2></div>${body}</section>`;
 var warnings = (items) => items?.length ? `<ul class="ddm-warnings">${items.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>` : "";
 var metric = (label, value) => `<div><span>${label}</span><b>${value}</b></div>`;
@@ -8216,8 +8361,8 @@ function readInput(view, d) {
       throw new Error(
         "Record the matching fiscal period and accounting basis."
       );
-    const history = (d.history || "").trim() ? d.history.split(/[,;\s]+/).filter(Boolean).map(Number) : [];
-    if (history.some((v) => !Number.isFinite(v) || v <= 0))
+    const history2 = (d.history || "").trim() ? d.history.split(/[,;\s]+/).filter(Boolean).map(Number) : [];
+    if (history2.some((v) => !Number.isFinite(v) || v <= 0))
       throw new Error(
         "Historical multiples must be positive numbers, separated by commas or spaces."
       );
@@ -8229,7 +8374,7 @@ function readInput(view, d) {
         name: d["peerName" + i2],
         multiple: n("peerMultiple" + i2)
       })),
-      history
+      history: history2
     };
   }
   if (view === "anr") {
@@ -8283,7 +8428,7 @@ function readInput(view, d) {
       throw new Error(
         "Record the accounting and share basis of these estimates."
       );
-    const rows2 = Array.from({ length: 3 }, (_, i2) => ({
+    const rows3 = Array.from({ length: 3 }, (_, i2) => ({
       fiscal: d["fiscal" + i2],
       revenue: n("revenue" + i2),
       eps: n("eps" + i2),
@@ -8292,11 +8437,11 @@ function readInput(view, d) {
     })).filter(
       (row) => row.fiscal || [row.revenue, row.eps, row.ebitda, row.count].some((v) => v != null)
     );
-    if (!rows2.length)
+    if (!rows3.length)
       throw new Error(
         "Enter a fiscal year-end and at least one forecast metric."
       );
-    rows2.forEach((row) => {
+    rows3.forEach((row) => {
       if (!isDate(row.fiscal))
         throw new Error("Each forecast needs a valid fiscal year-end date.");
       if ([row.revenue, row.eps, row.ebitda].every((v) => v == null))
@@ -8312,13 +8457,13 @@ function readInput(view, d) {
           "Contributor counts must be positive whole numbers or blank."
         );
     });
-    if (new Set(rows2.map((r) => r.fiscal)).size !== rows2.length)
+    if (new Set(rows3.map((r) => r.fiscal)).size !== rows3.length)
       throw new Error("Use each fiscal period once.");
     const price = n("price");
     if (price != null && (!Number.isFinite(price) || price <= 0))
       throw new Error("Comparison price must be positive or blank.");
     return {
-      rows: rows2.sort((a, b) => a.fiscal.localeCompare(b.fiscal)),
+      rows: rows3.sort((a, b) => a.fiscal.localeCompare(b.fiscal)),
       price
     };
   }
@@ -8522,9 +8667,9 @@ function renderResult(view, input, d, currency) {
   }
   if (view === "x3sm") {
     const r = forecastStatements(input), headers = ["Line item", ...r.rows.map((row) => "Year " + row.year)];
-    const line = (label, key) => [
+    const line = (label, key2) => [
       label,
-      ...r.rows.map((row) => num(row[key], 4))
+      ...r.rows.map((row) => num(row[key2], 4))
     ];
     return {
       data: r,
@@ -8573,16 +8718,16 @@ function renderResult(view, input, d, currency) {
     };
   }
   if (view === "ee") {
-    const rows2 = input.rows, classification = d.imported && d.estimateKind === "consensus" ? "Connected provider consensus; source metadata validated" : {
+    const rows3 = input.rows, classification = d.imported && d.estimateKind === "consensus" ? "Connected provider consensus; source metadata validated" : {
       user: "Your forecast assumptions",
       guidance: "Company guidance transcribed by you",
       consensus: "Third-party consensus transcribed by you"
     }[d.estimateKind];
     return {
-      data: { rows: rows2, classification },
+      data: { rows: rows3, classification },
       html: result(
         "Estimate notebook",
-        `${rows2.length} fiscal period${rows2.length === 1 ? "" : "s"}`,
+        `${rows3.length} fiscal period${rows3.length === 1 ? "" : "s"}`,
         note(
           `${esc(classification)}. ${esc(d.period)}. Review the source, fiscal horizon and accounting basis; a manual consensus label alone is not verification.`
         )
@@ -8598,7 +8743,7 @@ function renderResult(view, input, d, currency) {
             "Contributors",
             "Price / EPS"
           ],
-          rows2.map((row) => [
+          rows3.map((row) => [
             esc(row.fiscal),
             row.revenue == null ? "\u2014" : num(row.revenue, 2),
             row.eps == null ? "\u2014" : num(row.eps, 4),
@@ -8650,7 +8795,7 @@ var directory = await refreshIndexes(priorCoverage.indexes, fetcher, now);
 applyCoverage(directory);
 await writeFile(output + "/coverage.json", JSON.stringify(directory));
 var listings = catalog.filter((x2) => x2.assetType === "Equity");
-var rows = [];
+var rows2 = [];
 var cursor = 0;
 async function refresh(item) {
   const file = output + "/" + item.symbol.replaceAll(":", "_") + ".json";
@@ -8663,15 +8808,17 @@ async function refresh(item) {
   } catch {
   }
   await writeFile(file, JSON.stringify(d));
+  const forecast = forecastAssumptions(d, item);
   const answer = valuationAnswer(item, d, { evaluate: evaluateValuationDraft, defaults: valuationDefaults });
-  rows.push({ symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
-  if (rows.length % 25 === 0) console.log(`Refreshed ${rows.length} / ${listings.length} company listings`);
+  rows2.push({ industry: d.references?.industry?.name, sic: d.references?.issuer?.sic, referenceAsOf: d.references?.asOf, wacc: forecast.capital.wacc, costEquity: forecast.capital.costEquity, revenueGrowth: forecast.revenue.map((r) => r.growth), dividendGrowth: forecast.dividends.map((r) => r.growth), symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
+  if (rows2.length % 25 === 0) console.log(`Refreshed ${rows2.length} / ${listings.length} company listings`);
 }
 await Promise.all(Array.from({ length: 3 }, async () => {
   while (cursor < listings.length) await refresh(listings[cursor++]);
 }));
-rows.sort((a, b) => a.symbol.localeCompare(b.symbol));
-var manifest = { schema: 1, generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, financialsReady: rows.filter((r) => r.financials === "ready").length, numericalAnswers: rows.filter((r) => r.numericalAnswer).length, rows };
+rows2.sort((a, b) => a.symbol.localeCompare(b.symbol));
+var manifest = { schema: 1, generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, referencesReady: rows2.filter((r) => r.referenceAsOf).length, waccReady: rows2.filter((r) => Number.isFinite(r.wacc)).length, companyIndustryMappings: rows2.filter((r) => r.sic).length, revenuePaths: rows2.filter((r) => r.revenueGrowth.length === 5).length, dividendPaths: rows2.filter((r) => r.dividendGrowth.length === 5).length, financialsReady: rows2.filter((r) => r.financials === "ready").length, numericalAnswers: rows2.filter((r) => r.numericalAnswer).length, rows: rows2 };
 await writeFile(output + "/manifest.json", JSON.stringify(manifest, null, 2));
 console.log(JSON.stringify({ total: manifest.totalListings, financials: manifest.financialsReady, numericalAnswers: manifest.numericalAnswers }));
 if (manifest.financialsReady < 400) throw Error("Refresh coverage fell below the publication threshold; existing published snapshot will remain in place.");
+if (manifest.referencesReady < 500) throw Error("Risk/growth reference coverage fell below the publication threshold; retain prior public snapshot.");
