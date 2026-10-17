@@ -6220,7 +6220,7 @@ function unzipSync(data, opts) {
 }
 
 // worker/coverage-data.js
-var clean = (text) => text.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+var clean = (text2) => text2.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
 function spyHoldings(bytes) {
   const paths = ["xl/sharedStrings.xml", "xl/worksheets/sheet1.xml"];
   const zip = unzipSync(bytes, { filter: (f) => paths.includes(f.name) && f.originalSize < 4e6 });
@@ -6235,12 +6235,12 @@ function spyHoldings(bytes) {
     return cells;
   });
   const header = rows3.find((r) => r.A === "Name" && r.B === "Ticker");
-  const text = rows3.find((r) => r.A === "Holdings:")?.B;
-  const date3 = text?.match(/^As of (\d{2})-([A-Za-z]{3})-(\d{4})$/);
-  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(date3?.[2]) + 1;
-  if (header?.H !== "Local Currency" || !date3 || !month) throw new Error("Holdings schema changed");
+  const text2 = rows3.find((r) => r.A === "Holdings:")?.B;
+  const date4 = text2?.match(/^As of (\d{2})-([A-Za-z]{3})-(\d{4})$/);
+  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(date4?.[2]) + 1;
+  if (header?.H !== "Local Currency" || !date4 || !month) throw new Error("Holdings schema changed");
   return {
-    asOf: `${date3[3]}-${String(month).padStart(2, "0")}-${date3[1]}`,
+    asOf: `${date4[3]}-${String(month).padStart(2, "0")}-${date4[1]}`,
     rows: rows3.filter((r) => r.H === "USD" && /^[A-Z][A-Z0-9.\-]{0,10}$/.test(r.B || "")).map((r) => ({ ticker: r.B, name: r.A, currency: "USD" }))
   };
 }
@@ -12729,6 +12729,1249 @@ var issuer_financial_supplements_default = {
       allowedSourceUrls: [
         "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm"
       ]
+    },
+    {
+      id: "cnr-2026q2-operating-reviewed-20261017",
+      kind: "reviewed-operating-period",
+      symbol: "TSX:CNR",
+      ticker: "CNR.TO",
+      issuerName: "Canadian National Railway Company",
+      issuerCik: 16868,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-07-24",
+      period: {
+        start: "2026-01-01",
+        end: "2026-06-30",
+        kind: "ytd",
+        months: 6
+      },
+      source: {
+        name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+        url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm"
+      },
+      reviewStatus: "Reported source extraction and three-component arithmetic checked by Codex; no independent human analyst sign-off or new forecast underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        date: "2026-10-30",
+        periodEnd: "2026-09-30",
+        reason: "Scheduled Q3 2026 financial results require replacing/re-reviewing current and comparative YTD flows, balances and share bases; re-review sooner after a restatement or material corporate action. Six-hour data fetching does not synchronize this dated supplement."
+      },
+      metrics: {
+        revenue: {
+          value: 9132e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Revenue",
+          scope: "consolidated-us-gaap-revenue",
+          basis: "Reported six-month US GAAP YTD fact; Revenue",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 9132,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Revenue"
+          },
+          start: "2026-01-01"
+        },
+        ebit: {
+          value: 333e7,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Reported operating income / EBIT",
+          scope: "consolidated-us-gaap-operating-income",
+          basis: "Reported six-month US GAAP YTD fact; Reported operating income / EBIT",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-operating-income",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 3330,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Reported operating income / EBIT"
+          },
+          start: "2026-01-01"
+        },
+        da: {
+          value: 97e7,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Depreciation and amortization",
+          scope: "consolidated-us-gaap-depreciation-and-amortization",
+          basis: "Reported six-month US GAAP YTD fact; Depreciation and amortization",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-depreciation-and-amortization",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 970,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Depreciation and amortization"
+          },
+          start: "2026-01-01"
+        },
+        capex: {
+          value: 1134e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Gross property additions",
+          scope: "consolidated-us-gaap-gross-property-additions",
+          basis: "Reported six-month US GAAP YTD fact; Gross property additions; gross cash outflow magnitude before disposal proceeds and other investing activities; not net capex guidance",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-gross-property-additions",
+            location: "Consolidated statement of cash flows"
+          },
+          reported: {
+            value: 1134,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Gross property additions"
+          },
+          start: "2026-01-01"
+        },
+        tax: {
+          value: 806e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Income-tax expense",
+          scope: "consolidated-us-gaap-income-tax-expense",
+          basis: "Reported six-month US GAAP YTD fact; Income-tax expense; expense stated as a positive cost magnitude",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-income-tax-expense",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 806,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Income-tax expense"
+          },
+          start: "2026-01-01"
+        },
+        pretax: {
+          value: 3201e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Income before income taxes",
+          scope: "consolidated-us-gaap-income-before-income-taxes",
+          basis: "Reported six-month US GAAP YTD fact; Income before income taxes",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-income-before-income-taxes",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 3201,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Income before income taxes"
+          },
+          start: "2026-01-01"
+        },
+        netIncome: {
+          value: 2395e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Reported consolidated net income",
+          scope: "consolidated-us-gaap-net-income",
+          basis: "Reported six-month US GAAP YTD fact; Reported consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-net-income",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 2395,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Reported consolidated net income"
+          },
+          start: "2026-01-01"
+        },
+        interestExpense: {
+          value: 475e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Interest expense",
+          scope: "consolidated-us-gaap-interest-expense",
+          basis: "Reported six-month US GAAP YTD fact; Interest expense; expense stated as a positive cost magnitude",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-interest-expense",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 475,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Interest expense"
+          },
+          start: "2026-01-01"
+        },
+        cfo: {
+          value: 2876e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Cash from operating activities",
+          scope: "consolidated-us-gaap-operating-cash-flow",
+          basis: "Reported six-month US GAAP YTD fact; Cash from operating activities; includes cash interest and taxes; CFO less capex is not asserted to be FCFF",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-operating-cash-flow",
+            location: "Consolidated statement of cash flows"
+          },
+          reported: {
+            value: 2876,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Cash from operating activities"
+          },
+          start: "2026-01-01"
+        },
+        eps: {
+          value: 3.93,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD/shares",
+          currency: "CAD",
+          label: "Reported diluted earnings per share",
+          scope: "consolidated-us-gaap-diluted-eps",
+          basis: "Reported six-month YTD diluted EPS; neither adjusted nor annualized; not reconstructed from a rounded share average",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-us-gaap-diluted-eps",
+            location: "Consolidated statement of income; interim Note 7 Earnings per share"
+          },
+          reported: {
+            value: 3.93,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Reported diluted earnings per share"
+          },
+          start: "2026-01-01"
+        },
+        shares: {
+          value: 6097e5,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "shares",
+          currency: "CAD",
+          label: "Weighted-average diluted shares",
+          scope: "consolidated-weighted-average-diluted-shares",
+          basis: "Reported six-month YTD weighted-average diluted shares; not period-end shares or current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-weighted-average-diluted-shares",
+            location: "Consolidated statement of income; interim Note 7 Earnings per share"
+          },
+          reported: {
+            value: 609.7,
+            unit: "million shares",
+            scale: 1e6,
+            label: "Weighted-average diluted shares"
+          },
+          start: "2026-01-01"
+        },
+        cash: {
+          value: 28e7,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Unrestricted cash and cash equivalents",
+          scope: "consolidated-unrestricted-cash",
+          basis: "Reported period-end cash and cash equivalents; excludes C$14m restricted cash, so cash is C$280m rather than C$294m",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-unrestricted-cash",
+            location: "Consolidated balance sheets p.13; cash flow cash reconciliation p.16"
+          },
+          reported: {
+            value: 280,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Unrestricted cash and cash equivalents"
+          }
+        },
+        ppe: {
+          value: 50013e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Properties, net",
+          scope: "consolidated-properties-net",
+          basis: "Reported period-end properties balance; excludes separately disclosed operating lease right-of-use assets",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-properties-net",
+            location: "Consolidated balance sheets p.13"
+          },
+          reported: {
+            value: 50013,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Properties, net"
+          }
+        },
+        receivables: {
+          value: 1313e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Accounts receivable",
+          scope: "consolidated-accounts-receivable",
+          basis: "Reported period-end accounts receivable balance",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-accounts-receivable",
+            location: "Consolidated balance sheets p.13"
+          },
+          reported: {
+            value: 1313,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Accounts receivable"
+          }
+        },
+        inventory: {
+          value: 861e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Material and supplies",
+          scope: "consolidated-material-and-supplies",
+          basis: "Reported period-end material and supplies balance",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-material-and-supplies",
+            location: "Consolidated balance sheets p.13"
+          },
+          reported: {
+            value: 861,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Material and supplies"
+          }
+        },
+        payables: {
+          value: 2757e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Accounts payable and other",
+          scope: "consolidated-accounts-payable-and-other",
+          basis: "Reported period-end accounts payable and other; broader than pure trade payables and not a directly comparable operating NWC subtotal",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-accounts-payable-and-other",
+            location: "Consolidated balance sheets p.13"
+          },
+          reported: {
+            value: 2757,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Accounts payable and other"
+          }
+        },
+        currentLongDebt: {
+          value: 512e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Current portion of long-term debt",
+          scope: "consolidated-current-portion-of-long-term-debt",
+          basis: "Reported current debt carrying amount; component of total carrying-value debt",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-current-portion-of-long-term-debt",
+            location: "Consolidated balance sheets p.13"
+          },
+          reported: {
+            value: 512,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Current portion of long-term debt"
+          }
+        },
+        longDebt: {
+          value: 21742e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Long-term debt",
+          scope: "consolidated-long-term-debt-noncurrent",
+          basis: "Reported noncurrent debt carrying amount; includes commercial paper classification used by CN and finance leases, not market value",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-long-term-debt-noncurrent",
+            location: "Consolidated balance sheets p.13; financing and debt notes"
+          },
+          reported: {
+            value: 21742,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Long-term debt"
+          }
+        },
+        equity: {
+          value: 21901e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Total shareholders' equity",
+          scope: "consolidated-total-shareholders-equity",
+          basis: "Reported period-end total shareholders equity; common-only carrying equity is not separately normalized by this supplement",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-total-shareholders-equity",
+            location: "Consolidated balance sheets p.13"
+          },
+          reported: {
+            value: 21901,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total shareholders' equity"
+          }
+        },
+        commonShares: {
+          value: 6049e5,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "shares",
+          currency: "CAD",
+          label: "Period-end common shares outstanding",
+          scope: "consolidated-period-end-common-shares",
+          basis: "Reported period-end common shares outstanding; Share Trusts 1.1m is a separate column and is not added; not current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-period-end-common-shares",
+            location: "Consolidated statements of changes in shareholders equity p.14"
+          },
+          reported: {
+            value: 604.9,
+            unit: "million shares",
+            scale: 1e6,
+            label: "Period-end common shares outstanding"
+          }
+        },
+        debt: {
+          value: 22254e6,
+          asOf: "2026-06-30",
+          filed: "2026-07-24",
+          publishedAt: "2026-07-24",
+          unit: "CAD",
+          currency: "CAD",
+          label: "Total carrying-value debt",
+          scope: "consolidated-total-carrying-debt",
+          basis: "Derived current portion of long-term debt C$512m + noncurrent long-term debt C$21,742m = C$22,254m; includes commercial paper and finance leases, excludes operating lease liabilities and pension deficits; not debt fair value",
+          evidenceLabel: "derived_calculation",
+          source: {
+            name: "CN Q2 2026 \xB7 debt carrying-amount sum",
+            url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+            tag: "reviewed:consolidated-total-carrying-debt",
+            location: "Consolidated balance sheets p.13; current portion plus long-term debt",
+            operation: "sum",
+            components: [
+              {
+                value: 512e6,
+                asOf: "2026-06-30",
+                filed: "2026-07-24",
+                publishedAt: "2026-07-24",
+                unit: "CAD",
+                currency: "CAD",
+                label: "Current portion of long-term debt",
+                scope: "consolidated-current-portion-of-long-term-debt",
+                basis: "Reported current debt carrying amount; component of total carrying-value debt",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+                  url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+                  tag: "reviewed:consolidated-current-portion-of-long-term-debt",
+                  location: "Consolidated balance sheets p.13"
+                },
+                reported: {
+                  value: 512,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Current portion of long-term debt"
+                }
+              },
+              {
+                value: 21742e6,
+                asOf: "2026-06-30",
+                filed: "2026-07-24",
+                publishedAt: "2026-07-24",
+                unit: "CAD",
+                currency: "CAD",
+                label: "Long-term debt",
+                scope: "consolidated-long-term-debt-noncurrent",
+                basis: "Reported noncurrent debt carrying amount; includes commercial paper classification used by CN and finance leases, not market value",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+                  url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+                  tag: "reviewed:consolidated-long-term-debt-noncurrent",
+                  location: "Consolidated balance sheets p.13; financing and debt notes"
+                },
+                reported: {
+                  value: 21742,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Long-term debt"
+                }
+              }
+            ]
+          }
+        }
+      },
+      prior: {
+        start: "2025-01-01",
+        end: "2025-06-30",
+        metrics: {
+          revenue: {
+            value: 8675e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Revenue",
+            scope: "consolidated-us-gaap-revenue",
+            basis: "Reported six-month US GAAP YTD fact; Revenue",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 8675,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Revenue"
+            },
+            start: "2025-01-01"
+          },
+          ebit: {
+            value: 3248e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Reported operating income / EBIT",
+            scope: "consolidated-us-gaap-operating-income",
+            basis: "Reported six-month US GAAP YTD fact; Reported operating income / EBIT",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-operating-income",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 3248,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Reported operating income / EBIT"
+            },
+            start: "2025-01-01"
+          },
+          da: {
+            value: 982e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Depreciation and amortization",
+            scope: "consolidated-us-gaap-depreciation-and-amortization",
+            basis: "Reported six-month US GAAP YTD fact; Depreciation and amortization",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-depreciation-and-amortization",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 982,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Depreciation and amortization"
+            },
+            start: "2025-01-01"
+          },
+          capex: {
+            value: 1324e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Gross property additions",
+            scope: "consolidated-us-gaap-gross-property-additions",
+            basis: "Reported six-month US GAAP YTD fact; Gross property additions; gross cash outflow magnitude before disposal proceeds and other investing activities; not net capex guidance",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-gross-property-additions",
+              location: "Consolidated statement of cash flows"
+            },
+            reported: {
+              value: 1324,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Gross property additions"
+            },
+            start: "2025-01-01"
+          },
+          tax: {
+            value: 755e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Income-tax expense",
+            scope: "consolidated-us-gaap-income-tax-expense",
+            basis: "Reported six-month US GAAP YTD fact; Income-tax expense; expense stated as a positive cost magnitude",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-income-tax-expense",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 755,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Income-tax expense"
+            },
+            start: "2025-01-01"
+          },
+          pretax: {
+            value: 3088e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Income before income taxes",
+            scope: "consolidated-us-gaap-income-before-income-taxes",
+            basis: "Reported six-month US GAAP YTD fact; Income before income taxes",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-income-before-income-taxes",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 3088,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Income before income taxes"
+            },
+            start: "2025-01-01"
+          },
+          netIncome: {
+            value: 2333e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Reported consolidated net income",
+            scope: "consolidated-us-gaap-net-income",
+            basis: "Reported six-month US GAAP YTD fact; Reported consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-net-income",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 2333,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Reported consolidated net income"
+            },
+            start: "2025-01-01"
+          },
+          interestExpense: {
+            value: 452e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Interest expense",
+            scope: "consolidated-us-gaap-interest-expense",
+            basis: "Reported six-month US GAAP YTD fact; Interest expense; expense stated as a positive cost magnitude",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-interest-expense",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 452,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Interest expense"
+            },
+            start: "2025-01-01"
+          },
+          cfo: {
+            value: 2909e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Cash from operating activities",
+            scope: "consolidated-us-gaap-operating-cash-flow",
+            basis: "Reported six-month US GAAP YTD fact; Cash from operating activities; includes cash interest and taxes; CFO less capex is not asserted to be FCFF",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-operating-cash-flow",
+              location: "Consolidated statement of cash flows"
+            },
+            reported: {
+              value: 2909,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Cash from operating activities"
+            },
+            start: "2025-01-01"
+          },
+          eps: {
+            value: 3.71,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "CAD/shares",
+            currency: "CAD",
+            label: "Reported diluted earnings per share",
+            scope: "consolidated-us-gaap-diluted-eps",
+            basis: "Reported six-month YTD diluted EPS; neither adjusted nor annualized; not reconstructed from a rounded share average",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-us-gaap-diluted-eps",
+              location: "Consolidated statement of income; interim Note 7 Earnings per share"
+            },
+            reported: {
+              value: 3.71,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Reported diluted earnings per share"
+            },
+            start: "2025-01-01"
+          },
+          shares: {
+            value: 6282e5,
+            asOf: "2025-06-30",
+            filed: "2026-07-24",
+            publishedAt: "2026-07-24",
+            unit: "shares",
+            currency: "CAD",
+            label: "Weighted-average diluted shares",
+            scope: "consolidated-weighted-average-diluted-shares",
+            basis: "Reported six-month YTD weighted-average diluted shares; not period-end shares or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN Q2 2026 unaudited statements and notes, SEC Exhibit 99.2",
+              url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+              tag: "reviewed:consolidated-weighted-average-diluted-shares",
+              location: "Consolidated statement of income; interim Note 7 Earnings per share"
+            },
+            reported: {
+              value: 628.2,
+              unit: "million shares",
+              scale: 1e6,
+              label: "Weighted-average diluted shares"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      annual: {
+        start: "2025-01-01",
+        end: "2025-12-31",
+        filed: "2026-01-30",
+        form: "Issuer annual release",
+        metrics: {
+          revenue: {
+            value: 17304e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Revenue",
+            scope: "consolidated-us-gaap-revenue",
+            basis: "Reported FY2025 US GAAP annual fact; Revenue",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 17304,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Revenue"
+            },
+            start: "2025-01-01"
+          },
+          ebit: {
+            value: 6587e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Reported operating income / EBIT",
+            scope: "consolidated-us-gaap-operating-income",
+            basis: "Reported FY2025 US GAAP annual fact; Reported operating income / EBIT",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-operating-income",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 6587,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Reported operating income / EBIT"
+            },
+            start: "2025-01-01"
+          },
+          da: {
+            value: 1938e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Depreciation and amortization",
+            scope: "consolidated-us-gaap-depreciation-and-amortization",
+            basis: "Reported FY2025 US GAAP annual fact; Depreciation and amortization",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-depreciation-and-amortization",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 1938,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Depreciation and amortization"
+            },
+            start: "2025-01-01"
+          },
+          capex: {
+            value: 3658e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Gross property additions",
+            scope: "consolidated-us-gaap-gross-property-additions",
+            basis: "Reported FY2025 US GAAP annual fact; Gross property additions; gross cash outflow magnitude before disposal proceeds and other investing activities; not net capex guidance",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-gross-property-additions",
+              location: "Consolidated statement of cash flows"
+            },
+            reported: {
+              value: 3658,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Gross property additions"
+            },
+            start: "2025-01-01"
+          },
+          tax: {
+            value: 1544e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Income-tax expense",
+            scope: "consolidated-us-gaap-income-tax-expense",
+            basis: "Reported FY2025 US GAAP annual fact; Income-tax expense; expense stated as a positive cost magnitude",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-income-tax-expense",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 1544,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Income-tax expense"
+            },
+            start: "2025-01-01"
+          },
+          pretax: {
+            value: 6264e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Income before income taxes",
+            scope: "consolidated-us-gaap-income-before-income-taxes",
+            basis: "Reported FY2025 US GAAP annual fact; Income before income taxes",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-income-before-income-taxes",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 6264,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Income before income taxes"
+            },
+            start: "2025-01-01"
+          },
+          netIncome: {
+            value: 472e7,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Reported consolidated net income",
+            scope: "consolidated-us-gaap-net-income",
+            basis: "Reported FY2025 US GAAP annual fact; Reported consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-net-income",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 4720,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Reported consolidated net income"
+            },
+            start: "2025-01-01"
+          },
+          interestExpense: {
+            value: 913e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Interest expense",
+            scope: "consolidated-us-gaap-interest-expense",
+            basis: "Reported FY2025 US GAAP annual fact; Interest expense; expense stated as a positive cost magnitude",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-interest-expense",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 913,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Interest expense"
+            },
+            start: "2025-01-01"
+          },
+          cfo: {
+            value: 7049e6,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD",
+            currency: "CAD",
+            label: "Cash from operating activities",
+            scope: "consolidated-us-gaap-operating-cash-flow",
+            basis: "Reported FY2025 US GAAP annual fact; Cash from operating activities; includes cash interest and taxes; CFO less capex is not asserted to be FCFF",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-operating-cash-flow",
+              location: "Consolidated statement of cash flows"
+            },
+            reported: {
+              value: 7049,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Cash from operating activities"
+            },
+            start: "2025-01-01"
+          },
+          eps: {
+            value: 7.57,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "CAD/shares",
+            currency: "CAD",
+            label: "Reported diluted earnings per share",
+            scope: "consolidated-us-gaap-diluted-eps",
+            basis: "Reported annual diluted EPS; neither adjusted nor annualized; not reconstructed from a rounded share average",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-us-gaap-diluted-eps",
+              location: "Consolidated statement of income; interim Note 7 Earnings per share"
+            },
+            reported: {
+              value: 7.57,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Reported diluted earnings per share"
+            },
+            start: "2025-01-01"
+          },
+          shares: {
+            value: 6237e5,
+            asOf: "2025-12-31",
+            filed: "2026-01-30",
+            publishedAt: "2026-01-30",
+            unit: "shares",
+            currency: "CAD",
+            label: "Weighted-average diluted shares",
+            scope: "consolidated-weighted-average-diluted-shares",
+            basis: "Reported annual weighted-average diluted shares; not period-end shares or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "CN FY2025 results and financial statement tables",
+              url: "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/",
+              tag: "reviewed:consolidated-weighted-average-diluted-shares",
+              location: "Consolidated statement of income; interim Note 7 Earnings per share"
+            },
+            reported: {
+              value: 623.7,
+              unit: "million shares",
+              scale: 1e6,
+              label: "Weighted-average diluted shares"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "capex",
+          "cash",
+          "cfo",
+          "commonShares",
+          "currentLongDebt",
+          "da",
+          "debt",
+          "ebit",
+          "eps",
+          "equity",
+          "interestExpense",
+          "inventory",
+          "longDebt",
+          "netIncome",
+          "payables",
+          "ppe",
+          "pretax",
+          "receivables",
+          "revenue",
+          "shares",
+          "tax"
+        ],
+        priorMetrics: [
+          "capex",
+          "cfo",
+          "da",
+          "ebit",
+          "eps",
+          "interestExpense",
+          "netIncome",
+          "pretax",
+          "revenue",
+          "shares",
+          "tax"
+        ],
+        annualMetrics: [
+          "capex",
+          "cfo",
+          "da",
+          "ebit",
+          "eps",
+          "interestExpense",
+          "netIncome",
+          "pretax",
+          "revenue",
+          "shares",
+          "tax"
+        ],
+        ttmFlows: [
+          "revenue",
+          "ebit",
+          "da",
+          "capex",
+          "tax",
+          "pretax",
+          "netIncome",
+          "interestExpense",
+          "cfo"
+        ],
+        flowScopes: {
+          revenue: "consolidated-us-gaap-revenue",
+          ebit: "consolidated-us-gaap-operating-income",
+          da: "consolidated-us-gaap-depreciation-and-amortization",
+          capex: "consolidated-us-gaap-gross-property-additions",
+          tax: "consolidated-us-gaap-income-tax-expense",
+          pretax: "consolidated-us-gaap-income-before-income-taxes",
+          netIncome: "consolidated-us-gaap-net-income",
+          interestExpense: "consolidated-us-gaap-interest-expense",
+          cfo: "consolidated-us-gaap-operating-cash-flow"
+        },
+        missingRequestedMetrics: [
+          "commonNetIncomeDiluted"
+        ]
+      },
+      limitations: [
+        "These are historical reported financial facts through June 30, 2026; no current stock quote, market capitalization, fully diluted October share count, earnings forecast or intrinsic-value conclusion is added.",
+        "Each TTM monetary flow uses FY2025 + H1 2026 \u2212 H1 2025 from two official statement sources. No quarterly/YTD EPS or weighted-average share count is added, subtracted or annualized to manufacture an annual EPS or TTM denominator.",
+        "The latest H1 diluted-share average is 609.7m and the period-end common count is 604.9m. The separate reviewed DCF uses a 605.9m proxy (604.9m plus Q2 incremental dilution 1.0m); this supplement does not change that reviewed forecast, bridge or value.",
+        "Capex is gross reported property additions C$1,134m in H1 2026, C$1,324m in H1 2025 and C$3,658m in FY2025. Asset-sale proceeds, other investing cash flows, issuer non-GAAP free cash flow and management net-capex guidance are not substituted for gross capex or labeled FCFF.",
+        "Cash excludes restricted cash C$14m; debt includes commercial paper and finance leases but excludes operating lease liabilities and pension obligations. The reviewed DCF separately handles pensions and leases.",
+        "Payables includes accounts payable and other, so the normalized point-in-time receivables + supplies \u2212 payables arithmetic is not a complete operating working-capital roll-forward. The reviewed DCF retains its separately reviewed cash-flow-row working-capital treatment.",
+        "A separate diluted-common-income numerator is not asserted for all three periods; exact reported net income and diluted EPS are retained without deriving an unreported numerator from rounded EPS."
+      ],
+      allowedSourceUrls: [
+        "https://www.sec.gov/Archives/edgar/data/16868/000001686826000036/a2026q2fsnotes.htm",
+        "https://www.cn.ca/en/news/2026/01/cn-announces-solid-fourth-quarter-and-year-end-results/"
+      ]
     }
   ]
 };
@@ -12741,12 +13984,17 @@ var date = (value) => {
   const day2 = value.slice(0, 10), parsed = Date.parse(day2);
   return finite(parsed) && new Date(parsed).toISOString().slice(0, 10) === day2 ? day2 : null;
 };
-var nextDay = (day2) => new Date(Date.parse(day2) + 864e5).toISOString().slice(0, 10);
+var nextDay = (day2) => date(day2) ? new Date(Date.parse(day2) + 864e5).toISOString().slice(0, 10) : null;
 var instant = /* @__PURE__ */ new Set(["equity", "preferredEquity", "commonEquity", "commonShares"]);
 var ratios = /* @__PURE__ */ new Set(["cet1Ratio", "reportedROE", "pclRatio", "lcr", "netInterestMargin"]);
 var additive = /* @__PURE__ */ new Set(["revenue", "totalNetIncome", "netIncome", "commonNetIncomeDiluted"]);
 var allowed = /* @__PURE__ */ new Set([...instant, ...ratios, ...additive, "eps", "shares", "creditLossProvision"]);
 var requested = ["netIncome", "commonNetIncomeDiluted", "shares", "equity", "preferredEquity", "commonEquity", "commonShares"];
+var operatingInstant = /* @__PURE__ */ new Set([...instant, "cash", "ppe", "receivables", "inventory", "payables", "debt", "currentLongDebt", "longDebt"]);
+var operatingAdditive = /* @__PURE__ */ new Set([...additive, "ebit", "da", "capex", "cfo", "tax", "pretax", "interestExpense"]);
+var operatingRequested = ["revenue", "ebit", "da", "capex", "cfo", "tax", "pretax", "netIncome", "commonNetIncomeDiluted", "eps", "shares", "cash", "debt", "equity", "commonShares"];
+var operatingAllowed = /* @__PURE__ */ new Set([...operatingInstant, ...operatingAdditive, "eps", "shares"]);
+var profileFor = (entry) => entry?.kind === "reviewed-operating-period" ? { instant: operatingInstant, additive: operatingAdditive, allowed: operatingAllowed, requested: operatingRequested } : { instant, additive, allowed, requested };
 var ordered = (keys2) => [...keys2].sort().join("|");
 var urlOK = (value) => {
   try {
@@ -12760,36 +14008,46 @@ var staticWarning = "These historical facts were source-reviewed on 2026-10-17. 
 function validateIssuerFinancialSupplement(entry, asOf) {
   if (entry?.kind === "reviewed-sparse-period") return validateSparseSupplement(entry, asOf);
   const cutoff = date(asOf), errors = [];
+  const profile = profileFor(entry), operating = entry?.kind === "reviewed-operating-period";
   const fail = (message) => errors.push(message);
+  if (entry?.kind && !operating) fail("Unrecognized canonical supplement kind.");
   if (!cutoff || !date(entry?.reviewedAt) || !date(entry?.publishedAt) || entry.period?.end > entry.publishedAt || entry.publishedAt > entry.reviewedAt || entry.reviewedAt > cutoff) fail("Review/publication/period dates are invalid or future-dated.");
   if (entry?.currency !== "CAD" || !/^TSX:[A-Z]+$/.test(entry?.symbol || "") || entry?.ticker !== entry?.symbol?.slice(4) + ".TO") fail("Security/currency binding is invalid.");
   if (entry?.automaticRefresh !== false || entry?.period?.kind !== "ytd" || !date(entry?.period?.start) || !date(entry?.period?.end)) fail("A dated YTD supplement is required.");
+  if (operating && ![6, 9].includes(entry.period?.months)) fail("An exact six- or nine-month operating interval is required.");
   if (!(entry?.metrics?.revenue?.value > 0) || !finite(entry?.metrics?.eps?.value)) fail("Exact current YTD revenue and reported EPS anchors are required.");
   const validateFacts = (metrics, start, end, publishedAt) => {
-    for (const [key2, f] of Object.entries(metrics || {})) {
-      const expectedUnit = ratios.has(key2) ? "ratio" : ["shares", "commonShares"].includes(key2) ? "shares" : key2 === "eps" ? "CAD/shares" : "CAD";
-      if (!allowed.has(key2) || !finite(f?.value) || f.unit !== expectedUnit || f.currency && f.currency !== entry.currency || !urlOK(f.source?.url) || !entry.allowedSourceUrls?.includes(f.source.url) || f.asOf !== end || f.filed !== publishedAt || f.publishedAt !== publishedAt || !["fact_source_reported", "derived_calculation"].includes(f.evidenceLabel)) fail(`Invalid source/date/unit/coverage for ${key2}.`);
-      if (!instant.has(key2) && !ratios.has(key2) && f.start !== start) fail(`Duration mismatch for ${key2}.`);
-      if (instant.has(key2) && f.start) fail(`A point-in-time ${key2} cannot carry a YTD duration.`);
-      if (entry.issuerCik && cikInURL(f.source?.url) && Number(cikInURL(f.source?.url)) !== Number(entry.issuerCik)) fail(`Issuer source mismatch for ${key2}.`);
-      if (f.reported && (!finite(f.reported.value) || !finite(f.reported.scale) || f.reported.value * f.reported.scale !== f.value)) fail(`Native-unit scale mismatch for ${key2}.`);
+    for (const [key3, f] of Object.entries(metrics || {})) {
+      const expectedUnit = ratios.has(key3) ? "ratio" : ["shares", "commonShares"].includes(key3) ? "shares" : key3 === "eps" ? "CAD/shares" : "CAD";
+      if (!profile.allowed.has(key3) || !finite(f?.value) || f.unit !== expectedUnit || f.currency && f.currency !== entry.currency || !urlOK(f.source?.url) || !entry.allowedSourceUrls?.includes(f.source.url) || f.asOf !== end || f.filed !== publishedAt || f.publishedAt !== publishedAt || !["fact_source_reported", "derived_calculation"].includes(f.evidenceLabel)) fail(`Invalid source/date/unit/coverage for ${key3}.`);
+      if (!profile.instant.has(key3) && !ratios.has(key3) && f.start !== start) fail(`Duration mismatch for ${key3}.`);
+      if (profile.instant.has(key3) && f.start) fail(`A point-in-time ${key3} cannot carry a YTD duration.`);
+      if (operating && (!f.basis || !f.label || !f.scope)) fail(`Operating fact basis/scope is missing for ${key3}.`);
+      if (entry.issuerCik && cikInURL(f.source?.url) && Number(cikInURL(f.source?.url)) !== Number(entry.issuerCik)) fail(`Issuer source mismatch for ${key3}.`);
+      if (f.reported && (!finite(f.reported.value) || !finite(f.reported.scale) || f.reported.value * f.reported.scale !== f.value)) fail(`Native-unit scale mismatch for ${key3}.`);
       if (f.evidenceLabel === "derived_calculation") {
         const c = f.source?.components;
-        if (!Array.isArray(c) || c.length !== 2 || c.some((x2) => !finite(x2.value) || x2.asOf !== end || x2.filed !== publishedAt || x2.unit !== f.unit || x2.source?.url !== f.source.url) || f.value !== c[0].value - c[1].value) fail(`Unreconciled ${key2} derivation.`);
+        const sum = operating && key3 === "debt" && f.source?.operation === "sum";
+        if (!Array.isArray(c) || c.length !== 2 || c.some((x2) => !finite(x2.value) || x2.asOf !== end || x2.filed !== publishedAt || x2.unit !== f.unit || x2.source?.url !== f.source.url) || f.value !== (sum ? c[0].value + c[1].value : c[0].value - c[1].value) || sum && (c[0].value !== metrics.currentLongDebt?.value || c[1].value !== metrics.longDebt?.value)) fail(`Unreconciled ${key3} derivation.`);
       }
     }
   };
   const p = entry?.prior, a = entry?.annual;
   if (!date(p?.start) || !date(p?.end) || !date(a?.start) || !date(a?.end) || !date(a?.filed) || p?.start !== a?.start || nextDay(a?.end || "2000-01-01") !== entry?.period?.start || a?.end >= entry?.period?.end || a?.filed > entry?.publishedAt) fail("Annual/YTD fiscal coverage does not match.");
+  if (operating) {
+    const start = date(entry.period?.start) && new Date(entry.period.start), after = nextDay(entry.period?.end) && new Date(nextDay(entry.period.end));
+    if (!start || !after || start.getUTCDate() !== after.getUTCDate() || (after.getUTCFullYear() - start.getUTCFullYear()) * 12 + after.getUTCMonth() - start.getUTCMonth() !== entry.period.months || p?.end?.slice(5) !== entry.period?.end?.slice(5) || Number(entry.period?.end?.slice(0, 4)) !== Number(p?.end?.slice(0, 4)) + 1) fail("Operating YTD comparative months do not match.");
+  }
   validateFacts(entry?.metrics, entry?.period?.start, entry?.period?.end, entry?.publishedAt);
   validateFacts(p?.metrics, p?.start, p?.end, entry?.publishedAt);
   validateFacts(a?.metrics, a?.start, a?.end, a?.filed);
   for (const row of entry?.additionalAnnual || []) validateFacts(row.metrics, row.start, row.end, row.filed);
   if (ordered(entry?.coverage?.metrics || []) !== ordered(Object.keys(entry?.metrics || {})) || ordered(entry?.coverage?.priorMetrics || []) !== ordered(Object.keys(p?.metrics || {})) || ordered(entry?.coverage?.annualMetrics || []) !== ordered(Object.keys(a?.metrics || {}))) fail("Declared fact coverage differs from the evidence ledger.");
-  if (ordered(entry?.coverage?.missingRequestedMetrics || []) !== ordered(requested.filter((k) => !entry?.metrics?.[k]))) fail("Missing-line coverage must remain explicit.");
-  for (const key2 of entry?.coverage?.ttmFlows || []) {
-    const facts = [a?.metrics?.[key2], entry?.metrics?.[key2], p?.metrics?.[key2]];
-    if (!additive.has(key2) || facts.some((f) => !f || f.unit !== entry.currency) || facts[0]?.start !== p?.start || facts[1]?.start !== entry.period.start || facts[2]?.start !== p?.start || facts[0]?.asOf !== a?.end || facts[2]?.asOf !== p?.end) fail(`TTM ${key2} lacks three compatible dated components.`);
+  if (ordered(entry?.coverage?.missingRequestedMetrics || []) !== ordered(profile.requested.filter((k) => !entry?.metrics?.[k]))) fail("Missing-line coverage must remain explicit.");
+  for (const key3 of entry?.coverage?.ttmFlows || []) {
+    const facts = [a?.metrics?.[key3], entry?.metrics?.[key3], p?.metrics?.[key3]];
+    if (!profile.additive.has(key3) || facts.some((f) => !f || f.unit !== entry.currency) || facts[0]?.start !== p?.start || facts[1]?.start !== entry.period.start || facts[2]?.start !== p?.start || facts[0]?.asOf !== a?.end || facts[2]?.asOf !== p?.end) fail(`TTM ${key3} lacks three compatible dated components.`);
+    if (operating && (!entry.coverage.flowScopes?.[key3] || facts.some((f) => !f?.source?.tag || f.scope !== entry.coverage.flowScopes[key3] || f.source.tag !== facts[0]?.source?.tag))) fail(`TTM ${key3} accounting scope differs between components.`);
   }
   return { valid: !errors.length, errors };
 }
@@ -12838,16 +14096,17 @@ function applyIssuerFinancialSupplement(item, snapshot, { asOf = (/* @__PURE__ *
     ...!f.annual?.length ? { annual: f.annual || [] } : {}
   };
   const m = clone(entry.metrics), prior = clone(entry.prior), growth = {};
-  for (const key2 of additive) if (m[key2] && prior.metrics[key2]?.value > 0) growth[key2] = {
-    value: m[key2].value / prior.metrics[key2].value - 1,
-    basis: "Reported nine-month change versus the same nine months of the prior fiscal year; not a future growth forecast",
-    source: m[key2].source
+  const profile = profileFor(entry), interval = entry.period.months === 6 ? "six months" : "nine months";
+  for (const key3 of profile.additive) if (m[key3] && prior.metrics[key3]?.value > 0) growth[key3] = {
+    value: m[key3].value / prior.metrics[key3].value - 1,
+    basis: `Reported ${interval} change versus the same ${interval} of the prior fiscal year; not a future growth forecast`,
+    source: m[key3].source
   };
   const conflicts = [];
-  if (f.recent?.end === entry.period.end) for (const [key2, fact] of Object.entries(m)) {
-    const old = f.recent.metrics?.[key2];
+  if (f.recent?.end === entry.period.end) for (const [key3, fact] of Object.entries(m)) {
+    const old = f.recent.metrics?.[key3];
     if (finite(old?.value) && old.value !== fact.value) conflicts.push({
-      metric: key2,
+      metric: key3,
       original: old,
       reviewed: fact,
       explanation: "Reviewed issuer disclosure replaces a conflicting normalized input. Original value and source retained."
@@ -12863,25 +14122,25 @@ function applyIssuerFinancialSupplement(item, snapshot, { asOf = (/* @__PURE__ *
     prior,
     growth,
     qualityIssues: [],
-    warnings: ["Nine-month reported figures are YTD; diluted EPS is not annualized.", staticWarning, ...entry.limitations]
+    warnings: [`Reported ${interval} figures are YTD; diluted EPS is not annualized.`, staticWarning, ...entry.limitations]
   };
   const ttm = {};
-  for (const key2 of entry.coverage.ttmFlows) {
-    const components = [clone(entry.annual.metrics[key2]), clone(m[key2]), clone(prior.metrics[key2])];
-    ttm[key2] = {
-      ...m[key2],
+  for (const key3 of entry.coverage.ttmFlows) {
+    const components = [clone(entry.annual.metrics[key3]), clone(m[key3]), clone(prior.metrics[key3])];
+    ttm[key3] = {
+      ...m[key3],
       value: components[0].value + components[1].value - components[2].value,
       start: nextDay(prior.end),
       asOf: entry.period.end,
       evidenceLabel: "derived_calculation",
-      basis: "TTM = reported FY2025 + nine months FY2026 \u2212 nine months FY2025; three independently linked, compatible reported components",
-      source: { name: entry.issuerName + " \xB7 derived TTM", url: entry.source.url, tag: "reviewed-ttm:" + key2, components }
+      basis: `TTM = reported FY2025 + ${interval} FY2026 \u2212 ${interval} FY2025; three independently linked, compatible reported components`,
+      source: { name: entry.issuerName + " \xB7 derived TTM", url: entry.source.url, tag: "reviewed-ttm:" + key3, components }
     };
-    delete ttm[key2].reported;
+    delete ttm[key3].reported;
   }
-  for (const key2 of [...instant, "shares"]) if (m[key2]) ttm[key2] = {
-    ...m[key2],
-    basis: m[key2].basis + (key2 === "shares" ? "; latest YTD diluted-share proxy, not a reconstructed TTM average" : "; latest period-end balance, not an additive TTM flow")
+  for (const key3 of [...profile.instant, "shares"]) if (m[key3]) ttm[key3] = {
+    ...m[key3],
+    basis: m[key3].basis + (key3 === "shares" ? "; latest YTD diluted-share proxy, not a reconstructed TTM average" : "; latest period-end balance, not an additive TTM flow")
   };
   f.ttm = {
     start: nextDay(prior.end),
@@ -12940,20 +14199,20 @@ function validateSparseSupplement(entry, asOf) {
   const errors = [], cutoff = date(asOf), fail = (m) => errors.push(m), p = entry?.period;
   if (!cutoff || !date(entry.reviewedAt) || !date(entry.publishedAt) || !date(p?.start) || !date(p?.end) || p.start > p.end || p.end > entry.publishedAt || entry.publishedAt > entry.reviewedAt || entry.reviewedAt > cutoff || p.kind !== "ytd" || ![6, 9].includes(p.months) || entry.automaticRefresh !== false) fail("Sparse disclosure dates, interval or static review binding are invalid.");
   if (!["CAD", "USD"].includes(entry.currency) || !["CAD", "USD"].includes(entry.listingCurrency) || !/^(TSX:[A-Z]+|NYSE:[A-Z.]+)$/.test(entry.symbol || "") || entry.ticker !== (entry.symbol?.startsWith("TSX:") ? entry.symbol.slice(4) + ".TO" : entry.symbol?.slice(5))) fail("Sparse security or currency binding is invalid.");
-  const validateFact = (key2, f, definition, period, flexibleDuration = false) => {
-    if (!definition?.label || !["duration", "instant"].includes(definition.temporal) || !["money", "per-share", "shares", "ratio"].includes(definition.unit) || !finite(f?.value) || !urlOK(f.source?.url) || !entry.allowedSourceUrls?.includes(f.source.url) || f.unit !== sparseUnit(definition, entry.currency) || f.currency && f.currency !== entry.currency || f.label !== definition.label || f.scope !== definition.scope || !f.basis || !date(f.asOf) || !date(f.filed) || f.asOf > f.filed || f.filed !== entry.publishedAt || f.publishedAt !== f.filed || period?.end && f.asOf !== period.end || !["fact_source_reported", "derived_calculation"].includes(f.evidenceLabel)) fail("Invalid sparse source/date/unit/scope: " + key2);
-    if (definition?.temporal === "duration" && (!date(f.start) || f.start > f.asOf || !flexibleDuration && f.start !== period?.start)) fail("Invalid sparse duration: " + key2);
-    if (definition?.temporal === "instant" && f.start) fail("Point-in-time sparse fact has a duration: " + key2);
-    if (entry.issuerCik && cikInURL(f.source?.url) && Number(cikInURL(f.source.url)) !== Number(entry.issuerCik)) fail("Sparse source issuer mismatch: " + key2);
+  const validateFact = (key3, f, definition, period, flexibleDuration = false) => {
+    if (!definition?.label || !["duration", "instant"].includes(definition.temporal) || !["money", "per-share", "shares", "ratio"].includes(definition.unit) || !finite(f?.value) || !urlOK(f.source?.url) || !entry.allowedSourceUrls?.includes(f.source.url) || f.unit !== sparseUnit(definition, entry.currency) || f.currency && f.currency !== entry.currency || f.label !== definition.label || f.scope !== definition.scope || !f.basis || !date(f.asOf) || !date(f.filed) || f.asOf > f.filed || f.filed !== entry.publishedAt || f.publishedAt !== f.filed || period?.end && f.asOf !== period.end || !["fact_source_reported", "derived_calculation"].includes(f.evidenceLabel)) fail("Invalid sparse source/date/unit/scope: " + key3);
+    if (definition?.temporal === "duration" && (!date(f.start) || f.start > f.asOf || !flexibleDuration && f.start !== period?.start)) fail("Invalid sparse duration: " + key3);
+    if (definition?.temporal === "instant" && f.start) fail("Point-in-time sparse fact has a duration: " + key3);
+    if (entry.issuerCik && cikInURL(f.source?.url) && Number(cikInURL(f.source.url)) !== Number(entry.issuerCik)) fail("Sparse source issuer mismatch: " + key3);
     if (f.evidenceLabel === "derived_calculation") {
       const c = f.calculation;
-      if (key2 !== "classBEquivalentCommonShares" || entry.symbol !== "NYSE:BRK.B" || c?.operation !== "weighted-sum" || ordered(c.keys || []) !== ordered(["classAShares", "classBShares"]) || c.coefficients?.[0] !== 1500 || c.coefficients?.[1] !== 1 || f.value !== entry.metrics?.classAShares?.value * 1500 + entry.metrics?.classBShares?.value) fail("Sparse derived share economics do not reconcile.");
+      if (key3 !== "classBEquivalentCommonShares" || entry.symbol !== "NYSE:BRK.B" || c?.operation !== "weighted-sum" || ordered(c.keys || []) !== ordered(["classAShares", "classBShares"]) || c.coefficients?.[0] !== 1500 || c.coefficients?.[1] !== 1 || f.value !== entry.metrics?.classAShares?.value * 1500 + entry.metrics?.classBShares?.value) fail("Sparse derived share economics do not reconcile.");
     }
   };
-  for (const [key2, f] of Object.entries(entry.metrics || {})) validateFact(key2, f, entry.metricDefinitions?.[key2], p);
+  for (const [key3, f] of Object.entries(entry.metrics || {})) validateFact(key3, f, entry.metricDefinitions?.[key3], p);
   const prior = entry.prior;
   if (!date(prior?.start) || !date(prior?.end) || prior.end >= p?.end) fail("Sparse comparative interval is invalid.");
-  for (const [key2, f] of Object.entries(prior?.metrics || {})) validateFact(key2, f, entry.metricDefinitions?.[key2], prior);
+  for (const [key3, f] of Object.entries(prior?.metrics || {})) validateFact(key3, f, entry.metricDefinitions?.[key3], prior);
   for (const f of entry.observations || []) validateFact(f.key, f, {
     label: f.label,
     scope: f.scope,
@@ -12961,16 +14220,16 @@ function validateSparseSupplement(entry, asOf) {
     temporal: f.start ? "duration" : "instant"
   }, { end: p?.end }, true);
   if (!Object.keys(entry.metrics || {}).length || ordered(entry.coverage?.metrics || []) !== ordered(Object.keys(entry.metrics || {})) || ordered(entry.coverage?.priorMetrics || []) !== ordered(Object.keys(prior?.metrics || {}))) fail("Sparse fact coverage does not match its ledger.");
-  const canonical = Object.entries(entry.metricDefinitions || {}).filter(([, d]) => d.modelEligible).map(([key2]) => key2);
-  if (ordered(canonical) !== ordered(entry.canonicalMetrics || []) || canonical.some((key2) => !canonicalSparse.has(key2)) || entry.currency !== entry.listingCurrency && canonical.length) fail("Evidence-only or native-currency figures cannot enter canonical model metrics.");
-  for (const [key2, components] of Object.entries(entry.ttmComponents || {})) {
-    if (!additive.has(key2) || components.length !== 3 || components.some((f) => f.unit !== entry.currency)) {
+  const canonical = Object.entries(entry.metricDefinitions || {}).filter(([, d]) => d.modelEligible).map(([key3]) => key3);
+  if (ordered(canonical) !== ordered(entry.canonicalMetrics || []) || canonical.some((key3) => !canonicalSparse.has(key3)) || entry.currency !== entry.listingCurrency && canonical.length) fail("Evidence-only or native-currency figures cannot enter canonical model metrics.");
+  for (const [key3, components] of Object.entries(entry.ttmComponents || {})) {
+    if (!additive.has(key3) || components.length !== 3 || components.some((f) => f.unit !== entry.currency)) {
       fail("Sparse TTM requires three additive components.");
       continue;
     }
     const [a, c, old] = components;
-    for (const f of components) validateFact(key2, f, { ...entry.metricDefinitions[key2], label: f.label }, { start: f.start, end: f.asOf });
-    if (a.start !== old.start || nextDay(a.asOf) !== p.start || c.start !== p.start || c.asOf !== p.end || old.asOf !== prior.end || old.value !== prior.metrics[key2]?.value || c.value !== entry.metrics[key2]?.value) fail("Sparse TTM fiscal/component binding mismatch.");
+    for (const f of components) validateFact(key3, f, { ...entry.metricDefinitions[key3], label: f.label }, { start: f.start, end: f.asOf });
+    if (a.start !== old.start || nextDay(a.asOf) !== p.start || c.start !== p.start || c.asOf !== p.end || old.asOf !== prior.end || old.value !== prior.metrics[key3]?.value || c.value !== entry.metrics[key3]?.value) fail("Sparse TTM fiscal/component binding mismatch.");
   }
   return { valid: !errors.length, errors };
 }
@@ -12997,11 +14256,11 @@ function applySparseSupplement(entry, item, snapshot, asOf) {
   if (sameCurrency && !superseded) {
     const old = f.recent, matches = old?.start === entry.period.start && old.end === entry.period.end;
     const metrics = matches ? clone(old.metrics || {}) : {};
-    for (const key2 of entry.canonicalMetrics) {
-      metrics[key2] = clone(entry.metrics[key2]);
-      canonicalApplied.push(key2);
+    for (const key3 of entry.canonicalMetrics) {
+      metrics[key3] = clone(entry.metrics[key3]);
+      canonicalApplied.push(key3);
     }
-    const prior = { ...clone(entry.prior), metrics: Object.fromEntries(Object.entries(entry.prior.metrics).filter(([key2]) => entry.canonicalMetrics.includes(key2)).map(([key2, value]) => [key2, clone(value)])) };
+    const prior = { ...clone(entry.prior), metrics: Object.fromEntries(Object.entries(entry.prior.metrics).filter(([key3]) => entry.canonicalMetrics.includes(key3)).map(([key3, value]) => [key3, clone(value)])) };
     if (canonicalApplied.length) f.recent = {
       ...matches ? old : {},
       ...entry.period,
@@ -13021,9 +14280,9 @@ function applySparseSupplement(entry, item, snapshot, asOf) {
     const components = entry.ttmComponents || {}, keys2 = Object.keys(components);
     if (keys2.length) {
       const ttm = {};
-      for (const [key2, values] of Object.entries(components)) {
-        ttm[key2] = {
-          ...clone(entry.metrics[key2]),
+      for (const [key3, values] of Object.entries(components)) {
+        ttm[key3] = {
+          ...clone(entry.metrics[key3]),
           value: values[0].value + values[1].value - values[2].value,
           start: nextDay(entry.prior.end),
           evidenceLabel: "derived_calculation",
@@ -13031,7 +14290,7 @@ function applySparseSupplement(entry, item, snapshot, asOf) {
           source: { name: entry.issuerName + " \xB7 derived TTM", url: entry.source.url, components: clone(values) }
         };
       }
-      for (const key2 of instant) if (metrics[key2]) ttm[key2] = metrics[key2];
+      for (const key3 of instant) if (metrics[key3]) ttm[key3] = metrics[key3];
       f.ttm = {
         start: nextDay(entry.prior.end),
         end: entry.period.end,
@@ -13885,6 +15144,82 @@ var dividend_scope_evidence_default = {
           shareClass: "Common"
         }
       ]
+    },
+    {
+      cik: 1045609,
+      accession: "0001193125-26-323746",
+      filed: "2026-07-29",
+      currency: "USD",
+      start: "2026-01-01",
+      end: "2026-06-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 2.14
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 2.14,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526323746/R7.htm",
+        label: "Parent consolidated equity statement parenthetical: common dividends paid per share, six months ended June 30, 2026"
+      },
+      explanation: "The parent consolidated equity statement explicitly reports the six-month common dividend paid per share as USD2.14, separately from the three-month USD1.07 amount and from monetary operating-partnership/noncontrolling distributions. This verifies an actual H1 aggregate; it does not annualize a quarterly rate or infer missing quarters. The prior H1 USD2.02 agrees with its original 2025 filing, and the verified annual base retains its own original share basis.",
+      verifiedAt: "2026-10-17",
+      primaryInlineFact: {
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526323746/pld-20260630.htm",
+        factId: "F_a5362a56-7250-4b0d-8fe3-0b082cfe201b",
+        contextId: "C_a1ec46b6-1b05-40d6-87ae-d2d22aa5bdb6",
+        unit: "USD/shares",
+        scale: 0,
+        decimals: 2
+      },
+      reportedComparative: {
+        quarterStart: "2026-04-01",
+        quarterEnd: "2026-06-30",
+        value: 1.07,
+        currency: "USD",
+        scope: "Separately reported three-month common dividends paid per share; not a substituted H1 amount"
+      }
+    },
+    {
+      cik: 1045609,
+      accession: "0001193125-26-323746",
+      filed: "2026-07-29",
+      currency: "USD",
+      start: "2025-01-01",
+      end: "2025-06-30",
+      originals: [
+        {
+          tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+          value: 2.02
+        }
+      ],
+      tag: "us-gaap:CommonStockDividendsPerShareCashPaid",
+      value: 2.02,
+      source: {
+        name: "Issuer primary dividend scope evidence",
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526323746/R7.htm",
+        label: "Parent consolidated equity statement parenthetical: common dividends paid per share, six months ended June 30, 2025"
+      },
+      explanation: "The parent consolidated equity statement explicitly reports the six-month common dividend paid per share as USD2.02, separately from the three-month USD1.01 amount and from monetary operating-partnership/noncontrolling distributions. This verifies an actual H1 aggregate; it does not annualize a quarterly rate or infer missing quarters. The prior H1 USD2.02 agrees with its original 2025 filing, and the verified annual base retains its own original share basis.",
+      verifiedAt: "2026-10-17",
+      primaryInlineFact: {
+        url: "https://www.sec.gov/Archives/edgar/data/1045609/000119312526323746/pld-20260630.htm",
+        factId: "F_5a218e52-d8fa-47e5-ae2c-4559f93e9f54",
+        contextId: "C_615c6f00-010f-4b44-9e2f-90463ce7572f",
+        unit: "USD/shares",
+        scale: 0,
+        decimals: 2
+      },
+      reportedComparative: {
+        quarterStart: "2025-04-01",
+        quarterEnd: "2025-06-30",
+        value: 1.01,
+        currency: "USD",
+        scope: "Separately reported three-month common dividends paid per share; not a substituted H1 amount"
+      }
     }
   ]
 };
@@ -13923,6 +15258,31 @@ var shareBasisChanges = {
   }
 };
 var businessScopeChanges = {
+  SKYD: {
+    effectiveDate: "2026-10-06",
+    issuerCik: 2041610,
+    lastPredecessorStatementEnd: "2026-06-30",
+    lastPredecessorFilingDate: "2026-08-04",
+    requirePostCombinationPeriod: true,
+    reason: "Skydance completed its Warner Bros. Discovery acquisition on October 6 and changed its listing from PSKY to SKYD. The June financial statements describe Paramount Skydance before WBD and before the acquisition financing, new Class B equity and warrant rights. Historical EPS, operating growth, cash flows, debt and share counts cannot value the combined company without a matched combined-business and capital-claims bridge. A later publication date alone does not make a predecessor period comparable; each annual/TTM component must cover a compatible post-combination period.",
+    source: {
+      name: "Skydance October 6, 2026 Form 8-K \xB7 Exhibit 99.2, acquisition and pro forma capital structure",
+      url: "https://www.sec.gov/Archives/edgar/data/2041610/000110465926113913/tm2626659d7_ex99-2.htm",
+      publishedAt: "2026-10-06",
+      periodEnd: "2026-06-30"
+    },
+    capitalActions: [{
+      effectiveDate: "2026-10-13",
+      kind: "class-b-warrant-distribution",
+      reason: "Class B warrants were distributed after the acquisition. Outstanding common stock, eligible-holder exclusions, exercise terms and dilution must be reconciled with the new equity and financing; no current fully diluted share count or split ratio is inferred.",
+      source: {
+        name: "Skydance \xB7 separate trading of Class B shares and warrants",
+        url: "https://ir.skydance.com/news-releases/news-release-details/skydance-provides-details-separate-trading-skyd-class-b-shares",
+        publishedAt: "2026-10-14",
+        periodEnd: "2026-10-13"
+      }
+    }]
+  },
   WAT: {
     effectiveDate: "2026-02-09",
     lastPredecessorStatementEnd: "2025-12-31",
@@ -13945,11 +15305,33 @@ var businessScopeChanges = {
     source: shareBasisChanges.HON.source
   }
 };
+var reportingCalendarChanges = {
+  FERG: {
+    effectiveDate: "2026-01-01",
+    issuerCik: 2011641,
+    previousYearEnd: "07-31",
+    currentYearEnd: "12-31",
+    transitionPeriod: { start: "2025-08-01", end: "2025-12-31", form: "10-KT", filed: "2026-02-27" },
+    reason: "Ferguson changed its fiscal year-end from July 31 to December 31. Its August\u2013December 2025 five-month transition filing is a stub, and January\u2013June 2026 is the new calendar-year YTD period. The old July fiscal year cannot be rolled into a June TTM by adding calendar H1 and subtracting an unmatched prior fiscal YTD. The business is not treated as a merger solely because its reporting calendar changed; recent reported facts remain distinct from a compatible full-year valuation base, with no annualization.",
+    source: {
+      name: "Ferguson Q2 2026 Form 10-Q \xB7 Certain Terms and Note 1, fiscal year-end change",
+      url: "https://www.sec.gov/Archives/edgar/data/2011641/000201164126000040/ferg-20260630.htm",
+      publishedAt: "2026-08-10",
+      periodEnd: "2026-06-30"
+    }
+  }
+};
+var validDay = (day2) => /^\d{4}-\d{2}-\d{2}$/.test(day2 || "") && Number.isFinite(Date.parse(day2)) && new Date(Date.parse(day2)).toISOString().slice(0, 10) === day2;
 function businessScopeFactCompatible(fact, change2) {
   if (!change2) return true;
+  if (change2.requirePostCombinationPeriod) {
+    const end = (fact?.asOf || fact?.end || "").slice(0, 10), start = fact?.start?.slice(0, 10);
+    if (!validDay(end) || end < change2.effectiveDate || start && (!validDay(start) || start < change2.effectiveDate)) return false;
+  }
   const components = fact?.components || fact?.source?.components;
   if (components?.length) return components.every((component) => businessScopeFactCompatible(component, change2));
   const filed = (fact?.filed || fact?.source?.publishedAt || "").slice(0, 10);
+  if (change2.requirePostCombinationPeriod && (!validDay(filed) || filed < change2.effectiveDate)) return false;
   return !!fact?.source?.url && !!filed && filed > change2.lastPredecessorFilingDate;
 }
 function perShareFactCompatible(fact, change2, cutoff) {
@@ -13970,7 +15352,7 @@ function perShareGrowthCompatible(growth, change2, cutoff) {
   if (end < change2.effectiveDate || start >= change2.effectiveDate) return true;
   const components = growth.components || growth.source?.components || [];
   if (end > change2.source.periodEnd) return false;
-  return [start, end].every((date3) => components.some((fact) => (fact.asOf || fact.end)?.slice(0, 10) === date3 && Number.isFinite(fact.value) && !!fact.source?.url && (fact.filed || fact.source?.publishedAt || fact.asOf)?.slice(0, 10) <= cutoff && filingIdentity(fact.source.url) === filingIdentity(change2.source.url) && (fact.filed || fact.source?.publishedAt)?.slice(0, 10) === change2.source.publishedAt && perShareFactCompatible(fact, change2, cutoff)));
+  return [start, end].every((date4) => components.some((fact) => (fact.asOf || fact.end)?.slice(0, 10) === date4 && Number.isFinite(fact.value) && !!fact.source?.url && (fact.filed || fact.source?.publishedAt || fact.asOf)?.slice(0, 10) <= cutoff && filingIdentity(fact.source.url) === filingIdentity(change2.source.url) && (fact.filed || fact.source?.publishedAt)?.slice(0, 10) === change2.source.publishedAt && perShareFactCompatible(fact, change2, cutoff)));
 }
 var issuerOverrides = {
   "BRK.B": {
@@ -14124,8 +15506,11 @@ function classifyBusiness(item, snapshot = {}) {
     earningsPower: false,
     reason: "Royalty and land interests require reserve/production, royalty terms, land values and remaining economic-life analysis. A generic perpetual operating-margin model is not a complete resource/NAV appraisal."
   };
-  const basisChange = shareBasisChanges[item.ticker], scopeChange = businessScopeChanges[item.ticker];
-  if (!selected && (basisChange || scopeChange)) selected = { group: "operating", sector: "operating", source: (basisChange || scopeChange).source };
+  const cutoff = snapshot.checkedAt?.slice(0, 10), knownScope = businessScopeChanges[item.ticker];
+  const sourceIsAvailable = (change2) => !!cutoff && cutoff >= change2.effectiveDate && cutoff >= change2.source.publishedAt && (!change2.issuerCik || !issuer?.cik || Number(change2.issuerCik) === Number(issuer.cik));
+  const basisChange = shareBasisChanges[item.ticker], scopeChange = knownScope?.requirePostCombinationPeriod ? sourceIsAvailable(knownScope) ? knownScope : null : knownScope;
+  const calendar = reportingCalendarChanges[item.ticker], calendarChange = calendar && sourceIsAvailable(calendar) ? calendar : null;
+  if (!selected && (basisChange || scopeChange || calendarChange)) selected = { group: "operating", sector: "operating", source: (basisChange || scopeChange || calendarChange).source };
   if (!selected) return null;
   const policy = policies[selected.group];
   const result = {
@@ -14147,12 +15532,19 @@ function classifyBusiness(item, snapshot = {}) {
     const annual = snapshot.financials?.annual?.[0]?.metrics || {};
     const ttm = snapshot.financials?.ttm?.metrics;
     const keys2 = ["revenue", "ebit", "da", "capex"];
-    const operating = ttm && keys2.every((key2) => Number.isFinite(ttm[key2]?.value)) ? ttm : annual;
-    const operatingCompatible = keys2.every((key2) => businessScopeFactCompatible(operating[key2], scopeChange));
-    result.businessScopeChange = { ...scopeChange, operatingBasisCompatible: operatingCompatible };
+    const operating = ttm && keys2.every((key3) => Number.isFinite(ttm[key3]?.value)) ? ttm : annual;
+    const shareProxy = snapshot.financials?.recent?.metrics?.shares || operating.shares || annual.shares;
+    const operatingCompatible = keys2.every((key3) => businessScopeFactCompatible(operating[key3], scopeChange)) && (!scopeChange.requirePostCombinationPeriod || businessScopeFactCompatible(shareProxy, scopeChange));
+    const capitalActions = (scopeChange.capitalActions || []).filter((action) => cutoff >= action.effectiveDate && cutoff >= action.source.publishedAt);
+    result.businessScopeChange = { ...scopeChange, ...scopeChange.capitalActions ? { capitalActions } : {}, operatingBasisCompatible: operatingCompatible };
     result.reason += ` ${scopeChange.reason}`;
+    for (const action of capitalActions) result.reason += ` ${action.reason}`;
     if (!operatingCompatible) result.operatingDCF = false;
     if (!businessScopeFactCompatible(annual.eps, scopeChange)) result.earningsPower = false;
+  }
+  if (calendarChange) {
+    result.reportingCalendarChange = calendarChange;
+    result.reason += ` ${calendarChange.reason}`;
   }
   return result;
 }
@@ -14320,7 +15712,7 @@ function dividendSeries(payload, currency, now2) {
   });
 }
 function dividendFact(row, cik) {
-  return { value: row.val, start: row.start, asOf: row.end, filed: row.filed, unit: row.currency + "/shares", currency: row.currency, basis: "Reported common-dividend-per-share fact; declared and paid scopes remain separate", source: { name: "SEC EDGAR \xB7 company filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${row.accn.replaceAll("-", "")}/${row.accn}-index.html`, accession: row.accn, tag: row.tag, namespace: row.namespace } };
+  return { value: row.val, start: row.start, asOf: row.end, filed: row.filed, unit: row.currency + "/shares", currency: row.currency, basis: "Reported common-dividend-per-share fact; declared and paid scopes remain separate", source: { name: "SEC EDGAR \xB7 company filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${row.accn.replaceAll("-", "")}/${row.accn}-index.html`, accession: row.accn, tag: row.tag, namespace: row.namespace, ...row.primaryFiling ? { primaryFiling: row.primaryFiling } : {} } };
 }
 function proofFor(row, cik, { item } = {}) {
   return dividend_scope_evidence_default.records.find((p) => (!p.symbol || p.symbol === item?.symbol) && Number(p.cik) === Number(cik) && p.currency === row.currency && p.accession === row.accn && p.start === row.start && p.end === row.end && p.filed === row.filed && p.originals.some((o) => o.tag === row.namespace + ":" + row.tag && o.value === row.val) && (!p.payments || new Set(p.payments.map((r) => r.date)).size === p.payments.length && p.payments.every((r) => validDate(r.date) && r.date >= p.start && r.date <= p.end && r.currency === p.currency && Number.isFinite(r.value) && r.value >= 0) && equal(p.payments.reduce((n, r) => n + r.value, 0), p.value)));
@@ -14466,10 +15858,10 @@ function findSECListing(payload, item) {
   if (!Array.isArray(payload?.fields) || !Array.isArray(payload?.data))
     throw new Error("The SEC listing directory is unavailable.");
   const positions = Object.fromEntries(
-    payload.fields.map((key2, index) => [key2, index])
+    payload.fields.map((key3, index) => [key3, index])
   );
   if (!["cik", "ticker", "exchange"].every(
-    (key2) => Number.isInteger(positions[key2])
+    (key3) => Number.isInteger(positions[key3])
   ))
     throw new Error("The SEC listing directory has changed.");
   const ticker = item.ticker.replaceAll(".", "-");
@@ -14631,15 +16023,15 @@ async function usdCadRate(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
 }
 
 // src/macro-data.js
-function parseTreasuryXML(text) {
-  if (!text.includes("DailyTreasuryYieldCurveRateData")) throw new Error("The Treasury source returned an unexpected format.");
+function parseTreasuryXML(text2) {
+  if (!text2.includes("DailyTreasuryYieldCurveRateData")) throw new Error("The Treasury source returned an unexpected format.");
   const rows3 = [];
-  for (const match of text.matchAll(/<entry>[\s\S]*?<\/entry>/g)) {
+  for (const match of text2.matchAll(/<entry>[\s\S]*?<\/entry>/g)) {
     const body = match[0];
     const field = (name) => body.match(new RegExp(`<d:${name}[^>]*>([^<]+)</d:${name}>`))?.[1];
-    const date3 = field("NEW_DATE")?.slice(0, 10);
+    const date4 = field("NEW_DATE")?.slice(0, 10);
     const two = Number(field("BC_2YEAR")), ten = Number(field("BC_10YEAR"));
-    if (validDate(date3) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows3.push({ date: date3, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
+    if (validDate(date4) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows3.push({ date: date4, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
   }
   if (!rows3.length) throw new Error("The Treasury source has no complete observations.");
   return rows3.sort((a, b) => a.date.localeCompare(b.date)).slice(-520);
@@ -14650,15 +16042,15 @@ function parseRBCDividend(article, id, now2 = /* @__PURE__ */ new Date()) {
   const d = article?.data;
   if (String(d?.id) !== String(id) || !/Royal Bank of Canada/i.test(d.headline || ""))
     throw new Error("Issuer article mismatch");
-  const text = String(d.body || "").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ");
-  if (!/\(TSX:\s*RY\)/i.test(text) || !/\(NYSE:\s*RY\)/i.test(text))
+  const text2 = String(d.body || "").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ");
+  if (!/\(TSX:\s*RY\)/i.test(text2) || !/\(NYSE:\s*RY\)/i.test(text2))
     throw new Error("Share class not verified");
-  const match = text.match(
+  const match = text2.match(
     /declared\s+a\s+quarterly\s+common\s+share\s+dividend\s+of\s+\$(\d+(?:\.\d+)?)\s+per\s+share/i
   );
   const quarterly = Number(match?.[1]), timestamp = Date.parse(d.releaseDate);
-  const date3 = Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : "";
-  if (!Number.isFinite(quarterly) || quarterly <= 0 || quarterly > 25 || !validDate(date3) || timestamp > +now2 || (+now2 - timestamp) / 864e5 > 180)
+  const date4 = Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : "";
+  if (!Number.isFinite(quarterly) || quarterly <= 0 || quarterly > 25 || !validDate(date4) || timestamp > +now2 || (+now2 - timestamp) / 864e5 > 180)
     throw new Error("No recent regular common dividend");
   return {
     status: "ready",
@@ -14667,9 +16059,9 @@ function parseRBCDividend(article, id, now2 = /* @__PURE__ */ new Date()) {
     basis: "current",
     kind: "annualized-quarterly",
     quarterly,
-    periodStart: date3,
-    asOf: date3,
-    filed: date3,
+    periodStart: date4,
+    asOf: date4,
+    filed: date4,
     description: "Latest issuer-declared regular quarterly common dividend \xD7 4, CAD. Annualization is a starting assumption, not a forecast of four future declarations.",
     source: {
       name: "RBC Investor Relations \xB7 public dividend release",
@@ -14754,7 +16146,7 @@ function revenueScopeNeeded(rows3, { force = false } = {}) {
 function selectRevenueRow(rows3, payload, cik, { force = false } = {}) {
   if (!rows3.length) return { row: null };
   const first = rows3[0], currency = first.unit, candidates = revenueScopeCandidates(rows3, currency);
-  const key2 = revenueScopeKey(currency, first.start, first.end, first.accn), proof = payload.revenueScopes?.[key2];
+  const key3 = revenueScopeKey(currency, first.start, first.end, first.accn), proof = payload.revenueScopes?.[key3];
   const mustResolve = revenueScopeNeeded(candidates, { force: force || payload.revenueScopePolicy?.requireStatementProof === true });
   if (!mustResolve) return { row: first };
   const chosen = proof?.status === "verified" && Number(proof.cik) === Number(cik) && proof.accession === first.accn && proof.start === first.start && proof.end === first.end && proof.currency === currency && candidates.find((r) => r.namespace + ":" + r.tag === proof.tag && r.val === proof.value);
@@ -14808,9 +16200,9 @@ function revenueScopeRequests(payload, cik, currency, now2 = /* @__PURE__ */ new
     if (!revenueScopeNeeded(candidates, { force })) continue;
     const first = candidates[0];
     if (!first) continue;
-    const key2 = revenueScopeKey(currency, first.start, first.end, first.accn);
-    if (result.some((r) => r.key === key2)) continue;
-    result.push({ key: key2, cik: Number(cik), currency, start: first.start, end: first.end, accession: first.accn, candidates });
+    const key3 = revenueScopeKey(currency, first.start, first.end, first.accn);
+    if (result.some((r) => r.key === key3)) continue;
+    result.push({ key: key3, cik: Number(cik), currency, start: first.start, end: first.end, accession: first.accn, candidates });
   }
   return result;
 }
@@ -14925,6 +16317,7 @@ function financialFact(row, metric, cik) {
       name: "SEC EDGAR",
       tag: row.namespace + ":" + row.tag,
       accession: row.accn,
+      ...row.primaryFiling ? { primaryFiling: row.primaryFiling } : {},
       url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${row.accn.replaceAll("-", "")}/${row.accn}-index.html`
     }
   };
@@ -15143,17 +16536,17 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
   if (Number(payload?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
   const today = now2.toISOString().slice(0, 10), series = {};
   for (const [metric, names] of Object.entries(financialTags)) {
-    const unit = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
+    const unit2 = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
     const all = [];
     for (const name of names)
       for (const namespace of ["us-gaap", "ifrs-full"])
-        for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit] || []) {
+        for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit2] || []) {
           if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || row.filed < row.end || !forms3.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
             continue;
           const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY4 + 1;
           if (instantMetrics.has(metric) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
             continue;
-          all.push({ ...row, tag: name, namespace, unit });
+          all.push({ ...row, tag: name, namespace, unit: unit2 });
         }
     all.sort(
       (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag)
@@ -15180,13 +16573,13 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
       if (!r) continue;
       metrics[metric] = metric === "revenue" ? attachRevenueProof(financialFact(r, metric, cik), revenueProof) : financialFact(r, metric, cik);
     }
-    const derive = (key2, components, fn, basis) => {
-      if (metrics[key2] || !components.every((k) => metrics[k])) return;
+    const derive = (key3, components, fn, basis) => {
+      if (metrics[key3] || !components.every((k) => metrics[k])) return;
       const facts = components.map((k) => metrics[k]);
       if (!facts.every((f) => f.source.url === facts[0].source.url)) return;
       const value = fn(...facts.map((f) => f.value));
       if (!Number.isFinite(value)) return;
-      metrics[key2] = { ...facts[0], value, basis, source: {
+      metrics[key3] = { ...facts[0], value, basis, source: {
         ...facts[0].source,
         tag: facts.map((f) => f.source.tag).join("; "),
         name: "SEC EDGAR \xB7 derived subtotal",
@@ -15240,29 +16633,36 @@ var DAY5 = 864e5;
 var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY5 + 1;
 var forms4 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
 var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY5 <= n;
-function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE__ */ new Date()) {
+function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE__ */ new Date(), { latestStatement } = {}) {
   if (Number(payload?.cik) !== Number(cik)) throw Error("Issuer mismatch");
   const today = now2.toISOString().slice(0, 10), fy = annual?.annual?.[0];
-  if (!fy) return { recent: null, ttm: null };
   const series = {};
   for (const [metric, names] of Object.entries(financialTags)) {
-    const unit = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
+    const unit2 = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
     const rows3 = [];
-    for (const tag2 of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[unit] || []) {
+    for (const tag2 of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[unit2] || []) {
       if (!validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms4.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
       if (instantMetrics.has(metric) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
-      rows3.push({ ...r, tag: tag2, namespace, unit });
+      rows3.push({ ...r, tag: tag2, namespace, unit: unit2 });
     }
     series[metric] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
   }
   const nextDay3 = (end) => new Date(Date.parse(end) + DAY5).toISOString().slice(0, 10);
-  const anchor = [...series.revenue || [], ...series.eps || []].filter((r) => r.end > fy.end && days(r) < 310 && r.start === nextDay3(fy.end)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
+  const anchors = [...series.revenue || [], ...series.eps || []];
+  let anchor = fy && anchors.filter((r) => r.end > fy.end && days(r) < 310 && r.start === nextDay3(fy.end)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
+  const exactFiling = latestStatement && ["10-Q", "10-Q/A"].includes(latestStatement.form) && validDate(latestStatement.end) && validDate(latestStatement.filed) && latestStatement.filed <= today && latestStatement.end <= latestStatement.filed && /^\d{10}-\d{2}-\d{6}$/.test(latestStatement.accession || "");
+  if (exactFiling && (!anchor || anchor.end < latestStatement.end)) {
+    const reported = anchors.filter((r) => r.accn === latestStatement.accession && r.filed === latestStatement.filed && r.form === latestStatement.form && r.end === latestStatement.end && days(r) < 310);
+    const firstStart = reported.map((r) => r.start).sort()[0];
+    anchor = reported.find((r) => r.start === firstStart) || anchor;
+  }
   if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY5) return { recent: null, ttm: null };
+  const contiguous = !!fy && anchor.start === nextDay3(fy.end), standalone = !contiguous;
   const latest2 = {}, prior = {}, ttm = {}, qualityIssues2 = [];
   let priorPeriod = null;
   for (const [metric, rows3] of Object.entries(series)) {
-    const matches = rows3.filter((r) => r.end === anchor.end && (instantMetrics.has(metric) || r.start === anchor.start));
-    const annualDA = metric === "da" && fy.metrics?.da?.normalization?.kind === "scope-reconciliation" ? fy.metrics.da.source.tag : null;
+    const matches = rows3.filter((r) => r.end === anchor.end && (instantMetrics.has(metric) || r.start === anchor.start) && (!standalone || r.accn === anchor.accn && r.filed === anchor.filed));
+    const annualDA = metric === "da" && contiguous && fy.metrics?.da?.normalization?.kind === "scope-reconciliation" ? fy.metrics.da.source.tag : null;
     let c = annualDA && matches.find((r) => r.namespace + ":" + r.tag === annualDA) || matches[0], revenueProof;
     if (metric === "revenue" && c) {
       const selection = selectRevenueRow(matches, payload, cik);
@@ -15271,7 +16671,7 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       if (selection.issue) qualityIssues2.push(selection.issue);
     }
     if (!c) continue;
-    if (metric === "da" && (fy.qualityIssues || []).some((i2) => i2.code === "ambiguous_d_and_a_scope" && i2.facts?.[0]?.source.tag === c.namespace + ":" + c.tag)) {
+    if (metric === "da" && contiguous && (fy.qualityIssues || []).some((i2) => i2.code === "ambiguous_d_and_a_scope" && i2.facts?.[0]?.source.tag === c.namespace + ":" + c.tag)) {
       qualityIssues2.push({
         metric,
         severity: "material",
@@ -15284,7 +16684,7 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       continue;
     }
     latest2[metric] = metric === "revenue" ? attachRevenueProof(financialFact(c, metric, cik), revenueProof) : financialFact(c, metric, cik);
-    if (instantMetrics.has(metric)) continue;
+    if (instantMetrics.has(metric) || standalone) continue;
     const priorMatches = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY5).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && (metric === "revenue" || r.tag === c.tag && r.namespace === c.namespace)).sort((a, b) => Number(b.accn === c.accn) - Number(a.accn === c.accn) || b.filed.localeCompare(a.filed));
     let p = priorMatches[0], priorRevenueProof;
     if (metric === "revenue" && p) {
@@ -15298,13 +16698,13 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
       if (!priorPeriod || metric === "revenue") priorPeriod = p;
     }
   }
-  const derive = (m, key2, keys2, fn, basis) => {
-    if (m[key2] || !keys2.every((k) => m[k])) return;
+  const derive = (m, key3, keys2, fn, basis) => {
+    if (m[key3] || !keys2.every((k) => m[k])) return;
     const f = keys2.map((k) => m[k]);
     if (!f.every((x2) => x2.source.url === f[0].source.url && x2.start === f[0].start && x2.asOf === f[0].asOf)) return;
     const value = fn(...f.map((x2) => x2.value));
     if (!Number.isFinite(value)) return;
-    m[key2] = { ...f[0], value, basis, source: { name: "SEC EDGAR \xB7 derived subtotal", url: f[0].source.url, tag: f.map((x2) => x2.source.tag).join("; "), components: f } };
+    m[key3] = { ...f[0], value, basis, source: { name: "SEC EDGAR \xB7 derived subtotal", url: f[0].source.url, tag: f.map((x2) => x2.source.tag).join("; "), components: f } };
   };
   const deriveSubtotals = (m) => {
     derive(m, "da", ["depreciation", "amortization"], (d, a) => d + a, "Derived D&A = depreciation + amortization, matching reporting period and filing");
@@ -15316,6 +16716,15 @@ function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE
     const periodFact = m.revenue || m.eps || Object.values(m).find((f) => f.start);
     qualityIssues2.push(...normalizeMetricQuality(m, { payload, cik, series }).map((issue) => ({ ...issue, start: periodFact?.start, end: periodFact?.asOf || anchor.end })));
     derive(m, "commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Common equity = owners equity \u2212 preferred carrying value, matching period-end and filing");
+  }
+  if (standalone) {
+    const reason = "The latest exact reported YTD period has no contiguous supported full-year base. A fiscal-calendar change, successor accounting or limited listing history requires a separate source bridge; no TTM or comparable growth is constructed.";
+    qualityIssues2.push({ code: "standalone_reported_interim", severity: "review", start: anchor.start, end: anchor.end, message: reason });
+    return {
+      recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest2, prior: null, growth: {}, qualityIssues: qualityIssues2, warnings: ["Reported YTD figures only; not annualized.", reason] },
+      ttm: null,
+      periodAlignment: { continuousAnnualBase: false, start: anchor.start, end: anchor.end, accession: anchor.accn, filed: anchor.filed, source: { name: "SEC exact reported interim filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${anchor.accn.replaceAll("-", "")}/${anchor.accn}-index.html` }, reason }
+    };
   }
   for (const [metric, c] of Object.entries(latest2)) {
     if (instantMetrics.has(metric)) {
@@ -15603,7 +17012,7 @@ async function listingReferences(item, cik, fetcher2 = fetch, now2 = /* @__PURE_
   let issuer = null;
   if (cik) try {
     const url = "https://data.sec.gov/submissions/CIK" + String(cik).padStart(10, "0") + ".json", d = await sourceJSON(url, fetcher2);
-    if (Number(d.cik) === Number(cik)) issuer = { sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, latestStatement: latestStatementFiling(d, cik, now2), latestResultsDisclosure: latestResultsDisclosure(d, cik, now2), source: { name: "SEC issuer SIC classification", url } };
+    if (Number(d.cik) === Number(cik)) issuer = { cik: String(cik).padStart(10, "0"), sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, latestStatement: latestStatementFiling(d, cik, now2), latestResultsDisclosure: latestResultsDisclosure(d, cik, now2), source: { name: "SEC issuer SIC classification", url } };
   } catch {
   }
   const domicile = issuer?.country?.replace(/\s*\(.*\)/, "").split(",").at(-1).trim().toLowerCase();
@@ -15620,18 +17029,18 @@ var decode = (s) => s.replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, h, d) => String
 var plain = (s) => decode(s.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
 function incomeStatementReports(xml) {
   return [...xml.matchAll(/<Report(?:\s[^>]*)?>([\s\S]*?)<\/Report>/g)].map((m) => {
-    const body = m[1], value = (key2) => decode(body.match(new RegExp("<" + key2 + ">([\\s\\S]*?)<\\/" + key2 + ">"))?.[1] || "");
+    const body = m[1], value = (key3) => decode(body.match(new RegExp("<" + key3 + ">([\\s\\S]*?)<\\/" + key3 + ">"))?.[1] || "");
     return { name: value("ShortName"), file: value("HtmlFileName"), category: value("MenuCategory") };
   }).filter((r) => r.category === "Statements" && /consolidated/i.test(r.name) && /(?:statement.*(?:operations|income|earnings|loss)|(?:income|earnings) statements?|results of operations)/i.test(r.name) && !/parenthetical|schedule|cash flows|equity|financial position|balance sheet/i.test(r.name) && /^R\d+\.html?$/i.test(r.file)).slice(0, 3);
 }
 function rowScore(label) {
-  const text = label.toLowerCase().replace(/\s*\(notes?\s+[\d,\s]+\)\s*$/, "").replace(/[,:.]/g, "").replace(/\s+/g, " ").trim().replace(/^(revenues?|sales) net$/, "net $1");
-  if (/^(?:total )?(?:net )?(?:operating )?(?:revenues?|sales)(?: and (?:(?:other|operating|financial) )?(?:revenues?|income|other))?$/.test(text) || /^total revenues? net of interest expense$/.test(text) || /^total service revenues and vehicle sales$/.test(text)) return /^total /.test(text) ? 100 : 90;
-  if (/^(?:total )?(?:property|rental|real estate|rental and other property) (?:revenues?|income)$/.test(text)) return 85;
+  const text2 = label.toLowerCase().replace(/\s*\(notes?\s+[\d,\s]+\)\s*$/, "").replace(/[,:.]/g, "").replace(/\s+/g, " ").trim().replace(/^(revenues?|sales) net$/, "net $1");
+  if (/^(?:total )?(?:net )?(?:operating )?(?:revenues?|sales)(?: and (?:(?:other|operating|financial) )?(?:revenues?|income|other))?$/.test(text2) || /^total revenues? net of interest expense$/.test(text2) || /^total service revenues and vehicle sales$/.test(text2)) return /^total /.test(text2) ? 100 : 90;
+  if (/^(?:total )?(?:property|rental|real estate|rental and other property) (?:revenues?|income)$/.test(text2)) return 85;
   return 0;
 }
-function headerDate(text) {
-  const match = text.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z.]*\s+(\d{1,2}),?\s+(20\d{2})\b/i);
+function headerDate(text2) {
+  const match = text2.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z.]*\s+(\d{1,2}),?\s+(20\d{2})\b/i);
   if (!match) return null;
   const months = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, sept: 9, oct: 10, nov: 11, dec: 12 };
   return `${match[3]}-${String(months[match[1].toLowerCase()]).padStart(2, "0")}-${match[2].padStart(2, "0")}`;
@@ -15656,7 +17065,7 @@ function statementColumns(table) {
     return { index, end, months };
   });
 }
-function statementRevenueProofs(html, request, { url, reportName, summaryURL, checkedAt, diagnostics = {} }) {
+function statementRevenueProofs(html, request, { url, reportName, summaryURL: summaryURL2, checkedAt, diagnostics = {} }) {
   const table = html.match(/<table\b[^>]*class=["'][^"']*\breport\b[^"']*["'][^>]*>([\s\S]*?)<\/table>/i)?.[1];
   if (!table) {
     diagnostics.reasonCode = "statement_table_unrecognized";
@@ -15693,7 +17102,7 @@ function statementRevenueProofs(html, request, { url, reportName, summaryURL, ch
       return Number.isFinite(v) ? negative ? -v : v : NaN;
     }).filter(Number.isFinite);
     if (values.length !== columns.length) continue;
-    for (const candidate of candidates) for (const column of eligibleColumns) if (Math.abs(values[column.index] * scale - candidate.val) <= Math.max(1, Math.abs(candidate.val) * 1e-7)) found.push({ schema: 1, status: "verified", cik: request.cik, accession: request.accession, currency: request.currency, start: request.start, end: request.end, tag: tag2, value: candidate.val, label, reportName, score, scale, column, reportedCells: values, source: { name: "SEC EDGAR \xB7 consolidated income-statement revenue row", url }, filingSummary: summaryURL, checkedAt });
+    for (const candidate of candidates) for (const column of eligibleColumns) if (Math.abs(values[column.index] * scale - candidate.val) <= Math.max(1, Math.abs(candidate.val) * 1e-7)) found.push({ schema: 1, status: "verified", cik: request.cik, accession: request.accession, currency: request.currency, start: request.start, end: request.end, tag: tag2, value: candidate.val, label, reportName, score, scale, column, reportedCells: values, source: { name: "SEC EDGAR \xB7 consolidated income-statement revenue row", url }, filingSummary: summaryURL2, checkedAt });
   }
   const best = found.length ? Math.max(...found.map((r) => r.score)) : 0;
   diagnostics.hasRevenueRow = highestVisibleScore > 0;
@@ -15707,22 +17116,22 @@ function statementRevenueProofs(html, request, { url, reportName, summaryURL, ch
 async function sourceText(url, fetcher2) {
   const response = await fetcher2(url, { headers: { "User-Agent": UA, Accept: "application/xml,text/html" }, signal: AbortSignal.timeout(15e3), cf: { cacheTtl: 21600, cacheEverything: true } });
   if (!response.ok) throw Error("Official filing source HTTP " + response.status);
-  const text = await response.text();
-  if (text.length > 2e6) throw Error("Official filing source exceeded validation limit");
-  return text;
+  const text2 = await response.text();
+  if (text2.length > 2e6) throw Error("Official filing source exceeded validation limit");
+  return text2;
 }
 async function resolveRevenueScopes(payload, cik, currencies, fetcher2, now2 = /* @__PURE__ */ new Date(), { force = false } = {}) {
   if (Number(payload?.cik) !== Number(cik)) throw Error("Revenue-scope issuer mismatch");
   const scopes = { ...payload.revenueScopes || {} }, requests = currencies.flatMap((currency) => revenueScopeRequests(payload, cik, currency, now2, { force })), groups2 = /* @__PURE__ */ new Map();
   for (const request of requests) {
-    const key2 = request.accession;
-    if (!groups2.has(key2)) groups2.set(key2, []);
-    groups2.get(key2).push(request);
+    const key3 = request.accession;
+    if (!groups2.has(key3)) groups2.set(key3, []);
+    groups2.get(key3).push(request);
   }
   for (const [accession, group] of groups2) {
-    const base = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accession.replaceAll("-", "")}/`, summaryURL = base + "FilingSummary.xml";
+    const base = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accession.replaceAll("-", "")}/`, summaryURL2 = base + "FilingSummary.xml";
     try {
-      const reports = incomeStatementReports(await sourceText(summaryURL, fetcher2));
+      const reports = incomeStatementReports(await sourceText(summaryURL2, fetcher2));
       if (!reports.length) {
         const error = Error("No supported consolidated income-statement report was identified");
         error.reasonCode = "consolidated_income_statement_unidentified";
@@ -15733,7 +17142,7 @@ async function resolveRevenueScopes(payload, cik, currencies, fetcher2, now2 = /
         const url = base + report.file, html = await sourceText(url, fetcher2);
         for (const request of group) {
           if (selectedByKey.has(request.key)) continue;
-          const diagnostics = {}, proofs = statementRevenueProofs(html, request, { url, reportName: report.name, summaryURL, checkedAt: now2.toISOString(), diagnostics });
+          const diagnostics = {}, proofs = statementRevenueProofs(html, request, { url, reportName: report.name, summaryURL: summaryURL2, checkedAt: now2.toISOString(), diagnostics });
           if (diagnostics.hasRevenueRow || proofs.length) selectedByKey.set(request.key, { proofs, diagnostics });
           else if (diagnostics.reasonCode && !diagnosticByKey.has(request.key)) diagnosticByKey.set(request.key, diagnostics);
         }
@@ -15742,21 +17151,590 @@ async function resolveRevenueScopes(payload, cik, currencies, fetcher2, now2 = /
       for (const request of group) {
         const selected = selectedByKey.get(request.key), matches = selected?.proofs || [], deduped = /* @__PURE__ */ new Map();
         for (const proof of matches) {
-          const key2 = proof.tag + "|" + proof.value;
-          if (!deduped.has(key2)) deduped.set(key2, proof);
+          const key3 = proof.tag + "|" + proof.value;
+          if (!deduped.has(key3)) deduped.set(key3, proof);
         }
         const unique2 = [...deduped.values()];
         const diagnostics = selected?.diagnostics || diagnosticByKey.get(request.key) || {};
-        scopes[request.key] = unique2.length === 1 ? unique2[0] : { schema: 1, status: "unresolved", cik: Number(cik), accession, start: request.start, end: request.end, currency: request.currency, reasonCode: unique2.length ? "conflicting_consolidated_revenue_rows" : diagnostics.reasonCode || "statement_revenue_unmatched", reason: unique2.length ? "Consolidated income statements contain conflicting eligible revenue rows" : diagnostics.reason || "No statement revenue row matched the reported concept, value, currency and period", source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
+        scopes[request.key] = unique2.length === 1 ? unique2[0] : { schema: 1, status: "unresolved", cik: Number(cik), accession, start: request.start, end: request.end, currency: request.currency, reasonCode: unique2.length ? "conflicting_consolidated_revenue_rows" : diagnostics.reasonCode || "statement_revenue_unmatched", reason: unique2.length ? "Consolidated income statements contain conflicting eligible revenue rows" : diagnostics.reason || "No statement revenue row matched the reported concept, value, currency and period", source: { name: "SEC EDGAR filing summary", url: summaryURL2 }, checkedAt: now2.toISOString() };
       }
     } catch (error) {
-      for (const request of group) scopes[request.key] = { schema: 1, status: "unresolved", cik: Number(cik), accession, start: request.start, end: request.end, currency: request.currency, reasonCode: error.reasonCode || "official_statement_source_unavailable", reason: error.message, source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
+      for (const request of group) scopes[request.key] = { schema: 1, status: "unresolved", cik: Number(cik), accession, start: request.start, end: request.end, currency: request.currency, reasonCode: error.reasonCode || "official_statement_source_unavailable", reason: error.message, source: { name: "SEC EDGAR filing summary", url: summaryURL2 }, checkedAt: now2.toISOString() };
     }
   }
   return { ...payload, revenueScopes: scopes, ...force ? { revenueScopePolicy: { requireStatementProof: true } } : {} };
 }
 
+// worker/primary-filing-facts.js
+var XBRLI = "http://www.xbrl.org/2003/instance";
+var IX = /* @__PURE__ */ new Set(["http://www.xbrl.org/2013/inlineXBRL", "http://www.xbrl.org/2008/inlineXBRL"]);
+var FORMS = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"]);
+var TRANSFORMS = /* @__PURE__ */ new Set(["2010-04-20", "2011-07-31", "2015-02-26", "2020-02-12", "2022-02-16"]);
+var LIMITS = { maxDocumentBytes: 12e6, maxTotalBytes: 24e6, maxDocuments: 3, maxTags: 5e5, maxFacts: 4e4, maxDepth: 256, maxFactCharacters: 1024, timeoutMs: 18e3 };
+var MAXIMUMS = { ...LIMITS, maxDocumentBytes: 32e6, maxTotalBytes: 4e7, maxTags: 1e6, maxFacts: 8e4 };
+var PRIMARY_FILING_LIMITS = Object.freeze({ ...LIMITS });
+var PRIMARY_FILING_MAXIMUM_LIMITS = Object.freeze({ ...MAXIMUMS });
+var bounded = (overrides) => Object.fromEntries(Object.entries(LIMITS).map(([key3, defaultValue]) => [key3, Number.isInteger(overrides?.[key3]) && overrides[key3] > 0 ? Math.min(MAXIMUMS[key3], overrides[key3]) : defaultValue]));
+var date2 = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s) && Number.isFinite(Date.parse(s)) && new Date(s).toISOString().slice(0, 10) === s;
+var key2 = (namespace, tag2, unit2, row) => [namespace, tag2, unit2, row.start || "", row.end].join("|");
+var decode2 = (s) => {
+  let invalid = false;
+  const out = s.replace(/&([^;\s]+);/g, (all, v) => {
+    const named = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: "\xA0" };
+    if (Object.hasOwn(named, v)) return named[v];
+    if (/^#(?:[0-9]+|x[0-9a-f]+)$/i.test(v)) {
+      const n = v[1].toLowerCase() === "x" ? parseInt(v.slice(2), 16) : Number(v.slice(1));
+      if (n > 0 && n <= 1114111 && !(n >= 55296 && n <= 57343)) return String.fromCodePoint(n);
+    }
+    invalid = true;
+    return all;
+  });
+  return invalid ? null : out;
+};
+function attrs(text2) {
+  const out = /* @__PURE__ */ Object.create(null);
+  let cursor2 = 0;
+  const pattern = /([A-Za-z_][\w.:-]*)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
+  for (const m of text2.matchAll(pattern)) {
+    if (text2.slice(cursor2, m.index).trim()) throw Error("Malformed quoted XML attributes");
+    const name = m[1].startsWith("xmlns:") ? m[1] : m[1].toLowerCase(), value = decode2(m[2] ?? m[3]);
+    if (Object.hasOwn(out, name) || value == null) throw Error("Ambiguous XML attribute");
+    out[name] = value;
+    cursor2 = m.index + m[0].length;
+  }
+  if (text2.slice(cursor2).replace(/\/$/, "").trim()) throw Error("Malformed quoted XML attributes");
+  return out;
+}
+function expanded(name, ns) {
+  const parts = name.split(":");
+  return parts.length === 2 ? { local: parts[1], uri: ns[parts[0]] } : parts.length === 1 ? { local: parts[0], uri: ns[""] || "" } : { local: "", uri: "" };
+}
+function standard(uri) {
+  if (/^https?:\/\/fasb\.org\/us-gaap\/20\d{2}(?:-\d{2}-\d{2})?$/.test(uri || "")) return "us-gaap";
+  if (/^https?:\/\/xbrl\.ifrs\.org\/taxonomy\/20\d{2}-\d{2}-\d{2}\/ifrs-full$/.test(uri || "")) return "ifrs-full";
+  if (/^https?:\/\/xbrl\.sec\.gov\/dei\/20\d{2}(?:-\d{2}-\d{2})?$/.test(uri || "")) return "dei";
+  return null;
+}
+function metadata(options) {
+  const { cik, accession, filed, form } = options, end = options.periodEnd || options.end;
+  const today = (options.now || /* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+  if (!Number.isInteger(Number(cik)) || Number(cik) <= 0 || !/^\d{10}-\d{2}-\d{6}$/.test(accession || "") || !FORMS.has(form) || !date2(filed) || !date2(end) || end > filed || filed > today) throw Error("Invalid verified filing metadata");
+  const url = filingURL(options.url || options.source?.url, Number(cik), accession);
+  return { cik: Number(cik), accession, filed, form, end, today, url };
+}
+function filingURL(value, cik, accession) {
+  const u = new URL(value);
+  const prefix = `/Archives/edgar/data/${cik}/${accession.replaceAll("-", "")}/`;
+  if (u.protocol !== "https:" || u.hostname !== "www.sec.gov" || u.port || u.username || u.password || u.search || u.hash || !u.pathname.startsWith(prefix) || !/^[\w.-]+\.(?:htm|html)$/i.test(u.pathname.slice(prefix.length))) throw Error("Filing URL does not match verified SEC issuer/accession");
+  return u.href;
+}
+var summaryURL = (meta) => new URL("FilingSummary.xml", meta.url).href;
+var baseForm = (form) => String(form || "").trim().toUpperCase().replace(/\/A$/, "");
+function summaryInputFiles(xml, meta) {
+  const path2 = [], files = /* @__PURE__ */ new Map();
+  let current = null, inputLists = 0;
+  scan(xml, {
+    open(frame) {
+      if (current) current.nested = true;
+      if (frame.uri === "" && frame.local === "InputFiles" && path2.join("/") === "FilingSummary") inputLists++;
+      if (frame.uri === "" && frame.local === "File" && path2.join("/") === "FilingSummary/InputFiles") current = { attrs: frame.attrs, text: "", nested: false };
+      path2.push(frame.uri === "" ? frame.local : "?");
+    },
+    text(value) {
+      if (current) current.text += value;
+    },
+    close(frame) {
+      if (current && frame.local === "File" && path2.join("/") === "FilingSummary/InputFiles/File") {
+        const { attrs: a, nested } = current, name = a.original, shown = decode2(current.text)?.trim();
+        current = null;
+        if (!nested && a.isdefinitelyfs === "true" && baseForm(a.doctype) === baseForm(meta.form) && name && (!shown || shown === name) && /^[\w.-]+\.html?$/i.test(name)) {
+          const url = filingURL(new URL(name, meta.url).href, meta.cik, meta.accession);
+          files.set(url, { url, documentSetSource: { name: "SEC FilingSummary InputFiles", url: summaryURL(meta), original: name, doctype: a.doctype } });
+        }
+      }
+      path2.pop();
+    }
+  }, { ...LIMITS, maxTags: 2e4, maxDepth: 32 });
+  if (inputLists !== 1) throw Error("SEC FilingSummary has no unique InputFiles list");
+  return [...files.values()];
+}
+function scan(html, visit, bounds) {
+  if (/<!ENTITY\b/i.test(html)) throw Error("Entity declarations are unsupported");
+  const stack = [];
+  let pos = 0, count = 0;
+  const voids = /* @__PURE__ */ new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]);
+  while (pos < html.length) {
+    const start = html.indexOf("<", pos);
+    if (start < 0) {
+      visit.text?.(html.slice(pos), stack);
+      break;
+    }
+    if (start > pos) visit.text?.(html.slice(pos, start), stack);
+    if (html.startsWith("<!--", start)) {
+      const end2 = html.indexOf("-->", start + 4);
+      if (end2 < 0) throw Error("Unclosed XML comment");
+      pos = end2 + 3;
+      continue;
+    }
+    if (html.startsWith("<![CDATA[", start)) {
+      const end2 = html.indexOf("]]>", start + 9);
+      if (end2 < 0) throw Error("Unclosed CDATA");
+      visit.text?.(html.slice(start + 9, end2), stack);
+      pos = end2 + 3;
+      continue;
+    }
+    let end = start + 1, quote = null;
+    for (; end < html.length; end++) {
+      const ch = html[end];
+      if (quote) {
+        if (ch === quote) quote = null;
+      } else if (ch === '"' || ch === "'") quote = ch;
+      else if (ch === ">") break;
+    }
+    if (end === html.length) throw Error("Unclosed XML tag");
+    const raw = html.slice(start + 1, end);
+    pos = end + 1;
+    if (raw.startsWith("?") || /^!DOCTYPE\s+html\b[^\[]*$/i.test(raw)) continue;
+    if (raw.startsWith("!")) throw Error("Unsupported XML declaration");
+    if (++count > bounds.maxTags) throw Error("Filing tag limit exceeded");
+    if (raw[0] === "/") {
+      const name = raw.slice(1).trim();
+      if (voids.has(name.toLowerCase())) continue;
+      const frame2 = stack.pop();
+      if (!frame2 || frame2.name !== name) throw Error("Unbalanced XML elements");
+      visit.close?.(frame2, stack.length);
+      continue;
+    }
+    const m = raw.match(/^([A-Za-z_][\w.:-]*)([\s\S]*)$/);
+    if (!m) throw Error("Malformed XML element");
+    const a = attrs(m[2]), parent = stack.at(-1)?.ns || /* @__PURE__ */ Object.create(null);
+    const declarations = Object.entries(a).filter(([name]) => name === "xmlns" || name.startsWith("xmlns:"));
+    const ns = declarations.length ? Object.create(parent) : parent;
+    for (const [name, value] of declarations) ns[name === "xmlns" ? "" : name.slice(6)] = value;
+    const frame = { name: m[1], attrs: a, ns, ...expanded(m[1], ns), depth: stack.length };
+    visit.open?.(frame);
+    if (/\/\s*$/.test(raw) || voids.has(frame.name.toLowerCase())) visit.close?.(frame, stack.length);
+    else {
+      stack.push(frame);
+      if (stack.length > bounds.maxDepth) throw Error("Filing nesting limit exceeded");
+      if (["script", "style"].includes(frame.local.toLowerCase())) {
+        const re = new RegExp("</" + frame.name + "\\s*>", "g");
+        re.lastIndex = pos;
+        const close = re.exec(html);
+        if (!close) throw Error("Unclosed raw HTML element");
+        pos = close.index;
+      }
+    }
+  }
+  if (stack.length) throw Error("Unclosed XML elements");
+}
+var descendants = (node, uri, local) => [...node.uri === uri && node.local === local ? [node] : [], ...node.children.flatMap((child) => descendants(child, uri, local))];
+var text = (node) => {
+  const value = decode2(node.text);
+  return value == null ? null : value.trim();
+};
+function context(node, meta, url) {
+  if (descendants(node, XBRLI, "segment").length || descendants(node, XBRLI, "scenario").length || descendants(node, XBRLI, "forever").length) return null;
+  const ids = descendants(node, XBRLI, "identifier"), periods = descendants(node, XBRLI, "period");
+  if (ids.length !== 1 || periods.length !== 1 || !/^https?:\/\/www\.sec\.gov\/CIK$/.test(ids[0].attrs.scheme || "") || !/^\d+$/.test(text(ids[0]) || "") || Number(text(ids[0])) !== meta.cik) return null;
+  const allowed2 = /* @__PURE__ */ new Set(["context", "entity", "identifier", "period", "startDate", "endDate", "instant"]);
+  const tree = [node];
+  for (let i2 = 0; i2 < tree.length; i2++) {
+    if (tree[i2].uri !== XBRLI || !allowed2.has(tree[i2].local)) return null;
+    tree.push(...tree[i2].children);
+  }
+  const instant2 = descendants(node, XBRLI, "instant"), starts = descendants(node, XBRLI, "startDate"), ends = descendants(node, XBRLI, "endDate");
+  let start, end;
+  if (instant2.length === 1 && !starts.length && !ends.length) end = text(instant2[0]);
+  else if (!instant2.length && starts.length === 1 && ends.length === 1) {
+    start = text(starts[0]);
+    end = text(ends[0]);
+  } else return null;
+  if (!date2(end) || end > meta.filed || end > meta.today || start && (!date2(start) || start > end)) return null;
+  return { entity: { identifier: String(meta.cik), scheme: ids[0].attrs.scheme }, ...start ? { start } : {}, end, source: url };
+}
+function unit(node) {
+  const q = (n) => {
+    const v = expanded(text(n) || "", n.ns);
+    if (v.uri === "http://www.xbrl.org/2003/iso4217" && /^[A-Z]{3}$/.test(v.local)) return v.local;
+    if (v.uri === XBRLI && ["shares", "pure"].includes(v.local)) return v.local;
+    return null;
+  };
+  if (node.children.length !== 1) return null;
+  const child = node.children[0];
+  if (child.uri !== XBRLI) return null;
+  if (child.local === "measure") return q(child);
+  if (child.local !== "divide" || child.children.length !== 2) return null;
+  const numerator = child.children.find((n) => n.uri === XBRLI && n.local === "unitNumerator"), denominator = child.children.find((n) => n.uri === XBRLI && n.local === "unitDenominator");
+  if (!numerator || !denominator || numerator.children.length !== 1 || denominator.children.length !== 1 || [...numerator.children, ...denominator.children].some((n) => n.uri !== XBRLI || n.local !== "measure")) return null;
+  const a = q(numerator.children[0]), b = q(denominator.children[0]);
+  return /^[A-Z]{3}$/.test(a || "") && b === "shares" ? a + "/shares" : null;
+}
+function numeric(raw, a, ns) {
+  const decoded = decode2(raw);
+  if (decoded == null) throw Error("unknown-entity");
+  const s = decoded.trim();
+  if (!s) throw Error("empty-numeric");
+  if (a.sign !== void 0 && a.sign !== "-") throw Error("unsupported-sign");
+  if (a.scale !== void 0 && !/^-?\d{1,2}$/.test(a.scale)) throw Error("unsupported-scale");
+  const scale = Number(a.scale || 0);
+  if (Math.abs(scale) > 18) throw Error("unsupported-scale");
+  if (a["xsi:nil"] === "true" || a["xsi:nil"] === "1" || Object.entries(a).some(([k, v]) => k.endsWith(":nil") && ["true", "1"].includes(v))) throw Error("nil-numeric");
+  if (a.decimals === void 0 === (a.precision === void 0) || a.decimals !== void 0 && !/^(?:INF|-?\d+)$/.test(a.decimals) || a.precision !== void 0 && !/^(?:INF|[1-9]\d*)$/.test(a.precision)) throw Error("unsupported-accuracy");
+  let lexical = s;
+  if (a.format) {
+    const f = expanded(a.format, ns), registry = f.uri?.match(/^http:\/\/www\.xbrl\.org\/inlineXBRL\/transformation\/(\d{4}-\d{2}-\d{2})$/);
+    if (!registry || !TRANSFORMS.has(registry[1])) throw Error("unsupported-transform");
+    if (["num-dot-decimal", "numdotdecimal"].includes(f.local)) {
+      if (!/^[0-9,\s\u00a0\u202f]*(?:\.[0-9\s\u00a0\u202f]+)?$/.test(s) || !/[0-9]/.test(s)) throw Error("invalid-dot-decimal");
+      lexical = s.replace(/[,\s\u00a0\u202f]/g, "");
+    } else if (["num-comma-decimal", "numcommadecimal"].includes(f.local)) {
+      if (!/^[0-9.\s\u00a0\u202f]*(?:,[0-9\s\u00a0\u202f]+)?$/.test(s) || !/[0-9]/.test(s)) throw Error("invalid-comma-decimal");
+      lexical = s.replace(/[.\s\u00a0\u202f]/g, "").replace(",", ".");
+    } else if (["fixed-zero", "zerodash", "numdash"].includes(f.local)) {
+      if (!/^(?:[-\u2013\u2014\u2212]|0(?:\.0+)?)$/.test(s)) throw Error("ambiguous-reported-zero");
+      lexical = "0";
+    } else throw Error("unsupported-transform");
+  } else if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(s)) throw Error("invalid-untransformed-decimal");
+  const [whole, fraction2 = ""] = lexical.split("."), digits = (whole || "0") + fraction2, position = digits.length + scale - fraction2.length;
+  const magnitude = position <= 0 ? "0." + "0".repeat(-position) + digits : position >= digits.length ? digits + "0".repeat(position - digits.length) : digits.slice(0, position) + "." + digits.slice(position);
+  const normalizedValue = (a.sign === "-" ? "-" : "") + magnitude;
+  const n = Number(normalizedValue);
+  if (!Number.isFinite(n) || Math.abs(n) > Number.MAX_SAFE_INTEGER) throw Error("unsafe-numeric-range");
+  return { value: Object.is(n, -0) ? 0 : n, rawValue: s, normalizedValue, scale, sign: a.sign || null, format: a.format || null, decimals: a.decimals ?? null, precision: a.precision ?? null };
+}
+function roundingHalf(row) {
+  const p = row.primaryFiling;
+  if (p.decimals === "INF" || p.precision === "INF") return 0;
+  const decimals = p.decimals != null ? Number(p.decimals) : Number(p.precision) - 1 - Math.floor(Math.log10(Math.abs(row.val)));
+  return 0.5 * 10 ** -decimals;
+}
+function insertResource(map, id, value, source2, diagnostics, kind) {
+  if (!id) return;
+  const comparable = value && JSON.stringify(Object.fromEntries(Object.entries(value).filter(([key3]) => key3 !== "source")));
+  if (map.has(id)) {
+    const old = map.get(id);
+    if (!old || !value || old.signature !== comparable) {
+      map.set(id, null);
+      diagnostics.resourceConflicts.push({ kind, id, source: source2 });
+    } else old.sources.push(source2);
+  } else map.set(id, value ? { value, signature: comparable, sources: [source2] } : null);
+}
+function parsePrimaryFilingFacts(input, options = {}) {
+  const meta = metadata(options), bounds = bounded(options.bounds);
+  const documents = Array.isArray(input) ? input : [{ html: input, url: meta.url }];
+  if (!documents.length || documents.length > bounds.maxDocuments) throw Error("Filing document count exceeded");
+  const diagnostics = { documents: [], numericElements: 0, accepted: 0, rejected: {}, samples: [], resourceConflicts: [], factConflicts: [], roundedDuplicates: [], duplicateFacts: 0 };
+  const contexts = /* @__PURE__ */ new Map(), units = /* @__PURE__ */ new Map(), pending = [], factIds = /* @__PURE__ */ new Map();
+  let bytes = 0;
+  const reject = (reason, fact) => {
+    diagnostics.rejected[reason] = (diagnostics.rejected[reason] || 0) + 1;
+    if (diagnostics.samples.length < 30) diagnostics.samples.push({ reason, name: fact?.attrs.name || null, id: fact?.attrs.id || null, url: fact?.url || null });
+  };
+  for (const document of documents) {
+    const url = filingURL(document.url || meta.url, meta.cik, meta.accession), html = document.html;
+    if (typeof html !== "string") throw Error("Filing HTML is missing");
+    const size = new TextEncoder().encode(html).byteLength;
+    bytes += size;
+    if (size > bounds.maxDocumentBytes || bytes > bounds.maxTotalBytes) throw Error("Filing byte limit exceeded");
+    const resources = [], active = [];
+    scan(html, {
+      open(frame) {
+        const resource = frame.uri === XBRLI && ["context", "unit"].includes(frame.local);
+        if (resource || resources.length) {
+          const node = { local: frame.local, uri: frame.uri, attrs: frame.attrs, ns: frame.ns, text: "", children: [] };
+          if (resources.length) resources.at(-1).node.children.push(node);
+          resources.push({ depth: frame.depth, node });
+        }
+        if (IX.has(frame.uri) && frame.local === "nonFraction") {
+          if (++diagnostics.numericElements > bounds.maxFacts) throw Error("Filing numeric-fact limit exceeded");
+          active.push({ ...frame, text: "", url, excluded: 0, documentSetSource: document.documentSetSource });
+        }
+        if (IX.has(frame.uri) && frame.local === "exclude") for (const f of active) f.excluded++;
+      },
+      text(value) {
+        if (resources.length) resources.at(-1).node.text += value;
+        for (const f of active) if (!f.excluded) {
+          f.text += value;
+          if (f.text.length > bounds.maxFactCharacters) f.tooLong = true;
+        }
+      },
+      close(frame) {
+        if (IX.has(frame.uri) && frame.local === "exclude") for (const f of active) f.excluded--;
+        if (IX.has(frame.uri) && frame.local === "nonFraction") {
+          const fact = active.pop();
+          pending.push(fact);
+          if (fact.attrs.id) {
+            const id = fact.url + "#" + fact.attrs.id;
+            factIds.set(id, (factIds.get(id) || 0) + 1);
+          }
+        }
+        if (resources.at(-1)?.depth === frame.depth) {
+          const { node } = resources.pop();
+          if (!resources.length) {
+            if (node.local === "context") insertResource(contexts, node.attrs.id, context(node, meta, url), url, diagnostics, "context");
+            else insertResource(units, node.attrs.id, unit(node), url, diagnostics, "unit");
+          }
+        }
+      }
+    }, bounds);
+    diagnostics.documents.push({ url, bytes: size });
+  }
+  const groups2 = /* @__PURE__ */ new Map();
+  for (const f of pending) {
+    const a = f.attrs, n = expanded(a.name || "", f.ns), namespace = standard(n.uri), c = contexts.get(a.contextref), u = units.get(a.unitref);
+    if (!namespace) {
+      reject("nonstandard-namespace", f);
+      continue;
+    }
+    if (!c) {
+      reject("unverified-issuer-wide-context", f);
+      continue;
+    }
+    if (!u) {
+      reject("unsupported-or-ambiguous-unit", f);
+      continue;
+    }
+    if (a.id && factIds.get(f.url + "#" + a.id) > 1) {
+      reject("ambiguous-fact-id", f);
+      continue;
+    }
+    if (f.tooLong || a.continuedat || a.tupleref || a.target) {
+      reject("unsupported-fact-structure", f);
+      continue;
+    }
+    let parsed;
+    try {
+      parsed = numeric(f.text, a, f.ns);
+    } catch (error) {
+      reject(error.message, f);
+      continue;
+    }
+    const row = {
+      ...c.value.start ? { start: c.value.start } : {},
+      end: c.value.end,
+      val: parsed.value,
+      accn: meta.accession,
+      filed: meta.filed,
+      form: meta.form,
+      primaryFiling: {
+        name: "SEC primary inline-XBRL fact",
+        url: f.url,
+        factId: a.id || null,
+        contextId: a.contextref,
+        unitRef: a.unitref,
+        entity: c.value.entity,
+        contextSources: c.sources,
+        unitSources: u.sources,
+        unit: u.value,
+        taxonomyNamespace: n.uri,
+        ...f.documentSetSource ? { documentSetSource: f.documentSetSource } : {},
+        ...parsed
+      }
+    };
+    delete row.primaryFiling.value;
+    const id = key2(namespace, n.local, u.value, row), old = groups2.get(id);
+    if (!old) groups2.set(id, { namespace, tag: n.local, unit: u.value, row, rows: [row], values: /* @__PURE__ */ new Set([row.val]) });
+    else {
+      old.values.add(row.val);
+      old.rows.push(row);
+      diagnostics.duplicateFacts++;
+      if (roundingHalf(row) < roundingHalf(old.row)) old.row = row;
+    }
+  }
+  const facts = /* @__PURE__ */ Object.create(null);
+  for (const [id, group] of groups2) {
+    if (group.values.size > 1) {
+      const byAccuracy = /* @__PURE__ */ new Map();
+      let sameAccuracyConflict = false;
+      for (const row of group.rows) {
+        const accuracy = roundingHalf(row);
+        if (byAccuracy.has(accuracy) && byAccuracy.get(accuracy) !== row.val) sameAccuracyConflict = true;
+        byAccuracy.set(accuracy, row.val);
+      }
+      const low = Math.max(...group.rows.map((row) => row.val - roundingHalf(row))), high = Math.min(...group.rows.map((row) => row.val + roundingHalf(row)));
+      if (sameAccuracyConflict || !(low <= high)) {
+        diagnostics.factConflicts.push({ key: id, namespace: group.namespace, tag: group.tag, unit: group.unit, start: group.row.start || null, end: group.row.end, accession: meta.accession, filed: meta.filed, values: [...group.values], observations: group.rows });
+        reject("conflicting-numeric-duplicates");
+        continue;
+      }
+      diagnostics.roundedDuplicates.push({ key: id, selected: group.row.val, decimals: group.row.primaryFiling.decimals, values: [...group.values], basis: "Reported precision intervals overlap; the most precise original observation is retained, not averaged." });
+    }
+    if (group.rows.length > 1) group.row.primaryFiling.duplicateLocations = group.rows.filter((row) => row !== group.row).map((row) => ({ url: row.primaryFiling.url, factId: row.primaryFiling.factId, contextId: row.primaryFiling.contextId, value: row.val, decimals: row.primaryFiling.decimals }));
+    ((facts[group.namespace] ||= /* @__PURE__ */ Object.create(null))[group.tag] ||= { units: /* @__PURE__ */ Object.create(null) }).units[group.unit] ||= [];
+    facts[group.namespace][group.tag].units[group.unit].push(group.row);
+    diagnostics.accepted++;
+  }
+  const latestPeriodRepresented = Object.entries(facts).some(([namespace, tags]) => namespace !== "dei" && Object.values(tags).some((f) => Object.values(f.units).some((rows3) => rows3.some((row) => row.end === meta.end))));
+  return { cik: meta.cik, facts, primaryFiling: { status: diagnostics.accepted && latestPeriodRepresented ? "ready" : "incomplete", accession: meta.accession, filed: meta.filed, form: meta.form, periodEnd: meta.end, latestPeriodRepresented, diagnostics } };
+}
+function mergePrimaryFilingFacts(original, parsed) {
+  if (Number(original?.cik) !== Number(parsed?.cik)) throw Error("Primary filing issuer mismatch");
+  const result = { ...original, facts: { ...original.facts } }, diagnostics = { appended: 0, duplicates: 0, augmented: 0, retainedNewer: 0, conflicts: [], supersededConflicts: [] };
+  const writable = (namespace, tag2, unit2) => {
+    const previous = result.facts[namespace]?.[tag2], target = { ...previous, units: { ...previous?.units, [unit2]: [...previous?.units?.[unit2] || []] } };
+    result.facts[namespace] = { ...result.facts[namespace], [tag2]: target };
+    return target.units[unit2];
+  };
+  const conflict = (detail, primary) => {
+    const rows3 = writable(detail.namespace, detail.tag, detail.unit), removed = rows3.filter((r) => (r.start || null) === (detail.start || null) && r.end === detail.end && r.filed <= detail.filed);
+    if (rows3.some((r) => FORMS.has(r.form) && (r.start || null) === (detail.start || null) && r.end === detail.end && r.filed > detail.filed)) {
+      diagnostics.retainedNewer++;
+      diagnostics.supersededConflicts.push({ ...detail, primary });
+      return;
+    }
+    result.facts[detail.namespace][detail.tag].units[detail.unit] = rows3.filter((r) => !removed.includes(r));
+    diagnostics.conflicts.push({ ...detail, existing: removed, primary });
+  };
+  for (const detail of parsed.primaryFiling?.diagnostics?.factConflicts || []) conflict(detail, detail.observations);
+  for (const [namespace, tags] of Object.entries(parsed.facts || {})) for (const [tag2, concept] of Object.entries(tags)) for (const [unit2, observations] of Object.entries(concept.units || {})) {
+    writable(namespace, tag2, unit2);
+    for (const row of observations) {
+      const rows3 = result.facts[namespace][tag2].units[unit2];
+      const same = rows3.filter((r) => FORMS.has(r.form) && r.start === row.start && r.end === row.end);
+      if (same.some((r) => r.filed > row.filed)) {
+        diagnostics.retainedNewer++;
+        continue;
+      }
+      const exact = same.filter((r) => r.accn === row.accn && r.filed === row.filed);
+      if (exact.some((r) => r.val !== row.val)) {
+        conflict({ namespace, tag: tag2, unit: unit2, start: row.start || null, end: row.end, accession: row.accn, filed: row.filed, reason: "same-accession-value-conflict" }, [row]);
+        continue;
+      }
+      if (exact.some((r) => r.val === row.val)) {
+        diagnostics.duplicates++;
+        result.facts[namespace][tag2].units[unit2] = rows3.map((existing) => exact.includes(existing) && !existing.primaryFiling ? { ...existing, primaryFiling: row.primaryFiling } : existing);
+        diagnostics.augmented += exact.filter((existing) => !existing.primaryFiling).length;
+        continue;
+      }
+      if (same.some((r) => r.filed === row.filed && r.val !== row.val)) {
+        conflict({ namespace, tag: tag2, unit: unit2, start: row.start || null, end: row.end, filed: row.filed, reason: "different-accession-same-date-conflict" }, [row]);
+        continue;
+      }
+      result.facts[namespace][tag2].units[unit2].push(row);
+      diagnostics.appended++;
+    }
+  }
+  return { facts: result, diagnostics, primaryFiling: parsed.primaryFiling };
+}
+async function readBounded(response, limit) {
+  const length = Number(response.headers.get("content-length"));
+  if (length > limit) throw Error("Filing response byte limit exceeded");
+  if (!response.body?.getReader) {
+    const body = await response.text();
+    if (new TextEncoder().encode(body).byteLength > limit) throw Error("Filing response byte limit exceeded");
+    return body;
+  }
+  const reader = response.body.getReader(), parts = [];
+  let size = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > limit) {
+        await reader.cancel();
+        throw Error("Filing response byte limit exceeded");
+      }
+      parts.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const all = new Uint8Array(size);
+  let offset = 0;
+  for (const part of parts) {
+    all.set(part, offset);
+    offset += part.length;
+  }
+  return new TextDecoder("utf-8", { fatal: true }).decode(all);
+}
+async function fetchPrimaryFilingFacts(latestStatement, cik, { fetcher: fetcher2 = fetch, now: now2 = /* @__PURE__ */ new Date(), bounds = {} } = {}) {
+  const limits = bounded(bounds);
+  let meta;
+  try {
+    meta = metadata({ ...latestStatement, cik, now: now2, url: latestStatement?.source?.url });
+    const documents = [];
+    let size = 0;
+    const get = async (url, discovery = null, isMetadata = false) => {
+      const response = await fetcher2(url, { headers: { Accept: isMetadata ? "application/xml,text/xml" : "text/html,application/xhtml+xml", "User-Agent": "TickerLantern/1.0 (+https://tickerlantern.com)" }, redirect: "error", signal: AbortSignal.timeout(limits.timeoutMs), cf: { cacheTtl: 3600, cacheEverything: true } });
+      if (!response.ok || response.redirected || response.url && response.url !== url) throw Error("Primary filing request failed or redirected");
+      const type = response.headers.get("content-type");
+      if (type && !(isMetadata ? /application\/xml|text\/xml/i : /text\/html|application\/xhtml\+xml/i).test(type)) throw Error(isMetadata ? "SEC FilingSummary response is not XML" : "Primary filing response is not HTML");
+      const html = await readBounded(response, Math.min(isMetadata ? 1e6 : limits.maxDocumentBytes, limits.maxTotalBytes - size));
+      size += new TextEncoder().encode(html).byteLength;
+      if (!isMetadata) documents.push({ url, html, ...discovery ? { documentSetSource: discovery } : {} });
+      return html;
+    };
+    const main = await get(meta.url), linked = /* @__PURE__ */ new Set();
+    for (const m of main.matchAll(/<a\b[^>]*\bhref\s*=\s*["']([^"']+)["'][^>]*>/gi)) {
+      const value = decode2(m[1]);
+      if (!value || !/(?:^|\/)\w[\w.-]*_d\d+\.html?$/i.test(value)) continue;
+      let url;
+      try {
+        url = filingURL(new URL(value, meta.url).href, meta.cik, meta.accession);
+      } catch {
+        continue;
+      }
+      if (url !== meta.url) linked.add(url);
+    }
+    if (linked.size > limits.maxDocuments - 1) throw Error("Explicit inline document-set link count exceeded");
+    for (const url of linked) await get(url);
+    let parsed = parsePrimaryFilingFacts(documents, { ...meta, periodEnd: meta.end, now: now2, bounds: limits });
+    if (!parsed.primaryFiling.latestPeriodRepresented) {
+      const metadataURL = summaryURL(meta);
+      try {
+        const xml = await get(metadataURL, null, true), declared = summaryInputFiles(xml, meta), already = new Set(documents.map((document) => document.url)), additional = declared.filter((document) => !already.has(document.url));
+        if (documents.length + additional.length > limits.maxDocuments) throw Error("Declared inline document-set count exceeded");
+        for (const document of additional) await get(document.url, document.documentSetSource);
+        if (additional.length) parsed = parsePrimaryFilingFacts(documents, { ...meta, periodEnd: meta.end, now: now2, bounds: limits });
+        parsed.primaryFiling.diagnostics.documentSetDiscovery = { status: "ready", url: metadataURL, declared: declared.map((document) => document.url), fetched: additional.map((document) => document.url) };
+      } catch (error) {
+        parsed.primaryFiling.diagnostics.documentSetDiscovery = { status: "unavailable", url: metadataURL, reason: error.message };
+      }
+    }
+    return { status: parsed.primaryFiling.status, parsed, diagnostics: parsed.primaryFiling.diagnostics };
+  } catch (error) {
+    return { status: "unavailable", reason: error.message, diagnostics: { code: "primary-filing-fallback-failed", url: meta?.url || latestStatement?.source?.url || null } };
+  }
+}
+
 // worker/valuation-data.js
+async function latestFilingFacts(payload, cik, currencies, latestStatement, fetcher2 = fetch, now2 = /* @__PURE__ */ new Date(), { bounds } = {}) {
+  const modeled = currencies.map((currency) => {
+    const annual = parseFinancials(payload, cik, currency, now2);
+    return { ...annual, ...parseRecentFinancials(payload, cik, currency, annual, now2, { latestStatement }) };
+  });
+  const periods = modeled.flatMap((f) => [...f.annual || [], f.recent].filter(Boolean));
+  const latestEnd = periods.map((p) => p.end).sort().at(-1);
+  const amendment = latestStatement?.form?.endsWith("/A") && periods.some((p) => p.end === latestStatement.end && p.filed < latestStatement.filed);
+  if (!latestStatement?.end || latestEnd && latestStatement.end <= latestEnd && !amendment)
+    return { facts: payload, primaryFiling: null, qualityIssues: [] };
+  const imported = await fetchPrimaryFilingFacts(latestStatement, cik, { fetcher: fetcher2, now: now2, bounds });
+  if (!imported.parsed) return { facts: payload, primaryFiling: { status: imported.status, periodEnd: latestStatement.end, filed: latestStatement.filed, source: latestStatement.source, reason: imported.reason, diagnostics: imported.diagnostics }, qualityIssues: [] };
+  const merged = mergePrimaryFilingFacts(payload, imported.parsed);
+  const qualityIssues2 = merged.diagnostics.conflicts.map((conflict) => ({
+    code: "primary_filing_fact_conflict",
+    severity: "material",
+    start: conflict.start,
+    end: conflict.end,
+    metrics: Object.entries(financialTags).filter(([, tags]) => tags.includes(conflict.tag)).map(([metric]) => metric),
+    message: `Conflicting ${conflict.namespace}:${conflict.tag} observations for the same unit and reporting period were withheld; neither source wins by input order.`,
+    facts: [...conflict.existing || [], ...conflict.primary || []].map((row) => financialFact({ ...row, namespace: conflict.namespace, tag: conflict.tag, unit: conflict.unit }, "sourceEvidence", cik))
+  }));
+  return { facts: merged.facts, primaryFiling: { ...merged.primaryFiling, source: latestStatement.source, merge: merged.diagnostics }, qualityIssues: qualityIssues2 };
+}
+function reportedFinancials(payload, cik, currency, now2, latestStatement) {
+  const financials = parseFinancials(payload, cik, currency, now2);
+  Object.assign(financials, parseRecentFinancials(payload, cik, currency, financials, now2, { latestStatement }));
+  if (financials.periodAlignment?.continuousAnnualBase === false) financials.asOf = financials.recent.end;
+  if (financials.recent && financials.status !== "ready") {
+    financials.status = "ready";
+    financials.asOf = financials.recent.end;
+    financials.warnings = [...financials.warnings || [], "Only a reported interim period is supported; a complete annual valuation base is not established."];
+  }
+  return financials;
+}
 async function riskFree(item, fetcher2, now2) {
   try {
     const today = now2.toISOString().slice(0, 10);
@@ -15843,19 +17821,31 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
     riskFree(item, fetcher2, now2),
     licensedSnapshot(item, env, fetcher2, now2)
   ]);
+  try {
+    data.references = await listingReferences(item, filing.status === "fulfilled" ? filing.value.cik : item.cik || secReference(item)?.cik, fetcher2, now2);
+  } catch {
+    data.referenceStatus = "Industry outlook and risk source unavailable; unsupported automatic rates are withheld.";
+  }
   if (filing.status === "fulfilled") {
     const { cik } = filing.value;
     const currencies = item.currency === "CAD" && secReference(item)?.crossListed ? ["CAD", "USD"] : [item.currency];
-    const facts = await resolveRevenueScopes(filing.value.facts, cik, currencies, fetcher2, now2, { force: data.fit.group === "reit" });
-    data.financials = parseFinancials(facts, cik, item.currency, now2);
-    Object.assign(data.financials, parseRecentFinancials(facts, cik, item.currency, data.financials, now2));
+    const imported = await latestFilingFacts(
+      filing.value.facts,
+      cik,
+      currencies,
+      data.references?.issuer?.latestStatement,
+      fetcher2,
+      now2,
+      env.PUBLIC_DATA_PUBLISHER === "enabled" ? { bounds: { maxDocumentBytes: 28e6, maxTotalBytes: 4e7, maxTags: 1e6, maxFacts: 8e4 } } : {}
+    );
+    const facts = await resolveRevenueScopes(imported.facts, cik, currencies, fetcher2, now2, { force: data.fit.group === "reit" });
+    data.financials = reportedFinancials(facts, cik, item.currency, now2, data.references?.issuer?.latestStatement);
     data.dividend = parseSECDividends(facts, cik, now2, {
       currency: item.currency,
       item
     });
     if (data.financials.status !== "ready" && item.currency === "CAD" && secReference(item)?.crossListed) {
-      const usd = parseFinancials(facts, cik, "USD", now2);
-      Object.assign(usd, parseRecentFinancials(facts, cik, "USD", usd, now2));
+      const usd = reportedFinancials(facts, cik, "USD", now2, data.references?.issuer?.latestStatement);
       if (usd.status === "ready") try {
         const converted = convertUSDToCAD(usd, parseSECDividends(facts, cik, now2, { currency: "USD", item }), await usdCadRate(fetcher2, now2));
         data.financials = converted.financials;
@@ -15863,6 +17853,8 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
       } catch {
       }
     }
+    if (imported.primaryFiling) data.financials.primaryFiling = imported.primaryFiling;
+    if (imported.qualityIssues.length) data.financials.qualityIssues = [...data.financials.qualityIssues || [], ...imported.qualityIssues];
     const annualBase = data.financials.status === "ready" && data.financials.annual[0];
     const recentBase = data.financials.recent;
     const latest2 = recentBase?.metrics?.commonEquity && recentBase.metrics.commonShares ? recentBase : annualBase;
@@ -15882,20 +17874,15 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
   if (rf.status === "fulfilled") data.riskFree = rf.value;
   const market = feed.status === "fulfilled" ? feed.value : { status: "unavailable" };
   data.feed = market;
-  try {
-    data.references = await listingReferences(item, filing.status === "fulfilled" ? filing.value.cik : item.cik || secReference(item)?.cik, fetcher2, now2);
-  } catch {
-    data.referenceStatus = "Industry outlook and risk source unavailable; unsupported automatic rates are withheld.";
-  }
   data = applyIssuerFinancialSupplement(item, data, { asOf: now2.toISOString() });
   data.fit = modelFit(item, data);
-  for (const key2 of [
+  for (const key3 of [
     "price",
     "marketCap",
     "commonBookValuePerShare",
     "dividend"
   ])
-    if (market[key2]?.status === "ready") data[key2] = market[key2];
+    if (market[key3]?.status === "ready") data[key3] = market[key3];
   return data;
 }
 
@@ -15922,7 +17909,7 @@ function debtEvidence(metrics = {}) {
   const latest2 = entries.map(([, f]) => f.asOf).filter(Boolean).sort().at(-1);
   const m = Object.fromEntries(entries.filter(([, f]) => !latest2 || f.asOf === latest2)), v = (k) => m[k]?.value;
   const warnings = [];
-  const verified = debt_reconciliations_default.rows.find((r) => r.period === latest2 && Object.entries(r.expected).every(([key2, value]) => m[key2]?.value === value && m[key2].unit === r.currency && m[key2].source?.url?.includes(`/data/${r.cik}/${r.filing}/`)));
+  const verified = debt_reconciliations_default.rows.find((r) => r.period === latest2 && Object.entries(r.expected).every(([key3, value]) => m[key3]?.value === value && m[key3].unit === r.currency && m[key3].source?.url?.includes(`/data/${r.cik}/${r.filing}/`)));
   if (verified) return { value: verified.value, asOf: latest2, basis: verified.basis, components: Object.keys(verified.expected).map((k) => m[k]), complete: true, warnings, source: verified.source, verifiedAt: debt_reconciliations_default.verifiedAt };
   const result = (value, basis, components, complete = false) => ({ value, asOf: latest2 || null, basis, components: components.map((k) => m[k]), complete, warnings });
   const sum = (parts, basis, complete = false) => {
@@ -16022,10 +18009,10 @@ function capitalAssumptions(snapshot, item) {
   const ref = currentReferences(snapshot), sector = ref?.industry, country = ref?.country;
   const origins = {}, patches = {};
   const sovereignSpread = ref?.currencyDefaultSpread ?? (country?.defaultSpread || 0);
-  const put = (key2, v, why) => {
+  const put = (key3, v, why) => {
     if (finite3(v)) {
-      patches[key2] = v;
-      origins[key2] = why;
+      patches[key3] = v;
+      origins[key3] = why;
     }
   };
   const riskFree2 = snapshot.riskFree, assessmentDate = snapshot.checkedAt?.slice(0, 10);
@@ -16066,13 +18053,13 @@ function capitalAssumptions(snapshot, item) {
 }
 function path(start, terminal, n, origin, source2, cap) {
   if (!finite3(start)) return [];
-  const bounded2 = clamp(start, -0.5, cap);
+  const bounded3 = clamp(start, -0.5, cap);
   return Array.from({ length: n }, (_, i2) => ({
     year: i2 + 1,
-    growth: bounded2 + (terminal - bounded2) * i2 / n,
+    growth: bounded3 + (terminal - bounded3) * i2 / n,
     kind: "modelled",
     source: source2,
-    description: `${origin}; ${bounded2 !== start ? `growth constrained from ${(start * 100).toFixed(2)}% to ${(bounded2 * 100).toFixed(2)}% as an explicit scenario guardrail; ` : ""}linear fade toward ${(terminal * 100).toFixed(2)}% terminal scenario over ${n} years`
+    description: `${origin}; ${bounded3 !== start ? `growth constrained from ${(start * 100).toFixed(2)}% to ${(bounded3 * 100).toFixed(2)}% as an explicit scenario guardrail; ` : ""}linear fade toward ${(terminal * 100).toFixed(2)}% terminal scenario over ${n} years`
   }));
 }
 function forecastAssumptions(snapshot, item, years = 5) {
@@ -16149,7 +18136,7 @@ function fraction(value, label) {
     throw new Error(`${label} must be between 0% and 100%.`);
   return value;
 }
-function bounded(result) {
+function bounded2(result) {
   const walk = (v) => {
     if (typeof v === "number" && !Number.isFinite(v))
       throw new Error(
@@ -16175,7 +18162,7 @@ function equityBridge(input, enterpriseValue) {
   );
   positive(shares, "Diluted shares");
   const equity = enterpriseValue - debt + cash + otherAssets - claims;
-  return bounded({ enterpriseValue, equity, value: equity / shares });
+  return bounded2({ enterpriseValue, equity, value: equity / shares });
 }
 function calculateDCF(input) {
   const { flows, wacc, terminalMethod } = input;
@@ -16225,7 +18212,7 @@ function calculateDCF(input) {
     warnings.push(
       "The model gives non-positive common equity. This signals a failed equity case, not a tradable negative stock price."
     );
-  return bounded({
+  return bounded2({
     ...bridge,
     rows: rows3,
     pvFlows,
@@ -16268,7 +18255,7 @@ function calculateRI(input) {
   const terminalValue = rows3.at(-1).ri * persistence / (1 + r - persistence);
   const pvTerminal = terminalValue / (1 + r) ** rows3.length;
   const pvRI = rows3.reduce((sum, row) => sum + row.pv, 0), value = input.book + pvRI + pvTerminal;
-  return bounded({
+  return bounded2({
     rows: rows3,
     terminalValue,
     pvTerminal,
@@ -16381,14 +18368,14 @@ function calculateDDM(input) {
 var finite5 = Number.isFinite;
 var day = (value) => {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:$|T)/.test(value)) return null;
-  const date3 = value.slice(0, 10), parsed = Date.parse(date3);
-  return finite5(parsed) && new Date(parsed).toISOString().slice(0, 10) === date3 ? date3 : null;
+  const date4 = value.slice(0, 10), parsed = Date.parse(date4);
+  return finite5(parsed) && new Date(parsed).toISOString().slice(0, 10) === date4 ? date4 : null;
 };
 var rate = (value) => `${(value * 100).toFixed(2)}%`;
 var number2 = (value) => value.toLocaleString("en-US", { maximumFractionDigits: 2 });
 var money = (value, currency) => `${currency} ${number2(value)}`;
 var sourceURL = (value) => typeof value === "string" && /^https?:\/\//i.test(value);
-var valueOf = (metrics, key2) => metrics?.[key2]?.value;
+var valueOf = (metrics, key3) => metrics?.[key3]?.value;
 var clamp2 = (value, low, high) => Math.min(high, Math.max(low, value));
 var unique = (values) => [...new Set(values.filter(Boolean))];
 var DURATION_KEYS = ["revenue", "ebit", "da", "capex"];
@@ -16408,8 +18395,8 @@ var FACTS = [
   ["shares", "Weighted-average diluted shares", "shares"]
 ];
 function datedNotFuture(value, cutoff) {
-  const date3 = day(value);
-  return !!date3 && (!cutoff || date3 <= cutoff);
+  const date4 = day(value);
+  return !!date4 && (!cutoff || date4 <= cutoff);
 }
 function usableFact(fact, currency, cutoff) {
   if (!finite5(fact?.value) || !sourceURL(fact?.source?.url)) return false;
@@ -16452,13 +18439,13 @@ function qualityIssues(snapshot) {
     [snapshot.financials?.recent?.qualityIssues, "Latest interim", snapshot.financials?.recent?.end],
     [snapshot.financials?.ttm?.qualityIssues, "Trailing period", snapshot.financials?.ttm?.end]
   ];
-  const normalized = groups2.flatMap(([issues, context, contextEnd]) => (Array.isArray(issues) ? issues : []).filter(Boolean).map((issue) => {
+  const normalized = groups2.flatMap(([issues, context2, contextEnd]) => (Array.isArray(issues) ? issues : []).filter(Boolean).map((issue) => {
     const item = typeof issue === "string" ? { message: issue } : issue;
     const metrics = item.metrics || item.affectedMetrics || (item.metric ? [item.metric] : []);
     const scopeEnds = unique([item.end || item.periodEnd || contextEnd, ...item.end || item.periodEnd || contextEnd ? [] : (item.facts || []).map((fact) => fact.asOf || fact.end)]);
     return {
       ...item,
-      context,
+      context: context2,
       scopeEnds,
       message: item.message || item.reason || item.description || item.code || "Unresolved source-quality condition",
       metrics: Array.isArray(metrics) ? metrics : [metrics],
@@ -16467,10 +18454,10 @@ function qualityIssues(snapshot) {
   }));
   return [...new Map(normalized.map((issue) => [`${issue.code || ""}|${issue.metrics.join(",")}|${issue.scopeEnds.join(",")}|${issue.start || ""}|${issue.message}`, issue])).values()];
 }
-function factBlocked(issues, key2, fact) {
+function factBlocked(issues, key3, fact) {
   if (!fact) return false;
-  const own = issues.some((issue) => issue.blocking && issue.metrics.includes(key2) && (!issue.scopeEnds.length || issue.scopeEnds.includes(day(fact.asOf))) && (!issue.start || !fact.start || issue.start === fact.start));
-  return own || (fact.components || fact.source?.components || []).some((component) => factBlocked(issues, key2, component));
+  const own = issues.some((issue) => issue.blocking && issue.metrics.includes(key3) && (!issue.scopeEnds.length || issue.scopeEnds.includes(day(fact.asOf))) && (!issue.start || !fact.start || issue.start === fact.start));
+  return own || (fact.components || fact.source?.components || []).some((component) => factBlocked(issues, key3, component));
 }
 function scenarioResult(name, result, inputs, assumptions) {
   const rawValue = result.value;
@@ -16491,7 +18478,7 @@ function validatedValuationSnapshot(item, snapshot = {}) {
   const cutoff = day(snapshot.checkedAt), currency = item?.currency;
   if (!cutoff || snapshot.instrument?.symbol !== item?.symbol || snapshot.instrument?.currency !== currency || snapshot.financials?.currency && snapshot.financials.currency !== currency) return null;
   const issues = qualityIssues(snapshot);
-  const metrics = (values, end) => Object.fromEntries(Object.entries(cleanMetrics(values, currency, cutoff)).filter(([key2, fact]) => !factBlocked(issues, key2, fact) && day(fact.asOf) === end));
+  const metrics = (values, end) => Object.fromEntries(Object.entries(cleanMetrics(values, currency, cutoff)).filter(([key3, fact]) => !factBlocked(issues, key3, fact) && day(fact.asOf) === end));
   const annual = safeRows(snapshot.financials?.annual, currency, cutoff).map((row2) => ({ ...row2, metrics: metrics(row2.metrics, row2.end) }));
   const row = (value) => value && datedNotFuture(value.end, cutoff) ? { ...value, metrics: metrics(value.metrics, value.end) } : null;
   const recent = row(snapshot.financials?.recent), ttm = row(snapshot.financials?.ttm);
@@ -16499,10 +18486,10 @@ function validatedValuationSnapshot(item, snapshot = {}) {
     const end = recent.prior.end || Object.values(recent.prior.metrics || {}).map((fact) => day(fact.asOf)).filter(Boolean).sort().at(-1);
     recent.prior = row({ ...recent.prior, end });
   }
-  const fresh = (date3, days2) => datedNotFuture(date3, cutoff) && Date.parse(cutoff) - Date.parse(day(date3)) <= days2 * 864e5;
+  const fresh = (date4, days2) => datedNotFuture(date4, cutoff) && Date.parse(cutoff) - Date.parse(day(date4)) <= days2 * 864e5;
   const observation = (field, days2, positive2 = false) => field?.status === "ready" && field.currency === currency && finite5(field.value) && (positive2 ? field.value > 0 : field.value >= 0) && fresh(field.asOf, days2) && (!field.filed || datedNotFuture(field.filed, cutoff)) && sourceURL(field.source?.url) ? field : { status: "unavailable" };
-  const annualFresh = fresh(annual[0]?.end, 550), ttmFresh = fresh(ttm?.end, 550);
-  const status = issues.some((issue) => issue.blocking && !issue.metrics.length) ? "unavailable" : snapshot.financials?.status === "ready" && !annualFresh && !ttmFresh ? "stale" : snapshot.financials?.status;
+  const annualFresh = fresh(annual[0]?.end, 550), ttmFresh = fresh(ttm?.end, 550), recentFresh = fresh(recent?.end, 550);
+  const status = issues.some((issue) => issue.blocking && !issue.metrics.length) ? "unavailable" : snapshot.financials?.status === "ready" && !annualFresh && !ttmFresh && !recentFresh ? "stale" : snapshot.financials?.status;
   return {
     ...snapshot,
     financials: { ...snapshot.financials, status, annual, recent, ttm },
@@ -16545,26 +18532,44 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     audit: { formulas: [], rows: [], bridge: null }
   };
   const sourceMap = /* @__PURE__ */ new Map();
-  function addSource(source2, context = {}) {
+  function addSource(source2, context2 = {}) {
     if (!sourceURL(source2?.url)) return null;
-    const key2 = `${source2.url}|${context.periodEnd || ""}|${context.publishedDate || ""}`;
-    if (sourceMap.has(key2)) return sourceMap.get(key2);
-    const id = `source-${report.sources.length + 1}`;
-    report.sources.push({
-      id,
-      name: source2.name || "Original public source",
-      url: source2.url,
-      tag: source2.tag || null,
-      ...context
-    });
-    sourceMap.set(key2, id);
+    const key3 = `${source2.url}|${context2.periodEnd || ""}|${context2.publishedDate || ""}`;
+    let id = sourceMap.get(key3);
+    if (!id) {
+      id = `source-${report.sources.length + 1}`;
+      report.sources.push({
+        id,
+        name: source2.name || "Original public source",
+        url: source2.url,
+        tag: source2.tag || null,
+        ...context2
+      });
+      sourceMap.set(key3, id);
+    }
+    if (source2.primaryFiling) {
+      const proof = source2.primaryFiling;
+      addSource(
+        { name: "SEC original inline-XBRL financial statement", url: proof.url, tag: source2.tag },
+        { ...context2, purpose: `Original reported fact \xB7 context ${proof.contextId || "recorded"} \xB7 unit ${proof.unitRef || proof.unit || "recorded"}; sign, scale and reported precision retained in the input evidence` }
+      );
+      for (const url of unique([...proof.contextSources || [], ...proof.unitSources || []]))
+        if (url !== proof.url) addSource(
+          { name: "SEC inline-XBRL context and unit definitions", url },
+          { ...context2, purpose: "Same-accession document-set definitions for the original numeric fact" }
+        );
+      if (proof.documentSetSource) addSource(
+        proof.documentSetSource,
+        { ...context2, purpose: "SEC declaration of the financial statement document in the same accession" }
+      );
+    }
     return id;
   }
-  function assumption(label, value, unit, description, sources = []) {
+  function assumption(label, value, unit2, description, sources = []) {
     report.assumptions.push({
       label,
       value: finite5(value) ? value : null,
-      unit,
+      unit: unit2,
       description,
       sourceIds: unique(sources.map((source2) => addSource(source2)))
     });
@@ -16595,10 +18600,10 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       source2,
       { periodEnd: row.period.end, publishedDate: row.publishedAt, purpose: "Sparse source-reviewed disclosure; native reporting currency " + row.currency }
     )));
-    const metrics = Object.fromEntries(Object.entries(row.metrics).map(([key2, f]) => [key2, {
+    const metrics = Object.fromEntries(Object.entries(row.metrics).map(([key3, f]) => [key3, {
       ...f,
       sourceId: addSource(f.source, { periodEnd: f.asOf, publishedDate: f.filed, purpose: f.label + " \xB7 " + f.basis }),
-      modelEligible: row.modelCurrencyMatches && row.canonicalMetrics.includes(key2)
+      modelEligible: row.modelCurrencyMatches && row.canonicalMetrics.includes(key3)
     }]));
     const observations = (row.observations || []).map((f) => ({
       ...f,
@@ -16637,7 +18642,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     basis: fit.basis || "Curated business-model reference",
     source: fit.source || null,
     perShareBasisChange: fit.perShareBasisChange || null,
-    businessScopeChange: fit.businessScopeChange || null
+    businessScopeChange: fit.businessScopeChange || null,
+    reportingCalendarChange: fit.reportingCalendarChange || null
   } : null;
   addSource(fit.source, { purpose: "Business-model classification", publishedDate: day(fit.source?.publishedAt), periodEnd: fit.source?.periodEnd || null });
   if (fit.perShareBasisChange) {
@@ -16649,10 +18655,20 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     const change2 = fit.businessScopeChange;
     addSource(change2.source, { purpose: "Verified separation and predecessor operating scope", publishedDate: day(change2.source.publishedAt), periodEnd: change2.source.periodEnd });
     report.limitations.push(`${change2.reason} ${change2.operatingBasisCompatible ? "The selected operating inputs are sourced from subsequent reporting; business-specific normalization and the capital bridge still require review." : "An operating DCF is withheld until every annual/TTM component uses a matched subsequent reporting basis."}`);
+    for (const action of change2.capitalActions || []) if (reportDate >= action.effectiveDate) {
+      addSource(action.source, { purpose: "Post-acquisition capital and dilution terms", publishedDate: day(action.source?.publishedAt), periodEnd: action.source?.periodEnd });
+      report.limitations.push(action.reason);
+      report.risks.push({ risk: "Current capital and dilution reconciliation", monitor: action.reason });
+    }
+  }
+  if (fit.reportingCalendarChange) {
+    const change2 = fit.reportingCalendarChange;
+    addSource(change2.source, { purpose: "Fiscal-calendar transition and reported stub period", publishedDate: day(change2.source?.publishedAt), periodEnd: change2.source?.periodEnd });
+    report.limitations.push(change2.reason);
   }
   report.qualityIssues = qualityIssues(snapshot);
   const reportBlocked = report.qualityIssues.some((issue) => issue.blocking && !issue.metrics.length);
-  const metricFilter = (metrics) => Object.fromEntries(Object.entries(cleanMetrics(metrics, currency, reportDate)).filter(([key2, fact]) => !factBlocked(report.qualityIssues, key2, fact)));
+  const metricFilter = (metrics) => Object.fromEntries(Object.entries(cleanMetrics(metrics, currency, reportDate)).filter(([key3, fact]) => !factBlocked(report.qualityIssues, key3, fact)));
   const ready = snapshot.financials?.status === "ready" && !reportBlocked && !!reportDate;
   const annual = safeRows(snapshot.financials?.annual, currency, reportDate).map((row) => ({ ...row, metrics: metricFilter(row.metrics) }));
   const recentRaw = snapshot.financials?.recent;
@@ -16665,8 +18681,9 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
   const ttmRaw = snapshot.financials?.ttm;
   const ttm = ready && ttmRaw && datedNotFuture(ttmRaw.end, reportDate) ? { ...ttmRaw, metrics: metricFilter(ttmRaw.metrics) } : null;
   const annualBase = annual[0] || null;
-  const ttmComplete = ttm && DURATION_KEYS.every((key2) => finite5(valueOf(ttm.metrics, key2)));
-  const operatingBase = ttmComplete ? ttm : annualBase;
+  const ttmComplete = ttm && DURATION_KEYS.every((key3) => finite5(valueOf(ttm.metrics, key3)));
+  const periodAligned = snapshot.financials?.periodAlignment?.continuousAnnualBase !== false;
+  const operatingBase = ttmComplete ? ttm : periodAligned ? annualBase : null;
   const operatingMetrics = operatingBase?.metrics || {};
   const annualMetrics = annualBase?.metrics || {};
   const balanceMetrics = { ...annualMetrics, ...ttm?.metrics || {}, ...recent?.metrics || {} };
@@ -16677,7 +18694,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
   report.financials.valuationBasis = {
     kind: ttmComplete ? "ttm" : "annual",
     end: operatingBase?.end || null,
-    description: ttmComplete ? "Trailing twelve months: latest full year + current YTD \u2212 comparable prior YTD; latest sourced balances are dated separately." : "Latest supported full fiscal year. Interim statements, where available, inform the review but are not mechanically annualized."
+    description: !periodAligned ? "Exact reported YTD facts are displayed separately. No contiguous full-year cash-flow bridge is established; a whole-company DCF base is withheld." : ttmComplete ? "Trailing twelve months: latest full year + current YTD \u2212 comparable prior YTD; latest sourced balances are dated separately." : "Latest supported full fiscal year. Interim statements, where available, inform the review but are not mechanically annualized."
   };
   report.financials.operatingBasis = report.financials.valuationBasis;
   for (const row of [...annual, ...recent ? [recent, ...recent.prior ? [recent.prior] : []] : [], ...ttm ? [ttm] : []]) {
@@ -16697,15 +18714,21 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     addSource(fact.source, { periodEnd: fact.asOf || fact.end, publishedDate: day(fact.filed), purpose: `Statement-quality evidence: ${issue.message}` });
     normalizationSources(fact);
   }
-  report.lastFilingDate = report.sources.map((source2) => source2.publishedDate).filter(Boolean).sort().at(-1) || null;
-  for (const [key2, label, unit] of FACTS) {
+  const inputDates = [];
+  const financialDates = (fact) => {
+    inputDates.push(day(fact?.filed || fact?.source?.publishedAt));
+    for (const component of fact?.components || fact?.source?.components || []) financialDates(component);
+  };
+  for (const row of [...annual, recent, ttm].filter(Boolean)) for (const fact of Object.values(row.metrics)) financialDates(fact);
+  report.lastFilingDate = inputDates.filter(Boolean).sort().at(-1) || null;
+  for (const [key3, label, unit2] of FACTS) {
     const values = annual.map((row) => ({
       end: row.end,
-      value: valueOf(row.metrics, key2) ?? null,
-      sourceId: addSource(row.metrics[key2]?.source, { periodEnd: row.end, publishedDate: day(row.metrics[key2]?.filed) })
+      value: valueOf(row.metrics, key3) ?? null,
+      sourceId: addSource(row.metrics[key3]?.source, { periodEnd: row.end, publishedDate: day(row.metrics[key3]?.filed) })
     }));
-    const incomeLabels = key2 === "netIncome" ? unique(annual.map((row) => row.metrics.netIncome?.label)) : [];
-    if (values.some((row) => finite5(row.value))) report.financials.trends.push({ key: key2, label: incomeLabels.length === 1 ? incomeLabels[0] : key2 === "netIncome" ? "Net / common earnings \xB7 source scope retained" : label, unit, values });
+    const incomeLabels = key3 === "netIncome" ? unique(annual.map((row) => row.metrics.netIncome?.label)) : [];
+    if (values.some((row) => finite5(row.value))) report.financials.trends.push({ key: key3, label: incomeLabels.length === 1 ? incomeLabels[0] : key3 === "netIncome" ? "Net / common earnings \xB7 source scope retained" : label, unit: unit2, values });
   }
   const cleaned = {
     ...snapshot,
@@ -16737,7 +18760,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     report.limitations.push("Historical dividend growth is withheld because its share-unit or post-separation business basis is not reconciled. A current dividend amount alone does not validate an older growth rate.");
   }
   const forecast = forecastAssumptions(cleaned, item), capital = forecast.capital;
-  for (const [key2, value] of Object.entries(capital.patches)) {
+  for (const [key3, value] of Object.entries(capital.patches)) {
     const labels = {
       riskFree: "Risk-free yield",
       beta: "Equity beta proxy",
@@ -16748,13 +18771,13 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       debt: "Debt financing input"
     };
     assumption(
-      labels[key2] || key2,
+      labels[key3] || key3,
       value,
-      key2 === "beta" ? "multiple" : ["equity", "debt"].includes(key2) ? "capital-units" : "percent",
-      capital.origins[key2],
+      key3 === "beta" ? "multiple" : ["equity", "debt"].includes(key3) ? "capital-units" : "percent",
+      capital.origins[key3],
       [
-        key2 === "riskFree" ? snapshot.riskFree?.source : capital.source,
-        ["equityRiskPremium", "taxRate"].includes(key2) ? snapshot.references?.sources?.country : null
+        key3 === "riskFree" ? snapshot.riskFree?.source : capital.source,
+        ["equityRiskPremium", "taxRate"].includes(key3) ? snapshot.references?.sources?.country : null
       ]
     );
   }
@@ -16781,11 +18804,15 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
   if (margin != null) economics.push(`Reported operating margin is ${rate(margin)}${previousMargin != null ? `, versus ${rate(previousMargin)} in the preceding annual period` : ""}. ${previousMargin != null && margin < previousMargin ? "Margin compression means revenue growth alone does not establish improving earnings power." : "The forecast carries this observed margin forward as a scenario; durable pricing power has not been independently established."}`);
   if (recent) {
     const r = recent.metrics, pr = recent.prior?.metrics || {}, interim = [];
-    for (const [key2, label] of [["revenue", "revenue"], ["ebit", "operating profit"], ["eps", "diluted EPS"], ["cfo", "operating cash flow"]]) {
-      const g = change(valueOf(r, key2), valueOf(pr, key2));
+    for (const [key3, label] of [["revenue", "revenue"], ["ebit", "operating profit"], ["eps", "diluted EPS"], ["cfo", "operating cash flow"]]) {
+      const g = change(valueOf(r, key3), valueOf(pr, key3));
       if (g != null) interim.push(`${label} ${g >= 0 ? "+" : "\u2212"}${rate(Math.abs(g))}`);
     }
     economics.push(`The latest available interim/YTD statement ends ${recent.end}${recent.filed ? ` and was filed ${recent.filed}` : ""}.${interim.length ? ` Against its comparable prior-year period: ${interim.join("; ")}.` : " A comparable same-period growth calculation is not supported for the available lines."} YTD totals are not treated as a full year.`);
+    if (!periodAligned) {
+      economics.push(snapshot.financials.periodAlignment.reason);
+      addSource(snapshot.financials.periodAlignment.source, { periodEnd: recent.end, publishedDate: recent.filed, purpose: "Exact reported interim period; full-year alignment is unverified" });
+    }
   } else if (report.financials.reviewedPeriods.length) economics.push("Newer source-reviewed disclosures are displayed with their native currency, exact period and economic scope. They do not establish a complete matching-currency interim set for this listing; valuation inputs retain their separate older dates.");
   else economics.push("No more recent interim/YTD statement is represented in this snapshot. The annual statement date is the evidence cutoff, not proof that the issuer has released no newer information.");
   if (!economics.length) economics.push("The connected snapshot does not supply usable annual statement facts. The report can select an appropriate economic framework, but cannot establish revenue, margins or earnings trends.");
@@ -16818,18 +18845,18 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
   const failures = [], scenarios = ["Bear", "Base", "Bull"];
   function operateDCF() {
     const m = operatingMetrics, startRevenue = valueOf(m, "revenue"), startEBIT = valueOf(m, "ebit");
-    if (fit.businessScopeChange && (!DURATION_KEYS.every((key2) => businessScopeFactCompatible(m[key2], fit.businessScopeChange)) || !borrowing.components.length || !borrowing.components.every((fact) => businessScopeFactCompatible(fact, fit.businessScopeChange))))
+    if (fit.businessScopeChange && (!DURATION_KEYS.every((key3) => businessScopeFactCompatible(m[key3], fit.businessScopeChange)) || !borrowing.components.length || !borrowing.components.every((fact) => businessScopeFactCompatible(fact, fit.businessScopeChange))))
       throw Error("The operating or borrowing inputs still contain the predecessor business. Matched post-separation annual/TTM components and debt are required before attributing enterprise value to the remaining company.");
     const sharesFact = recent?.metrics?.shares || m.shares || am.shares;
     const shares = sharesFact?.value;
     if (!perShareFactCompatible(sharesFact, fit.perShareBasisChange, reportDate))
       throw Error("The selected diluted-share denominator predates a verified corporate action. An operating value cannot be converted to current-share value until the share basis is reconciled.");
-    const missing = DURATION_KEYS.filter((key2) => !finite5(valueOf(m, key2)));
+    const missing = DURATION_KEYS.filter((key3) => !finite5(valueOf(m, key3)));
     if (missing.length || !(startRevenue > 0) || !(shares > 0) || !finite5(debt) || debt < 0 || !capital.wacc || !finite5(forecast.taxRate) || forecast.revenue.length !== 5)
       throw Error(`Operating DCF needs ${unique([...missing, !(shares > 0) && "a sourced diluted-share proxy", (!finite5(debt) || debt < 0) && "consistent reported debt", !capital.wacc && "dated financing/risk inputs", forecast.revenue.length !== 5 && "a supported five-year revenue path"]).join(", ") || "consistent positive revenue and tax inputs"}.`);
     if (valueOf(m, "da") < 0 || valueOf(m, "capex") < 0) throw Error("D&A and capex require a verified positive expense/investment sign convention.");
     const baseMargin = startEBIT / startRevenue, daRate = valueOf(m, "da") / startRevenue, capexRate = valueOf(m, "capex") / startRevenue;
-    const tradeComplete = ["receivables", "inventory", "payables"].every((key2) => finite5(valueOf(balanceMetrics, key2)));
+    const tradeComplete = ["receivables", "inventory", "payables"].every((key3) => finite5(valueOf(balanceMetrics, key3)));
     const openingNWC = tradeComplete ? valueOf(balanceMetrics, "receivables") + valueOf(balanceMetrics, "inventory") - valueOf(balanceMetrics, "payables") : 0;
     const nwcRate = openingNWC / startRevenue;
     const results = scenarios.map((name, index) => {
@@ -16907,7 +18934,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       tradeComplete ? nwcRate : null,
       "rate",
       tradeComplete ? "Receivables + inventory \u2212 trade payables; partial operating-working-capital definition. Latest sourced balances and operating-period revenue may have different dates." : "Unverified scenario: zero change in working capital because the full trade-balance set is unavailable. This is a forecast assumption, not a reported zero.",
-      ["receivables", "inventory", "payables"].map((key2) => balanceMetrics[key2]?.source)
+      ["receivables", "inventory", "payables"].map((key3) => balanceMetrics[key3]?.source)
     );
     assumption("Diluted-share denominator", shares, "shares", sharesFact.basis || "Dated weighted-average diluted-share proxy; not a verified current fully diluted share count.", [sharesFact.source]);
     assumption("Debt deducted in equity bridge", debt, "money", `${borrowing.asOf || "Date not established"}; ${borrowing.basis}. ${borrowing.warnings.join(" ")}`, borrowing.components.map((fact) => fact.source));
@@ -18123,14 +20150,14 @@ var validURL = (value) => {
     return false;
   }
 };
-var date2 = (value) => {
+var date3 = (value) => {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:T|$)/.test(value)) return null;
-  const text = value.slice(0, 10), parsed = Date.parse(text);
-  return finite6(parsed) && new Date(parsed).toISOString().slice(0, 10) === text ? text : null;
+  const text2 = value.slice(0, 10), parsed = Date.parse(text2);
+  return finite6(parsed) && new Date(parsed).toISOString().slice(0, 10) === text2 ? text2 : null;
 };
 var latest = (values) => values.filter(Boolean).sort().at(-1) || null;
 var age = (asOf, value) => asOf && value ? Math.round((Date.parse(asOf) - Date.parse(value)) / 864e5) : null;
-var sourceOK = (fact, cutoff) => finite6(fact?.value) && validURL(fact.source?.url) && !!date2(fact.asOf) && date2(fact.asOf) <= cutoff && (!fact.filed || !!date2(fact.filed) && date2(fact.filed) <= cutoff);
+var sourceOK = (fact, cutoff) => finite6(fact?.value) && validURL(fact.source?.url) && !!date3(fact.asOf) && date3(fact.asOf) <= cutoff && (!fact.filed || !!date3(fact.filed) && date3(fact.filed) <= cutoff);
 var researchStandards = {
   bankCapital: { name: "OSFI capital requirements and distribution constraints", url: "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/capital-adequacy-requirements-car-2026-chapter-1-overview-risk-based-capital-requirements", scope: "Canadian regulated banks; thresholds are not inferred for another jurisdiction." },
   insuranceCapital: { name: "OSFI life-insurance capital adequacy framework", url: "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/life-insurance-capital-adequacy-test-guideline-2025", scope: "Canadian life insurers; retain the legal entity and total/core ratio definitions." },
@@ -18139,7 +20166,7 @@ var researchStandards = {
   reitCashFlow: { name: "Nareit: funds from operations", url: "https://www.reit.com/glossary/funds-operation-ffo", scope: "FFO supplements GAAP; recurring capital expenditure, leasing costs and property NAV still need separate review." },
   brokerCapital: { name: "SEC: broker-dealer financial responsibility", url: "https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers/division-trading-markets-broker-dealer-net-capital-books-records-guidance", scope: "US broker-dealers; identify applicable rules and jurisdiction rather than importing a bank or insurer capital ratio." }
 };
-var requirement = (id, label, keys2, why, standard = null) => ({ id, label, keys: keys2, why, standard });
+var requirement = (id, label, keys2, why, standard2 = null) => ({ id, label, keys: keys2, why, standard: standard2 });
 var commonEquity = requirement("common-equity", "Common-equity and share-class reconciliation", ["commonEquity", "commonBookValuePerShare"], "Separate common shareholders from preferred/AT1 capital and noncontrolling interests; reconcile per-share economic rights.");
 var profiles = {
   bank: [
@@ -18210,37 +20237,37 @@ function researchSector(item, snapshot = {}) {
   return "operating";
 }
 function verifiedCurrentRelease(item, asOf, rows3 = current_releases_default.rows) {
-  const cutoff = date2(asOf);
+  const cutoff = date3(asOf);
   if (!cutoff) return null;
-  return (Array.isArray(rows3) ? rows3 : []).filter((row) => row.symbol === item?.symbol && validURL(row.source?.url) && date2(row.periodEnd) && date2(row.publishedAt) && date2(row.verifiedAt) && row.periodEnd <= row.publishedAt && row.publishedAt <= row.verifiedAt && row.verifiedAt <= cutoff).sort((a, b) => b.periodEnd.localeCompare(a.periodEnd) || b.publishedAt.localeCompare(a.publishedAt))[0] || null;
+  return (Array.isArray(rows3) ? rows3 : []).filter((row) => row.symbol === item?.symbol && validURL(row.source?.url) && date3(row.periodEnd) && date3(row.publishedAt) && date3(row.verifiedAt) && row.periodEnd <= row.publishedAt && row.publishedAt <= row.verifiedAt && row.verifiedAt <= cutoff).sort((a, b) => b.periodEnd.localeCompare(a.periodEnd) || b.publishedAt.localeCompare(a.publishedAt))[0] || null;
 }
 function assessResearchReadiness(item, snapshot = {}, options = {}) {
-  const assessedAt = date2(options.asOf || (/* @__PURE__ */ new Date()).toISOString());
+  const assessedAt = date3(options.asOf || (/* @__PURE__ */ new Date()).toISOString());
   const identityMatches = snapshot.instrument?.symbol === item?.symbol && snapshot.instrument?.currency === item?.currency && (!snapshot.financials?.currency || snapshot.financials.currency === item?.currency);
   const applicable = item?.assetType === "Equity" && !!item?.supported;
-  const annual = identityMatches ? (snapshot.financials?.annual || []).filter((row) => date2(row.end) && row.end <= assessedAt) : [];
+  const annual = identityMatches ? (snapshot.financials?.annual || []).filter((row) => date3(row.end) && row.end <= assessedAt) : [];
   const rawRecent = identityMatches ? snapshot.financials?.recent : null;
-  const recent = rawRecent && date2(rawRecent.end) && rawRecent.end <= assessedAt ? rawRecent : null;
-  const ttm = identityMatches && date2(snapshot.financials?.ttm?.end) && snapshot.financials.ttm.end <= assessedAt ? snapshot.financials.ttm : null;
+  const recent = rawRecent && date3(rawRecent.end) && rawRecent.end <= assessedAt ? rawRecent : null;
+  const ttm = identityMatches && date3(snapshot.financials?.ttm?.end) && snapshot.financials.ttm.end <= assessedAt ? snapshot.financials.ttm : null;
   const statementRows = [...annual, ...recent ? [recent] : [], ...ttm ? [ttm] : []];
   const reviewedDisclosures = identityMatches ? validatedReviewedFinancialPeriods(item, snapshot, assessedAt) : [];
   const observed = [];
-  for (const row of statementRows) for (const [key2, raw] of Object.entries(row.metrics || {})) {
+  for (const row of statementRows) for (const [key3, raw] of Object.entries(row.metrics || {})) {
     const fact = { ...raw, asOf: raw.asOf || row.end, filed: raw.filed || row.filed };
     const factCurrency = fact.currency || (/^[A-Z]{3}(?:\/shares)?$/.test(fact.unit || "") ? fact.unit.split("/")[0] : null);
-    if (sourceOK(fact, assessedAt) && (!factCurrency || factCurrency === item.currency)) observed.push({ key: key2, ...fact, location: "connected-model-facts" });
+    if (sourceOK(fact, assessedAt) && (!factCurrency || factCurrency === item.currency)) observed.push({ key: key3, ...fact, location: "connected-model-facts" });
   }
-  const metric = (key2) => observed.filter((f) => f.key === key2).sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
+  const metric = (key3) => observed.filter((f) => f.key === key3).sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
   const latestStatementPeriod = latest(statementRows.filter((row) => observed.some((f) => f.asOf === row.end)).map((row) => row.end));
   const release = verifiedCurrentRelease(item, assessedAt, options.releases || current_releases_default.rows);
   const external = (release?.observations || []).filter((f) => sourceOK(f, assessedAt)).map((f) => ({ ...f, location: "verified-release-only" }));
   const newerRelease = !!release && (!latestStatementPeriod || release.periodEnd > latestStatementPeriod);
   const rawFiling = identityMatches ? snapshot.references?.issuer?.latestStatement : null;
-  const filing = rawFiling && ["10-Q", "10-K", "10-Q/A", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"].includes(rawFiling.form) && date2(rawFiling.end) && date2(rawFiling.filed) && rawFiling.end <= rawFiling.filed && rawFiling.filed <= assessedAt && validURL(rawFiling.source?.url) ? rawFiling : null;
+  const filing = rawFiling && ["10-Q", "10-K", "10-Q/A", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"].includes(rawFiling.form) && date3(rawFiling.end) && date3(rawFiling.filed) && rawFiling.end <= rawFiling.filed && rawFiling.filed <= assessedAt && validURL(rawFiling.source?.url) ? rawFiling : null;
   const newerFiling = !!filing && (!latestStatementPeriod || filing.end > latestStatementPeriod);
   const checkedAt = identityMatches ? snapshot.checkedAt || null : null;
-  const reviewed = options.reviewedReport?.symbol === item?.symbol && (options.reviewedReport.currency || options.reviewedReport.conclusion?.currency) === item?.currency && date2(options.reviewedReport?.review?.reviewedAt) && options.reviewedReport.review.reviewedAt <= assessedAt ? options.reviewedReport : null;
-  const reviewedPeriod = date2(reviewed?.review?.statementPeriod);
+  const reviewed = options.reviewedReport?.symbol === item?.symbol && (options.reviewedReport.currency || options.reviewedReport.conclusion?.currency) === item?.currency && date3(options.reviewedReport?.review?.reviewedAt) && options.reviewedReport.review.reviewedAt <= assessedAt ? options.reviewedReport : null;
+  const reviewedPeriod = date3(reviewed?.review?.statementPeriod);
   const sector = researchSector(item, snapshot);
   const sectorChecks = (profiles[sector] || profiles.operating).map((rule) => {
     const connected = observed.filter((f) => rule.keys.includes(f.key));
@@ -18253,8 +20280,8 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
       requiredKeys: rule.keys,
       status: available.length ? "partial" : "missing",
       // Presence of ratio inputs does not establish clean-surplus, reserves or a valuation judgment.
-      evidence: [...connected, ...releaseOnly].map((f) => ({ key: f.key, value: f.value, unit: f.unit, asOf: f.asOf, filed: date2(f.filed || f.publishedAt), source: f.source, basis: f.basis || "Source-linked fact", location: f.location })),
-      missingKeys: rule.keys.filter((key2) => !available.includes(key2)),
+      evidence: [...connected, ...releaseOnly].map((f) => ({ key: f.key, value: f.value, unit: f.unit, asOf: f.asOf, filed: date3(f.filed || f.publishedAt), source: f.source, basis: f.basis || "Source-linked fact", location: f.location })),
+      missingKeys: rule.keys.filter((key3) => !available.includes(key3)),
       modelIntegrated: connected.length > 0,
       needsAnalystReconciliation: true,
       standard: rule.standard ? researchStandards[rule.standard] : null
@@ -18270,9 +20297,9 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
     explanation: "Weighted-average diluted shares and period-end common shares have different meanings. Neither proves current fully diluted shares after buybacks, issuance, options or class conversions."
   };
   const price = identityMatches && snapshot.price?.status === "ready" && sourceOK(snapshot.price, assessedAt) && (!snapshot.price.currency || snapshot.price.currency === item.currency) && snapshot.price.value > 0 ? snapshot.price : null;
-  const consensus = identityMatches ? (snapshot.feed?.estimates || []).filter((row) => row.currency === item.currency && date2(row.asOf) && row.asOf <= assessedAt && date2(row.fiscalEnd) && row.fiscalEnd > assessedAt && validURL(row.source?.url) && (row.revenue > 0 || row.eps > 0)) : [];
+  const consensus = identityMatches ? (snapshot.feed?.estimates || []).filter((row) => row.currency === item.currency && date3(row.asOf) && row.asOf <= assessedAt && date3(row.fiscalEnd) && row.fiscalEnd > assessedAt && validURL(row.source?.url) && (row.revenue > 0 || row.eps > 0)) : [];
   const report = options.report, cases = report?.scenarios || [];
-  const valuationPeriod = reviewedPeriod || (["dcf", "ri", "earnings"].includes(report?.method?.key) ? date2(report?.financials?.valuationBasis?.end) : null);
+  const valuationPeriod = reviewedPeriod || (["dcf", "ri", "earnings"].includes(report?.method?.key) ? date3(report?.financials?.valuationBasis?.end) : null);
   const newerReleaseThanValuationBase = !!release && !!valuationPeriod && release.periodEnd > valuationPeriod;
   const numericCases = cases.filter((row) => finite6(row.value)).map((row) => row.value);
   const invalidCases = cases.some((row) => row.value != null && (!finite6(row.value) || row.value <= 0));
@@ -18289,8 +20316,8 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
   const gaps = [];
   const gap = (id, label, detail) => gaps.push({ id, label, detail });
   const disclosureRaw = identityMatches ? snapshot.references?.issuer?.latestResultsDisclosure : null;
-  const disclosure = disclosureRaw && date2(disclosureRaw.filed) && disclosureRaw.filed <= assessedAt && validURL(disclosureRaw.source?.url) ? disclosureRaw : null;
-  const latestSourceFiling = latest(observed.map((f) => date2(f.filed)));
+  const disclosure = disclosureRaw && date3(disclosureRaw.filed) && disclosureRaw.filed <= assessedAt && validURL(disclosureRaw.source?.url) ? disclosureRaw : null;
+  const latestSourceFiling = latest(observed.map((f) => date3(f.filed)));
   const newerResultsDisclosure = !!disclosure && (!latestSourceFiling || disclosure.filed > latestSourceFiling);
   if (!identityMatches) gap("identity", "Listing/currency evidence does not match", "The snapshot cannot substantiate the selected security\u2019s figures.");
   if (!observed.length) gap("statements", "Usable source-linked statement facts are incomplete", "A successful source check does not establish an issuer financial record.");
@@ -18313,7 +20340,7 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
     annualPeriods: annual.length,
     hasRecent: !!recent && observed.some((f) => f.asOf === recent.end),
     hasTtm: !!ttm,
-    completeOperatingTtm: !!ttm && ["revenue", "ebit", "da", "capex"].every((key2) => sourceOK({ ...ttm.metrics?.[key2], asOf: ttm.metrics?.[key2]?.asOf || ttm.end }, assessedAt)),
+    completeOperatingTtm: !!ttm && ["revenue", "ebit", "da", "capex"].every((key3) => sourceOK({ ...ttm.metrics?.[key3], asOf: ttm.metrics?.[key3]?.asOf || ttm.end }, assessedAt)),
     sectorRequirements: sectorChecks.length,
     fullyUnderwrittenSectorRequirements: 0,
     sectorRequirementsWithSomeEvidence: sectorChecks.filter((c) => c.evidence.length).length,
@@ -18343,7 +20370,7 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
       latestInterimPeriod: recent?.end || null,
       latestTtmPeriod: ttm?.end || null,
       latestStatementPeriod,
-      latestFilingDate: latest(observed.map((f) => date2(f.filed))),
+      latestFilingDate: latest(observed.map((f) => date3(f.filed))),
       latestReviewedDisclosurePeriod: latest(reviewedDisclosures.map((row) => row.period.end)),
       reviewedDisclosureCurrencies: uniq(reviewedDisclosures.map((row) => row.currency)),
       nativeCurrencyEvidenceOnly: reviewedDisclosures.some((row) => row.currency !== item.currency),
@@ -18363,7 +20390,7 @@ function assessResearchReadiness(item, snapshot = {}, options = {}) {
       newerStatementEvidence: newerRelease || newerFiling,
       reviewedStatementPeriod: reviewedPeriod,
       reviewedReportBehindRelease: !!reviewedPeriod && !!release && reviewedPeriod < release.periodEnd,
-      reviewDue: !!date2(reviewed?.review?.nextReview?.date) && reviewed.review.nextReview.date <= assessedAt,
+      reviewDue: !!date3(reviewed?.review?.nextReview?.date) && reviewed.review.nextReview.date <= assessedAt,
       note: "Periods are compared with verified issuer releases and the SEC periodic-filing inventory. Earnings releases may precede 10-Q/10-K filings; neither a matching period nor a recent source check certifies complete research coverage."
     },
     releaseEvidence: release,
@@ -18427,7 +20454,7 @@ var rows2 = [];
 var cursor = 0;
 async function refresh(item) {
   const file = output + "/" + item.symbol.replaceAll(":", "_") + ".json";
-  let d = await fetchValuationData(item, {}, fetcher, now);
+  let d = await fetchValuationData(item, { PUBLIC_DATA_PUBLISHER: "enabled" }, fetcher, now);
   if (!d.references) try {
     const old = JSON.parse(await readFile(file, "utf8"));
     const age2 = now - Date.parse(old.references?.asOf + "-01");
