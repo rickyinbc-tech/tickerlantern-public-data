@@ -116,15 +116,15 @@
   },
   "dataQualityVersion": 2,
   "verifiedRevenuePeriods": 488,
-  "generatedAt": "2026-10-17T20:45:42.766Z",
+  "generatedAt": "2026-10-17T21:06:47.774Z",
   "cadence": "Every six hours",
   "totalListings": 581,
   "researchAudit": {
     "scope": "Automated source and calculation controls; not a certification of individual company underwriting",
     "institutionallyUnderwritten": 0,
-    "conditionalValuationScenarios": 103,
-    "limitedCrossChecks": 418,
-    "evidenceReviews": 60,
+    "conditionalValuationScenarios": 177,
+    "limitedCrossChecks": 345,
+    "evidenceReviews": 59,
     "withSourceConditions": 552,
     "newerPeriodicNotInModel": 5,
     "newerResultsDisclosure": 44
@@ -137,7 +137,7 @@
   "revenuePaths": 579,
   "dividendPaths": 567,
   "financialsReady": 555,
-  "numericalAnswers": 521,
+  "numericalAnswers": 522,
   "rows": [
     {
       "revenueProofs": 0,
@@ -1194,8 +1194,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "review",
-        "valueKind": "review",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -1223,8 +1223,8 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "review",
-      "numericalAnswer": false,
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
@@ -1522,8 +1522,8 @@
     {
       "revenueProofs": 3,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 13,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -1557,7 +1557,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -1606,8 +1606,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -1641,7 +1641,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -1774,8 +1774,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 14,
         "latestKnownPeriodic": "2026-08-30",
         "newerPeriodicNotInModel": false,
@@ -1807,7 +1807,7 @@
       "financials": "ready",
       "financialPeriod": "2026-08-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -2014,8 +2014,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -2049,7 +2049,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -2350,8 +2350,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 13,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -2385,7 +2385,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -2644,8 +2644,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -2679,7 +2679,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -2852,8 +2852,8 @@
     {
       "revenueProofs": 3,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 15,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -2887,7 +2887,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -3100,8 +3100,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 5,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -3135,15 +3135,15 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 14,
         "latestKnownPeriodic": "2026-07-03",
         "newerPeriodicNotInModel": false,
@@ -3177,7 +3177,7 @@
       "financials": "ready",
       "financialPeriod": "2026-04-03",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -3807,8 +3807,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 24,
         "latestKnownPeriodic": "2026-07-31",
         "newerPeriodicNotInModel": false,
@@ -3840,7 +3840,7 @@
       "financials": "ready",
       "financialPeriod": "2026-07-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -4301,8 +4301,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 13,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -4336,7 +4336,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -5215,8 +5215,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -5250,15 +5250,15 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 13,
         "latestKnownPeriodic": "2026-07-03",
         "newerPeriodicNotInModel": false,
@@ -5292,7 +5292,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -5714,8 +5714,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 25,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -5749,7 +5749,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -5966,8 +5966,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-08-01",
         "newerPeriodicNotInModel": false,
@@ -6001,7 +6001,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -6291,8 +6291,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -6326,7 +6326,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -6915,8 +6915,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -6950,7 +6950,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -7207,8 +7207,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 14,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -7242,15 +7242,15 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 4,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -7284,7 +7284,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -7501,8 +7501,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-08-31",
         "newerPeriodicNotInModel": false,
@@ -7534,7 +7534,7 @@
       "financials": "ready",
       "financialPeriod": "2026-08-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -7919,8 +7919,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -7954,7 +7954,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -8001,8 +8001,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 20,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -8036,7 +8036,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -8211,8 +8211,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 22,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -8246,7 +8246,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -8883,8 +8883,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-08-01",
         "newerPeriodicNotInModel": false,
@@ -8918,7 +8918,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -9379,8 +9379,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 14,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -9414,7 +9414,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -9541,8 +9541,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -9574,15 +9574,15 @@
       "financials": "ready",
       "financialPeriod": "2026-06-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -9616,7 +9616,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -9791,8 +9791,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-08-31",
         "newerPeriodicNotInModel": false,
@@ -9826,7 +9826,7 @@
       "financials": "ready",
       "financialPeriod": "2025-11-30",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -10585,8 +10585,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 20,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -10620,7 +10620,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -10669,8 +10669,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 21,
         "latestKnownPeriodic": "2026-07-31",
         "newerPeriodicNotInModel": false,
@@ -10704,7 +10704,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -10873,8 +10873,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-09-30",
         "newerPeriodicNotInModel": false,
@@ -10908,7 +10908,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -11077,8 +11077,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-07-31",
         "newerPeriodicNotInModel": false,
@@ -11112,7 +11112,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -11245,8 +11245,8 @@
     {
       "revenueProofs": 3,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 26,
         "latestKnownPeriodic": "2026-06-27",
         "newerPeriodicNotInModel": false,
@@ -11280,7 +11280,7 @@
       "financials": "ready",
       "financialPeriod": "2025-09-27",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -11743,8 +11743,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -11778,7 +11778,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -12077,8 +12077,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 13,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -12112,7 +12112,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -12455,8 +12455,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 15,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -12490,15 +12490,15 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 20,
         "latestKnownPeriodic": "2026-05-31",
         "newerPeriodicNotInModel": false,
@@ -12532,7 +12532,7 @@
       "financials": "ready",
       "financialPeriod": "2025-08-31",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -12579,8 +12579,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 0,
         "latestKnownPeriodic": "2026-05-31",
         "newerPeriodicNotInModel": false,
@@ -12612,7 +12612,7 @@
       "financials": "ready",
       "financialPeriod": "2026-05-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -12702,8 +12702,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -12737,15 +12737,15 @@
       "financials": "ready",
       "financialPeriod": "2025-09-30",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -12779,7 +12779,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -12828,8 +12828,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 24,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -12863,7 +12863,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -12996,8 +12996,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -13031,7 +13031,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -13122,8 +13122,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 15,
         "latestKnownPeriodic": "2026-08-30",
         "newerPeriodicNotInModel": false,
@@ -13157,7 +13157,7 @@
       "financials": "ready",
       "financialPeriod": "2026-05-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -13500,8 +13500,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -13535,7 +13535,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -13752,8 +13752,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -13787,7 +13787,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -13962,8 +13962,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -13997,7 +13997,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -14340,8 +14340,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -14375,7 +14375,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -14634,8 +14634,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-05-31",
         "newerPeriodicNotInModel": false,
@@ -14669,7 +14669,7 @@
       "financials": "ready",
       "financialPeriod": "2025-08-31",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -15012,8 +15012,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 15,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -15047,7 +15047,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -15096,8 +15096,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-08-15",
         "newerPeriodicNotInModel": false,
@@ -15131,7 +15131,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -15474,8 +15474,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-28",
         "newerPeriodicNotInModel": false,
@@ -15509,15 +15509,15 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-07-31",
         "newerPeriodicNotInModel": false,
@@ -15551,7 +15551,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -15726,8 +15726,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -15761,7 +15761,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -15894,8 +15894,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -15929,15 +15929,15 @@
       "financials": "ready",
       "financialPeriod": "2026-03-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -15971,7 +15971,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -16230,8 +16230,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -16265,7 +16265,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -16986,8 +16986,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -17021,7 +17021,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -17154,8 +17154,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 22,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -17189,7 +17189,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -18492,8 +18492,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -18527,7 +18527,7 @@
       "financials": "ready",
       "financialPeriod": "2025-09-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -19073,8 +19073,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 11,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -19108,7 +19108,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -19451,8 +19451,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 20,
         "latestKnownPeriodic": "2026-06-27",
         "newerPeriodicNotInModel": false,
@@ -19484,7 +19484,7 @@
       "financials": "ready",
       "financialPeriod": "2026-06-27",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -19701,8 +19701,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-08-01",
         "newerPeriodicNotInModel": false,
@@ -19736,7 +19736,7 @@
       "financials": "ready",
       "financialPeriod": "2026-01-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -20115,8 +20115,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 13,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -20150,7 +20150,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -20367,8 +20367,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -20402,7 +20402,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -20829,8 +20829,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -20864,7 +20864,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -20955,8 +20955,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 29,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -20990,7 +20990,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -21325,8 +21325,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -21360,7 +21360,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -21702,8 +21702,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -21737,7 +21737,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -22304,8 +22304,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "earnings",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 12,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -22339,7 +22339,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -22470,8 +22470,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 16,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -22505,7 +22505,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -22704,8 +22704,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 29,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -22739,7 +22739,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -22982,8 +22982,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2025-12-28",
         "newerPeriodicNotInModel": false,
@@ -23015,7 +23015,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-28",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -24064,8 +24064,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "ddm",
-        "valueKind": "cross-check",
+        "method": "dcf",
+        "valueKind": "intrinsic-scenario",
         "qualityConditions": 10,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -24099,7 +24099,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T20:45:42.766Z"
     },
@@ -24222,14 +24222,15 @@
   ],
   "modelAudit": {
     "schema": 1,
-    "generatedAt": "2026-10-17T20:45:42.766Z",
-    "scope": "Every supported stock, all nine automatic tools using the same validated evidence and calculation engines as the website. Missing evidence and unsuitable models remain explicit.",
+    "generatedAt": "2026-10-17T21:06:47.774Z",
+    "policyVersion": "tl-growth-2026-10-v4",
+    "scope": "All nine tools for every supported stock; new industry NWC reference, unchanged public financial facts and source dates.",
     "stocks": 581,
     "counts": {
       "dcf": {
         "valid": 0,
-        "partial": 95,
-        "missing": 379,
+        "partial": 169,
+        "missing": 305,
         "not_applicable": 107
       },
       "ddm": {
@@ -24246,14 +24247,14 @@
       },
       "rv": {
         "valid": 0,
-        "partial": 0,
-        "missing": 581,
+        "partial": 417,
+        "missing": 164,
         "not_applicable": 0
       },
       "eqrv": {
         "valid": 0,
-        "partial": 0,
-        "missing": 581,
+        "partial": 417,
+        "missing": 164,
         "not_applicable": 0
       },
       "anr": {
@@ -24276,11 +24277,67 @@
       },
       "x3sm": {
         "valid": 0,
-        "partial": 67,
-        "missing": 407,
+        "partial": 133,
+        "missing": 341,
         "not_applicable": 107
       }
     },
     "file": "model-audit.json"
+  },
+  "sourceFinancialBatchGeneratedAt": "2026-10-17T20:45:42.766Z",
+  "referenceUpdate": {
+    "kind": "Industry non-cash working-capital ratios and separate relative-multiple benchmarks",
+    "asOf": "2026-01",
+    "checkedAt": "2026-10-17T20:49:16.037Z",
+    "source": {
+      "name": "NYU Stern / Aswath Damodaran · US industry non-cash working capital / sales",
+      "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/wcdata.html"
+    },
+    "sha256": "26145232c5b4a969438081a4420d09f288b5bdefcf1a9e8bbd3659d05f8157d5",
+    "financialFactsRechecked": false,
+    "financialSourceDatesPreserved": true,
+    "providerRequests": 5,
+    "multipleSources": [
+      {
+        "metric": "pe",
+        "source": {
+          "name": "NYU Stern / Aswath Damodaran · US industry pe aggregate",
+          "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pedata.html"
+        },
+        "asOf": "2026-01",
+        "checkedAt": "2026-10-17T20:55:50.527Z",
+        "sha256": "952ee99af1daccf598e204a9f05596c1c9d02c10e9f2148a59803b2847723bd4"
+      },
+      {
+        "metric": "pb",
+        "source": {
+          "name": "NYU Stern / Aswath Damodaran · US industry pb aggregate",
+          "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/pbvdata.html"
+        },
+        "asOf": "2026-01",
+        "checkedAt": "2026-10-17T20:55:51.265Z",
+        "sha256": "7934b06c562e3ae0c0d5b1644fd3346606535c61e0adb879eb1c58cd598d56ab"
+      },
+      {
+        "metric": "evEbitda",
+        "source": {
+          "name": "NYU Stern / Aswath Damodaran · US industry evEbitda aggregate",
+          "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/vebitda.html"
+        },
+        "asOf": "2026-01",
+        "checkedAt": "2026-10-17T20:55:51.799Z",
+        "sha256": "84dd21aebd7820cd1febccaa12266b5827a5cbafe021072baab04d8e263fbd90"
+      },
+      {
+        "metric": "evRevenue",
+        "source": {
+          "name": "NYU Stern / Aswath Damodaran · US industry evRevenue aggregate",
+          "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/psdata.html"
+        },
+        "asOf": "2026-01",
+        "checkedAt": "2026-10-17T20:55:52.470Z",
+        "sha256": "14b5c270f8c5c348fc897e7ee473f85266e9b2db050664a6d8803cdc3b7ce493"
+      }
+    ]
   }
 }
