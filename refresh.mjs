@@ -6828,6 +6828,81 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
   };
 }
 
+// src/growth-policy.js
+var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v2";
+var validDate2 = (x2) => /^\d{4}-\d{2}-\d{2}$/.test(x2 || "") && Number.isFinite(Date.parse(x2));
+function cagr(begin, end, years) {
+  if (![begin, end, years].every(Number.isFinite) || begin <= 0 || end <= 0 || years <= 0) return null;
+  return (end / begin) ** (1 / years) - 1;
+}
+function growthEvidence(annual, metric, { asOf, eligible = () => true } = {}) {
+  const groups2 = /* @__PURE__ */ new Map();
+  for (const row of annual || []) {
+    const f = row?.metrics?.[metric];
+    if (!validDate2(row.end) || asOf && row.end > asOf || !Number.isFinite(f?.value) || !eligible(f)) continue;
+    if (!groups2.has(row.end)) groups2.set(row.end, []);
+    groups2.get(row.end).push({ ...row, fact: f });
+  }
+  const rows3 = [...groups2.values()].filter((g) => new Set(g.map((r) => r.fact.value)).size === 1).map((g) => g[0]).sort((a, b) => b.end.localeCompare(a.end));
+  const latest2 = rows3[0], result = { metric, asOf: latest2?.end || null, yoy: null, cagr3: null, cagr5: null, inputs: [], flags: [] };
+  if (!latest2) return result;
+  for (const [key4, n] of [["yoy", 1], ["cagr3", 3], ["cagr5", 5]]) {
+    const prior = rows3.find((r) => Math.abs((Date.parse(latest2.end) - Date.parse(r.end)) / 864e5 - 365.25 * n) <= 16);
+    if (!prior) continue;
+    const between = rows3.filter((r) => r.end >= prior.end && r.end <= latest2.end);
+    if (between.length !== n + 1 || between.some((r, i2) => i2 && Math.abs((Date.parse(between[i2 - 1].end) - Date.parse(r.end)) / 864e5 - 365.25) > 20)) {
+      result.flags.push(key4 + "_incomplete_history");
+      continue;
+    }
+    if (prior.fact.unit && latest2.fact.unit && prior.fact.unit !== latest2.fact.unit) {
+      result.flags.push(key4 + "_incompatible_units");
+      continue;
+    }
+    const value = cagr(prior.fact.value, latest2.fact.value, n);
+    if (value == null) {
+      result.flags.push(key4 + "_nonpositive_endpoint");
+      continue;
+    }
+    result[key4] = { value, years: n, start: prior.end, end: latest2.end, category: "calculated_historical_metric", formula: "(ending / beginning)^(1 / fiscal years) - 1", inputIds: [metric + ":" + prior.end, metric + ":" + latest2.end], sources: [prior.fact.source, latest2.fact.source] };
+  }
+  return result;
+}
+function revenueGrowthPolicy(evidence, { sectorGrowth, sectorName, weights = { cagr3: 0.6, cagr5: 0.4 } } = {}) {
+  const parts = Object.entries(weights).filter(([key4, w]) => w > 0 && Number.isFinite(evidence[key4]?.value));
+  const total = parts.reduce((n, [, w]) => n + w, 0);
+  let value, method, flags = [];
+  if (total) {
+    value = parts.reduce((n, [key4, w]) => n + evidence[key4].value * w / total, 0);
+    method = parts.map(([key4, w]) => `${(100 * w / total).toFixed(0)}% \xD7 ${key4}`).join(" + ");
+  } else if (Number.isFinite(evidence.yoy?.value)) {
+    value = evidence.yoy.value;
+    method = "Comparable annual YoY; insufficient three/five-year history";
+    flags.push("low_history");
+  } else if (Number.isFinite(sectorGrowth) && sectorName) {
+    value = sectorGrowth;
+    method = `Dated ${sectorName} industry growth proxy; company history insufficient`;
+    flags.push("sector_proxy", "low_history");
+  } else return { value: null, status: "missing", policyVersion: GROWTH_POLICY_VERSION, flags: ["insufficient_comparable_positive_history"], description: "No valid comparable revenue growth history or justified industry proxy." };
+  return { value, status: "available", category: "model_assumption", method, policyVersion: GROWTH_POLICY_VERSION, weights, flags, inputIds: parts.flatMap(([key4]) => evidence[key4].inputIds), description: `Model assumption based on ${method}; history through FY ${evidence.asOf || "unknown"}; policy version ${GROWTH_POLICY_VERSION}. Historical growth is not management guidance or analyst consensus.` };
+}
+function normalizedOperatingDrivers(annual, metricBase, { cyclical = false } = {}) {
+  const usable = (annual || []).filter((r) => r.metrics?.revenue?.value > 0).slice(0, cyclical ? 5 : 3);
+  if (!usable.length && metricBase?.revenue?.value > 0) usable.push({ metrics: metricBase });
+  const median = (v) => {
+    const a = v.sort((x2, y) => x2 - y);
+    return a.length ? a.length % 2 ? a[(a.length - 1) / 2] : (a[a.length / 2 - 1] + a[a.length / 2]) / 2 : null;
+  };
+  const ratio = (key4) => median(usable.map((r) => r.metrics[key4]?.value / r.metrics.revenue.value).filter(Number.isFinite));
+  return { margin: ratio("ebit"), daRate: ratio("da"), depreciationRate: ratio("depreciation"), capexRate: ratio("capex"), nwcRate: median(usable.filter((r) => ["receivables", "inventory", "payables"].every((k) => Number.isFinite(r.metrics[k]?.value))).map((r) => (r.metrics.receivables.value + r.metrics.inventory.value - r.metrics.payables.value) / r.metrics.revenue.value)), periods: usable.map((r) => r.end).filter(Boolean), method: `Median of up to ${cyclical ? "five cycle-normalization" : "three"} comparable reported annual operating ratios; no undocumented outlier exclusions`, policyVersion: GROWTH_POLICY_VERSION };
+}
+function cyclicalRevenuePolicy(annual, options = {}) {
+  const evidence = growthEvidence(annual, "revenue", options), ordered2 = [...annual || []].sort((a, b) => b.end.localeCompare(a.end));
+  const changes = ordered2.slice(0, 5).map((row, i2) => growthEvidence(ordered2.slice(i2), "revenue", options).yoy?.value).filter(Number.isFinite).sort((a, b) => a - b);
+  if (changes.length < 4) return { ...revenueGrowthPolicy(evidence, options), flags: ["cyclical_low_history", "not_full_cycle"], description: "Insufficient comparable cycle history: conditional growth starting point, not a verified mid-cycle forecast. " + revenueGrowthPolicy(evidence, options).description };
+  const value = changes.length % 2 ? changes[(changes.length - 1) / 2] : (changes[changes.length / 2 - 1] + changes[changes.length / 2]) / 2;
+  return { value, status: "available", category: "model_assumption", policyVersion: GROWTH_POLICY_VERSION, method: "Median of up to five comparable annual revenue growth rates, fading to nominal terminal policy", description: `Cycle-normalization assumption: median of ${changes.length} comparable annual revenue growth rates through ${evidence.asOf}; ${GROWTH_POLICY_VERSION}. This history may not span an entire economic cycle.`, flags: ["cycle_length_uncertain"], inputIds: ordered2.slice(0, 6).map((r) => "revenue:" + r.end) };
+}
+
 // src/financial-contract.js
 var FINANCIAL_CONTRACT_VERSION = 1;
 var DATA_STATUSES = ["available", "partial", "stale", "missing", "invalid", "not_applicable"];
@@ -18245,81 +18320,6 @@ function modelAssumptionPolicy(item, data) {
   }
 }
 
-// src/growth-policy.js
-var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v1";
-var validDate2 = (x2) => /^\d{4}-\d{2}-\d{2}$/.test(x2 || "") && Number.isFinite(Date.parse(x2));
-function cagr(begin, end, years) {
-  if (![begin, end, years].every(Number.isFinite) || begin <= 0 || end <= 0 || years <= 0) return null;
-  return (end / begin) ** (1 / years) - 1;
-}
-function growthEvidence(annual, metric, { asOf, eligible = () => true } = {}) {
-  const groups2 = /* @__PURE__ */ new Map();
-  for (const row of annual || []) {
-    const f = row?.metrics?.[metric];
-    if (!validDate2(row.end) || asOf && row.end > asOf || !Number.isFinite(f?.value) || !eligible(f)) continue;
-    if (!groups2.has(row.end)) groups2.set(row.end, []);
-    groups2.get(row.end).push({ ...row, fact: f });
-  }
-  const rows3 = [...groups2.values()].filter((g) => new Set(g.map((r) => r.fact.value)).size === 1).map((g) => g[0]).sort((a, b) => b.end.localeCompare(a.end));
-  const latest2 = rows3[0], result = { metric, asOf: latest2?.end || null, yoy: null, cagr3: null, cagr5: null, inputs: [], flags: [] };
-  if (!latest2) return result;
-  for (const [key4, n] of [["yoy", 1], ["cagr3", 3], ["cagr5", 5]]) {
-    const prior = rows3.find((r) => Math.abs((Date.parse(latest2.end) - Date.parse(r.end)) / 864e5 - 365.25 * n) <= 16);
-    if (!prior) continue;
-    const between = rows3.filter((r) => r.end >= prior.end && r.end <= latest2.end);
-    if (between.length !== n + 1 || between.some((r, i2) => i2 && Math.abs((Date.parse(between[i2 - 1].end) - Date.parse(r.end)) / 864e5 - 365.25) > 20)) {
-      result.flags.push(key4 + "_incomplete_history");
-      continue;
-    }
-    if (prior.fact.unit && latest2.fact.unit && prior.fact.unit !== latest2.fact.unit) {
-      result.flags.push(key4 + "_incompatible_units");
-      continue;
-    }
-    const value = cagr(prior.fact.value, latest2.fact.value, n);
-    if (value == null) {
-      result.flags.push(key4 + "_nonpositive_endpoint");
-      continue;
-    }
-    result[key4] = { value, years: n, start: prior.end, end: latest2.end, category: "calculated_historical_metric", formula: "(ending / beginning)^(1 / fiscal years) - 1", inputIds: [metric + ":" + prior.end, metric + ":" + latest2.end], sources: [prior.fact.source, latest2.fact.source] };
-  }
-  return result;
-}
-function revenueGrowthPolicy(evidence, { sectorGrowth, sectorName, weights = { cagr3: 0.6, cagr5: 0.4 } } = {}) {
-  const parts = Object.entries(weights).filter(([key4, w]) => w > 0 && Number.isFinite(evidence[key4]?.value));
-  const total = parts.reduce((n, [, w]) => n + w, 0);
-  let value, method, flags = [];
-  if (total) {
-    value = parts.reduce((n, [key4, w]) => n + evidence[key4].value * w / total, 0);
-    method = parts.map(([key4, w]) => `${(100 * w / total).toFixed(0)}% \xD7 ${key4}`).join(" + ");
-  } else if (Number.isFinite(evidence.yoy?.value)) {
-    value = evidence.yoy.value;
-    method = "Comparable annual YoY; insufficient three/five-year history";
-    flags.push("low_history");
-  } else if (Number.isFinite(sectorGrowth) && sectorName) {
-    value = sectorGrowth;
-    method = `Dated ${sectorName} industry growth proxy; company history insufficient`;
-    flags.push("sector_proxy", "low_history");
-  } else return { value: null, status: "missing", policyVersion: GROWTH_POLICY_VERSION, flags: ["insufficient_comparable_positive_history"], description: "No valid comparable revenue growth history or justified industry proxy." };
-  return { value, status: "available", category: "model_assumption", method, policyVersion: GROWTH_POLICY_VERSION, weights, flags, inputIds: parts.flatMap(([key4]) => evidence[key4].inputIds), description: `Model assumption based on ${method}; history through FY ${evidence.asOf || "unknown"}; policy version ${GROWTH_POLICY_VERSION}. Historical growth is not management guidance or analyst consensus.` };
-}
-function normalizedOperatingDrivers(annual, metricBase, { cyclical = false } = {}) {
-  const usable = (annual || []).filter((r) => r.metrics?.revenue?.value > 0).slice(0, cyclical ? 5 : 3);
-  if (!usable.length && metricBase?.revenue?.value > 0) usable.push({ metrics: metricBase });
-  const median = (v) => {
-    const a = v.sort((x2, y) => x2 - y);
-    return a.length ? a.length % 2 ? a[(a.length - 1) / 2] : (a[a.length / 2 - 1] + a[a.length / 2]) / 2 : null;
-  };
-  const ratio = (key4) => median(usable.map((r) => r.metrics[key4]?.value / r.metrics.revenue.value).filter(Number.isFinite));
-  return { margin: ratio("ebit"), daRate: ratio("da"), depreciationRate: ratio("depreciation"), capexRate: ratio("capex"), nwcRate: median(usable.filter((r) => ["receivables", "inventory", "payables"].every((k) => Number.isFinite(r.metrics[k]?.value))).map((r) => (r.metrics.receivables.value + r.metrics.inventory.value - r.metrics.payables.value) / r.metrics.revenue.value)), periods: usable.map((r) => r.end).filter(Boolean), method: `Median of up to ${cyclical ? "five cycle-normalization" : "three"} comparable reported annual operating ratios; no undocumented outlier exclusions`, policyVersion: GROWTH_POLICY_VERSION };
-}
-function cyclicalRevenuePolicy(annual, options = {}) {
-  const evidence = growthEvidence(annual, "revenue", options), ordered2 = [...annual || []].sort((a, b) => b.end.localeCompare(a.end));
-  const changes = ordered2.slice(0, 5).map((row, i2) => growthEvidence(ordered2.slice(i2), "revenue", options).yoy?.value).filter(Number.isFinite).sort((a, b) => a - b);
-  if (changes.length < 4) return { ...revenueGrowthPolicy(evidence, options), flags: ["cyclical_low_history", "not_full_cycle"], description: "Insufficient comparable cycle history: conditional growth starting point, not a verified mid-cycle forecast. " + revenueGrowthPolicy(evidence, options).description };
-  const value = changes.length % 2 ? changes[(changes.length - 1) / 2] : (changes[changes.length / 2 - 1] + changes[changes.length / 2]) / 2;
-  return { value, status: "available", category: "model_assumption", policyVersion: GROWTH_POLICY_VERSION, method: "Median of up to five comparable annual revenue growth rates, fading to nominal terminal policy", description: `Cycle-normalization assumption: median of ${changes.length} comparable annual revenue growth rates through ${evidence.asOf}; ${GROWTH_POLICY_VERSION}. This history may not span an entire economic cycle.`, flags: ["cycle_length_uncertain"], inputIds: ordered2.slice(0, 6).map((r) => "revenue:" + r.end) };
-}
-
 // src/research/debt-reconciliations.json
 var debt_reconciliations_default = {
   schema: 1,
@@ -18422,7 +18422,6 @@ function currentReferences(snapshot) {
   const dated = /^\d{4}-\d{2}$/.test(ref?.asOf || "") && Date.parse(ref.asOf + "-01");
   return dated && checked >= dated && checked - dated <= 550 * 864e5 ? ref : null;
 }
-var clamp = (x2, lo, hi) => Math.min(hi, Math.max(lo, x2));
 function reportedDebt(m = {}) {
   return debtEvidence(m).value;
 }
@@ -18542,30 +18541,16 @@ function forecastAssumptions(snapshot, item, years = 5) {
     dividendStart = epsStart;
     dividendBasis = "Dividend growth follows modelled EPS growth at constant payout (company dividend history unavailable)";
   }
-  if (finite5(dividendStart) && finite5(epsStart) && payout > 0 && payout <= 1) {
-    const maxCoveredGrowth = (1 + clamp(epsStart, -0.5, 0.5)) * payout ** (-1 / years) - 1;
-    if (dividendStart > maxCoveredGrowth) {
-      dividendStart = maxCoveredGrowth;
-      dividendBasis += "; constrained by modelled earnings coverage over the forecast horizon";
-    }
-  }
-  if (payout > 1) {
-    const correction = payout ** (-1 / years) * (1 + (epsStart ?? 0)) - 1;
-    dividendStart = finite5(dividendStart) ? Math.min(dividendStart, correction) : correction;
-    dividendBasis = `Payout ${(payout * 100).toFixed(1)}% of reported EPS: scenario restores 100% coverage over ${years} years; review cyclical earnings and special dividends`;
-  }
   const terminalPolicies = { USD: { value: 0.02, basis: "USD long-run nominal modelling policy" }, CAD: { value: 0.02, basis: "CAD long-run nominal modelling policy" } };
   const terminalPolicy = terminalPolicies[item.currency] || { value: null, basis: "No approved long-run nominal policy for " + item.currency };
   const macroCap = terminalPolicy.value;
   const ceiling = macroCap;
   const revenueTerminal = macroCap == null ? null : Math.min(macroCap, finite5(revenueStart) ? revenueStart : macroCap, ceiling);
-  const dividendTerminal = macroCap == null ? null : Math.min(macroCap, finite5(dividendStart) ? dividendStart : macroCap, macroCap);
   const industryBasis = sector ? `NYU Stern ${sector.name} sector outlook (${ref.asOf}); US industry proxy` : "no industry outlook";
   const revenue = path(revenueStart, revenueTerminal, years, `${revenueHistory?.description || "Company revenue history unavailable"}; ${industryBasis}; ${revenuePolicy.method || "missing supported growth history"}`, ref?.sources?.growth || revenueHistory?.source, 0.5);
   for (const row of revenue) row.historySource = revenueHistory?.source;
   const earnings = path(epsStart, Math.min(0.02, epsStart ?? 0.02), years, `${epsHistory?.description || "Company EPS history unavailable"}; ${industryBasis}; ${epsPolicy}; model scenario, not consensus`, ref?.sources?.growth || epsHistory?.source, 0.5);
   for (const row of earnings) row.historySource = epsHistory?.source;
-  const dividends = dividendBasisCompatible ? path(dividendStart, dividendTerminal, years, dividendBasis || "Dividend forecast unavailable", dividendHistory?.source || ref?.sources?.growth, 0.25) : [];
   const estimates = matchingCompanyEstimates(snapshot, item);
   for (const [metric, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
     let previous = base;
@@ -18577,7 +18562,37 @@ function forecastAssumptions(snapshot, item, years = 5) {
       } else break;
     }
   }
-  return { cyclical, terminalPolicy, policyVersion: GROWTH_POLICY_VERSION, revenueHistory: revenueHistoryEvidence, revenuePolicy, dividendBasisCompatible, epsBasisCompatible, perShareBasisChange: basisChange, capital, revenue, earnings, dividends, revenueTerminal, dividendTerminal, terminalDescription: terminalPolicy.value == null ? terminalPolicy.basis : `${terminalPolicy.basis}: 2% cap, further limited by the company growth path; negative growth is retained. This fixed policy is an editable model assumption, not fetched data. Discount rates are never altered to force a valid perpetuity.`, taxRate: capital.patches.taxRate / 100, payout };
+  const dividendTrendStart = dividendStart;
+  let dividendCoverage = null;
+  if (payout > 0 && earnings.length === years) {
+    let projectedEPS = eps;
+    const positiveEarnings = earnings.every((row) => {
+      projectedEPS = row.kind === "consensus" && finite5(row.amount) ? row.amount : projectedEPS * (1 + row.growth);
+      return finite5(projectedEPS) && projectedEPS > 0;
+    });
+    const steps = years - (snapshot.dividend?.basis === "forward" ? 1 : 0);
+    if (positiveEarnings && steps > 0) {
+      const maximumGrowth = (projectedEPS / d) ** (1 / steps) - 1;
+      if (finite5(maximumGrowth) && (payout > 1 || dividendStart > maximumGrowth)) {
+        dividendBasis = `Payout ${(payout * 100).toFixed(1)}% of reported EPS: model scenario targets no more than 100% payout by year ${years} using the actual EPS forecast path; ${steps} adjustable dividend payments, ${snapshot.dividend?.basis === "forward" ? "reported forward D1 retained" : "D0 grown from year one"}. Each adjustable payment's growth is capped at ${(maximumGrowth * 100).toFixed(3)}% during this recovery; a temporary cut does not set perpetual growth. Review cyclical earnings and special dividends`;
+        dividendCoverage = { status: "scenario", finalEPS: projectedEPS, adjustablePayments: steps, maximumGrowth };
+      }
+    } else if (payout > 1) {
+      dividendStart = null;
+      dividendCoverage = { status: "unavailable", reason: "Positive comparable projected EPS and adjustable future dividends are required for an earnings-coverage recovery scenario; no unsupported restoration claim or dividend cut is supplied." };
+    }
+  }
+  const dividendTerminal = macroCap == null ? null : Math.min(
+    macroCap,
+    finite5(dividendTrendStart) ? dividendTrendStart : macroCap,
+    payout > 0 && finite5(epsStart) ? Math.min(0.02, epsStart) : macroCap
+  );
+  const dividends = dividendBasisCompatible ? path(dividendStart, dividendTerminal, years, dividendBasis || "Dividend forecast unavailable", dividendHistory?.source || ref?.sources?.growth, 0.25) : [];
+  if (dividendCoverage?.status === "scenario") for (const [i2, row] of dividends.entries()) {
+    if (snapshot.dividend?.basis !== "forward" || i2 > 0) row.growth = Math.min(row.growth, dividendCoverage.maximumGrowth);
+    row.description = dividendBasis + `; constrained annual path, followed by ${(dividendTerminal * 100).toFixed(2)}% stable dividend growth scenario`;
+  }
+  return { cyclical, terminalPolicy, policyVersion: GROWTH_POLICY_VERSION, revenueHistory: revenueHistoryEvidence, revenuePolicy, dividendBasisCompatible, epsBasisCompatible, perShareBasisChange: basisChange, capital, revenue, earnings, dividends, dividendCoverage, revenueTerminal, dividendTerminal, terminalDescription: terminalPolicy.value == null ? terminalPolicy.basis : `${terminalPolicy.basis}: 2% cap, further limited by the company growth path; negative growth is retained. Dividend terminal growth is also limited by the compatible model EPS terminal path. This fixed policy is an editable model assumption, not fetched data. Discount rates are never altered to force a valid perpetuity.`, taxRate: capital.patches.taxRate / 100, payout };
 }
 
 // src/terminal-reinvestment.js
@@ -18707,7 +18722,7 @@ var number2 = (value) => value.toLocaleString("en-US", { maximumFractionDigits: 
 var money = (value, currency) => `${currency} ${number2(value)}`;
 var sourceURL = (value) => typeof value === "string" && /^https?:\/\//i.test(value);
 var valueOf = (metrics, key4) => metrics?.[key4]?.value;
-var clamp2 = (value, low, high) => Math.min(high, Math.max(low, value));
+var clamp = (value, low, high) => Math.min(high, Math.max(low, value));
 var unique = (values) => [...new Set(values.filter(Boolean))];
 var DURATION_KEYS = ["revenue", "ebit", "da", "capex"];
 var FACTS = [
@@ -19381,8 +19396,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       const direction = index - 1, costEquity = capital.costEquity - direction * 0.015, persistence = 0;
       let e = eps, dividend = d.value;
       const rows3 = forecast.earnings.map((driver, i2) => {
-        e = driver.kind === "consensus" && finite6(driver.amount) ? driver.amount * (1 + direction * 0.02) ** driver.year : e * (1 + clamp2(driver.growth + direction * 0.02, -0.9, 1));
-        if (!(i2 === 0 && d.basis === "forward")) dividend *= 1 + clamp2(forecast.dividends[i2]?.growth || 0, -0.9, 1);
+        e = driver.kind === "consensus" && finite6(driver.amount) ? driver.amount * (1 + direction * 0.02) ** driver.year : e * (1 + clamp(driver.growth + direction * 0.02, -0.9, 1));
+        if (!(i2 === 0 && d.basis === "forward")) dividend *= 1 + clamp(forecast.dividends[i2]?.growth || 0, -0.9, 1);
         return { eps: e, dividend };
       });
       const inputs = { book: book.value, costEquity, persistence, rows: rows3 };
@@ -19426,7 +19441,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
       throw Error(d.status === "ready" && d.value === 0 ? "A sourced zero dividend makes DDM inapplicable; it does not make the company worthless." : "Dividend valuation needs a sourced positive common dividend and a supportable equity-return/growth path.");
     if (d.warnings?.some((w) => /special/i.test(w))) report.limitations.push("Reported annual dividends may include special distributions; a regular-only starting payout has not been verified.");
     const results = scenarios.map((name, index) => {
-      const direction = index - 1, requiredReturn = capital.costEquity - direction * 0.015, terminalGrowth = Math.min(requiredReturn - 0.01, forecast.dividendTerminal + direction * 5e-3);
+      const direction = index - 1, requiredReturn = capital.costEquity - direction * 0.015, terminalGrowth = forecast.dividendTerminal + direction * 5e-3;
       const inputs = {
         model: "two-stage",
         basis: d.basis === "forward" ? "forward" : "current",
@@ -19434,7 +19449,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
         years: 5,
         requiredReturn,
         terminalGrowth,
-        growthRates: forecast.dividends.map((row) => clamp2(row.growth + direction * 0.02, -0.9, 0.5))
+        growthRates: forecast.dividends.map((row) => row.growth + direction * 0.02)
       };
       const assumptions = `Dividend growth ${direction === 0 ? "uses the disclosed path" : `${direction > 0 ? "+" : "\u2212"}2 pp a year`}; cost of equity ${rate(requiredReturn)}; terminal growth ${rate(terminalGrowth)}.`;
       try {
