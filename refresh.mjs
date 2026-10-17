@@ -5558,8 +5558,8 @@ var listingSource = "https://www.sec.gov/files/company_tickers_exchange.json";
 function currentSnapshotDate(value, now2 = /* @__PURE__ */ new Date(), maxDays = 7) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) throw new Error("Missing snapshot date");
   const d = /* @__PURE__ */ new Date(value + "T00:00:00Z");
-  const age = (+now2 - +d) / 864e5;
-  if (!Number.isFinite(age) || d.toISOString().slice(0, 10) !== value || age < 0 || age >= maxDays + 1)
+  const age2 = (+now2 - +d) / 864e5;
+  if (!Number.isFinite(age2) || d.toISOString().slice(0, 10) !== value || age2 < 0 || age2 >= maxDays + 1)
     throw new Error("Snapshot is stale or future-dated");
   return value;
 }
@@ -5735,14 +5735,6 @@ function applyCoverage(snapshot) {
   return coverageState;
 }
 applyCoverage(coverageState);
-var esc = (s) => String(s ?? "").replace(
-  /[&<>"']/g,
-  (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]
-);
-var num = (n, d = 2) => Number.isFinite(n) ? n.toLocaleString("en-US", {
-  minimumFractionDigits: d,
-  maximumFractionDigits: d
-}) : "\u2014";
 
 // node_modules/fflate/esm/index.mjs
 import { createRequire } from "module";
@@ -6244,11 +6236,11 @@ function spyHoldings(bytes) {
   });
   const header = rows3.find((r) => r.A === "Name" && r.B === "Ticker");
   const text = rows3.find((r) => r.A === "Holdings:")?.B;
-  const date = text?.match(/^As of (\d{2})-([A-Za-z]{3})-(\d{4})$/);
-  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(date?.[2]) + 1;
-  if (header?.H !== "Local Currency" || !date || !month) throw new Error("Holdings schema changed");
+  const date3 = text?.match(/^As of (\d{2})-([A-Za-z]{3})-(\d{4})$/);
+  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(date3?.[2]) + 1;
+  if (header?.H !== "Local Currency" || !date3 || !month) throw new Error("Holdings schema changed");
   return {
-    asOf: `${date[3]}-${String(month).padStart(2, "0")}-${date[1]}`,
+    asOf: `${date3[3]}-${String(month).padStart(2, "0")}-${date3[1]}`,
     rows: rows3.filter((r) => r.H === "USD" && /^[A-Z][A-Z0-9.\-]{0,10}$/.test(r.B || "")).map((r) => ({ ticker: r.B, name: r.A, currency: "USD" }))
   };
 }
@@ -6327,14 +6319,6781 @@ async function refreshIndexes(previous = {}, fetcher2 = fetch, now2 = /* @__PURE
   return { schema: 1, checkedAt: now2.toISOString(), indexes };
 }
 
+// src/research/issuer-financial-supplements.json
+var issuer_financial_supplements_default = {
+  schema: 1,
+  reviewedAt: "2026-10-17",
+  kind: "reviewed-dated-supplement",
+  automaticRefresh: false,
+  scope: "Six Canadian banks with reconciled YTD/TTM lines plus six specifically checked sparse issuer disclosures. Each entry declares exact coverage, native currency and economic share scope. This is not complete all-stock underwriting or an automatically refreshed statement feed.",
+  rows: [
+    {
+      id: "ry-2026q3-reviewed-20261017",
+      symbol: "TSX:RY",
+      ticker: "RY.TO",
+      issuerName: "Royal Bank of Canada",
+      issuerCik: 1000275,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-27",
+      period: {
+        start: "2025-11-01",
+        end: "2026-07-31",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "Royal Bank of Canada \xB7 Q3 2026 issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm"
+      },
+      reviewStatus: "Source extraction and arithmetic checked by Codex; no independent human sign-off or complete underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        periodEnd: "2026-10-31",
+        reason: "Replace or re-review when FY2026/Q4 financial statements are released, or sooner if a restatement, material corporate action or corrected filing changes these facts. The six-hour data fetch does not update this static review."
+      },
+      metrics: {
+        revenue: {
+          value: 53951e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "ifrs-full:Revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 53951,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total revenue, net of interest expense"
+          },
+          start: "2025-11-01"
+        },
+        totalNetIncome: {
+          value: 17318e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "ifrs-full:ProfitLoss",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 17318,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Consolidated net income"
+          },
+          start: "2025-11-01"
+        },
+        netIncome: {
+          value: 16894e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+            location: "Note 11: Earnings per share"
+          },
+          reported: {
+            value: 16894,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income attributable/available to common shareholders"
+          },
+          start: "2025-11-01"
+        },
+        commonNetIncomeDiluted: {
+          value: 16894e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+            location: "Note 11: Earnings per share"
+          },
+          reported: {
+            value: 16894,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+          },
+          start: "2025-11-01"
+        },
+        eps: {
+          value: 12.1,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "ifrs-full:DilutedEarningsLossPerShare",
+            location: "Note 11: Earnings per share"
+          },
+          reported: {
+            value: 12.1,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Diluted earnings per share"
+          },
+          start: "2025-11-01"
+        },
+        shares: {
+          value: 1396542e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "ifrs-full:AdjustedWeightedAverageShares",
+            location: "Note 11: Earnings per share"
+          },
+          reported: {
+            value: 1396542,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Weighted average diluted common shares"
+          },
+          start: "2025-11-01"
+        },
+        creditLossProvision: {
+          value: 3002e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "reviewed:creditLossProvision",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 3002,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Provision for credit losses"
+          },
+          start: "2025-11-01"
+        },
+        equity: {
+          value: 145036e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "reviewed:equity",
+            location: "Consolidated balance sheets and Financial highlights: common equity"
+          },
+          reported: {
+            value: 145036,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to owners / bank shareholders"
+          }
+        },
+        preferredEquity: {
+          value: 11114e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported preferred shares and other equity instruments outstanding at net carrying value (CAD11,154m issued less CAD40m treasury); not preferred par value",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "reviewed:preferredEquity",
+            location: "Consolidated balance sheets and Financial highlights: common equity"
+          },
+          reported: {
+            value: 11114,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Preferred shares and other equity instruments, net carrying amount"
+          }
+        },
+        commonEquity: {
+          value: 133922e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "reviewed:commonEquity",
+            location: "Consolidated balance sheets and Financial highlights: common equity"
+          },
+          reported: {
+            value: 133922,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to common shareholders"
+          }
+        },
+        commonShares: {
+          value: 1384554e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Period-end common shares outstanding, net of treasury common shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+            tag: "reviewed:commonShares",
+            location: "MD&A: Capital management, common shares outstanding; Note 10"
+          },
+          reported: {
+            value: 1384554,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Period-end common shares outstanding, net of treasury common shares"
+          }
+        },
+        cet1Ratio: {
+          value: 0.135,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported"
+        },
+        reportedROE: {
+          value: 0.179,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        },
+        pclRatio: {
+          value: 36e-4,
+          unit: "ratio",
+          basis: "Quarterly measure, annualized per issuer glossary; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        },
+        lcr: {
+          value: 1.25,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported"
+        }
+      },
+      prior: {
+        start: "2024-11-01",
+        end: "2025-07-31",
+        metrics: {
+          revenue: {
+            value: 49396e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 49396,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 14935e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 14935,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 14575e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 11: Earnings per share"
+            },
+            reported: {
+              value: 14575,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 14575e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 11: Earnings per share"
+            },
+            reported: {
+              value: 14575,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 10.31,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 11: Earnings per share"
+            },
+            reported: {
+              value: 10.31,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          shares: {
+            value: 1413235e3,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "shares",
+            currency: "CAD",
+            basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "ifrs-full:AdjustedWeightedAverageShares",
+              location: "Note 11: Earnings per share"
+            },
+            reported: {
+              value: 1413235,
+              unit: "thousand shares",
+              scale: 1e3,
+              label: "Weighted average diluted common shares"
+            },
+            start: "2024-11-01"
+          },
+          creditLossProvision: {
+            value: 3355e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm",
+              tag: "reviewed:creditLossProvision",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 3355,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Provision for credit losses"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      annual: {
+        start: "2024-11-01",
+        end: "2025-10-31",
+        filed: "2025-12-03",
+        form: "40-F",
+        metrics: {
+          revenue: {
+            value: 66605e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312525305927/d95203dex2.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 66605,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 20369e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312525305927/d95203dex2.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 20369,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 19868e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312525305927/d95203dex2.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 22: Earnings per share"
+            },
+            reported: {
+              value: 19868,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 19868e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312525305927/d95203dex2.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 22: Earnings per share"
+            },
+            reported: {
+              value: 19868,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 14.07,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Royal Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312525305927/d95203dex2.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 22: Earnings per share"
+            },
+            reported: {
+              value: 14.07,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "cet1Ratio",
+          "commonEquity",
+          "commonNetIncomeDiluted",
+          "commonShares",
+          "creditLossProvision",
+          "eps",
+          "equity",
+          "lcr",
+          "netIncome",
+          "pclRatio",
+          "preferredEquity",
+          "reportedROE",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "commonNetIncomeDiluted",
+          "creditLossProvision",
+          "eps",
+          "netIncome",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        annualMetrics: [
+          "commonNetIncomeDiluted",
+          "eps",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        ttmFlows: [
+          "revenue",
+          "totalNetIncome",
+          "netIncome",
+          "commonNetIncomeDiluted"
+        ],
+        missingRequestedMetrics: []
+      },
+      limitations: [
+        "Listed facts are dated historical evidence. No company earnings forecast, sustainable ROE, growth expectation or current market price is asserted.",
+        "Comparative YTD figures are taken from the same 2026 issuer disclosure. The annual component is separately linked; accounting concepts were checked for these listed reported subtotals.",
+        "Period-end common shares and YTD weighted-average diluted shares have distinct uses; neither verifies current fully diluted shares."
+      ],
+      allowedSourceUrls: [
+        "https://www.sec.gov/Archives/edgar/data/1000275/000119312525305927/d95203dex2.htm",
+        "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm",
+        "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm"
+      ]
+    },
+    {
+      id: "td-2026q3-reviewed-20261017",
+      symbol: "TSX:TD",
+      ticker: "TD.TO",
+      issuerName: "Toronto-Dominion Bank",
+      issuerCik: 947263,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-27",
+      period: {
+        start: "2025-11-01",
+        end: "2026-07-31",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm"
+      },
+      reviewStatus: "Source extraction and arithmetic checked by Codex; no independent human sign-off or complete underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        periodEnd: "2026-10-31",
+        reason: "Replace or re-review when FY2026/Q4 financial statements are released, or sooner if a restatement, material corporate action or corrected filing changes these facts. The six-hour data fetch does not update this static review."
+      },
+      metrics: {
+        revenue: {
+          value: 49267e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "ifrs-full:Revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 49267,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total revenue, net of interest expense"
+          },
+          start: "2025-11-01"
+        },
+        totalNetIncome: {
+          value: 12909e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "ifrs-full:ProfitLoss",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 12909,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Consolidated net income"
+          },
+          start: "2025-11-01"
+        },
+        netIncome: {
+          value: 12512e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+            location: "Note 16: Earnings per share p76"
+          },
+          reported: {
+            value: 12512,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income attributable/available to common shareholders"
+          },
+          start: "2025-11-01"
+        },
+        commonNetIncomeDiluted: {
+          value: 12512e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+            location: "Note 16: Earnings per share p76"
+          },
+          reported: {
+            value: 12512,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+          },
+          start: "2025-11-01"
+        },
+        eps: {
+          value: 7.5,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "ifrs-full:DilutedEarningsLossPerShare",
+            location: "Note 16: Earnings per share p76"
+          },
+          reported: {
+            value: 7.5,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Diluted earnings per share"
+          },
+          start: "2025-11-01"
+        },
+        shares: {
+          value: 16676e5,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "ifrs-full:AdjustedWeightedAverageShares",
+            location: "Note 16: Earnings per share p76"
+          },
+          reported: {
+            value: 1667.6,
+            unit: "million shares",
+            scale: 1e6,
+            label: "Weighted average diluted common shares"
+          },
+          start: "2025-11-01"
+        },
+        creditLossProvision: {
+          value: 2957e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "reviewed:creditLossProvision",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 2957,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Provision for credit losses"
+          },
+          start: "2025-11-01"
+        },
+        equity: {
+          value: 127015e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "reviewed:equity",
+            location: "Interim consolidated balance sheet p49; Note 12 p73: carrying amounts net of treasury instruments"
+          },
+          reported: {
+            value: 127015,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to owners / bank shareholders"
+          }
+        },
+        preferredEquity: {
+          value: 12829e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported total preferred shares and other equity instruments at carrying value, net of CAD46m treasury instruments (CAD12,875m gross less CAD46m); not preferred par value",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "reviewed:preferredEquity",
+            location: "Interim consolidated balance sheet p49; Note 12 p73: carrying amounts net of treasury instruments"
+          },
+          reported: {
+            value: 12829,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Preferred shares and other equity instruments, net carrying amount"
+          }
+        },
+        commonShares: {
+          value: 1638397e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Period-end common shares outstanding, net of treasury common shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "reviewed:commonShares",
+            location: "Note 12: Share capital, total common shares net of 114 thousand treasury shares"
+          },
+          reported: {
+            value: 1638397,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Period-end common shares outstanding, net of treasury common shares"
+          }
+        },
+        commonEquity: {
+          value: 114186e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Derived common equity = owners equity less preferred and other equity instruments at carrying value, net of treasury; excludes noncontrolling interests",
+          evidenceLabel: "derived_calculation",
+          source: {
+            name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+            tag: "reviewed:commonEquity",
+            location: "Interim consolidated balance sheet p49; Note 12 p73: carrying amounts net of treasury instruments",
+            components: [
+              {
+                value: 127015e6,
+                asOf: "2026-07-31",
+                filed: "2026-08-27",
+                publishedAt: "2026-08-27",
+                unit: "CAD",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+                  tag: "reviewed:equity",
+                  location: "Interim consolidated balance sheet p49; Note 12 p73: carrying amounts net of treasury instruments"
+                },
+                reported: {
+                  value: 127015,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Equity attributable to owners / bank shareholders"
+                }
+              },
+              {
+                value: 12829e6,
+                asOf: "2026-07-31",
+                filed: "2026-08-27",
+                publishedAt: "2026-08-27",
+                unit: "CAD",
+                currency: "CAD",
+                basis: "Reported total preferred shares and other equity instruments at carrying value, net of CAD46m treasury instruments (CAD12,875m gross less CAD46m); not preferred par value",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+                  tag: "reviewed:preferredEquity",
+                  location: "Interim consolidated balance sheet p49; Note 12 p73: carrying amounts net of treasury instruments"
+                },
+                reported: {
+                  value: 12829,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Preferred shares and other equity instruments, net carrying amount"
+                }
+              }
+            ]
+          }
+        },
+        cet1Ratio: {
+          value: 0.143,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Toronto-Dominion Bank official results",
+            url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported"
+        },
+        reportedROE: {
+          value: 0.158,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Toronto-Dominion Bank official results",
+            url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        }
+      },
+      prior: {
+        start: "2024-11-01",
+        end: "2025-07-31",
+        metrics: {
+          revenue: {
+            value: 52283e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 52283,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 17258e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 17258,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 16884e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 16: Earnings per share p76"
+            },
+            reported: {
+              value: 16884,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 16884e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 16: Earnings per share p76"
+            },
+            reported: {
+              value: 16884,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 9.72,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 16: Earnings per share p76"
+            },
+            reported: {
+              value: 9.72,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          shares: {
+            value: 1737e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "shares",
+            currency: "CAD",
+            basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "ifrs-full:AdjustedWeightedAverageShares",
+              location: "Note 16: Earnings per share p76"
+            },
+            reported: {
+              value: 1737,
+              unit: "million shares",
+              scale: 1e6,
+              label: "Weighted average diluted common shares"
+            },
+            start: "2024-11-01"
+          },
+          creditLossProvision: {
+            value: 3524e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm",
+              tag: "reviewed:creditLossProvision",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 3524,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Provision for credit losses"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      annual: {
+        start: "2024-11-01",
+        end: "2025-10-31",
+        filed: "2025-12-04",
+        form: "40-F",
+        metrics: {
+          revenue: {
+            value: 67777e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276225000289/ex993.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 67777,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 20538e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276225000289/ex993.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 20538,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 19973e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276225000289/ex993.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 24: Earnings per share p84"
+            },
+            reported: {
+              value: 19973,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 19973e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276225000289/ex993.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 24: Earnings per share p84"
+            },
+            reported: {
+              value: 19973,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 11.56,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Toronto-Dominion Bank \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/947263/000156276225000289/ex993.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 24: Earnings per share p84"
+            },
+            reported: {
+              value: 11.56,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "cet1Ratio",
+          "commonEquity",
+          "commonNetIncomeDiluted",
+          "commonShares",
+          "creditLossProvision",
+          "eps",
+          "equity",
+          "netIncome",
+          "preferredEquity",
+          "reportedROE",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "commonNetIncomeDiluted",
+          "creditLossProvision",
+          "eps",
+          "netIncome",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        annualMetrics: [
+          "commonNetIncomeDiluted",
+          "eps",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        ttmFlows: [
+          "revenue",
+          "totalNetIncome",
+          "netIncome",
+          "commonNetIncomeDiluted"
+        ],
+        missingRequestedMetrics: []
+      },
+      limitations: [
+        "Listed facts are dated historical evidence. No company earnings forecast, sustainable ROE, growth expectation or current market price is asserted.",
+        "Comparative YTD figures are taken from the same 2026 issuer disclosure. The annual component is separately linked; accounting concepts were checked for these listed reported subtotals.",
+        "Period-end common shares and YTD weighted-average diluted shares have distinct uses; neither verifies current fully diluted shares."
+      ],
+      allowedSourceUrls: [
+        "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results",
+        "https://www.sec.gov/Archives/edgar/data/947263/000156276225000289/ex993.htm",
+        "https://www.sec.gov/Archives/edgar/data/947263/000156276226000098/ex991.htm"
+      ]
+    },
+    {
+      id: "cm-2026q3-reviewed-20261017",
+      symbol: "TSX:CM",
+      ticker: "CM.TO",
+      issuerName: "Canadian Imperial Bank of Commerce",
+      issuerCik: 1045520,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-27",
+      period: {
+        start: "2025-11-01",
+        end: "2026-07-31",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm"
+      },
+      reviewStatus: "Source extraction and arithmetic checked by Codex; no independent human sign-off or complete underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        periodEnd: "2026-10-31",
+        reason: "Replace or re-review when FY2026/Q4 financial statements are released, or sooner if a restatement, material corporate action or corrected filing changes these facts. The six-hour data fetch does not update this static review."
+      },
+      metrics: {
+        revenue: {
+          value: 24772e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "ifrs-full:Revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 24772,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total revenue, net of interest expense"
+          },
+          start: "2025-11-01"
+        },
+        totalNetIncome: {
+          value: 7974e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "ifrs-full:ProfitLoss",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 7974,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Consolidated net income"
+          },
+          start: "2025-11-01"
+        },
+        netIncome: {
+          value: 7601e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+            location: "Note 11: Earnings per share p73"
+          },
+          reported: {
+            value: 7601,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income attributable/available to common shareholders"
+          },
+          start: "2025-11-01"
+        },
+        commonNetIncomeDiluted: {
+          value: 7601e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+            location: "Note 11: Earnings per share p73"
+          },
+          reported: {
+            value: 7601,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+          },
+          start: "2025-11-01"
+        },
+        eps: {
+          value: 8.22,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "ifrs-full:DilutedEarningsLossPerShare",
+            location: "Note 11: Earnings per share p73"
+          },
+          reported: {
+            value: 8.22,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Diluted earnings per share"
+          },
+          start: "2025-11-01"
+        },
+        shares: {
+          value: 925064e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "ifrs-full:AdjustedWeightedAverageShares",
+            location: "Note 11: Earnings per share p73"
+          },
+          reported: {
+            value: 925064,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Weighted average diluted common shares"
+          },
+          start: "2025-11-01"
+        },
+        creditLossProvision: {
+          value: 1737e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "reviewed:creditLossProvision",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 1737,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Provision for credit losses"
+          },
+          start: "2025-11-01"
+        },
+        equity: {
+          value: 67194e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "reviewed:equity",
+            location: "Interim consolidated balance sheet p52; preferred shares and other equity instruments carrying amount"
+          },
+          reported: {
+            value: 67194,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to owners / bank shareholders"
+          }
+        },
+        preferredEquity: {
+          value: 8048e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Preferred shares and other equity instruments, net carrying amount",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "reviewed:preferredEquity",
+            location: "Interim consolidated balance sheet p52; preferred shares and other equity instruments carrying amount"
+          },
+          reported: {
+            value: 8048,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Preferred shares and other equity instruments, net carrying amount"
+          }
+        },
+        commonShares: {
+          value: 907935437,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Derived common shares outstanding = 907,956,138 issued common shares less 20,701 treasury common shares",
+          evidenceLabel: "derived_calculation",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "reviewed:commonShares",
+            location: "MD&A: Shares outstanding at July 31: 907,956,138 common issued less 20,701 treasury",
+            components: [
+              {
+                value: 907956138,
+                asOf: "2026-07-31",
+                filed: "2026-08-27",
+                publishedAt: "2026-08-27",
+                unit: "shares",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; issuedCommon",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+                  tag: "reviewed:issuedCommon",
+                  location: "MD&A: Shares outstanding at July 31: 907,956,138 common issued less 20,701 treasury"
+                },
+                reported: {
+                  value: 907956138,
+                  unit: "shares",
+                  scale: 1,
+                  label: "issuedCommon"
+                }
+              },
+              {
+                value: 20701,
+                asOf: "2026-07-31",
+                filed: "2026-08-27",
+                publishedAt: "2026-08-27",
+                unit: "shares",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; treasuryCommon",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+                  tag: "reviewed:treasuryCommon",
+                  location: "MD&A: Shares outstanding at July 31: 907,956,138 common issued less 20,701 treasury"
+                },
+                reported: {
+                  value: 20701,
+                  unit: "shares",
+                  scale: 1,
+                  label: "treasuryCommon"
+                }
+              }
+            ]
+          }
+        },
+        commonEquity: {
+          value: 59146e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-27",
+          publishedAt: "2026-08-27",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Derived common equity = owners equity less preferred and other equity instruments at carrying value, net of treasury; excludes noncontrolling interests",
+          evidenceLabel: "derived_calculation",
+          source: {
+            name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+            tag: "reviewed:commonEquity",
+            location: "Interim consolidated balance sheet p52; preferred shares and other equity instruments carrying amount",
+            components: [
+              {
+                value: 67194e6,
+                asOf: "2026-07-31",
+                filed: "2026-08-27",
+                publishedAt: "2026-08-27",
+                unit: "CAD",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+                  tag: "reviewed:equity",
+                  location: "Interim consolidated balance sheet p52; preferred shares and other equity instruments carrying amount"
+                },
+                reported: {
+                  value: 67194,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Equity attributable to owners / bank shareholders"
+                }
+              },
+              {
+                value: 8048e6,
+                asOf: "2026-07-31",
+                filed: "2026-08-27",
+                publishedAt: "2026-08-27",
+                unit: "CAD",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; Preferred shares and other equity instruments, net carrying amount",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+                  tag: "reviewed:preferredEquity",
+                  location: "Interim consolidated balance sheet p52; preferred shares and other equity instruments carrying amount"
+                },
+                reported: {
+                  value: 8048,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Preferred shares and other equity instruments, net carrying amount"
+                }
+              }
+            ]
+          }
+        },
+        cet1Ratio: {
+          value: 0.134,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported"
+        },
+        reportedROE: {
+          value: 0.152,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        },
+        netInterestMargin: {
+          value: 0.0207,
+          unit: "ratio",
+          basis: "On average interest-earning assets excluding trading; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        },
+        lcr: {
+          value: 1.27,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-27",
+          evidenceLabel: "fact_source_reported"
+        }
+      },
+      prior: {
+        start: "2024-11-01",
+        end: "2025-07-31",
+        metrics: {
+          revenue: {
+            value: 21557e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 21557,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 6274e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 6274,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 6007e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 11: Earnings per share p73"
+            },
+            reported: {
+              value: 6007,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 6007e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 11: Earnings per share p73"
+            },
+            reported: {
+              value: 6007,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 6.37,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 11: Earnings per share p73"
+            },
+            reported: {
+              value: 6.37,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          shares: {
+            value: 942579e3,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "shares",
+            currency: "CAD",
+            basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "ifrs-full:AdjustedWeightedAverageShares",
+              location: "Note 11: Earnings per share p73"
+            },
+            reported: {
+              value: 942579,
+              unit: "thousand shares",
+              scale: 1e3,
+              label: "Weighted average diluted common shares"
+            },
+            start: "2024-11-01"
+          },
+          creditLossProvision: {
+            value: 1737e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-27",
+            publishedAt: "2026-08-27",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm",
+              tag: "reviewed:creditLossProvision",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 1737,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Provision for credit losses"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      annual: {
+        start: "2024-11-01",
+        end: "2025-10-31",
+        filed: "2025-12-04",
+        form: "40-F",
+        metrics: {
+          revenue: {
+            value: 29133e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312525307488/d91021dex99b3b.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 29133,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 8454e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312525307488/d91021dex99b3b.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 8454,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 8065e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312525307488/d91021dex99b3b.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 19: Earnings per share"
+            },
+            reported: {
+              value: 8065,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 8065e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312525307488/d91021dex99b3b.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 19: Earnings per share"
+            },
+            reported: {
+              value: 8065,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 8.57,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Canadian Imperial Bank of Commerce \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/1045520/000119312525307488/d91021dex99b3b.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 19: Earnings per share"
+            },
+            reported: {
+              value: 8.57,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "cet1Ratio",
+          "commonEquity",
+          "commonNetIncomeDiluted",
+          "commonShares",
+          "creditLossProvision",
+          "eps",
+          "equity",
+          "lcr",
+          "netIncome",
+          "netInterestMargin",
+          "preferredEquity",
+          "reportedROE",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "commonNetIncomeDiluted",
+          "creditLossProvision",
+          "eps",
+          "netIncome",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        annualMetrics: [
+          "commonNetIncomeDiluted",
+          "eps",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        ttmFlows: [
+          "revenue",
+          "totalNetIncome",
+          "netIncome",
+          "commonNetIncomeDiluted"
+        ],
+        missingRequestedMetrics: []
+      },
+      limitations: [
+        "Listed facts are dated historical evidence. No company earnings forecast, sustainable ROE, growth expectation or current market price is asserted.",
+        "Comparative YTD figures are taken from the same 2026 issuer disclosure. The annual component is separately linked; accounting concepts were checked for these listed reported subtotals.",
+        "Period-end common shares and YTD weighted-average diluted shares have distinct uses; neither verifies current fully diluted shares."
+      ],
+      allowedSourceUrls: [
+        "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results",
+        "https://www.sec.gov/Archives/edgar/data/1045520/000119312525307488/d91021dex99b3b.htm",
+        "https://www.sec.gov/Archives/edgar/data/1045520/000119312526369486/d128934dex991.htm"
+      ]
+    },
+    {
+      id: "bmo-2026q3-reviewed-20261017",
+      symbol: "TSX:BMO",
+      ticker: "BMO.TO",
+      issuerName: "Bank of Montreal",
+      issuerCik: 927971,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-25",
+      period: {
+        start: "2025-11-01",
+        end: "2026-07-31",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "Bank of Montreal \xB7 Q3 2026 issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm"
+      },
+      reviewStatus: "Source extraction and arithmetic checked by Codex; no independent human sign-off or complete underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        periodEnd: "2026-10-31",
+        reason: "Replace or re-review when FY2026/Q4 financial statements are released, or sooner if a restatement, material corporate action or corrected filing changes these facts. The six-hour data fetch does not update this static review."
+      },
+      metrics: {
+        revenue: {
+          value: 29287e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "ifrs-full:Revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 29287,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total revenue, net of interest expense"
+          },
+          start: "2025-11-01"
+        },
+        totalNetIncome: {
+          value: 6869e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "ifrs-full:ProfitLoss",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 6869,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Consolidated net income"
+          },
+          start: "2025-11-01"
+        },
+        netIncome: {
+          value: 6563e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+            location: "Note 10: Earnings per share"
+          },
+          reported: {
+            value: 6563,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income attributable/available to common shareholders"
+          },
+          start: "2025-11-01"
+        },
+        commonNetIncomeDiluted: {
+          value: 6563e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+            location: "Note 10: Earnings per share"
+          },
+          reported: {
+            value: 6563,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+          },
+          start: "2025-11-01"
+        },
+        eps: {
+          value: 9.3,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "ifrs-full:DilutedEarningsLossPerShare",
+            location: "Note 10: Earnings per share"
+          },
+          reported: {
+            value: 9.3,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Diluted earnings per share"
+          },
+          start: "2025-11-01"
+        },
+        shares: {
+          value: 705384e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "ifrs-full:AdjustedWeightedAverageShares",
+            location: "Note 10: Earnings per share"
+          },
+          reported: {
+            value: 705384,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Weighted average diluted common shares"
+          },
+          start: "2025-11-01"
+        },
+        creditLossProvision: {
+          value: 2207e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "reviewed:creditLossProvision",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 2207,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Provision for credit losses"
+          },
+          start: "2025-11-01"
+        },
+        equity: {
+          value: 86523e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "reviewed:equity",
+            location: "Consolidated balance sheet p45; preferred shares and other equity instruments carrying amount"
+          },
+          reported: {
+            value: 86523,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to owners / bank shareholders"
+          }
+        },
+        preferredEquity: {
+          value: 7706e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Preferred shares and other equity instruments, net carrying amount",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "reviewed:preferredEquity",
+            location: "Consolidated balance sheet p45; preferred shares and other equity instruments carrying amount"
+          },
+          reported: {
+            value: 7706,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Preferred shares and other equity instruments, net carrying amount"
+          }
+        },
+        commonShares: {
+          value: 697146398,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Period-end common shares outstanding, net of treasury common shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "reviewed:commonShares",
+            location: "Note 6: Share capital, common shares at July 31, 2026"
+          },
+          reported: {
+            value: 697146398,
+            unit: "shares",
+            scale: 1,
+            label: "Period-end common shares outstanding, net of treasury common shares"
+          }
+        },
+        commonEquity: {
+          value: 78817e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Derived common equity = owners equity less preferred and other equity instruments at carrying value, net of treasury; excludes noncontrolling interests",
+          evidenceLabel: "derived_calculation",
+          source: {
+            name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+            tag: "reviewed:commonEquity",
+            location: "Consolidated balance sheet p45; preferred shares and other equity instruments carrying amount",
+            components: [
+              {
+                value: 86523e6,
+                asOf: "2026-07-31",
+                filed: "2026-08-25",
+                publishedAt: "2026-08-25",
+                unit: "CAD",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+                  tag: "reviewed:equity",
+                  location: "Consolidated balance sheet p45; preferred shares and other equity instruments carrying amount"
+                },
+                reported: {
+                  value: 86523,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Equity attributable to owners / bank shareholders"
+                }
+              },
+              {
+                value: 7706e6,
+                asOf: "2026-07-31",
+                filed: "2026-08-25",
+                publishedAt: "2026-08-25",
+                unit: "CAD",
+                currency: "CAD",
+                basis: "Reported IFRS/GAAP period-end fact; Preferred shares and other equity instruments, net carrying amount",
+                evidenceLabel: "fact_source_reported",
+                source: {
+                  name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+                  url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+                  tag: "reviewed:preferredEquity",
+                  location: "Consolidated balance sheet p45; preferred shares and other equity instruments carrying amount"
+                },
+                reported: {
+                  value: 7706,
+                  unit: "CAD millions",
+                  scale: 1e6,
+                  label: "Preferred shares and other equity instruments, net carrying amount"
+                }
+              }
+            ]
+          }
+        },
+        cet1Ratio: {
+          value: 0.13,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-25",
+          evidenceLabel: "fact_source_reported"
+        },
+        reportedROE: {
+          value: 0.084,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          },
+          filed: "2026-08-25",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        }
+      },
+      prior: {
+        start: "2024-11-01",
+        end: "2025-07-31",
+        metrics: {
+          revenue: {
+            value: 26933e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 26933,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 643e7,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 6430,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 6148e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 10: Earnings per share"
+            },
+            reported: {
+              value: 6148,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 6148e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 10: Earnings per share"
+            },
+            reported: {
+              value: 6148,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 8.47,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 10: Earnings per share"
+            },
+            reported: {
+              value: 8.47,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          shares: {
+            value: 725981e3,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "shares",
+            currency: "CAD",
+            basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "ifrs-full:AdjustedWeightedAverageShares",
+              location: "Note 10: Earnings per share"
+            },
+            reported: {
+              value: 725981,
+              unit: "thousand shares",
+              scale: 1e3,
+              label: "Weighted average diluted common shares"
+            },
+            start: "2024-11-01"
+          },
+          creditLossProvision: {
+            value: 2862e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+              tag: "reviewed:creditLossProvision",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 2862,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Provision for credit losses"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      annual: {
+        start: "2024-11-01",
+        end: "2025-10-31",
+        filed: "2025-12-04",
+        form: "40-F",
+        metrics: {
+          revenue: {
+            value: 36274e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000119312525307982/d938207dex993.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 36274,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 8725e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000119312525307982/d938207dex993.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 8725,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 8273e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000119312525307982/d938207dex993.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 23: Earnings per share"
+            },
+            reported: {
+              value: 8273,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 8273e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000119312525307982/d938207dex993.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 23: Earnings per share"
+            },
+            reported: {
+              value: 8273,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 11.44,
+            asOf: "2025-10-31",
+            filed: "2025-12-04",
+            publishedAt: "2025-12-04",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Montreal \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/927971/000119312525307982/d938207dex993.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 23: Earnings per share"
+            },
+            reported: {
+              value: 11.44,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "cet1Ratio",
+          "commonEquity",
+          "commonNetIncomeDiluted",
+          "commonShares",
+          "creditLossProvision",
+          "eps",
+          "equity",
+          "netIncome",
+          "preferredEquity",
+          "reportedROE",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "commonNetIncomeDiluted",
+          "creditLossProvision",
+          "eps",
+          "netIncome",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        annualMetrics: [
+          "commonNetIncomeDiluted",
+          "eps",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        ttmFlows: [
+          "revenue",
+          "totalNetIncome",
+          "netIncome",
+          "commonNetIncomeDiluted"
+        ],
+        missingRequestedMetrics: []
+      },
+      limitations: [
+        "Listed facts are dated historical evidence. No company earnings forecast, sustainable ROE, growth expectation or current market price is asserted.",
+        "Comparative YTD figures are taken from the same 2026 issuer disclosure. The annual component is separately linked; accounting concepts were checked for these listed reported subtotals.",
+        "Period-end common shares and YTD weighted-average diluted shares have distinct uses; neither verifies current fully diluted shares."
+      ],
+      allowedSourceUrls: [
+        "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results",
+        "https://www.sec.gov/Archives/edgar/data/927971/000092797126000108/bmo-20260731_d2.htm",
+        "https://www.sec.gov/Archives/edgar/data/927971/000119312525307982/d938207dex993.htm"
+      ]
+    },
+    {
+      id: "bns-2026q3-reviewed-20261017",
+      symbol: "TSX:BNS",
+      ticker: "BNS.TO",
+      issuerName: "Bank of Nova Scotia",
+      issuerCik: 9631,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-25",
+      period: {
+        start: "2025-11-01",
+        end: "2026-07-31",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "Bank of Nova Scotia \xB7 Q3 2026 issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm"
+      },
+      reviewStatus: "Source extraction and arithmetic checked by Codex; no independent human sign-off or complete underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        periodEnd: "2026-10-31",
+        reason: "Replace or re-review when FY2026/Q4 financial statements are released, or sooner if a restatement, material corporate action or corrected filing changes these facts. The six-hour data fetch does not update this static review."
+      },
+      metrics: {
+        revenue: {
+          value: 30018e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "ifrs-full:Revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 30018,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total revenue, net of interest expense"
+          },
+          start: "2025-11-01"
+        },
+        totalNetIncome: {
+          value: 7884e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "ifrs-full:ProfitLoss",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 7884,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Consolidated net income"
+          },
+          start: "2025-11-01"
+        },
+        netIncome: {
+          value: 7401e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+            location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+          },
+          reported: {
+            value: 7401,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income attributable/available to common shareholders"
+          },
+          start: "2025-11-01"
+        },
+        commonNetIncomeDiluted: {
+          value: 7392e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+            location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+          },
+          reported: {
+            value: 7392,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+          },
+          start: "2025-11-01"
+        },
+        eps: {
+          value: 6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "ifrs-full:DilutedEarningsLossPerShare",
+            location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+          },
+          reported: {
+            value: 6,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Diluted earnings per share"
+          },
+          start: "2025-11-01"
+        },
+        shares: {
+          value: 1232e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "ifrs-full:AdjustedWeightedAverageShares",
+            location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+          },
+          reported: {
+            value: 1232,
+            unit: "million shares",
+            scale: 1e6,
+            label: "Weighted average diluted common shares"
+          },
+          start: "2025-11-01"
+        },
+        creditLossProvision: {
+          value: 3472e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "reviewed:creditLossProvision",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 3472,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Provision for credit losses"
+          },
+          start: "2025-11-01"
+        },
+        equity: {
+          value: 89151e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to owners / bank shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "reviewed:equity",
+            location: "Consolidated statement of financial position: total common equity; preferred shares and other equity instruments"
+          },
+          reported: {
+            value: 89151,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to owners / bank shareholders"
+          }
+        },
+        preferredEquity: {
+          value: 9939e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Preferred shares and other equity instruments, net carrying amount",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "reviewed:preferredEquity",
+            location: "Consolidated statement of financial position: total common equity; preferred shares and other equity instruments"
+          },
+          reported: {
+            value: 9939,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Preferred shares and other equity instruments, net carrying amount"
+          }
+        },
+        commonEquity: {
+          value: 79212e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "reviewed:commonEquity",
+            location: "Consolidated statement of financial position: total common equity; preferred shares and other equity instruments"
+          },
+          reported: {
+            value: 79212,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to common shareholders"
+          }
+        },
+        commonShares: {
+          value: 1218812e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-25",
+          publishedAt: "2026-08-25",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Period-end common shares outstanding, net of treasury common shares",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+            tag: "reviewed:commonShares",
+            location: "MD&A: July 31 outstanding securities, common shares (000s): 1,218,812"
+          },
+          reported: {
+            value: 1218812,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Period-end common shares outstanding, net of treasury common shares"
+          }
+        },
+        cet1Ratio: {
+          value: 0.131,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          },
+          filed: "2026-08-25",
+          evidenceLabel: "fact_source_reported"
+        },
+        reportedROE: {
+          value: 0.141,
+          unit: "ratio",
+          basis: "Reported; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          },
+          filed: "2026-08-25",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        },
+        pclRatio: {
+          value: 56e-4,
+          unit: "ratio",
+          basis: "Quarterly measure, annualized per issuer glossary; dated issuer capital/operating ratio, not a forecast",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          },
+          filed: "2026-08-25",
+          evidenceLabel: "fact_source_reported",
+          start: "2026-05-01",
+          periodKind: "quarter"
+        }
+      },
+      prior: {
+        start: "2024-11-01",
+        end: "2025-07-31",
+        metrics: {
+          revenue: {
+            value: 27938e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 27938,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 5552e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 5552,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 5179e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 5179,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 5021e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 5021,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 4.02,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 4.02,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          shares: {
+            value: 125e7,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "shares",
+            currency: "CAD",
+            basis: "Reported YTD weighted-average diluted shares; not period-end or current fully diluted shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "ifrs-full:AdjustedWeightedAverageShares",
+              location: "Note 16: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 1250,
+              unit: "million shares",
+              scale: 1e6,
+              label: "Weighted average diluted common shares"
+            },
+            start: "2024-11-01"
+          },
+          creditLossProvision: {
+            value: 3601e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-25",
+            publishedAt: "2026-08-25",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm",
+              tag: "reviewed:creditLossProvision",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 3601,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Provision for credit losses"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      annual: {
+        start: "2024-11-01",
+        end: "2025-10-31",
+        filed: "2025-12-02",
+        form: "40-F",
+        metrics: {
+          revenue: {
+            value: 37741e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-02",
+            publishedAt: "2025-12-02",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312525304643/d936350dex993.htm",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 37741,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 7758e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-02",
+            publishedAt: "2025-12-02",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312525304643/d936350dex993.htm",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 7758,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          netIncome: {
+            value: 7283e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-02",
+            publishedAt: "2025-12-02",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income attributable/available to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312525304643/d936350dex993.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntity",
+              location: "Note 32: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 7283,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income attributable/available to common shareholders"
+            },
+            start: "2024-11-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 708e7,
+            asOf: "2025-10-31",
+            filed: "2025-12-02",
+            publishedAt: "2025-12-02",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Net income available to common shareholders including dilutive effects (EPS numerator)",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312525304643/d936350dex993.htm",
+              tag: "ifrs-full:ProfitLossAttributableToOrdinaryEquityHoldersOfParentEntityIncludingDilutiveEffects",
+              location: "Note 32: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 7080,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Net income available to common shareholders including dilutive effects (EPS numerator)"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 5.67,
+            asOf: "2025-10-31",
+            filed: "2025-12-02",
+            publishedAt: "2025-12-02",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "Bank of Nova Scotia \xB7 FY2025 annual statements",
+              url: "https://www.sec.gov/Archives/edgar/data/9631/000119312525304643/d936350dex993.htm",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Note 32: Earnings per share (includes dilutive numerator adjustments)"
+            },
+            reported: {
+              value: 5.67,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "cet1Ratio",
+          "commonEquity",
+          "commonNetIncomeDiluted",
+          "commonShares",
+          "creditLossProvision",
+          "eps",
+          "equity",
+          "netIncome",
+          "pclRatio",
+          "preferredEquity",
+          "reportedROE",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "commonNetIncomeDiluted",
+          "creditLossProvision",
+          "eps",
+          "netIncome",
+          "revenue",
+          "shares",
+          "totalNetIncome"
+        ],
+        annualMetrics: [
+          "commonNetIncomeDiluted",
+          "eps",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        ttmFlows: [
+          "revenue",
+          "totalNetIncome",
+          "netIncome",
+          "commonNetIncomeDiluted"
+        ],
+        missingRequestedMetrics: []
+      },
+      limitations: [
+        "Listed facts are dated historical evidence. No company earnings forecast, sustainable ROE, growth expectation or current market price is asserted.",
+        "Comparative YTD figures are taken from the same 2026 issuer disclosure. The annual component is separately linked; accounting concepts were checked for these listed reported subtotals.",
+        "Period-end common shares and YTD weighted-average diluted shares have distinct uses; neither verifies current fully diluted shares.",
+        "Reported common NI differs from the diluted EPS numerator: 2026 YTD CAD7,401m versus CAD7,392m, 2025 YTD CAD5,179m versus CAD5,021m, and FY2025 CAD7,283m versus CAD7,080m. The separate EPS-note adjustments are preserved."
+      ],
+      allowedSourceUrls: [
+        "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results",
+        "https://www.sec.gov/Archives/edgar/data/9631/000119312525304643/d936350dex993.htm",
+        "https://www.sec.gov/Archives/edgar/data/9631/000119312526364115/d93977dex991.htm"
+      ]
+    },
+    {
+      id: "na-2026q3-reviewed-20261017",
+      symbol: "TSX:NA",
+      ticker: "NA.TO",
+      issuerName: "National Bank of Canada",
+      issuerCik: null,
+      currency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-26",
+      period: {
+        start: "2025-11-01",
+        end: "2026-07-31",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "National Bank of Canada \xB7 Q3 2026 issuer disclosure",
+        url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html"
+      },
+      reviewStatus: "Source extraction and arithmetic checked by Codex; no independent human sign-off or complete underwriting.",
+      automaticRefresh: false,
+      reviewTrigger: {
+        periodEnd: "2026-10-31",
+        reason: "Replace or re-review when FY2026/Q4 financial statements are released, or sooner if a restatement, material corporate action or corrected filing changes these facts. The six-hour data fetch does not update this static review."
+      },
+      metrics: {
+        revenue: {
+          value: 11853e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            tag: "ifrs-full:Revenue",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 11853,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Total revenue, net of interest expense"
+          },
+          start: "2025-11-01"
+        },
+        totalNetIncome: {
+          value: 3795e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            tag: "ifrs-full:ProfitLoss",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 3795,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Consolidated net income"
+          },
+          start: "2025-11-01"
+        },
+        eps: {
+          value: 9.39,
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            tag: "ifrs-full:DilutedEarningsLossPerShare",
+            location: "Operating results: reported diluted earnings per share"
+          },
+          reported: {
+            value: 9.39,
+            unit: "CAD per share",
+            scale: 1,
+            label: "Diluted earnings per share"
+          },
+          start: "2025-11-01"
+        },
+        creditLossProvision: {
+          value: 723e6,
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            tag: "reviewed:creditLossProvision",
+            location: "Consolidated statement of income"
+          },
+          reported: {
+            value: 723,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Provision for credit losses"
+          },
+          start: "2025-11-01"
+        },
+        commonEquity: {
+          value: 3146e7,
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported IFRS/GAAP period-end fact; Equity attributable to common shareholders",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            tag: "reviewed:commonEquity",
+            location: "Supplementary information: Balance sheet and off-balance-sheet, equity attributable to common shareholders"
+          },
+          reported: {
+            value: 31460,
+            unit: "CAD millions",
+            scale: 1e6,
+            label: "Equity attributable to common shareholders"
+          }
+        },
+        commonShares: {
+          value: 383581e3,
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          unit: "shares",
+          currency: "CAD",
+          basis: "Issuer-reported period-end number of common shares. A separate treasury-share and current fully diluted reconciliation was not verified in this release.",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            tag: "reviewed:commonShares",
+            location: "Supplementary information: Common share information, number of common shares (thousands)"
+          },
+          reported: {
+            value: 383581,
+            unit: "thousand shares",
+            scale: 1e3,
+            label: "Number of common shares at period end"
+          }
+        },
+        cet1Ratio: {
+          value: 0.135,
+          unit: "ratio",
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          basis: "Reported July 31 CET1 / average LCR capital-management measure",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 issuer-issued CNW results",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            location: "Financial highlights / supplementary information"
+          }
+        },
+        reportedROE: {
+          value: 0.161,
+          unit: "ratio",
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          basis: "Reported annualized return on common equity for the quarter ended July 31, not a sustainable ROE forecast",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 issuer-issued CNW results",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            location: "Financial highlights / supplementary information"
+          },
+          start: "2026-05-01",
+          periodKind: "quarter"
+        },
+        lcr: {
+          value: 1.61,
+          unit: "ratio",
+          asOf: "2026-07-31",
+          filed: "2026-08-26",
+          publishedAt: "2026-08-26",
+          basis: "Reported July 31 CET1 / average LCR capital-management measure",
+          evidenceLabel: "fact_source_reported",
+          source: {
+            name: "National Bank of Canada \xB7 issuer-issued CNW results",
+            url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+            location: "Financial highlights / supplementary information"
+          }
+        }
+      },
+      prior: {
+        start: "2024-11-01",
+        end: "2025-07-31",
+        metrics: {
+          revenue: {
+            value: 10282e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-26",
+            publishedAt: "2026-08-26",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 10282,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 2958e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-26",
+            publishedAt: "2026-08-26",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 2958,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 7.5,
+            asOf: "2025-07-31",
+            filed: "2026-08-26",
+            publishedAt: "2026-08-26",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Operating results: reported diluted earnings per share"
+            },
+            reported: {
+              value: 7.5,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          creditLossProvision: {
+            value: 1002e6,
+            asOf: "2025-07-31",
+            filed: "2026-08-26",
+            publishedAt: "2026-08-26",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP nine-month YTD fact; Provision for credit losses",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 Q3 2026 issuer financial disclosure",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html",
+              tag: "reviewed:creditLossProvision",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 1002,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Provision for credit losses"
+            },
+            start: "2024-11-01"
+          }
+        }
+      },
+      annual: {
+        start: "2024-11-01",
+        end: "2025-10-31",
+        filed: "2025-12-03",
+        form: "Issuer annual disclosure",
+        metrics: {
+          revenue: {
+            value: 1398e7,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+              tag: "ifrs-full:Revenue",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 13980,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Total revenue, net of interest expense"
+            },
+            start: "2024-11-01"
+          },
+          totalNetIncome: {
+            value: 4017e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+              tag: "ifrs-full:ProfitLoss",
+              location: "Consolidated statement of income"
+            },
+            reported: {
+              value: 4017,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Consolidated net income"
+            },
+            start: "2024-11-01"
+          },
+          eps: {
+            value: 10.07,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+              tag: "ifrs-full:DilutedEarningsLossPerShare",
+              location: "Supplementary information: reported annual diluted earnings per share"
+            },
+            reported: {
+              value: 10.07,
+              unit: "CAD per share",
+              scale: 1,
+              label: "Diluted earnings per share"
+            },
+            start: "2024-11-01"
+          },
+          commonEquity: {
+            value: 30655e6,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Equity attributable to common shareholders",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+              tag: "reviewed:commonEquity",
+              location: "Supplementary information: equity attributable to common shareholders"
+            },
+            reported: {
+              value: 30655,
+              unit: "CAD millions",
+              scale: 1e6,
+              label: "Equity attributable to common shareholders"
+            }
+          },
+          commonShares: {
+            value: 391066e3,
+            asOf: "2025-10-31",
+            filed: "2025-12-03",
+            publishedAt: "2025-12-03",
+            unit: "shares",
+            currency: "CAD",
+            basis: "Reported IFRS/GAAP annual fact; Period-end common shares outstanding, net of treasury common shares",
+            evidenceLabel: "fact_source_reported",
+            source: {
+              name: "National Bank of Canada \xB7 FY2025 annual statements",
+              url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+              tag: "reviewed:commonShares",
+              location: "Supplementary information: number of common shares (thousands)"
+            },
+            reported: {
+              value: 391066,
+              unit: "thousand shares",
+              scale: 1e3,
+              label: "Period-end common shares outstanding, net of treasury common shares"
+            }
+          }
+        }
+      },
+      coverage: {
+        metrics: [
+          "cet1Ratio",
+          "commonEquity",
+          "commonShares",
+          "creditLossProvision",
+          "eps",
+          "lcr",
+          "reportedROE",
+          "revenue",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "creditLossProvision",
+          "eps",
+          "revenue",
+          "totalNetIncome"
+        ],
+        annualMetrics: [
+          "commonEquity",
+          "commonShares",
+          "eps",
+          "revenue",
+          "totalNetIncome"
+        ],
+        ttmFlows: [
+          "revenue",
+          "totalNetIncome"
+        ],
+        missingRequestedMetrics: [
+          "netIncome",
+          "commonNetIncomeDiluted",
+          "shares",
+          "equity",
+          "preferredEquity"
+        ]
+      },
+      limitations: [
+        "Listed facts are dated historical evidence. No company earnings forecast, sustainable ROE, growth expectation or current market price is asserted.",
+        "Comparative YTD figures are taken from the same 2026 issuer disclosure. The annual component is separately linked; accounting concepts were checked for these listed reported subtotals.",
+        "Period-end common shares and YTD weighted-average diluted shares have distinct uses; neither verifies current fully diluted shares.",
+        "The National Bank release does not establish YTD diluted weighted shares, common-attributable income/EPS numerator or preferred/AT1 carrying equity here. These facts and TTM common-income/per-share earnings are withheld; consolidated NI is not substituted for common earnings.",
+        "National Bank common equity and common-share count are issuer financial-highlight fields. Their separate treasury-share reconciliation and current dilution are not established by this supplement."
+      ],
+      additionalAnnual: [
+        {
+          start: "2023-11-01",
+          end: "2024-10-31",
+          filed: "2025-12-03",
+          form: "Issuer annual disclosure",
+          metrics: {
+            revenue: {
+              value: 114e8,
+              asOf: "2024-10-31",
+              filed: "2025-12-03",
+              publishedAt: "2025-12-03",
+              unit: "CAD",
+              currency: "CAD",
+              basis: "Reported IFRS/GAAP annual fact; Total revenue, net of interest expense",
+              evidenceLabel: "fact_source_reported",
+              source: {
+                name: "National Bank of Canada \xB7 FY2025 annual statements",
+                url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+                tag: "ifrs-full:Revenue",
+                location: "Consolidated statement of income"
+              },
+              reported: {
+                value: 11400,
+                unit: "CAD millions",
+                scale: 1e6,
+                label: "Total revenue, net of interest expense"
+              },
+              start: "2023-11-01"
+            },
+            totalNetIncome: {
+              value: 3816e6,
+              asOf: "2024-10-31",
+              filed: "2025-12-03",
+              publishedAt: "2025-12-03",
+              unit: "CAD",
+              currency: "CAD",
+              basis: "Reported IFRS/GAAP annual fact; Consolidated net income",
+              evidenceLabel: "fact_source_reported",
+              source: {
+                name: "National Bank of Canada \xB7 FY2025 annual statements",
+                url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+                tag: "ifrs-full:ProfitLoss",
+                location: "Consolidated statement of income"
+              },
+              reported: {
+                value: 3816,
+                unit: "CAD millions",
+                scale: 1e6,
+                label: "Consolidated net income"
+              },
+              start: "2023-11-01"
+            },
+            eps: {
+              value: 10.68,
+              asOf: "2024-10-31",
+              filed: "2025-12-03",
+              publishedAt: "2025-12-03",
+              unit: "CAD/shares",
+              currency: "CAD",
+              basis: "Reported IFRS/GAAP annual fact; Diluted earnings per share",
+              evidenceLabel: "fact_source_reported",
+              source: {
+                name: "National Bank of Canada \xB7 FY2025 annual statements",
+                url: "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+                tag: "ifrs-full:DilutedEarningsLossPerShare",
+                location: "Supplementary information: reported annual diluted earnings per share"
+              },
+              reported: {
+                value: 10.68,
+                unit: "CAD per share",
+                scale: 1,
+                label: "Diluted earnings per share"
+              },
+              start: "2023-11-01"
+            }
+          }
+        }
+      ],
+      allowedSourceUrls: [
+        "https://www.newswire.ca/news-releases/national-bank-reports-its-2025-fourth-quarter-and-annual-results-and-raises-its-quarterly-dividend-by-6-cents-to-1-24-per-share-825267318.html",
+        "https://www.newswire.ca/news-releases/national-bank-reports-its-results-for-the-third-quarter-of-2026-832391732.html"
+      ]
+    },
+    {
+      id: "mfc-to-sparse-reviewed-20261017",
+      kind: "reviewed-sparse-period",
+      symbol: "TSX:MFC",
+      ticker: "MFC.TO",
+      issuerName: "Manulife Financial",
+      issuerCik: 1086888,
+      currency: "CAD",
+      listingCurrency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-05",
+      automaticRefresh: false,
+      period: {
+        start: "2026-01-01",
+        end: "2026-06-30",
+        kind: "ytd",
+        months: 6
+      },
+      source: {
+        name: "Manulife Financial \xB7 reported issuer disclosure",
+        url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+        location: "Reported financial tables and stated notes"
+      },
+      sources: [
+        {
+          name: "Manulife Financial \xB7 reported issuer disclosure",
+          url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+          location: "Reported financial tables and stated notes"
+        }
+      ],
+      reviewStatus: "Listed reported facts were source-extracted and checked by Codex; no independent human sign-off, complete underwriting or synchronized future estimates.",
+      metrics: {
+        netIncome: {
+          value: 3096e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported common shareholders net income",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Reported common shareholders net income table; unadjusted actual-currency columns"
+          },
+          start: "2026-01-01"
+        },
+        shareholdersNetIncome: {
+          value: 3257e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Net income attributed to shareholders, before preferred/other distributions",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        eps: {
+          value: 1.85,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported diluted common EPS, six months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Financial highlights; footnote defines EPS as diluted"
+          },
+          start: "2026-01-01"
+        },
+        equity: {
+          value: 52324e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Total shareholders and other equity",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Core ROE reconciliation: equity components, June 30 column"
+          }
+        },
+        preferredEquity: {
+          value: 666e7,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Preferred shares and other equity, carrying amount",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Core ROE reconciliation: equity components, June 30 column"
+          }
+        },
+        commonEquity: {
+          value: 45664e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Common shareholders equity",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Core ROE reconciliation: equity components, June 30 column"
+          }
+        },
+        commonBookValuePerShare: {
+          value: 27.48,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported common book value, excluding the separate non-GAAP adjusted book/CSM measure",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported book value per common share",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Reported financial tables and stated notes"
+          }
+        }
+      },
+      metricDefinitions: {
+        netIncome: {
+          label: "Reported common shareholders net income",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        shareholdersNetIncome: {
+          label: "Net income attributed to shareholders, before preferred/other distributions",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        eps: {
+          label: "Reported diluted common EPS, six months",
+          unit: "per-share",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        equity: {
+          label: "Total shareholders and other equity",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        preferredEquity: {
+          label: "Preferred shares and other equity, carrying amount",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        commonEquity: {
+          label: "Common shareholders equity",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        commonBookValuePerShare: {
+          label: "Reported book value per common share",
+          unit: "per-share",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        }
+      },
+      observations: [
+        {
+          value: 1.2,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported diluted EPS, second quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-04-01",
+          key: "quarterEps",
+          periodKind: "quarter"
+        },
+        {
+          value: 0.18,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "ratio",
+          basis: "Issuer annualized quarterly common ROE; not sustainable forward ROE",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported common ROE, second quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-04-01",
+          key: "reportedROE",
+          periodKind: "quarter"
+        },
+        {
+          value: 1.36,
+          asOf: "2026-06-30",
+          filed: "2026-08-05",
+          publishedAt: "2026-08-05",
+          unit: "ratio",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "MLI LICAT ratio",
+          scope: "The Manufacturers Life Insurance Company (MLI), operating legal entity; not MFC holding-company capital",
+          source: {
+            name: "Manulife Financial \xB7 reported issuer disclosure",
+            url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+            location: "Reported financial tables and stated notes"
+          },
+          key: "licatRatio",
+          periodKind: "instant"
+        }
+      ],
+      prior: {
+        start: "2025-01-01",
+        end: "2025-06-30",
+        metrics: {
+          netIncome: {
+            value: 2114e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-05",
+            publishedAt: "2026-08-05",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported common shareholders net income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Manulife Financial \xB7 reported issuer disclosure",
+              url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+              location: "Reported common shareholders net income table; unadjusted actual-currency columns"
+            },
+            start: "2025-01-01"
+          },
+          shareholdersNetIncome: {
+            value: 2274e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-05",
+            publishedAt: "2026-08-05",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Net income attributed to shareholders, before preferred/other distributions",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Manulife Financial \xB7 reported issuer disclosure",
+              url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          eps: {
+            value: 1.23,
+            asOf: "2025-06-30",
+            filed: "2026-08-05",
+            publishedAt: "2026-08-05",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported diluted common EPS, six months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Manulife Financial \xB7 reported issuer disclosure",
+              url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+              location: "Financial highlights; footnote defines EPS as diluted"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      limitations: [
+        "Sparse dated historical evidence, not complete statement normalization or investment underwriting.",
+        "Quarterly and YTD per-share amounts are not annualized. Weighted averages and period-end shares do not establish current fully diluted capitalization.",
+        "The release reports no verified YTD diluted weighted share count or current period-end common-share count here. No count is inferred from rounded EPS or BVPS.",
+        "Core, CER-adjusted earnings and adjusted book value are excluded from the canonical reported fields. Common NI is not claimed to be the fully reconciled diluted-EPS numerator."
+      ],
+      reviewTrigger: {
+        reason: "Re-review the next quarterly/annual issuer disclosure, corrections, restatements and material corporate actions. Scheduled data fetching does not re-review static facts."
+      },
+      ttmComponents: {
+        netIncome: [
+          {
+            value: 5251e6,
+            asOf: "2025-12-31",
+            filed: "2026-08-05",
+            publishedAt: "2026-08-05",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "FY2025 common shareholders net income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Manulife Financial \xB7 reported issuer disclosure",
+              url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+              location: "Reported common shareholders net income table: Full Year2025, actual-currency columns"
+            },
+            start: "2025-01-01"
+          },
+          {
+            value: 3096e6,
+            asOf: "2026-06-30",
+            filed: "2026-08-05",
+            publishedAt: "2026-08-05",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported common shareholders net income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Manulife Financial \xB7 reported issuer disclosure",
+              url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+              location: "Reported common shareholders net income table; unadjusted actual-currency columns"
+            },
+            start: "2026-01-01"
+          },
+          {
+            value: 2114e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-05",
+            publishedAt: "2026-08-05",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported common shareholders net income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Manulife Financial \xB7 reported issuer disclosure",
+              url: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html",
+              location: "Reported common shareholders net income table; unadjusted actual-currency columns"
+            },
+            start: "2025-01-01"
+          }
+        ]
+      },
+      canonicalMetrics: [
+        "netIncome",
+        "eps",
+        "equity",
+        "preferredEquity",
+        "commonEquity",
+        "commonBookValuePerShare"
+      ],
+      coverage: {
+        metrics: [
+          "commonBookValuePerShare",
+          "commonEquity",
+          "eps",
+          "equity",
+          "netIncome",
+          "preferredEquity",
+          "shareholdersNetIncome"
+        ],
+        priorMetrics: [
+          "eps",
+          "netIncome",
+          "shareholdersNetIncome"
+        ],
+        canonicalMetrics: [
+          "netIncome",
+          "eps",
+          "equity",
+          "preferredEquity",
+          "commonEquity",
+          "commonBookValuePerShare"
+        ],
+        evidenceOnlyMetrics: [
+          "shareholdersNetIncome"
+        ],
+        ttmFlows: [
+          "netIncome"
+        ],
+        missingRequestedMetrics: [
+          "shares",
+          "commonShares",
+          "commonNetIncomeDiluted",
+          "reportedRevenue"
+        ]
+      },
+      allowedSourceUrls: [
+        "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html"
+      ],
+      nativeCommonBookValueMetric: "commonBookValuePerShare"
+    },
+    {
+      id: "slf-to-sparse-reviewed-20261017",
+      kind: "reviewed-sparse-period",
+      symbol: "TSX:SLF",
+      ticker: "SLF.TO",
+      issuerName: "Sun Life Financial",
+      issuerCik: 1097362,
+      currency: "CAD",
+      listingCurrency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-06",
+      automaticRefresh: false,
+      period: {
+        start: "2026-01-01",
+        end: "2026-06-30",
+        kind: "ytd",
+        months: 6
+      },
+      source: {
+        name: "Sun Life Financial \xB7 reported issuer disclosure",
+        url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+        location: "Reported financial tables and stated notes"
+      },
+      sources: [
+        {
+          name: "Sun Life Financial \xB7 reported issuer disclosure",
+          url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+          location: "Reported financial tables and stated notes"
+        }
+      ],
+      reviewStatus: "Listed reported facts were source-extracted and checked by Codex; no independent human sign-off, complete underwriting or synchronized future estimates.",
+      metrics: {
+        netIncome: {
+          value: 1473e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-06",
+          publishedAt: "2026-08-06",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported net income, common shareholders",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Sun Life Financial \xB7 reported issuer disclosure",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+            location: "Financial highlights: year-to-date2026/2025; footnote3 defines common income"
+          },
+          start: "2026-01-01"
+        },
+        eps: {
+          value: 2.64,
+          asOf: "2026-06-30",
+          filed: "2026-08-06",
+          publishedAt: "2026-08-06",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported diluted common EPS, six months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Sun Life Financial \xB7 reported issuer disclosure",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+            location: "Financial highlights and EPS reconciliation; footnote4 defines EPS as fully diluted"
+          },
+          start: "2026-01-01"
+        }
+      },
+      metricDefinitions: {
+        netIncome: {
+          label: "Reported net income, common shareholders",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        eps: {
+          label: "Reported diluted common EPS, six months",
+          unit: "per-share",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        }
+      },
+      observations: [
+        {
+          value: 1.81,
+          asOf: "2026-06-30",
+          filed: "2026-08-06",
+          publishedAt: "2026-08-06",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported diluted EPS, second quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Sun Life Financial \xB7 reported issuer disclosure",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-04-01",
+          key: "quarterEps",
+          periodKind: "quarter"
+        },
+        {
+          value: 1008e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-06",
+          publishedAt: "2026-08-06",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported common shareholders income, second quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Sun Life Financial \xB7 reported issuer disclosure",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-04-01",
+          key: "quarterNetIncome",
+          periodKind: "quarter"
+        },
+        {
+          value: 1.45,
+          asOf: "2026-06-30",
+          filed: "2026-08-06",
+          publishedAt: "2026-08-06",
+          unit: "ratio",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "SLF Inc. LICAT ratio",
+          scope: "Sun Life Financial Inc. holding-company legal entity",
+          source: {
+            name: "Sun Life Financial \xB7 reported issuer disclosure",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+            location: "Reported financial tables and stated notes"
+          },
+          key: "licatRatio",
+          periodKind: "instant"
+        },
+        {
+          value: 1.33,
+          asOf: "2026-06-30",
+          filed: "2026-08-06",
+          publishedAt: "2026-08-06",
+          unit: "ratio",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Sun Life Assurance LICAT ratio",
+          scope: "Sun Life Assurance Company of Canada operating legal entity",
+          source: {
+            name: "Sun Life Financial \xB7 reported issuer disclosure",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+            location: "Reported financial tables and stated notes"
+          },
+          key: "operatingEntityLicatRatio",
+          periodKind: "instant"
+        }
+      ],
+      prior: {
+        start: "2025-01-01",
+        end: "2025-06-30",
+        metrics: {
+          netIncome: {
+            value: 1644e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-06",
+            publishedAt: "2026-08-06",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported net income, common shareholders",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Sun Life Financial \xB7 reported issuer disclosure",
+              url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+              location: "Financial highlights: year-to-date2026/2025; footnote3 defines common income"
+            },
+            start: "2025-01-01"
+          },
+          eps: {
+            value: 2.89,
+            asOf: "2025-06-30",
+            filed: "2026-08-06",
+            publishedAt: "2026-08-06",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported diluted common EPS, six months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Sun Life Financial \xB7 reported issuer disclosure",
+              url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/",
+              location: "Financial highlights and EPS reconciliation; footnote4 defines EPS as fully diluted"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      limitations: [
+        "Sparse dated historical evidence, not complete statement normalization or investment underwriting.",
+        "Quarterly and YTD per-share amounts are not annualized. Weighted averages and period-end shares do not establish current fully diluted capitalization.",
+        "The release does not provide the full reported revenue/common-equity/share-count normalization in the inspected tables. These fields are withheld.",
+        "Diluted EPS includes convertible-security effects. The exact adjusted common-income numerator and weighted diluted count were not independently verified; reported common NI is not substituted for that numerator.",
+        "Underlying earnings, CSM and capital ratios are not reported revenue or distributable common equity."
+      ],
+      reviewTrigger: {
+        reason: "Re-review the next quarterly/annual issuer disclosure, corrections, restatements and material corporate actions. Scheduled data fetching does not re-review static facts."
+      },
+      canonicalMetrics: [
+        "netIncome",
+        "eps"
+      ],
+      coverage: {
+        metrics: [
+          "eps",
+          "netIncome"
+        ],
+        priorMetrics: [
+          "eps",
+          "netIncome"
+        ],
+        canonicalMetrics: [
+          "netIncome",
+          "eps"
+        ],
+        evidenceOnlyMetrics: [],
+        ttmFlows: [],
+        missingRequestedMetrics: [
+          "revenue",
+          "shares",
+          "commonShares",
+          "commonEquity",
+          "preferredEquity",
+          "commonNetIncomeDiluted"
+        ]
+      },
+      allowedSourceUrls: [
+        "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+      ]
+    },
+    {
+      id: "bn-to-sparse-reviewed-20261017",
+      kind: "reviewed-sparse-period",
+      symbol: "TSX:BN",
+      ticker: "BN.TO",
+      issuerName: "Brookfield Corporation",
+      issuerCik: 1001085,
+      currency: "USD",
+      listingCurrency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-13",
+      automaticRefresh: false,
+      period: {
+        start: "2026-01-01",
+        end: "2026-06-30",
+        kind: "ytd",
+        months: 6
+      },
+      source: {
+        name: "Brookfield Corporation \xB7 reported issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+        location: "Reported financial tables and stated notes"
+      },
+      sources: [
+        {
+          name: "Brookfield Corporation \xB7 reported issuer disclosure",
+          url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+          location: "Reported financial tables and stated notes"
+        }
+      ],
+      reviewStatus: "Listed reported facts were source-extracted and checked by Codex; no independent human sign-off, complete underwriting or synchronized future estimates.",
+      metrics: {
+        revenue: {
+          value: 37986e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported consolidated revenue",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        totalNetIncome: {
+          value: 1745e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported consolidated net income",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        shareholdersNetIncome: {
+          value: 466e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Net income attributable to Brookfield shareholders, before preferred dividends",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        eps: {
+          value: 0.16,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD/shares",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported diluted EPS, USD per Brookfield share, six months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        commonEquity: {
+          value: 42483e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported common equity",
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          }
+        },
+        preferredEquity: {
+          value: 4088e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported preferred equity",
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          }
+        },
+        noncontrollingInterests: {
+          value: 120065e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported noncontrolling interests",
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          }
+        },
+        corporateDebt: {
+          value: 14711e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Corporate borrowings",
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          }
+        },
+        nonRecourseDebt: {
+          value: 250271e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Managed-entity non-recourse borrowings",
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported financial tables and stated notes"
+          }
+        }
+      },
+      metricDefinitions: {
+        revenue: {
+          label: "Reported consolidated revenue",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        totalNetIncome: {
+          label: "Reported consolidated net income",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        shareholdersNetIncome: {
+          label: "Net income attributable to Brookfield shareholders, before preferred dividends",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        eps: {
+          label: "Reported diluted EPS, USD per Brookfield share, six months",
+          unit: "per-share",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        commonEquity: {
+          label: "Reported common equity",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified"
+        },
+        preferredEquity: {
+          label: "Reported preferred equity",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified"
+        },
+        noncontrollingInterests: {
+          label: "Reported noncontrolling interests",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified"
+        },
+        corporateDebt: {
+          label: "Corporate borrowings",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified"
+        },
+        nonRecourseDebt: {
+          label: "Managed-entity non-recourse borrowings",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Brookfield consolidated; parent/managed-entity claims separately identified"
+        }
+      },
+      observations: [
+        {
+          value: 0.54,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD/shares",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Issuer-reported trailing twelve-month diluted EPS, USD",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported diluted EPS reconciliation: last twelve months"
+          },
+          start: "2025-07-01",
+          key: "reportedTtmEps",
+          periodKind: "ttm"
+        },
+        {
+          value: 127e7,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Issuer-reported trailing common NI including affiliate-share dilution",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported diluted EPS reconciliation: last twelve months"
+          },
+          start: "2025-07-01",
+          key: "reportedTtmDilutedCommonIncome",
+          periodKind: "ttm"
+        },
+        {
+          value: 23621e5,
+          asOf: "2026-06-30",
+          filed: "2026-08-13",
+          publishedAt: "2026-08-13",
+          unit: "shares",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Issuer-reported trailing shares and share equivalents",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Brookfield Corporation \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+            location: "Reported diluted EPS reconciliation: last twelve months"
+          },
+          start: "2025-07-01",
+          key: "reportedTtmDilutedShares",
+          periodKind: "ttm"
+        }
+      ],
+      prior: {
+        start: "2025-01-01",
+        end: "2025-06-30",
+        metrics: {
+          revenue: {
+            value: 36027e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-13",
+            publishedAt: "2026-08-13",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported consolidated revenue",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Brookfield Corporation \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          totalNetIncome: {
+            value: 127e7,
+            asOf: "2025-06-30",
+            filed: "2026-08-13",
+            publishedAt: "2026-08-13",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported consolidated net income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Brookfield Corporation \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          shareholdersNetIncome: {
+            value: 345e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-13",
+            publishedAt: "2026-08-13",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Net income attributable to Brookfield shareholders, before preferred dividends",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Brookfield Corporation \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          eps: {
+            value: 0.11,
+            asOf: "2025-06-30",
+            filed: "2026-08-13",
+            publishedAt: "2026-08-13",
+            unit: "USD/shares",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported diluted EPS, USD per Brookfield share, six months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Brookfield Corporation \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      limitations: [
+        "Sparse dated historical evidence, not complete statement normalization or investment underwriting.",
+        "Quarterly and YTD per-share amounts are not annualized. Weighted averages and period-end shares do not establish current fully diluted capitalization.",
+        "Reporting currency is USD while this listing is CAD. These native amounts are evidence-only and are not injected into CAD model facts or converted using an unverified FX assumption.",
+        "Consolidated revenue, non-recourse debt and minority claims are not all economically attributable to BN common shareholders. A parent/managed-entity sum-of-parts bridge remains unverified.",
+        "The six-month shareholders-income line is before preferred dividends; no common YTD numerator or current share count is inferred. Reported DE is non-IFRS and is not substituted for net income."
+      ],
+      reviewTrigger: {
+        reason: "Re-review the next quarterly/annual issuer disclosure, corrections, restatements and material corporate actions. Scheduled data fetching does not re-review static facts."
+      },
+      canonicalMetrics: [],
+      coverage: {
+        metrics: [
+          "commonEquity",
+          "corporateDebt",
+          "eps",
+          "nonRecourseDebt",
+          "noncontrollingInterests",
+          "preferredEquity",
+          "revenue",
+          "shareholdersNetIncome",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "eps",
+          "revenue",
+          "shareholdersNetIncome",
+          "totalNetIncome"
+        ],
+        canonicalMetrics: [],
+        evidenceOnlyMetrics: [
+          "revenue",
+          "totalNetIncome",
+          "shareholdersNetIncome",
+          "eps",
+          "commonEquity",
+          "preferredEquity",
+          "noncontrollingInterests",
+          "corporateDebt",
+          "nonRecourseDebt"
+        ],
+        ttmFlows: [],
+        missingRequestedMetrics: [
+          "CAD-converted-financials",
+          "YTD-common-income-numerator",
+          "current-common-shares",
+          "parent-and-managed-entity-NAV-bridge"
+        ]
+      },
+      allowedSourceUrls: [
+        "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+      ]
+    },
+    {
+      id: "pow-to-sparse-reviewed-20261017",
+      kind: "reviewed-sparse-period",
+      symbol: "TSX:POW",
+      ticker: "POW.TO",
+      issuerName: "Power Corporation of Canada",
+      issuerCik: null,
+      currency: "CAD",
+      listingCurrency: "CAD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-07-30",
+      automaticRefresh: false,
+      period: {
+        start: "2026-01-01",
+        end: "2026-06-30",
+        kind: "ytd",
+        months: 6
+      },
+      source: {
+        name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+        url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+        location: "Reported financial tables and stated notes"
+      },
+      sources: [
+        {
+          name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+          url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+          location: "Reported financial tables and stated notes"
+        }
+      ],
+      reviewStatus: "Listed reported facts were source-extracted and checked by Codex; no independent human sign-off, complete underwriting or synchronized future estimates.",
+      metrics: {
+        netIncome: {
+          value: 151e7,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "IFRS net earnings attributable to participating shareholders",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Earnings summary: six-month IFRS net earnings; footnote5 participating shareholder scope"
+          },
+          start: "2026-01-01"
+        },
+        basicEps: {
+          value: 2.39,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported BASIC EPS per participating share, six months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Earnings summary explicitly labelled earnings per share \u2014 basic"
+          },
+          start: "2026-01-01"
+        },
+        averageParticipatingShares: {
+          value: 6321e5,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "shares",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Average participating shares, six months (not diluted)",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Contribution to results \u2014 six months: average shares outstanding"
+          },
+          start: "2026-01-01"
+        },
+        commonEquity: {
+          value: 2376e7,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "CAD",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "IFRS participating shareholders equity",
+          scope: "Power participating shareholders; equity-method combined holding-company presentation",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Participating shareholders equity IFRS reconciliation"
+          }
+        },
+        commonShares: {
+          value: 6295e5,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "shares",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Period-end participating shares, including participating classes",
+          scope: "All participating share classes; not current fully diluted shares",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Book value per participating share table: shares outstanding in millions"
+          }
+        },
+        commonBookValuePerShare: {
+          value: 37.74,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported book value per participating share",
+          scope: "Power participating shareholders; issuer book measure, not management fair-value NAV",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Reported financial tables and stated notes"
+          }
+        }
+      },
+      metricDefinitions: {
+        netIncome: {
+          label: "IFRS net earnings attributable to participating shareholders",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        basicEps: {
+          label: "Reported BASIC EPS per participating share, six months",
+          unit: "per-share",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        averageParticipatingShares: {
+          label: "Average participating shares, six months (not diluted)",
+          unit: "shares",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        commonEquity: {
+          label: "IFRS participating shareholders equity",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "Power participating shareholders; equity-method combined holding-company presentation"
+        },
+        commonShares: {
+          label: "Period-end participating shares, including participating classes",
+          unit: "shares",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "All participating share classes; not current fully diluted shares"
+        },
+        commonBookValuePerShare: {
+          label: "Reported book value per participating share",
+          unit: "per-share",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "Power participating shareholders; issuer book measure, not management fair-value NAV"
+        }
+      },
+      observations: [
+        {
+          value: 1.1,
+          asOf: "2026-06-30",
+          filed: "2026-07-30",
+          publishedAt: "2026-07-30",
+          unit: "CAD/shares",
+          currency: "CAD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported BASIC EPS per participating share, second quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+            url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-04-01",
+          key: "quarterBasicEps",
+          periodKind: "quarter"
+        }
+      ],
+      prior: {
+        start: "2025-01-01",
+        end: "2025-06-30",
+        metrics: {
+          netIncome: {
+            value: 1461e6,
+            asOf: "2025-06-30",
+            filed: "2026-07-30",
+            publishedAt: "2026-07-30",
+            unit: "CAD",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "IFRS net earnings attributable to participating shareholders",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+              url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+              location: "Earnings summary: six-month IFRS net earnings; footnote5 participating shareholder scope"
+            },
+            start: "2025-01-01"
+          },
+          basicEps: {
+            value: 2.27,
+            asOf: "2025-06-30",
+            filed: "2026-07-30",
+            publishedAt: "2026-07-30",
+            unit: "CAD/shares",
+            currency: "CAD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported BASIC EPS per participating share, six months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Power Corporation of Canada \xB7 reported issuer disclosure",
+              url: "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html",
+              location: "Earnings summary explicitly labelled earnings per share \u2014 basic"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      limitations: [
+        "Sparse dated historical evidence, not complete statement normalization or investment underwriting.",
+        "Quarterly and YTD per-share amounts are not annualized. Weighted averages and period-end shares do not establish current fully diluted capitalization.",
+        "The reported EPS field is BASIC. It is not relabelled diluted EPS or multiplied to create annual earnings.",
+        "Management adjusted NAV of CAD112.94 is a non-IFRS fair-value estimate and is not substituted for reported book value CAD37.74 or an independently underwritten intrinsic value.",
+        "Consolidated cash flows and parent distributable capital require subsidiary, minority and holding-cost reconciliation; no generic holding-company FCFF is inferred."
+      ],
+      reviewTrigger: {
+        reason: "Re-review the next quarterly/annual issuer disclosure, corrections, restatements and material corporate actions. Scheduled data fetching does not re-review static facts.",
+        scheduledAt: "2026-11-11"
+      },
+      canonicalMetrics: [
+        "netIncome",
+        "commonEquity",
+        "commonShares",
+        "commonBookValuePerShare"
+      ],
+      coverage: {
+        metrics: [
+          "averageParticipatingShares",
+          "basicEps",
+          "commonBookValuePerShare",
+          "commonEquity",
+          "commonShares",
+          "netIncome"
+        ],
+        priorMetrics: [
+          "basicEps",
+          "netIncome"
+        ],
+        canonicalMetrics: [
+          "netIncome",
+          "commonEquity",
+          "commonShares",
+          "commonBookValuePerShare"
+        ],
+        evidenceOnlyMetrics: [
+          "basicEps",
+          "averageParticipatingShares"
+        ],
+        ttmFlows: [],
+        missingRequestedMetrics: [
+          "revenue",
+          "diluted-eps",
+          "shares",
+          "commonNetIncomeDiluted",
+          "fully-underwritten-holding-NAV"
+        ]
+      },
+      allowedSourceUrls: [
+        "https://www.newswire.ca/news-releases/power-corporation-reports-second-quarter-2026-financial-results-841941971.html"
+      ],
+      nativeCommonBookValueMetric: "commonBookValuePerShare"
+    },
+    {
+      id: "brk-b-sparse-reviewed-20261017",
+      kind: "reviewed-sparse-period",
+      symbol: "NYSE:BRK.B",
+      ticker: "BRK.B",
+      issuerName: "Berkshire Hathaway",
+      issuerCik: 1067983,
+      currency: "USD",
+      listingCurrency: "USD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-08-10",
+      automaticRefresh: false,
+      period: {
+        start: "2026-01-01",
+        end: "2026-06-30",
+        kind: "ytd",
+        months: 6
+      },
+      source: {
+        name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+        location: "Reported financial tables and stated notes"
+      },
+      sources: [
+        {
+          name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+          url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+          location: "Reported financial tables and stated notes"
+        }
+      ],
+      reviewStatus: "Listed reported facts were source-extracted and checked by Codex; no independent human sign-off, complete underwriting or synchronized future estimates.",
+      metrics: {
+        revenue: {
+          value: 195483e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported consolidated total revenue, excluding separately presented investment gains",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Consolidated statements of earnings: total revenues"
+          },
+          start: "2026-01-01"
+        },
+        totalNetIncome: {
+          value: 35951e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported consolidated net earnings including NCI",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        netIncome: {
+          value: 35773e6,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported net earnings attributable to Berkshire shareholders",
+          scope: "All Berkshire common classes; includes fair-value investment gains",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        classBEps: {
+          value: 16.59,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "USD/shares",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported earnings per average equivalent CLASS B share, six months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Consolidated statements of earnings: Class B equivalent per-share line"
+          },
+          start: "2026-01-01"
+        },
+        averageEquivalentClassBShares: {
+          value: 2155918015,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "shares",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Average equivalent CLASS B shares, six months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Consolidated statements of earnings: average equivalent Class B shares outstanding"
+          },
+          start: "2026-01-01"
+        },
+        commonEquity: {
+          value: 74791e7,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Berkshire shareholders equity, excluding noncontrolling interests",
+          scope: "All Berkshire common classes; must use distribution-equivalent denominator",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Consolidated balance sheets: Berkshire shareholders equity"
+          }
+        },
+        classAShares: {
+          value: 501101,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "shares",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Period-end Class A common shares outstanding",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Note18: Common stock, June30 outstanding column"
+          }
+        },
+        classBShares: {
+          value: 1395887484,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "shares",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Period-end Class B common shares outstanding",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Note18: Common stock, June30 outstanding column"
+          }
+        },
+        classBEquivalentCommonShares: {
+          value: 2147538984,
+          asOf: "2026-06-30",
+          filed: "2026-08-10",
+          publishedAt: "2026-08-10",
+          unit: "shares",
+          basis: "Derived: Class A501,101 \xD71,500 + Class B1,395,887,484 =2,147,538,984 equivalent Class B distribution shares. Voting rights use a different ratio.",
+          evidenceLabel: "derived_calculation",
+          label: "Derived period-end CLASS B distribution-equivalent common shares",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+            location: "Note18: Common stock, distribution rights and shares outstanding"
+          },
+          calculation: {
+            operation: "weighted-sum",
+            coefficients: [
+              1500,
+              1
+            ],
+            keys: [
+              "classAShares",
+              "classBShares"
+            ]
+          }
+        }
+      },
+      metricDefinitions: {
+        revenue: {
+          label: "Reported consolidated total revenue, excluding separately presented investment gains",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        totalNetIncome: {
+          label: "Reported consolidated net earnings including NCI",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        netIncome: {
+          label: "Reported net earnings attributable to Berkshire shareholders",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "All Berkshire common classes; includes fair-value investment gains"
+        },
+        classBEps: {
+          label: "Reported earnings per average equivalent CLASS B share, six months",
+          unit: "per-share",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        averageEquivalentClassBShares: {
+          label: "Average equivalent CLASS B shares, six months",
+          unit: "shares",
+          temporal: "duration",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        commonEquity: {
+          label: "Berkshire shareholders equity, excluding noncontrolling interests",
+          unit: "money",
+          temporal: "instant",
+          modelEligible: true,
+          scope: "All Berkshire common classes; must use distribution-equivalent denominator"
+        },
+        classAShares: {
+          label: "Period-end Class A common shares outstanding",
+          unit: "shares",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        classBShares: {
+          label: "Period-end Class B common shares outstanding",
+          unit: "shares",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        },
+        classBEquivalentCommonShares: {
+          label: "Derived period-end CLASS B distribution-equivalent common shares",
+          unit: "shares",
+          temporal: "instant",
+          modelEligible: false,
+          scope: "Listed issuer consolidated"
+        }
+      },
+      observations: [],
+      prior: {
+        start: "2025-01-01",
+        end: "2025-06-30",
+        metrics: {
+          revenue: {
+            value: 18224e7,
+            asOf: "2025-06-30",
+            filed: "2026-08-10",
+            publishedAt: "2026-08-10",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported consolidated total revenue, excluding separately presented investment gains",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+              location: "Consolidated statements of earnings: total revenues"
+            },
+            start: "2025-01-01"
+          },
+          totalNetIncome: {
+            value: 17129e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-10",
+            publishedAt: "2026-08-10",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported consolidated net earnings including NCI",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          netIncome: {
+            value: 16973e6,
+            asOf: "2025-06-30",
+            filed: "2026-08-10",
+            publishedAt: "2026-08-10",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported net earnings attributable to Berkshire shareholders",
+            scope: "All Berkshire common classes; includes fair-value investment gains",
+            source: {
+              name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          classBEps: {
+            value: 7.87,
+            asOf: "2025-06-30",
+            filed: "2026-08-10",
+            publishedAt: "2026-08-10",
+            unit: "USD/shares",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported earnings per average equivalent CLASS B share, six months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+              location: "Consolidated statements of earnings: Class B equivalent per-share line"
+            },
+            start: "2025-01-01"
+          },
+          averageEquivalentClassBShares: {
+            value: 2157335139,
+            asOf: "2025-06-30",
+            filed: "2026-08-10",
+            publishedAt: "2026-08-10",
+            unit: "shares",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Average equivalent CLASS B shares, six months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "Berkshire Hathaway \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+              location: "Consolidated statements of earnings: average equivalent Class B shares outstanding"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      limitations: [
+        "Sparse dated historical evidence, not complete statement normalization or investment underwriting.",
+        "Quarterly and YTD per-share amounts are not annualized. Weighted averages and period-end shares do not establish current fully diluted capitalization.",
+        "Class B EPS and equivalent shares retain their exact class labels and are evidence-only. They are not annualized or substituted into a recurring annual earnings-power base.",
+        "GAAP earnings include unrealized equity-investment fair-value gains. Operating earnings, insurance float, portfolio values, subsidiaries and current ownership require separate underwriting.",
+        "The 1,500 Class B/Class A conversion describes distribution economics, not voting rights or independently verified current fully diluted capitalization."
+      ],
+      reviewTrigger: {
+        reason: "Re-review the next quarterly/annual issuer disclosure, corrections, restatements and material corporate actions. Scheduled data fetching does not re-review static facts."
+      },
+      canonicalMetrics: [
+        "revenue",
+        "totalNetIncome",
+        "netIncome",
+        "commonEquity"
+      ],
+      coverage: {
+        metrics: [
+          "averageEquivalentClassBShares",
+          "classAShares",
+          "classBEps",
+          "classBEquivalentCommonShares",
+          "classBShares",
+          "commonEquity",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "averageEquivalentClassBShares",
+          "classBEps",
+          "netIncome",
+          "revenue",
+          "totalNetIncome"
+        ],
+        canonicalMetrics: [
+          "revenue",
+          "totalNetIncome",
+          "netIncome",
+          "commonEquity"
+        ],
+        evidenceOnlyMetrics: [
+          "classBEps",
+          "averageEquivalentClassBShares",
+          "classAShares",
+          "classBShares",
+          "classBEquivalentCommonShares"
+        ],
+        ttmFlows: [],
+        missingRequestedMetrics: [
+          "normalized-operating-earnings",
+          "fully-underwritten-portfolio-and-NAV",
+          "current-fully-diluted-class-B-equivalents"
+        ]
+      },
+      allowedSourceUrls: [
+        "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+      ]
+    },
+    {
+      id: "blk-sparse-reviewed-20261017",
+      kind: "reviewed-sparse-period",
+      symbol: "NYSE:BLK",
+      ticker: "BLK",
+      issuerName: "BlackRock",
+      issuerCik: 2012383,
+      currency: "USD",
+      listingCurrency: "USD",
+      reviewedAt: "2026-10-17",
+      publishedAt: "2026-10-14",
+      automaticRefresh: false,
+      period: {
+        start: "2026-01-01",
+        end: "2026-09-30",
+        kind: "ytd",
+        months: 9
+      },
+      source: {
+        name: "BlackRock \xB7 reported issuer disclosure",
+        url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+        location: "Reported financial tables and stated notes"
+      },
+      sources: [
+        {
+          name: "BlackRock \xB7 reported issuer disclosure",
+          url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+          location: "Reported financial tables and stated notes"
+        }
+      ],
+      reviewStatus: "Listed reported facts were source-extracted and checked by Codex; no independent human sign-off, complete underwriting or synchronized future estimates.",
+      metrics: {
+        revenue: {
+          value: 21534e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP total revenue",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        ebit: {
+          value: 7603e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP operating income",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        totalNetIncome: {
+          value: 6288e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported consolidated GAAP net income",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        netIncome: {
+          value: 5785e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "GAAP NI attributable to BlackRock Inc., before dilutive Subco addback",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        commonNetIncomeDiluted: {
+          value: 6066e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "GAAP net income for diluted EPS including Subco NCI addback",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        pretax: {
+          value: 8205e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP income before taxes",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        tax: {
+          value: 1917e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP income tax expense",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+          },
+          start: "2026-01-01"
+        },
+        eps: {
+          value: 36.82,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD/shares",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP diluted common EPS, nine months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        },
+        shares: {
+          value: 1647e5,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "shares",
+          basis: "Reported rounded million-share count including Subco Units. YTD weighted average, not current fully diluted capitalization.",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported weighted-average diluted common shares INCLUDING SUBCO UNITS, nine months",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-01-01"
+        }
+      },
+      metricDefinitions: {
+        revenue: {
+          label: "Reported GAAP total revenue",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        ebit: {
+          label: "Reported GAAP operating income",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        totalNetIncome: {
+          label: "Reported consolidated GAAP net income",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        netIncome: {
+          label: "GAAP NI attributable to BlackRock Inc., before dilutive Subco addback",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        commonNetIncomeDiluted: {
+          label: "GAAP net income for diluted EPS including Subco NCI addback",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        pretax: {
+          label: "Reported GAAP income before taxes",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        tax: {
+          label: "Reported GAAP income tax expense",
+          unit: "money",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        eps: {
+          label: "Reported GAAP diluted common EPS, nine months",
+          unit: "per-share",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        },
+        shares: {
+          label: "Reported weighted-average diluted common shares INCLUDING SUBCO UNITS, nine months",
+          unit: "shares",
+          temporal: "duration",
+          modelEligible: true,
+          scope: "Listed issuer consolidated"
+        }
+      },
+      observations: [
+        {
+          value: 10.57,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD/shares",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP diluted EPS, third quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-07-01",
+          key: "quarterEps",
+          periodKind: "quarter"
+        },
+        {
+          value: 1739e6,
+          asOf: "2026-09-30",
+          filed: "2026-10-14",
+          publishedAt: "2026-10-14",
+          unit: "USD",
+          currency: "USD",
+          basis: "Reported",
+          evidenceLabel: "fact_source_reported",
+          label: "Reported GAAP diluted EPS numerator including Subco addback, third quarter",
+          scope: "Listed issuer consolidated",
+          source: {
+            name: "BlackRock \xB7 reported issuer disclosure",
+            url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+            location: "Reported financial tables and stated notes"
+          },
+          start: "2026-07-01",
+          key: "quarterDilutedCommonIncome",
+          periodKind: "quarter"
+        }
+      ],
+      prior: {
+        start: "2025-01-01",
+        end: "2025-09-30",
+        metrics: {
+          revenue: {
+            value: 17208e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported GAAP total revenue",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          ebit: {
+            value: 5384e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported GAAP operating income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          totalNetIncome: {
+            value: 4707e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported consolidated GAAP net income",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          netIncome: {
+            value: 4426e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "GAAP NI attributable to BlackRock Inc., before dilutive Subco addback",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          commonNetIncomeDiluted: {
+            value: 4496e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "GAAP net income for diluted EPS including Subco NCI addback",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          pretax: {
+            value: 6012e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported GAAP income before taxes",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          tax: {
+            value: 1305e6,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported GAAP income tax expense",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Nine-month GAAP income statement; diluted EPS numerator reconciliation for commonNetIncomeDiluted"
+            },
+            start: "2025-01-01"
+          },
+          eps: {
+            value: 28.21,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "USD/shares",
+            currency: "USD",
+            basis: "Reported",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported GAAP diluted common EPS, nine months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          },
+          shares: {
+            value: 1594e5,
+            asOf: "2025-09-30",
+            filed: "2026-10-14",
+            publishedAt: "2026-10-14",
+            unit: "shares",
+            basis: "Reported rounded million-share count including Subco Units. YTD weighted average, not current fully diluted capitalization.",
+            evidenceLabel: "fact_source_reported",
+            label: "Reported weighted-average diluted common shares INCLUDING SUBCO UNITS, nine months",
+            scope: "Listed issuer consolidated",
+            source: {
+              name: "BlackRock \xB7 reported issuer disclosure",
+              url: "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm",
+              location: "Reported financial tables and stated notes"
+            },
+            start: "2025-01-01"
+          }
+        }
+      },
+      limitations: [
+        "Sparse dated historical evidence, not complete statement normalization or investment underwriting.",
+        "Quarterly and YTD per-share amounts are not annualized. Weighted averages and period-end shares do not establish current fully diluted capitalization.",
+        "GAAP NI attributable to BlackRock Inc. is not the diluted EPS numerator: the YTD numerator adds CAD-free USD281m of Subco NCI to USD5,785m, yielding USD6,066m. The denominator includes Subco Units.",
+        "The release does not supply a full new D&A/capex/cash-flow/equity normalization in the inspected tables. Older full-year/TTM operating bases retain their actual older dates.",
+        "Adjusted EPS42.37 and adjusted NI6,980m are not substituted for the nine-month GAAP EPS36.82 or the GAAP diluted numerator6,066m."
+      ],
+      reviewTrigger: {
+        reason: "Re-review the next quarterly/annual issuer disclosure, corrections, restatements and material corporate actions. Scheduled data fetching does not re-review static facts."
+      },
+      canonicalMetrics: [
+        "revenue",
+        "ebit",
+        "totalNetIncome",
+        "netIncome",
+        "commonNetIncomeDiluted",
+        "pretax",
+        "tax",
+        "eps",
+        "shares"
+      ],
+      coverage: {
+        metrics: [
+          "commonNetIncomeDiluted",
+          "ebit",
+          "eps",
+          "netIncome",
+          "pretax",
+          "revenue",
+          "shares",
+          "tax",
+          "totalNetIncome"
+        ],
+        priorMetrics: [
+          "commonNetIncomeDiluted",
+          "ebit",
+          "eps",
+          "netIncome",
+          "pretax",
+          "revenue",
+          "shares",
+          "tax",
+          "totalNetIncome"
+        ],
+        canonicalMetrics: [
+          "revenue",
+          "ebit",
+          "totalNetIncome",
+          "netIncome",
+          "commonNetIncomeDiluted",
+          "pretax",
+          "tax",
+          "eps",
+          "shares"
+        ],
+        evidenceOnlyMetrics: [],
+        ttmFlows: [],
+        missingRequestedMetrics: [
+          "latest-cash-flow-statement",
+          "latest-common-equity",
+          "latest-period-end-common-shares",
+          "complete-three-component-TTM"
+        ]
+      },
+      allowedSourceUrls: [
+        "https://www.sec.gov/Archives/edgar/data/2012383/000119312526420979/blk-ex99_1.htm"
+      ]
+    }
+  ]
+};
+
+// src/issuer-financial-supplements.js
+var finite = Number.isFinite;
+var clone = (value) => structuredClone(value);
+var date = (value) => {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:$|T)/.test(value)) return null;
+  const day2 = value.slice(0, 10), parsed = Date.parse(day2);
+  return finite(parsed) && new Date(parsed).toISOString().slice(0, 10) === day2 ? day2 : null;
+};
+var nextDay = (day2) => new Date(Date.parse(day2) + 864e5).toISOString().slice(0, 10);
+var instant = /* @__PURE__ */ new Set(["equity", "preferredEquity", "commonEquity", "commonShares"]);
+var ratios = /* @__PURE__ */ new Set(["cet1Ratio", "reportedROE", "pclRatio", "lcr", "netInterestMargin"]);
+var additive = /* @__PURE__ */ new Set(["revenue", "totalNetIncome", "netIncome", "commonNetIncomeDiluted"]);
+var allowed = /* @__PURE__ */ new Set([...instant, ...ratios, ...additive, "eps", "shares", "creditLossProvision"]);
+var requested = ["netIncome", "commonNetIncomeDiluted", "shares", "equity", "preferredEquity", "commonEquity", "commonShares"];
+var ordered = (keys2) => [...keys2].sort().join("|");
+var urlOK = (value) => {
+  try {
+    return new URL(value).protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+var cikInURL = (value) => String(value || "").match(/(?:\/data\/|\/CIK0*)(\d+)(?:\/|\.json)/i)?.[1];
+var staticWarning = "These historical facts were source-reviewed on 2026-10-17. They are a dated supplement, not an automatically synchronized issuer feed. A new release, restatement or corporate action requires a new review.";
+function validateIssuerFinancialSupplement(entry, asOf) {
+  if (entry?.kind === "reviewed-sparse-period") return validateSparseSupplement(entry, asOf);
+  const cutoff = date(asOf), errors = [];
+  const fail = (message) => errors.push(message);
+  if (!cutoff || !date(entry?.reviewedAt) || !date(entry?.publishedAt) || entry.period?.end > entry.publishedAt || entry.publishedAt > entry.reviewedAt || entry.reviewedAt > cutoff) fail("Review/publication/period dates are invalid or future-dated.");
+  if (entry?.currency !== "CAD" || !/^TSX:[A-Z]+$/.test(entry?.symbol || "") || entry?.ticker !== entry?.symbol?.slice(4) + ".TO") fail("Security/currency binding is invalid.");
+  if (entry?.automaticRefresh !== false || entry?.period?.kind !== "ytd" || !date(entry?.period?.start) || !date(entry?.period?.end)) fail("A dated YTD supplement is required.");
+  if (!(entry?.metrics?.revenue?.value > 0) || !finite(entry?.metrics?.eps?.value)) fail("Exact current YTD revenue and reported EPS anchors are required.");
+  const validateFacts = (metrics, start, end, publishedAt) => {
+    for (const [key2, f] of Object.entries(metrics || {})) {
+      const expectedUnit = ratios.has(key2) ? "ratio" : ["shares", "commonShares"].includes(key2) ? "shares" : key2 === "eps" ? "CAD/shares" : "CAD";
+      if (!allowed.has(key2) || !finite(f?.value) || f.unit !== expectedUnit || f.currency && f.currency !== entry.currency || !urlOK(f.source?.url) || !entry.allowedSourceUrls?.includes(f.source.url) || f.asOf !== end || f.filed !== publishedAt || f.publishedAt !== publishedAt || !["fact_source_reported", "derived_calculation"].includes(f.evidenceLabel)) fail(`Invalid source/date/unit/coverage for ${key2}.`);
+      if (!instant.has(key2) && !ratios.has(key2) && f.start !== start) fail(`Duration mismatch for ${key2}.`);
+      if (instant.has(key2) && f.start) fail(`A point-in-time ${key2} cannot carry a YTD duration.`);
+      if (entry.issuerCik && cikInURL(f.source?.url) && Number(cikInURL(f.source?.url)) !== Number(entry.issuerCik)) fail(`Issuer source mismatch for ${key2}.`);
+      if (f.reported && (!finite(f.reported.value) || !finite(f.reported.scale) || f.reported.value * f.reported.scale !== f.value)) fail(`Native-unit scale mismatch for ${key2}.`);
+      if (f.evidenceLabel === "derived_calculation") {
+        const c = f.source?.components;
+        if (!Array.isArray(c) || c.length !== 2 || c.some((x2) => !finite(x2.value) || x2.asOf !== end || x2.filed !== publishedAt || x2.unit !== f.unit || x2.source?.url !== f.source.url) || f.value !== c[0].value - c[1].value) fail(`Unreconciled ${key2} derivation.`);
+      }
+    }
+  };
+  const p = entry?.prior, a = entry?.annual;
+  if (!date(p?.start) || !date(p?.end) || !date(a?.start) || !date(a?.end) || !date(a?.filed) || p?.start !== a?.start || nextDay(a?.end || "2000-01-01") !== entry?.period?.start || a?.end >= entry?.period?.end || a?.filed > entry?.publishedAt) fail("Annual/YTD fiscal coverage does not match.");
+  validateFacts(entry?.metrics, entry?.period?.start, entry?.period?.end, entry?.publishedAt);
+  validateFacts(p?.metrics, p?.start, p?.end, entry?.publishedAt);
+  validateFacts(a?.metrics, a?.start, a?.end, a?.filed);
+  for (const row of entry?.additionalAnnual || []) validateFacts(row.metrics, row.start, row.end, row.filed);
+  if (ordered(entry?.coverage?.metrics || []) !== ordered(Object.keys(entry?.metrics || {})) || ordered(entry?.coverage?.priorMetrics || []) !== ordered(Object.keys(p?.metrics || {})) || ordered(entry?.coverage?.annualMetrics || []) !== ordered(Object.keys(a?.metrics || {}))) fail("Declared fact coverage differs from the evidence ledger.");
+  if (ordered(entry?.coverage?.missingRequestedMetrics || []) !== ordered(requested.filter((k) => !entry?.metrics?.[k]))) fail("Missing-line coverage must remain explicit.");
+  for (const key2 of entry?.coverage?.ttmFlows || []) {
+    const facts = [a?.metrics?.[key2], entry?.metrics?.[key2], p?.metrics?.[key2]];
+    if (!additive.has(key2) || facts.some((f) => !f || f.unit !== entry.currency) || facts[0]?.start !== p?.start || facts[1]?.start !== entry.period.start || facts[2]?.start !== p?.start || facts[0]?.asOf !== a?.end || facts[2]?.asOf !== p?.end) fail(`TTM ${key2} lacks three compatible dated components.`);
+  }
+  return { valid: !errors.length, errors };
+}
+function applyIssuerFinancialSupplement(item, snapshot, { asOf = (/* @__PURE__ */ new Date()).toISOString() } = {}) {
+  const entry = issuer_financial_supplements_default.rows.find((row) => row.symbol === item?.symbol);
+  if (entry?.kind === "reviewed-sparse-period") return applySparseSupplement(entry, item, snapshot, asOf);
+  if (!entry || !snapshot || snapshot.instrument?.symbol !== entry.symbol || snapshot.instrument?.ticker !== entry.ticker || item?.ticker !== entry.ticker || item?.currency !== entry.currency || snapshot.instrument?.currency !== entry.currency || snapshot.financials?.currency && snapshot.financials.currency !== entry.currency) return snapshot;
+  const validation = validateIssuerFinancialSupplement(entry, asOf);
+  if (!validation.valid) return snapshot;
+  const issuer = snapshot.references?.issuer;
+  const ciks = [
+    issuer?.cik,
+    cikInURL(issuer?.source?.url),
+    ...(snapshot.financials?.annual || []).flatMap((row) => Object.values(row.metrics || {}).map((f2) => cikInURL(f2.source?.url)))
+  ].filter(Boolean);
+  if (entry.issuerCik ? ciks.some((cik) => Number(cik) !== Number(entry.issuerCik)) : ciks.length > 0) return snapshot;
+  const out = clone(snapshot), f = out.financials ||= {};
+  const known = issuer?.latestStatement;
+  const knownNewer = date(known?.end) && date(known?.filed) && known.filed <= date(asOf) && known.end > entry.period.end;
+  const newerModeled = [f.recent?.end, f.ttm?.end, ...(f.annual || []).map((r) => r.end)].some((end) => date(end) && end > entry.period.end);
+  const samePeriodNewerFiling = f.recent?.end === entry.period.end && [
+    f.recent.filed,
+    ...Object.values(f.recent.metrics || {}).map((fact) => fact.filed || fact.publishedAt)
+  ].some((filed) => date(filed) && filed > entry.publishedAt && filed <= date(asOf));
+  if (knownNewer || newerModeled || samePeriodNewerFiling) {
+    f.supplement = {
+      id: entry.id,
+      status: "superseded",
+      kind: "reviewed-dated-supplement",
+      reviewedAt: entry.reviewedAt,
+      statementPeriod: entry.period.end,
+      automaticRefresh: false,
+      source: entry.source,
+      warning: "A newer statement period or later filing for this period is already known or connected. This dated supplement did not replace newer figures."
+    };
+    return out;
+  }
+  if (f.supplement?.id === entry.id && f.supplement?.status === "applied") return out;
+  const original = {
+    status: f.status,
+    asOf: f.asOf,
+    ...f.reason ? { reason: f.reason } : {},
+    recent: f.recent || null,
+    ttm: f.ttm || null,
+    commonBookValuePerShare: out.commonBookValuePerShare || null,
+    ...!f.annual?.length ? { annual: f.annual || [] } : {}
+  };
+  const m = clone(entry.metrics), prior = clone(entry.prior), growth = {};
+  for (const key2 of additive) if (m[key2] && prior.metrics[key2]?.value > 0) growth[key2] = {
+    value: m[key2].value / prior.metrics[key2].value - 1,
+    basis: "Reported nine-month change versus the same nine months of the prior fiscal year; not a future growth forecast",
+    source: m[key2].source
+  };
+  const conflicts = [];
+  if (f.recent?.end === entry.period.end) for (const [key2, fact] of Object.entries(m)) {
+    const old = f.recent.metrics?.[key2];
+    if (finite(old?.value) && old.value !== fact.value) conflicts.push({
+      metric: key2,
+      original: old,
+      reviewed: fact,
+      explanation: "Reviewed issuer disclosure replaces a conflicting normalized input. Original value and source retained."
+    });
+  }
+  f.recent = {
+    ...entry.period,
+    filed: entry.publishedAt,
+    publishedAt: entry.publishedAt,
+    form: entry.issuerCik ? "6-K" : "Issuer release",
+    kind: "reviewed-dated-supplement",
+    metrics: m,
+    prior,
+    growth,
+    qualityIssues: [],
+    warnings: ["Nine-month reported figures are YTD; diluted EPS is not annualized.", staticWarning, ...entry.limitations]
+  };
+  const ttm = {};
+  for (const key2 of entry.coverage.ttmFlows) {
+    const components = [clone(entry.annual.metrics[key2]), clone(m[key2]), clone(prior.metrics[key2])];
+    ttm[key2] = {
+      ...m[key2],
+      value: components[0].value + components[1].value - components[2].value,
+      start: nextDay(prior.end),
+      asOf: entry.period.end,
+      evidenceLabel: "derived_calculation",
+      basis: "TTM = reported FY2025 + nine months FY2026 \u2212 nine months FY2025; three independently linked, compatible reported components",
+      source: { name: entry.issuerName + " \xB7 derived TTM", url: entry.source.url, tag: "reviewed-ttm:" + key2, components }
+    };
+    delete ttm[key2].reported;
+  }
+  for (const key2 of [...instant, "shares"]) if (m[key2]) ttm[key2] = {
+    ...m[key2],
+    basis: m[key2].basis + (key2 === "shares" ? "; latest YTD diluted-share proxy, not a reconstructed TTM average" : "; latest period-end balance, not an additive TTM flow")
+  };
+  f.ttm = {
+    start: nextDay(prior.end),
+    end: entry.period.end,
+    kind: "reviewed-dated-supplement",
+    metrics: ttm,
+    qualityIssues: [],
+    basis: "Only explicitly covered flows use three-component TTM arithmetic; balances and YTD share averages keep their original date/basis",
+    warnings: ["No TTM diluted EPS or TTM weighted-share average was inferred. Per-share earnings require a separately disclosed denominator choice.", staticWarning, ...entry.limitations]
+  };
+  if (!f.annual?.length) f.annual = [clone(entry.annual), ...(entry.additionalAnnual || []).map(clone)];
+  f.status = "ready";
+  f.currency = entry.currency;
+  f.asOf = entry.period.end;
+  if (f.reason) f.reason = "Source-reviewed issuer HTML supplies only the explicitly covered annual/YTD/balance facts; full-line coverage remains incomplete.";
+  f.warnings = [.../* @__PURE__ */ new Set([...f.warnings || [], staticWarning])];
+  f.supplement = {
+    id: entry.id,
+    status: "applied",
+    kind: "reviewed-dated-supplement",
+    reviewedAt: entry.reviewedAt,
+    publishedAt: entry.publishedAt,
+    statementPeriod: entry.period.end,
+    automaticRefresh: false,
+    source: clone(entry.source),
+    reviewStatus: entry.reviewStatus,
+    coverage: clone(entry.coverage),
+    reviewTrigger: clone(entry.reviewTrigger),
+    limitations: clone(entry.limitations),
+    warning: staticWarning,
+    sourceConflicts: conflicts,
+    original
+  };
+  const common = m.commonEquity, shares = m.commonShares;
+  if (common?.value > 0 && shares?.value > 0 && common.asOf === shares.asOf && common.source.url === shares.source.url && !(date(out.commonBookValuePerShare?.asOf) > common.asOf)) {
+    out.commonBookValuePerShare = {
+      status: "ready",
+      value: common.value / shares.value,
+      currency: entry.currency,
+      unit: "CAD/shares",
+      asOf: common.asOf,
+      filed: entry.publishedAt,
+      publishedAt: entry.publishedAt,
+      kind: "reviewed-dated-supplement",
+      reviewedAt: entry.reviewedAt,
+      automaticRefresh: false,
+      basis: "Historical common equity / matching period-end common shares, excluding preferred/AT1 carrying capital and NCI. Period-end common shares are not current fully diluted shares.",
+      source: { name: entry.issuerName + " \xB7 derived common book value per share", url: entry.source.url, components: [common, shares] }
+    };
+  }
+  return out;
+}
+var canonicalSparse = /* @__PURE__ */ new Set([...instant, ...additive, "eps", "shares", "ebit", "pretax", "tax", "commonBookValuePerShare"]);
+var sparseUnit = (definition, currency) => definition?.unit === "money" ? currency : definition?.unit === "per-share" ? currency + "/shares" : definition?.unit;
+function validateSparseSupplement(entry, asOf) {
+  const errors = [], cutoff = date(asOf), fail = (m) => errors.push(m), p = entry?.period;
+  if (!cutoff || !date(entry.reviewedAt) || !date(entry.publishedAt) || !date(p?.start) || !date(p?.end) || p.start > p.end || p.end > entry.publishedAt || entry.publishedAt > entry.reviewedAt || entry.reviewedAt > cutoff || p.kind !== "ytd" || ![6, 9].includes(p.months) || entry.automaticRefresh !== false) fail("Sparse disclosure dates, interval or static review binding are invalid.");
+  if (!["CAD", "USD"].includes(entry.currency) || !["CAD", "USD"].includes(entry.listingCurrency) || !/^(TSX:[A-Z]+|NYSE:[A-Z.]+)$/.test(entry.symbol || "") || entry.ticker !== (entry.symbol?.startsWith("TSX:") ? entry.symbol.slice(4) + ".TO" : entry.symbol?.slice(5))) fail("Sparse security or currency binding is invalid.");
+  const validateFact = (key2, f, definition, period, flexibleDuration = false) => {
+    if (!definition?.label || !["duration", "instant"].includes(definition.temporal) || !["money", "per-share", "shares", "ratio"].includes(definition.unit) || !finite(f?.value) || !urlOK(f.source?.url) || !entry.allowedSourceUrls?.includes(f.source.url) || f.unit !== sparseUnit(definition, entry.currency) || f.currency && f.currency !== entry.currency || f.label !== definition.label || f.scope !== definition.scope || !f.basis || !date(f.asOf) || !date(f.filed) || f.asOf > f.filed || f.filed !== entry.publishedAt || f.publishedAt !== f.filed || period?.end && f.asOf !== period.end || !["fact_source_reported", "derived_calculation"].includes(f.evidenceLabel)) fail("Invalid sparse source/date/unit/scope: " + key2);
+    if (definition?.temporal === "duration" && (!date(f.start) || f.start > f.asOf || !flexibleDuration && f.start !== period?.start)) fail("Invalid sparse duration: " + key2);
+    if (definition?.temporal === "instant" && f.start) fail("Point-in-time sparse fact has a duration: " + key2);
+    if (entry.issuerCik && cikInURL(f.source?.url) && Number(cikInURL(f.source.url)) !== Number(entry.issuerCik)) fail("Sparse source issuer mismatch: " + key2);
+    if (f.evidenceLabel === "derived_calculation") {
+      const c = f.calculation;
+      if (key2 !== "classBEquivalentCommonShares" || entry.symbol !== "NYSE:BRK.B" || c?.operation !== "weighted-sum" || ordered(c.keys || []) !== ordered(["classAShares", "classBShares"]) || c.coefficients?.[0] !== 1500 || c.coefficients?.[1] !== 1 || f.value !== entry.metrics?.classAShares?.value * 1500 + entry.metrics?.classBShares?.value) fail("Sparse derived share economics do not reconcile.");
+    }
+  };
+  for (const [key2, f] of Object.entries(entry.metrics || {})) validateFact(key2, f, entry.metricDefinitions?.[key2], p);
+  const prior = entry.prior;
+  if (!date(prior?.start) || !date(prior?.end) || prior.end >= p?.end) fail("Sparse comparative interval is invalid.");
+  for (const [key2, f] of Object.entries(prior?.metrics || {})) validateFact(key2, f, entry.metricDefinitions?.[key2], prior);
+  for (const f of entry.observations || []) validateFact(f.key, f, {
+    label: f.label,
+    scope: f.scope,
+    unit: f.unit === entry.currency ? "money" : f.unit === entry.currency + "/shares" ? "per-share" : f.unit,
+    temporal: f.start ? "duration" : "instant"
+  }, { end: p?.end }, true);
+  if (!Object.keys(entry.metrics || {}).length || ordered(entry.coverage?.metrics || []) !== ordered(Object.keys(entry.metrics || {})) || ordered(entry.coverage?.priorMetrics || []) !== ordered(Object.keys(prior?.metrics || {}))) fail("Sparse fact coverage does not match its ledger.");
+  const canonical = Object.entries(entry.metricDefinitions || {}).filter(([, d]) => d.modelEligible).map(([key2]) => key2);
+  if (ordered(canonical) !== ordered(entry.canonicalMetrics || []) || canonical.some((key2) => !canonicalSparse.has(key2)) || entry.currency !== entry.listingCurrency && canonical.length) fail("Evidence-only or native-currency figures cannot enter canonical model metrics.");
+  for (const [key2, components] of Object.entries(entry.ttmComponents || {})) {
+    if (!additive.has(key2) || components.length !== 3 || components.some((f) => f.unit !== entry.currency)) {
+      fail("Sparse TTM requires three additive components.");
+      continue;
+    }
+    const [a, c, old] = components;
+    for (const f of components) validateFact(key2, f, { ...entry.metricDefinitions[key2], label: f.label }, { start: f.start, end: f.asOf });
+    if (a.start !== old.start || nextDay(a.asOf) !== p.start || c.start !== p.start || c.asOf !== p.end || old.asOf !== prior.end || old.value !== prior.metrics[key2]?.value || c.value !== entry.metrics[key2]?.value) fail("Sparse TTM fiscal/component binding mismatch.");
+  }
+  return { valid: !errors.length, errors };
+}
+function validatedReviewedFinancialPeriods(item, snapshot, asOf) {
+  if (snapshot?.instrument?.symbol !== item?.symbol || snapshot.instrument.currency !== item?.currency) return [];
+  return (snapshot.financials?.reviewedPeriods || []).filter((row) => row.symbol === item.symbol && row.listingCurrency === item.currency && validateSparseSupplement(row, asOf).valid).map((row) => ({ ...row, modelCurrencyMatches: row.currency === item.currency }));
+}
+function applySparseSupplement(entry, item, snapshot, asOf) {
+  if (!snapshot || item?.symbol !== entry.symbol || item?.ticker !== entry.ticker || item?.currency !== entry.listingCurrency || snapshot.instrument?.symbol !== entry.symbol || snapshot.instrument?.ticker !== entry.ticker || snapshot.instrument?.currency !== entry.listingCurrency || !validateSparseSupplement(entry, asOf).valid) return snapshot;
+  const issuer = snapshot.references?.issuer;
+  const ciks = [issuer?.cik, cikInURL(issuer?.source?.url), ...(snapshot.financials?.annual || []).flatMap((r) => Object.values(r.metrics || {}).map((f2) => cikInURL(f2.source?.url)))].filter(Boolean);
+  if (entry.issuerCik ? ciks.some((c) => Number(c) !== Number(entry.issuerCik)) : ciks.length) return snapshot;
+  const out = clone(snapshot), f = out.financials ||= {}, sameCurrency = entry.currency === entry.listingCurrency;
+  const evidence = { ...clone(entry), modelCurrencyMatches: sameCurrency };
+  f.reviewedPeriods = [...(f.reviewedPeriods || []).filter((r) => r.id !== entry.id), evidence];
+  if (f.supplement?.id === entry.id && f.supplement.status === "applied") return out;
+  const original = { recent: f.recent || null, ttm: f.ttm || null, commonBookValuePerShare: out.commonBookValuePerShare || null };
+  const laterPeriod = [f.recent?.end, f.ttm?.end, ...(f.annual || []).map((r) => r.end)].some((end) => date(end) && end > entry.period.end);
+  const laterFiling = f.recent?.end === entry.period.end && [f.recent.filed, ...Object.values(f.recent.metrics || {}).map((f2) => f2.filed)].some((filed) => date(filed) && filed > entry.publishedAt && filed <= date(asOf));
+  const known = issuer?.latestStatement;
+  const newerKnown = date(known?.end) && date(known?.filed) && known.filed <= date(asOf) && known.end > entry.period.end;
+  const superseded = laterPeriod || laterFiling || newerKnown;
+  const canonicalApplied = [];
+  if (sameCurrency && !superseded) {
+    const old = f.recent, matches = old?.start === entry.period.start && old.end === entry.period.end;
+    const metrics = matches ? clone(old.metrics || {}) : {};
+    for (const key2 of entry.canonicalMetrics) {
+      metrics[key2] = clone(entry.metrics[key2]);
+      canonicalApplied.push(key2);
+    }
+    const prior = { ...clone(entry.prior), metrics: Object.fromEntries(Object.entries(entry.prior.metrics).filter(([key2]) => entry.canonicalMetrics.includes(key2)).map(([key2, value]) => [key2, clone(value)])) };
+    if (canonicalApplied.length) f.recent = {
+      ...matches ? old : {},
+      ...entry.period,
+      filed: entry.publishedAt,
+      kind: "reviewed-sparse-period",
+      metrics,
+      prior,
+      growth: {},
+      qualityIssues: matches ? old.qualityIssues || [] : [],
+      warnings: [.../* @__PURE__ */ new Set([
+        ...matches ? old.warnings || [] : [],
+        staticWarning,
+        "Only listed reported fields have been updated. Evidence-only EPS/share-class/sector observations do not fill missing model inputs.",
+        ...entry.limitations
+      ])]
+    };
+    const components = entry.ttmComponents || {}, keys2 = Object.keys(components);
+    if (keys2.length) {
+      const ttm = {};
+      for (const [key2, values] of Object.entries(components)) {
+        ttm[key2] = {
+          ...clone(entry.metrics[key2]),
+          value: values[0].value + values[1].value - values[2].value,
+          start: nextDay(entry.prior.end),
+          evidenceLabel: "derived_calculation",
+          basis: "Reported annual + current YTD \u2212 same-period prior YTD; only the declared compatible common-income flow is reconstructed",
+          source: { name: entry.issuerName + " \xB7 derived TTM", url: entry.source.url, components: clone(values) }
+        };
+      }
+      for (const key2 of instant) if (metrics[key2]) ttm[key2] = metrics[key2];
+      f.ttm = {
+        start: nextDay(entry.prior.end),
+        end: entry.period.end,
+        metrics: ttm,
+        kind: "reviewed-sparse-period",
+        qualityIssues: [],
+        warnings: [staticWarning, "This sparse TTM set does not establish complete FCFF or diluted EPS inputs."]
+      };
+    }
+    const nativeBook = entry.nativeCommonBookValueMetric && metrics[entry.nativeCommonBookValueMetric];
+    if (nativeBook && !(date(out.commonBookValuePerShare?.asOf) > nativeBook.asOf)) out.commonBookValuePerShare = {
+      ...clone(nativeBook),
+      status: "ready",
+      kind: "reviewed-dated-supplement",
+      reviewedAt: entry.reviewedAt,
+      automaticRefresh: false,
+      currency: entry.currency
+    };
+    if (f.recent) f.asOf = [f.asOf, entry.period.end].filter(date).sort().at(-1);
+  }
+  f.supplement = {
+    id: entry.id,
+    status: superseded ? "superseded" : "applied",
+    kind: "reviewed-sparse-period",
+    reviewedAt: entry.reviewedAt,
+    publishedAt: entry.publishedAt,
+    statementPeriod: entry.period.end,
+    nativeCurrency: entry.currency,
+    listingCurrency: entry.listingCurrency,
+    modelCurrencyMatches: sameCurrency,
+    canonicalAppliedMetrics: canonicalApplied,
+    automaticRefresh: false,
+    reviewStatus: entry.reviewStatus,
+    coverage: clone(entry.coverage),
+    source: clone(entry.source),
+    sources: clone(entry.sources),
+    limitations: clone(entry.limitations),
+    reviewTrigger: clone(entry.reviewTrigger),
+    original,
+    warning: staticWarning + (!sameCurrency ? " Native reporting currency differs from the listing: these figures are evidence-only and no unverified currency conversion was applied." : "")
+  };
+  return out;
+}
+
+// src/data-quality.js
+var DATA_QUALITY_VERSION = 2;
+
 // src/currency-conversion.js
 function convertUSDToCAD(financials, dividend, fx) {
   if (financials.currency !== "USD" || fx?.currency !== "CAD/USD" || !(fx.value > 0) || !Number.isFinite(fx.value)) throw Error("Invalid currency conversion");
-  const convert = (f) => ({ ...f, value: f.value * fx.value, unit: f.unit?.replace("USD", "CAD"), original: { value: f.value, unit: f.unit }, conversion: fx, basis: (f.basis || "Reported fact") + `; converted USD to CAD at ${fx.value} CAD/USD (${fx.asOf}); constant FX scenario` });
-  const convertMetrics = (m) => Object.fromEntries(Object.entries(m || {}).map(([k, f]) => [k, f.unit === "USD" || f.unit === "USD/shares" ? convert(f) : { ...f }]));
-  const converted = { ...financials, currency: "CAD", reportingCurrency: "USD", conversion: fx, annual: financials.annual.map((a) => ({ ...a, metrics: convertMetrics(a.metrics) })), warnings: [...financials.warnings || [], "USD financial facts translated to CAD at the dated daily average exchange rate. Forecasts assume that exchange rate stays constant; these are not originally reported CAD amounts."] };
-  if (financials.ttm) converted.ttm = { ...financials.ttm, metrics: convertMetrics(financials.ttm.metrics) };
-  if (financials.recent) converted.recent = { ...financials.recent, metrics: convertMetrics(financials.recent.metrics), prior: { ...financials.recent.prior, metrics: convertMetrics(financials.recent.prior?.metrics) } };
+  const convert = (f) => {
+    const monetary = f?.unit === "USD" || f?.unit === "USD/shares";
+    const out = monetary ? { ...f, value: f.value * fx.value, unit: f.unit.replace("USD", "CAD"), original: { value: f.value, unit: f.unit }, conversion: fx, basis: (f.basis || "Reported fact") + `; converted USD to CAD at ${fx.value} CAD/USD (${fx.asOf}); constant FX scenario` } : { ...f };
+    if (f?.source?.components) out.source = { ...f.source, components: f.source.components.map(convert) };
+    return out;
+  };
+  const convertMetrics = (m) => Object.fromEntries(Object.entries(m || {}).map(([k, f]) => [k, convert(f)]));
+  const convertIssues = (issues) => issues?.map((issue) => ({ ...issue, ...issue.facts ? { facts: issue.facts.map(convert) } : {} }));
+  const convertPeriod = (p) => ({ ...p, metrics: convertMetrics(p.metrics), ...p.qualityIssues ? { qualityIssues: convertIssues(p.qualityIssues) } : {} });
+  const converted = { ...financials, currency: "CAD", reportingCurrency: "USD", conversion: fx, annual: financials.annual.map(convertPeriod), ...financials.qualityIssues ? { qualityIssues: convertIssues(financials.qualityIssues) } : {}, warnings: [...financials.warnings || [], "USD financial facts translated to CAD at the dated daily average exchange rate. Forecasts assume that exchange rate stays constant; these are not originally reported CAD amounts."] };
+  if (financials.ttm) converted.ttm = convertPeriod(financials.ttm);
+  if (financials.recent) converted.recent = { ...convertPeriod(financials.recent), prior: convertPeriod(financials.recent.prior || {}) };
   const d = dividend?.status === "ready" && dividend.currency === "USD" ? { ...dividend, value: dividend.value * fx.value, currency: "CAD", kind: "fx-converted", original: { value: dividend.value, currency: "USD" }, conversion: fx, description: dividend.description + ` Translated at ${fx.value} CAD/USD, Bank of Canada daily average ${fx.asOf}; constant FX assumption.` } : dividend;
   return { financials: converted, dividend: d };
 }
@@ -6349,13 +13108,13 @@ function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), opti
   const today = now2.toISOString().slice(0, 10);
   const currency = options.currency || "USD";
   const candidates = [];
-  for (const [namespace2, tag2] of [
+  for (const [namespace2, tag3] of [
     ["us-gaap", "CommonStockDividendsPerShareDeclared"],
     ["us-gaap", "CommonStockDividendsPerShareCashPaid"],
     ["ifrs-full", "DividendsPaidOrdinarySharesPerShare"],
     ["ifrs-full", "DividendsRecognisedAsDistributionsToOwnersPerShare"]
   ]) {
-    const rows3 = payload.facts?.[namespace2]?.[tag2]?.units?.[currency + "/shares"];
+    const rows3 = payload.facts?.[namespace2]?.[tag3]?.units?.[currency + "/shares"];
     if (!Array.isArray(rows3)) continue;
     const annual2 = rows3.filter(
       (row) => validDate(row.start) && validDate(row.end) && validDate(row.filed) && row.end <= today && row.filed <= today && [
@@ -6373,7 +13132,7 @@ function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), opti
       (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed)
     );
     if (annual2.length)
-      candidates.push({ tag: tag2, namespace: namespace2, latest: annual2[0], annual: annual2 });
+      candidates.push({ tag: tag3, namespace: namespace2, latest: annual2[0], annual: annual2 });
   }
   candidates.sort((a, b) => b.latest.end.localeCompare(a.latest.end));
   if (!candidates.length)
@@ -6381,44 +13140,44 @@ function parseSECDividends(payload, cik, now2 = /* @__PURE__ */ new Date(), opti
       status: "unavailable",
       reason: "No supported annual matching-currency ordinary/common-dividend-per-share disclosure was found. Missing data does not establish that the company pays no dividend."
     };
-  const { tag, namespace, latest, annual } = candidates[0];
-  if ((+now2 - Date.parse(latest.end)) / DAY > 550)
+  const { tag: tag2, namespace, latest: latest2, annual } = candidates[0];
+  if ((+now2 - Date.parse(latest2.end)) / DAY > 550)
     return {
       status: "stale",
       reason: "The latest supported annual dividend disclosure is more than 550 days old. Automatic valuation is withheld.",
-      asOf: latest.end
+      asOf: latest2.end
     };
-  const url = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${latest.accn.replaceAll("-", "")}/${latest.accn}-index.html`;
+  const url = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${latest2.accn.replaceAll("-", "")}/${latest2.accn}-index.html`;
   const sameFiling = [
     ...new Map(
-      annual.filter((row) => row.accn === latest.accn).map((row) => [row.end, row])
+      annual.filter((row) => row.accn === latest2.accn).map((row) => [row.end, row])
     ).values()
   ].sort((a, b) => a.end.localeCompare(b.end));
   const first = sameFiling[0];
   const years = first ? Math.round(
-    (Date.parse(latest.end) - Date.parse(first.end)) / DAY / 365.25
+    (Date.parse(latest2.end) - Date.parse(first.end)) / DAY / 365.25
   ) : 0;
-  const historicalGrowth = years >= 1.5 && first.val > 0 && latest.val > 0 ? (latest.val / first.val) ** (1 / years) - 1 : null;
+  const historicalGrowth = years >= 1.5 && first.val > 0 && latest2.val > 0 ? (latest2.val / first.val) ** (1 / years) - 1 : null;
   return {
     status: "ready",
-    value: latest.val,
+    value: latest2.val,
     currency,
     basis: "current",
-    periodStart: latest.start,
-    asOf: latest.end,
-    filed: latest.filed,
-    description: `Latest full fiscal-year dividends ${tag.endsWith("Declared") ? "declared" : "paid"} per share; not a current annualized dividend rate.`,
+    periodStart: latest2.start,
+    asOf: latest2.end,
+    filed: latest2.filed,
+    description: `Latest full fiscal-year dividends ${tag2.endsWith("Declared") ? "declared" : "paid"} per share; not a current annualized dividend rate.`,
     source: {
       name: "SEC EDGAR \xB7 company filing",
       url,
-      accession: latest.accn,
-      tag,
+      accession: latest2.accn,
+      tag: tag2,
       namespace
     },
     historicalGrowth: Number.isFinite(historicalGrowth) ? {
       value: historicalGrowth,
       start: first.end,
-      end: latest.end,
+      end: latest2.end,
       years,
       description: "Annual dividend CAGR from comparative years in the same filing; historical, not a forecast."
     } : null,
@@ -6595,6 +13354,272 @@ async function usdCadRate(fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
   return { value: Number(row.FXUSDCAD.v), currency: "CAD/USD", asOf: row.d, source: { name: "Bank of Canada daily average USD/CAD", url }, basis: "Daily average exchange-rate assumption; not a real-time quote" };
 }
 
+// src/business-classification.js
+var shareBasisChanges = {
+  BKNG: {
+    effectiveDate: "2026-04-02",
+    ratio: 25,
+    reason: "A 25-for-1 forward split changed the economic share unit. Pre-split EPS, dividends and share counts cannot be used as current-share inputs without a sourced restatement.",
+    source: { name: "Booking Holdings Q2 2026 Form 10-Q \xB7 Note 1, Stock Split", url: "https://www.sec.gov/Archives/edgar/data/1075531/000107553126000037/bkng-20260630.htm", publishedAt: "2026-08-04", periodEnd: "2026-06-30" }
+  },
+  CRWD: {
+    effectiveDate: "2026-07-01",
+    ratio: 4,
+    reason: "A four-for-one stock dividend was distributed after the July 1 close; split-adjusted trading began July 2. The subsequent quarterly filing retrospectively adjusts its share and per-share figures.",
+    source: { name: "CrowdStrike Q2 FY2027 Form 10-Q \xB7 Note 1, Stock Split", url: "https://www.sec.gov/Archives/edgar/data/1535527/000153552726000031/crwd-20260731.htm", publishedAt: "2026-08-27", periodEnd: "2026-07-31" }
+  },
+  DD: {
+    effectiveDate: "2026-06-24",
+    ratio: 1 / 3,
+    reason: "A one-for-three reverse split changed the economic share unit. The subsequent quarterly filing restates shares and per-share amounts and separately recasts discontinued operations; older EPS/dividend amounts must not be treated as current-share figures.",
+    source: { name: "DuPont Q2 2026 Form 10-Q \xB7 Notes 1, 7 and 14, Reverse Stock Split", url: "https://www.sec.gov/Archives/edgar/data/1666700/000166670026000053/dd-20260630.htm", publishedAt: "2026-08-04", periodEnd: "2026-06-30" }
+  },
+  CVNA: {
+    effectiveDate: "2026-05-08",
+    ratio: 5,
+    reason: "A five-for-one split changed the common-share and LLC-unit basis. The subsequent quarterly filing restates its per-share figures; older annual amounts require a sourced restatement.",
+    source: { name: "Carvana Q2 2026 Form 10-Q \xB7 Note 2, Stock Split", url: "https://www.sec.gov/Archives/edgar/data/1690820/000169082026000055/cvna-20260630.htm", publishedAt: "2026-07-29", periodEnd: "2026-06-30" }
+  },
+  HON: {
+    effectiveDate: "2026-06-29",
+    ratio: 0.5,
+    reason: "A one-for-two reverse split followed the Aerospace separation. The Q2 filing retrospectively adjusts share and per-share amounts, but its operating results still include Aerospace; share restatement does not establish post-separation business comparability.",
+    source: { name: "Honeywell Q2 2026 Form 10-Q \xB7 Basis of Presentation and Aerospace separation", url: "https://www.sec.gov/Archives/edgar/data/773840/000077384026000124/hon-20260630.htm", publishedAt: "2026-07-23", periodEnd: "2026-06-30" }
+  }
+};
+var businessScopeChanges = {
+  WAT: {
+    effectiveDate: "2026-02-09",
+    lastPredecessorStatementEnd: "2025-12-31",
+    lastPredecessorFilingDate: "2026-02-23",
+    reason: "Waters combined with BD\u2019s Biosciences and Diagnostic Solutions businesses on February 9, issuing additional shares and changing the business and financing scope. Its 2025 earnings describe predecessor Waters. A valuation of the combined company requires compatible post-combination or reconciled pro-forma earnings, cash flows and capital claims; old EPS cannot simply be capitalized for the enlarged company.",
+    source: { name: "Waters FY2025 Form 10-K \xB7 subsequent acquisition and changed reporting segments", url: "https://www.sec.gov/Archives/edgar/data/1000697/000119312526062604/R29.htm", publishedAt: "2026-02-23", periodEnd: "2025-12-31" }
+  },
+  BDX: {
+    effectiveDate: "2026-02-09",
+    lastPredecessorStatementEnd: "2025-12-31",
+    lastPredecessorFilingDate: "2026-02-09",
+    reason: "BD separated its Biosciences and Diagnostic Solutions business on February 9. The 2025 annual figures and the December quarter represent the predecessor business. They cannot be mixed with remaining-company debt or a post-separation capital structure without reconciling continuing operations, distributions and the disposed business.",
+    source: { name: "BD \xB7 completed separation and combination with Waters", url: "https://investors.bd.com/news-events/press-releases/detail/937/bd-completes-combination-of-biosciences-diagnostic-solutions-business-with-waters-corporation", publishedAt: "2026-02-09", periodEnd: "2026-02-09" }
+  },
+  HON: {
+    effectiveDate: "2026-06-29",
+    lastPredecessorStatementEnd: "2026-06-30",
+    lastPredecessorFilingDate: "2026-07-23",
+    reason: "The Aerospace business was separated on June 29. Honeywell\u2019s nominal June 30 quarter actually closed June 27 and still consolidates Aerospace as continuing operations. Discontinued-operation presentation starts in Q3. Predecessor revenue, margins, cash flows, debt and payout history cannot be treated as those of the remaining automation company without a matched post-separation reconciliation.",
+    source: shareBasisChanges.HON.source
+  }
+};
+function businessScopeFactCompatible(fact, change2) {
+  if (!change2) return true;
+  const components = fact?.components || fact?.source?.components;
+  if (components?.length) return components.every((component) => businessScopeFactCompatible(component, change2));
+  const filed = (fact?.filed || fact?.source?.publishedAt || "").slice(0, 10);
+  return !!fact?.source?.url && !!filed && filed > change2.lastPredecessorFilingDate;
+}
+function perShareFactCompatible(fact, change2, cutoff) {
+  if (!change2 || !cutoff || cutoff < change2.effectiveDate) return true;
+  const published = (fact?.filed || fact?.source?.publishedAt || fact?.asOf || "").slice(0, 10);
+  return !!published && published >= change2.effectiveDate;
+}
+var filingIdentity = (url) => {
+  if (typeof url !== "string") return null;
+  return url.match(/^https:\/\/www\.sec\.gov\/Archives\/edgar\/data\/\d+\/\d+\//)?.[0] || url;
+};
+function perShareGrowthCompatible(growth, change2, cutoff) {
+  if (!change2 || !cutoff || cutoff < change2.effectiveDate) return true;
+  const start = growth?.start?.slice(0, 10), end = growth?.end?.slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(start || "") || !/^\d{4}-\d{2}-\d{2}$/.test(end || "") || start >= end || end > cutoff) return false;
+  if (end < change2.effectiveDate || start >= change2.effectiveDate) return true;
+  const components = growth.components || growth.source?.components || [];
+  if (end > change2.source.periodEnd) return false;
+  return [start, end].every((date3) => components.some((fact) => (fact.asOf || fact.end)?.slice(0, 10) === date3 && Number.isFinite(fact.value) && !!fact.source?.url && (fact.filed || fact.source?.publishedAt || fact.asOf)?.slice(0, 10) <= cutoff && filingIdentity(fact.source.url) === filingIdentity(change2.source.url) && (fact.filed || fact.source?.publishedAt)?.slice(0, 10) === change2.source.publishedAt && perShareFactCompatible(fact, change2, cutoff)));
+}
+var issuerOverrides = {
+  "BRK.B": {
+    group: "holding",
+    sector: "diversified-holding",
+    earningsPower: false,
+    reason: "GAAP net earnings include realized and unrealized investment gains and impairments. They are not a verified recurring distributable-earnings annuity. A company valuation needs normalized operating earnings, investment values, parent/subsidiary capital claims and the Class B-equivalent economic share basis.",
+    source: { name: "Berkshire Hathaway Q2 2026 earnings release \xB7 GAAP and operating-earnings distinction", url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526344495/d159922dex991.htm", publishedAt: "2026-08-08", periodEnd: "2026-06-30" }
+  },
+  CVNA: {
+    group: "operating",
+    sector: "up-c-retail",
+    framework: "ownership-adjusted-operating",
+    operatingDCF: false,
+    ownershipBridgeRequired: true,
+    reason: "Carvana consolidates its operating LLC although outside LLC holders retain economic interests. An operating valuation must reconcile those interests, Class A/LLC conversion rights and the per-share capital structure; assuming no noncontrolling claim is insufficient. Reported Class A EPS uses its own issuer-defined numerator and dilution rules and is not corrected by dividing consolidated net income by shares.",
+    source: { name: "Carvana Q2 2026 Form 10-Q \xB7 Notes 2, 11 and 13", url: "https://www.sec.gov/Archives/edgar/data/1690820/000169082026000055/cvna-20260630.htm", publishedAt: "2026-07-29", periodEnd: "2026-06-30" }
+  },
+  TKO: {
+    group: "operating",
+    sector: "up-c-sports",
+    framework: "ownership-adjusted-operating",
+    operatingDCF: false,
+    ownershipBridgeRequired: true,
+    reason: "TKO consolidates TKO OpCo while other members retain a substantial economic interest and exchange rights. Common-share value requires a consistent ownership/if-converted denominator, noncontrolling and redeemable claims, tax receivable obligations and acquisition-accounting bridge. Issuer-reported diluted EPS can include a reallocated numerator; a basic-income/diluted-share mismatch is not itself an EPS error.",
+    source: { name: "TKO Q2 2026 Form 10-Q \xB7 consolidation, equity and noncontrolling interests", url: "https://www.sec.gov/Archives/edgar/data/1973266/000119312526330592/tko-20260630.htm", publishedAt: "2026-08-03", periodEnd: "2026-06-30" }
+  },
+  "QSR.TO": {
+    group: "operating",
+    sector: "exchangeable-partnership",
+    framework: "ownership-adjusted-operating",
+    operatingDCF: false,
+    ownershipBridgeRequired: true,
+    reason: "Restaurant Brands consolidates a partnership with outside exchangeable-unit holders. Its diluted EPS assumes unit conversion and reallocates the earnings numerator consistently. A consolidated enterprise value cannot be attributed to current parent common shares without reconciling exchangeable units, other claims and tax effects; the verified EPS is retained as reported.",
+    source: { name: "Restaurant Brands Q2 2026 Form 10-Q \xB7 Notes 2 and 11", url: "https://www.sec.gov/Archives/edgar/data/1618756/000161875626000045/qsr-20260630.htm", publishedAt: "2026-08-06", periodEnd: "2026-06-30" }
+  },
+  "BAM.TO": {
+    group: "asset-manager",
+    sector: "investment-management",
+    ownershipBridgeRequired: true,
+    reason: "Brookfield Asset Management\u2019s 2025 corporate arrangement changed the ownership and predecessor reporting basis. Common-share value requires separate fee earnings, carried-interest allocations, consolidated-fund interests and preferred/redeemable noncontrolling claims. The arrangement gave BAM full common ownership of the Asset Management Company; it does not imply all consolidated earnings or capital claims belong to BAM common shares.",
+    source: { name: "Brookfield Asset Management 2025 Form 10-K \xB7 Organization and 2025 Arrangement", url: "https://www.sec.gov/Archives/edgar/data/1937926/000162828026013098/bam-20251231.htm", publishedAt: "2026-03-02", periodEnd: "2025-12-31" }
+  },
+  BLK: { group: "asset-manager", sector: "investment-management", source: { name: "BlackRock investor relations \xB7 business overview", url: "https://ir.blackrock.com/home/default.aspx" } },
+  MSTR: {
+    group: "holding",
+    sector: "bitcoin-treasury",
+    earningsPower: false,
+    reason: "Bitcoin holdings, current asset marks, debt, preferred claims, convertible dilution and software operations require a component NAV bridge. Bitcoin fair-value gains and losses flow through reported earnings and are not a sustainable distributable-earnings annuity.",
+    source: { name: "Strategy 2025 Form 10-K \xB7 bitcoin accounting and capital structure", url: "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm" }
+  },
+  INVH: { group: "reit", sector: "property-reit", source: { name: "Invitation Homes \xB7 company history", url: "https://www.invitationhomes.com/about-us" } },
+  L: { group: "holding", sector: "diversified-holding", source: { name: "Loews \xB7 corporate overview", url: "https://loews.com/overview/default.aspx" } }
+};
+var exchanges = {
+  CBOE: { name: "Cboe \xB7 derivatives and exchange business", url: "https://www.cboe.com/insights/posts/pioneering-options-for-the-next-generation" },
+  CME: { name: "CME Group \xB7 company overview", url: "https://www.cmegroup.com/company/about-us.html" },
+  ICE: { name: "ICE \xB7 business overview", url: "https://www.ice.com/about" },
+  NDAQ: { name: "Nasdaq \xB7 company overview", url: "https://www.nasdaq.com/about" }
+};
+var policies = {
+  bank: {
+    framework: "common-equity",
+    operatingDCF: false,
+    residualIncome: true,
+    earningsPower: true,
+    reason: "Deposits and lending are operating inputs. Assess sustainable common-equity returns, credit losses, funding and regulatory capital; a generic industrial enterprise bridge is inappropriate."
+  },
+  insurer: {
+    framework: "common-equity",
+    operatingDCF: false,
+    residualIncome: true,
+    earningsPower: true,
+    reason: "Policy liabilities, investment assets and insurance capital drive value. Sustainable common-equity returns require reserve, catastrophe and investment-mark analysis."
+  },
+  broker: {
+    framework: "common-equity",
+    operatingDCF: false,
+    residualIncome: true,
+    earningsPower: true,
+    reason: "Customer financing, trading assets, client cash and regulatory capital must be distinguished from distributable corporate capital. Use a common-equity framework with a reconciled balance sheet."
+  },
+  "consumer-finance": {
+    framework: "common-equity",
+    operatingDCF: false,
+    residualIncome: true,
+    earningsPower: true,
+    reason: "Loans, credit losses and financing liabilities form the operating business. Common-equity returns and required capital are more informative than an industrial FCFF/debt bridge."
+  },
+  "asset-manager": {
+    framework: "fee-earnings-and-components",
+    operatingDCF: false,
+    residualIncome: false,
+    earningsPower: true,
+    reason: "Fee-related earnings, performance fees, investments and any insurance/fund subsidiaries require separate analysis. Consolidated fund assets, liabilities and noncontrolling interests must be removed or reconciled before an enterprise valuation."
+  },
+  reit: {
+    framework: "property-nav-and-affo",
+    operatingDCF: false,
+    residualIncome: false,
+    earningsPower: false,
+    dividendEarningsCap: false,
+    reason: "Property value, recurring rents, occupancy, lease terms and recurring capital expenditure drive a REIT. GAAP EPS is affected by real-estate depreciation; FFO/AFFO reconciliation and property NAV are required for a complete valuation."
+  },
+  holding: {
+    framework: "sum-of-parts",
+    operatingDCF: false,
+    residualIncome: false,
+    earningsPower: true,
+    reason: "A component-by-component asset and liability valuation is required. Consolidated earnings or a distribution stream can provide only a cross-check without the subsidiary, investment and holding-company capital bridge."
+  },
+  exchange: {
+    framework: "operating-cash-flow",
+    operatingDCF: true,
+    residualIncome: false,
+    earningsPower: true,
+    reason: "Exchange, clearing, market-data and technology fees are operating businesses. Separate clearing collateral, customer funds and regulatory balances from corporate cash and debt before completing the equity bridge."
+  },
+  operating: {
+    framework: "operating-cash-flow",
+    operatingDCF: true,
+    residualIncome: false,
+    earningsPower: true,
+    reason: "Operating revenue, margins, cash conversion and reinvestment drive value; business-specific accounting and financing adjustments remain necessary."
+  }
+};
+function classifyBusiness(item, snapshot = {}) {
+  if (!item || item.assetType !== "Equity") return null;
+  const issuer = snapshot.references?.issuer, sic = String(issuer?.sic || ""), description = issuer?.description || "";
+  let selected = issuerOverrides[item.ticker], basis = selected ? "Issuer business description; explicit exception to broad SIC grouping" : null;
+  if (!selected && exchanges[item.ticker]) {
+    selected = { group: "exchange", sector: "exchange-and-data", source: exchanges[item.ticker] };
+    basis = "Issuer exchange / market-infrastructure business description";
+  }
+  if (!selected && (sic === "6798" || /real estate investment trusts?/i.test(description))) selected = { group: "reit", sector: "property-reit" };
+  if (!selected && /business development compan/i.test(description)) selected = { group: "holding", sector: "bdc" };
+  if (!selected && /^60[23]/.test(sic)) selected = { group: "bank", sector: "bank" };
+  if (!selected && /^63/.test(sic)) selected = { group: "insurer", sector: "insurance-carrier" };
+  if (!selected && sic === "6411") selected = {
+    group: "operating",
+    sector: "insurance-broker",
+    reason: "Insurance brokerage earns commissions and fees; it is not automatically an insurance carrier. Assess retention, organic revenue, compensation, acquisitions and cash conversion using an operating framework."
+  };
+  if (!selected && sic === "6282") selected = { group: "asset-manager", sector: "investment-management" };
+  if (!selected && sic === "6211") selected = { group: "broker", sector: "securities-intermediary" };
+  if (!selected && (["6141", "6153", "6159"].includes(sic) || ["AXP", "SYF"].includes(item.ticker))) selected = { group: "consumer-finance", sector: "consumer-finance" };
+  if (!selected && sic === "6792") selected = {
+    group: "operating",
+    sector: "royalty-and-land",
+    operatingDCF: false,
+    earningsPower: false,
+    reason: "Royalty and land interests require reserve/production, royalty terms, land values and remaining economic-life analysis. A generic perpetual operating-margin model is not a complete resource/NAV appraisal."
+  };
+  const basisChange = shareBasisChanges[item.ticker], scopeChange = businessScopeChanges[item.ticker];
+  if (!selected && (basisChange || scopeChange)) selected = { group: "operating", sector: "operating", source: (basisChange || scopeChange).source };
+  if (!selected) return null;
+  const policy = policies[selected.group];
+  const result = {
+    ...policy,
+    ...selected,
+    dividendEarningsCap: selected.sector === "bdc" ? false : policy.dividendEarningsCap !== false,
+    framework: selected.sector === "bdc" ? "investment-nav-and-distributions" : selected.framework || policy.framework,
+    basis: basis || `SEC issuer classification ${sic}: ${description || "business type"}`,
+    source: selected.source || issuer?.source || null,
+    verifiedAt: selected.source || exchanges[item.ticker] ? "2026-10-17" : snapshot.checkedAt?.slice(0, 10) || null
+  };
+  if (basisChange) {
+    result.perShareBasisChange = basisChange;
+    result.reason += ` ${basisChange.reason}`;
+    const eps = snapshot.financials?.annual?.[0]?.metrics?.eps;
+    if (!perShareFactCompatible(eps, basisChange, snapshot.checkedAt?.slice(0, 10))) result.earningsPower = false;
+  }
+  if (scopeChange && snapshot.checkedAt?.slice(0, 10) >= scopeChange.effectiveDate) {
+    const annual = snapshot.financials?.annual?.[0]?.metrics || {};
+    const ttm = snapshot.financials?.ttm?.metrics;
+    const keys2 = ["revenue", "ebit", "da", "capex"];
+    const operating = ttm && keys2.every((key2) => Number.isFinite(ttm[key2]?.value)) ? ttm : annual;
+    const operatingCompatible = keys2.every((key2) => businessScopeFactCompatible(operating[key2], scopeChange));
+    result.businessScopeChange = { ...scopeChange, operatingBasisCompatible: operatingCompatible };
+    result.reason += ` ${scopeChange.reason}`;
+    if (!operatingCompatible) result.operatingDCF = false;
+    if (!businessScopeFactCompatible(annual.eps, scopeChange)) result.earningsPower = false;
+  }
+  return result;
+}
+
 // src/model-fit.js
 var groups = {
   bank: [
@@ -6646,7 +13671,7 @@ var groups = {
   uncertain: ["TSLA", "COIN", "PLTR", "SHOP.TO", "SHOP", "CRWV", "RKLB"],
   holding: ["BRK.B", "BN.TO", "POW.TO"]
 };
-function modelFit(item) {
+function modelFit(item, snapshot) {
   if (!item?.supported || item.assetType !== "Equity")
     return {
       primary: null,
@@ -6658,7 +13683,7 @@ function modelFit(item) {
   const group = Object.entries(groups).find(
     ([, tickers]) => tickers.includes(item.ticker)
   )?.[0] || "operating";
-  const policies = {
+  const policies2 = {
     bank: {
       primary: "ri",
       title: "Residual income",
@@ -6730,10 +13755,14 @@ function modelFit(item) {
       caution: "Review business mix, cash-flow quality, dilution, margins and reinvestment before relying on forecasts."
     }
   };
+  const economic = classifyBusiness(item, snapshot);
+  const selected = policies2[group];
+  const override = economic ? { ...economic, primary: economic.residualIncome ? "ri" : economic.operatingDCF ? "dcf" : "models", title: economic.framework.replaceAll("-", " "), checks: economic.operatingDCF ? ["rv", "eqrv"] : ["ddm", "rv"], metric: economic.residualIncome ? "pb" : economic.group === "reit" ? "evEbitda" : "pe", caution: economic.reason } : {};
   return {
     group,
     confidence: group === "holding" ? "Manual review required" : "Starting framework",
-    ...policies[group],
+    ...selected,
+    ...override,
     statement: "No model is always most accurate. This is an explainable starting point, not a verified survey of current Wall Street analyst usage."
   };
 }
@@ -6745,9 +13774,9 @@ function parseTreasuryXML(text) {
   for (const match of text.matchAll(/<entry>[\s\S]*?<\/entry>/g)) {
     const body = match[0];
     const field = (name) => body.match(new RegExp(`<d:${name}[^>]*>([^<]+)</d:${name}>`))?.[1];
-    const date = field("NEW_DATE")?.slice(0, 10);
+    const date3 = field("NEW_DATE")?.slice(0, 10);
     const two = Number(field("BC_2YEAR")), ten = Number(field("BC_10YEAR"));
-    if (validDate(date) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows3.push({ date, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
+    if (validDate(date3) && Number.isFinite(two) && Number.isFinite(ten) && Math.abs(two) < 100 && Math.abs(ten) < 100) rows3.push({ date: date3, two, ten, spread: Math.round((ten - two) * 1e6) / 1e4 });
   }
   if (!rows3.length) throw new Error("The Treasury source has no complete observations.");
   return rows3.sort((a, b) => a.date.localeCompare(b.date)).slice(-520);
@@ -6765,8 +13794,8 @@ function parseRBCDividend(article, id, now2 = /* @__PURE__ */ new Date()) {
     /declared\s+a\s+quarterly\s+common\s+share\s+dividend\s+of\s+\$(\d+(?:\.\d+)?)\s+per\s+share/i
   );
   const quarterly = Number(match?.[1]), timestamp = Date.parse(d.releaseDate);
-  const date = Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : "";
-  if (!Number.isFinite(quarterly) || quarterly <= 0 || quarterly > 25 || !validDate(date) || timestamp > +now2 || (+now2 - timestamp) / 864e5 > 180)
+  const date3 = Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : "";
+  if (!Number.isFinite(quarterly) || quarterly <= 0 || quarterly > 25 || !validDate(date3) || timestamp > +now2 || (+now2 - timestamp) / 864e5 > 180)
     throw new Error("No recent regular common dividend");
   return {
     status: "ready",
@@ -6775,9 +13804,9 @@ function parseRBCDividend(article, id, now2 = /* @__PURE__ */ new Date()) {
     basis: "current",
     kind: "annualized-quarterly",
     quarterly,
-    periodStart: date,
-    asOf: date,
-    filed: date,
+    periodStart: date3,
+    asOf: date3,
+    filed: date3,
     description: "Latest issuer-declared regular quarterly common dividend \xD7 4, CAD. Annualization is a starting assumption, not a forecast of four future declarations.",
     source: {
       name: "RBC Investor Relations \xB7 public dividend release",
@@ -6843,9 +13872,90 @@ async function issuerDividend(item, fetcher2 = fetch, now2 = /* @__PURE__ */ new
   }
 }
 
-// src/fundamentals.js
+// src/revenue-scope.js
+var revenueTags = ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet", "Revenue", "RealEstateRevenueNet", "OperatingLeaseLeaseIncome", "RevenueFromContractWithCustomerIncludingAssessedTax", "RevenuesNetOfInterestExpense", "RegulatedAndUnregulatedOperatingRevenue"];
 var DAY2 = 864e5;
-var forms = /* @__PURE__ */ new Set([
+var forms = /* @__PURE__ */ new Set(["10-K", "10-K/A", "10-Q", "10-Q/A", "20-F", "20-F/A", "40-F", "40-F/A", "6-K", "6-K/A"]);
+var duration2 = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY2 + 1;
+var revenueScopeKey = (currency, start, end, accession2) => [currency, start, end, accession2].join("|");
+function revenueScopeCandidates(rows3, currency) {
+  if (!rows3.length) return [];
+  const first = rows3[0];
+  return rows3.filter((r) => r.accn === first.accn && r.start === first.start && r.end === first.end && r.unit === currency);
+}
+function revenueScopeNeeded(rows3, { force = false } = {}) {
+  if (!rows3.length) return false;
+  const values = [...new Set(rows3.map((r) => r.val))];
+  return values.length > 1 || force || rows3.some((r) => r.tag === "OperatingLeaseLeaseIncome" || r.tag === "RealEstateRevenueNet");
+}
+function selectRevenueRow(rows3, payload, cik, { force = false } = {}) {
+  if (!rows3.length) return { row: null };
+  const first = rows3[0], currency = first.unit, candidates = revenueScopeCandidates(rows3, currency);
+  const key2 = revenueScopeKey(currency, first.start, first.end, first.accn), proof = payload.revenueScopes?.[key2];
+  const mustResolve = revenueScopeNeeded(candidates, { force: force || payload.revenueScopePolicy?.requireStatementProof === true });
+  if (!mustResolve) return { row: first };
+  const chosen = proof?.status === "verified" && Number(proof.cik) === Number(cik) && proof.accession === first.accn && proof.start === first.start && proof.end === first.end && proof.currency === currency && candidates.find((r) => r.namespace + ":" + r.tag === proof.tag && r.val === proof.value);
+  if (chosen) return { row: chosen, proof };
+  return { row: null, issue: {
+    metric: "revenue",
+    severity: "material",
+    code: "unverified_revenue_scope",
+    start: first.start,
+    end: first.end,
+    message: "Revenue concepts have different scopes, or a lessor requires an aggregate revenue check. No consolidated income-statement row has verified the issuer total for this period; component fees are withheld rather than presented as total revenue.",
+    source: { name: "SEC EDGAR \xB7 revenue-scope check", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${first.accn.replaceAll("-", "")}/${first.accn}-index.html` },
+    candidates: candidates.map((r) => ({ value: r.val, unit: r.unit, tag: r.namespace + ":" + r.tag, start: r.start, end: r.end, accession: r.accn })),
+    reasonCode: proof?.reasonCode || "statement_proof_unavailable",
+    reason: proof?.reason || "Consolidated statement proof unavailable"
+  } };
+}
+function attachRevenueProof(fact, proof) {
+  if (!proof) return fact;
+  return {
+    ...fact,
+    basis: fact.basis + `; consolidated income-statement row verified: ${proof.label}; use this reported scope rather than treating component fees as the issuer total`,
+    normalization: { kind: "consolidated-statement-revenue-scope", evidence: proof },
+    source: { ...fact.source, statement: { name: proof.source.name, url: proof.source.url, label: proof.label } }
+  };
+}
+function revenueScopeRequests(payload, cik, currency, now2 = /* @__PURE__ */ new Date(), { force = false } = {}) {
+  const today = now2.toISOString().slice(0, 10), rows3 = [];
+  for (const tag2 of revenueTags) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[currency] || []) {
+    if (!validDate(r.start) || !validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val) || duration2(r) < 70 || duration2(r) > 385) continue;
+    rows3.push({ ...r, namespace, tag: tag2, unit: currency });
+  }
+  rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || revenueTags.indexOf(a.tag) - revenueTags.indexOf(b.tag));
+  const annual = rows3.filter((r) => !r.form.startsWith("10-Q") && duration2(r) >= 330 && now2 - Date.parse(r.end) < 1400 * DAY2), ends = [...new Set(annual.map((r) => r.end))].slice(0, 3), periods = [];
+  for (const end of ends) {
+    const first = annual.find((r) => r.end === end);
+    periods.push(rows3.filter((r) => r.end === first.end && r.start === first.start));
+  }
+  const fy = annual.find((r) => r.end === ends[0]);
+  if (fy) {
+    const start = new Date(Date.parse(fy.end) + DAY2).toISOString().slice(0, 10), current = rows3.find((r) => r.end > fy.end && r.start === start && duration2(r) < 310);
+    if (current) {
+      periods.push(rows3.filter((r) => r.end === current.end && r.start === current.start));
+      const prior = rows3.filter((r) => r.start === fy.start && Math.abs((Date.parse(r.end) - Date.parse(current.end)) / DAY2 + 365.25) < 14 && Math.abs(duration2(r) - duration2(current)) < 14).sort((a, b) => Number(b.accn === current.accn) - Number(a.accn === current.accn) || b.filed.localeCompare(a.filed))[0];
+      if (prior) periods.push(rows3.filter((r) => r.end === prior.end && r.start === prior.start).sort((a, b) => Number(b.accn === current.accn) - Number(a.accn === current.accn) || b.filed.localeCompare(a.filed) || revenueTags.indexOf(a.tag) - revenueTags.indexOf(b.tag)));
+    }
+  }
+  const result = [];
+  for (const period of periods) {
+    const candidates = revenueScopeCandidates(period, currency);
+    if (!revenueScopeNeeded(candidates, { force })) continue;
+    const first = candidates[0];
+    if (!first) continue;
+    const key2 = revenueScopeKey(currency, first.start, first.end, first.accn);
+    if (result.some((r) => r.key === key2)) continue;
+    result.push({ key: key2, cik: Number(cik), currency, start: first.start, end: first.end, accession: first.accn, candidates });
+  }
+  return result;
+}
+
+// src/fundamentals.js
+var DAY3 = 864e5;
+var SHARE_SCALE_FACTORS = [1e3, 1e6, 1e-3, 1e-6];
+var forms2 = /* @__PURE__ */ new Set([
   "10-K",
   "10-K/A",
   "40-F",
@@ -6856,12 +13966,7 @@ var forms = /* @__PURE__ */ new Set([
   "6-K/A"
 ]);
 var financialTags = {
-  revenue: [
-    "RevenueFromContractWithCustomerExcludingAssessedTax",
-    "Revenues",
-    "SalesRevenueNet",
-    "Revenue"
-  ],
+  revenue: revenueTags,
   ebit: ["OperatingIncomeLoss", "ProfitLossFromOperatingActivities"],
   eps: ["EarningsPerShareDiluted", "DilutedEarningsLossPerShare"],
   commonNetIncomeDiluted: ["NetIncomeLossAvailableToCommonStockholdersDiluted"],
@@ -6911,10 +14016,15 @@ var financialTags = {
   currentLongDebt: ["LongTermDebtCurrent", "LongTermDebtAndCapitalLeaseObligationsCurrent", "CurrentBorrowings"],
   commercialPaper: ["CommercialPaper"],
   shortDebt: ["DebtCurrent", "ShortTermBorrowings"],
+  debtCurrentTotal: ["DebtCurrent"],
+  shortBorrowings: ["ShortTermBorrowings"],
   longDebt: ["LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations", "NoncurrentBorrowings"],
   equity: ["StockholdersEquity", "EquityAttributableToOwnersOfParent"],
   commonEquity: ["CommonStockholdersEquity"],
-  preferredEquity: ["PreferredStockValue", "PreferredStockCarryingValue", "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount"],
+  preferredEquity: ["PreferredStockCarryingValue", "PreferredStockIncludingAdditionalPaidInCapitalNetOfDiscount"],
+  preferredParValue: ["PreferredStockValue"],
+  preferredSharesOutstanding: ["PreferredStockSharesOutstanding"],
+  preferredSharesIssued: ["PreferredStockSharesIssued"],
   commonShares: ["CommonStockSharesOutstanding"]
 };
 var instantMetrics = /* @__PURE__ */ new Set([
@@ -6925,59 +14035,224 @@ var instantMetrics = /* @__PURE__ */ new Set([
   "payables",
   "debt",
   "shortDebt",
+  "debtCurrentTotal",
+  "shortBorrowings",
   "currentLongDebt",
   "commercialPaper",
   "longDebt",
   "equity",
   "commonEquity",
   "preferredEquity",
+  "preferredParValue",
+  "preferredSharesOutstanding",
+  "preferredSharesIssued",
   "commonShares"
 ]);
+var shareMetrics = /* @__PURE__ */ new Set(["shares", "commonShares", "preferredSharesOutstanding", "preferredSharesIssued"]);
+function financialFact(row, metric, cik) {
+  return {
+    value: row.val,
+    asOf: row.end,
+    filed: row.filed,
+    unit: row.unit,
+    ...row.start ? { start: row.start } : {},
+    basis: metric === "capex" && row.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric === "shares" ? "Reported weighted-average diluted share count; not current fully diluted shares" : instantMetrics.has(metric) ? "Reported period-end balance" : "Reported filing fact",
+    source: {
+      name: "SEC EDGAR",
+      tag: row.namespace + ":" + row.tag,
+      accession: row.accn,
+      url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${row.accn.replaceAll("-", "")}/${row.accn}-index.html`
+    }
+  };
+}
+function normalizeMetricQuality(metrics, { payload, cik, series = {} }) {
+  const issues = [], samePeriod = (a, b) => a && b && a.asOf === b.asOf && a.start === b.start && a.source.url === b.source.url;
+  const cp = metrics.commercialPaper;
+  const nxpNotes = {
+    "2025-12-31|0001413447-26-000008": "https://www.sec.gov/Archives/edgar/data/1413447/000141344726000008/nxpi-20251231.htm",
+    "2026-03-29|0001413447-26-000034": "https://www.sec.gov/Archives/edgar/data/1413447/000141344726000034/nxpi-20260329.htm"
+  };
+  const noteURL = Number(cik) === 1413447 && cp?.value === 2e9 && nxpNotes[cp.asOf + "|" + cp.source.accession];
+  if (noteURL) {
+    metrics.commercialPaperProgramLimit = { ...cp, basis: "Reported commercial-paper program capacity; not debt outstanding" };
+    metrics.commercialPaper = {
+      ...cp,
+      value: 0,
+      basis: "Zero commercial paper outstanding verified in the exact period's debt note; the XBRL 2bn fact describes program capacity",
+      normalization: { kind: "verified-capacity-versus-outstanding", original: cp, evidence: { name: "SEC EDGAR \xB7 NXP commercial-paper debt note", url: noteURL, asOf: cp.asOf } }
+    };
+    issues.push({
+      metric: "commercialPaper",
+      severity: "corrected",
+      code: "commercial_paper_capacity_reclassified",
+      message: "NXP's 2bn commercial-paper concept is program capacity. The exact dated debt note reports zero notes outstanding; capacity is preserved separately and is not added to borrowings.",
+      facts: [cp, metrics.commercialPaper]
+    });
+  }
+  if (!metrics.preferredEquity && metrics.equity) {
+    const zeroShares = [metrics.preferredSharesOutstanding, metrics.preferredSharesIssued].find((f) => f?.value === 0 && f.asOf === metrics.equity.asOf && f.source.url === metrics.equity.source.url);
+    if (zeroShares) metrics.preferredEquity = {
+      ...zeroShares,
+      value: 0,
+      unit: metrics.equity.unit,
+      basis: "Zero nonredeemable preferred equity inferred from an explicitly reported zero issued/outstanding preferred-share count in the same dated filing; redeemable/temporary capital requires separate review",
+      source: { ...zeroShares.source, name: "SEC EDGAR \xB7 zero issued/outstanding preferred shares", components: [zeroShares] }
+    };
+    else if (!metrics.commonEquity && metrics.preferredParValue) issues.push({
+      metric: "commonEquity",
+      severity: "material",
+      code: "preferred_par_is_not_carrying_equity",
+      message: "PreferredStockValue is par/stated value, not preferred carrying capital. Total owners equity cannot be treated as common equity by subtracting this figure; a verified common-equity bridge is required.",
+      facts: [metrics.equity, metrics.preferredParValue, metrics.preferredSharesOutstanding].filter(Boolean)
+    });
+  }
+  const da = metrics.da, dep = metrics.depreciation, amort = metrics.amortization;
+  const lowerBound = Math.max(
+    samePeriod(da, dep) ? dep.value : 0,
+    samePeriod(da, amort) ? amort.value : 0,
+    samePeriod(da, dep) && samePeriod(da, amort) ? dep.value + amort.value : 0
+  );
+  if (da && lowerBound > 0 && da.value < lowerBound * 0.9) {
+    const candidates = (series.da || []).filter((r) => r.start === da.start && r.end === da.asOf && r.accn === da.source.accession && r.val >= lowerBound * 0.9).map((r) => financialFact(r, "da", cik));
+    if (candidates.length) {
+      metrics.da = {
+        ...candidates[0],
+        basis: candidates[0].basis + "; aggregate selected after rejecting a narrower D&A tag below separately reported depreciation/amortization",
+        normalization: { kind: "scope-reconciliation", rejected: da }
+      };
+      issues.push({
+        metric: "da",
+        severity: "corrected",
+        code: "d_and_a_scope_reconciled",
+        message: "A narrower D&A concept was rejected because it was below separately reported depreciation/amortization; a consistent aggregate fact from the same period and filing was selected.",
+        facts: [da, metrics.da, dep, amort].filter(Boolean)
+      });
+    } else {
+      delete metrics.da;
+      issues.push({
+        metric: "da",
+        severity: "material",
+        code: "ambiguous_d_and_a_scope",
+        message: "The reported D&A tag is below separately reported depreciation/amortization. It cannot represent a verified consolidated add-back and is withheld from valuation until its scope is reconciled.",
+        facts: [da, dep, amort].filter(Boolean)
+      });
+    }
+  }
+  const shares = metrics.shares, eps = metrics.eps, income = metrics.commonNetIncomeDiluted || metrics.netIncome;
+  if (shares?.value > 0 && Number.isFinite(eps?.value) && eps.value !== 0 && !eps.source.name.includes("derived") && Number.isFinite(income?.value) && income.value !== 0 && samePeriod(shares, eps) && samePeriod(shares, income)) {
+    const ratio = income.value / (shares.value * eps.value), factor = SHARE_SCALE_FACTORS.find((n) => Math.abs(ratio / n - 1) < 0.1);
+    if (factor) {
+      const corroboration = (payload.facts?.dei?.EntityCommonStockSharesOutstanding?.units?.shares || []).filter((r) => r.accn === shares.source.accession && !r.start && Number.isFinite(r.val) && r.val > 0 && validDate(r.end) && r.end <= shares.filed && (Date.parse(shares.filed) - Date.parse(r.end)) / DAY3 < 95 && Math.abs(shares.value * factor / r.val - 1) < 0.2).sort((a, b) => Math.abs(Date.parse(a.end) - Date.parse(shares.asOf)) - Math.abs(Date.parse(b.end) - Date.parse(shares.asOf)))[0];
+      if (corroboration) {
+        const common = financialFact({ ...corroboration, namespace: "dei", tag: "EntityCommonStockSharesOutstanding", unit: "shares" }, "commonShares", cik);
+        metrics.shares = {
+          ...shares,
+          value: shares.value * factor,
+          basis: shares.basis + `; source share-unit scale corrected by ${factor >= 1 ? factor.toLocaleString("en-US") : String(factor)}\xD7, corroborated by same-filing EPS, income and DEI common shares`,
+          normalization: { kind: "corroborated-share-unit-scale", factor, original: shares, evidence: [eps, income, common] }
+        };
+        issues.push({
+          metric: "shares",
+          severity: "corrected",
+          code: "share_unit_scale_corrected",
+          message: `A source share-unit scaling error was corrected by ${factor}\xD7 using same-filing EPS, income and a corroborating DEI common-share count; the original fact is retained.`,
+          facts: [shares, metrics.shares, eps, income, common]
+        });
+      } else {
+        delete metrics.shares;
+        issues.push({
+          metric: "shares",
+          severity: "material",
+          code: "share_unit_scale_unverified",
+          message: "The source share count is inconsistent with same-filing earnings and EPS by a thousands/millions factor. It is withheld because an independent share count does not corroborate a correction.",
+          facts: [shares, eps, income]
+        });
+      }
+    }
+  }
+  const unresolvedShares = metrics.shares;
+  if (unresolvedShares?.value > 0 && !unresolvedShares.normalization?.factor) {
+    const conflict = (payload.facts?.dei?.EntityCommonStockSharesOutstanding?.units?.shares || []).find((r) => r.accn === unresolvedShares.source.accession && !r.start && r.val > 0 && validDate(r.end) && r.end <= unresolvedShares.filed && (Date.parse(unresolvedShares.filed) - Date.parse(r.end)) / DAY3 < 95 && SHARE_SCALE_FACTORS.some((factor) => Math.abs(r.val / unresolvedShares.value / factor - 1) < 0.2));
+    if (conflict) {
+      const rejectedEPS = metrics.eps;
+      const directTie = eps && income && !eps.source.name.includes("derived") && samePeriod(unresolvedShares, eps) && samePeriod(unresolvedShares, income) && Math.abs(income.value / (unresolvedShares.value * eps.value) - 1) < 0.1;
+      if (directTie) issues.push({
+        metric: "shares",
+        severity: "review",
+        code: "dei_share_count_conflicts_with_reported_earnings",
+        message: "DEI common shares differ by a thousands/millions factor from the reported diluted denominator, but same-period reported EPS and earnings corroborate the denominator. The conflicting DEI count is not substituted into valuation.",
+        facts: [unresolvedShares, eps, income]
+      });
+      else {
+        delete metrics.shares;
+        delete metrics.eps;
+        issues.push({
+          metric: "shares",
+          severity: "material",
+          code: "share_unit_or_corporate_action_basis_unverified",
+          message: "The weighted share basis differs from same-filing DEI common shares by a thousands/millions factor. A derived EPS cannot independently validate its own denominator; shares and per-share earnings are withheld until the unit or corporate-action basis is reconciled.",
+          facts: [unresolvedShares, rejectedEPS].filter(Boolean)
+        });
+      }
+    }
+  }
+  const periodEndShares = metrics.commonShares, weighted = metrics.shares;
+  if (periodEndShares?.value > 0 && weighted?.value > 0) {
+    const factor = SHARE_SCALE_FACTORS.find((n) => Math.abs(periodEndShares.value * n / weighted.value - 1) < 0.2);
+    const corroboratingPeriods = factor ? (payload.facts?.["us-gaap"]?.CommonStockSharesOutstanding?.units?.shares || []).filter((r) => !r.start && r.end === periodEndShares.asOf && r.accn !== periodEndShares.source.accession && validDate(r.filed) && r.filed >= r.end && r.filed < periodEndShares.filed && /^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") && Number.isFinite(r.val) && Math.abs(r.val - periodEndShares.value * factor) < 1) : [];
+    if (new Set(corroboratingPeriods.map((r) => r.accn)).size >= 2) {
+      delete metrics.commonShares;
+      issues.push({
+        metric: "commonShares",
+        severity: "material",
+        code: "period_end_share_unit_unverified",
+        message: "The latest period-end common-share fact differs by a thousands/millions factor from both the weighted denominator and multiple earlier filings for the identical date. The period-end count is withheld pending source-unit or corporate-action reconciliation; the separately reported weighted denominator is unchanged.",
+        facts: [periodEndShares, weighted, ...corroboratingPeriods.slice(-2).map((r) => financialFact({ ...r, namespace: "us-gaap", tag: "CommonStockSharesOutstanding", unit: "shares" }, "commonShares", cik))]
+      });
+    }
+  }
+  return issues;
+}
 function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date()) {
   if (Number(payload?.cik) !== Number(cik)) throw new Error("Issuer mismatch");
   const today = now2.toISOString().slice(0, 10), series = {};
-  for (const [metric2, names] of Object.entries(financialTags)) {
-    const unit = metric2 === "eps" ? currency + "/shares" : ["shares", "commonShares"].includes(metric2) ? "shares" : currency;
+  for (const [metric, names] of Object.entries(financialTags)) {
+    const unit = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
     const all = [];
     for (const name of names)
       for (const namespace of ["us-gaap", "ifrs-full"])
         for (const row of payload.facts?.[namespace]?.[name]?.units?.[unit] || []) {
-          if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || !forms.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
+          if (!validDate(row.end) || !validDate(row.filed) || row.end > today || row.filed > today || row.filed < row.end || !forms2.has(row.form) || !/^\d{10}-\d{2}-\d{6}$/.test(row.accn || "") || !Number.isFinite(row.val))
             continue;
-          const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY2 + 1;
-          if (instantMetrics.has(metric2) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
+          const days2 = (Date.parse(row.end) - Date.parse(row.start)) / DAY3 + 1;
+          if (instantMetrics.has(metric) ? !!row.start : !validDate(row.start) || days2 < 330 || days2 > 385)
             continue;
           all.push({ ...row, tag: name, namespace, unit });
         }
     all.sort(
       (a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag)
     );
-    series[metric2] = [
-      ...new Map(
-        all.slice().reverse().map((r) => [r.end, r])
-      ).values()
-    ].sort((a, b) => b.end.localeCompare(a.end));
+    series[metric] = all;
   }
   const ends = [
     ...new Set([...series.revenue, ...series.eps].map((r) => r.end))
   ].sort().reverse().slice(0, 3);
-  const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY2 <= 1400).map((end) => {
-    const metrics = {};
-    for (const [metric2, rows3] of Object.entries(series)) {
-      const r = rows3.find((r2) => r2.end === end);
+  let reconciledDATag;
+  const annual = ends.filter((end) => (+now2 - Date.parse(end)) / DAY3 <= 1400).map((end) => {
+    const metrics = {}, qualityIssues2 = [];
+    const anchor = series.revenue.find((r) => r.end === end) || series.eps.find((r) => r.end === end);
+    for (const [metric, rows3] of Object.entries(series)) {
+      const matches = rows3.filter((r2) => r2.end === end && (instantMetrics.has(metric) || r2.start === anchor.start));
+      let r = metric === "da" && reconciledDATag ? matches.find((r2) => r2.namespace + ":" + r2.tag === reconciledDATag) || matches[0] : matches[0];
+      let revenueProof;
+      if (metric === "revenue" && r) {
+        const selection = selectRevenueRow(matches, payload, cik);
+        r = selection.row;
+        revenueProof = selection.proof;
+        if (selection.issue) qualityIssues2.push(selection.issue);
+      }
       if (!r) continue;
-      metrics[metric2] = {
-        value: r.val,
-        asOf: r.end,
-        filed: r.filed,
-        unit: r.unit,
-        basis: metric2 === "capex" && r.tag === "PaymentsToAcquireProductiveAssets" ? "Reported investment in productive assets, including PP&E, software and other intangibles" : metric2 === "equity" ? "Total stockholders/owners equity; common-only basis not confirmed" : metric2 === "shares" ? "Reported annual weighted-average share count; not current diluted shares" : "Reported filing fact",
-        source: {
-          name: "SEC EDGAR",
-          tag: r.namespace + ":" + r.tag,
-          url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${r.accn.replaceAll("-", "")}/${r.accn}-index.html`
-        }
-      };
+      metrics[metric] = metric === "revenue" ? attachRevenueProof(financialFact(r, metric, cik), revenueProof) : financialFact(r, metric, cik);
     }
     const derive = (key2, components, fn, basis) => {
       if (metrics[key2] || !components.every((k) => metrics[k])) return;
@@ -6988,21 +14263,45 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
       metrics[key2] = { ...facts[0], value, basis, source: {
         ...facts[0].source,
         tag: facts.map((f) => f.source.tag).join("; "),
-        name: "SEC EDGAR \xB7 derived subtotal"
+        name: "SEC EDGAR \xB7 derived subtotal",
+        components: facts
       } };
     };
     derive("eps", ["commonNetIncomeDiluted", "shares"], (income, shares) => shares > 0 ? income / shares : NaN, "Derived diluted EPS = income available to common shareholders, diluted / weighted-average diluted shares, same fiscal year and filing");
     if (metrics.eps && !series.eps.some((r) => r.end === end)) metrics.eps.unit = currency + "/shares";
     derive("da", ["depreciation", "amortization"], (d, a) => d + a, "Derived D&A = depreciation + intangible amortization, same fiscal year and filing");
-    derive("ebit", ["pretax", "nonoperating"], (p, n) => p - n, "Derived operating income = pretax income \u2212 net nonoperating income, same fiscal year and filing");
+    if (!metrics.ebit && metrics.pretax && metrics.nonoperating)
+      qualityIssues2.push({
+        metric: "ebit",
+        severity: "material",
+        code: "unverified_operating_income_bridge",
+        message: "Operating income is not directly reported in the supported concepts. Pretax income minus net nonoperating income is not a verified operating subtotal because issuers can present interest separately. No generic EBIT bridge is substituted.",
+        facts: [metrics.pretax, metrics.nonoperating, metrics.interestExpense].filter(Boolean)
+      });
     derive("commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Derived common equity = stockholders equity excluding NCI \u2212 preferred carrying value, same date and filing");
-    return { end, metrics };
+    const daCandidates = [];
+    for (const tag2 of financialTags.da) for (const namespace of ["us-gaap", "ifrs-full"])
+      for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[currency] || [])
+        if (r.end === end && r.start === anchor.start && r.accn === metrics.da?.source.accession && Number.isFinite(r.val))
+          daCandidates.push({ ...r, tag: tag2, namespace, unit: currency });
+    qualityIssues2.push(...normalizeMetricQuality(metrics, { payload, cik, series: { da: daCandidates } }));
+    derive("commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Derived common equity = stockholders equity excluding NCI \u2212 preferred carrying value, same date and filing");
+    if (metrics.da?.normalization?.kind === "scope-reconciliation") reconciledDATag = metrics.da.source.tag;
+    const filingURLs = [...new Set(Object.values(metrics).map((f) => f.source.url))];
+    if (filingURLs.length > 1) qualityIssues2.push({
+      metric: "period",
+      severity: "review",
+      code: "mixed_filing_comparatives",
+      message: "This fiscal-year record combines latest available facts from multiple filings. Comparative restatement, classification and share-split bases require review; individual source dates are retained."
+    });
+    return { start: anchor.start, end, metrics, qualityIssues: qualityIssues2 };
   });
   return {
-    status: !annual.length ? "unavailable" : (+now2 - Date.parse(annual[0].end)) / DAY2 > 550 ? "stale" : "ready",
+    status: !annual.length ? "unavailable" : (+now2 - Date.parse(annual[0].end)) / DAY3 > 550 ? "stale" : "ready",
     currency,
     annual,
     asOf: annual[0]?.end || null,
+    qualityIssues: annual.flatMap((a) => a.qualityIssues.map((issue) => ({ ...issue, start: a.start, end: a.end }))),
     warnings: [
       "Financial statements may use a different reporting currency from the listing. Values with unmatched currency are withheld.",
       "Stockholders/owners equity is not automatically treated as common equity. Preferred and AT1 capital require a verified adjustment."
@@ -7011,72 +14310,120 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
 }
 
 // src/recent-financials.js
-var DAY3 = 864e5;
-var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY3 + 1;
-var forms2 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
-var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY3 <= n;
+var DAY4 = 864e5;
+var days = (r) => (Date.parse(r.end) - Date.parse(r.start)) / DAY4 + 1;
+var forms3 = /* @__PURE__ */ new Set(["10-Q", "10-Q/A", "10-K", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A", "6-K", "6-K/A"]);
+var nearby = (a, b, n = 14) => Math.abs(Date.parse(a) - Date.parse(b)) / DAY4 <= n;
 function parseRecentFinancials(payload, cik, currency, annual, now2 = /* @__PURE__ */ new Date()) {
   if (Number(payload?.cik) !== Number(cik)) throw Error("Issuer mismatch");
   const today = now2.toISOString().slice(0, 10), fy = annual?.annual?.[0];
   if (!fy) return { recent: null, ttm: null };
   const series = {};
-  for (const [metric2, names] of Object.entries(financialTags)) {
-    const unit = metric2 === "eps" ? currency + "/shares" : ["shares", "commonShares"].includes(metric2) ? "shares" : currency;
+  for (const [metric, names] of Object.entries(financialTags)) {
+    const unit = metric === "eps" ? currency + "/shares" : shareMetrics.has(metric) ? "shares" : currency;
     const rows3 = [];
-    for (const tag of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag]?.units?.[unit] || []) {
-      if (!validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || !forms2.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
-      if (instantMetrics.has(metric2) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
-      rows3.push({ ...r, tag, namespace, unit });
+    for (const tag2 of names) for (const namespace of ["us-gaap", "ifrs-full"]) for (const r of payload.facts?.[namespace]?.[tag2]?.units?.[unit] || []) {
+      if (!validDate(r.end) || !validDate(r.filed) || r.end > today || r.filed > today || r.filed < r.end || !forms3.has(r.form) || !/^\d{10}-\d{2}-\d{6}$/.test(r.accn || "") || !Number.isFinite(r.val)) continue;
+      if (instantMetrics.has(metric) ? !!r.start : !validDate(r.start) || days(r) < 70 || days(r) > 385) continue;
+      rows3.push({ ...r, tag: tag2, namespace, unit });
     }
-    series[metric2] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
+    series[metric] = rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed) || names.indexOf(a.tag) - names.indexOf(b.tag));
   }
-  const anchor = [...series.revenue || [], ...series.eps || []].filter((r) => r.end > fy.end && days(r) < 310 && nearby(r.start, new Date(Date.parse(fy.end) + DAY3).toISOString().slice(0, 10), 10)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
-  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY3) return { recent: null, ttm: null };
-  const make = (r) => ({ value: r.val, asOf: r.end, filed: r.filed, unit: r.unit, basis: instantMetrics.has(r.metric) ? "Reported period-end balance" : "Reported year-to-date filing fact", source: { name: "SEC EDGAR", tag: r.namespace + ":" + r.tag, url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${r.accn.replaceAll("-", "")}/${r.accn}-index.html`, accession: r.accn } });
-  const latest = {}, prior = {}, ttm = {};
+  const nextDay2 = (end) => new Date(Date.parse(end) + DAY4).toISOString().slice(0, 10);
+  const anchor = [...series.revenue || [], ...series.eps || []].filter((r) => r.end > fy.end && days(r) < 310 && r.start === nextDay2(fy.end)).sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0];
+  if (!anchor || now2 - Date.parse(anchor.end) > 550 * DAY4) return { recent: null, ttm: null };
+  const latest2 = {}, prior = {}, ttm = {}, qualityIssues2 = [];
   let priorPeriod = null;
-  for (const [metric2, rows3] of Object.entries(series)) {
-    const c = rows3.find((r) => r.end === anchor.end && (instantMetrics.has(metric2) || r.start === anchor.start));
+  for (const [metric, rows3] of Object.entries(series)) {
+    const matches = rows3.filter((r) => r.end === anchor.end && (instantMetrics.has(metric) || r.start === anchor.start));
+    const annualDA = metric === "da" && fy.metrics?.da?.normalization?.kind === "scope-reconciliation" ? fy.metrics.da.source.tag : null;
+    let c = annualDA && matches.find((r) => r.namespace + ":" + r.tag === annualDA) || matches[0], revenueProof;
+    if (metric === "revenue" && c) {
+      const selection = selectRevenueRow(matches, payload, cik);
+      c = selection.row;
+      revenueProof = selection.proof;
+      if (selection.issue) qualityIssues2.push(selection.issue);
+    }
     if (!c) continue;
-    latest[metric2] = make({ ...c, metric: metric2 });
-    if (instantMetrics.has(metric2)) {
-      ttm[metric2] = latest[metric2];
+    if (metric === "da" && (fy.qualityIssues || []).some((i2) => i2.code === "ambiguous_d_and_a_scope" && i2.facts?.[0]?.source.tag === c.namespace + ":" + c.tag)) {
+      qualityIssues2.push({
+        metric,
+        severity: "material",
+        code: "unresolved_d_and_a_scope_carries_forward",
+        start: c.start,
+        end: c.end,
+        message: "The same D&A concept failed consolidated-scope reconciliation in the annual statements. Its interim value remains withheld until a source-backed aggregate bridge is available.",
+        facts: [financialFact(c, metric, cik)]
+      });
       continue;
     }
-    const p = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY3).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && r.tag === c.tag && r.namespace === c.namespace).sort((a2, b) => Number(b.accn === c.accn) - Number(a2.accn === c.accn) || b.filed.localeCompare(a2.filed))[0];
+    latest2[metric] = metric === "revenue" ? attachRevenueProof(financialFact(c, metric, cik), revenueProof) : financialFact(c, metric, cik);
+    if (instantMetrics.has(metric)) continue;
+    const priorMatches = rows3.filter((r) => r.end < c.end && nearby(r.end, new Date(Date.parse(c.end) - 365.25 * DAY4).toISOString().slice(0, 10)) && Math.abs(days(r) - days(c)) <= 14 && (metric === "revenue" || r.tag === c.tag && r.namespace === c.namespace)).sort((a, b) => Number(b.accn === c.accn) - Number(a.accn === c.accn) || b.filed.localeCompare(a.filed));
+    let p = priorMatches[0], priorRevenueProof;
+    if (metric === "revenue" && p) {
+      const selection = selectRevenueRow(priorMatches.filter((r) => r.start === p.start && r.end === p.end), payload, cik);
+      p = selection.row;
+      priorRevenueProof = selection.proof;
+      if (selection.issue) qualityIssues2.push(selection.issue);
+    }
     if (p) {
-      prior[metric2] = make({ ...p, metric: metric2 });
-      if (!priorPeriod || metric2 === "revenue") priorPeriod = p;
+      prior[metric] = metric === "revenue" ? attachRevenueProof(financialFact(p, metric, cik), priorRevenueProof) : financialFact(p, metric, cik);
+      if (!priorPeriod || metric === "revenue") priorPeriod = p;
     }
-    if (metric2 === "shares") {
-      ttm.shares = { ...latest.shares, basis: "Latest reported YTD weighted-average diluted share count used as a valuation proxy; not current fully diluted or reconstructed TTM shares" };
-      continue;
-    }
-    if (metric2 === "eps" || !p) continue;
-    const a = rows3.find((r) => r.end === fy.end && days(r) >= 330 && days(r) <= 385 && r.tag === c.tag && r.namespace === c.namespace);
-    if (!a) continue;
-    const value = a.val + c.val - p.val;
-    const components = [make({ ...a, metric: metric2 }), make({ ...c, metric: metric2 }), make({ ...p, metric: metric2 })];
-    if (!Number.isFinite(value)) continue;
-    ttm[metric2] = { ...latest[metric2], value, basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; review restatements", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.namespace + ":" + c.tag, url: latest[metric2].source.url, components } };
   }
-  const derive = (m, key2, keys, fn, basis) => {
-    if (m[key2] || !keys.every((k) => m[k])) return;
-    const f = keys.map((k) => m[k]);
-    if (!f.every((x2) => x2.source.url === f[0].source.url)) return;
+  const derive = (m, key2, keys2, fn, basis) => {
+    if (m[key2] || !keys2.every((k) => m[k])) return;
+    const f = keys2.map((k) => m[k]);
+    if (!f.every((x2) => x2.source.url === f[0].source.url && x2.start === f[0].start && x2.asOf === f[0].asOf)) return;
     const value = fn(...f.map((x2) => x2.value));
     if (!Number.isFinite(value)) return;
     m[key2] = { ...f[0], value, basis, source: { name: "SEC EDGAR \xB7 derived subtotal", url: f[0].source.url, tag: f.map((x2) => x2.source.tag).join("; "), components: f } };
   };
-  for (const m of [latest, prior, ttm]) {
+  const deriveSubtotals = (m) => {
     derive(m, "da", ["depreciation", "amortization"], (d, a) => d + a, "Derived D&A = depreciation + amortization, matching reporting period and filing");
-    derive(m, "ebit", ["pretax", "nonoperating"], (p, n) => p - n, "Derived EBIT = pretax income \u2212 net nonoperating income, matching reporting period and filing");
+    if (!m.ebit && m.pretax && m.nonoperating) qualityIssues2.push({ metric: "ebit", severity: "material", code: "unverified_operating_income_bridge", message: "A direct operating subtotal is unavailable. Pretax income minus net nonoperating income cannot verify whether financing interest is excluded; no generic EBIT bridge is substituted.", facts: [m.pretax, m.nonoperating, m.interestExpense].filter(Boolean) });
+    derive(m, "commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Common equity = owners equity \u2212 preferred carrying value, matching period-end and filing");
+  };
+  for (const m of [latest2, prior]) {
+    deriveSubtotals(m);
+    const periodFact = m.revenue || m.eps || Object.values(m).find((f) => f.start);
+    qualityIssues2.push(...normalizeMetricQuality(m, { payload, cik, series }).map((issue) => ({ ...issue, start: periodFact?.start, end: periodFact?.asOf || anchor.end })));
     derive(m, "commonEquity", ["equity", "preferredEquity"], (e, p) => e - p, "Common equity = owners equity \u2212 preferred carrying value, matching period-end and filing");
   }
+  for (const [metric, c] of Object.entries(latest2)) {
+    if (instantMetrics.has(metric)) {
+      ttm[metric] = c;
+      continue;
+    }
+    if (metric === "shares") {
+      ttm.shares = { ...c, basis: c.basis + "; latest YTD share-count proxy, not a reconstructed TTM average" };
+      continue;
+    }
+    if (metric === "eps") continue;
+    const p = prior[metric], a = fy.metrics?.[metric];
+    if (!p || !a) continue;
+    const fiscalStart = fy.start || a.start;
+    if (!fiscalStart || p.start !== fiscalStart || a.start !== p.start || a.source.tag !== c.source.tag || p.source.tag !== c.source.tag || a.unit !== c.unit || p.unit !== c.unit) {
+      qualityIssues2.push({ metric, severity: "material", code: "ttm_fiscal_basis_mismatch", message: "TTM was withheld because annual and comparable YTD facts do not share the same fiscal start, unit and accounting concept.", facts: [a, c, p] });
+      continue;
+    }
+    const span = (Date.parse(c.asOf) - Date.parse(p.asOf)) / DAY4;
+    if (span < 330 || span > 385) continue;
+    const value = a.value + c.value - p.value;
+    if (!Number.isFinite(value)) continue;
+    const components = [a, c, p], warnings = [];
+    if (p.source.url !== c.source.url) {
+      warnings.push("The prior YTD comparative is from a different filing; restatement comparability is unverified.");
+      qualityIssues2.push({ metric, severity: "review", code: "ttm_comparative_filing_mismatch", message: warnings[0], facts: [c, p] });
+    }
+    ttm[metric] = { ...c, value, start: nextDay2(p.asOf), basis: "Trailing twelve months = reported full fiscal year + current YTD \u2212 comparable prior YTD; matching fiscal start and accounting concept", source: { name: "SEC EDGAR \xB7 derived TTM", tag: c.source.tag, url: c.source.url, components }, ...warnings.length ? { warnings } : {} };
+  }
+  deriveSubtotals(ttm);
   const growth = {};
-  for (const k of Object.keys(latest)) if (!instantMetrics.has(k) && prior[k]?.value > 0) growth[k] = { value: latest[k].value / prior[k].value - 1, basis: "Year-to-date change versus comparable prior-year period", source: latest[k].source };
-  const earliest = new Date(priorPeriod?.end ? Date.parse(priorPeriod.end) + DAY3 : Date.parse(anchor.end) - 364 * DAY3).toISOString().slice(0, 10);
-  return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest, prior: { start: priorPeriod?.start, end: priorPeriod?.end, metrics: prior }, growth, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
+  for (const k of Object.keys(latest2)) if (!instantMetrics.has(k) && prior[k]?.value > 0 && latest2[k].start === anchor.start && prior[k].start === (fy.start || fy.metrics?.[k]?.start)) growth[k] = { value: latest2[k].value / prior[k].value - 1, basis: "Year-to-date change versus comparable prior-year period", source: latest2[k].source };
+  const earliest = priorPeriod?.end ? nextDay2(priorPeriod.end) : new Date(Date.parse(anchor.end) - 364 * DAY4).toISOString().slice(0, 10);
+  return { recent: { start: anchor.start, end: anchor.end, filed: anchor.filed, form: anchor.form, metrics: latest2, prior: { start: priorPeriod?.start, end: priorPeriod?.end, metrics: prior }, growth, qualityIssues: qualityIssues2, warnings: ["Interim figures are YTD, not annualized or necessarily the latest standalone quarter."] }, ttm: { start: earliest, end: anchor.end, basis: "Derived TTM operating data and latest reported balance-sheet/share proxies", metrics: ttm, qualityIssues: qualityIssues2, warnings: ["TTM requires matching fiscal, YTD and comparable prior-YTD facts. Missing components are withheld.", "Diluted EPS is not reconstructed by summing per-share figures. Latest YTD diluted shares remain a proxy, and corporate actions require review."] } };
 }
 
 // worker/market-provider.js
@@ -7114,8 +14461,8 @@ async function licensedSnapshot(item, env, fetcher2 = fetch, now2 = /* @__PURE__
       if (!f) continue;
       if (!Number.isFinite(f.value) || f.value < 0 || ["price", "marketCap"].includes(name) && f.value === 0 || !validDate(f.asOf) || f.asOf > today || f.currency !== item.currency || !f.basis?.trim() || !f.source?.name?.trim() || !/^https:\/\//.test(f.source.url || ""))
         continue;
-      const age = (+now2 - Date.parse(f.asOf)) / 864e5;
-      if (age > (name === "price" || name === "marketCap" ? 10 : 550)) continue;
+      const age2 = (+now2 - Date.parse(f.asOf)) / 864e5;
+      if (age2 > (name === "price" || name === "marketCap" ? 10 : 550)) continue;
       if (name === "commonBookValuePerShare" && f.commonOnly !== true) continue;
       fields[name] = { ...f, status: "ready" };
       if (name === "dividend")
@@ -7177,6 +14524,28 @@ function validateRelative(r, item, now2) {
 }
 
 // worker/forecast-references.js
+function latestStatementFiling(submissions, cik, now2 = /* @__PURE__ */ new Date()) {
+  const recent = submissions.filings?.recent, today = now2.toISOString().slice(0, 10);
+  if (!recent || Number(submissions.cik) !== Number(cik)) return null;
+  const rows3 = [];
+  for (let i2 = 0; i2 < (recent.form || []).length; i2++) {
+    const form = recent.form[i2], end = recent.reportDate?.[i2], filed = recent.filingDate?.[i2], accn = recent.accessionNumber?.[i2], document = recent.primaryDocument?.[i2];
+    if (!["10-Q", "10-K", "10-Q/A", "10-K/A", "40-F", "40-F/A", "20-F", "20-F/A"].includes(form) || !validDate(end) || !validDate(filed) || end > today || filed > today || !/^\d{10}-\d{2}-\d{6}$/.test(accn || "") || !/^[\w.-]+\.(?:htm|html)$/i.test(document || "")) continue;
+    rows3.push({ form, end, filed, accession: accn, source: { name: "SEC latest periodic statement filing", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accn.replaceAll("-", "")}/${document}` } });
+  }
+  return rows3.sort((a, b) => b.end.localeCompare(a.end) || b.filed.localeCompare(a.filed))[0] || null;
+}
+function latestResultsDisclosure(submissions, cik, now2 = /* @__PURE__ */ new Date()) {
+  const r = submissions.filings?.recent, today = now2.toISOString().slice(0, 10);
+  if (Number(submissions.cik) !== Number(cik) || !r) return null;
+  const rows3 = [];
+  for (let i2 = 0; i2 < (r.form || []).length; i2++) {
+    const form = r.form[i2], filed = r.filingDate?.[i2], accn = r.accessionNumber?.[i2], document = r.primaryDocument?.[i2];
+    if (!["8-K", "8-K/A"].includes(form) || !/(?:^|[,\s])2\.02(?:$|[,\s])/.test(r.items?.[i2] || "") || !validDate(filed) || filed > today || !/^\d{10}-\d{2}-\d{6}$/.test(accn || "") || !/^[\w.-]+\.(?:htm|html)$/i.test(document || "")) continue;
+    rows3.push({ form, filed, accession: accn, basis: "Results-of-operations disclosure; filing date is not a fiscal period end", source: { name: "SEC results-of-operations disclosure \xB7 Item 2.02", url: `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accn.replaceAll("-", "")}/${document}` } });
+  }
+  return rows3.sort((a, b) => b.filed.localeCompare(a.filed))[0] || null;
+}
 var referenceURLs = { beta: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html", capital: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/wacc.html", country: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html", growth: "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histgr.html" };
 var clean2 = (s) => s.replace(/<[^>]*>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
 var rows = (html) => [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map((r) => [...r[1].matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((x2) => clean2(x2[1])));
@@ -7189,7 +14558,7 @@ function parseReferences(html, now2 = /* @__PURE__ */ new Date()) {
   const asOf = dates[0][2] + "-" + String(months[dates[0][1]]).padStart(2, "0");
   if (asOf > now2.toISOString().slice(0, 7) || now2 - Date.parse(asOf + "-01") > 550 * 864e5) throw Error("Risk and growth references are stale or future dated");
   const beta = rows(html.beta), capital = rows(html.capital), growth = rows(html.growth), countries = rows(html.country);
-  for (const [table2, marker] of [[beta, "Unlevered beta"], [capital, "Cost of Debt"], [growth, "Expected Growth in Revenues"], [countries, "Equity Risk Premium"]]) if (!table2.some((r) => r.join(" ").includes(marker))) throw Error("Reference table schema changed");
+  for (const [table, marker] of [[beta, "Unlevered beta"], [capital, "Cost of Debt"], [growth, "Expected Growth in Revenues"], [countries, "Equity Risk Premium"]]) if (!table.some((r) => r.join(" ").includes(marker))) throw Error("Reference table schema changed");
   const countryRows = countries.filter((r) => r.length >= 6 && number(r[4]) > 0 && number(r[4]) < 1 && Number.isFinite(number(r[5])) && number(r[5]) >= 0 && number(r[5]) < 0.6).map((r) => ({ name: r[0], defaultSpread: number(r[2]), equityRiskPremium: number(r[4]), taxRate: number(r[5]) }));
   if (countryRows.length < 100 || !["United States", "Canada", "Hong Kong"].every((n) => countryRows.some((r) => r.name === n)) || countryRows.some((r) => !(r.equityRiskPremium > 0 && r.equityRiskPremium < 1 && r.taxRate >= 0 && r.taxRate < 0.6))) throw Error("Country reference incomplete");
   const samples = capital.map((r) => [number(r[2]), number(r[3])]).filter(([b, k]) => b > 0 && k > 0);
@@ -7308,7 +14677,7 @@ async function listingReferences(item, cik, fetcher2 = fetch, now2 = /* @__PURE_
   let issuer = null;
   if (cik) try {
     const url = "https://data.sec.gov/submissions/CIK" + String(cik).padStart(10, "0") + ".json", d = await sourceJSON(url, fetcher2);
-    if (Number(d.cik) === Number(cik)) issuer = { sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, source: { name: "SEC issuer SIC classification", url } };
+    if (Number(d.cik) === Number(cik)) issuer = { sic: d.sic, description: d.sicDescription, country: d.addresses?.business?.stateOrCountryDescription, latestStatement: latestStatementFiling(d, cik, now2), latestResultsDisclosure: latestResultsDisclosure(d, cik, now2), source: { name: "SEC issuer SIC classification", url } };
   } catch {
   }
   const domicile = issuer?.country?.replace(/\s*\(.*\)/, "").split(",").at(-1).trim().toLowerCase();
@@ -7317,6 +14686,148 @@ async function listingReferences(item, cik, fetcher2 = fetch, now2 = /* @__PURE_
   const industry = base.industries.find((r) => key(r.name) === key(industryForListing(item, issuer?.sic))) || base.industries.find((r) => r.name === "Total Market");
   const bank = canadianSystemicBanks.has(item.symbol);
   return { asOf: base.asOf, checkedAt: base.checkedAt, sources: { ...base.sources, ...bank ? { classification: { name: "OSFI \xB7 Canadian systemically important banks", url: "https://www.osfi-bsif.gc.ca/en/supervision/financial-institutions/banks/systemically-important-banks" } } : {} }, country, countryBasis, currencyDefaultSpread: base.countries.find((c) => c.name === { USD: "United States", CAD: "Canada", HKD: "Hong Kong" }[item.currency])?.defaultSpread || 0, industry, issuer, classificationBasis: bank ? "OSFI domestic systemic bank mapped to a large-bank US industry proxy" : issuer ? "SEC SIC mapped to an approximate US industry proxy" : "Broad US market proxy; no validated issuer industry classification" };
+}
+
+// worker/revenue-scope.js
+var UA = "TickerLantern public financial research contact@tickerlantern.com";
+var decode = (s) => s.replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, h, d) => String.fromCodePoint(parseInt(h || d, h ? 16 : 10))).replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+var plain = (s) => decode(s.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+function incomeStatementReports(xml) {
+  return [...xml.matchAll(/<Report(?:\s[^>]*)?>([\s\S]*?)<\/Report>/g)].map((m) => {
+    const body = m[1], value = (key2) => decode(body.match(new RegExp("<" + key2 + ">([\\s\\S]*?)<\\/" + key2 + ">"))?.[1] || "");
+    return { name: value("ShortName"), file: value("HtmlFileName"), category: value("MenuCategory") };
+  }).filter((r) => r.category === "Statements" && /consolidated/i.test(r.name) && /(?:statement.*(?:operations|income|earnings|loss)|(?:income|earnings) statements?|results of operations)/i.test(r.name) && !/parenthetical|schedule|cash flows|equity|financial position|balance sheet/i.test(r.name) && /^R\d+\.html?$/i.test(r.file)).slice(0, 3);
+}
+function rowScore(label) {
+  const text = label.toLowerCase().replace(/\s*\(notes?\s+[\d,\s]+\)\s*$/, "").replace(/[,:.]/g, "").replace(/\s+/g, " ").trim().replace(/^(revenues?|sales) net$/, "net $1");
+  if (/^(?:total )?(?:net )?(?:operating )?(?:revenues?|sales)(?: and (?:(?:other|operating|financial) )?(?:revenues?|income|other))?$/.test(text) || /^total revenues? net of interest expense$/.test(text) || /^total service revenues and vehicle sales$/.test(text)) return /^total /.test(text) ? 100 : 90;
+  if (/^(?:total )?(?:property|rental|real estate|rental and other property) (?:revenues?|income)$/.test(text)) return 85;
+  return 0;
+}
+function headerDate(text) {
+  const match = text.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z.]*\s+(\d{1,2}),?\s+(20\d{2})\b/i);
+  if (!match) return null;
+  const months = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, sept: 9, oct: 10, nov: 11, dec: 12 };
+  return `${match[3]}-${String(months[match[1].toLowerCase()]).padStart(2, "0")}-${match[2].padStart(2, "0")}`;
+}
+function statementColumns(table) {
+  let durations = [], dates = [];
+  for (const row of table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    if (/<td\b/i.test(row[1])) break;
+    const cells = [...row[1].matchAll(/<th\b([^>]*)>([\s\S]*?)<\/th>/gi)].filter((c) => /class=["'][^"']*\bth\b/.test(c[1]));
+    const group = cells.flatMap((c) => {
+      const months = plain(c[2]).match(/(\d+)\s+Months?\s+Ended/i);
+      return months ? Array.from({ length: Number(c[1].match(/colspan=["'](\d+)/i)?.[1] || 1) }, () => Number(months[1])) : [];
+    });
+    const endDates = cells.map((c) => ({ end: headerDate(plain(c[2])), width: Number(c[1].match(/colspan=["'](\d+)/i)?.[1] || 1) })).filter((c) => c.end);
+    if (group.length) durations = group;
+    if (endDates.length) dates = endDates;
+  }
+  let physicalColumn = 0;
+  return dates.map(({ end, width }, index) => {
+    const months = durations[physicalColumn];
+    physicalColumn += width;
+    return { index, end, months };
+  });
+}
+function statementRevenueProofs(html, request, { url, reportName, summaryURL, checkedAt, diagnostics = {} }) {
+  const table = html.match(/<table\b[^>]*class=["'][^"']*\breport\b[^"']*["'][^>]*>([\s\S]*?)<\/table>/i)?.[1];
+  if (!table) {
+    diagnostics.reasonCode = "statement_table_unrecognized";
+    return [];
+  }
+  const heading = plain(table.slice(0, Math.min(table.indexOf("</th>") + 1e3, 4e3))), currency = heading.match(/\b(USD|CAD|EUR|GBP|JPY|CNY|HKD)\s*\(/)?.[1];
+  if (currency && currency !== request.currency) {
+    diagnostics.reasonCode = "statement_currency_mismatch";
+    return [];
+  }
+  const scale = /\$\s*in\s*billions/i.test(heading) ? 1e9 : /\$\s*in\s*millions/i.test(heading) ? 1e6 : /\$\s*in\s*thousands/i.test(heading) ? 1e3 : 1;
+  const columns = statementColumns(table), days2 = (Date.parse(request.end) - Date.parse(request.start)) / 864e5 + 1;
+  const eligibleColumns = columns.filter((c) => c.end === request.end && Number.isFinite(c.months) && Math.abs(days2 - c.months * 365.25 / 12) <= 20);
+  if (!eligibleColumns.length) {
+    diagnostics.reasonCode = "statement_period_column_unmatched";
+    return [];
+  }
+  const found = [];
+  let highestVisibleScore = 0, highestRow;
+  for (const row of table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    const cell = row[1].match(/<td\b[^>]*class=["'][^"']*\bpl\b[^"']*["'][^>]*>([\s\S]*?)<\/td>/i)?.[1];
+    if (!cell) continue;
+    const concept = cell.match(/defref_([a-z][a-z0-9-]*)_([A-Za-z0-9]+)/i), label = plain(cell), score = rowScore(label);
+    if (!concept || !score) continue;
+    if (/Abstract$/.test(concept[2])) continue;
+    if (score > highestVisibleScore) {
+      highestVisibleScore = score;
+      highestRow = { tag: concept[1] + ":" + concept[2], namespace: concept[1], label };
+    }
+    const tag2 = concept[1] + ":" + concept[2], candidates = request.candidates.filter((r) => r.namespace + ":" + r.tag === tag2);
+    if (!candidates.length) continue;
+    const values = [...row[1].matchAll(/<td\b[^>]*class=["'][^"']*\bnum[^"']*["'][^>]*>([\s\S]*?)<\/td>/gi)].map((m) => plain(m[1])).map((s) => {
+      const negative = /\(/.test(s), v = Number(s.replace(/[,$()\s]/g, "").replace(/−/g, "-"));
+      return Number.isFinite(v) ? negative ? -v : v : NaN;
+    }).filter(Number.isFinite);
+    if (values.length !== columns.length) continue;
+    for (const candidate of candidates) for (const column of eligibleColumns) if (Math.abs(values[column.index] * scale - candidate.val) <= Math.max(1, Math.abs(candidate.val) * 1e-7)) found.push({ schema: 1, status: "verified", cik: request.cik, accession: request.accession, currency: request.currency, start: request.start, end: request.end, tag: tag2, value: candidate.val, label, reportName, score, scale, column, reportedCells: values, source: { name: "SEC EDGAR \xB7 consolidated income-statement revenue row", url }, filingSummary: summaryURL, checkedAt });
+  }
+  const best = found.length ? Math.max(...found.map((r) => r.score)) : 0;
+  diagnostics.hasRevenueRow = highestVisibleScore > 0;
+  if (!highestVisibleScore) diagnostics.reasonCode = "consolidated_revenue_total_row_unidentified";
+  if (best < highestVisibleScore && highestRow) {
+    diagnostics.reasonCode = !["us-gaap", "ifrs-full"].includes(highestRow.namespace) ? "issuer_extension_total_not_in_companyfacts" : "statement_total_not_in_companyfacts_period";
+    diagnostics.reason = `The consolidated statement's primary revenue row is ${highestRow.tag} (${highestRow.label}); no supported companyfacts candidate matches its exact period and value. Component revenue is not substituted.`;
+  }
+  return best === highestVisibleScore ? found.filter((r) => r.score === best) : [];
+}
+async function sourceText(url, fetcher2) {
+  const response = await fetcher2(url, { headers: { "User-Agent": UA, Accept: "application/xml,text/html" }, signal: AbortSignal.timeout(15e3), cf: { cacheTtl: 21600, cacheEverything: true } });
+  if (!response.ok) throw Error("Official filing source HTTP " + response.status);
+  const text = await response.text();
+  if (text.length > 2e6) throw Error("Official filing source exceeded validation limit");
+  return text;
+}
+async function resolveRevenueScopes(payload, cik, currencies, fetcher2, now2 = /* @__PURE__ */ new Date(), { force = false } = {}) {
+  if (Number(payload?.cik) !== Number(cik)) throw Error("Revenue-scope issuer mismatch");
+  const scopes = { ...payload.revenueScopes || {} }, requests = currencies.flatMap((currency) => revenueScopeRequests(payload, cik, currency, now2, { force })), groups2 = /* @__PURE__ */ new Map();
+  for (const request of requests) {
+    const key2 = request.accession;
+    if (!groups2.has(key2)) groups2.set(key2, []);
+    groups2.get(key2).push(request);
+  }
+  for (const [accession2, group] of groups2) {
+    const base = `https://www.sec.gov/Archives/edgar/data/${Number(cik)}/${accession2.replaceAll("-", "")}/`, summaryURL = base + "FilingSummary.xml";
+    try {
+      const reports = incomeStatementReports(await sourceText(summaryURL, fetcher2));
+      if (!reports.length) {
+        const error = Error("No supported consolidated income-statement report was identified");
+        error.reasonCode = "consolidated_income_statement_unidentified";
+        throw error;
+      }
+      const selectedByKey = /* @__PURE__ */ new Map(), diagnosticByKey = /* @__PURE__ */ new Map();
+      for (const report of reports) {
+        const url = base + report.file, html = await sourceText(url, fetcher2);
+        for (const request of group) {
+          if (selectedByKey.has(request.key)) continue;
+          const diagnostics = {}, proofs = statementRevenueProofs(html, request, { url, reportName: report.name, summaryURL, checkedAt: now2.toISOString(), diagnostics });
+          if (diagnostics.hasRevenueRow || proofs.length) selectedByKey.set(request.key, { proofs, diagnostics });
+          else if (diagnostics.reasonCode && !diagnosticByKey.has(request.key)) diagnosticByKey.set(request.key, diagnostics);
+        }
+        if (group.every((request) => selectedByKey.has(request.key))) break;
+      }
+      for (const request of group) {
+        const selected = selectedByKey.get(request.key), matches = selected?.proofs || [], deduped = /* @__PURE__ */ new Map();
+        for (const proof of matches) {
+          const key2 = proof.tag + "|" + proof.value;
+          if (!deduped.has(key2)) deduped.set(key2, proof);
+        }
+        const unique2 = [...deduped.values()];
+        const diagnostics = selected?.diagnostics || diagnosticByKey.get(request.key) || {};
+        scopes[request.key] = unique2.length === 1 ? unique2[0] : { schema: 1, status: "unresolved", cik: Number(cik), accession: accession2, start: request.start, end: request.end, currency: request.currency, reasonCode: unique2.length ? "conflicting_consolidated_revenue_rows" : diagnostics.reasonCode || "statement_revenue_unmatched", reason: unique2.length ? "Consolidated income statements contain conflicting eligible revenue rows" : diagnostics.reason || "No statement revenue row matched the reported concept, value, currency and period", source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
+      }
+    } catch (error) {
+      for (const request of group) scopes[request.key] = { schema: 1, status: "unresolved", cik: Number(cik), accession: accession2, start: request.start, end: request.end, currency: request.currency, reasonCode: error.reasonCode || "official_statement_source_unavailable", reason: error.message, source: { name: "SEC EDGAR filing summary", url: summaryURL }, checkedAt: now2.toISOString() };
+    }
+  }
+  return { ...payload, revenueScopes: scopes, ...force ? { revenueScopePolicy: { requireStatementProof: true } } : {} };
 }
 
 // worker/valuation-data.js
@@ -7381,8 +14892,9 @@ async function riskFree(item, fetcher2, now2) {
   }
 }
 async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @__PURE__ */ new Date()) {
-  const data = {
+  let data = {
     schema: 1,
+    dataQualityVersion: DATA_QUALITY_VERSION,
     instrument: {
       symbol: item.symbol,
       ticker: item.ticker,
@@ -7406,7 +14918,9 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
     licensedSnapshot(item, env, fetcher2, now2)
   ]);
   if (filing.status === "fulfilled") {
-    const { facts, cik } = filing.value;
+    const { cik } = filing.value;
+    const currencies = item.currency === "CAD" && secReference(item)?.crossListed ? ["CAD", "USD"] : [item.currency];
+    const facts = await resolveRevenueScopes(filing.value.facts, cik, currencies, fetcher2, now2, { force: data.fit.group === "reit" });
     data.financials = parseFinancials(facts, cik, item.currency, now2);
     Object.assign(data.financials, parseRecentFinancials(facts, cik, item.currency, data.financials, now2));
     data.dividend = parseSECDividends(facts, cik, now2, {
@@ -7422,14 +14936,16 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
       } catch {
       }
     }
-    const latest = data.financials.status === "ready" && data.financials.annual[0];
-    const common = latest?.metrics?.commonEquity, shares = latest?.metrics?.commonShares;
+    const annualBase = data.financials.status === "ready" && data.financials.annual[0];
+    const recentBase = data.financials.recent;
+    const latest2 = recentBase?.metrics?.commonEquity && recentBase.metrics.commonShares ? recentBase : annualBase;
+    const common = latest2?.metrics?.commonEquity, shares = latest2?.metrics?.commonShares;
     if (common && shares?.value > 0 && common.value > 0 && common.source.url === shares.source.url)
       data.commonBookValuePerShare = {
         status: "ready",
         value: common.value / shares.value,
         currency: item.currency,
-        asOf: latest.end,
+        asOf: latest2.end,
         source: { name: "SEC EDGAR \xB7 common equity / period-end common shares", url: common.source.url },
         basis: "Reported or reconciled common equity divided by period-end common shares; review share-class economic rights"
       };
@@ -7444,6 +14960,8 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
   } catch {
     data.referenceStatus = "Industry outlook and risk source unavailable; unsupported automatic rates are withheld.";
   }
+  data = applyIssuerFinancialSupplement(item, data, { asOf: now2.toISOString() });
+  data.fit = modelFit(item, data);
   for (const key2 of [
     "price",
     "marketCap",
@@ -7454,8 +14972,103 @@ async function fetchValuationData(item, env = {}, fetcher2 = fetch, now2 = /* @_
   return data;
 }
 
+// src/research/debt-reconciliations.json
+var debt_reconciliations_default = {
+  schema: 1,
+  verifiedAt: "2026-10-17",
+  scope: "Exact dated filing reconciliations; no rule is extended to a new filing or changed amount.",
+  rows: [
+    { cik: 320193, period: "2026-06-27", filing: "000032019326000020", expected: { currentLongDebt: 11007e6, longDebt: 7134e7, commercialPaper: 1997e6 }, value: 84344e6, currency: "USD", basis: "Balance-sheet term debt, current and noncurrent, plus separately presented commercial paper; no commercial paper double count", source: { name: "Apple Q3 2026 Form 10-Q \xB7 consolidated balance sheet", url: "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm" } },
+    { cik: 320193, period: "2025-09-27", filing: "000032019325000079", expected: { currentLongDebt: 1235e7, longDebt: 78328e6, commercialPaper: 7979e6 }, value: 98657e6, currency: "USD", basis: "Term debt plus separately presented commercial paper; independently tied to the September 2025 comparative in the Q3 2026 balance sheet", source: { name: "Apple Q3 2026 Form 10-Q \xB7 September 2025 comparative balance sheet", url: "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm" } },
+    { cik: 16868, period: "2025-12-31", filing: "000001686826000011", expected: { debt: 21206e6, currentLongDebt: 906e6, longDebt: 203e8, commercialPaper: 124e6 }, value: 21206e6, currency: "CAD", basis: "Debt note total already includes commercial paper in the current portion; adding the separately tagged paper again would double count", source: { name: "CN 2025 annual financial statements \xB7 debt note", url: "https://www.sec.gov/Archives/edgar/data/16868/000001686826000011/R22.htm" } },
+    { cik: 93410, period: "2025-12-31", filing: "000009341026000078", expected: { debt: 39781e6, shortDebt: 10918e6, commercialPaper: 4642e6 }, value: 40758e6, currency: "USD", basis: "Long-term debt 39,781m plus net short-term debt 977m. Gross current subtotal 10,918m includes 9,941m reclassified to long-term; the gross subtotal cannot be added again", source: { name: "Chevron 2025 annual statements \xB7 short-term debt note and long-term debt note", url: "https://www.sec.gov/Archives/edgar/data/93410/000009341026000078/R28.htm" } }
+  ]
+};
+
+// src/debt-evidence.js
+var keys = ["debt", "shortDebt", "shortBorrowings", "debtCurrentTotal", "currentLongDebt", "longDebt", "commercialPaper"];
+var finite2 = Number.isFinite;
+var tag = (f) => (f?.source?.tag || "").split(":").at(-1);
+function debtEvidence(metrics = {}) {
+  const entries = keys.filter((k) => finite2(metrics[k]?.value) && metrics[k].value >= 0).map((k) => [k, metrics[k]]);
+  if (!entries.length) return { value: null, asOf: null, basis: "No supported debt balance", warnings: ["A complete borrowing bridge is not established."], components: [] };
+  const latest2 = entries.map(([, f]) => f.asOf).filter(Boolean).sort().at(-1);
+  const m = Object.fromEntries(entries.filter(([, f]) => !latest2 || f.asOf === latest2)), v = (k) => m[k]?.value;
+  const warnings = [];
+  const verified = debt_reconciliations_default.rows.find((r) => r.period === latest2 && Object.entries(r.expected).every(([key2, value]) => m[key2]?.value === value && m[key2].unit === r.currency && m[key2].source?.url?.includes(`/data/${r.cik}/${r.filing}/`)));
+  if (verified) return { value: verified.value, asOf: latest2, basis: verified.basis, components: Object.keys(verified.expected).map((k) => m[k]), complete: true, warnings, source: verified.source, verifiedAt: debt_reconciliations_default.verifiedAt };
+  const result = (value, basis, components, complete = false) => ({ value, asOf: latest2 || null, basis, components: components.map((k) => m[k]), complete, warnings });
+  const sum = (parts, basis, complete = false) => {
+    const facts = parts.map((k) => m[k]);
+    const currencies = new Set(facts.map((f) => f.unit).filter(Boolean));
+    const filings = new Set(facts.map((f) => f.source?.url).filter(Boolean));
+    if (currencies.size > 1 || filings.size > 1) return result(null, "Debt components do not share one currency and filing basis", parts);
+    return result(parts.reduce((s, k) => s + v(k), 0), basis, parts, complete);
+  };
+  if (m.debt && (tag(m.debt) === "Borrowings" || m.debt.scope === "total-borrowings")) return result(v("debt"), "Reported total borrowings; verify leases, restricted subsidiaries and other claims", ["debt"], true);
+  const current = m.debtCurrentTotal || (tag(m.shortDebt) === "DebtCurrent" || tag(m.shortDebt) === "CurrentBorrowings" ? m.shortDebt : null);
+  if (current) m.debtCurrentTotal = current;
+  const short = m.shortBorrowings || (tag(m.shortDebt) === "ShortTermBorrowings" ? m.shortDebt : null);
+  if (short) m.shortBorrowings = short;
+  if (current && m.longDebt && (!m.debt || Math.abs(v("longDebt") - v("debt")) > Math.max(1, Math.abs(v("debt")) * 1e-5)))
+    return sum(["debtCurrentTotal", "longDebt"], "Total current debt + noncurrent debt; commercial paper is not added again", true);
+  if (m.debt) {
+    if (short && short.value > 0 || m.commercialPaper?.value > 0 || current && current.value > 0) {
+      warnings.push("A long-term-debt subtotal overlaps with separately reported current borrowings or commercial paper. The full debt note must establish inclusion and any refinancing reclassification; no automatic addition is made.");
+      return result(null, "Unreconciled borrowing scope", ["debt", ...short ? ["shortBorrowings"] : [], ...current ? ["debtCurrentTotal"] : [], ...m.commercialPaper ? ["commercialPaper"] : []]);
+    }
+    warnings.push("Only a reported long-term-debt subtotal is established; short-term facilities, leases and other financing claims require review.");
+    return result(v("debt"), "Reported long-term-debt subtotal used as a provisional debt proxy", ["debt"]);
+  }
+  if (m.currentLongDebt && m.longDebt) {
+    if (m.commercialPaper?.value > 0) {
+      warnings.push("Commercial-paper inclusion in the current portion is unverified; adding it could double count borrowings.");
+      return result(null, "Current/noncurrent debt and commercial paper need source reconciliation", ["currentLongDebt", "longDebt", "commercialPaper"]);
+    }
+    const parts = ["currentLongDebt", "longDebt", ...short ? ["shortBorrowings"] : []];
+    warnings.push("The current/noncurrent debt bridge is a reported financing proxy; unreported facilities and leases remain subject to review.");
+    return sum(parts, "Current long-term maturities + noncurrent debt" + (short ? " + separate short-term borrowings" : ""));
+  }
+  if (m.shortDebt && m.longDebt && !tag(m.shortDebt)) return sum(["shortDebt", "longDebt"], "Provider-labelled current + noncurrent debt; source scope requires review");
+  warnings.push("The latest debt period lacks a complete current/noncurrent borrowing bridge. Older balances are not silently mixed into the new date.");
+  return result(null, "Latest borrowing evidence is incomplete", Object.keys(m));
+}
+
 // src/forecast-assumptions.js
-var finite = Number.isFinite;
+var finite3 = Number.isFinite;
+function matchingCompanyEstimates(snapshot, item) {
+  const cutoff = snapshot.checkedAt?.slice(0, 10);
+  if (!validDate(cutoff) || snapshot.instrument?.symbol !== item?.symbol || snapshot.instrument?.currency !== item?.currency) return [];
+  const change2 = classifyBusiness(item, snapshot)?.perShareBasisChange;
+  const rows3 = (Array.isArray(snapshot.feed?.estimates) ? snapshot.feed.estimates : []).filter(
+    (e) => validDate(e.fiscalEnd) && e.fiscalEnd > cutoff && validDate(e.asOf) && e.asOf <= cutoff && (Date.parse(cutoff) - Date.parse(e.asOf)) / 864e5 <= 45 && e.currency === item.currency && e.frequency === "annual" && Number.isInteger(e.contributors) && e.contributors > 0 && e.basis?.trim() && e.source?.name?.trim() && /^https:\/\//.test(e.source?.url || "")
+  ).map((e) => {
+    const out = { ...e };
+    if (!perShareFactCompatible({ asOf: e.asOf, source: e.source }, change2, cutoff)) delete out.eps;
+    return out;
+  }).filter((e) => ["revenue", "eps", "ebitda"].some((k) => finite3(e[k]))).sort((a, b) => a.fiscalEnd.localeCompare(b.fiscalEnd) || b.asOf.localeCompare(a.asOf));
+  if (!rows3.length) return [];
+  const nextAnnual = (end) => {
+    const [y, m, d] = end.split("-").map(Number), last = new Date(Date.UTC(y + 1, m, 0)).getUTCDate();
+    return `${y + 1}-${String(m).padStart(2, "0")}-${String(Math.min(d, last)).padStart(2, "0")}`;
+  };
+  const annual = snapshot.financials?.annual?.[0]?.end;
+  let expected = validDate(annual) ? nextAnnual(annual) : rows3[0].fiscalEnd;
+  for (let i2 = 0; i2 < 10 && expected <= cutoff; i2++) expected = nextAnnual(expected);
+  if (expected <= cutoff || (Date.parse(expected) - Date.parse(cutoff)) / 864e5 > 385) return [];
+  const accepted = [];
+  let lastEnd = null;
+  for (const row of rows3) {
+    if (row.fiscalEnd === lastEnd) continue;
+    const delta = (Date.parse(row.fiscalEnd) - Date.parse(expected)) / 864e5;
+    if (delta < -14) continue;
+    if (delta > 14) break;
+    accepted.push(row);
+    lastEnd = row.fiscalEnd;
+    expected = nextAnnual(row.fiscalEnd);
+  }
+  return accepted;
+}
 function currentReferences(snapshot) {
   const ref = snapshot.references, checked = Date.parse(snapshot.checkedAt) || Date.now();
   const dated = /^\d{4}-\d{2}$/.test(ref?.asOf || "") && Date.parse(ref.asOf + "-01");
@@ -7463,21 +15076,19 @@ function currentReferences(snapshot) {
 }
 var clamp = (x2, lo, hi) => Math.min(hi, Math.max(lo, x2));
 function reportedDebt(m = {}) {
-  const v = (k) => m[k]?.value;
-  if (finite(v("debt"))) return v("debt");
-  for (const keys of [["shortDebt", "longDebt"], ["currentLongDebt", "longDebt", "commercialPaper"]])
-    if (keys.every((k) => finite(v(k)))) return keys.reduce((s, k) => s + v(k), 0);
-  return null;
+  return debtEvidence(m).value;
 }
-function history(snapshot, metric2) {
+function history(snapshot, metric, change2, scopeChange) {
   const rows3 = (snapshot.financials?.status === "ready" ? snapshot.financials.annual : []) || [];
-  const a = rows3[0], b = rows3.filter((r) => r.metrics?.[metric2]?.value > 0).at(-1);
+  const a = rows3[0], b = rows3.filter((r) => r.metrics?.[metric]?.value > 0).at(-1);
   const years = a && b ? (Date.parse(a.end) - Date.parse(b.end)) / 864e5 / 365.25 : 0;
-  if (!(a?.metrics?.[metric2]?.value > 0 && b && years > 0.8)) return null;
+  if (!(a?.metrics?.[metric]?.value > 0 && b && years > 0.8)) return null;
+  if (scopeChange && (!businessScopeFactCompatible(a.metrics[metric], scopeChange) || !businessScopeFactCompatible(b.metrics[metric], scopeChange))) return null;
+  if (metric === "eps" && change2 && perShareFactCompatible(a.metrics[metric], change2, snapshot.checkedAt?.slice(0, 10)) !== perShareFactCompatible(b.metrics[metric], change2, snapshot.checkedAt?.slice(0, 10))) return null;
   return {
-    value: (a.metrics[metric2].value / b.metrics[metric2].value) ** (1 / years) - 1,
-    description: `${metric2} historical CAGR ${b.end} \u2192 ${a.end}; check restatements and share splits`,
-    source: a.metrics[metric2].source
+    value: (a.metrics[metric].value / b.metrics[metric].value) ** (1 / years) - 1,
+    description: `${metric} historical CAGR ${b.end} \u2192 ${a.end}; check restatements and share splits`,
+    source: a.metrics[metric].source
   };
 }
 function capitalAssumptions(snapshot, item) {
@@ -7485,25 +15096,29 @@ function capitalAssumptions(snapshot, item) {
   const origins = {}, patches = {};
   const sovereignSpread = ref?.currencyDefaultSpread ?? (country?.defaultSpread || 0);
   const put = (key2, v, why) => {
-    if (finite(v)) {
+    if (finite3(v)) {
       patches[key2] = v;
       origins[key2] = why;
     }
   };
-  if (snapshot.riskFree?.status === "ready") put("riskFree", snapshot.riskFree.value - sovereignSpread * 100, `${snapshot.riskFree.source?.name || "Government"} ten-year yield \xB7 ${snapshot.riskFree.asOf}; less sourced sovereign default spread ${(sovereignSpread * 100).toFixed(2)} pp`);
+  const riskFree2 = snapshot.riskFree, assessmentDate = snapshot.checkedAt?.slice(0, 10);
+  if (riskFree2?.status === "ready" && finite3(riskFree2.value) && riskFree2.value > -5 && riskFree2.value < 30 && validDate(assessmentDate) && validDate(riskFree2.asOf) && riskFree2.asOf <= assessmentDate && (Date.parse(assessmentDate) - Date.parse(riskFree2.asOf)) / 864e5 <= 10 && (!riskFree2.currency || riskFree2.currency === item.currency) && riskFree2.source?.name?.trim() && /^https:\/\//.test(riskFree2.source?.url || ""))
+    put("riskFree", riskFree2.value - sovereignSpread * 100, `${riskFree2.source.name} ten-year yield \xB7 ${riskFree2.asOf}; less sourced sovereign default spread ${(sovereignSpread * 100).toFixed(2)} pp`);
   if (sector) {
     put("beta", sector.beta, `Industry levered beta proxy \xB7 ${sector.name} \xB7 ${ref.asOf}; not measured company beta`);
     put("equity", sector.equityWeight * 100, `Industry target equity weight \xB7 ${sector.name} \xB7 ${ref.asOf}; normalized units`);
     put("debt", (1 - sector.equityWeight) * 100, `Industry target debt weight \xB7 ${sector.name} \xB7 ${ref.asOf}; normalized units`);
     const rf = patches.riskFree / 100;
-    put("costDebt", finite(rf) ? Math.max(rf, rf + sector.debtSpread) * 100 : NaN, `Government yield + industry debt spread (${(sector.debtSpread * 100).toFixed(2)} pp) \xB7 ${ref.asOf}; borrowing-cost proxy`);
+    put("costDebt", finite3(rf) ? Math.max(rf, rf + sector.debtSpread) * 100 : NaN, `Government yield + industry debt spread (${(sector.debtSpread * 100).toFixed(2)} pp) \xB7 ${ref.asOf}; borrowing-cost proxy`);
   }
   put("equityRiskPremium", country?.equityRiskPremium * 100, `Country equity risk premium proxy \xB7 ${country?.name} \xB7 ${ref?.asOf}; ${ref?.countryBasis || "country proxy"}; excludes detailed geographic exposure`);
   put("taxRate", country?.taxRate * 100, `Country statutory corporate tax proxy \xB7 ${country?.name} \xB7 ${ref?.asOf}; verify issuer marginal rate`);
   let capitalBasis = "scenario";
   const m = snapshot.financials?.status === "ready" ? snapshot.financials.annual?.[0]?.metrics || {} : {};
   const debt = reportedDebt(m);
-  if (snapshot.marketCap?.status === "ready" && snapshot.marketCap.value > 0 && debt >= 0 && finite(patches.taxRate) && sector?.unleveredBeta > 0) {
+  const marketCap = snapshot.marketCap, cutoff = snapshot.checkedAt?.slice(0, 10);
+  const marketCapCurrent = marketCap?.status === "ready" && marketCap.value > 0 && finite3(marketCap.value) && snapshot.instrument?.symbol === item?.symbol && snapshot.instrument?.currency === item?.currency && marketCap.currency === item?.currency && validDate(cutoff) && validDate(marketCap.asOf) && marketCap.asOf <= cutoff && (Date.parse(cutoff) - Date.parse(marketCap.asOf)) / 864e5 <= 10 && marketCap.basis?.trim() && marketCap.source?.name?.trim() && /^https:\/\//.test(marketCap.source?.url || "");
+  if (marketCapCurrent && finite3(debt) && debt >= 0 && finite3(patches.taxRate) && sector?.unleveredBeta > 0) {
     capitalBasis = "market";
     put("equity", snapshot.marketCap.value / 1e6, `Market capitalization \xB7 ${snapshot.marketCap.asOf}; millions`);
     put("debt", debt / 1e6, "Reported book debt used as market-debt proxy; millions");
@@ -7516,14 +15131,14 @@ function capitalAssumptions(snapshot, item) {
     patches,
     origins,
     capitalBasis,
-    costEquity: finite(ke) && ke > 0 ? ke : null,
-    wacc: finite(wacc) && wacc > 0 ? wacc : null,
+    costEquity: finite3(ke) && ke > 0 ? ke : null,
+    wacc: finite3(wacc) && wacc > 0 ? wacc : null,
     description: capitalBasis === "market" ? "Market-equity WACC estimate; industry asset beta and book-debt proxies" : "Industry target-capital WACC scenario; market capitalization unavailable",
     source: ref?.sources?.capital
   };
 }
 function path(start, terminal, n, origin, source2, cap) {
-  if (!finite(start)) return [];
+  if (!finite3(start)) return [];
   const bounded2 = clamp(start, -0.5, cap);
   return Array.from({ length: n }, (_, i2) => ({
     year: i2 + 1,
@@ -7536,21 +15151,24 @@ function path(start, terminal, n, origin, source2, cap) {
 function forecastAssumptions(snapshot, item, years = 5) {
   const capital = capitalAssumptions(snapshot, item), ref = currentReferences(snapshot), sector = ref?.industry;
   const annual = snapshot.financials?.status === "ready" ? snapshot.financials.annual?.[0] : null, m = annual?.metrics || {};
-  const revenueHistory = history(snapshot, "revenue"), epsHistory = history(snapshot, "eps");
+  const business = classifyBusiness(item, snapshot), basisChange = business?.perShareBasisChange, scopeChange = business?.businessScopeChange, cutoff = snapshot.checkedAt?.slice(0, 10);
+  const dividendBasisCompatible = perShareFactCompatible(snapshot.dividend, basisChange, cutoff) && businessScopeFactCompatible(snapshot.dividend, scopeChange), epsBasisCompatible = perShareFactCompatible(m.eps, basisChange, cutoff) && businessScopeFactCompatible(m.eps, scopeChange);
+  const revenueHistory = history(snapshot, "revenue", null, scopeChange), epsHistory = history(snapshot, "eps", basisChange, scopeChange);
   const dh = snapshot.dividend?.historicalGrowth;
-  const dividendHistory = finite(dh?.value) ? { value: dh.value, description: `Company dividend historical CAGR ${dh.start} \u2192 ${dh.end}`, source: snapshot.dividend.source } : null;
-  const blend = (own, industry) => finite(own?.value) && finite(industry) ? (own.value + industry) / 2 : own?.value ?? industry;
+  const dividendHistory = finite3(dh?.value) && perShareGrowthCompatible(dh, basisChange, cutoff) && businessScopeFactCompatible(dh, scopeChange) ? { value: dh.value, description: `Company dividend historical CAGR ${dh.start} \u2192 ${dh.end}`, source: snapshot.dividend.source } : null;
+  const blend = (own, industry) => finite3(own?.value) && finite3(industry) ? (own.value + industry) / 2 : own?.value ?? industry;
   const revenueStart = blend(revenueHistory, sector?.revenueGrowth2y);
   const epsStart = blend(epsHistory, sector?.epsGrowth5y);
   const d = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null, eps = m.eps?.value;
-  const payout = d >= 0 && eps > 0 ? d / eps : null;
+  const distributionBusiness = classifyBusiness(item, snapshot)?.dividendEarningsCap === false;
+  const payout = !distributionBusiness && dividendBasisCompatible && epsBasisCompatible && d >= 0 && eps > 0 ? d / eps : null;
   let dividendStart = dividendHistory?.value;
   let dividendBasis = dividendHistory?.description;
-  if (!finite(dividendStart) && finite(epsStart)) {
+  if (!distributionBusiness && (!scopeChange || epsBasisCompatible) && !finite3(dividendStart) && finite3(epsStart)) {
     dividendStart = epsStart;
     dividendBasis = "Dividend growth follows modelled EPS growth at constant payout (company dividend history unavailable)";
   }
-  if (finite(dividendStart) && finite(epsStart) && payout > 0 && payout <= 1) {
+  if (finite3(dividendStart) && finite3(epsStart) && payout > 0 && payout <= 1) {
     const maxCoveredGrowth = (1 + clamp(epsStart, -0.5, 0.5)) * payout ** (-1 / years) - 1;
     if (dividendStart > maxCoveredGrowth) {
       dividendStart = maxCoveredGrowth;
@@ -7559,303 +15177,187 @@ function forecastAssumptions(snapshot, item, years = 5) {
   }
   if (payout > 1) {
     const correction = payout ** (-1 / years) * (1 + (epsStart ?? 0)) - 1;
-    dividendStart = finite(dividendStart) ? Math.min(dividendStart, correction) : correction;
+    dividendStart = finite3(dividendStart) ? Math.min(dividendStart, correction) : correction;
     dividendBasis = `Payout ${(payout * 100).toFixed(1)}% of reported EPS: scenario restores 100% coverage over ${years} years; review cyclical earnings and special dividends`;
   }
   const macroCap = 0.02;
   const ceiling = capital.wacc ? Math.max(-0.5, capital.wacc - 0.01) : macroCap;
-  const revenueTerminal = Math.min(macroCap, finite(revenueStart) ? revenueStart : macroCap, ceiling);
-  const dividendTerminal = Math.min(macroCap, finite(dividendStart) ? dividendStart : macroCap, capital.costEquity ? capital.costEquity - 0.01 : macroCap);
+  const revenueTerminal = Math.min(macroCap, finite3(revenueStart) ? revenueStart : macroCap, ceiling);
+  const dividendTerminal = Math.min(macroCap, finite3(dividendStart) ? dividendStart : macroCap, capital.costEquity ? capital.costEquity - 0.01 : macroCap);
   const industryBasis = sector ? `NYU Stern ${sector.name} sector outlook (${ref.asOf}); US industry proxy` : "no industry outlook";
-  const revenue = path(revenueStart, revenueTerminal, years, `${revenueHistory?.description || "Company revenue history unavailable"}; ${industryBasis}; ${revenueHistory && finite(sector?.revenueGrowth2y) ? "50/50 company-history / sector-expectation blend" : "available source only"}`, ref?.sources?.growth || revenueHistory?.source, 0.5);
+  const revenue = path(revenueStart, revenueTerminal, years, `${revenueHistory?.description || "Company revenue history unavailable"}; ${industryBasis}; ${revenueHistory && finite3(sector?.revenueGrowth2y) ? "50/50 company-history / sector-expectation blend" : "available source only"}`, ref?.sources?.growth || revenueHistory?.source, 0.5);
   for (const row of revenue) row.historySource = revenueHistory?.source;
   const earnings = path(epsStart, Math.min(0.02, epsStart ?? 0.02), years, `${epsHistory?.description || "Company EPS history unavailable"}; ${industryBasis}; historical/company-sector scenario`, ref?.sources?.growth || epsHistory?.source, 0.5);
   for (const row of earnings) row.historySource = epsHistory?.source;
-  const dividends = path(dividendStart, dividendTerminal, years, dividendBasis || "Dividend forecast unavailable", dividendHistory?.source || ref?.sources?.growth, 0.25);
-  const estimates = (snapshot.feed?.estimates || []).filter((e) => e.currency === item.currency && e.fiscalEnd > snapshot.checkedAt?.slice(0, 10) && e.source?.url && e.asOf <= snapshot.checkedAt.slice(0, 10)).sort((a, b) => a.fiscalEnd.localeCompare(b.fiscalEnd));
-  for (const [metric2, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
+  const dividends = dividendBasisCompatible ? path(dividendStart, dividendTerminal, years, dividendBasis || "Dividend forecast unavailable", dividendHistory?.source || ref?.sources?.growth, 0.25) : [];
+  const estimates = matchingCompanyEstimates(snapshot, item);
+  for (const [metric, rows3, base] of [["revenue", revenue, m.revenue?.value], ["eps", earnings, eps]]) {
     let previous = base;
     for (let i2 = 0; i2 < Math.min(rows3.length, estimates.length); i2++) {
       const e = estimates[i2];
-      if (e[metric2] > 0 && previous > 0) {
-        rows3[i2] = { ...rows3[i2], growth: e[metric2] / previous - 1, amount: e[metric2], kind: "consensus", fiscalEnd: e.fiscalEnd, source: e.source, description: `Company consensus ${metric2} \xB7 ${e.fiscalEnd} \xB7 ${e.asOf} \xB7 ${e.basis}; fiscal forecast used as annual valuation step (timing approximation)` };
-        previous = e[metric2];
+      if (finite3(e[metric])) {
+        rows3[i2] = { ...rows3[i2], growth: previous > 0 ? e[metric] / previous - 1 : rows3[i2].growth, amount: e[metric], kind: "consensus", fiscalEnd: e.fiscalEnd, source: e.source, description: `Company consensus ${metric} \xB7 ${e.fiscalEnd} \xB7 ${e.asOf} \xB7 ${e.basis}; fiscal forecast used as annual valuation step (timing approximation)` };
+        previous = e[metric];
       } else break;
     }
   }
-  return { capital, revenue, earnings, dividends, revenueTerminal, dividendTerminal, terminalDescription: "Terminal scenario capped at 2% nominal growth and at the company growth path; declining companies retain negative growth. This cap is a modelling assumption, not an analyst forecast.", taxRate: capital.patches.taxRate / 100, payout };
+  return { dividendBasisCompatible, epsBasisCompatible, perShareBasisChange: basisChange, capital, revenue, earnings, dividends, revenueTerminal, dividendTerminal, terminalDescription: "Terminal scenario capped at 2% nominal growth and at the company growth path; declining companies retain negative growth. This cap is a modelling assumption, not an analyst forecast.", taxRate: capital.patches.taxRate / 100, payout };
 }
 
-// src/valuation-autofill.js
-function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBasis) {
-  const fit = modelFit(item), latest = snapshot.financials?.status === "ready" ? snapshot.financials.annual[0] : null, previous = snapshot.financials?.annual?.[1];
-  const m = latest?.metrics || {}, prev = previous?.metrics || {};
-  const value = (k) => m[k]?.value, patches = {}, origins = {}, gaps = [];
-  const put = (key2, v, origin) => {
-    if (Number.isFinite(v) || typeof v === "string") {
-      patches[key2] = String(v);
-      origins[key2] = origin + (snapshot.financials?.conversion ? ` \xB7 USD\u2192CAD ${snapshot.financials.conversion.value} (${snapshot.financials.conversion.asOf}); constant FX assumption` : "");
-    }
+// src/valuation.js
+function finite4(value, label) {
+  if (!Number.isFinite(value)) throw new Error(`Enter ${label}.`);
+  return value;
+}
+function positive(value, label) {
+  if (finite4(value, label) <= 0) throw new Error(`${label} must be positive.`);
+  return value;
+}
+function nonnegative(value, label) {
+  if (finite4(value, label) < 0) throw new Error(`${label} cannot be negative.`);
+  return value;
+}
+function fraction(value, label) {
+  if (finite4(value, label) < 0 || value > 1)
+    throw new Error(`${label} must be between 0% and 100%.`);
+  return value;
+}
+function bounded(result) {
+  const walk = (v) => {
+    if (typeof v === "number" && !Number.isFinite(v))
+      throw new Error(
+        "Inputs exceed the numerical range. Use less extreme assumptions."
+      );
+    if (v && typeof v === "object") Object.values(v).forEach(walk);
   };
-  const fact = (key2, metric2, scale = 1) => {
-    if (m[metric2])
-      put(
-        key2,
-        value(metric2) / scale,
-        "Reported \xB7 " + latest.end + " \xB7 " + m[metric2].source.tag
+  walk(result);
+  return result;
+}
+function priceDifference(value, price) {
+  if (price == null) return null;
+  return value / positive(price, "Comparison price") - 1;
+}
+function equityBridge(input, enterpriseValue) {
+  const { debt, cash, otherAssets, claims, shares } = input;
+  nonnegative(debt, "Debt");
+  nonnegative(cash, "Excess cash");
+  nonnegative(otherAssets, "Other non-operating assets");
+  nonnegative(
+    claims,
+    "Preferred equity, noncontrolling interests and other claims"
+  );
+  positive(shares, "Diluted shares");
+  const equity = enterpriseValue - debt + cash + otherAssets - claims;
+  return bounded({ enterpriseValue, equity, value: equity / shares });
+}
+function calculateDCF(input) {
+  const { flows, wacc, terminalMethod } = input;
+  positive(wacc, "WACC");
+  if (!Array.isArray(flows) || flows.length < 1 || flows.length > 10)
+    throw new Error("Enter 1\u201310 annual FCFF forecasts.");
+  const rows3 = flows.map((fcff, index) => {
+    finite4(fcff, `year ${index + 1} FCFF`);
+    const year = index + 1, factor = (1 + wacc) ** -year;
+    return { year, fcff, factor, pv: fcff * factor };
+  });
+  let terminalValue, terminalFCFF = null;
+  const warnings = [];
+  if (terminalMethod === "growth") {
+    const g = finite4(input.terminalGrowth, "perpetual growth");
+    if (g <= -1 || g >= wacc)
+      throw new Error("Perpetual growth must exceed \u2212100% and be below WACC.");
+    terminalFCFF = input.terminalFCFF == null ? positive(flows.at(-1), "Final forecast FCFF for a growing perpetuity") * (1 + g) : positive(input.terminalFCFF, "First perpetual-year FCFF");
+    terminalValue = terminalFCFF / (wacc - g);
+    if (wacc - g < 0.01)
+      warnings.push(
+        "WACC is less than 1 percentage point above perpetual growth; value is highly sensitive."
       );
-    else gaps.push(metric2);
-  };
-  const assumption = (key2, v, why) => put(key2, v, "Scenario assumption \xB7 " + why);
-  const million = 1e6, dividend = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null;
-  if (!latest && snapshot.financials?.reason) gaps.push(snapshot.financials.reason);
-  const forecast = forecastAssumptions(snapshot, item), capital = forecast.capital;
-  const growth = forecast.revenue[0]?.growth;
-  const reportedDebt2 = reportedDebt(m);
-  if (view === "dcf" || view === "x3sm") {
-    const required = [
-      "revenue",
-      "ebit",
-      "da",
-      "capex"
-    ];
-    const complete = required.every((k) => Number.isFinite(value(k))) && value("revenue") > 0;
-    const debt = reportedDebt2;
-    if (Number.isFinite(debt) && debt >= 0)
-      put(
-        "debt",
-        debt / million,
-        "Reported book debt proxy; review leases and market value"
+    if (g > 0.05)
+      warnings.push(
+        "Perpetual growth above 5% needs a strong long-run economic justification in this currency."
       );
-    else gaps.push("consistent debt balance");
-    if (view === "dcf") {
-      fact("shares", "shares", million);
-      assumption(
-        "cash",
-        0,
-        "excess cash not verified; reported total cash is not assumed excess"
-      );
-      assumption("otherAssets", 0, "other non-operating assets require review");
-      assumption("claims", 0, "preferred/NCI/other claims require review");
-      put("wacc", capital.wacc == null ? NaN : capital.wacc * 100, capital.description + "; same inputs as WACC tool");
-      if (capital.wacc == null) gaps.push("Sourced risk inputs unavailable; no default discount rate is substituted.");
-      put("terminalGrowth", forecast.revenueTerminal * 100, forecast.terminalDescription);
-      assumption(
-        "exitMultiple",
-        8,
-        "illustrative exit multiple; compare sourced peers"
-      );
-    }
-    if (complete && forecast.revenue.length === 5 && Number.isFinite(forecast.taxRate) && fit.group !== "bank" && fit.group !== "insurer" && fit.group !== "holding") {
-      const revenue = value("revenue"), margin = value("ebit") / revenue, daRate = value("da") / revenue, capexRate = value("capex") / revenue;
-      const tradeComplete = ["receivables", "inventory", "payables"].every((k) => Number.isFinite(value(k)));
-      const nwc = tradeComplete ? value("receivables") + value("inventory") - value("payables") : 0, nwcRate = nwc / revenue;
-      if (!tradeComplete) gaps.push("Trade working-capital data is incomplete. Forecasts assume zero change in working capital; linked statements assume opening operating NWC of zero. Review before relying on this scenario.");
-      let r = revenue, working = nwc;
-      for (let i2 = 0; i2 < 5; i2++) {
-        const driver = forecast.revenue[i2];
-        r *= 1 + driver.growth;
-        put("growth" + i2, driver.growth * 100, driver.description);
-        const nextWorking = r * nwcRate;
-        const fcff = r * margin * (1 - forecast.taxRate) + r * daRate - r * capexRate - (nextWorking - working);
-        working = nextWorking;
-        put(
-          "fcff" + i2,
-          fcff / million,
-          "Forecast scenario \xB7 reported EBIT/D&A/capex, " + (tradeComplete ? "trade working-capital ratios" : "ASSUMED zero working-capital change; source balances incomplete") + "; revenue growth " + (driver.growth * 100).toFixed(3) + "% (see growth evidence); tax " + (forecast.taxRate * 100).toFixed(2) + "% statutory-rate proxy"
-        );
-      }
-      put(
-        "terminalEbitda",
-        (r * margin + r * daRate) / million,
-        "Forecast EBITDA, not analyst consensus"
-      );
-      if (view === "x3sm") {
-        fact("revenue", "revenue", million);
-        fact("cash", "cash", million);
-        fact("ppe", "ppe", million);
-        put(
-          "nwc",
-          nwc / million,
-          tradeComplete ? "Derived trade working capital = receivables + inventory \u2212 payables; excludes other operating balances" : "Scenario assumption \xB7 opening operating NWC is zero because the source balances are incomplete; not a reported balance"
-        );
-        put(
-          "growth",
-          growth * 100,
-          forecast.revenue[0].description + "; linked statement uses year-1 rate throughout; review individual annual forecasts in DCF"
-        );
-        put(
-          "margin",
-          margin * 100,
-          "Reported operating margin used as a forecast assumption"
-        );
-        put(
-          "daRate",
-          daRate * 100,
-          "Reported D&A/revenue used as a forecast assumption"
-        );
-        put(
-          "capexRate",
-          capexRate * 100,
-          "Reported capex/revenue used as a forecast assumption"
-        );
-        put("nwcRate", nwcRate * 100, tradeComplete ? "Trade working-capital/revenue scenario" : "Scenario assumption \xB7 zero working-capital investment; review missing source balances");
-        put("taxRate", capital.patches.taxRate, capital.origins.taxRate);
-        put("costDebt", capital.patches.costDebt, capital.origins.costDebt);
-        assumption("payout", 30, "payout scenario");
-        if (Number.isFinite(value("equity")) && Number.isFinite(debt) && Number.isFinite(value("cash")) && Number.isFinite(value("ppe")))
-          put(
-            "otherNetAssets",
-            (value("equity") + debt - value("cash") - value("ppe") - nwc) / million,
-            "Opening reconciliation to reported owners equity; other net assets held constant"
-          );
-      }
-    } else
-      gaps.push(
-        "a consistent revenue/EBIT/D&A/capex set; financial firms require a different framework"
-      );
-  }
-  if (view === "ri") {
-    put("costEquity", capital.costEquity == null ? NaN : capital.costEquity * 100, "CAPM cost of equity from the same sourced WACC inputs; " + capital.description);
-    assumption(
-      "persistence",
-      0,
-      "no continuation after year five until reviewed"
+  } else if (terminalMethod === "exit") {
+    terminalValue = positive(input.terminalEbitda, "Final-year EBITDA") * positive(input.exitMultiple, "Exit EV/EBITDA multiple");
+    warnings.push(
+      "Exit multiples import a market-pricing assumption into DCF; this is not a pure perpetual cash-flow valuation."
     );
-    const bv = snapshot.commonBookValuePerShare;
-    if (bv?.status === "ready")
-      put("book", bv.value, "Common book value per share \xB7 " + (bv.asOf || "date unavailable") + " \xB7 " + (bv.basis || "verified common-only basis"));
-    else gaps.push("common book value excluding preferred/AT1 and NCI");
-    if (Number.isFinite(value("eps")) && forecast.earnings.length === 5) {
-      let eps = value("eps");
-      for (let i2 = 0; i2 < 5; i2++) {
-        eps *= 1 + forecast.earnings[i2].growth;
-        put("eps" + i2, eps, forecast.earnings[i2].description);
-      }
-    } else gaps.push("diluted EPS and supported company growth path");
-    if (dividend != null && forecast.dividends.length === 5) {
-      let d = dividend;
-      for (let i2 = 0; i2 < 5; i2++) {
-        d *= 1 + forecast.dividends[i2].growth;
-        put("dividend" + i2, d, forecast.dividends[i2].description);
-      }
-    } else if (dividend === 0) for (let i2 = 0; i2 < 5; i2++) put("dividend" + i2, 0, "Reported zero annual dividend continued as a scenario; buybacks excluded");
-    else gaps.push("sourced ordinary/common dividends and supported growth path");
-  }
-  if (view === "wacc") {
-    const capitalBasis = selectedCapitalBasis || capital.capitalBasis;
-    patches.capitalBasis = capitalBasis;
-    for (const [key2, v] of Object.entries(capital.patches))
-      if (!["equity", "debt"].includes(key2) || capitalBasis === capital.capitalBasis) put(key2, v, capital.origins[key2]);
-    if (capitalBasis !== capital.capitalBasis) gaps.push("Enter capital values for the selected basis; the automatic basis is " + capital.capitalBasis);
-    if (capital.wacc == null) gaps.push("A complete dated risk-free / beta / risk premium / tax / financing reference is required. Defaults are not substituted.");
-    if (capital.capitalBasis === "scenario") gaps.push(capital.description);
-  }
-  if (view === "rv" || view === "eqrv") {
-    const metric2 = selectedMetric || fit.metric || "pe";
-    patches.metric = metric2;
-    if (metric2 === "pe") fact("fundamental", "eps");
-    else if (metric2 === "evEbitda" && Number.isFinite(value("ebit")) && Number.isFinite(value("da")))
-      put(
-        "fundamental",
-        (value("ebit") + value("da")) / million,
-        "Derived annual EBITDA \xB7 " + latest.end
-      );
-    else if (metric2 === "evRevenue") fact("fundamental", "revenue", million);
-    else if (snapshot.commonBookValuePerShare?.status === "ready")
-      put(
-        "fundamental",
-        snapshot.commonBookValuePerShare.value,
-        "Verified common book value"
-      );
-    patches.period = "Reported fiscal year " + (latest?.end || "not available") + "; peer ratios must use the same period and accounting basis";
-    const relative = snapshot.feed?.relative;
-    if (relative && relative.metric === metric2) {
-      put(
-        "fundamental",
-        relative.fundamental,
-        "Connected matching-basis target \xB7 " + relative.asOf
-      );
-      patches.period = relative.basis + "; fiscal end " + relative.fiscalEnd;
-      patches.asOf = relative.asOf;
-      patches.source = relative.source.name + " \xB7 " + relative.source.url;
-      for (const [i2, p] of relative.peers.entries()) {
-        put("peerName" + i2, p.name, "Connected peer \xB7 " + relative.asOf);
-        put("peerMultiple" + i2, p.multiple, "Matching " + relative.basis);
-      }
-      put(
-        "history",
-        relative.history.map((h) => h.multiple).join(", "),
-        "Dated equally weighted observations \xB7 " + relative.basis
-      );
-      if (relative.bridge)
-        for (const [k, v] of Object.entries(relative.bridge))
-          put(k, v, "Connected enterprise-to-equity bridge \xB7 " + relative.asOf);
-      if (!relative.peers.length) gaps.push("matching peer multiples");
-      if (!relative.history.length)
-        gaps.push("historical multiple observations");
-    } else
-      gaps.push("matching peer multiples and historical multiple observations");
-  }
-  if (view === "anr" && !snapshot.feed?.targets)
-    gaps.push(
-      "licensed, dated analyst targets, ratings and target-currency metadata"
+  } else throw new Error("Choose a supported terminal-value method.");
+  const pvFlows = rows3.reduce((sum, row) => sum + row.pv, 0);
+  const pvTerminal = terminalValue * rows3.at(-1).factor;
+  const bridge = equityBridge(input, pvFlows + pvTerminal);
+  const terminalWeight = bridge.enterpriseValue > 0 ? pvTerminal / bridge.enterpriseValue : null;
+  if (terminalWeight >= 0.8)
+    warnings.push(
+      "At least 80% of enterprise value comes from terminal value; long-run assumptions dominate."
     );
-  if (view === "ee") {
-    const estimates = snapshot.feed?.estimates || [];
-    if (estimates.length) {
-      patches.estimateKind = "consensus";
-      patches.period = estimates[0].basis;
-      patches.asOf = estimates[0].asOf;
-      patches.source = estimates.map((e) => e.source.name + " \xB7 " + e.source.url).join("; ");
-      for (const [i2, e] of estimates.slice(0, 3).entries()) {
-        patches["fiscal" + i2] = e.fiscalEnd;
-        for (const k of ["eps", "revenue", "ebitda"])
-          if (Number.isFinite(e[k]))
-            put(
-              k + i2,
-              e[k] / (k === "eps" ? 1 : 1e6),
-              "Connected consensus \xB7 " + e.asOf
-            );
-        put("count" + i2, e.contributors, "Provider contributor count");
-      }
-    } else if (latest) {
-      patches.estimateKind = "user";
-      patches.period = "Company-specific scenarios from reported " + latest.end + " figures and dated industry outlook, fading each year; constant operating margin and D&A/revenue. Not company guidance or company analyst consensus.";
-      patches.asOf = latest.end;
-      const [year, month, day] = latest.end.split("-").map(Number);
-      let projectedRevenue = value("revenue"), projectedEPS = value("eps"), projectedEBITDA = value("ebit") + value("da");
-      for (let i2 = 0; i2 < 3; i2++) {
-        const y = year + i2 + 1, last = new Date(Date.UTC(y, month, 0)).getUTCDate();
-        patches["fiscal" + i2] = `${y}-${String(month).padStart(2, "0")}-${String(Math.min(day, last)).padStart(2, "0")}`;
-        origins["fiscal" + i2] = "Assumed fiscal year-end from latest annual filing; confirm issuer calendar";
-        if (forecast.revenue[i2] && Number.isFinite(projectedRevenue)) {
-          projectedRevenue *= 1 + forecast.revenue[i2].growth;
-          put("revenue" + i2, projectedRevenue / million, forecast.revenue[i2].description);
-        }
-        if (forecast.earnings[i2] && Number.isFinite(projectedEPS)) {
-          projectedEPS *= 1 + forecast.earnings[i2].growth;
-          put("eps" + i2, projectedEPS, forecast.earnings[i2].description);
-        }
-        if (forecast.revenue[i2] && Number.isFinite(projectedEBITDA)) {
-          projectedEBITDA *= 1 + forecast.revenue[i2].growth;
-          put("ebitda" + i2, projectedEBITDA / million, "Constant reported EBITDA margin; " + forecast.revenue[i2].description);
-        }
-      }
-      gaps.push("analyst consensus and contributor counts are unavailable; populated figures are explicit scenarios");
-    } else gaps.push("matching-currency filing drivers and licensed consensus estimates are unavailable");
-  }
-  if (snapshot.price?.status === "ready") {
-    put(
-      "price",
-      snapshot.price.value,
-      "Daily closing price \xB7 " + snapshot.price.asOf
+  if (flows.some((v) => v < 0))
+    warnings.push(
+      "Negative forecast FCFF is included without flooring; check the funding and path to sustainable cash flow."
     );
-    patches.priceDate = snapshot.price.asOf;
-  }
-  if (latest && view !== "ee") patches.asOf ||= latest.end;
-  patches.source ||= latest ? "SEC filing facts with explicit forecast assumptions. " + Object.values(m)[0]?.source.url + (snapshot.financials?.conversion ? ` USD financials translated to CAD at ${snapshot.financials.conversion.value} CAD/USD (${snapshot.financials.conversion.asOf}); constant FX scenario. ${snapshot.financials.conversion.source.url}` : "") : "";
-  return { patches, origins, gaps: [...new Set(gaps)], fit };
+  if (bridge.equity <= 0)
+    warnings.push(
+      "The model gives non-positive common equity. This signals a failed equity case, not a tradable negative stock price."
+    );
+  return bounded({
+    ...bridge,
+    rows: rows3,
+    pvFlows,
+    terminalValue,
+    terminalFCFF,
+    pvTerminal,
+    terminalWeight,
+    upside: priceDifference(bridge.value, input.price),
+    warnings
+  });
+}
+function calculateRI(input) {
+  let book = positive(input.book, "Opening common book value per share");
+  const r = positive(input.costEquity, "Cost of equity");
+  const persistence = fraction(
+    input.persistence,
+    "Residual-income persistence"
+  );
+  if (!Array.isArray(input.rows) || !input.rows.length)
+    throw new Error("Enter annual EPS and dividend forecasts.");
+  const rows3 = input.rows.map((row, index) => {
+    const eps = finite4(row.eps, `year ${index + 1} EPS`), dividend = nonnegative(row.dividend, `Year ${index + 1} dividend`);
+    const openingBook = book, charge = r * openingBook, ri = eps - charge;
+    book += eps - dividend;
+    if (book <= 0)
+      throw new Error(
+        `Year ${index + 1} book value becomes non-positive; this simplified clean-surplus model is unsuitable.`
+      );
+    return {
+      year: index + 1,
+      openingBook,
+      eps,
+      dividend,
+      charge,
+      ri,
+      closingBook: book,
+      pv: ri / (1 + r) ** (index + 1)
+    };
+  });
+  const terminalValue = rows3.at(-1).ri * persistence / (1 + r - persistence);
+  const pvTerminal = terminalValue / (1 + r) ** rows3.length;
+  const pvRI = rows3.reduce((sum, row) => sum + row.pv, 0), value = input.book + pvRI + pvTerminal;
+  return bounded({
+    rows: rows3,
+    terminalValue,
+    pvTerminal,
+    pvRI,
+    value,
+    upside: priceDifference(value, input.price),
+    warnings: [
+      "Assumes clean-surplus accounting, constant shares and annual year-end payments. OCI, buybacks, issuance and accounting adjustments must be reflected consistently.",
+      ...persistence === 1 ? [
+        "100% persistence assumes the final year's residual income continues unchanged forever."
+      ] : [],
+      ...value <= 0 ? [
+        "Non-positive model equity indicates an unsuitable or failed equity case, not a negative tradable stock price."
+      ] : []
+    ]
+  });
 }
 
 // src/ddm.js
@@ -7920,17 +15422,17 @@ function calculateDDM(input) {
   const upside = price == null ? null : value / price - 1;
   const marginOfSafety = price == null ? null : 1 - price / value;
   const terminalWeight = two ? pvTerminal / value : null;
-  const warnings2 = [];
+  const warnings = [];
   if (r - g < 0.01)
-    warnings2.push(
+    warnings.push(
       "Less than 1 percentage point separates required return and perpetual growth. Small changes can move value sharply."
     );
   if (g > 0.05)
-    warnings2.push(
+    warnings.push(
       "Perpetual growth above 5% is an aggressive assumption. Check its sustainability in the valuation currency."
     );
   if (terminalWeight >= 0.8)
-    warnings2.push(
+    warnings.push(
       "At least 80% of this estimate comes from terminal value. Long-run assumptions dominate the result."
     );
   return {
@@ -7944,910 +15446,1997 @@ function calculateDDM(input) {
     rows: rows3,
     upside,
     marginOfSafety,
-    warnings: warnings2
+    warnings
   };
-}
-
-// src/valuation-answer.js
-function valuationAnswer(item, snapshot, engine) {
-  const answer = selectAnswer(item, snapshot, engine), fx = snapshot?.financials?.conversion || snapshot?.dividend?.conversion;
-  if (fx && Number.isFinite(answer.value)) answer.assumptions += ` USD financial facts translated at ${fx.value} CAD/USD (Bank of Canada daily average ${fx.asOf}); constant FX assumption.`;
-  return answer;
-}
-function selectAnswer(item, snapshot, engine) {
-  const fit = modelFit(item);
-  const pending = { method: "review", title: "Review the company financials", reason: fit.reason, assumptions: fit.caution };
-  if (!snapshot || snapshot.instrument?.symbol !== item.symbol || snapshot.instrument?.currency !== item.currency) return pending;
-  const candidates = [fit.primary, ...fit.group === "operating" || ["regulated", "cyclical", "uncertain"].includes(fit.group) ? ["dcf"] : [], "ri"];
-  if (engine) for (const view of [...new Set(candidates)].filter(Boolean)) {
-    try {
-      const fill = automaticInputs(view, snapshot, item);
-      const draft = { ...engine.defaults(view), ...fill.patches };
-      const r = engine.evaluate(view, draft, item.currency);
-      if (!Number.isFinite(r.data.value)) continue;
-      return { method: view, title: view === "dcf" ? "Cash-flow DCF scenario" : "Residual-income scenario", value: r.data.value, asOf: snapshot.financials.asOf || snapshot.financials.annual?.[0]?.end, source: Object.values(snapshot.financials.annual?.[0]?.metrics || {})[0]?.source, assumptions: "Reported inputs with editable growth, discount-rate and capital-adjustment assumptions. Open the model to inspect every input.", reason: fit.reason };
-    } catch {
-    }
-  }
-  const d = snapshot.dividend;
-  const f = forecastAssumptions(snapshot, item), ke = f.capital.costEquity;
-  if (d?.status === "ready" && d.currency === item.currency && d.value > 0 && ke && f.dividends.length === 5) {
-    const r = calculateDDM({ model: "two-stage", basis: "current", dividend: d.value, requiredReturn: ke, terminalGrowth: f.dividendTerminal, growthRates: f.dividends.map((r2) => r2.growth), years: 5 });
-    return { method: "ddm", title: "Dividend-based scenario", value: r.value, asOf: d.asOf, source: d.source, assumptions: `Starting annual dividend ${d.value} ${item.currency}; company-specific annual modelled dividend growth ${f.dividends.map((r2) => (r2.growth * 100).toFixed(2) + "%").join(", ")}; ${(f.dividendTerminal * 100).toFixed(2)}% terminal scenario; ${(ke * 100).toFixed(2)}% CAPM equity return from sourced risk inputs. ${f.dividends[0].description}. Dividends may not capture buybacks or retained earnings.`, reason: fit.reason };
-  }
-  const annual = snapshot.financials?.status === "ready" && snapshot.financials.annual?.[0], eps = annual?.metrics?.eps;
-  if (eps?.value > 0 && eps.source?.url && ke > 0.02) {
-    const r = ke;
-    return {
-      method: "earnings",
-      title: "No-growth earnings-power scenario",
-      value: eps.value / r,
-      low: eps.value / (r + 0.02),
-      high: eps.value / (r - 0.02),
-      asOf: annual.end,
-      source: eps.source,
-      assumptions: `Reported annual diluted EPS of ${eps.value} ${item.currency} is assumed sustainable and 100% distributable, with zero growth and a ${(ke * 100).toFixed(2)}% CAPM equity return from sourced risk inputs. Range varies required return by \xB12 percentage points. Earnings are not cash flow; reinvestment, cyclicality and one-off items require review.`,
-      reason: fit.reason
-    };
-  }
-  return { ...pending, reason: annual?.metrics?.eps?.value <= 0 ? "Current earnings do not support a positive no-growth earnings valuation. Review a path to sustainable cash flow and use scenario DCF." : fit.reason };
-}
-
-// src/valuation.js
-function finite2(value, label) {
-  if (!Number.isFinite(value)) throw new Error(`Enter ${label}.`);
-  return value;
-}
-function positive(value, label) {
-  if (finite2(value, label) <= 0) throw new Error(`${label} must be positive.`);
-  return value;
-}
-function nonnegative(value, label) {
-  if (finite2(value, label) < 0) throw new Error(`${label} cannot be negative.`);
-  return value;
-}
-function fraction(value, label) {
-  if (finite2(value, label) < 0 || value > 1)
-    throw new Error(`${label} must be between 0% and 100%.`);
-  return value;
-}
-function bounded(result2) {
-  const walk = (v) => {
-    if (typeof v === "number" && !Number.isFinite(v))
-      throw new Error(
-        "Inputs exceed the numerical range. Use less extreme assumptions."
-      );
-    if (v && typeof v === "object") Object.values(v).forEach(walk);
-  };
-  walk(result2);
-  return result2;
-}
-function priceDifference(value, price) {
-  if (price == null) return null;
-  return value / positive(price, "Comparison price") - 1;
-}
-function equityBridge(input, enterpriseValue) {
-  const { debt, cash, otherAssets, claims, shares } = input;
-  nonnegative(debt, "Debt");
-  nonnegative(cash, "Excess cash");
-  nonnegative(otherAssets, "Other non-operating assets");
-  nonnegative(
-    claims,
-    "Preferred equity, noncontrolling interests and other claims"
-  );
-  positive(shares, "Diluted shares");
-  const equity = enterpriseValue - debt + cash + otherAssets - claims;
-  return bounded({ enterpriseValue, equity, value: equity / shares });
-}
-function calculateDCF(input) {
-  const { flows, wacc, terminalMethod } = input;
-  positive(wacc, "WACC");
-  if (!Array.isArray(flows) || flows.length < 1 || flows.length > 10)
-    throw new Error("Enter 1\u201310 annual FCFF forecasts.");
-  const rows3 = flows.map((fcff, index) => {
-    finite2(fcff, `year ${index + 1} FCFF`);
-    const year = index + 1, factor = (1 + wacc) ** -year;
-    return { year, fcff, factor, pv: fcff * factor };
-  });
-  let terminalValue;
-  const warnings2 = [];
-  if (terminalMethod === "growth") {
-    const g = finite2(input.terminalGrowth, "perpetual growth");
-    if (g <= -1 || g >= wacc)
-      throw new Error("Perpetual growth must exceed \u2212100% and be below WACC.");
-    positive(flows.at(-1), "Final forecast FCFF for a growing perpetuity");
-    terminalValue = flows.at(-1) * (1 + g) / (wacc - g);
-    if (wacc - g < 0.01)
-      warnings2.push(
-        "WACC is less than 1 percentage point above perpetual growth; value is highly sensitive."
-      );
-    if (g > 0.05)
-      warnings2.push(
-        "Perpetual growth above 5% needs a strong long-run economic justification in this currency."
-      );
-  } else if (terminalMethod === "exit") {
-    terminalValue = positive(input.terminalEbitda, "Final-year EBITDA") * positive(input.exitMultiple, "Exit EV/EBITDA multiple");
-    warnings2.push(
-      "Exit multiples import a market-pricing assumption into DCF; this is not a pure perpetual cash-flow valuation."
-    );
-  } else throw new Error("Choose a supported terminal-value method.");
-  const pvFlows = rows3.reduce((sum, row) => sum + row.pv, 0);
-  const pvTerminal = terminalValue * rows3.at(-1).factor;
-  const bridge = equityBridge(input, pvFlows + pvTerminal);
-  const terminalWeight = bridge.enterpriseValue > 0 ? pvTerminal / bridge.enterpriseValue : null;
-  if (terminalWeight >= 0.8)
-    warnings2.push(
-      "At least 80% of enterprise value comes from terminal value; long-run assumptions dominate."
-    );
-  if (flows.some((v) => v < 0))
-    warnings2.push(
-      "Negative forecast FCFF is included without flooring; check the funding and path to sustainable cash flow."
-    );
-  if (bridge.equity <= 0)
-    warnings2.push(
-      "The model gives non-positive common equity. This signals a failed equity case, not a tradable negative stock price."
-    );
-  return bounded({
-    ...bridge,
-    rows: rows3,
-    pvFlows,
-    terminalValue,
-    pvTerminal,
-    terminalWeight,
-    upside: priceDifference(bridge.value, input.price),
-    warnings: warnings2
-  });
-}
-function dcfSensitivity(input) {
-  const rates = [-0.01, -5e-3, 0, 5e-3, 0.01].map((d) => input.wacc + d);
-  const growth = input.terminalMethod === "growth";
-  const assumptions = (growth ? [-0.01, -5e-3, 0, 5e-3, 0.01] : [-2, -1, 0, 1, 2]).map((d) => (growth ? input.terminalGrowth : input.exitMultiple) + d);
-  const values = rates.map(
-    (wacc) => assumptions.map((a) => {
-      try {
-        return calculateDCF({
-          ...input,
-          wacc,
-          [growth ? "terminalGrowth" : "exitMultiple"]: a
-        }).value;
-      } catch {
-        return null;
-      }
-    })
-  );
-  return { rates, assumptions, values };
-}
-function calculateWACC(input) {
-  const { riskFree: riskFree2, beta, equityRiskPremium, costDebt, taxRate, equity, debt } = input;
-  finite2(riskFree2, "risk-free rate");
-  finite2(beta, "levered equity beta");
-  nonnegative(equityRiskPremium, "Equity risk premium");
-  fraction(taxRate, "Marginal tax rate");
-  positive(equity, "Market value of common equity");
-  nonnegative(debt, "Market value of debt");
-  if (debt > 0) nonnegative(costDebt, "Pre-tax cost of debt");
-  const costEquity = riskFree2 + beta * equityRiskPremium;
-  positive(costEquity, "Calculated cost of equity");
-  const equityWeight = equity / (equity + debt), debtWeight = 1 - equityWeight;
-  const afterTaxDebt = debt > 0 ? costDebt * (1 - taxRate) : 0;
-  const wacc = equityWeight * costEquity + debtWeight * afterTaxDebt;
-  positive(wacc, "Calculated WACC");
-  return bounded({
-    costEquity,
-    equityWeight,
-    debtWeight,
-    afterTaxDebt,
-    wacc,
-    warnings: [
-      "Uses a common-equity/debt capital structure and an available tax shield. Preferred stock, leases and constrained interest deductions need consistent adjustments."
-    ]
-  });
-}
-function median(values) {
-  if (!values.length)
-    throw new Error("At least one usable observation is needed.");
-  const sorted = values.slice().sort((a, b) => a - b), n = sorted.length;
-  return sorted.length % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
-}
-function isDate(value) {
-  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
-}
-function calculateRelative(input) {
-  if (!["pe", "pb", "evEbitda", "evRevenue"].includes(input.metric))
-    throw new Error("Choose P/E, P/B, EV/EBITDA or EV/revenue.");
-  positive(
-    input.fundamental,
-    "Target company's matching EPS, book value per share or EBITDA"
-  );
-  const peers = input.peers.filter(
-    (p) => Number.isFinite(p.multiple) && p.multiple > 0 && p.name?.trim()
-  );
-  const names = peers.map((p) => p.name.trim().toLowerCase());
-  if (new Set(names).size !== names.length)
-    throw new Error(
-      "Use each peer once; duplicate peer names would distort the median."
-    );
-  const peerMedian = peers.length ? median(peers.map((p) => p.multiple)) : null;
-  const history2 = input.history.filter((v) => Number.isFinite(v) && v > 0);
-  const historicalMedian = history2.length ? median(history2) : null;
-  if (peerMedian == null && historicalMedian == null)
-    throw new Error(
-      "Enter a named positive peer multiple or a positive historical observation. Negative or zero denominators are not meaningful here."
-    );
-  const valueAt = (multiple2) => ["evEbitda", "evRevenue"].includes(input.metric) ? equityBridge(input, multiple2 * input.fundamental).value : multiple2 * input.fundamental;
-  let currentMultiple = null;
-  if (input.price != null) {
-    positive(input.price, "Comparison price");
-    if (["evEbitda", "evRevenue"].includes(input.metric)) {
-      equityBridge(input, 0);
-      currentMultiple = (input.price * input.shares + input.debt - input.cash - input.otherAssets + input.claims) / input.fundamental;
-    } else currentMultiple = input.price / input.fundamental;
-  }
-  const historySorted = history2.slice().sort((a, b) => a - b);
-  const historicalPercentile = currentMultiple == null || !history2.length ? null : (history2.filter((v) => v < currentMultiple).length + history2.filter((v) => v === currentMultiple).length * 0.5) / history2.length;
-  return bounded({
-    historicalPercentile,
-    historicalLow: historySorted[0] ?? null,
-    historicalHigh: historySorted.at(-1) ?? null,
-    peers,
-    excluded: input.peers.filter((p) => p.name?.trim() || p.multiple != null).length - peers.length,
-    peerMedian,
-    historicalMedian,
-    historicalCount: history2.length,
-    currentMultiple,
-    peerValue: peerMedian == null ? null : valueAt(peerMedian),
-    historicalValue: historicalMedian == null ? null : valueAt(historicalMedian),
-    peerPremium: currentMultiple == null || peerMedian == null ? null : currentMultiple / peerMedian - 1,
-    historicalPremium: currentMultiple == null || historicalMedian == null ? null : currentMultiple / historicalMedian - 1,
-    warnings: [
-      "Relative discounts can reflect weaker growth, returns, accounting quality or higher risk. They do not establish intrinsic value.",
-      ...peers.length === 1 ? [
-        "One peer is a weak comparison set; its multiple is the entire peer benchmark."
-      ] : [],
-      ...currentMultiple != null && currentMultiple <= 0 ? [
-        "The current enterprise multiple is non-positive. A conventional multiple premium/discount is not economically meaningful."
-      ] : [],
-      ...[peerMedian, historicalMedian].filter((v) => v != null).some((v) => valueAt(v) <= 0) ? [
-        "An implied equity value is non-positive; treat it as a failed equity case, not a negative tradable share price."
-      ] : []
-    ]
-  });
-}
-function calculateTargets(input) {
-  const rows3 = input.rows.filter(
-    (row) => row.name?.trim() || row.target != null || row.date
-  );
-  if (!rows3.length)
-    throw new Error("Enter at least one analyst, target and observation date.");
-  const names = [];
-  for (const row of rows3) {
-    if (!row.name?.trim())
-      throw new Error("Name the broker or analyst for every target.");
-    positive(row.target, "Analyst price target");
-    if (!isDate(row.date))
-      throw new Error("Record a valid calendar date for every target.");
-    names.push(row.name.trim().toLowerCase());
-  }
-  if (new Set(names).size !== names.length)
-    throw new Error(
-      "Keep one target per broker/analyst; remove duplicate entries."
-    );
-  const targets = rows3.map((r) => r.target), mean = targets.reduce((a, b) => a + b, 0) / rows3.length;
-  return bounded({
-    rows: rows3,
-    count: rows3.length,
-    mean,
-    median: median(targets),
-    low: Math.min(...targets),
-    high: Math.max(...targets),
-    upside: priceDifference(mean, input.price)
-  });
-}
-function calculateRI(input) {
-  let book = positive(input.book, "Opening common book value per share");
-  const r = positive(input.costEquity, "Cost of equity");
-  const persistence = fraction(
-    input.persistence,
-    "Residual-income persistence"
-  );
-  if (!Array.isArray(input.rows) || !input.rows.length)
-    throw new Error("Enter annual EPS and dividend forecasts.");
-  const rows3 = input.rows.map((row, index) => {
-    const eps = finite2(row.eps, `year ${index + 1} EPS`), dividend = nonnegative(row.dividend, `Year ${index + 1} dividend`);
-    const openingBook = book, charge = r * openingBook, ri = eps - charge;
-    book += eps - dividend;
-    if (book <= 0)
-      throw new Error(
-        `Year ${index + 1} book value becomes non-positive; this simplified clean-surplus model is unsuitable.`
-      );
-    return {
-      year: index + 1,
-      openingBook,
-      eps,
-      dividend,
-      charge,
-      ri,
-      closingBook: book,
-      pv: ri / (1 + r) ** (index + 1)
-    };
-  });
-  const terminalValue = rows3.at(-1).ri * persistence / (1 + r - persistence);
-  const pvTerminal = terminalValue / (1 + r) ** rows3.length;
-  const pvRI = rows3.reduce((sum, row) => sum + row.pv, 0), value = input.book + pvRI + pvTerminal;
-  return bounded({
-    rows: rows3,
-    terminalValue,
-    pvTerminal,
-    pvRI,
-    value,
-    upside: priceDifference(value, input.price),
-    warnings: [
-      "Assumes clean-surplus accounting, constant shares and annual year-end payments. OCI, buybacks, issuance and accounting adjustments must be reflected consistently.",
-      ...persistence === 1 ? [
-        "100% persistence assumes the final year's residual income continues unchanged forever."
-      ] : [],
-      ...value <= 0 ? [
-        "Non-positive model equity indicates an unsuitable or failed equity case, not a negative tradable stock price."
-      ] : []
-    ]
-  });
-}
-function forecastStatements(input) {
-  let revenue = positive(input.revenue, "Starting annual revenue");
-  const growth = finite2(input.growth, "annual revenue growth");
-  if (growth <= -1) throw new Error("Revenue growth must exceed \u2212100%.");
-  const margin = fraction(input.margin, "EBIT margin"), tax = fraction(input.taxRate, "Tax rate");
-  const daRate = fraction(input.daRate, "D&A / revenue"), capexRate = fraction(input.capexRate, "Capex / revenue"), nwcRate = finite2(input.nwcRate, "Operating working capital / revenue"), payout = fraction(input.payout, "Dividend payout");
-  let cash = nonnegative(input.cash, "Opening cash"), ppe = nonnegative(input.ppe, "Opening net PP&E"), nwc = finite2(input.nwc, "Opening operating working capital");
-  const debt = nonnegative(input.debt, "Debt"), kd = nonnegative(input.costDebt, "Pre-tax borrowing rate");
-  const otherNetAssets = input.otherNetAssets ?? 0;
-  finite2(otherNetAssets, "Other net assets");
-  if (Math.abs(nwcRate) > 1)
-    throw new Error(
-      "Operating working capital/revenue must be between \u2212100% and 100%."
-    );
-  let equity = cash + ppe + nwc + otherNetAssets - debt;
-  if (equity <= 0)
-    throw new Error(
-      "Opening net assets must exceed debt in this simplified model."
-    );
-  const openingEquity = equity, rows3 = [], warnings2 = [];
-  for (let year = 1; year <= 5; year++) {
-    revenue *= 1 + growth;
-    const ebit = revenue * margin, da = revenue * daRate, capex = revenue * capexRate;
-    const interest = debt * kd, pretax = ebit - interest, taxes = Math.max(0, pretax) * tax, netIncome = pretax - taxes;
-    const nextNwc = revenue * nwcRate, deltaNwc = nextNwc - nwc, dividend = Math.max(0, netIncome) * payout;
-    const cfo = netIncome + da - deltaNwc, cfi = -capex, cff = -dividend;
-    const openingCash = cash;
-    cash += cfo + cfi + cff;
-    ppe += capex - da;
-    nwc = nextNwc;
-    equity += netIncome - dividend;
-    if (ppe < 0)
-      throw new Error(
-        `Year ${year} net PP&E becomes negative. Revise depreciation, capex or opening assets.`
-      );
-    const fcff = ebit - Math.max(0, ebit) * tax + da - capex - deltaNwc;
-    rows3.push({
-      year,
-      revenue,
-      ebit,
-      da,
-      ebitda: ebit + da,
-      interest,
-      taxes,
-      netIncome,
-      dividend,
-      capex,
-      deltaNwc,
-      cfo,
-      cfi,
-      cff,
-      openingCash,
-      cash,
-      ppe,
-      nwc,
-      otherNetAssets,
-      debt,
-      equity,
-      fcff,
-      balance: cash + ppe + nwc + otherNetAssets - debt - equity
-    });
-  }
-  if (rows3.some((r) => r.cash < 0))
-    warnings2.push(
-      "Cash becomes negative: the forecast requires financing. No automatic debt or equity plug hides that deficit."
-    );
-  warnings2.push(
-    "Simplified linked statements: only cash, operating working capital, net PP&E, fixed debt and common equity are modeled. No new financing, acquisitions, OCI or loss-tax credits. This is not Bloomberg X3SM."
-  );
-  return bounded({ openingEquity, rows: rows3, warnings: warnings2 });
 }
 
 // src/valuation-report.js
-var finite3 = Number.isFinite;
+var finite5 = Number.isFinite;
+var day = (value) => {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:$|T)/.test(value)) return null;
+  const date3 = value.slice(0, 10), parsed = Date.parse(date3);
+  return finite5(parsed) && new Date(parsed).toISOString().slice(0, 10) === date3 ? date3 : null;
+};
+var rate = (value) => `${(value * 100).toFixed(2)}%`;
+var number2 = (value) => value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+var money = (value, currency) => `${currency} ${number2(value)}`;
+var sourceURL = (value) => typeof value === "string" && /^https?:\/\//i.test(value);
+var valueOf = (metrics, key2) => metrics?.[key2]?.value;
+var clamp2 = (value, low, high) => Math.min(high, Math.max(low, value));
+var unique = (values) => [...new Set(values.filter(Boolean))];
+var DURATION_KEYS = ["revenue", "ebit", "da", "capex"];
+var FACTS = [
+  ["revenue", "Revenue", "money"],
+  ["ebit", "Operating profit / EBIT", "money"],
+  ["eps", "Diluted EPS", "per-share"],
+  ["netIncome", "Net income", "money"],
+  ["cfo", "Cash from operations", "money"],
+  ["da", "Depreciation & amortization", "money"],
+  ["capex", "Capital expenditure", "money"],
+  ["cash", "Cash & equivalents", "money"],
+  ["debt", "Source-reported debt subtotal", "money"],
+  ["commonEquity", "Common equity", "money"],
+  ["equity", "Owners equity (not automatically common)", "money"],
+  ["shares", "Weighted-average diluted shares", "shares"]
+];
+function datedNotFuture(value, cutoff) {
+  const date3 = day(value);
+  return !!date3 && (!cutoff || date3 <= cutoff);
+}
+function usableFact(fact, currency, cutoff) {
+  if (!finite5(fact?.value) || !sourceURL(fact?.source?.url)) return false;
+  const published = day(fact.filed || fact.source?.publishedAt), end = day(fact.asOf);
+  if (!published || !end || published < end) return false;
+  if (fact.currency && fact.currency !== currency) return false;
+  if (fact.unit && /^[A-Z]{3}(?:\/shares)?$/.test(fact.unit) && fact.unit.split("/")[0] !== currency) return false;
+  if (fact.filed && !datedNotFuture(fact.filed, cutoff)) return false;
+  if (fact.asOf && !datedNotFuture(fact.asOf, cutoff)) return false;
+  const conversion = fact.conversion;
+  let sourceCurrency = currency;
+  if (conversion) {
+    const pair = conversion.currency?.split("/");
+    if (pair?.[0] !== currency || !(conversion.value > 0) || !sourceURL(conversion.source?.url) || !datedNotFuture(conversion.asOf, cutoff) || !finite5(fact.original?.value) || Math.abs(fact.value - fact.original.value * conversion.value) > Math.max(1, Math.abs(fact.value)) * 1e-10) return false;
+    sourceCurrency = pair[1];
+    if (!/^[A-Z]{3}$/.test(sourceCurrency || "") || fact.original.unit?.split("/")[0] !== sourceCurrency) return false;
+  }
+  if ((fact.components || fact.source?.components)?.some((component) => !usableFact(component, component.conversion ? currency : sourceCurrency, cutoff))) return false;
+  return true;
+}
+function cleanMetrics(metrics, currency, cutoff) {
+  return Object.fromEntries(Object.entries(metrics || {}).filter(([, fact]) => usableFact(fact, currency, cutoff)));
+}
+function safeRows(rows3, currency, cutoff) {
+  return (Array.isArray(rows3) ? rows3 : []).filter((row) => datedNotFuture(row?.end, cutoff)).map((row) => ({ ...row, metrics: Object.fromEntries(Object.entries(cleanMetrics(row.metrics, currency, cutoff)).filter(([, fact]) => day(fact.asOf) === row.end)) })).sort((a, b) => b.end.localeCompare(a.end));
+}
+function change(a, b) {
+  return finite5(a) && finite5(b) && b > 0 ? a / b - 1 : null;
+}
+function classify(item, snapshot) {
+  const fit = modelFit(item), economic = classifyBusiness(item, snapshot);
+  return economic ? { ...fit, ...economic } : fit;
+}
+var intermediary = (fit) => ["bank", "insurer", "broker", "consumer-finance"].includes(fit.group);
+function qualityIssues(snapshot) {
+  const groups2 = [
+    [snapshot.financials?.qualityIssues, "Financial statements"],
+    ...(snapshot.financials?.annual || []).map((row) => [row.qualityIssues, `Annual ${row.end}`, row.end]),
+    [snapshot.financials?.recent?.qualityIssues, "Latest interim", snapshot.financials?.recent?.end],
+    [snapshot.financials?.ttm?.qualityIssues, "Trailing period", snapshot.financials?.ttm?.end]
+  ];
+  const normalized = groups2.flatMap(([issues, context, contextEnd]) => (Array.isArray(issues) ? issues : []).filter(Boolean).map((issue) => {
+    const item = typeof issue === "string" ? { message: issue } : issue;
+    const metrics = item.metrics || item.affectedMetrics || (item.metric ? [item.metric] : []);
+    const scopeEnds = unique([item.end || item.periodEnd || contextEnd, ...item.end || item.periodEnd || contextEnd ? [] : (item.facts || []).map((fact) => fact.asOf || fact.end)]);
+    return {
+      ...item,
+      context,
+      scopeEnds,
+      message: item.message || item.reason || item.description || item.code || "Unresolved source-quality condition",
+      metrics: Array.isArray(metrics) ? metrics : [metrics],
+      blocking: item.blocking === true || ["error", "critical"].includes(item.severity)
+    };
+  }));
+  return [...new Map(normalized.map((issue) => [`${issue.code || ""}|${issue.metrics.join(",")}|${issue.scopeEnds.join(",")}|${issue.start || ""}|${issue.message}`, issue])).values()];
+}
+function factBlocked(issues, key2, fact) {
+  if (!fact) return false;
+  const own = issues.some((issue) => issue.blocking && issue.metrics.includes(key2) && (!issue.scopeEnds.length || issue.scopeEnds.includes(day(fact.asOf))) && (!issue.start || !fact.start || issue.start === fact.start));
+  return own || (fact.components || fact.source?.components || []).some((component) => factBlocked(issues, key2, component));
+}
+function scenarioResult(name, result, inputs, assumptions) {
+  const rawValue = result.value;
+  return {
+    name,
+    status: rawValue > 0 ? "calculated" : "non-positive",
+    value: rawValue > 0 ? rawValue : null,
+    rawValue,
+    inputs,
+    assumptions,
+    calculation: result
+  };
+}
+function failedScenario(name, error, assumptions) {
+  return { name, status: "unsupported", value: null, reason: error.message, assumptions };
+}
+function validatedValuationSnapshot(item, snapshot = {}) {
+  const cutoff = day(snapshot.checkedAt), currency = item?.currency;
+  if (!cutoff || snapshot.instrument?.symbol !== item?.symbol || snapshot.instrument?.currency !== currency || snapshot.financials?.currency && snapshot.financials.currency !== currency) return null;
+  const issues = qualityIssues(snapshot);
+  const metrics = (values, end) => Object.fromEntries(Object.entries(cleanMetrics(values, currency, cutoff)).filter(([key2, fact]) => !factBlocked(issues, key2, fact) && day(fact.asOf) === end));
+  const annual = safeRows(snapshot.financials?.annual, currency, cutoff).map((row2) => ({ ...row2, metrics: metrics(row2.metrics, row2.end) }));
+  const row = (value) => value && datedNotFuture(value.end, cutoff) ? { ...value, metrics: metrics(value.metrics, value.end) } : null;
+  const recent = row(snapshot.financials?.recent), ttm = row(snapshot.financials?.ttm);
+  if (recent?.prior) {
+    const end = recent.prior.end || Object.values(recent.prior.metrics || {}).map((fact) => day(fact.asOf)).filter(Boolean).sort().at(-1);
+    recent.prior = row({ ...recent.prior, end });
+  }
+  const fresh = (date3, days2) => datedNotFuture(date3, cutoff) && Date.parse(cutoff) - Date.parse(day(date3)) <= days2 * 864e5;
+  const observation = (field, days2, positive2 = false) => field?.status === "ready" && field.currency === currency && finite5(field.value) && (positive2 ? field.value > 0 : field.value >= 0) && fresh(field.asOf, days2) && (!field.filed || datedNotFuture(field.filed, cutoff)) && sourceURL(field.source?.url) ? field : { status: "unavailable" };
+  const annualFresh = fresh(annual[0]?.end, 550), ttmFresh = fresh(ttm?.end, 550);
+  const status = issues.some((issue) => issue.blocking && !issue.metrics.length) ? "unavailable" : snapshot.financials?.status === "ready" && !annualFresh && !ttmFresh ? "stale" : snapshot.financials?.status;
+  return {
+    ...snapshot,
+    financials: { ...snapshot.financials, status, annual, recent, ttm },
+    price: observation(snapshot.price, 7, true),
+    marketCap: observation(snapshot.marketCap, 7, true),
+    commonBookValuePerShare: observation(snapshot.commonBookValuePerShare, 550, true),
+    dividend: observation(snapshot.dividend, 550),
+    riskFree: snapshot.riskFree?.status === "ready" && (!snapshot.riskFree.currency || snapshot.riskFree.currency === currency) && finite5(snapshot.riskFree.value) && fresh(snapshot.riskFree.asOf, 10) && sourceURL(snapshot.riskFree.source?.url) ? snapshot.riskFree : { status: "unavailable" }
+  };
+}
+function buildValuationReport(item, snapshot = {}, options = {}) {
+  snapshot = validatedValuationSnapshot(item, snapshot) || snapshot;
+  const currency = item.currency, reportDate = day(options.asOf || snapshot.checkedAt);
+  const report = {
+    schema: 1,
+    label: "Automated statement analysis",
+    instrument: { symbol: item.symbol, ticker: item.ticker, name: item.name, currency },
+    reportDate,
+    checkedAt: snapshot.checkedAt || null,
+    statementDate: null,
+    lastFilingDate: null,
+    status: "research-only",
+    method: { key: "review", name: "Evidence-led financial review", rationale: "", limitations: [] },
+    conclusion: "",
+    valuation: null,
+    marketComparison: null,
+    financials: { annual: [], recent: null, valuationBasis: null, trends: [], reviewedPeriods: [] },
+    analysis: [],
+    assumptions: [],
+    scenarios: [],
+    sensitivity: null,
+    risks: [],
+    limitations: [],
+    sources: [],
+    audit: { formulas: [], rows: [], bridge: null }
+  };
+  const sourceMap = /* @__PURE__ */ new Map();
+  function addSource(source2, context = {}) {
+    if (!sourceURL(source2?.url)) return null;
+    const key2 = `${source2.url}|${context.periodEnd || ""}|${context.publishedDate || ""}`;
+    if (sourceMap.has(key2)) return sourceMap.get(key2);
+    const id = `source-${report.sources.length + 1}`;
+    report.sources.push({
+      id,
+      name: source2.name || "Original public source",
+      url: source2.url,
+      tag: source2.tag || null,
+      ...context
+    });
+    sourceMap.set(key2, id);
+    return id;
+  }
+  function assumption(label, value, unit, description, sources = []) {
+    report.assumptions.push({
+      label,
+      value: finite5(value) ? value : null,
+      unit,
+      description,
+      sourceIds: unique(sources.map((source2) => addSource(source2)))
+    });
+  }
+  function normalizationSources(fact) {
+    const evidence = fact?.normalization?.evidence;
+    for (const item2 of evidence ? Array.isArray(evidence) ? evidence : [evidence] : []) {
+      addSource(item2.source || item2, { periodEnd: item2.asOf || null, publishedDate: day(item2.filed), purpose: "Original evidence for a documented source normalization" });
+      normalizationSources(item2);
+    }
+    if (fact?.normalization?.rejected) addSource(
+      fact.normalization.rejected.source,
+      { periodEnd: fact.normalization.rejected.asOf, publishedDate: day(fact.normalization.rejected.filed), purpose: "Rejected narrower source fact; not used as the valuation input" }
+    );
+  }
+  const identityOK = snapshot.instrument?.symbol === item.symbol && snapshot.instrument?.currency === currency;
+  const currencyOK = !snapshot.financials?.currency || snapshot.financials.currency === currency;
+  const fit = classify(item, identityOK ? snapshot : {});
+  report.method.rationale = fit.reason || "A verified company share and matching statements are needed for company valuation.";
+  if (!identityOK || !currencyOK || item.assetType !== "Equity" || !item.supported) {
+    report.conclusion = item.assetType !== "Equity" ? "This instrument requires its own holdings, asset-value or contract analysis; company-share intrinsic-value models do not apply." : "The available snapshot does not match this company\u2019s share listing and currency. A numerical intrinsic-value conclusion is not supported.";
+    report.limitations.push("No mismatched company figures or currency amounts have been carried into a valuation.");
+    report.risks.push({ risk: "Security and currency identity", monitor: "Verify the selected share class, listing currency and source issuer before modelling." });
+    return report;
+  }
+  report.financials.reviewedPeriods = validatedReviewedFinancialPeriods(item, snapshot, reportDate).map((row) => {
+    const sourceIds = unique((row.sources || [row.source]).map((source2) => addSource(
+      source2,
+      { periodEnd: row.period.end, publishedDate: row.publishedAt, purpose: "Sparse source-reviewed disclosure; native reporting currency " + row.currency }
+    )));
+    const metrics = Object.fromEntries(Object.entries(row.metrics).map(([key2, f]) => [key2, {
+      ...f,
+      sourceId: addSource(f.source, { periodEnd: f.asOf, publishedDate: f.filed, purpose: f.label + " \xB7 " + f.basis }),
+      modelEligible: row.modelCurrencyMatches && row.canonicalMetrics.includes(key2)
+    }]));
+    const observations = (row.observations || []).map((f) => ({
+      ...f,
+      modelEligible: false,
+      sourceId: addSource(f.source, { periodEnd: f.asOf, publishedDate: f.filed, purpose: f.label + " \xB7 evidence only" })
+    }));
+    for (const facts of Object.values(row.ttmComponents || {})) for (const f of facts)
+      addSource(f.source, { periodEnd: f.asOf, publishedDate: f.filed, purpose: "Dated compatible component of the explicitly covered sparse TTM flow" });
+    return {
+      id: row.id,
+      kind: row.kind,
+      symbol: row.symbol,
+      period: row.period,
+      currency: row.currency,
+      listingCurrency: row.listingCurrency,
+      reviewedAt: row.reviewedAt,
+      publishedAt: row.publishedAt,
+      modelCurrencyMatches: row.modelCurrencyMatches,
+      reviewStatus: row.reviewStatus,
+      automaticRefresh: false,
+      metrics,
+      observations,
+      metricDefinitions: row.metricDefinitions,
+      coverage: row.coverage,
+      limitations: row.limitations,
+      sourceIds,
+      source: row.source,
+      sources: row.sources
+    };
+  });
+  report.latestReviewedDisclosurePeriod = report.financials.reviewedPeriods.map((row) => row.period.end).sort().at(-1) || null;
+  report.businessClassification = fit.group ? {
+    group: fit.group,
+    sector: fit.sector || fit.group,
+    framework: fit.framework || fit.primary,
+    basis: fit.basis || "Curated business-model reference",
+    source: fit.source || null,
+    perShareBasisChange: fit.perShareBasisChange || null,
+    businessScopeChange: fit.businessScopeChange || null
+  } : null;
+  addSource(fit.source, { purpose: "Business-model classification", publishedDate: day(fit.source?.publishedAt), periodEnd: fit.source?.periodEnd || null });
+  if (fit.perShareBasisChange) {
+    const action = fit.perShareBasisChange;
+    addSource(action.source, { purpose: "Verified corporate action and economic share unit", publishedDate: day(action.source.publishedAt), periodEnd: action.source.periodEnd });
+    if (reportDate >= action.effectiveDate) report.limitations.push(`${action.reason} Effective ${action.effectiveDate}; new shares per old share ${number2(action.ratio)}. Historical figures are preserved, not arithmetically rewritten by this report.`);
+  }
+  if (fit.businessScopeChange) {
+    const change2 = fit.businessScopeChange;
+    addSource(change2.source, { purpose: "Verified separation and predecessor operating scope", publishedDate: day(change2.source.publishedAt), periodEnd: change2.source.periodEnd });
+    report.limitations.push(`${change2.reason} ${change2.operatingBasisCompatible ? "The selected operating inputs are sourced from subsequent reporting; business-specific normalization and the capital bridge still require review." : "An operating DCF is withheld until every annual/TTM component uses a matched subsequent reporting basis."}`);
+  }
+  report.qualityIssues = qualityIssues(snapshot);
+  const reportBlocked = report.qualityIssues.some((issue) => issue.blocking && !issue.metrics.length);
+  const metricFilter = (metrics) => Object.fromEntries(Object.entries(cleanMetrics(metrics, currency, reportDate)).filter(([key2, fact]) => !factBlocked(report.qualityIssues, key2, fact)));
+  const ready = snapshot.financials?.status === "ready" && !reportBlocked && !!reportDate;
+  const annual = safeRows(snapshot.financials?.annual, currency, reportDate).map((row) => ({ ...row, metrics: metricFilter(row.metrics) }));
+  const recentRaw = snapshot.financials?.recent;
+  const priorEnd = recentRaw?.prior?.end || Object.values(recentRaw?.prior?.metrics || {}).map((fact) => day(fact.asOf)).filter(Boolean).sort().at(-1);
+  const recent = recentRaw && datedNotFuture(recentRaw.end, reportDate) ? {
+    ...recentRaw,
+    metrics: metricFilter(recentRaw.metrics),
+    prior: recentRaw.prior && datedNotFuture(priorEnd, reportDate) ? { ...recentRaw.prior, end: priorEnd, metrics: metricFilter(recentRaw.prior.metrics) } : null
+  } : null;
+  const ttmRaw = snapshot.financials?.ttm;
+  const ttm = ready && ttmRaw && datedNotFuture(ttmRaw.end, reportDate) ? { ...ttmRaw, metrics: metricFilter(ttmRaw.metrics) } : null;
+  const annualBase = annual[0] || null;
+  const ttmComplete = ttm && DURATION_KEYS.every((key2) => finite5(valueOf(ttm.metrics, key2)));
+  const operatingBase = ttmComplete ? ttm : annualBase;
+  const operatingMetrics = operatingBase?.metrics || {};
+  const annualMetrics = annualBase?.metrics || {};
+  const balanceMetrics = { ...annualMetrics, ...ttm?.metrics || {}, ...recent?.metrics || {} };
+  report.statementDate = [annualBase?.end, recent?.end, ttm?.end].filter(Boolean).sort().at(-1) || null;
+  report.financials.annual = annual;
+  report.financials.recent = recent;
+  report.financials.ttm = ttm;
+  report.financials.valuationBasis = {
+    kind: ttmComplete ? "ttm" : "annual",
+    end: operatingBase?.end || null,
+    description: ttmComplete ? "Trailing twelve months: latest full year + current YTD \u2212 comparable prior YTD; latest sourced balances are dated separately." : "Latest supported full fiscal year. Interim statements, where available, inform the review but are not mechanically annualized."
+  };
+  report.financials.operatingBasis = report.financials.valuationBasis;
+  for (const row of [...annual, ...recent ? [recent, ...recent.prior ? [recent.prior] : []] : [], ...ttm ? [ttm] : []]) {
+    for (const fact of Object.values(row.metrics)) {
+      addSource(fact.source, { periodEnd: fact.asOf || row.end, publishedDate: day(fact.filed || row.filed), purpose: fact.basis || "Reported financial input" });
+      const collect = (components) => {
+        for (const component of components || []) {
+          addSource(component.source, { periodEnd: component.asOf || component.end, publishedDate: day(component.filed), purpose: "Trailing-period calculation component" });
+          collect(component.components || component.source?.components);
+        }
+      };
+      collect(fact.components || fact.source?.components);
+      normalizationSources(fact);
+    }
+  }
+  for (const issue of report.qualityIssues) for (const fact of issue.facts || []) {
+    addSource(fact.source, { periodEnd: fact.asOf || fact.end, publishedDate: day(fact.filed), purpose: `Statement-quality evidence: ${issue.message}` });
+    normalizationSources(fact);
+  }
+  report.lastFilingDate = report.sources.map((source2) => source2.publishedDate).filter(Boolean).sort().at(-1) || null;
+  for (const [key2, label, unit] of FACTS) {
+    const values = annual.map((row) => ({
+      end: row.end,
+      value: valueOf(row.metrics, key2) ?? null,
+      sourceId: addSource(row.metrics[key2]?.source, { periodEnd: row.end, publishedDate: day(row.metrics[key2]?.filed) })
+    }));
+    if (values.some((row) => finite5(row.value))) report.financials.trends.push({ key: key2, label, unit, values });
+  }
+  const cleaned = {
+    ...snapshot,
+    financials: {
+      ...snapshot.financials,
+      annual,
+      status: ready ? "ready" : snapshot.financials?.status
+    },
+    riskFree: snapshot.riskFree?.status === "ready" && datedNotFuture(snapshot.riskFree.asOf, reportDate) && (!reportDate || Date.parse(reportDate) - Date.parse(day(snapshot.riskFree.asOf)) <= 10 * 864e5) && (!snapshot.riskFree.currency || snapshot.riskFree.currency === currency) && sourceURL(snapshot.riskFree.source?.url) ? snapshot.riskFree : { status: "unavailable" },
+    // Date/currency invalid declarations must not seed a forecast path.
+    dividend: snapshot.dividend?.currency === currency && datedNotFuture(snapshot.dividend?.asOf, reportDate) && (!reportDate || Date.parse(reportDate) - Date.parse(day(snapshot.dividend.asOf)) <= 550 * 864e5) && (!snapshot.dividend?.filed || datedNotFuture(snapshot.dividend.filed, reportDate)) && sourceURL(snapshot.dividend?.source?.url) ? snapshot.dividend : { status: "unavailable" }
+  };
+  const dividendHistory = cleaned.dividend.historicalGrowth;
+  if (dividendHistory && (!perShareGrowthCompatible(dividendHistory, fit.perShareBasisChange, reportDate) || !businessScopeFactCompatible(dividendHistory, fit.businessScopeChange))) {
+    cleaned.dividend = { ...cleaned.dividend, historicalGrowth: null };
+    report.limitations.push("Historical dividend growth is withheld because its share-unit or post-separation business basis is not reconciled. A current dividend amount alone does not validate an older growth rate.");
+  }
+  const forecast = forecastAssumptions(cleaned, item), capital = forecast.capital;
+  for (const [key2, value] of Object.entries(capital.patches)) {
+    const labels = {
+      riskFree: "Risk-free yield",
+      beta: "Equity beta proxy",
+      equityRiskPremium: "Equity risk premium",
+      costDebt: "Pre-tax borrowing cost",
+      taxRate: "Operating tax-rate proxy",
+      equity: "Equity financing input",
+      debt: "Debt financing input"
+    };
+    assumption(
+      labels[key2] || key2,
+      value,
+      key2 === "beta" ? "multiple" : ["equity", "debt"].includes(key2) ? "capital-units" : "percent",
+      capital.origins[key2],
+      [
+        key2 === "riskFree" ? snapshot.riskFree?.source : capital.source,
+        ["equityRiskPremium", "taxRate"].includes(key2) ? snapshot.references?.sources?.country : null
+      ]
+    );
+  }
+  if (capital.wacc) assumption("DCF discount rate / WACC", capital.wacc, "rate", capital.description, [capital.source]);
+  if (capital.costEquity) assumption("Equity discount rate", capital.costEquity, "rate", "CAPM cost of equity for residual income and dividends. Equity cash flows are not discounted at WACC.", [capital.source]);
+  for (const [metric, path2] of [["Revenue", forecast.revenue], ["EPS", forecast.earnings], ["Dividend", forecast.dividends]])
+    for (const row of path2) assumption(
+      `${metric} growth \xB7 Year ${row.year}`,
+      row.growth,
+      "rate",
+      `${row.kind === "consensus" ? "Dated company consensus" : "Modelled scenario"}: ${row.description}`,
+      [row.source, row.historySource]
+    );
+  const a = annual[0], p = annual[1], am = a?.metrics || {}, pm = p?.metrics || {};
+  const revenue = valueOf(am, "revenue"), previousRevenue = valueOf(pm, "revenue");
+  const ebit = valueOf(am, "ebit"), previousEbit = valueOf(pm, "ebit");
+  const eps = valueOf(am, "eps"), previousEPS = valueOf(pm, "eps");
+  const revenueGrowth = change(revenue, previousRevenue), epsGrowth = change(eps, previousEPS);
+  const margin = revenue > 0 && finite5(ebit) ? ebit / revenue : null;
+  const previousMargin = previousRevenue > 0 && finite5(previousEbit) ? previousEbit / previousRevenue : null;
+  const economics = [];
+  if (a) economics.push(`The latest supported annual financial period ends ${a.end}${report.lastFilingDate ? `; the latest filing date represented in these financial inputs is ${report.lastFilingDate}` : ""}. ${report.financials.valuationBasis.description}`);
+  if (revenueGrowth != null) economics.push(`Annual revenue ${revenueGrowth >= 0 ? "grew" : "fell"} ${rate(Math.abs(revenueGrowth))} from ${p.end} to ${a.end}. ${epsGrowth != null ? `Diluted EPS ${epsGrowth >= 0 ? "rose" : "fell"} ${rate(Math.abs(epsGrowth))} over the same fiscal comparison.` : "A matching diluted-EPS comparison is not supported by the available facts."}`);
+  if (margin != null) economics.push(`Reported operating margin is ${rate(margin)}${previousMargin != null ? `, versus ${rate(previousMargin)} in the preceding annual period` : ""}. ${previousMargin != null && margin < previousMargin ? "Margin compression means revenue growth alone does not establish improving earnings power." : "The forecast carries this observed margin forward as a scenario; durable pricing power has not been independently established."}`);
+  if (recent) {
+    const r = recent.metrics, pr = recent.prior?.metrics || {}, interim = [];
+    for (const [key2, label] of [["revenue", "revenue"], ["ebit", "operating profit"], ["eps", "diluted EPS"], ["cfo", "operating cash flow"]]) {
+      const g = change(valueOf(r, key2), valueOf(pr, key2));
+      if (g != null) interim.push(`${label} ${g >= 0 ? "+" : "\u2212"}${rate(Math.abs(g))}`);
+    }
+    economics.push(`The latest available interim/YTD statement ends ${recent.end}${recent.filed ? ` and was filed ${recent.filed}` : ""}.${interim.length ? ` Against its comparable prior-year period: ${interim.join("; ")}.` : " A comparable same-period growth calculation is not supported for the available lines."} YTD totals are not treated as a full year.`);
+  } else if (report.financials.reviewedPeriods.length) economics.push("Newer source-reviewed disclosures are displayed with their native currency, exact period and economic scope. They do not establish a complete matching-currency interim set for this listing; valuation inputs retain their separate older dates.");
+  else economics.push("No more recent interim/YTD statement is represented in this snapshot. The annual statement date is the evidence cutoff, not proof that the issuer has released no newer information.");
+  if (!economics.length) economics.push("The connected snapshot does not supply usable annual statement facts. The report can select an appropriate economic framework, but cannot establish revenue, margins or earnings trends.");
+  report.analysis.push({ heading: "Business economics and recent performance", paragraphs: economics });
+  const quality = [], cfo = valueOf(operatingMetrics, "cfo"), capex = valueOf(operatingMetrics, "capex"), netIncome = valueOf(operatingMetrics, "netIncome");
+  if (finite5(cfo) && finite5(capex)) {
+    quality.push(`For the ${ttmComplete ? "trailing period" : "annual period"} ending ${operatingBase.end}, reported operating cash flow less capital expenditure is ${money(cfo - capex, currency)}.${netIncome > 0 && !fit.ownershipBridgeRequired ? ` Operating cash flow / net income is ${number2(cfo / netIncome)}\xD7.` : ""} This is a reported cash-conversion measure; interest classification, tax and financing adjustments mean it is not automatically unlevered FCFF.`);
+    if (fit.ownershipBridgeRequired) quality.push("Consolidated operating cash flow includes activities attributable to other economic owners. It is not compared directly with a parent/common-only earnings numerator; owner cash conversion requires a matching ownership and distribution bridge.");
+    else if (netIncome > 0 && cfo < netIncome) quality.push("Operating cash flow trails reported earnings. Working-capital absorption, timing effects and non-cash profits need review before treating EPS as distributable cash.");
+  } else quality.push("A matched operating-cash-flow/capex set is incomplete. Cash conversion cannot be confirmed from earnings alone; no missing cash-flow line is replaced with a reported zero.");
+  if (intermediary(fit)) quality.push("For this financial business, investing and financing cash flows can be operating inputs in economic substance. CFO minus capex is not a measure of regulatory distributable capital; loan quality, reserves and required capital are central to payout capacity.");
+  if (finite5(valueOf(operatingMetrics, "da")) && finite5(capex)) quality.push(`Capital expenditure ${capex >= valueOf(operatingMetrics, "da") ? "exceeds" : "is below"} depreciation and amortization. ${capex >= valueOf(operatingMetrics, "da") ? "The model deducts the full reported reinvestment burden; a maintenance-versus-growth split is not verified." : "A low capex year may overstate repeatable free cash flow if assets require later replacement."}`);
+  const sharesChange = change(valueOf(am, "shares"), valueOf(pm, "shares"));
+  if (sharesChange != null) quality.push(`Annual weighted-average diluted shares ${sharesChange >= 0 ? "increased" : "decreased"} ${rate(Math.abs(sharesChange))}. ${fit.ownershipBridgeRequired ? "This reported denominator can reflect if-converted units, ownership allocations and corporate actions; its movement is not treated as ordinary stock issuance or buybacks without the share-class reconciliation." : sharesChange > 0 ? "Dilution can offset growth in enterprise earnings." : "Buybacks or issuance timing can lift per-share results without equivalent growth in operating profit."} The valuation share denominator remains a dated reported proxy, not a verified current fully diluted count.`);
+  report.analysis.push({ heading: "Cash conversion, reinvestment and dilution", paragraphs: quality });
+  const borrowing = debtEvidence(balanceMetrics), debt = borrowing.value, cash = valueOf(balanceMetrics, "cash"), operatingEBITDA = finite5(valueOf(operatingMetrics, "ebit")) && finite5(valueOf(operatingMetrics, "da")) ? valueOf(operatingMetrics, "ebit") + valueOf(operatingMetrics, "da") : null;
+  const leverage = [];
+  report.financials.debtEvidence = borrowing;
+  if (finite5(debt)) leverage.push(`Reported debt ${borrowing.complete ? "bridge" : "proxy"} is ${money(debt, currency)}${borrowing.asOf ? ` as of ${borrowing.asOf}` : ""}${finite5(cash) ? `; reported cash is ${money(cash, currency)}` : ""}. ${borrowing.basis}.${operatingEBITDA > 0 && !intermediary(fit) ? ` Debt / ${ttmComplete ? "trailing" : "annual"} EBITDA is ${number2(debt / operatingEBITDA)}\xD7, using reported balance and earnings dates.` : ""} ${intermediary(fit) ? "Financial funding liabilities are part of operations; an ordinary industrial net-debt/EBITDA interpretation is inappropriate." : "Book debt is a financing proxy; leases, pension deficits, preferred capital and noncontrolling interests require separate reconciliation."}`);
+  else leverage.push("A consistent reported debt balance is not available. No debt-free assumption is made; an enterprise-to-common-equity bridge cannot be completed from missing liabilities.");
+  leverage.push(...borrowing.warnings);
+  for (const component of borrowing.components) addSource(component.source, { periodEnd: component.asOf, publishedDate: day(component.filed), purpose: "Borrowing bridge component" });
+  addSource(borrowing.source, {
+    periodEnd: borrowing.asOf,
+    verifiedAt: borrowing.verifiedAt || null,
+    purpose: `Verified dated debt-scope reconciliation${borrowing.verifiedAt ? `; checked ${borrowing.verifiedAt}` : ""}`
+  });
+  if (finite5(cash)) leverage.push("Reported cash is not automatically excess cash. The operating DCF adds none of it until cash required to run the business, restricted balances and non-operating investments are distinguished.");
+  report.analysis.push({ heading: "Balance sheet and financing", paragraphs: leverage });
+  const failures = [], scenarios = ["Bear", "Base", "Bull"];
+  function operateDCF() {
+    const m = operatingMetrics, startRevenue = valueOf(m, "revenue"), startEBIT = valueOf(m, "ebit");
+    if (fit.businessScopeChange && (!DURATION_KEYS.every((key2) => businessScopeFactCompatible(m[key2], fit.businessScopeChange)) || !borrowing.components.length || !borrowing.components.every((fact) => businessScopeFactCompatible(fact, fit.businessScopeChange))))
+      throw Error("The operating or borrowing inputs still contain the predecessor business. Matched post-separation annual/TTM components and debt are required before attributing enterprise value to the remaining company.");
+    const sharesFact = recent?.metrics?.shares || m.shares || am.shares;
+    const shares = sharesFact?.value;
+    if (!perShareFactCompatible(sharesFact, fit.perShareBasisChange, reportDate))
+      throw Error("The selected diluted-share denominator predates a verified corporate action. An operating value cannot be converted to current-share value until the share basis is reconciled.");
+    const missing = DURATION_KEYS.filter((key2) => !finite5(valueOf(m, key2)));
+    if (missing.length || !(startRevenue > 0) || !(shares > 0) || !finite5(debt) || debt < 0 || !capital.wacc || !finite5(forecast.taxRate) || forecast.revenue.length !== 5)
+      throw Error(`Operating DCF needs ${unique([...missing, !(shares > 0) && "a sourced diluted-share proxy", (!finite5(debt) || debt < 0) && "consistent reported debt", !capital.wacc && "dated financing/risk inputs", forecast.revenue.length !== 5 && "a supported five-year revenue path"]).join(", ") || "consistent positive revenue and tax inputs"}.`);
+    if (valueOf(m, "da") < 0 || valueOf(m, "capex") < 0) throw Error("D&A and capex require a verified positive expense/investment sign convention.");
+    const baseMargin = startEBIT / startRevenue, daRate = valueOf(m, "da") / startRevenue, capexRate = valueOf(m, "capex") / startRevenue;
+    const tradeComplete = ["receivables", "inventory", "payables"].every((key2) => finite5(valueOf(balanceMetrics, key2)));
+    const openingNWC = tradeComplete ? valueOf(balanceMetrics, "receivables") + valueOf(balanceMetrics, "inventory") - valueOf(balanceMetrics, "payables") : 0;
+    const nwcRate = openingNWC / startRevenue;
+    const results = scenarios.map((name, index) => {
+      const direction = index - 1, wacc = capital.wacc - direction * 0.015, terminalGrowth = Math.min(wacc - 0.01, forecast.revenueTerminal + direction * 5e-3), operatingMargin = baseMargin + direction * 0.02;
+      const assumptions = `Revenue growth ${direction === 0 ? "uses the disclosed path" : `${direction > 0 ? "+" : "\u2212"}2 pp versus the disclosed path each year`}; operating margin ${direction === 0 ? "unchanged" : `${direction > 0 ? "+" : "\u2212"}2 pp`}; WACC ${rate(wacc)}; terminal growth ${rate(terminalGrowth)}. These scenario stresses are judgemental, not statistical confidence bounds.`;
+      try {
+        let r = startRevenue, working = openingNWC;
+        const rows3 = forecast.revenue.map((driver) => {
+          const priorRevenue = r;
+          const g = clamp2(driver.growth + direction * 0.02, -0.9, 1);
+          r = driver.kind === "consensus" && finite5(driver.amount) ? driver.amount * (1 + direction * 0.02) ** driver.year : r * (1 + g);
+          const ebit2 = r * operatingMargin, taxes = Math.max(0, ebit2) * forecast.taxRate, da = r * daRate, capex2 = r * capexRate, nextWorking = r * nwcRate, deltaNWC = nextWorking - working, fcff = ebit2 - taxes + da - capex2 - deltaNWC;
+          working = nextWorking;
+          return {
+            year: driver.year,
+            growth: r / priorRevenue - 1,
+            revenue: r,
+            ebit: ebit2,
+            taxes,
+            da,
+            capex: capex2,
+            deltaNWC,
+            fcff,
+            growthBasis: driver.description,
+            sourceId: addSource(driver.source)
+          };
+        });
+        const terminalRevenue = r * (1 + terminalGrowth), terminalEBIT = terminalRevenue * operatingMargin, terminalTaxes = Math.max(0, terminalEBIT) * forecast.taxRate, terminalDA = terminalRevenue * daRate, terminalCapex = terminalRevenue * capexRate, terminalDeltaNWC = terminalRevenue * nwcRate - working, terminalNOPAT = terminalEBIT - terminalTaxes, terminalReinvestment = terminalCapex - terminalDA + terminalDeltaNWC, terminalFCFF = terminalNOPAT - terminalReinvestment;
+        if (!(terminalNOPAT > 0)) throw Error("The terminal operating-profit base is non-positive. Positive cash from declining asset balances is not a demonstrated sustainable operating perpetuity.");
+        if (terminalGrowth >= 0 && terminalCapex + Math.max(1, terminalDA) * 1e-10 < terminalDA)
+          throw Error("A non-declining terminal business would retain capex below aggregate D&A forever. Maintenance investment, acquisition-intangible amortization and other reinvestment are not reconciled, so this operating perpetuity is not supported by the statement set.");
+        const terminal = {
+          revenue: terminalRevenue,
+          growth: terminalGrowth,
+          ebit: terminalEBIT,
+          taxes: terminalTaxes,
+          nopat: terminalNOPAT,
+          da: terminalDA,
+          capex: terminalCapex,
+          deltaNWC: terminalDeltaNWC,
+          reinvestment: terminalReinvestment,
+          fcff: terminalFCFF,
+          impliedIncrementalROIC: terminalGrowth > 0 && terminalReinvestment > 0 ? terminalGrowth * terminalNOPAT / terminalReinvestment : null
+        };
+        const inputs = {
+          flows: rows3.map((row) => row.fcff),
+          wacc,
+          terminalMethod: "growth",
+          terminalGrowth,
+          terminalFCFF,
+          debt,
+          cash: 0,
+          otherAssets: 0,
+          claims: Math.max(0, valueOf(balanceMetrics, "preferredEquity") || 0),
+          shares
+        };
+        const result = calculateDCF(inputs);
+        return { ...scenarioResult(name, result, inputs, assumptions), forecastRows: rows3, terminal };
+      } catch (error) {
+        return failedScenario(name, error, assumptions);
+      }
+    });
+    if (results[1].status !== "calculated") throw Error(results[1].reason || "The operating scenario does not support positive common equity.");
+    report.scenarios = results;
+    report.method = { key: "dcf", name: "Operating FCFF DCF scenario", rationale: fit.reason, limitations: [
+      fit.caution,
+      "The cash-flow model is conditional on constant observed margins and reinvestment ratios; it is not a management forecast."
+    ] };
+    assumption("Valuation operating base", startRevenue, "money", `${ttmComplete ? "Complete sourced trailing-twelve-month set" : "Reported annual set"} ending ${operatingBase.end}; revenue base.`, [m.revenue.source]);
+    assumption("Operating margin", baseMargin, "rate", `Observed EBIT / revenue for ${operatingBase.end}; held constant in the base scenario.`, [m.ebit.source, m.revenue.source]);
+    assumption("D&A / revenue", daRate, "rate", "Reported ratio held constant; not a company depreciation forecast.", [m.da.source]);
+    assumption("Capex / revenue", capexRate, "rate", "Full reported investment ratio held constant; no unsupported maintenance-capex adjustment.", [m.capex.source]);
+    assumption(
+      "Operating working capital / revenue",
+      tradeComplete ? nwcRate : null,
+      "rate",
+      tradeComplete ? "Receivables + inventory \u2212 trade payables; partial operating-working-capital definition. Latest sourced balances and operating-period revenue may have different dates." : "Unverified scenario: zero change in working capital because the full trade-balance set is unavailable. This is a forecast assumption, not a reported zero.",
+      ["receivables", "inventory", "payables"].map((key2) => balanceMetrics[key2]?.source)
+    );
+    assumption("Diluted-share denominator", shares, "shares", sharesFact.basis || "Dated weighted-average diluted-share proxy; not a verified current fully diluted share count.", [sharesFact.source]);
+    assumption("Debt deducted in equity bridge", debt, "money", `${borrowing.asOf || "Date not established"}; ${borrowing.basis}. ${borrowing.warnings.join(" ")}`, borrowing.components.map((fact) => fact.source));
+    assumption("Excess cash added", 0, "money", "Conservative scenario adjustment: no reported cash is assumed excess. This is not a reported cash balance.");
+    assumption("Other non-operating assets added", 0, "money", "Unverified bridge adjustment held at zero; not proof no other assets exist.");
+    assumption("Other claims deducted", results[1].inputs.claims, "money", finite5(valueOf(balanceMetrics, "preferredEquity")) ? "Known preferred carrying value deducted; NCI, pensions and other claims are not fully reconciled." : "Unverified preferred/NCI/other-claim adjustment held at zero. Common-equity value is provisional until this bridge is reconciled.");
+    assumption("Terminal FCFF growth", forecast.revenueTerminal, "rate", forecast.terminalDescription);
+    assumption(
+      "First stable-year net reinvestment",
+      results[1].terminal.reinvestment,
+      "money",
+      "Year 6 capex \u2212 D&A + working-capital investment recalculated at terminal growth, not Year 5 growth. The capex/D&A split remains a reported-ratio scenario.",
+      [m.capex.source, m.da.source]
+    );
+    if (results[1].terminal.impliedIncrementalROIC != null) assumption(
+      "Implied stable incremental return on capital",
+      results[1].terminal.impliedIncrementalROIC,
+      "rate",
+      "Diagnostic = terminal growth \xD7 stable NOPAT / stable net reinvestment. This is implied by the scenario, not a measured or analyst-underwritten company ROIC."
+    );
+    report.audit.formulas = [
+      "FCFF = EBIT \u2212 max(EBIT, 0) \xD7 tax rate + D&A \u2212 capex \u2212 change in trade working capital.",
+      "Stable Year 6 revenue = Year 5 revenue \xD7 (1 + terminal growth). Year 6 FCFF is recalculated from its NOPAT, D&A, capex and change in working capital at the stable growth rate.",
+      "Enterprise value = present value of five annual FCFFs + [recalculated Year 6 FCFF / (WACC \u2212 terminal growth)] / (1 + WACC)^5.",
+      "Conditional common value per share = (enterprise value \u2212 reported debt + assumed excess cash + other assets \u2212 assumed other claims) / dated diluted-share proxy."
+    ];
+    report.audit.rows = results[1].forecastRows;
+    report.audit.bridge = {
+      enterpriseValue: results[1].calculation.enterpriseValue,
+      pvFlows: results[1].calculation.pvFlows,
+      pvTerminal: results[1].calculation.pvTerminal,
+      terminalValue: results[1].calculation.terminalValue,
+      debt,
+      excessCash: 0,
+      otherAssets: 0,
+      claims: results[1].inputs.claims,
+      equityValue: results[1].calculation.equity,
+      shares,
+      terminalWeight: results[1].calculation.terminalWeight
+    };
+    report.audit.terminal = results[1].terminal;
+    report.sensitivity = {
+      label: "Discount-rate sensitivity; all other base assumptions unchanged",
+      driver: "WACC",
+      rows: [-0.01, 0, 0.01].map((offset) => {
+        try {
+          const r = calculateDCF({ ...results[1].inputs, wacc: capital.wacc + offset });
+          return { assumption: capital.wacc + offset, value: r.value > 0 ? r.value : null };
+        } catch {
+          return { assumption: capital.wacc + offset, value: null };
+        }
+      })
+    };
+    report.limitations.push(
+      ...results[1].calculation.warnings,
+      ...borrowing.warnings,
+      "The common-equity bridge is provisional: reported book debt and a dated diluted-share proxy are used; unidentified non-operating assets and claims are not verified.",
+      ...!tradeComplete ? ["Working-capital investment is assumed unchanged because a complete trade-balance set is not sourced. Positive growth may require more reinvestment than this scenario deducts."] : []
+    );
+    if (results[1].terminal.growth < 0) report.limitations.push("The terminal scenario shrinks indefinitely at a negative nominal rate. This is a declining perpetuity, not a finite-life liquidation model; closure costs and realizable asset-sale proceeds are not valued.");
+    if (results[1].terminal.reinvestment <= 0) report.limitations.push("Stable cash flow depends on negative or zero net reinvestment, including the sourced working-capital financing pattern. Customer/supplier financing must remain scalable; this is not evidence of a measured positive reinvestment return.");
+  }
+  function residualIncome() {
+    const book = snapshot.commonBookValuePerShare, d = cleaned.dividend;
+    if (![book, am.eps, d].every((fact) => perShareFactCompatible(fact, fit.perShareBasisChange, reportDate)))
+      throw Error("Common book value, EPS or the dividend predates a verified corporate action. Residual income requires all per-share inputs on one compatible share basis.");
+    const bookPeriod = annual.find((row) => row.end === book?.asOf);
+    if (/(?:^|;\s*)(?:us-gaap:)?PreferredStockValue(?:;|$)/.test(bookPeriod?.metrics?.commonEquity?.source?.tag || ""))
+      throw Error("Common book value was derived by subtracting preferred par/stated value rather than verified preferred carrying value. That legacy common-equity bridge is not valid for residual income.");
+    if (!(book?.status === "ready" && book.currency === currency && book.value > 0 && sourceURL(book.source?.url) && datedNotFuture(book.asOf, reportDate) && eps > 0 && capital.costEquity && forecast.earnings.length === 5 && d.status === "ready" && d.value >= 0 && (d.value === 0 || forecast.dividends.length === 5)))
+      throw Error("Residual income needs verified common-only book value per share, matching diluted EPS, dated equity-return inputs and a supported common-dividend path. Owners equity is not substituted for common equity.");
+    const results = scenarios.map((name, index) => {
+      const direction = index - 1, costEquity = capital.costEquity - direction * 0.015, persistence = 0;
+      let e = eps, dividend = d.value;
+      const rows3 = forecast.earnings.map((driver, i2) => {
+        e = driver.kind === "consensus" && finite5(driver.amount) ? driver.amount * (1 + direction * 0.02) ** driver.year : e * (1 + clamp2(driver.growth + direction * 0.02, -0.9, 1));
+        if (!(i2 === 0 && d.basis === "forward")) dividend *= 1 + clamp2(forecast.dividends[i2]?.growth || 0, -0.9, 1);
+        return { eps: e, dividend };
+      });
+      const inputs = { book: book.value, costEquity, persistence, rows: rows3 };
+      const assumptions = `EPS growth ${direction === 0 ? "uses the disclosed path" : `${direction > 0 ? "+" : "\u2212"}2 pp a year`}; equity return ${rate(costEquity)}; residual-income persistence ${rate(persistence)} in every case. No unverified continuation of excess returns or residual losses is added after year five.`;
+      try {
+        return scenarioResult(name, calculateRI(inputs), inputs, assumptions);
+      } catch (error) {
+        return failedScenario(name, error, assumptions);
+      }
+    });
+    if (results[1].status !== "calculated") throw Error(results[1].reason || "Residual income does not support positive common equity.");
+    report.scenarios = results;
+    report.method = {
+      key: "ri",
+      name: "Common-equity residual-income scenario",
+      rationale: fit.reason,
+      limitations: ["Clean-surplus accounting, unchanged shares and the transition of excess ROE to the cost of equity require judgement. Regulatory capital is not inferred from accounting equity."]
+    };
+    assumption("Opening common book value / share", book.value, "per-share", `${book.asOf}; ${book.basis || "Verified common-only basis"}`, [book.source]);
+    assumption("Opening reported diluted EPS", eps, "per-share", `Fiscal year ending ${a.end}; annual EPS is used even when a newer YTD statement is available.`, [am.eps.source]);
+    assumption("Residual-income persistence", 0, "rate", "Base scenario assumes no excess return beyond year five; not a statement that franchise value is zero.");
+    report.audit.formulas = [
+      "Residual income = forecast EPS \u2212 cost of equity \xD7 opening common book value per share.",
+      "Next common book value = opening common book value + EPS \u2212 common dividends.",
+      "Value per share = opening common book value + present value of annual residual incomes + disclosed continuation value."
+    ];
+    report.audit.rows = results[1].calculation.rows;
+    report.limitations.push(
+      ...results[1].calculation.warnings,
+      `Book value is dated ${book.asOf}; EPS is dated ${a.end} and the dividend input ${d.asOf}. This mixed-date approximation needs a fully reconciled clean-surplus roll-forward.`,
+      "A bank/insurer report does not establish asset quality, reserve adequacy, liquidity or regulatory distributable capital from these summary fields."
+    );
+  }
+  function dividendValue() {
+    const d = cleaned.dividend;
+    if (fit.businessScopeChange && !businessScopeFactCompatible(d, fit.businessScopeChange))
+      throw Error("The dividend represents the predecessor business. A sourced post-separation payout and compatible growth path are required before valuing the remaining company\u2019s distributions.");
+    if (!perShareFactCompatible(d, fit.perShareBasisChange, reportDate))
+      throw Error("The starting dividend predates a verified stock split or reverse split. It is a historical per-share amount, not a compatible current-share D0; a sourced restatement or new declaration is required.");
+    if (!(d.status === "ready" && d.value > 0 && capital.costEquity && forecast.dividends.length === 5))
+      throw Error(d.status === "ready" && d.value === 0 ? "A sourced zero dividend makes DDM inapplicable; it does not make the company worthless." : "Dividend valuation needs a sourced positive common dividend and a supportable equity-return/growth path.");
+    if (d.warnings?.some((w) => /special/i.test(w))) report.limitations.push("Reported annual dividends may include special distributions; a regular-only starting payout has not been verified.");
+    const results = scenarios.map((name, index) => {
+      const direction = index - 1, requiredReturn = capital.costEquity - direction * 0.015, terminalGrowth = Math.min(requiredReturn - 0.01, forecast.dividendTerminal + direction * 5e-3);
+      const inputs = {
+        model: "two-stage",
+        basis: d.basis === "forward" ? "forward" : "current",
+        dividend: d.value,
+        years: 5,
+        requiredReturn,
+        terminalGrowth,
+        growthRates: forecast.dividends.map((row) => clamp2(row.growth + direction * 0.02, -0.9, 0.5))
+      };
+      const assumptions = `Dividend growth ${direction === 0 ? "uses the disclosed path" : `${direction > 0 ? "+" : "\u2212"}2 pp a year`}; cost of equity ${rate(requiredReturn)}; terminal growth ${rate(terminalGrowth)}.`;
+      try {
+        return scenarioResult(name, calculateDDM(inputs), inputs, assumptions);
+      } catch (error) {
+        return failedScenario(name, error, assumptions);
+      }
+    });
+    if (results[1].status !== "calculated") throw Error(results[1].reason || "A positive dividend value is not supported.");
+    report.scenarios = results;
+    report.method = {
+      key: "ddm",
+      name: "Dividend-stream value scenario",
+      rationale: "A sourced common dividend supports a distribution-based cross-check when a complete enterprise or common-book model cannot be established.",
+      limitations: ["This values the modelled dividend stream; buybacks, retained earnings and a future payout-policy change may materially alter total shareholder value."]
+    };
+    assumption("Starting annual common dividend", d.value, "per-share", `${d.asOf}; ${d.description || "Source-reported common dividend"}`, [d.source]);
+    assumption("Terminal dividend growth", forecast.dividendTerminal, "rate", forecast.terminalDescription);
+    report.audit.formulas = [
+      "Annual dividend = prior dividend \xD7 (1 + that year\u2019s disclosed growth rate). A forward D1 input is not grown a second time.",
+      "Dividend value = present value of the first five annual dividends + Year 6 dividend / (cost of equity \u2212 terminal growth), discounted five years."
+    ];
+    report.audit.rows = results[1].calculation.rows;
+    report.limitations.push(...results[1].calculation.warnings, ...d.warnings || []);
+  }
+  function earningsPower() {
+    if (!perShareFactCompatible(am.eps, fit.perShareBasisChange, reportDate))
+      throw Error("Annual EPS predates a verified corporate action and cannot support a current-share earnings-power value without a sourced restatement.");
+    if (!(eps > 0 && capital.costEquity > 0.02 && sourceURL(am.eps?.source?.url)))
+      throw Error("A positive, sourced diluted-EPS base and a dated equity return are needed for an earnings-power cross-check.");
+    report.method = {
+      key: "earnings",
+      name: "No-growth earnings-power cross-check",
+      rationale: "A full cash-flow/common-book/dividend model is not supported. Sustainable distributable earnings provide a conditional cross-check, not a completed intrinsic-value appraisal.",
+      limitations: ["Reported earnings are assumed fully distributable and sustainable with zero growth. Reinvestment needs and one-off profits are not normalized."]
+    };
+    report.scenarios = scenarios.map((name, index) => {
+      const requiredReturn = capital.costEquity + (1 - index) * 0.02;
+      return scenarioResult(
+        name,
+        { value: eps / requiredReturn, rows: [] },
+        { eps, requiredReturn, growth: 0 },
+        `Zero earnings growth; 100% of reported EPS assumed distributable; equity return ${rate(requiredReturn)}. No assumed revenue forecast is converted into cash flow.`
+      );
+    });
+    assumption("Sustainable distributable EPS", eps, "per-share", `${a.end} reported diluted EPS assumed sustainable and fully distributable; this distribution assumption is unverified.`, [am.eps.source]);
+    report.audit.formulas = ["No-growth earnings-power value = sustainable, fully distributable EPS / required equity return."];
+    report.limitations.push("An earnings-power cross-check does not establish that accounting earnings can be distributed without reducing the business\u2019s productive capacity.");
+  }
+  if (!ready) {
+    failures.push(`${!reportDate ? "A dated source cutoff is required. " : ""}${reportBlocked ? "A blocking statement-quality condition is unresolved. " : ""}Financial source status is ${snapshot.financials?.status || "unavailable"}; old or absent financial inputs are not used for a fresh numerical valuation.${snapshot.financials?.reason ? ` Source coverage explanation: ${snapshot.financials.reason}` : ""}`);
+    if (reportDate && !reportBlocked && cleaned.dividend.status === "ready" && cleaned.dividend.value > 0) {
+      try {
+        dividendValue();
+      } catch (error) {
+        failures.push(error.message);
+      }
+    }
+  } else {
+    const methods = intermediary(fit) ? [residualIncome, dividendValue, earningsPower] : fit.group === "holding" || fit.operatingDCF === false ? [dividendValue, ...fit.earningsPower === false ? [] : [earningsPower]] : [operateDCF, dividendValue, earningsPower];
+    for (const build of methods) {
+      try {
+        build();
+        break;
+      } catch (error) {
+        failures.push(error.message);
+      }
+    }
+  }
+  const usedGrowth = report.method.key === "dcf" ? ["Revenue"] : report.method.key === "ri" ? ["EPS", "Dividend"] : report.method.key === "ddm" ? ["Dividend"] : [];
+  report.assumptions = report.assumptions.filter((row) => {
+    const growthMetric = /^(Revenue|EPS|Dividend) growth · Year /.exec(row.label)?.[1];
+    return !growthMetric || usedGrowth.includes(growthMetric);
+  });
+  if (report.scenarios.length) {
+    if (report.method.key === "ddm") report.financials.valuationBasis = {
+      kind: "dividend",
+      end: cleaned.dividend.asOf,
+      description: "Sourced annual common dividend; growth and equity-return assumptions are disclosed separately."
+    };
+    else if (["ri", "earnings"].includes(report.method.key)) report.financials.valuationBasis = {
+      kind: "annual",
+      end: a.end,
+      description: "Annual diluted EPS; newer interim performance is reviewed separately, without summing per-share figures."
+    };
+    const base = report.scenarios.find((row) => row.name === "Base");
+    report.status = "scenario";
+    report.valuation = {
+      currency,
+      basis: "Conditional per-share scenario values; not a quoted market price",
+      kind: ["ddm", "earnings"].includes(report.method.key) ? "cross-check" : "intrinsic-scenario",
+      bear: report.scenarios[0].value,
+      base: base.value,
+      bull: report.scenarios[2].value,
+      low: report.scenarios.every((row) => row.value != null) ? Math.min(...report.scenarios.map((row) => row.value)) : null,
+      high: report.scenarios.every((row) => row.value != null) ? Math.max(...report.scenarios.map((row) => row.value)) : null
+    };
+    const v = report.valuation;
+    report.conclusion = `${report.method.name} supports a conditional base value of ${money(v.base, currency)} per share${v.low != null ? ` and a stressed range of ${money(v.low, currency)}\u2013${money(v.high, currency)}` : "; at least one stress case fails to support positive common equity or cannot be quantified"}. ${v.kind === "cross-check" ? "This is a limited cross-check because the preferred full-company valuation is not supported by the connected facts." : "The range depends on the disclosed operating assumptions and capital adjustments."} It is a model outcome, not a guaranteed realizable price.`;
+    const price = snapshot.price;
+    if (price?.status === "ready" && price.currency === currency && price.value > 0 && sourceURL(price.source?.url) && datedNotFuture(price.asOf, reportDate) && Date.parse(reportDate) - Date.parse(day(price.asOf)) <= 7 * 864e5) {
+      report.marketComparison = {
+        price: price.value,
+        asOf: price.asOf,
+        sourceId: addSource(price.source),
+        difference: v.base / price.value - 1
+      };
+    }
+  } else {
+    report.financials.valuationBasis = null;
+    report.conclusion = annual.length ? "The available statements support a financial review, but not a defensible positive per-share intrinsic value with the connected data. The report identifies the missing economic bridge rather than replacing it with a generic price." : "A company valuation cannot be substantiated from the connected statement evidence. The report explains the appropriate framework and the evidence needed to reach a numerical conclusion.";
+  }
+  report.analysis.push({ heading: "Why this valuation method", paragraphs: unique([fit.reason, report.method.rationale, ...failures]) });
+  report.limitations.push(
+    ...report.method.limitations,
+    ...snapshot.financials?.warnings || [],
+    ...recent?.warnings || [],
+    ...ttm?.warnings || [],
+    "This is automated statement analysis. It does not mean a human analyst read and reviewed every page of the issuer\u2019s latest filing, earnings release or footnotes.",
+    "Company histories and US industry aggregates are model drivers, not company-specific analyst consensus unless explicitly identified as such.",
+    "Source checks can run more frequently than issuers or reference datasets publish. A recent report check does not make older statements or annual industry estimates new.",
+    "The five forecast steps are annual modelling intervals applied to the disclosed reported base and discounted at year-end. A calendar stub, seasonality and the gap between statement date and report date are not separately modelled.",
+    ...!report.marketComparison ? ["No matching, dated native stock price is connected; no undervalued/overvalued or upside claim is made against an assumed market quote."] : [],
+    ...snapshot.financials?.conversion ? [`Source financials were translated using ${snapshot.financials.conversion.value} ${currency}/USD on ${snapshot.financials.conversion.asOf}. This is a constant-FX scenario, not a historical translation restatement.`] : []
+  );
+  report.limitations = unique(report.limitations);
+  if (report.qualityIssues.length) {
+    const conditions = report.qualityIssues.map((issue) => `${issue.blocking ? "Blocking source condition" : "Source-quality condition"} \xB7 ${issue.context}: ${issue.message}`);
+    report.analysis.unshift({ heading: "Statement quality conditions", paragraphs: conditions });
+    report.limitations.push(...conditions);
+  }
+  const baseDCF = report.scenarios.find((row) => row.name === "Base")?.forecastRows;
+  report.risks.push({ risk: "Growth and margin durability", monitor: baseDCF ? `Compare new filings with Year 1 revenue ${money(baseDCF[0].revenue, currency)} and operating profit ${money(baseDCF[0].ebit, currency)}. A material shortfall invalidates the unchanged-margin base path.` : "Compare newly released revenue, diluted EPS and payout coverage with the disclosed annual path; do not infer recurring growth from a one-time gain." });
+  report.risks.push({ risk: "Cash conversion and reinvestment", monitor: "Watch cash from operations, receivables/payables, inventory and capex together. Sustained earnings growth without cash generation or higher maintenance investment weakens the valuation." });
+  report.risks.push({
+    risk: intermediary(fit) ? "Financial asset quality and capital" : "Financing and share dilution",
+    monitor: intermediary(fit) ? "Review credit losses, reserve development, investment marks and regulatory capital. Summary book value and EPS do not establish capital available for distribution." : "Review new debt, refinancing costs, lease commitments, pensions, stock compensation and fully diluted shares; reconcile all claims before treating enterprise value as common equity."
+  });
+  if (fit.group === "cyclical") report.risks.push({ risk: "Cycle normalization", monitor: "Stress commodity/pricing volumes and utilization through a downturn. A trailing-year margin held constant is not a mid-cycle margin estimate." });
+  if (fit.group === "holding") report.risks.push({ risk: "Unvalued business components", monitor: "A subsidiary-by-subsidiary asset and liability bridge is required. A residual-income or earnings cross-check is not a complete sum-of-parts valuation." });
+  report.analysis.push({ heading: "What the conclusion can support", paragraphs: [
+    report.marketComparison ? `The base scenario differs from the sourced ${report.marketComparison.asOf} comparison price by ${rate(report.marketComparison.difference)}. This comparison inherits all model and quote-date limitations.` : "There is no verified matching market-price observation in this report. Its conclusion concerns conditional business value; it does not establish whether today\u2019s stock price is cheap or expensive.",
+    "Reassess the valuation after the next statement, a material guidance change, refinancing, acquisition or capital-policy change. The stated risks identify evidence that could overturn the base case."
+  ] });
+  return report;
+}
 
-// src/valuation-view.js
-var pct = (v) => v == null ? "\u2014" : `${num(v * 100, 2)}%`;
-var money = (v, c) => v == null ? "\u2014" : `${esc(c)} ${num(v, 2)}`;
-var multiple = (v) => v == null ? "\u2014" : `${num(v, 2)}\xD7`;
-var note = (s) => `<p class="ddm-help">${s}</p>`;
-var table = (caption, headers, rows3, cls = "") => `<div class="ddm-table-wrap" tabindex="0" role="region" aria-label="${esc(caption)}"><table class="ddm-table ${cls}"><caption>${caption}</caption><thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${rows3.map((row) => `<tr>${row.map((c, i2) => i2 ? `<td>${c}</td>` : `<th scope="row">${c}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`;
-var panel = (title, body) => `<section class="panel"><div class="panel-head"><h2>${title}</h2></div>${body}</section>`;
-var warnings = (items) => items?.length ? `<ul class="ddm-warnings">${items.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>` : "";
-var metric = (label, value) => `<div><span>${label}</span><b>${value}</b></div>`;
-var result = (label, value, body) => panel(
-  label,
-  `<div class="ddm-result-body"><strong id="val-value" class="val-value">${value}</strong>${body}</div>`
-);
-var cf = "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/";
-var valuationDefaults = (view) => ({
-  method: "growth",
-  metric: "pe",
-  terminalMethod: "growth",
-  estimateKind: "user",
-  example: false,
-  auto: true,
-  ...view === "ri" ? { persistence: "0" } : {}
-});
-var sourceReferences = {
-  dcf: ["FCFF valuation and WACC", cf + "free-cash-flow-valuation"],
-  wacc: [
-    "FCFF discount rate and capital weights",
-    cf + "free-cash-flow-valuation"
-  ],
-  ri: ["Residual income valuation", cf + "residual-income-valuation"],
-  rv: [
-    "Equity valuation approaches",
-    cf + "equity-valuation-concepts-basic-tools"
-  ],
-  eqrv: [
-    "Bloomberg \xB7 relative valuation context",
-    "https://data.bloomberglp.com/professional/sites/10/IR-Essentials-guide.pdf"
-  ],
-  anr: [
-    "Bloomberg \xB7 analyst targets navigation",
-    "https://data.bloomberglp.com/professional/sites/10/Getting-Started-Guide-for-Students-English.pdf"
-  ],
-  ee: [
-    "Bloomberg \xB7 earnings and estimates",
-    "https://assets.bbhub.io/professional/sites/10/RMB-Equity-Solutions.pdf"
-  ],
-  x3sm: [
-    "Bloomberg \xB7 Excel template context",
-    "https://data.bloomberglp.com/professional/sites/10/Education-Brochure.pdf"
+// src/research/current-releases.json
+var current_releases_default = {
+  schema: 1,
+  verifiedAt: "2026-10-17",
+  coverage: "Thirteen specifically checked issuers; not an all-stock release inventory or a certification of complete source coverage.",
+  rows: [
+    {
+      symbol: "TSX:RY",
+      ticker: "RY.TO",
+      name: "Royal Bank of Canada",
+      periodEnd: "2026-07-31",
+      publishedAt: "2026-08-27",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Royal Bank of Canada official results",
+        url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "cet1Ratio",
+          label: "CET1 ratio",
+          value: 0.135,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported ROE",
+          value: 0.179,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          }
+        },
+        {
+          key: "adjustedROE",
+          label: "Adjusted ROE",
+          value: 0.181,
+          unit: "ratio",
+          basis: "Non-GAAP",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          }
+        },
+        {
+          key: "pclRatio",
+          label: "PCL on loans ratio",
+          value: 36e-4,
+          unit: "ratio",
+          basis: "Quarterly measure, annualized per issuer glossary",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          }
+        },
+        {
+          key: "lcr",
+          label: "Average LCR",
+          value: 1.25,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 4.23,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Royal Bank of Canada official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex991.htm"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD",
+      financialStatementUrl: "https://www.sec.gov/Archives/edgar/data/1000275/000119312526369461/d91595dex992.htm"
+    },
+    {
+      symbol: "TSX:TD",
+      ticker: "TD.TO",
+      name: "Toronto-Dominion Bank",
+      periodEnd: "2026-07-31",
+      publishedAt: "2026-08-27",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Toronto-Dominion Bank official results",
+        url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "cet1Ratio",
+          label: "CET1 ratio",
+          value: 0.143,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Toronto-Dominion Bank official results",
+            url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported ROE",
+          value: 0.158,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Toronto-Dominion Bank official results",
+            url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "adjustedROE",
+          label: "Adjusted ROE",
+          value: 0.16,
+          unit: "ratio",
+          basis: "Non-GAAP",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Toronto-Dominion Bank official results",
+            url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 2.74,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Toronto-Dominion Bank official results",
+            url: "https://td.mediaroom.com/2026-08-27-TD-Bank-Group-Reports-Third-Quarter-2026-Results"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD",
+      documentDatedAt: "2026-08-26"
+    },
+    {
+      symbol: "TSX:CM",
+      ticker: "CM.TO",
+      name: "Canadian Imperial Bank of Commerce",
+      periodEnd: "2026-07-31",
+      publishedAt: "2026-08-27",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Canadian Imperial Bank of Commerce official results",
+        url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "cet1Ratio",
+          label: "CET1 ratio",
+          value: 0.134,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported ROE",
+          value: 0.152,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "adjustedROE",
+          label: "Adjusted ROE",
+          value: 0.168,
+          unit: "ratio",
+          basis: "Non-GAAP",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "netInterestMargin",
+          label: "NIM excluding trading",
+          value: 0.0207,
+          unit: "ratio",
+          basis: "On average interest-earning assets excluding trading",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "lcr",
+          label: "LCR",
+          value: 1.27,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 2.47,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-27",
+          source: {
+            name: "Canadian Imperial Bank of Commerce official results",
+            url: "https://cibc.mediaroom.com/2026-08-27-CIBC-Announces-Third-Quarter-2026-Results"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD"
+    },
+    {
+      symbol: "TSX:BMO",
+      ticker: "BMO.TO",
+      name: "Bank of Montreal",
+      periodEnd: "2026-07-31",
+      publishedAt: "2026-08-25",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Bank of Montreal official results",
+        url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "cet1Ratio",
+          label: "CET1 ratio",
+          value: 0.13,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported ROE",
+          value: 0.084,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "adjustedROE",
+          label: "Adjusted ROE",
+          value: 0.14,
+          unit: "ratio",
+          basis: "Non-GAAP",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 2.38,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          }
+        },
+        {
+          key: "creditLossProvision",
+          label: "Credit loss provision",
+          value: 722e6,
+          unit: "CAD",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Montreal official results",
+            url: "https://newsroom.bmo.com/2026-08-25-BMO-Financial-Group-Reports-Third-Quarter-2026-Results"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD"
+    },
+    {
+      symbol: "TSX:BNS",
+      ticker: "BNS.TO",
+      name: "Bank of Nova Scotia",
+      periodEnd: "2026-07-31",
+      publishedAt: "2026-08-25",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Bank of Nova Scotia official results",
+        url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "cet1Ratio",
+          label: "CET1 ratio",
+          value: 0.131,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported ROE",
+          value: 0.141,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          }
+        },
+        {
+          key: "adjustedROE",
+          label: "Adjusted ROE",
+          value: 0.142,
+          unit: "ratio",
+          basis: "Non-GAAP",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          }
+        },
+        {
+          key: "pclRatio",
+          label: "PCL ratio",
+          value: 56e-4,
+          unit: "ratio",
+          basis: "Quarterly measure, annualized per issuer glossary",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 2.27,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-07-31",
+          publishedAt: "2026-08-25",
+          source: {
+            name: "Bank of Nova Scotia official results",
+            url: "https://scotiabank.investorroom.com/2026-08-25-Scotiabank-reports-third-quarter-results"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD"
+    },
+    {
+      symbol: "TSX:NA",
+      ticker: "NA.TO",
+      name: "National Bank of Canada",
+      periodEnd: "2026-07-31",
+      publishedAt: "2026-08-26",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "National Bank of Canada official results",
+        url: "https://www.nbc.ca/about-us/news-media/press-release/2026/20260826-nbc-third-quarter-results.html"
+      },
+      scope: "Issuer HTML verifies Q3 release and July 31 period. Full release is not normalized; no KPI from the linked document is asserted.",
+      observations: [],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD"
+    },
+    {
+      symbol: "TSX:MFC",
+      ticker: "MFC.TO",
+      name: "Manulife Financial",
+      periodEnd: "2026-06-30",
+      publishedAt: "2026-08-05",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Manulife Financial official results",
+        url: "https://www.manulife.com/ca/en/about-us/investors/results-and-reports"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "commonBookValuePerShare",
+          label: "Common book value per share",
+          value: 27.48,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-05",
+          source: {
+            name: "Manulife Financial official results",
+            url: "https://www.manulife.com/ca/en/about-us/investors/results-and-reports"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported common ROE",
+          value: 0.18,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-05",
+          source: {
+            name: "Manulife Financial official results",
+            url: "https://www.manulife.com/ca/en/about-us/investors/results-and-reports"
+          }
+        },
+        {
+          key: "coreROE",
+          label: "Core ROE",
+          value: 0.163,
+          unit: "ratio",
+          basis: "Non-GAAP ratio",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-05",
+          source: {
+            name: "Manulife Financial official results",
+            url: "https://www.manulife.com/ca/en/about-us/investors/results-and-reports"
+          }
+        },
+        {
+          key: "newBusinessCsm",
+          label: "New business CSM net of NCI",
+          value: 1024e6,
+          unit: "CAD",
+          basis: "Non-GAAP; currency growth comparisons use constant exchange rates",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-05",
+          source: {
+            name: "Manulife Financial official results",
+            url: "https://www.manulife.com/ca/en/about-us/investors/results-and-reports"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 1.2,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-05",
+          source: {
+            name: "Manulife Financial official results",
+            url: "https://www.manulife.com/ca/en/about-us/investors/results-and-reports"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD",
+      publicationDateSource: "https://www.prnewswire.com/news-releases/manulife-reports-second-quarter-2026-results-825420484.html"
+    },
+    {
+      symbol: "TSX:SLF",
+      ticker: "SLF.TO",
+      name: "Sun Life Financial",
+      periodEnd: "2026-06-30",
+      publishedAt: "2026-08-06",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Sun Life Financial official results",
+        url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "licatRatio",
+          label: "SLF Inc. LICAT ratio",
+          value: 1.45,
+          unit: "ratio",
+          basis: "Sun Life Financial Inc. legal-entity scope",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-06",
+          source: {
+            name: "Sun Life Financial official results",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+          }
+        },
+        {
+          key: "reportedROE",
+          label: "Reported ROE",
+          value: 0.172,
+          unit: "ratio",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-06",
+          source: {
+            name: "Sun Life Financial official results",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+          }
+        },
+        {
+          key: "underlyingROE",
+          label: "Underlying ROE",
+          value: 0.191,
+          unit: "ratio",
+          basis: "Non-IFRS",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-06",
+          source: {
+            name: "Sun Life Financial official results",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+          }
+        },
+        {
+          key: "newBusinessCsm",
+          label: "New business CSM",
+          value: 4e8,
+          unit: "CAD",
+          basis: "Non-IFRS",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-06",
+          source: {
+            name: "Sun Life Financial official results",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+          }
+        },
+        {
+          key: "contractualServiceMargin",
+          label: "CSM net of tax",
+          value: 119e8,
+          unit: "CAD",
+          basis: "Balance used in non-IFRS leverage denominator",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-06",
+          source: {
+            name: "Sun Life Financial official results",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+          }
+        },
+        {
+          key: "reportedEps",
+          label: "Diluted EPS",
+          value: 1.81,
+          unit: "CAD/share",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-06",
+          source: {
+            name: "Sun Life Financial official results",
+            url: "https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-reports-second-quarter-2026-results/124117/"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD"
+    },
+    {
+      symbol: "TSX:BN",
+      ticker: "BN.TO",
+      name: "Brookfield Corporation",
+      periodEnd: "2026-06-30",
+      publishedAt: "2026-08-13",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Brookfield Corporation official results",
+        url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "commonEquity",
+          label: "Common equity",
+          value: 42483e6,
+          unit: "USD",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        },
+        {
+          key: "corporateDebt",
+          label: "Corporate borrowings",
+          value: 14711e6,
+          unit: "USD",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        },
+        {
+          key: "nonRecourseDebt",
+          label: "Managed-entity non-recourse borrowings",
+          value: 250271e6,
+          unit: "USD",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        },
+        {
+          key: "noncontrollingInterests",
+          label: "Noncontrolling interests",
+          value: 120065e6,
+          unit: "USD",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        },
+        {
+          key: "preferredEquity",
+          label: "Preferred equity",
+          value: 4088e6,
+          unit: "USD",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        },
+        {
+          key: "distributableEarnings",
+          label: "Quarterly DE",
+          value: 1548e6,
+          unit: "USD",
+          basis: "Non-IFRS",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        },
+        {
+          key: "deBeforeRealizations",
+          label: "Quarterly DE before realizations",
+          value: 1427e6,
+          unit: "USD",
+          basis: "Non-IFRS",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-13",
+          source: {
+            name: "Brookfield Corporation official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1001085/000117184326005474/exh_991.htm"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "USD",
+      cautions: [
+        "Parent and managed-entity debt, minority interests and preferred equity need a sum-of-parts bridge. Consolidated figures cannot all be attributed to BN common shareholders.",
+        "Listing is CAD but reported figures are USD. Corporate simplification and share conversions require separate review."
+      ]
+    },
+    {
+      symbol: "TSX:POW",
+      ticker: "POW.TO",
+      name: "Power Corporation of Canada",
+      periodEnd: "2026-06-30",
+      publishedAt: "2026-07-30",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Power Corporation of Canada official results",
+        url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [
+        {
+          key: "adjustedNavPerShare",
+          label: "Management adjusted NAV per participating share",
+          value: 112.94,
+          unit: "CAD/share",
+          basis: "Non-IFRS management estimate, not independent intrinsic value",
+          asOf: "2026-06-30",
+          publishedAt: "2026-07-30",
+          source: {
+            name: "Power Corporation of Canada official results",
+            url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/"
+          }
+        },
+        {
+          key: "grossAssetValue",
+          label: "Holding-company gross asset value",
+          value: 77422e6,
+          unit: "CAD",
+          basis: "Non-IFRS reconciliation",
+          asOf: "2026-06-30",
+          publishedAt: "2026-07-30",
+          source: {
+            name: "Power Corporation of Canada official results",
+            url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/"
+          }
+        },
+        {
+          key: "holdingClaims",
+          label: "Liabilities and preferred shares",
+          value: 6324e6,
+          unit: "CAD",
+          basis: "Holding-company NAV reconciliation",
+          asOf: "2026-06-30",
+          publishedAt: "2026-07-30",
+          source: {
+            name: "Power Corporation of Canada official results",
+            url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/"
+          }
+        },
+        {
+          key: "adjustedNav",
+          label: "Adjusted NAV",
+          value: 71098e6,
+          unit: "CAD",
+          basis: "Non-IFRS management estimate",
+          asOf: "2026-06-30",
+          publishedAt: "2026-07-30",
+          source: {
+            name: "Power Corporation of Canada official results",
+            url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/"
+          }
+        },
+        {
+          key: "participatingShares",
+          label: "Participating shares outstanding",
+          value: 6295e5,
+          unit: "shares",
+          basis: "Reported",
+          asOf: "2026-06-30",
+          publishedAt: "2026-07-30",
+          source: {
+            name: "Power Corporation of Canada official results",
+            url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD",
+      cautions: [
+        "Public holdings use market values and private assets management estimates. Neither consolidated book nor management NAV proves realizable intrinsic value."
+      ]
+    },
+    {
+      symbol: "NYSE:BRK.B",
+      ticker: "BRK.B",
+      name: "Berkshire Hathaway",
+      periodEnd: "2026-06-30",
+      publishedAt: "2026-08-10",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Berkshire Hathaway official results",
+        url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+      },
+      scope: "Q2 Form 10-Q filing, period and Class A/B economic-rights distinction verified; no full subsidiary valuation or fully diluted Class B-equivalent count is claimed.",
+      observations: [
+        {
+          key: "classBDistributionRights",
+          label: "Class B distribution rights relative to Class A",
+          value: 6666666666666666e-19,
+          unit: "fraction",
+          basis: "Note 18; voting rights have a different conversion",
+          asOf: "2026-06-30",
+          publishedAt: "2026-08-10",
+          source: {
+            name: "Berkshire Hathaway official results",
+            url: "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm"
+          },
+          displayValue: "1 / 1,500 of Class A distribution rights; voting rights use a different ratio"
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "USD"
+    },
+    {
+      symbol: "TSX:CNR",
+      ticker: "CNR.TO",
+      name: "Canadian National Railway",
+      periodEnd: "2026-06-30",
+      publishedAt: "2026-07-24",
+      verifiedAt: "2026-10-17",
+      source: {
+        name: "Canadian National Railway official results",
+        url: "https://www.cn.ca/en/news/2026/07/cn-delivers-on-commitments-with-strong-second-quarter-results-an/"
+      },
+      scope: "Release period, publication date and listed observations verified; not a complete financial-statement or investment review.",
+      observations: [],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      reportingCurrency: "CAD",
+      reviewedReportId: "cnr-statement-review-2026-10-17",
+      nextExpectedRelease: {
+        date: "2026-10-30",
+        source: {
+          name: "CN announced results schedule",
+          url: "https://www.globenewswire.com/news-release/2026/10/06/3375589/0/en/cn-to-report-third-quarter-2026-financial-and-operating-results-on-october-30-2026.html"
+        }
+      },
+      cautions: [
+        "October 6 grain movement is an operating update, not Q3 financial statements."
+      ]
+    },
+    {
+      symbol: "NYSE:BLK",
+      ticker: "BLK",
+      name: "BlackRock",
+      periodEnd: "2026-09-30",
+      publishedAt: "2026-10-14",
+      verifiedAt: "2026-10-17",
+      reportingCurrency: "USD",
+      source: {
+        name: "BlackRock official Q3 2026 results",
+        url: "https://www.blackrock.com/corporate/newsroom/media/press-releases/blackrock-reports-third-quarter-2026"
+      },
+      scope: "Issuer Q3 release period and publication date verified. Listed flow and growth observations are not a complete normalized statement set.",
+      observations: [
+        {
+          key: "netFlows",
+          label: "Quarterly net inflows",
+          value: 205e9,
+          unit: "USD",
+          basis: "Issuer reported client flows; not corporate cash flow",
+          asOf: "2026-09-30",
+          publishedAt: "2026-10-14",
+          source: {
+            name: "BlackRock official Q3 2026 results",
+            url: "https://www.blackrock.com/corporate/newsroom/media/press-releases/blackrock-reports-third-quarter-2026"
+          }
+        },
+        {
+          key: "organicBaseFeeGrowth",
+          label: "Annualized organic base fee growth",
+          value: 0.11,
+          unit: "ratio",
+          basis: "Quarterly measure annualized by issuer, not a long-term company forecast",
+          asOf: "2026-09-30",
+          publishedAt: "2026-10-14",
+          source: {
+            name: "BlackRock official Q3 2026 results",
+            url: "https://www.blackrock.com/corporate/newsroom/media/press-releases/blackrock-reports-third-quarter-2026"
+          }
+        }
+      ],
+      modelIntegration: "Separate research evidence. Not injected into valuation inputs.",
+      cautions: [
+        "Earnings release may precede periodic 10-Q filing. Matching the latest 10-Q date alone does not establish that the latest earnings are reflected."
+      ]
+    }
   ]
 };
-function readInput(view, d) {
-  const n = (k) => d[k] == null || String(d[k]).trim() === "" ? null : Number(d[k]);
-  const rate = (k) => n(k) == null ? null : n(k) / 100;
-  const bridge = Object.fromEntries(
-    ["debt", "cash", "otherAssets", "claims", "shares", "price"].map((k) => [
-      k,
-      n(k)
-    ])
-  );
-  if (view === "dcf")
-    return {
-      ...bridge,
-      flows: Array.from({ length: 5 }, (_, i2) => n("fcff" + i2)),
-      wacc: rate("wacc"),
-      terminalGrowth: rate("terminalGrowth"),
-      terminalMethod: d.terminalMethod,
-      terminalEbitda: n("terminalEbitda"),
-      exitMultiple: n("exitMultiple")
-    };
-  if (view === "wacc")
-    return {
-      riskFree: rate("riskFree"),
-      beta: n("beta"),
-      equityRiskPremium: rate("equityRiskPremium"),
-      costDebt: rate("costDebt"),
-      taxRate: rate("taxRate"),
-      equity: n("equity"),
-      debt: n("debt")
-    };
-  if (["rv", "eqrv"].includes(view)) {
-    if (!d.period?.trim())
-      throw new Error(
-        "Record the matching fiscal period and accounting basis."
-      );
-    const history2 = (d.history || "").trim() ? d.history.split(/[,;\s]+/).filter(Boolean).map(Number) : [];
-    if (history2.some((v) => !Number.isFinite(v) || v <= 0))
-      throw new Error(
-        "Historical multiples must be positive numbers, separated by commas or spaces."
-      );
-    return {
-      ...bridge,
-      metric: d.metric,
-      fundamental: n("fundamental"),
-      peers: Array.from({ length: 4 }, (_, i2) => ({
-        name: d["peerName" + i2],
-        multiple: n("peerMultiple" + i2)
-      })),
-      history: history2
-    };
+
+// src/research-readiness.js
+var finite6 = Number.isFinite;
+var uniq = (values) => [...new Set(values.filter(Boolean))];
+var validURL = (value) => {
+  try {
+    return ["https:", "http:"].includes(new URL(value).protocol);
+  } catch {
+    return false;
   }
-  if (view === "anr") {
-    if (!d.horizon?.trim())
-      throw new Error("Record a common target horizon and share basis.");
-    return {
-      price: n("price"),
-      rows: Array.from({ length: 4 }, (_, i2) => ({
-        name: d["analyst" + i2],
-        target: n("target" + i2),
-        date: d["targetDate" + i2],
-        rating: d["rating" + i2] || "Not recorded"
-      }))
-    };
-  }
-  if (view === "ri")
-    return {
-      book: n("book"),
-      costEquity: rate("costEquity"),
-      persistence: rate("persistence"),
-      price: n("price"),
-      rows: Array.from({ length: 5 }, (_, i2) => ({
-        eps: n("eps" + i2),
-        dividend: n("dividend" + i2)
-      }))
-    };
-  if (view === "x3sm")
-    return Object.fromEntries(
-      [
-        "revenue",
-        "growth",
-        "margin",
-        "taxRate",
-        "costDebt",
-        "daRate",
-        "capexRate",
-        "nwcRate",
-        "payout",
-        "cash",
-        "debt",
-        "ppe",
-        "nwc",
-        "otherNetAssets"
-      ].map((k) => [
-        k,
-        ["revenue", "cash", "debt", "ppe", "nwc", "otherNetAssets"].includes(k) ? n(k) : rate(k)
-      ])
-    );
-  if (view === "ee") {
-    if (!d.period?.trim())
-      throw new Error(
-        "Record the accounting and share basis of these estimates."
-      );
-    const rows3 = Array.from({ length: 3 }, (_, i2) => ({
-      fiscal: d["fiscal" + i2],
-      revenue: n("revenue" + i2),
-      eps: n("eps" + i2),
-      ebitda: n("ebitda" + i2),
-      count: n("count" + i2)
-    })).filter(
-      (row) => row.fiscal || [row.revenue, row.eps, row.ebitda, row.count].some((v) => v != null)
-    );
-    if (!rows3.length)
-      throw new Error(
-        "Enter a fiscal year-end and at least one forecast metric."
-      );
-    rows3.forEach((row) => {
-      if (!isDate(row.fiscal))
-        throw new Error("Each forecast needs a valid fiscal year-end date.");
-      if ([row.revenue, row.eps, row.ebitda].every((v) => v == null))
-        throw new Error("Each fiscal period needs at least one metric.");
-      if ([row.revenue, row.eps, row.ebitda].some(
-        (v) => v != null && !Number.isFinite(v)
-      ))
-        throw new Error("Estimates must be finite numbers.");
-      if (row.revenue != null && row.revenue < 0)
-        throw new Error("Revenue cannot be negative.");
-      if (row.count != null && (!Number.isInteger(row.count) || row.count < 1))
-        throw new Error(
-          "Contributor counts must be positive whole numbers or blank."
-        );
-    });
-    if (new Set(rows3.map((r) => r.fiscal)).size !== rows3.length)
-      throw new Error("Use each fiscal period once.");
-    const price = n("price");
-    if (price != null && (!Number.isFinite(price) || price <= 0))
-      throw new Error("Comparison price must be positive or blank.");
-    return {
-      rows: rows3.sort((a, b) => a.fiscal.localeCompare(b.fiscal)),
-      price
-    };
-  }
+};
+var date2 = (value) => {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:T|$)/.test(value)) return null;
+  const text = value.slice(0, 10), parsed = Date.parse(text);
+  return finite6(parsed) && new Date(parsed).toISOString().slice(0, 10) === text ? text : null;
+};
+var latest = (values) => values.filter(Boolean).sort().at(-1) || null;
+var age = (asOf, value) => asOf && value ? Math.round((Date.parse(asOf) - Date.parse(value)) / 864e5) : null;
+var sourceOK = (fact, cutoff) => finite6(fact?.value) && validURL(fact.source?.url) && !!date2(fact.asOf) && date2(fact.asOf) <= cutoff && (!fact.filed || !!date2(fact.filed) && date2(fact.filed) <= cutoff);
+var researchStandards = {
+  bankCapital: { name: "OSFI capital requirements and distribution constraints", url: "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/capital-adequacy-requirements-car-2026-chapter-1-overview-risk-based-capital-requirements", scope: "Canadian regulated banks; thresholds are not inferred for another jurisdiction." },
+  insuranceCapital: { name: "OSFI life-insurance capital adequacy framework", url: "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/life-insurance-capital-adequacy-test-guideline-2025", scope: "Canadian life insurers; retain the legal entity and total/core ratio definitions." },
+  insuranceAccounting: { name: "IFRS Foundation: IFRS 17", url: "https://www.ifrs.org/issued-standards/list-of-standards/ifrs-17-insurance-contracts/", scope: "IFRS reporters: service profit, finance effects, OCI and unearned-profit recognition differ." },
+  holdingBridge: { name: "Power Corporation: holding-company NAV methodology", url: "https://www.powercorporation.com/en/news/press-releases/2026/2026-07-30-power-corporation-reports-second-quarter-2026-financial-results/", scope: "An issuer example of component values less holding-company claims, not a universal fair-value assertion." },
+  reitCashFlow: { name: "Nareit: funds from operations", url: "https://www.reit.com/glossary/funds-operation-ffo", scope: "FFO supplements GAAP; recurring capital expenditure, leasing costs and property NAV still need separate review." },
+  brokerCapital: { name: "SEC: broker-dealer financial responsibility", url: "https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers/division-trading-markets-broker-dealer-net-capital-books-records-guidance", scope: "US broker-dealers; identify applicable rules and jurisdiction rather than importing a bank or insurer capital ratio." }
+};
+var requirement = (id, label, keys2, why, standard = null) => ({ id, label, keys: keys2, why, standard });
+var commonEquity = requirement("common-equity", "Common-equity and share-class reconciliation", ["commonEquity", "commonBookValuePerShare"], "Separate common shareholders from preferred/AT1 capital and noncontrolling interests; reconcile per-share economic rights.");
+var profiles = {
+  bank: [
+    commonEquity,
+    requirement("bank-capital", "CET1, risk-weighted assets and applicable capital buffers", ["cet1Ratio", "riskWeightedAssets", "capitalRequirement"], "Regulatory capital and growth in required capital constrain distributable earnings.", "bankCapital"),
+    requirement("credit-quality", "Loan losses, impaired loans and allowance coverage", ["pclRatio", "grossImpairedLoans", "allowanceForCreditLosses"], "Normalize the credit cycle and stress losses rather than capitalize one quarter of EPS."),
+    requirement("bank-earnings", "Sustainable common ROE and net interest margin", ["reportedROE", "netInterestMargin"], "Reconcile reported/adjusted earnings, loan/deposit growth, pricing and operating costs."),
+    requirement("bank-liquidity", "Funding, liquidity and payout capacity", ["lcr", "nsfr", "dividendPayoutRatio"], "Assess funding mix, liquidity and capital distributions together; deposits are operating funding.")
+  ],
+  life: [
+    commonEquity,
+    requirement("insurance-capital", "Solvency capital and legal-entity payout capacity", ["licatRatio", "capitalRemittances"], "A group or operating-entity capital ratio is not freely distributable parent cash.", "insuranceCapital"),
+    requirement("insurance-service", "CSM or reserve movement and new business economics", ["contractualServiceMargin", "newBusinessCsm", "insuranceServiceResult"], "For IFRS reporters, reconcile service profit, new business and assumption changes; CSM is not current cash.", "insuranceAccounting"),
+    requirement("insurance-assets", "Asset/liability and investment-risk sensitivities", ["interestRateSensitivity", "creditRiskSensitivity", "assetLiabilityDurationGap"], "Insurance liabilities, investment marks and discount-rate changes affect economic capital."),
+    requirement("insurance-earnings", "Normalized common ROE and reported/core reconciliation", ["reportedROE", "normalizedCommonEarnings"], "Separate recurring insurance profit from market experience, reserve revisions and acquisition effects.")
+  ],
+  insurer: [
+    commonEquity,
+    requirement("insurance-capital", "Jurisdiction-appropriate solvency and payout capacity", ["solvencyCapitalRatio", "capitalRemittances"], "Identify the actual regulator and legal entity; do not substitute a Canadian LICAT ratio for US risk-based capital."),
+    requirement("underwriting", "Underwriting profitability and reserve development", ["combinedRatio", "priorYearReserveDevelopment", "catastropheLosses"], "Normalize reserve releases, catastrophe losses and pricing rather than extrapolate a benign loss year."),
+    requirement("insurance-assets", "Investment yield and asset/liability sensitivities", ["investmentYield", "interestRateSensitivity", "creditRiskSensitivity"], "Investment income and claim-liability duration can dominate common-equity returns."),
+    requirement("insurance-earnings", "Normalized common earnings and ROE", ["reportedROE", "normalizedCommonEarnings"], "Reconcile recurring underwriting/investment earnings and the common capital base.")
+  ],
+  holding: [
+    requirement("components", "Ownership-adjusted subsidiary and investment values", ["componentValues", "ownershipPercentages"], "Value operating businesses and investments individually and eliminate cross-holdings or double counting."),
+    requirement("parent-claims", "Parent debt, preferences and minority-interest bridge", ["corporateDebt", "preferredEquity", "noncontrollingInterests"], "Consolidated debt may be non-recourse and consolidated earnings may belong partly to minority owners.", "holdingBridge"),
+    requirement("holding-cash", "Parent cash, upstream distributions and recurring costs", ["parentCash", "upstreamDistributions", "holdingCompanyCosts"], "Subsidiary assets and cash are not automatically available to the holding company."),
+    requirement("holding-marks", "Investment marks, deferred tax and share-class economics", ["privateAssetMarks", "deferredTaxOnInvestments", "shareClassReconciliation"], "Management NAV, market prices and realizable intrinsic value are distinct; apply the correct economic share unit.")
+  ],
+  reit: [
+    requirement("reit-ffo", "GAAP earnings to FFO and recurring AFFO reconciliation", ["ffo", "affo", "recurringPropertyCapex", "leasingCosts"], "Depreciation, property sales, straight-line rent and recurring investment must be reconciled; GAAP EPS is not property cash yield.", "reitCashFlow"),
+    requirement("reit-property", "Property NOI, occupancy and lease economics", ["netOperatingIncome", "occupancy", "samePropertyNoiGrowth", "leaseMaturities"], "Use property and tenant economics rather than a generic consolidated sales-growth assumption."),
+    requirement("reit-nav", "Property NAV and claims per economic share or unit", ["propertyValues", "capitalizationRates", "debt", "operatingPartnershipUnits"], "Reconcile ownership, property debt, preferred claims and operating-partnership units before calculating NAV per share.")
+  ],
+  "asset-manager": [
+    requirement("manager-fees", "Fee-bearing assets, net flows and fee economics", ["feeBearingAum", "netFlows", "baseFeeRevenue", "feeMargin"], "Assets managed for clients are not corporate assets. Separate market appreciation from organic inflows and fee-rate changes."),
+    requirement("manager-earnings", "Recurring fees versus performance and investment gains", ["feeRelatedEarnings", "performanceFees", "investmentIncome"], "Different earnings streams require different durability and realization assumptions."),
+    requirement("manager-capital", "Parent ownership, seed investments and capital claims", ["parentCash", "seedInvestments", "corporateDebt", "noncontrollingInterests"], "Remove consolidated client/fund assets and reconcile minority ownership before attributing cash to common shareholders.")
+  ],
+  broker: [
+    commonEquity,
+    requirement("broker-capital", "Net capital and required regulatory capital", ["regulatoryNetCapital", "requiredNetCapital"], "Capital available for common distributions is constrained by the actual intermediary regulatory regime.", "brokerCapital"),
+    requirement("broker-client", "Customer cash, collateral and financing segregation", ["segregatedCustomerAssets", "customerLiabilities", "marginLoanReceivables"], "Customer balances and clearing collateral cannot be treated as excess corporate cash."),
+    requirement("broker-earnings", "Common ROE, transaction activity and net interest economics", ["reportedROE", "netInterestIncome", "transactionRevenue"], "Separate recurring client economics from trading conditions and interest-rate cycles.")
+  ],
+  "consumer-finance": [
+    commonEquity,
+    requirement("finance-credit", "Receivable growth and normalized credit losses", ["loanReceivables", "netChargeOffRatio", "delinquencyRatio", "allowanceForCreditLosses"], "Losses, underwriting quality and growth in required capital determine sustainable common returns."),
+    requirement("finance-funding", "Funding cost, securitizations and liquidity", ["fundingCost", "securitizationDebt", "liquidityResources"], "Financing funds the operating asset base; a generic industrial net-debt bridge can misstate distributable equity cash."),
+    requirement("finance-returns", "Sustainable common ROE and payout capacity", ["reportedROE", "normalizedCommonEarnings", "requiredCapital"], "Normalize spread income and credit costs before extrapolating EPS or dividends.")
+  ],
+  "insurance-broker": [
+    requirement("broker-organic", "Organic commissions, retention and client exposure", ["organicRevenueGrowth", "clientRetention", "commissionRevenue"], "Insurance brokers earn commissions and fees; carrier reserves and underwriting combined ratios are not interchangeable operating metrics."),
+    requirement("broker-acquisitions", "Acquisitions, producer compensation and cash conversion", ["acquisitionSpend", "producerCompensation", "cfo", "capex"], "Separate purchased growth, deferred commissions and recurring owner cash.")
+  ],
+  operating: [
+    requirement("operating-statements", "Matched operating profit, cash flow and reinvestment", ["revenue", "ebit", "cfo", "da", "capex"], "A matched period is needed to bridge operating profit to owner cash."),
+    requirement("operating-drivers", "Company-specific unit economics and segment drivers", ["segmentRevenue", "unitEconomics", "companyGuidance"], "History and industry averages are starting scenarios, not a company-specific competitive or demand underwrite."),
+    requirement("reinvestment", "Maintenance/growth investment and working capital", ["maintenanceCapex", "growthCapex", "operatingWorkingCapital", "receivables", "inventory", "payables"], "Sustainable growth requires capital; reconcile trade and other operating balances, and do not treat low temporary spending as permanent cash earnings."),
+    requirement("capital-claims", "Debt, leases, pension and minority claims", ["debt", "leaseLiabilities", "pensionDeficit", "noncontrollingInterests"], "Reconcile the enterprise-to-common-equity bridge without treating unknown claims as zero.")
+  ]
+};
+function researchSector(item, snapshot = {}) {
+  const fit = modelFit(item, snapshot);
+  if (fit.sector === "insurance-broker") return "insurance-broker";
+  if (["MFC.TO", "SLF.TO", "GWO.TO"].includes(item?.ticker)) return "life";
+  if (["holding", "bank", "insurer", "reit", "asset-manager", "broker", "consumer-finance"].includes(fit.group)) return fit.group;
+  return "operating";
 }
-function evaluateValuationDraft(view, d, currency) {
-  const input = readInput(view, d);
-  return { input, ...renderResult(view, input, d, currency) };
+function verifiedCurrentRelease(item, asOf, rows3 = current_releases_default.rows) {
+  const cutoff = date2(asOf);
+  if (!cutoff) return null;
+  return (Array.isArray(rows3) ? rows3 : []).filter((row) => row.symbol === item?.symbol && validURL(row.source?.url) && date2(row.periodEnd) && date2(row.publishedAt) && date2(row.verifiedAt) && row.periodEnd <= row.publishedAt && row.publishedAt <= row.verifiedAt && row.verifiedAt <= cutoff).sort((a, b) => b.periodEnd.localeCompare(a.periodEnd) || b.publishedAt.localeCompare(a.publishedAt))[0] || null;
 }
-function renderResult(view, input, d, currency) {
-  if (view === "dcf") {
-    const r = calculateDCF(input), s = dcfSensitivity(input), growth = input.terminalMethod === "growth";
-    return {
-      data: r,
-      html: result(
-        "DCF \xB7 conditional equity value / share",
-        money(r.value, currency),
-        note(
-          "Annual year-end FCFF; constant nominal WACC. All totals below are in millions; per-share value is in the selected trading currency."
-        ) + `<div class="ddm-metrics">${metric("vs. entered price", pct(r.upside))}${metric("Enterprise value \xB7 millions", num(r.enterpriseValue, 2))}${metric("PV terminal / enterprise value", pct(r.terminalWeight))}</div>` + warnings(r.warnings)
-      ) + panel(
-        "Cash-flow audit",
-        table(
-          "Five annual FCFF forecasts \xB7 millions",
-          ["Period", "FCFF", "Discount factor", "PV"],
-          r.rows.map((row) => [
-            "Year " + row.year,
-            num(row.fcff, 4),
-            num(row.factor, 6),
-            num(row.pv, 4)
-          ]).concat([
-            [
-              "Terminal \xB7 end year 5",
-              num(r.terminalValue, 4),
-              num((1 + input.wacc) ** -5, 6),
-              num(r.pvTerminal, 4)
-            ]
-          ])
-        )
-      ) + panel(
-        "Enterprise-to-common-equity bridge",
-        table(
-          "All totals and diluted shares in millions",
-          ["Component", "Value"],
-          [
-            ["PV explicit FCFF", num(r.pvFlows, 4)],
-            ["+ PV terminal", num(r.pvTerminal, 4)],
-            ["= Enterprise value", num(r.enterpriseValue, 4)],
-            ["\u2212 Debt", num(input.debt, 4)],
-            ["+ Excess cash", num(input.cash, 4)],
-            ["+ Other non-operating assets", num(input.otherAssets, 4)],
-            ["\u2212 Preferred / NCI / other claims", num(input.claims, 4)],
-            ["= Common equity", num(r.equity, 4)],
-            ["\xF7 Diluted shares", num(input.shares, 4)],
-            ["= Value per share", num(r.value, 4)]
-          ]
-        )
-      ) + panel(
-        `Sensitivity \xB7 WACC \xD7 ${growth ? "perpetual growth" : "exit multiple"}`,
-        `<div class="ddm-table-wrap"><table class="ddm-table"><caption>Value per share \xB7 ${esc(currency)} \xB7 other inputs fixed</caption><thead><tr><th scope="col">WACC \u2193 / ${growth ? "g" : "EV/EBITDA"} \u2192</th>${s.assumptions.map((a) => `<th scope="col">${growth ? pct(a) : multiple(a)}</th>`).join("")}</tr></thead><tbody>${s.rates.map((rate, i2) => `<tr><th scope="row">${pct(rate)}</th>${s.values[i2].map((v, j) => `<td ${i2 === 2 && j === 2 ? 'class="ddm-base"' : ""}>${v == null ? "\u2014" : num(v, 2)}</td>`).join("")}</tr>`).join("")}</tbody></table></div><p class="ddm-table-note">Amber is the base case. \u2014 is an invalid combination. Rates vary by \xB10.5 / \xB11 percentage point; exit multiples by \xB11\xD7 / \xB12\xD7.</p>`
-      )
-    };
+function assessResearchReadiness(item, snapshot = {}, options = {}) {
+  const assessedAt = date2(options.asOf || (/* @__PURE__ */ new Date()).toISOString());
+  const identityMatches = snapshot.instrument?.symbol === item?.symbol && snapshot.instrument?.currency === item?.currency && (!snapshot.financials?.currency || snapshot.financials.currency === item?.currency);
+  const applicable = item?.assetType === "Equity" && !!item?.supported;
+  const annual = identityMatches ? (snapshot.financials?.annual || []).filter((row) => date2(row.end) && row.end <= assessedAt) : [];
+  const rawRecent = identityMatches ? snapshot.financials?.recent : null;
+  const recent = rawRecent && date2(rawRecent.end) && rawRecent.end <= assessedAt ? rawRecent : null;
+  const ttm = identityMatches && date2(snapshot.financials?.ttm?.end) && snapshot.financials.ttm.end <= assessedAt ? snapshot.financials.ttm : null;
+  const statementRows = [...annual, ...recent ? [recent] : [], ...ttm ? [ttm] : []];
+  const reviewedDisclosures = identityMatches ? validatedReviewedFinancialPeriods(item, snapshot, assessedAt) : [];
+  const observed = [];
+  for (const row of statementRows) for (const [key2, raw] of Object.entries(row.metrics || {})) {
+    const fact = { ...raw, asOf: raw.asOf || row.end, filed: raw.filed || row.filed };
+    const factCurrency = fact.currency || (/^[A-Z]{3}(?:\/shares)?$/.test(fact.unit || "") ? fact.unit.split("/")[0] : null);
+    if (sourceOK(fact, assessedAt) && (!factCurrency || factCurrency === item.currency)) observed.push({ key: key2, ...fact, location: "connected-model-facts" });
   }
-  if (view === "wacc") {
-    const r = calculateWACC(input);
+  const metric = (key2) => observed.filter((f) => f.key === key2).sort((a, b) => b.asOf.localeCompare(a.asOf))[0] || null;
+  const latestStatementPeriod = latest(statementRows.filter((row) => observed.some((f) => f.asOf === row.end)).map((row) => row.end));
+  const release = verifiedCurrentRelease(item, assessedAt, options.releases || current_releases_default.rows);
+  const external = (release?.observations || []).filter((f) => sourceOK(f, assessedAt)).map((f) => ({ ...f, location: "verified-release-only" }));
+  const newerRelease = !!release && (!latestStatementPeriod || release.periodEnd > latestStatementPeriod);
+  const rawFiling = identityMatches ? snapshot.references?.issuer?.latestStatement : null;
+  const filing = rawFiling && ["10-Q", "10-K", "10-Q/A", "10-K/A", "20-F", "20-F/A", "40-F", "40-F/A"].includes(rawFiling.form) && date2(rawFiling.end) && date2(rawFiling.filed) && rawFiling.end <= rawFiling.filed && rawFiling.filed <= assessedAt && validURL(rawFiling.source?.url) ? rawFiling : null;
+  const newerFiling = !!filing && (!latestStatementPeriod || filing.end > latestStatementPeriod);
+  const checkedAt = identityMatches ? snapshot.checkedAt || null : null;
+  const reviewed = options.reviewedReport?.symbol === item?.symbol && (options.reviewedReport.currency || options.reviewedReport.conclusion?.currency) === item?.currency && date2(options.reviewedReport?.review?.reviewedAt) && options.reviewedReport.review.reviewedAt <= assessedAt ? options.reviewedReport : null;
+  const reviewedPeriod = date2(reviewed?.review?.statementPeriod);
+  const sector = researchSector(item, snapshot);
+  const sectorChecks = (profiles[sector] || profiles.operating).map((rule) => {
+    const connected = observed.filter((f) => rule.keys.includes(f.key));
+    const releaseOnly = external.filter((f) => rule.keys.includes(f.key));
+    const available = uniq([...connected, ...releaseOnly].map((f) => f.key));
     return {
-      data: r,
-      html: result(
-        d.capitalBasis === "scenario" ? "Scenario WACC \xB7 assumed financing mix" : "Weighted average cost of capital",
-        pct(r.wacc),
-        `<div class="ddm-metrics">${metric("CAPM cost of equity", pct(r.costEquity))}${metric("After-tax debt cost", pct(r.afterTaxDebt))}${metric("Equity / debt weights", `${pct(r.equityWeight)} / ${pct(r.debtWeight)}`)}</div>` + note(
-          "k\u2091 = risk-free rate + levered beta \xD7 equity risk premium. WACC = E/(E+D) \xD7 k\u2091 + D/(E+D) \xD7 k\u1D48 \xD7 (1\u2212tax). Use k\u2091 for DDM and RI; WACC for unlevered FCFF."
-        ) + warnings(r.warnings) + `<button id="val-transfer" class="primary" type="button">Use this WACC in DCF \u2192</button>`
-      )
+      id: rule.id,
+      label: rule.label,
+      why: rule.why,
+      requiredKeys: rule.keys,
+      status: available.length ? "partial" : "missing",
+      // Presence of ratio inputs does not establish clean-surplus, reserves or a valuation judgment.
+      evidence: [...connected, ...releaseOnly].map((f) => ({ key: f.key, value: f.value, unit: f.unit, asOf: f.asOf, filed: date2(f.filed || f.publishedAt), source: f.source, basis: f.basis || "Source-linked fact", location: f.location })),
+      missingKeys: rule.keys.filter((key2) => !available.includes(key2)),
+      modelIntegrated: connected.length > 0,
+      needsAnalystReconciliation: true,
+      standard: rule.standard ? researchStandards[rule.standard] : null
     };
-  }
-  if (["rv", "eqrv"].includes(view)) {
-    const r = calculateRelative(input);
-    const validValue = r.peerValue ?? r.historicalValue;
-    return {
-      data: r,
-      html: result(
-        view === "eqrv" ? "Relative historical context" : "Peer-implied value / share",
-        view === "eqrv" ? r.historicalPercentile == null ? "History not supplied" : pct(r.historicalPercentile) + " historical percentile" : money(validValue, currency),
-        note(
-          `Benchmark: ${r.peerValue != null ? "entered peer median" : "entered historical median"}. ${esc(d.period)}. A multiple-based implied price is not an intrinsic-value estimate.`
-        ) + `<div class="ddm-metrics">${view === "eqrv" ? metric("Historical range", multiple(r.historicalLow) + " \u2013 " + multiple(r.historicalHigh)) : ""}${metric("Current multiple", multiple(r.currentMultiple))}${metric("Peer median", multiple(r.peerMedian))}${metric("Historical median", multiple(r.historicalMedian))}</div>` + warnings(r.warnings)
-      ) + panel(
-        "Comparison audit",
-        table(
-          "Benchmarks are kept separate",
-          [
-            "Benchmark",
-            "Observations",
-            "Multiple",
-            "Implied price",
-            "Current multiple / benchmark \u2212 1"
-          ],
-          [
-            [
-              "Peers",
-              String(r.peers.length),
-              multiple(r.peerMedian),
-              money(r.peerValue, currency),
-              pct(r.peerPremium)
-            ],
-            [
-              "History",
-              String(r.historicalCount),
-              multiple(r.historicalMedian),
-              money(r.historicalValue, currency),
-              pct(r.historicalPremium)
-            ]
-          ]
-        ) + note(
-          `Positive percentages mean a multiple premium; negative means a discount. ${r.excluded} incomplete or non-positive peer observations excluded. Historical observations use a median, not time-series regression. EV/EBITDA implied prices use the entered enterprise-to-equity bridge.`
-        )
-      ) + panel(
-        "Included peers",
-        table(
-          esc(d.period),
-          ["Peer", "Multiple"],
-          r.peers.map((p) => [esc(p.name), multiple(p.multiple)])
-        )
-      )
-    };
-  }
-  if (view === "anr") {
-    const r = calculateTargets(input);
-    return {
-      data: r,
-      html: result(
-        "Mean of your entered analyst targets",
-        money(r.mean, currency),
-        note(`Entered sample only \xB7 ${esc(d.horizon)}.`) + `<div class="ddm-metrics">${metric("Median target", money(r.median, currency))}${metric("Low / high", `${num(r.low, 2)} / ${num(r.high, 2)}`)}${metric("Mean vs. entered price", pct(r.upside))}</div>` + note(
-          `${r.count} observations. Targets are analyst opinions, not intrinsic values or assured returns. Check stale targets, sample selection and broker-specific rating definitions.`
-        )
-      ) + panel(
-        "Target observations",
-        table(
-          `All targets in ${esc(currency)} / share`,
-          ["Broker / analyst", "Date", "Target", "Original rating"],
-          r.rows.map((row) => [
-            esc(row.name),
-            esc(row.date),
-            num(row.target, 2),
-            esc(row.rating)
-          ])
-        )
-      )
-    };
-  }
-  if (view === "ri") {
-    const r = calculateRI(input);
-    return {
-      data: r,
-      html: result(
-        "Residual income \xB7 equity value / share",
-        money(r.value, currency),
-        `<div class="ddm-metrics">${metric("Opening book value", money(input.book, currency))}${metric("PV explicit residual income", money(r.pvRI, currency))}${metric("vs. entered price", pct(r.upside))}</div>` + note(
-          `V\u2080 = B\u2080 + \u03A3[RI\u209C/(1+r)\u1D57] + TV\u2085/(1+r)\u2075. RI\u2085\u208A\u2096 = RI\u2085 \xD7 \u03C9\u1D4F; TV\u2085 = RI\u2085 \xD7 \u03C9 / (1+r\u2212\u03C9). \u03C9 = ${pct(input.persistence)}. No debt/cash adjustment is applied to per-share common equity.`
-        ) + warnings(r.warnings)
-      ) + panel(
-        "Clean-surplus and residual-income audit",
-        table(
-          `${esc(currency)} / share \xB7 annual year-end`,
-          [
-            "Year",
-            "Opening book",
-            "EPS",
-            "Dividend",
-            "Equity charge",
-            "RI",
-            "Closing book",
-            "PV RI"
-          ],
-          r.rows.map((row) => [
-            String(row.year),
-            num(row.openingBook, 4),
-            num(row.eps, 4),
-            num(row.dividend, 4),
-            num(row.charge, 4),
-            num(row.ri, 4),
-            num(row.closingBook, 4),
-            num(row.pv, 4)
-          ])
-        )
-      ) + panel(
-        "Valuation bridge",
-        table(
-          "Book value plus excess earnings",
-          ["Component", "Per share"],
-          [
-            ["Opening common book", num(input.book, 4)],
-            ["+ PV years 1\u20135 RI", num(r.pvRI, 4)],
-            ["+ PV continuation", num(r.pvTerminal, 4)],
-            ["= Model common equity", num(r.value, 4)]
-          ]
-        )
-      )
-    };
-  }
-  if (view === "x3sm") {
-    const r = forecastStatements(input), headers = ["Line item", ...r.rows.map((row) => "Year " + row.year)];
-    const line = (label, key2) => [
-      label,
-      ...r.rows.map((row) => num(row[key2], 4))
-    ];
-    return {
-      data: r,
-      html: result(
-        "Five-year linked forecast",
-        `${num(r.rows.at(-1).fcff, 2)} million`,
-        note(
-          `Year-5 unlevered FCFF \xB7 ${esc(currency)}. Opening simplified equity = ${num(r.openingEquity, 2)} million. No valuation is implied until you choose discount rates, terminal assumptions and an equity bridge.`
-        ) + warnings(r.warnings) + `<button id="val-transfer" class="primary" type="button">Use projected FCFF in DCF \u2192</button>`
-      ) + panel(
-        "Income statement",
-        table(`All totals in ${esc(currency)} millions`, headers, [
-          line("Revenue", "revenue"),
-          line("EBITDA", "ebitda"),
-          line("\u2212 D&A", "da"),
-          line("EBIT", "ebit"),
-          line("\u2212 Interest", "interest"),
-          line("\u2212 Cash income taxes", "taxes"),
-          line("Net income", "netIncome")
-        ])
-      ) + panel(
-        "Cash-flow statement",
-        table("Annual cash movements \xB7 no financing plug", headers, [
-          line("Net income", "netIncome"),
-          line("+ D&A", "da"),
-          line("\u2212 Increase in operating NWC", "deltaNwc"),
-          line("CFO", "cfo"),
-          line("Investing CF (\u2212capex)", "cfi"),
-          line("Financing CF (\u2212dividends)", "cff"),
-          line("Opening cash", "openingCash"),
-          line("Closing cash / funding gap", "cash"),
-          line("Unlevered FCFF", "fcff")
-        ])
-      ) + panel(
-        "Balance sheet",
-        table("Assets less liabilities equals common equity", headers, [
-          line("Cash / funding gap", "cash"),
-          line("Net PP&E", "ppe"),
-          line("Operating NWC (net)", "nwc"),
-          line("Debt", "debt"),
-          line("Simplified equity", "equity"),
-          line("Other net assets (held constant)", "otherNetAssets"),
-          line("Balance check \xB7 should be 0", "balance")
-        ])
-      )
-    };
-  }
-  if (view === "ee") {
-    const rows3 = input.rows, classification = d.imported && d.estimateKind === "consensus" ? "Connected provider consensus; source metadata validated" : {
-      user: "Your forecast assumptions",
-      guidance: "Company guidance transcribed by you",
-      consensus: "Third-party consensus transcribed by you"
-    }[d.estimateKind];
-    return {
-      data: { rows: rows3, classification },
-      html: result(
-        "Estimate notebook",
-        `${rows3.length} fiscal period${rows3.length === 1 ? "" : "s"}`,
-        note(
-          `${esc(classification)}. ${esc(d.period)}. Review the source, fiscal horizon and accounting basis; a manual consensus label alone is not verification.`
-        )
-      ) + panel(
-        "Forecast snapshot",
-        table(
-          `Revenue / EBITDA in ${esc(currency)} millions; EPS in ${esc(currency)} / share`,
-          [
-            "Fiscal year-end",
-            "Revenue",
-            "EPS",
-            "EBITDA",
-            "Contributors",
-            "Price / EPS"
-          ],
-          rows3.map((row) => [
-            esc(row.fiscal),
-            row.revenue == null ? "\u2014" : num(row.revenue, 2),
-            row.eps == null ? "\u2014" : num(row.eps, 4),
-            row.ebitda == null ? "\u2014" : num(row.ebitda, 2),
-            row.count ?? "\u2014",
-            row.eps > 0 && input.price != null ? multiple(input.price / row.eps) : "\u2014"
-          ])
-        )
-      ) + note(
-        "Price / EPS is calculated only for positive EPS and a positive entered price. No multiple is shown for a loss. No figures are automatically transferred into FCFF: EPS and EBITDA are not cash flow."
-      )
-    };
-  }
+  });
+  const shares = metric("shares"), commonShares = metric("commonShares");
+  const shareBasis = {
+    kind: shares?.value > 0 ? "weighted-average-diluted-proxy" : commonShares?.value > 0 ? "period-end-common-only" : "unavailable",
+    asOf: shares?.asOf || commonShares?.asOf || null,
+    dilutedWeightedAverage: shares?.value > 0 ? shares.value : null,
+    periodEndCommon: commonShares?.value > 0 ? commonShares.value : null,
+    currentFullyDilutedVerified: false,
+    explanation: "Weighted-average diluted shares and period-end common shares have different meanings. Neither proves current fully diluted shares after buybacks, issuance, options or class conversions."
+  };
+  const price = identityMatches && snapshot.price?.status === "ready" && sourceOK(snapshot.price, assessedAt) && (!snapshot.price.currency || snapshot.price.currency === item.currency) && snapshot.price.value > 0 ? snapshot.price : null;
+  const consensus = identityMatches ? (snapshot.feed?.estimates || []).filter((row) => row.currency === item.currency && date2(row.asOf) && row.asOf <= assessedAt && date2(row.fiscalEnd) && row.fiscalEnd > assessedAt && validURL(row.source?.url) && (row.revenue > 0 || row.eps > 0)) : [];
+  const report = options.report, cases = report?.scenarios || [];
+  const valuationPeriod = reviewedPeriod || (["dcf", "ri", "earnings"].includes(report?.method?.key) ? date2(report?.financials?.valuationBasis?.end) : null);
+  const newerReleaseThanValuationBase = !!release && !!valuationPeriod && release.periodEnd > valuationPeriod;
+  const numericCases = cases.filter((row) => finite6(row.value)).map((row) => row.value);
+  const invalidCases = cases.some((row) => row.value != null && (!finite6(row.value) || row.value <= 0));
+  const orderOK = numericCases.every((v, i2) => !i2 || v >= numericCases[i2 - 1]);
+  const modelQA = {
+    status: !report ? "not-assessed" : invalidCases || !orderOK ? "structural-check-failed" : "structural-checks-only",
+    label: !report ? "Calculation controls not supplied" : "Calculation structure inspected; underwriting is separate",
+    numericalScenarios: numericCases.length,
+    finitePositiveScenarios: !invalidCases,
+    orderedScenarios: orderOK,
+    independentCalculationAudit: reviewed?.checks?.independentRecalculation || "No independent per-stock arithmetic audit is recorded.",
+    institutionalUnderwritingEstablished: false
+  };
+  const gaps = [];
+  const gap = (id, label, detail) => gaps.push({ id, label, detail });
+  const disclosureRaw = identityMatches ? snapshot.references?.issuer?.latestResultsDisclosure : null;
+  const disclosure = disclosureRaw && date2(disclosureRaw.filed) && disclosureRaw.filed <= assessedAt && validURL(disclosureRaw.source?.url) ? disclosureRaw : null;
+  const latestSourceFiling = latest(observed.map((f) => date2(f.filed)));
+  const newerResultsDisclosure = !!disclosure && (!latestSourceFiling || disclosure.filed > latestSourceFiling);
+  if (!identityMatches) gap("identity", "Listing/currency evidence does not match", "The snapshot cannot substantiate the selected security\u2019s figures.");
+  if (!observed.length) gap("statements", "Usable source-linked statement facts are incomplete", "A successful source check does not establish an issuer financial record.");
+  if (identityMatches && snapshot.financials?.status === "stale") gap("source-stale", "The financial snapshot is explicitly stale", "Historical figures remain inspectable, but the source status does not support a claim that current financial statements were successfully updated.");
+  const supplement = identityMatches ? snapshot.financials?.supplement : null;
+  if (["reviewed-dated-supplement", "reviewed-sparse-period"].includes(supplement?.kind)) gap("dated-supplement", supplement.status === "applied" ? "Dated statement review \xB7 scheduled refresh does not repeat this review" : "Dated statement review has been superseded", supplement.warning + ` Statement period ${supplement.statementPeriod}; source-reviewed ${supplement.reviewedAt}.`);
+  if (newerRelease) gap("newer-release", "Newer financial results are verified outside the connected model", `${release.periodEnd} results published ${release.publishedAt}; connected statement period ${latestStatementPeriod || "unavailable"}. Release observations are separate and do not update the model.`);
+  if (newerReleaseThanValuationBase) gap("valuation-period", "Valuation earnings base predates the verified release", `The calculation uses a supported ${valuationPeriod} annual/TTM base. The verified release covers ${release.periodEnd}. Newer observations do not establish that the complete cash-flow, common-earnings or capital bridge has been updated.`);
+  if (newerFiling) gap("newer-periodic-filing", "A newer periodic statement filing is known", `${filing.form} for ${filing.end}, filed ${filing.filed}; connected financial facts cover ${latestStatementPeriod || "no supported period"}. The filing inventory does not establish that every statement line has been ingested.`);
+  if (newerResultsDisclosure) gap("newer-results-disclosure", "A newer results disclosure requires review", `SEC Item 2.02 disclosure filed ${disclosure.filed}; the latest represented source filing is ${latestSourceFiling || "not established"}. This is a disclosure date, not an inferred financial period.`);
+  if (!release) gap("latest-release", "Latest issuer release has not been independently checked", "Displayed statement dates are observed coverage, not confirmation that no newer disclosure exists.");
+  if (!price) gap("market-price", "Current market comparison is unsupported", "A verified quote, date, currency and share listing are needed before judging whether value is above or below price.");
+  gap("current-shares", "Current fully diluted capitalization is not established", shareBasis.explanation);
+  if (!consensus.length) gap("forward-expectations", "Company-specific consensus is not connected", "Historical growth and industry outlooks are model assumptions; they are not the issuer\u2019s synchronized forward consensus.");
+  for (const check of sectorChecks) gap(check.id, check.label, check.why);
+  gap("underwriting", "Company economics and downside require further underwriting", "Completing ingestion or formula checks does not prove sustainable returns, capital needs, competitive advantage or forecast probabilities.");
+  const coverage = {
+    connectedMetrics: uniq(observed.map((f) => f.key)).length,
+    sourceLinkedFacts: observed.length,
+    annualPeriods: annual.length,
+    hasRecent: !!recent && observed.some((f) => f.asOf === recent.end),
+    hasTtm: !!ttm,
+    completeOperatingTtm: !!ttm && ["revenue", "ebit", "da", "capex"].every((key2) => sourceOK({ ...ttm.metrics?.[key2], asOf: ttm.metrics?.[key2]?.asOf || ttm.end }, assessedAt)),
+    sectorRequirements: sectorChecks.length,
+    fullyUnderwrittenSectorRequirements: 0,
+    sectorRequirementsWithSomeEvidence: sectorChecks.filter((c) => c.evidence.length).length,
+    verifiedReleaseObservations: external.length,
+    reviewedDisclosurePeriods: reviewedDisclosures.length,
+    companyConsensusRows: consensus.length,
+    hasVerifiedPrice: !!price,
+    currentFullyDilutedVerified: false
+  };
+  return {
+    schema: 1,
+    symbol: item?.symbol || null,
+    assessedAt,
+    applicable,
+    sector,
+    status: !applicable ? "not-applicable" : !identityMatches || !observed.length ? "source-gaps" : "preliminary-research",
+    label: applicable ? "Research readiness \xB7 further underwriting required" : "Company research does not apply",
+    permittedUse: "Source-linked research and transparent modelling scenarios. Institutional investment underwriting is not established.",
+    ingestion: {
+      checkedAt,
+      reportedState: identityMatches ? snapshot.sync?.state || snapshot.financials?.status || "unavailable" : "identity-mismatch",
+      meaning: "A data refresh checks the connected source. Its success does not prove all current issuer disclosures were ingested.",
+      coverage
+    },
+    freshness: {
+      latestAnnualPeriod: latest(annual.map((row) => row.end)),
+      latestInterimPeriod: recent?.end || null,
+      latestTtmPeriod: ttm?.end || null,
+      latestStatementPeriod,
+      latestFilingDate: latest(observed.map((f) => date2(f.filed))),
+      latestReviewedDisclosurePeriod: latest(reviewedDisclosures.map((row) => row.period.end)),
+      reviewedDisclosureCurrencies: uniq(reviewedDisclosures.map((row) => row.currency)),
+      nativeCurrencyEvidenceOnly: reviewedDisclosures.some((row) => row.currency !== item.currency),
+      valuationFinancialPeriod: valuationPeriod,
+      newerReleaseThanValuationBase,
+      statementAgeDays: age(assessedAt, latestStatementPeriod),
+      releaseVerificationAgeDays: age(assessedAt, release?.verifiedAt),
+      latestVerifiedReleasePeriod: release?.periodEnd || null,
+      latestVerifiedReleasePublishedAt: release?.publishedAt || null,
+      latestKnownPeriodicFiling: filing,
+      latestKnownPeriodicPeriod: filing?.end || null,
+      latestResultsDisclosure: disclosure,
+      newerResultsDisclosure,
+      comparison: newerRelease ? "newer-release-not-in-model" : newerFiling ? "newer-periodic-filing-not-in-model" : release ? "period-represented-not-completeness-certified" : "latest-release-unverified",
+      newerReleaseVerified: newerRelease,
+      newerPeriodicFilingVerified: newerFiling,
+      newerStatementEvidence: newerRelease || newerFiling,
+      reviewedStatementPeriod: reviewedPeriod,
+      reviewedReportBehindRelease: !!reviewedPeriod && !!release && reviewedPeriod < release.periodEnd,
+      reviewDue: !!date2(reviewed?.review?.nextReview?.date) && reviewed.review.nextReview.date <= assessedAt,
+      note: "Periods are compared with verified issuer releases and the SEC periodic-filing inventory. Earnings releases may precede 10-Q/10-K filings; neither a matching period nor a recent source check certifies complete research coverage."
+    },
+    releaseEvidence: release,
+    supplementEvidence: supplement || null,
+    shareBasis,
+    forecastEvidence: {
+      status: consensus.length ? "some-consensus-observations" : "scenario-assumptions",
+      companyConsensusRows: consensus.length,
+      statement: "A history/sector-derived forecast remains a modelling judgment even when its source inputs refresh automatically."
+    },
+    modelQA,
+    underwriting: {
+      status: "not-established",
+      sourceReview: reviewed ? "specific-reviewed-snapshot" : "automated-evidence-assessment",
+      reviewDate: reviewed?.review?.reviewedAt || null,
+      scope: reviewed?.review?.reviewer || "No source-by-source analyst review of this stock is claimed.",
+      statement: "Evidence coverage, formula integrity and financial underwriting are separate. No readiness score certifies institutional quality."
+    },
+    sectorChecks,
+    gaps
+  };
 }
 
 // scripts/build-financial-snapshots.mjs
@@ -8893,8 +17482,8 @@ async function refresh(item) {
   let d = await fetchValuationData(item, {}, fetcher, now);
   if (!d.references) try {
     const old = JSON.parse(await readFile(file, "utf8"));
-    const age = now - Date.parse(old.references?.asOf + "-01");
-    if (old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && age >= 0 && age <= 550 * 864e5) {
+    const age2 = now - Date.parse(old.references?.asOf + "-01");
+    if (old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && age2 >= 0 && age2 <= 550 * 864e5) {
       d.references = { ...old.references, syncState: "last_known", lastAttempt: now.toISOString() };
       d.referenceStatus = "Latest reference-source check failed; using the dated last-known industry and risk reference.";
     }
@@ -8904,21 +17493,26 @@ async function refresh(item) {
   d.sync = { state: useful ? "ready" : "unavailable", lastAttempt: now.toISOString(), lastSuccess: useful ? now.toISOString() : null, cadence: "Public company facts refreshed every six hours; source publication dates remain unchanged.", publisher: "TickerLantern public financial data" };
   if (!useful) try {
     const old = JSON.parse(await readFile(file, "utf8"));
-    if (old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && now - Date.parse(old.checkedAt) < 3 * 864e5 && (old.financials?.status === "ready" || old.dividend?.status === "ready")) d = { ...old, sync: { ...old.sync, state: "last_known", lastAttempt: now.toISOString() } };
+    if (old.dataQualityVersion === DATA_QUALITY_VERSION && old.instrument?.symbol === item.symbol && old.instrument.currency === item.currency && now - Date.parse(old.checkedAt) < 3 * 864e5 && (old.financials?.status === "ready" || old.dividend?.status === "ready")) d = { ...old, sync: { ...old.sync, state: "last_known", lastAttempt: now.toISOString() } };
   } catch {
   }
   await writeFile(file, JSON.stringify(d));
   const forecast = forecastAssumptions(d, item);
-  const answer = valuationAnswer(item, d, { evaluate: evaluateValuationDraft, defaults: valuationDefaults });
-  rows2.push({ latestInterim: d.financials.recent?.end, ttm: d.financials.ttm?.end, industry: d.references?.industry?.name, sic: d.references?.issuer?.sic, referenceAsOf: d.references?.asOf, wacc: forecast.capital.wacc, costEquity: forecast.capital.costEquity, revenueGrowth: forecast.revenue.map((r) => r.growth), dividendGrowth: forecast.dividends.map((r) => r.growth), symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
+  const report = buildValuationReport(item, d), readiness = assessResearchReadiness(item, d, { report, asOf: now.toISOString() });
+  const calculated = report.scenarios.map((row) => row.value).filter((value) => value != null);
+  if (d.dataQualityVersion !== DATA_QUALITY_VERSION || d.instrument?.symbol !== item.symbol || d.instrument?.currency !== item.currency || report.statementDate && report.statementDate > now.toISOString().slice(0, 10) || calculated.some((value, index) => !Number.isFinite(value) || value <= 0 || index > 0 && value < calculated[index - 1]))
+    throw Error("Publication integrity check failed for " + item.symbol + "; retain the previous verified batch.");
+  const answer = { method: report.method.key, value: report.valuation?.base };
+  rows2.push({ revenueProofs: [...d.financials.annual || [], d.financials.recent, d.financials.recent?.prior].filter((p) => p?.metrics?.revenue?.normalization?.kind === "consolidated-statement-revenue-scope").length, research: { method: report.method.key, valueKind: report.valuation?.kind || "review", qualityConditions: report.qualityIssues.length, latestKnownPeriodic: readiness.freshness.latestKnownPeriodicPeriod, newerPeriodicNotInModel: readiness.freshness.newerPeriodicFilingVerified, newerResultsDisclosure: readiness.freshness.newerResultsDisclosure, newerVerifiedRelease: readiness.freshness.newerReleaseVerified, institutionalUnderwritingEstablished: false }, latestInterim: d.financials.recent?.end, ttm: d.financials.ttm?.end, industry: d.references?.industry?.name, sic: d.references?.issuer?.sic, referenceAsOf: d.references?.asOf, wacc: forecast.capital.wacc, costEquity: forecast.capital.costEquity, revenueGrowth: forecast.revenue.map((r) => r.growth), dividendGrowth: forecast.dividends.map((r) => r.growth), symbol: item.symbol, currency: item.currency, financials: d.financials.status, financialPeriod: d.financials.asOf, dividend: d.dividend.status, answerMethod: answer.method, numericalAnswer: Number.isFinite(answer.value), lastSuccess: d.sync.lastSuccess });
   if (rows2.length % 25 === 0) console.log(`Refreshed ${rows2.length} / ${listings.length} company listings`);
 }
 await Promise.all(Array.from({ length: 3 }, async () => {
   while (cursor < listings.length) await refresh(listings[cursor++]);
 }));
 rows2.sort((a, b) => a.symbol.localeCompare(b.symbol));
-var manifest = { schema: 1, generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, interimReady: rows2.filter((r) => r.latestInterim).length, ttmReady: rows2.filter((r) => r.ttm).length, referencesReady: rows2.filter((r) => r.referenceAsOf).length, waccReady: rows2.filter((r) => Number.isFinite(r.wacc)).length, companyIndustryMappings: rows2.filter((r) => r.sic).length, revenuePaths: rows2.filter((r) => r.revenueGrowth.length === 5).length, dividendPaths: rows2.filter((r) => r.dividendGrowth.length === 5).length, financialsReady: rows2.filter((r) => r.financials === "ready").length, numericalAnswers: rows2.filter((r) => r.numericalAnswer).length, rows: rows2 };
+var manifest = { schema: 1, dataQualityVersion: DATA_QUALITY_VERSION, verifiedRevenuePeriods: rows2.reduce((n, r) => n + r.revenueProofs, 0), generatedAt: now.toISOString(), cadence: "Every six hours", totalListings: listings.length, researchAudit: { scope: "Automated source and calculation controls; not a certification of individual company underwriting", institutionallyUnderwritten: 0, conditionalValuationScenarios: rows2.filter((r) => r.research.valueKind === "intrinsic-scenario").length, limitedCrossChecks: rows2.filter((r) => r.research.valueKind === "cross-check").length, evidenceReviews: rows2.filter((r) => r.research.valueKind === "review").length, withSourceConditions: rows2.filter((r) => r.research.qualityConditions > 0).length, newerPeriodicNotInModel: rows2.filter((r) => r.research.newerPeriodicNotInModel).length, newerResultsDisclosure: rows2.filter((r) => r.research.newerResultsDisclosure).length }, interimReady: rows2.filter((r) => r.latestInterim).length, ttmReady: rows2.filter((r) => r.ttm).length, referencesReady: rows2.filter((r) => r.referenceAsOf).length, waccReady: rows2.filter((r) => Number.isFinite(r.wacc)).length, companyIndustryMappings: rows2.filter((r) => r.sic).length, revenuePaths: rows2.filter((r) => r.revenueGrowth.length === 5).length, dividendPaths: rows2.filter((r) => r.dividendGrowth.length === 5).length, financialsReady: rows2.filter((r) => r.financials === "ready").length, numericalAnswers: rows2.filter((r) => r.numericalAnswer).length, rows: rows2 };
 await writeFile(output + "/manifest.json", JSON.stringify(manifest, null, 2));
 console.log(JSON.stringify({ total: manifest.totalListings, financials: manifest.financialsReady, numericalAnswers: manifest.numericalAnswers }));
 if (manifest.financialsReady < 400) throw Error("Refresh coverage fell below the publication threshold; existing published snapshot will remain in place.");
 if (manifest.referencesReady < 500) throw Error("Risk/growth reference coverage fell below the publication threshold; retain prior public snapshot.");
+if (manifest.verifiedRevenuePeriods < 200) throw Error("Consolidated income-statement revenue proof coverage fell below the verified-source threshold; retain prior public snapshot.");
