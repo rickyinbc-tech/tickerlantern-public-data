@@ -1,0 +1,5795 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-10-17T07:03:19.200Z",
+  "cadence": "Every six hours",
+  "totalListings": 581,
+  "financialsReady": 528,
+  "numericalAnswers": 507,
+  "rows": [
+    {
+      "symbol": "CBOE:CBOE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "HKEX:700",
+      "currency": "HKD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "HKEX:9988",
+      "currency": "HKD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:AAPL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-27",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ABNB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ACGL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ADBE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-28",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ADI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-01",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ADP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ADSK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AEP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AKAM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ALAB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ALGN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ALNY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AMAT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-26",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AMD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AMGN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AMZN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:APA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:APP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ARM",
+      "currency": "USD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:ASML",
+      "currency": "USD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:AVGO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-02",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:AXON",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:BIIB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:BKNG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:BKR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CASY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-04-30",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CCEP",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:CDNS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CDW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CEG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CHRW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CHTR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CINF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CMCSA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CME",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:COIN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:COO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:COST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-08-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CPRT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CRWD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CRWV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CSCO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-25",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CSGP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CSX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CTAS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:CTSH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:DASH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:DDOG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:DLTR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:DPZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:DXCM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:EBAY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ECHO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:EQIX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ERIE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:EVRG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:EXC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:EXE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:EXPE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FANG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FAST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FER",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:FFIV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FISV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FLEX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FOX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FOXA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FSLR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:FTNT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:GEHC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:GEN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-04-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:GILD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:GOOG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:GOOGL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:HAS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:HBAN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:HON",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:HONA",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:HOOD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:HSIC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:HST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:IBKR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:IDXX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ILMN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:INCY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:INTC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "stale",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:INTU",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ISRG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:JBHT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:JKHY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:KDP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:KLAC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:KMB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:LIN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:LITE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-27",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:LNT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:LRCX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-28",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:LULU",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-02-01",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MAR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MCHP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MDLZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MELI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:META",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MNST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MPWR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MRNA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MRVL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MSFT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MSTR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:MU",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-09-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NBIS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NDAQ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NDSN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NFLX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NTAP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-04-24",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NTRS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NVDA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-25",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NWS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NWSA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:NXPI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ODFL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ON",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ORLY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PANW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PAYX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PCAR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PDD",
+      "currency": "USD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:PEP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PFG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PLTR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PODD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PTC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:PYPL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:QCOM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-28",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:REG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:REGN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:RKLB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ROP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ROST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SBAC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SBUX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-28",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SHOP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SMCI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SNDK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-03",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SNPS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SPCX",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NASDAQ:STLD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:STX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:SWKS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-03",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TECH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TER",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TMUS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TRI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TRMB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-02",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TROW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TSCO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TSLA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TTWO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:TXN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:UAL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ULTA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:VRSK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:VRSN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:VRTX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:VTRS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:WDAY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:WDC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-07-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:WMT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:WTW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:WYNN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:XEL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NASDAQ:ZBRA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:A",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ABBV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ABT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ACN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-08-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ADM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AEE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AES",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AFL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AIG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AIZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AJG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ALB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ALL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ALLE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AMCR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AME",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AMP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AMT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ANET",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AON",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AOS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:APD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:APH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:APO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:APTV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ARE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ARES",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ATO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AVY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AWK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AXP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:AZO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-08-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BAC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BALL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BAX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BBY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BDX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BEN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BF.B",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-04-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BLK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BMY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BNY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BRK.B",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BRO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BSX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:BXP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:C",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CAH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CARR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CAT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CBRE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CCI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CCL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-30",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CFG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CHD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CIEN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-01",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CLX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-06-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CMG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CMI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CMS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CNC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CNP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:COF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:COHR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:COP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:COR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CPAY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CPT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CRH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CRL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CRM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CVNA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CVS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:CVX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:D",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DAL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-02",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DECK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DELL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DGX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DHI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DHR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DIS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-27",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DLR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DOC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DOV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DOW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DRI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DTE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DUK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DVA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:DVN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ECL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ED",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EFX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EIX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ELV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EME",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EMR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EOG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EQT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ES",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ESS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ETN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ETR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EXPD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:EXR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:F",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FCX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FDS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-08-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FDX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FDXF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FERG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-07-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FICO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FIS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FITB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FIX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FRT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:FTV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GDDY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GEV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GIS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GLW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GNRC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GPC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GPN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GRMN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:GWW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HAL",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "stale",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NYSE:HCA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-02-01",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HIG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HII",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HLT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HPE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HPQ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HRL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-26",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HSY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HUBB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HUM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:HWM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IBM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ICE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IEX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IFF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:INVH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IQV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IRM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ITW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:IVZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:J",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-26",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:JBL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-08-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:JCI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:JNJ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:JPM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KEY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KEYS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KHC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-27",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KIM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KKR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KMI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:KVUE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:L",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LDOS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-02",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LEN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-30",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LHX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-02",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LII",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LLY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LMT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LOW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LUV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LVS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LYB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:LYV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MAA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MAS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MCD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MCK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MCO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MDT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-04-24",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MET",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MGM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MKC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-11-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MLM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MMM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MOS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MPC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MRK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MRSH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MSCI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MSI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MTB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:MTD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NCLH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NEE",
+      "currency": "USD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NYSE:NEM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NKE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NOC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NOW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NRG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NSC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NUE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:NVR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:O",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:OKE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:OMC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ORCL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-05-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:OTIS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:OXY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:P",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-02-01",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PCG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PEG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PFE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PGR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PHM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PKG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PLD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PNC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PNR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PNW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PPG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PPL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PRU",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PSA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PSX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:PWR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:Q",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RCL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RDDT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RJF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-28",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RMD",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ROK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ROL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RSG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RTX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:RVTY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SCHW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SHW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SJM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-04-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SKYD",
+      "currency": "USD",
+      "financials": "stale",
+      "financialPeriod": "2024-12-31",
+      "dividend": "stale",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NYSE:SLB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SNA",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SOLV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SPG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SPGI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SRE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:STE",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-03-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:STT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:STZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-02-28",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SW",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SWK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SYF",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SYK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:SYY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-27",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:T",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TDG",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TDY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TEL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-26",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TFC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TGT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TJX",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TKO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TMO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TPL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TPR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-06-27",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TRGP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TRV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TSM",
+      "currency": "USD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NYSE:TSN",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-27",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TWLO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TXT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-03",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:TYL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:UBER",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:UDR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:UHS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:UNH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:UNP",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:UPS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:URI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:USB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:V",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-09-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VEEV",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-01-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VICI",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VLO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VLTO",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VMC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VMRK",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VRT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VTR",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:VYLR",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NYSE:VZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WAB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WAT",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WEC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WELL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WFC",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WMB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WRB",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WSM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2026-02-01",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WST",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:WY",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:XOM",
+      "currency": "USD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "NYSE:XYL",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:XYZ",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:YUM",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ZBH",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "NYSE:ZTS",
+      "currency": "USD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:ABX",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:AEM",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:ATD",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:BAM",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:BCE",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:BIP.UN",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:BMO",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:BN",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:BNS",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:CAE",
+      "currency": "CAD",
+      "financials": "stale",
+      "financialPeriod": "2025-03-31",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:CCL.B",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:CCO",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:CLS",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:CM",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:CNQ",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:CNR",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:CP",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:CSU",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:CTC.A",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:CVE",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:DOL",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:EMA",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:ENB",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:FFH",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:FM",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:FNV",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:FSV",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:FTS",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:GIB.A",
+      "currency": "CAD",
+      "financials": "stale",
+      "financialPeriod": "2024-09-30",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:GIL",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:H",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:IFC",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:IMO",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:K",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:L",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:MFC",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:MG",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:MRU",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:NA",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:NTR",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:OTEX",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:POW",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:PPL",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:QSR",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:RCI.B",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "stale",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:RY",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:SAP",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:SHOP",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:SLF",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:SU",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:T",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:TD",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-10-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:TECK.B",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "unavailable",
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:TOU",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:TRI",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:TRP",
+      "currency": "CAD",
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ri",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:03:19.200Z"
+    },
+    {
+      "symbol": "TSX:WCN",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:WN",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:WPM",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "financialPeriod": null,
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    },
+    {
+      "symbol": "TSX:WSP",
+      "currency": "CAD",
+      "financials": "unavailable",
+      "dividend": "unavailable",
+      "answerMethod": "review",
+      "numericalAnswer": false,
+      "lastSuccess": null
+    }
+  ]
+}
