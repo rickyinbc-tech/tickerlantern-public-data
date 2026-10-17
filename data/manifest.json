@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "generatedAt": "2026-10-17T07:03:19.200Z",
+  "generatedAt": "2026-10-17T07:09:18.157Z",
   "cadence": "Every six hours",
   "totalListings": 581,
-  "financialsReady": 528,
-  "numericalAnswers": 507,
+  "financialsReady": 547,
+  "numericalAnswers": 526,
   "rows": [
     {
       "symbol": "CBOE:CBOE",
@@ -14,7 +14,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "HKEX:700",
@@ -42,7 +42,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ABNB",
@@ -50,9 +50,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ACGL",
@@ -62,7 +62,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ADBE",
@@ -72,7 +72,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ADI",
@@ -82,7 +82,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ADP",
@@ -92,7 +92,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ADSK",
@@ -102,7 +102,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AEP",
@@ -112,7 +112,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AKAM",
@@ -122,7 +122,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ALAB",
@@ -132,7 +132,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ALGN",
@@ -142,7 +142,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ALNY",
@@ -152,7 +152,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AMAT",
@@ -162,7 +162,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AMD",
@@ -172,7 +172,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AMGN",
@@ -182,7 +182,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AMZN",
@@ -192,7 +192,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:APA",
@@ -202,7 +202,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:APP",
@@ -212,7 +212,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ARM",
@@ -240,7 +240,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:AXON",
@@ -250,7 +250,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:BIIB",
@@ -260,7 +260,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:BKNG",
@@ -270,7 +270,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:BKR",
@@ -280,7 +280,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CASY",
@@ -290,7 +290,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CCEP",
@@ -310,7 +310,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CDW",
@@ -320,7 +320,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CEG",
@@ -330,7 +330,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CHRW",
@@ -340,7 +340,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CHTR",
@@ -350,7 +350,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CINF",
@@ -360,7 +360,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CMCSA",
@@ -368,9 +368,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CME",
@@ -380,7 +380,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:COIN",
@@ -390,7 +390,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:COO",
@@ -400,7 +400,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:COST",
@@ -410,7 +410,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CPRT",
@@ -420,7 +420,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CRWD",
@@ -430,7 +430,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CRWV",
@@ -440,7 +440,7 @@
       "dividend": "ready",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CSCO",
@@ -450,7 +450,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CSGP",
@@ -460,7 +460,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CSX",
@@ -470,7 +470,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CTAS",
@@ -480,7 +480,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:CTSH",
@@ -490,7 +490,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:DASH",
@@ -500,7 +500,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:DDOG",
@@ -510,7 +510,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:DLTR",
@@ -520,7 +520,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:DPZ",
@@ -530,7 +530,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:DXCM",
@@ -540,7 +540,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:EBAY",
@@ -548,9 +548,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ECHO",
@@ -560,7 +560,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:EQIX",
@@ -570,7 +570,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ERIE",
@@ -580,7 +580,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:EVRG",
@@ -590,7 +590,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:EXC",
@@ -600,7 +600,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:EXE",
@@ -610,7 +610,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:EXPE",
@@ -620,7 +620,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FANG",
@@ -630,7 +630,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FAST",
@@ -640,7 +640,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FER",
@@ -660,7 +660,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FISV",
@@ -668,9 +668,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FLEX",
@@ -680,7 +680,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FOX",
@@ -690,7 +690,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FOXA",
@@ -700,7 +700,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FSLR",
@@ -710,7 +710,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:FTNT",
@@ -720,7 +720,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:GEHC",
@@ -730,7 +730,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:GEN",
@@ -740,7 +740,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:GILD",
@@ -750,7 +750,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:GOOG",
@@ -760,7 +760,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:GOOGL",
@@ -770,7 +770,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:HAS",
@@ -780,7 +780,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:HBAN",
@@ -790,7 +790,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:HON",
@@ -798,9 +798,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:HONA",
@@ -820,7 +820,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:HSIC",
@@ -830,7 +830,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:HST",
@@ -840,7 +840,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:IBKR",
@@ -850,7 +850,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:IDXX",
@@ -860,7 +860,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ILMN",
@@ -870,7 +870,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:INCY",
@@ -880,7 +880,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:INTC",
@@ -890,7 +890,7 @@
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:INTU",
@@ -900,7 +900,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ISRG",
@@ -910,7 +910,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:JBHT",
@@ -920,7 +920,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:JKHY",
@@ -930,7 +930,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:KDP",
@@ -940,7 +940,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:KLAC",
@@ -950,7 +950,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:KMB",
@@ -960,7 +960,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:LIN",
@@ -970,7 +970,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:LITE",
@@ -980,7 +980,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:LNT",
@@ -990,7 +990,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:LRCX",
@@ -1000,7 +1000,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:LULU",
@@ -1010,7 +1010,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MAR",
@@ -1020,7 +1020,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MCHP",
@@ -1030,7 +1030,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MDLZ",
@@ -1040,7 +1040,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MELI",
@@ -1050,7 +1050,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:META",
@@ -1060,7 +1060,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MNST",
@@ -1070,7 +1070,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MPWR",
@@ -1080,7 +1080,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MRNA",
@@ -1090,7 +1090,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MRVL",
@@ -1100,7 +1100,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MSFT",
@@ -1110,7 +1110,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MSTR",
@@ -1120,7 +1120,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:MU",
@@ -1128,9 +1128,9 @@
       "financials": "ready",
       "financialPeriod": "2026-09-03",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NBIS",
@@ -1140,7 +1140,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NDAQ",
@@ -1150,7 +1150,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NDSN",
@@ -1160,7 +1160,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NFLX",
@@ -1170,7 +1170,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NTAP",
@@ -1180,7 +1180,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NTRS",
@@ -1190,7 +1190,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NVDA",
@@ -1200,7 +1200,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NWS",
@@ -1210,7 +1210,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NWSA",
@@ -1220,7 +1220,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:NXPI",
@@ -1230,7 +1230,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ODFL",
@@ -1240,7 +1240,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ON",
@@ -1250,7 +1250,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ORLY",
@@ -1260,7 +1260,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PANW",
@@ -1270,7 +1270,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PAYX",
@@ -1280,7 +1280,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PCAR",
@@ -1290,7 +1290,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PDD",
@@ -1309,7 +1309,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PFG",
@@ -1319,7 +1319,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PLTR",
@@ -1329,7 +1329,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PODD",
@@ -1339,7 +1339,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PTC",
@@ -1349,7 +1349,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:PYPL",
@@ -1359,7 +1359,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:QCOM",
@@ -1369,7 +1369,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:REG",
@@ -1379,7 +1379,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:REGN",
@@ -1389,7 +1389,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:RKLB",
@@ -1399,7 +1399,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ROP",
@@ -1409,7 +1409,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ROST",
@@ -1419,7 +1419,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SBAC",
@@ -1429,7 +1429,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SBUX",
@@ -1439,7 +1439,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SHOP",
@@ -1449,7 +1449,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SMCI",
@@ -1459,7 +1459,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SNDK",
@@ -1469,7 +1469,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SNPS",
@@ -1479,7 +1479,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SPCX",
@@ -1499,7 +1499,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:STX",
@@ -1509,7 +1509,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:SWKS",
@@ -1519,7 +1519,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TECH",
@@ -1529,7 +1529,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TER",
@@ -1539,7 +1539,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TMUS",
@@ -1549,7 +1549,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TRI",
@@ -1559,7 +1559,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TRMB",
@@ -1569,7 +1569,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TROW",
@@ -1579,7 +1579,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TSCO",
@@ -1589,7 +1589,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TSLA",
@@ -1599,7 +1599,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TTWO",
@@ -1609,7 +1609,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:TXN",
@@ -1619,7 +1619,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:UAL",
@@ -1629,7 +1629,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ULTA",
@@ -1639,7 +1639,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:VRSK",
@@ -1649,7 +1649,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:VRSN",
@@ -1659,7 +1659,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:VRTX",
@@ -1669,7 +1669,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:VTRS",
@@ -1679,7 +1679,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:WDAY",
@@ -1689,7 +1689,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:WDC",
@@ -1699,7 +1699,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:WMT",
@@ -1709,7 +1709,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:WTW",
@@ -1719,7 +1719,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:WYNN",
@@ -1729,7 +1729,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:XEL",
@@ -1739,7 +1739,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NASDAQ:ZBRA",
@@ -1749,7 +1749,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:A",
@@ -1759,7 +1759,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ABBV",
@@ -1767,9 +1767,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ABT",
@@ -1779,7 +1779,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ACN",
@@ -1787,9 +1787,9 @@
       "financials": "ready",
       "financialPeriod": "2026-08-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ADM",
@@ -1799,7 +1799,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AEE",
@@ -1809,7 +1809,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AES",
@@ -1819,7 +1819,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AFL",
@@ -1829,7 +1829,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AIG",
@@ -1839,7 +1839,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AIZ",
@@ -1849,7 +1849,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AJG",
@@ -1859,7 +1859,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ALB",
@@ -1869,7 +1869,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ALL",
@@ -1879,7 +1879,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ALLE",
@@ -1889,7 +1889,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AMCR",
@@ -1899,7 +1899,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AME",
@@ -1909,7 +1909,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AMP",
@@ -1919,7 +1919,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AMT",
@@ -1929,7 +1929,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ANET",
@@ -1939,7 +1939,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AON",
@@ -1949,7 +1949,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AOS",
@@ -1959,7 +1959,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:APD",
@@ -1969,7 +1969,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:APH",
@@ -1979,7 +1979,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:APO",
@@ -1989,7 +1989,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:APTV",
@@ -1999,7 +1999,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ARE",
@@ -2009,7 +2009,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ARES",
@@ -2019,7 +2019,7 @@
       "dividend": "stale",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ATO",
@@ -2029,7 +2029,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AVY",
@@ -2039,7 +2039,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AWK",
@@ -2049,7 +2049,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AXP",
@@ -2059,7 +2059,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:AZO",
@@ -2069,7 +2069,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BA",
@@ -2077,9 +2077,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "stale",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BAC",
@@ -2089,7 +2089,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BALL",
@@ -2099,7 +2099,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BAX",
@@ -2109,7 +2109,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BBY",
@@ -2119,7 +2119,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BDX",
@@ -2129,7 +2129,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BE",
@@ -2139,7 +2139,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BEN",
@@ -2149,7 +2149,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BF.B",
@@ -2159,7 +2159,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BG",
@@ -2169,7 +2169,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BLK",
@@ -2179,7 +2179,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BMY",
@@ -2189,7 +2189,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BNY",
@@ -2199,7 +2199,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BR",
@@ -2209,7 +2209,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BRK.B",
@@ -2219,7 +2219,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BRO",
@@ -2229,7 +2229,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BSX",
@@ -2237,9 +2237,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BX",
@@ -2249,7 +2249,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:BXP",
@@ -2259,7 +2259,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:C",
@@ -2269,7 +2269,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CAH",
@@ -2279,7 +2279,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CARR",
@@ -2289,7 +2289,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CAT",
@@ -2299,7 +2299,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CB",
@@ -2309,7 +2309,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CBRE",
@@ -2319,7 +2319,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CCI",
@@ -2327,9 +2327,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CCL",
@@ -2339,7 +2339,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CF",
@@ -2349,7 +2349,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CFG",
@@ -2359,7 +2359,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CHD",
@@ -2369,7 +2369,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CI",
@@ -2379,7 +2379,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CIEN",
@@ -2389,7 +2389,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CL",
@@ -2399,7 +2399,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CLX",
@@ -2409,7 +2409,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CMG",
@@ -2419,7 +2419,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CMI",
@@ -2427,9 +2427,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CMS",
@@ -2439,7 +2439,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CNC",
@@ -2449,7 +2449,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CNP",
@@ -2459,7 +2459,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:COF",
@@ -2469,7 +2469,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:COHR",
@@ -2479,7 +2479,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:COP",
@@ -2489,7 +2489,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:COR",
@@ -2499,7 +2499,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CPAY",
@@ -2509,7 +2509,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CPT",
@@ -2519,7 +2519,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CRH",
@@ -2529,7 +2529,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CRL",
@@ -2539,7 +2539,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CRM",
@@ -2549,7 +2549,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CVNA",
@@ -2559,7 +2559,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CVS",
@@ -2567,9 +2567,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ri",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:CVX",
@@ -2579,7 +2579,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:D",
@@ -2589,7 +2589,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DAL",
@@ -2599,7 +2599,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DD",
@@ -2607,9 +2607,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DE",
@@ -2619,7 +2619,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DECK",
@@ -2629,7 +2629,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DELL",
@@ -2639,7 +2639,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DG",
@@ -2649,7 +2649,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DGX",
@@ -2659,7 +2659,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DHI",
@@ -2669,7 +2669,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DHR",
@@ -2679,7 +2679,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DIS",
@@ -2689,7 +2689,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DLR",
@@ -2699,7 +2699,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DOC",
@@ -2709,7 +2709,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DOV",
@@ -2719,7 +2719,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DOW",
@@ -2729,7 +2729,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DRI",
@@ -2739,7 +2739,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DTE",
@@ -2749,7 +2749,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DUK",
@@ -2759,7 +2759,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DVA",
@@ -2769,7 +2769,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:DVN",
@@ -2779,7 +2779,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ECL",
@@ -2787,9 +2787,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ED",
@@ -2799,7 +2799,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EFX",
@@ -2809,7 +2809,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EG",
@@ -2819,7 +2819,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EIX",
@@ -2829,7 +2829,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EL",
@@ -2837,9 +2837,9 @@
       "financials": "ready",
       "financialPeriod": "2026-06-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ELV",
@@ -2849,7 +2849,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EME",
@@ -2859,7 +2859,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EMR",
@@ -2869,7 +2869,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EOG",
@@ -2879,7 +2879,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EQT",
@@ -2889,7 +2889,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ES",
@@ -2899,7 +2899,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ESS",
@@ -2909,7 +2909,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ETN",
@@ -2919,7 +2919,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ETR",
@@ -2929,7 +2929,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EW",
@@ -2939,7 +2939,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EXPD",
@@ -2949,7 +2949,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:EXR",
@@ -2959,7 +2959,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:F",
@@ -2969,7 +2969,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FCX",
@@ -2979,7 +2979,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FDS",
@@ -2989,7 +2989,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FDX",
@@ -2999,7 +2999,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FDXF",
@@ -3009,7 +3009,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FE",
@@ -3019,7 +3019,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FERG",
@@ -3029,7 +3029,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FICO",
@@ -3039,7 +3039,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FIS",
@@ -3049,7 +3049,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FITB",
@@ -3059,7 +3059,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FIX",
@@ -3069,7 +3069,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FRT",
@@ -3079,7 +3079,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:FTV",
@@ -3089,7 +3089,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GD",
@@ -3099,7 +3099,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GDDY",
@@ -3109,7 +3109,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GE",
@@ -3119,7 +3119,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GEV",
@@ -3129,7 +3129,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GIS",
@@ -3139,7 +3139,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GL",
@@ -3149,7 +3149,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GLW",
@@ -3159,7 +3159,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GM",
@@ -3169,7 +3169,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GNRC",
@@ -3179,7 +3179,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GPC",
@@ -3189,7 +3189,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GPN",
@@ -3199,7 +3199,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GRMN",
@@ -3209,7 +3209,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GS",
@@ -3219,7 +3219,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:GWW",
@@ -3229,7 +3229,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HAL",
@@ -3249,7 +3249,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HD",
@@ -3257,9 +3257,9 @@
       "financials": "ready",
       "financialPeriod": "2026-02-01",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HIG",
@@ -3269,7 +3269,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HII",
@@ -3279,7 +3279,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HLT",
@@ -3289,7 +3289,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HPE",
@@ -3299,7 +3299,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HPQ",
@@ -3309,7 +3309,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HRL",
@@ -3319,7 +3319,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HSY",
@@ -3329,7 +3329,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HUBB",
@@ -3339,7 +3339,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HUM",
@@ -3349,7 +3349,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:HWM",
@@ -3359,7 +3359,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IBM",
@@ -3369,7 +3369,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ICE",
@@ -3379,7 +3379,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IEX",
@@ -3389,7 +3389,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IFF",
@@ -3399,7 +3399,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:INVH",
@@ -3409,7 +3409,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IP",
@@ -3419,7 +3419,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IQV",
@@ -3429,7 +3429,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IR",
@@ -3439,7 +3439,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IRM",
@@ -3449,7 +3449,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IT",
@@ -3459,7 +3459,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ITW",
@@ -3469,7 +3469,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:IVZ",
@@ -3479,7 +3479,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:J",
@@ -3489,7 +3489,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:JBL",
@@ -3499,7 +3499,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:JCI",
@@ -3509,7 +3509,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:JNJ",
@@ -3519,7 +3519,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:JPM",
@@ -3529,7 +3529,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KEY",
@@ -3539,7 +3539,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KEYS",
@@ -3549,7 +3549,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KHC",
@@ -3559,7 +3559,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KIM",
@@ -3567,9 +3567,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KKR",
@@ -3579,7 +3579,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KMI",
@@ -3589,7 +3589,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KO",
@@ -3599,7 +3599,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KR",
@@ -3609,7 +3609,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:KVUE",
@@ -3619,7 +3619,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:L",
@@ -3629,7 +3629,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LDOS",
@@ -3639,7 +3639,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LEN",
@@ -3649,7 +3649,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LH",
@@ -3659,7 +3659,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LHX",
@@ -3669,7 +3669,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LII",
@@ -3677,9 +3677,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LLY",
@@ -3689,7 +3689,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LMT",
@@ -3699,7 +3699,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LOW",
@@ -3709,7 +3709,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LUV",
@@ -3719,7 +3719,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LVS",
@@ -3729,7 +3729,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LYB",
@@ -3739,7 +3739,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:LYV",
@@ -3749,7 +3749,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MA",
@@ -3759,7 +3759,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MAA",
@@ -3769,7 +3769,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MAS",
@@ -3779,7 +3779,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MCD",
@@ -3789,7 +3789,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MCK",
@@ -3799,7 +3799,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MCO",
@@ -3809,7 +3809,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MDT",
@@ -3817,9 +3817,9 @@
       "financials": "ready",
       "financialPeriod": "2026-04-24",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MET",
@@ -3829,7 +3829,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MGM",
@@ -3839,7 +3839,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MKC",
@@ -3849,7 +3849,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MLM",
@@ -3859,7 +3859,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MMM",
@@ -3869,7 +3869,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MO",
@@ -3879,7 +3879,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MOS",
@@ -3889,7 +3889,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MPC",
@@ -3897,9 +3897,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MRK",
@@ -3909,7 +3909,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MRSH",
@@ -3919,7 +3919,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MS",
@@ -3929,7 +3929,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MSCI",
@@ -3939,7 +3939,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MSI",
@@ -3949,7 +3949,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MTB",
@@ -3959,7 +3959,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:MTD",
@@ -3969,7 +3969,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NCLH",
@@ -3979,16 +3979,17 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NEE",
       "currency": "USD",
-      "financials": "unavailable",
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NEM",
@@ -3998,7 +3999,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NI",
@@ -4008,7 +4009,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NKE",
@@ -4018,7 +4019,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NOC",
@@ -4028,7 +4029,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NOW",
@@ -4038,7 +4039,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NRG",
@@ -4048,7 +4049,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NSC",
@@ -4056,9 +4057,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NUE",
@@ -4068,7 +4069,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:NVR",
@@ -4078,7 +4079,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:O",
@@ -4088,7 +4089,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:OKE",
@@ -4098,7 +4099,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:OMC",
@@ -4108,7 +4109,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ORCL",
@@ -4118,7 +4119,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:OTIS",
@@ -4128,7 +4129,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:OXY",
@@ -4138,7 +4139,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:P",
@@ -4148,7 +4149,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PCG",
@@ -4158,7 +4159,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PEG",
@@ -4168,7 +4169,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PFE",
@@ -4178,7 +4179,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PG",
@@ -4188,7 +4189,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PGR",
@@ -4198,7 +4199,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PH",
@@ -4206,9 +4207,9 @@
       "financials": "ready",
       "financialPeriod": "2026-06-30",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PHM",
@@ -4218,7 +4219,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PKG",
@@ -4228,7 +4229,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PLD",
@@ -4238,7 +4239,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PM",
@@ -4248,7 +4249,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PNC",
@@ -4258,7 +4259,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PNR",
@@ -4268,7 +4269,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PNW",
@@ -4278,7 +4279,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PPG",
@@ -4288,7 +4289,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PPL",
@@ -4298,7 +4299,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PRU",
@@ -4308,7 +4309,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PSA",
@@ -4318,7 +4319,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PSX",
@@ -4328,7 +4329,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:PWR",
@@ -4338,7 +4339,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:Q",
@@ -4346,9 +4347,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RCL",
@@ -4356,9 +4357,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RDDT",
@@ -4368,7 +4369,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RF",
@@ -4378,7 +4379,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RJF",
@@ -4388,7 +4389,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RL",
@@ -4398,7 +4399,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RMD",
@@ -4408,7 +4409,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ROK",
@@ -4418,7 +4419,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ROL",
@@ -4428,7 +4429,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RSG",
@@ -4438,7 +4439,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RTX",
@@ -4448,7 +4449,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:RVTY",
@@ -4458,7 +4459,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SCHW",
@@ -4468,7 +4469,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SHW",
@@ -4478,7 +4479,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SJM",
@@ -4488,7 +4489,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SKYD",
@@ -4508,7 +4509,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SNA",
@@ -4518,7 +4519,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SO",
@@ -4528,7 +4529,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SOLV",
@@ -4538,7 +4539,7 @@
       "dividend": "unavailable",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SPG",
@@ -4548,7 +4549,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SPGI",
@@ -4558,7 +4559,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SRE",
@@ -4568,7 +4569,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:STE",
@@ -4578,7 +4579,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:STT",
@@ -4588,7 +4589,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:STZ",
@@ -4598,7 +4599,7 @@
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SW",
@@ -4606,9 +4607,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ri",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SWK",
@@ -4618,7 +4619,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SYF",
@@ -4628,7 +4629,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SYK",
@@ -4638,7 +4639,7 @@
       "dividend": "stale",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:SYY",
@@ -4648,7 +4649,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:T",
@@ -4658,7 +4659,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TDG",
@@ -4668,7 +4669,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TDY",
@@ -4678,7 +4679,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TEL",
@@ -4688,7 +4689,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TFC",
@@ -4698,7 +4699,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TGT",
@@ -4708,7 +4709,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TJX",
@@ -4718,7 +4719,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TKO",
@@ -4728,7 +4729,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TMO",
@@ -4736,9 +4737,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TPL",
@@ -4748,7 +4749,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TPR",
@@ -4758,7 +4759,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TRGP",
@@ -4768,7 +4769,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TRV",
@@ -4778,7 +4779,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TSM",
@@ -4795,9 +4796,9 @@
       "financials": "ready",
       "financialPeriod": "2025-09-27",
       "dividend": "unavailable",
-      "answerMethod": "earnings",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TT",
@@ -4807,7 +4808,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TWLO",
@@ -4817,7 +4818,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TXT",
@@ -4827,7 +4828,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:TYL",
@@ -4837,7 +4838,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:UBER",
@@ -4847,7 +4848,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:UDR",
@@ -4857,7 +4858,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:UHS",
@@ -4867,7 +4868,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:UNH",
@@ -4877,7 +4878,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:UNP",
@@ -4887,7 +4888,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:UPS",
@@ -4895,9 +4896,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:URI",
@@ -4907,7 +4908,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:USB",
@@ -4917,7 +4918,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:V",
@@ -4927,7 +4928,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VEEV",
@@ -4937,7 +4938,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VICI",
@@ -4947,7 +4948,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VLO",
@@ -4957,7 +4958,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VLTO",
@@ -4967,7 +4968,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VMC",
@@ -4977,7 +4978,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VMRK",
@@ -4987,7 +4988,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VRT",
@@ -4997,7 +4998,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VST",
@@ -5007,7 +5008,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VTR",
@@ -5017,7 +5018,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:VYLR",
@@ -5037,7 +5038,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WAB",
@@ -5047,7 +5048,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WAT",
@@ -5057,7 +5058,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WEC",
@@ -5067,7 +5068,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WELL",
@@ -5077,7 +5078,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WFC",
@@ -5087,7 +5088,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WM",
@@ -5095,9 +5096,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WMB",
@@ -5105,9 +5106,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ddm",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WRB",
@@ -5117,7 +5118,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WSM",
@@ -5127,7 +5128,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WST",
@@ -5137,7 +5138,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:WY",
@@ -5147,7 +5148,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:XOM",
@@ -5167,7 +5168,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:XYZ",
@@ -5177,7 +5178,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:YUM",
@@ -5187,7 +5188,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ZBH",
@@ -5197,7 +5198,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "NYSE:ZTS",
@@ -5207,27 +5208,27 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:ABX",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:AEM",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:ATD",
@@ -5241,12 +5242,12 @@
     {
       "symbol": "TSX:BAM",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
       "answerMethod": "review",
       "numericalAnswer": false,
-      "lastSuccess": null
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:BCE",
@@ -5256,17 +5257,17 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:BIP.UN",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:BMO",
@@ -5276,17 +5277,17 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:BN",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:BNS",
@@ -5296,7 +5297,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CAE",
@@ -5325,17 +5326,17 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CLS",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CM",
@@ -5345,7 +5346,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CNQ",
@@ -5355,7 +5356,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CNR",
@@ -5365,7 +5366,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CP",
@@ -5375,7 +5376,7 @@
       "dividend": "ready",
       "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:CSU",
@@ -5403,7 +5404,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:DOL",
@@ -5429,9 +5430,9 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "ri",
+      "answerMethod": "dcf",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:FFH",
@@ -5454,22 +5455,22 @@
     {
       "symbol": "TSX:FNV",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:FSV",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:FTS",
@@ -5479,7 +5480,7 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:GIB.A",
@@ -5494,12 +5495,12 @@
     {
       "symbol": "TSX:GIL",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-28",
+      "dividend": "ready",
+      "answerMethod": "dcf",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:H",
@@ -5527,17 +5528,17 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:K",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:L",
@@ -5556,17 +5557,17 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:MG",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:MRU",
@@ -5589,22 +5590,22 @@
     {
       "symbol": "TSX:NTR",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:OTEX",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2026-06-30",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:POW",
@@ -5623,17 +5624,17 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:QSR",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:RCI.B",
@@ -5643,7 +5644,7 @@
       "dividend": "stale",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:RY",
@@ -5653,7 +5654,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:SAP",
@@ -5667,12 +5668,12 @@
     {
       "symbol": "TSX:SHOP",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:SLF",
@@ -5682,7 +5683,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:SU",
@@ -5692,7 +5693,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:T",
@@ -5702,7 +5703,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:TD",
@@ -5712,7 +5713,7 @@
       "dividend": "ready",
       "answerMethod": "ddm",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:TECK.B",
@@ -5722,7 +5723,7 @@
       "dividend": "unavailable",
       "answerMethod": "earnings",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:TOU",
@@ -5736,12 +5737,12 @@
     {
       "symbol": "TSX:TRI",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:TRP",
@@ -5751,17 +5752,17 @@
       "dividend": "ready",
       "answerMethod": "ri",
       "numericalAnswer": true,
-      "lastSuccess": "2026-10-17T07:03:19.200Z"
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:WCN",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
-      "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
+      "dividend": "ready",
+      "answerMethod": "ddm",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:WN",
@@ -5775,12 +5776,12 @@
     {
       "symbol": "TSX:WPM",
       "currency": "CAD",
-      "financials": "unavailable",
-      "financialPeriod": null,
+      "financials": "ready",
+      "financialPeriod": "2025-12-31",
       "dividend": "unavailable",
-      "answerMethod": "review",
-      "numericalAnswer": false,
-      "lastSuccess": null
+      "answerMethod": "earnings",
+      "numericalAnswer": true,
+      "lastSuccess": "2026-10-17T07:09:18.157Z"
     },
     {
       "symbol": "TSX:WSP",
