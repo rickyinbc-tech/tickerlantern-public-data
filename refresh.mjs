@@ -6838,7 +6838,7 @@ function parseFinancials(payload, cik, currency, now2 = /* @__PURE__ */ new Date
 }
 
 // src/growth-policy.js
-var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v6";
+var GROWTH_POLICY_VERSION = "tl-growth-2026-10-v7";
 var validDate2 = (x2) => /^\d{4}-\d{2}-\d{2}$/.test(x2 || "") && Number.isFinite(Date.parse(x2));
 function cagr(begin, end, years) {
   if (![begin, end, years].every(Number.isFinite) || begin <= 0 || end <= 0 || years <= 0) return null;
@@ -18964,6 +18964,29 @@ function debtEvidence(metrics = {}) {
   return result2(null, "Latest borrowing evidence is incomplete", Object.keys(m));
 }
 
+// src/preferred-capital.js
+function preferredCapitalEvidence(snapshot, item) {
+  const cutoff = (snapshot?.valuationDate || snapshot?.checkedAt)?.slice(0, 10);
+  const periods = [snapshot?.financials?.recent, snapshot?.financials?.annual?.[0]].filter(Boolean);
+  const observations = periods.flatMap((row) => ["preferredEquity", "preferredSharesOutstanding"].flatMap((key3) => {
+    const fact = row.metrics?.[key3];
+    return Number.isFinite(fact?.value) && fact.value >= 0 && validDate(fact.asOf) && fact.asOf === row.end && validDate(fact.filed) && fact.filed >= fact.asOf && (!cutoff || fact.filed <= cutoff && fact.asOf <= cutoff) && (!fact.unit || fact.unit === (key3 === "preferredEquity" ? item.currency : "shares")) && /^https:\/\//.test(fact.source?.url || "") ? [{ key: key3, fact }] : [];
+  }));
+  const asOf = observations.map(({ fact }) => fact.asOf).sort().at(-1) || null;
+  const atDate = observations.filter(({ fact }) => fact.asOf === asOf);
+  const latest2 = atDate.filter(({ key: key3, fact }) => !atDate.some((other) => other.key === key3 && other.fact.filed > fact.filed));
+  const required = latest2.some(({ fact }) => fact.value > 0);
+  const carryingValues = [...new Set(latest2.filter(({ key: key3 }) => key3 === "preferredEquity").map(({ fact }) => fact.value))];
+  const amount = carryingValues.length === 1 && (!required || carryingValues[0] > 0) ? carryingValues[0] : null;
+  return {
+    required,
+    amount,
+    asOf,
+    facts: latest2.map(({ fact }) => fact),
+    description: required ? `Reported preferred capital at ${asOf}; ${amount == null ? "a preferred claim is established, but a consistent carrying/financing value is unavailable" : "carrying value is a book-value proxy"}. Consistent common/debt/preferred values and a preferred financing cost require review.` : "No positive preferred claim established by the available preferred-specific observations; unreported or temporary capital is not verified absent."
+  };
+}
+
 // src/share-basis-evidence.js
 function comparableEPSHistory(annual, { cutoff, eligible = () => true } = {}) {
   const rows2 = [...annual || []].sort((a2, b3) => String(b3.end).localeCompare(String(a2.end))), retained = [];
@@ -19066,8 +19089,10 @@ function reportedDebt(m = {}) {
   return debtEvidence(m).value;
 }
 function capitalAssumptions(snapshot, item) {
+  const preferredEvidence = preferredCapitalEvidence(snapshot, item), preferredRequired = preferredEvidence.required;
   const linked = linkedCapital(item, snapshot);
-  if (linked) return { patches: linked.patches || {}, origins: Object.fromEntries(Object.keys(linked.patches || {}).map((k) => [k, "User override \xB7 linked local WACC assumptions \xB7 " + linked.valuationDate])), capitalBasis: linked.capitalBasis || "scenario", costEquity: linked.costEquity, wacc: linked.wacc, description: "User override linked from WACC for this listing, period and valuation date", source: null };
+  const linkedPreferredComplete = linked?.patches?.preferred > 0 && Number.isFinite(linked.patches.costPreferred) && linked.patches.costPreferred >= 0;
+  if (linked && (!preferredRequired || linkedPreferredComplete)) return { preferredRequired, preferredEvidence, patches: linked.patches || {}, origins: Object.fromEntries(Object.keys(linked.patches || {}).map((k) => [k, "User override \xB7 linked local WACC assumptions \xB7 " + linked.valuationDate])), capitalBasis: linked.capitalBasis || "scenario", costEquity: linked.costEquity, wacc: linked.wacc, description: "User override linked from WACC for this listing, period and valuation date", source: null };
   const ref2 = currentReferences(snapshot), sector = ref2?.industry, country = ref2?.country;
   const origins = {}, patches = {};
   const sovereignSpread = ref2?.currencyDefaultSpread ?? (country?.defaultSpread || 0);
@@ -19092,7 +19117,6 @@ function capitalAssumptions(snapshot, item) {
   let capitalBasis = "scenario";
   const m = snapshot.financials?.status === "ready" ? snapshot.financials.annual?.[0]?.metrics || {} : {};
   const debt = reportedDebt(m);
-  const preferredRequired = m.preferredEquity?.value > 0;
   const marketCap = snapshot.marketCap, cutoff = (snapshot.valuationDate || snapshot.checkedAt)?.slice(0, 10);
   const marketCapCurrent = marketCap?.status === "ready" && marketCap.value > 0 && finite5(marketCap.value) && snapshot.instrument?.symbol === item?.symbol && snapshot.instrument?.currency === item?.currency && marketCap.currency === item?.currency && validDate(cutoff) && validDate(marketCap.asOf) && marketCap.asOf <= cutoff && (Date.parse(cutoff) - Date.parse(marketCap.asOf)) / 864e5 <= 10 && marketCap.basis?.trim() && marketCap.source?.name?.trim() && /^https:\/\//.test(marketCap.source?.url || "");
   if (marketCapCurrent && finite5(debt) && debt >= 0 && finite5(patches.taxRate) && sector?.unleveredBeta > 0) {
@@ -19102,8 +19126,8 @@ function capitalAssumptions(snapshot, item) {
     put("beta", sector.unleveredBeta * (1 + (1 - patches.taxRate / 100) * debt / snapshot.marketCap.value), `Industry asset beta relevered to company market equity / book-debt proxy \xB7 ${ref2.asOf}`);
   }
   if (preferredRequired) {
-    put("preferred", m.preferredEquity.value / 1e6, "Reported preferred carrying value proxy; a consistent market or target capital structure and preferred financing cost require review");
-    if (capitalBasis === "scenario") {
+    if (preferredEvidence.amount > 0) put("preferred", preferredEvidence.amount / 1e6, preferredEvidence.description + " Millions in the trading currency.");
+    if (capitalBasis === "scenario" || preferredEvidence.amount == null) {
       delete patches.equity;
       delete patches.debt;
     }
@@ -19120,6 +19144,7 @@ function capitalAssumptions(snapshot, item) {
   }
   return {
     preferredRequired,
+    preferredEvidence,
     patches,
     origins,
     capitalBasis,
@@ -19836,6 +19861,8 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
   const failures = [], scenarios = ["Bear", "Base", "Bull"];
   function operateDCF() {
     const m = operatingMetrics, startRevenue = valueOf(m, "revenue"), startEBIT = valueOf(m, "ebit");
+    const preferredCapital = preferredCapitalEvidence(cleaned, item);
+    if (preferredCapital.required && preferredCapital.amount == null) throw Error(preferredCapital.description + " The enterprise-to-common-equity bridge requires a quantified preferred claim.");
     if (fit.businessScopeChange && (!DURATION_KEYS.every((key3) => businessScopeFactCompatible(m[key3], fit.businessScopeChange)) || !borrowing.components.length || !borrowing.components.every((fact) => businessScopeFactCompatible(fact, fit.businessScopeChange))))
       throw Error("The operating or borrowing inputs still contain the predecessor business. Matched post-separation annual/TTM components and debt are required before attributing enterprise value to the remaining company.");
     const sharesFact = recent?.metrics?.shares || m.shares || am.shares;
@@ -19910,7 +19937,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
           debt,
           cash: 0,
           otherAssets: 0,
-          claims: Math.max(0, valueOf(balanceMetrics, "preferredEquity") || 0),
+          claims: preferredCapital.amount || 0,
           shares
         };
         const result2 = calculateDCF(inputs);
@@ -19935,7 +19962,7 @@ function buildValuationReport(item, snapshot = {}, options = {}) {
     assumption("Debt deducted in equity bridge", debt, "money", `${borrowing.asOf || "Date not established"}; ${borrowing.basis}. ${borrowing.warnings.join(" ")}`, borrowing.components.map((fact) => fact.source));
     assumption("Excess cash added", 0, "money", "Conservative scenario adjustment: no reported cash is assumed excess. This is not a reported cash balance.");
     assumption("Other non-operating assets added", 0, "money", "Unverified bridge adjustment held at zero; not proof no other assets exist.");
-    assumption("Other claims deducted", results[1].inputs.claims, "money", finite6(valueOf(balanceMetrics, "preferredEquity")) ? "Known preferred carrying value deducted; NCI, pensions and other claims are not fully reconciled." : "Unverified preferred/NCI/other-claim adjustment held at zero. Common-equity value is provisional until this bridge is reconciled.");
+    assumption("Other claims deducted", results[1].inputs.claims, "money", preferredCapital.amount != null ? preferredCapital.description + " Known preferred carrying value deducted; NCI, pensions and other claims are not fully reconciled." : "Unverified preferred/NCI/other-claim adjustment held at zero. Common-equity value is provisional until this bridge is reconciled.", preferredCapital.facts.map((f) => f.source));
     assumption("Terminal FCFF growth", forecast.revenueTerminal, "rate", forecast.terminalDescription);
     assumption(
       "Terminal reinvestment policy",
@@ -21446,7 +21473,7 @@ function modelApplicability(item, snapshot, model) {
 }
 
 // src/relative-evidence.js
-function connectedRelativeEligible(r, item, fit, cutoff) {
+function connectedRelativeEligible(r, item, fit, cutoff, preferredCapital) {
   if (!r || !["pe", "pb", "evEbitda", "evRevenue"].includes(r.metric) || r.currency !== item.currency || !validDate(cutoff) || !validDate(r.asOf) || r.asOf > cutoff || Date.parse(cutoff) - Date.parse(r.asOf) > 10 * 864e5 || !validDate(r.fiscalEnd) || !r.basis?.trim() || !r.source?.name || !/^https:\/\//.test(r.source.url || "") || !(Number.isFinite(r.fundamental) && r.fundamental > 0) || !Array.isArray(r.peers) || r.peers.length > 4 || !Array.isArray(r.history) || r.history.length > 120 || r.history.some((h) => !validDate(h?.date) || h.date > r.asOf || !(Number.isFinite(h.multiple) && h.multiple > 0)) || new Set(r.history.map((h) => h.date)).size !== r.history.length) return false;
   const perShare = ["pe", "pb"].includes(r.metric), enterprise = !perShare, published = r.source.publishedAt;
   const shareChange = perShare && fit.perShareBasisChange && cutoff >= fit.perShareBasisChange.effectiveDate;
@@ -21456,6 +21483,7 @@ function connectedRelativeEligible(r, item, fit, cutoff) {
   if (!businessScopeFactCompatible(denominator, fit.businessScopeChange) || perShare && !perShareFactCompatible(denominator, fit.perShareBasisChange, cutoff)) return false;
   if (r.metric === "pe" && fit.earningsPower === false && !fit.businessScopeChange) return false;
   if (enterprise && (fit.operatingDCF === false || !r.bridge || !["debt", "cash", "otherAssets", "claims", "shares"].every((k) => Number.isFinite(r.bridge[k]) && r.bridge[k] >= 0) || r.bridge.shares <= 0)) return false;
+  if (enterprise && preferredCapital?.required && (!(preferredCapital.amount > 0) || r.bridge.claims * 1e6 < preferredCapital.amount)) return false;
   try {
     calculateRelative({ ...r.bridge, metric: r.metric, fundamental: r.fundamental, peers: r.peers, history: r.history, asOf: r.asOf });
     return true;
@@ -21519,6 +21547,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
   const million = 1e6, dividend = snapshot.dividend?.status === "ready" ? snapshot.dividend.value : null;
   if (!latest2 && snapshot.financials?.reason) gaps.push(snapshot.financials.reason);
   const forecast = forecastAssumptions(snapshot, item), capital = forecast.capital;
+  const preferredCapital = preferredCapitalEvidence(snapshot, item);
   const reportedDebt2 = reportedDebt(m);
   if (view === "x3sm") {
     fact("revenue", "revenue", million);
@@ -21650,7 +21679,7 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
     for (const [key3, v] of Object.entries(capital.patches))
       if (!["equity", "debt"].includes(key3) || capitalBasis === capital.capitalBasis) put(key3, v, capital.origins[key3]);
     if (capitalBasis !== capital.capitalBasis) gaps.push("Enter capital values for the selected basis; the automatic basis is " + capital.capitalBasis);
-    if (capital.preferredRequired) gaps.push("Reported preferred capital requires a consistent equity/debt/preferred value basis and preferred financing cost. A two-claim WACC is withheld.");
+    if (capital.preferredRequired) gaps.push(preferredCapital.description + " A two-claim WACC is withheld.");
     if (capital.wacc == null) gaps.push("A complete dated risk-free / beta / risk premium / tax / financing reference is required. Defaults are not substituted.");
     if (capital.capitalBasis === "scenario") gaps.push(capital.description);
   }
@@ -21668,10 +21697,10 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
     const fundamentals = { pe: value("eps"), pb: book?.value, evEbitda: value("ebit") + value("da"), evRevenue: value("revenue") };
     const preferred = selectedMetric || fit.metric || "pe";
     let metric2 = preferred;
-    const relative = snapshot.feed?.relative, relativeValid = connectedRelativeEligible(relative, item, fit, cutoff);
+    const relative = snapshot.feed?.relative, relativeValid = connectedRelativeEligible(relative, item, fit, cutoff, preferredCapital);
     if (!selectedMetric && selectedBenchmarkMode !== "industry" && relativeValid) metric2 = relative.metric;
     if (!selectedMetric && selectedBenchmarkMode !== "peers" && (selectedBenchmarkMode === "industry" || !relativeValid)) {
-      const bridge = Number.isFinite(reportedDebt2) && reportedDebt2 >= 0 && value("shares") > 0 && currentShare(m.shares);
+      const bridge = Number.isFinite(reportedDebt2) && reportedDebt2 >= 0 && value("shares") > 0 && currentShare(m.shares) && (!preferredCapital.required || preferredCapital.amount > 0);
       const candidates = [.../* @__PURE__ */ new Set([preferred, "pe", "pb", "evEbitda", "evRevenue"])];
       const chosen = candidates.find((k) => available[k] && fundamentals[k] > 0 && (!k.startsWith("ev") || bridge) && snapshot.references?.status !== "stale" && snapshot.references?.industry?.relativeBenchmarks?.[k]?.metric === k && industryBenchmarkEligible(snapshot.references.industry.relativeBenchmarks[k], cutoff));
       if (chosen) {
@@ -21734,7 +21763,8 @@ function automaticInputs(view, snapshot, item, selectedMetric, selectedCapitalBa
           fact("shares", "shares", million);
           assumption("cash", 0, "excess cash not verified");
           assumption("otherAssets", 0, "non-operating assets not reconciled");
-          assumption("claims", Math.max(0, value("preferredEquity") || 0) / million, "known preferred carrying capital only; other claims unverified");
+          if (!preferredCapital.required || preferredCapital.amount > 0) assumption("claims", (preferredCapital.amount || 0) / million, preferredCapital.required ? preferredCapital.description + " Other claims unverified." : "Preferred/NCI/other claims unverified; provisional zero adjustment requires review");
+          else gaps.push(preferredCapital.description + " Enterprise value cannot be assigned to common shares with a zero preferred adjustment.");
         }
         gaps.push("Dated US industry aggregate scenario; individual comparable peers, company multiple history and a current price are not inferred.");
       } else gaps.push("Matching peers/history or an eligible dated industry reference are unavailable for this metric.");
@@ -22092,8 +22122,8 @@ function renderResult(view, input, d, currency) {
       html: result(
         d.capitalBasis === "scenario" ? "Scenario WACC \xB7 assumed financing mix" : "Weighted average cost of capital",
         pct(r.wacc),
-        `<div class="ddm-metrics">${metric("CAPM cost of equity", pct(r.costEquity))}${metric("After-tax debt cost", pct(r.afterTaxDebt))}${metric("Equity / debt weights", `${pct(r.equityWeight)} / ${pct(r.debtWeight)}`)}</div>` + note(
-          "k\u2091 = risk-free rate + levered beta \xD7 equity risk premium. WACC = E/(E+D) \xD7 k\u2091 + D/(E+D) \xD7 k\u1D48 \xD7 (1\u2212tax). Use k\u2091 for DDM and RI; WACC for unlevered FCFF."
+        `<div class="ddm-metrics">${metric("CAPM cost of equity", pct(r.costEquity))}${metric("After-tax debt cost", pct(r.afterTaxDebt))}${metric("Common / debt / preferred weights", `${pct(r.equityWeight)} / ${pct(r.debtWeight)} / ${pct(r.preferredWeight)}`)}${r.preferredWeight > 0 ? metric("Preferred financing cost", pct(r.costPreferred)) : ""}</div>` + note(
+          "k\u2091 = risk-free rate + levered beta \xD7 equity risk premium. With V = E + D + P, WACC = E/V \xD7 k\u2091 + D/V \xD7 k\u1D48 \xD7 tax factor + P/V \xD7 k\u209A. The debt tax factor is (1\u2212tax) when the shield is available and 1 otherwise; preferred financing receives no debt tax shield. Use k\u2091 for DDM and RI; WACC for unlevered FCFF."
         ) + warnings(r.warnings) + `<button id="val-transfer" class="primary" type="button">Use this WACC in DCF \u2192</button>`
       )
     };

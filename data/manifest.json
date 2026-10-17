@@ -116,14 +116,14 @@
   },
   "dataQualityVersion": 2,
   "verifiedRevenuePeriods": 488,
-  "generatedAt": "2026-10-17T21:50:59.291Z",
+  "generatedAt": "2026-10-17T22:12:29.492Z",
   "cadence": "Every six hours",
   "totalListings": 581,
   "researchAudit": {
     "scope": "Automated source and calculation controls; not a certification of individual company underwriting",
     "institutionallyUnderwritten": 0,
-    "conditionalValuationScenarios": 184,
-    "limitedCrossChecks": 338,
+    "conditionalValuationScenarios": 179,
+    "limitedCrossChecks": 343,
     "evidenceReviews": 59,
     "withSourceConditions": 552,
     "newerPeriodicNotInModel": 5,
@@ -132,7 +132,7 @@
   "interimReady": 493,
   "ttmReady": 486,
   "referencesReady": 581,
-  "waccReady": 575,
+  "waccReady": 531,
   "companyIndustryMappings": 560,
   "revenuePaths": 579,
   "dividendPaths": 567,
@@ -3240,7 +3240,7 @@
       "industry": "Computer Services",
       "sic": "7370",
       "referenceAsOf": "2026-01",
-      "wacc": 0.08702893155344081,
+      "wacc": null,
       "costEquity": 0.097214,
       "revenueGrowth": [
         0.14368982996383878,
@@ -3282,7 +3282,7 @@
       "industry": "Computer Services",
       "sic": "7370",
       "referenceAsOf": "2026-01",
-      "wacc": 0.08702893155344081,
+      "wacc": null,
       "costEquity": 0.097214,
       "revenueGrowth": [
         0.14368982996383878,
@@ -3366,8 +3366,8 @@
       "industry": "Bank (Money Center)",
       "sic": "6021",
       "referenceAsOf": "2026-01",
-      "wacc": 0.057477503104005304,
-      "costEquity": 0.082496,
+      "wacc": null,
+      "costEquity": 0.08249599999999999,
       "revenueGrowth": [
         0.08318536252645634,
         0.07054829002116507,
@@ -4149,8 +4149,8 @@
       "industry": "Telecom. Equipment",
       "sic": "3669",
       "referenceAsOf": "2026-01",
-      "wacc": 0.08598667764501695,
-      "costEquity": 0.08963199999999999,
+      "wacc": null,
+      "costEquity": 0.089632,
       "revenueGrowth": [
         0.1632041684912774,
         0.1345633347930219,
@@ -4343,8 +4343,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "dcf",
-        "valueKind": "intrinsic-scenario",
+        "method": "ddm",
+        "valueKind": "cross-check",
         "qualityConditions": 25,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -4357,7 +4357,7 @@
       "industry": "Semiconductor",
       "sic": "3674",
       "referenceAsOf": "2026-01",
-      "wacc": 0.11462223911396836,
+      "wacc": null,
       "costEquity": 0.116392,
       "revenueGrowth": [
         0.07076972010178118,
@@ -4378,7 +4378,7 @@
       "financials": "ready",
       "financialPeriod": "2026-03-31",
       "dividend": "ready",
-      "answerMethod": "dcf",
+      "answerMethod": "ddm",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T21:17:41.635Z"
     },
@@ -4651,7 +4651,7 @@
       "industry": "Semiconductor",
       "sic": "3674",
       "referenceAsOf": "2026-01",
-      "wacc": 0.11462223911396836,
+      "wacc": null,
       "costEquity": 0.116392,
       "revenueGrowth": [
         0.3265507350304768,
@@ -5812,7 +5812,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.0685189668643873,
@@ -5896,7 +5896,7 @@
       "industry": "Aerospace/Defense",
       "sic": "3760",
       "referenceAsOf": "2026-01",
-      "wacc": 0.08705714043987024,
+      "wacc": null,
       "costEquity": 0.09097,
       "revenueGrowth": [
         0.5,
@@ -6140,7 +6140,7 @@
       "industry": "Computers/Peripherals",
       "sic": "3571",
       "referenceAsOf": "2026-01",
-      "wacc": 0.10605328917618187,
+      "wacc": null,
       "costEquity": 0.10881,
       "revenueGrowth": [
         0.5,
@@ -6845,7 +6845,7 @@
       "industry": "Air Transport",
       "sic": "4512",
       "referenceAsOf": "2026-01",
-      "wacc": 0.07533337125341935,
+      "wacc": null,
       "costEquity": 0.10167399999999999,
       "revenueGrowth": [
         0.18087582950711883,
@@ -7849,7 +7849,7 @@
       "industry": "Chemical (Diversified)",
       "sic": "2821",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05990160702644342,
+      "wacc": null,
       "costEquity": 0.08651,
       "revenueGrowth": [
         -0.02481729755730734,
@@ -7891,7 +7891,7 @@
       "industry": "Insurance (Prop/Cas.)",
       "sic": "6331",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0664232773096172,
+      "wacc": null,
       "costEquity": 0.070008,
       "revenueGrowth": [
         0.09785000352587807,
@@ -8351,7 +8351,7 @@
       "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06984442629256139,
+      "wacc": null,
       "costEquity": 0.078036,
       "revenueGrowth": [
         0.5,
@@ -8645,7 +8645,7 @@
       "industry": "Financial Svcs. (Non-bank & Insurance )",
       "sic": "6199",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0574389607606743,
+      "wacc": null,
       "costEquity": 0.091862,
       "revenueGrowth": [
         0.09522509818192848,
@@ -8771,8 +8771,8 @@
       "industry": "Bank (Money Center)",
       "sic": "6021",
       "referenceAsOf": "2026-01",
-      "wacc": 0.057477503104005304,
-      "costEquity": 0.082496,
+      "wacc": null,
+      "costEquity": 0.08249599999999999,
       "revenueGrowth": [
         0.06840424727932293,
         0.05872339782345834,
@@ -9185,8 +9185,8 @@
       "industry": "Drugs (Pharmaceutical)",
       "sic": "2834",
       "referenceAsOf": "2026-01",
-      "wacc": 0.08718225226057646,
-      "costEquity": 0.092308,
+      "wacc": null,
+      "costEquity": 0.09230799999999999,
       "revenueGrowth": [
         0.018842088022071747,
         0.018842088022071747,
@@ -9227,7 +9227,7 @@
       "industry": "Banks (Regional)",
       "sic": "6022",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05815183456656768,
+      "wacc": null,
       "costEquity": 0.06644,
       "revenueGrowth": [
         0.05981353426010419,
@@ -9889,7 +9889,7 @@
       "industry": "Banks (Regional)",
       "sic": "6022",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05815183456656768,
+      "wacc": null,
       "costEquity": 0.06644,
       "revenueGrowth": [
         0.13419999999999999,
@@ -11301,7 +11301,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.09284706556010619,
@@ -13472,8 +13472,8 @@
       "industry": "Brokerage & Investment Banking",
       "sic": "6211",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": null,
+      "costEquity": 0.10078199999999998,
       "revenueGrowth": [
         0.06501820557722571,
         0.05601456446178057,
@@ -13794,8 +13794,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "dcf",
-        "valueKind": "intrinsic-scenario",
+        "method": "ddm",
+        "valueKind": "cross-check",
         "qualityConditions": 18,
         "latestKnownPeriodic": "2026-07-31",
         "newerPeriodicNotInModel": false,
@@ -13808,7 +13808,7 @@
       "industry": "Computers/Peripherals",
       "sic": "3570",
       "referenceAsOf": "2026-01",
-      "wacc": 0.1067375195682425,
+      "wacc": null,
       "costEquity": 0.10881,
       "revenueGrowth": [
         0.13838085438311154,
@@ -13829,7 +13829,7 @@
       "financials": "ready",
       "financialPeriod": "2025-10-31",
       "dividend": "ready",
-      "answerMethod": "dcf",
+      "answerMethod": "ddm",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T21:17:41.635Z"
     },
@@ -14564,7 +14564,7 @@
       "industry": "Investments & Asset Management",
       "sic": "6282",
       "referenceAsOf": "2026-01",
-      "wacc": 0.07352325852341518,
+      "wacc": null,
       "costEquity": 0.078036,
       "revenueGrowth": [
         0.013630140351825037,
@@ -14942,7 +14942,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.050614281492419755,
@@ -15782,7 +15782,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.04079981464756779,
@@ -16034,7 +16034,7 @@
       "industry": "Insurance (Life)",
       "sic": "6311",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06406690803739169,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.08590426281238561,
@@ -16580,7 +16580,7 @@
       "industry": "Banks (Regional)",
       "sic": "6022",
       "referenceAsOf": "2026-01",
-      "wacc": 0.05815183456656768,
+      "wacc": null,
       "costEquity": 0.06644,
       "revenueGrowth": [
         0.0062536514899589335,
@@ -16944,8 +16944,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "dcf",
-        "valueKind": "intrinsic-scenario",
+        "method": "ddm",
+        "valueKind": "cross-check",
         "qualityConditions": 18,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -16958,7 +16958,7 @@
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0516427025996756,
+      "wacc": null,
       "costEquity": 0.059303999999999996,
       "revenueGrowth": [
         0.0918236757909705,
@@ -16979,7 +16979,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "dcf",
+      "answerMethod": "ddm",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T21:17:41.635Z"
     },
@@ -17752,7 +17752,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.14101825092200318,
@@ -17836,8 +17836,8 @@
       "industry": "Bank (Money Center)",
       "sic": "6021",
       "referenceAsOf": "2026-01",
-      "wacc": 0.057477503104005304,
-      "costEquity": 0.082496,
+      "wacc": null,
+      "costEquity": 0.08249599999999999,
       "revenueGrowth": [
         0.07163071213175587,
         0.061304569705404696,
@@ -18088,7 +18088,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.07164889133948252,
@@ -18340,8 +18340,8 @@
       "industry": "Bank (Money Center)",
       "sic": "6021",
       "referenceAsOf": "2026-01",
-      "wacc": 0.057477503104005304,
-      "costEquity": 0.082496,
+      "wacc": null,
+      "costEquity": 0.08249599999999999,
       "revenueGrowth": [
         0.0855,
         0.0724,
@@ -18716,8 +18716,8 @@
       "industry": "Brokerage & Investment Banking",
       "sic": "6211",
       "referenceAsOf": "2026-01",
-      "wacc": 0.06855916616951738,
-      "costEquity": 0.100782,
+      "wacc": null,
+      "costEquity": 0.10078199999999998,
       "revenueGrowth": [
         0.09058422467394385,
         0.07646737973915509,
@@ -19283,8 +19283,8 @@
     {
       "revenueProofs": 0,
       "research": {
-        "method": "dcf",
-        "valueKind": "intrinsic-scenario",
+        "method": "ddm",
+        "valueKind": "cross-check",
         "qualityConditions": 7,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -19297,7 +19297,7 @@
       "industry": "Paper/Forest Products",
       "sic": "2650",
       "referenceAsOf": "2026-01",
-      "wacc": 0.07774359295835497,
+      "wacc": null,
       "costEquity": 0.091416,
       "revenueGrowth": [
         0.3215380139788915,
@@ -19318,7 +19318,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "dcf",
+      "answerMethod": "ddm",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T21:17:41.635Z"
     },
@@ -19381,7 +19381,7 @@
       "industry": "Financial Svcs. (Non-bank & Insurance )",
       "sic": "6199",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0574389607606743,
+      "wacc": null,
       "costEquity": 0.091862,
       "revenueGrowth": [
         0.1244,
@@ -20633,7 +20633,7 @@
       "industry": "Business & Consumer Services",
       "sic": "7389",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0811290520850035,
+      "wacc": null,
       "costEquity": 0.088294,
       "revenueGrowth": [
         0.11696492318322269,
@@ -20885,7 +20885,7 @@
       "industry": "R.E.I.T.",
       "sic": "6798",
       "referenceAsOf": "2026-01",
-      "wacc": 0.061161905693522166,
+      "wacc": null,
       "costEquity": 0.07714399999999999,
       "revenueGrowth": [
         0.03820364899527129,
@@ -20955,8 +20955,8 @@
     {
       "revenueProofs": 5,
       "research": {
-        "method": "dcf",
-        "valueKind": "intrinsic-scenario",
+        "method": "ddm",
+        "valueKind": "cross-check",
         "qualityConditions": 29,
         "latestKnownPeriodic": "2026-06-30",
         "newerPeriodicNotInModel": false,
@@ -20969,7 +20969,7 @@
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
-      "wacc": 0.0516427025996756,
+      "wacc": null,
       "costEquity": 0.059303999999999996,
       "revenueGrowth": [
         0.02984208081746398,
@@ -20990,7 +20990,7 @@
       "financials": "ready",
       "financialPeriod": "2025-12-31",
       "dividend": "ready",
-      "answerMethod": "dcf",
+      "answerMethod": "ddm",
       "numericalAnswer": true,
       "lastSuccess": "2026-10-17T21:17:41.635Z"
     },
@@ -22082,7 +22082,7 @@
       "industry": "Bank (Money Center)",
       "sic": "6029",
       "referenceAsOf": "2026-01",
-      "wacc": 0.047790182074024426,
+      "wacc": null,
       "costEquity": 0.07044800000000001,
       "revenueGrowth": [
         0.04511805501563396,
@@ -22158,7 +22158,7 @@
       "industry": "Bank (Money Center)",
       "sic": "6022",
       "referenceAsOf": "2026-01",
-      "wacc": 0.047790182074024426,
+      "wacc": null,
       "costEquity": 0.07044800000000001,
       "revenueGrowth": [
         0.05298922968109654,
@@ -22360,7 +22360,7 @@
       "industry": "Bank (Money Center)",
       "sic": "6029",
       "referenceAsOf": "2026-01",
-      "wacc": 0.047790182074024426,
+      "wacc": null,
       "costEquity": 0.07044800000000001,
       "revenueGrowth": [
         0.09745070127125048,
@@ -22914,7 +22914,7 @@
       "industry": "Utility (General)",
       "sic": "4911",
       "referenceAsOf": "2026-01",
-      "wacc": 0.04195916096096053,
+      "wacc": null,
       "costEquity": 0.048452,
       "revenueGrowth": [
         0.05752519986096627,
@@ -23232,7 +23232,7 @@
       "industry": "Insurance (Life)",
       "sic": "6311",
       "referenceAsOf": "2026-01",
-      "wacc": 0.053702978006263356,
+      "wacc": null,
       "costEquity": 0.065372,
       "revenueGrowth": [
         -0.0889172996233161,
@@ -23635,7 +23635,7 @@
       "industry": "Bank (Money Center)",
       "sic": "6029",
       "referenceAsOf": "2026-01",
-      "wacc": 0.047790182074024426,
+      "wacc": null,
       "costEquity": 0.07044800000000001,
       "revenueGrowth": [
         0.09326677068217437,
@@ -23878,7 +23878,7 @@
       "industry": "Bank (Money Center)",
       "sic": "6029",
       "referenceAsOf": "2026-01",
-      "wacc": 0.047790182074024426,
+      "wacc": null,
       "costEquity": 0.07044800000000001,
       "revenueGrowth": [
         0.10517786215122085,
@@ -24222,16 +24222,16 @@
   ],
   "modelAudit": {
     "schema": 1,
-    "generatedAt": "2026-10-17T21:54:36.571Z",
+    "generatedAt": "2026-10-17T22:12:29.492Z",
     "sourceBatchGeneratedAt": "2026-10-17T21:17:41.635Z",
-    "policyVersion": "tl-growth-2026-10-v6",
-    "scope": "Every supported stock in all nine tools; corrected industry proxies and independent input autofill, unchanged corporate observations and source dates.",
+    "policyVersion": "tl-growth-2026-10-v7",
+    "scope": "All supported stocks in all nine tools; current preferred claims and financing/equity bridge eligibility recalculated. Original corporate snapshots, source observations and retrieval timestamps unchanged.",
     "stocks": 581,
     "counts": {
       "dcf": {
         "valid": 0,
-        "partial": 176,
-        "missing": 298,
+        "partial": 171,
+        "missing": 303,
         "not_applicable": 107
       },
       "ddm": {
@@ -24242,20 +24242,20 @@
       },
       "wacc": {
         "valid": 0,
-        "partial": 518,
-        "missing": 2,
+        "partial": 493,
+        "missing": 27,
         "not_applicable": 61
       },
       "rv": {
         "valid": 0,
-        "partial": 504,
-        "missing": 77,
+        "partial": 500,
+        "missing": 81,
         "not_applicable": 0
       },
       "eqrv": {
         "valid": 0,
-        "partial": 504,
-        "missing": 77,
+        "partial": 500,
+        "missing": 81,
         "not_applicable": 0
       },
       "anr": {
@@ -24294,5 +24294,13 @@
     "financialFactsRechecked": false,
     "financialSourceDatesPreserved": true,
     "providerRequests": 9
+  },
+  "engineUpdate": {
+    "kind": "Current preferred capital and financing/equity bridge eligibility",
+    "policyVersion": "tl-growth-2026-10-v7",
+    "auditedAt": "2026-10-17T22:12:29.492Z",
+    "financialFactsRechecked": false,
+    "financialSnapshotsByteIdentical": true,
+    "providerRequests": 0
   }
 }
