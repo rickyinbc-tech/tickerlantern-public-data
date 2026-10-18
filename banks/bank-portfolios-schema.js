@@ -27,15 +27,17 @@ export function validBankSnapshot(d,now=new Date(),previous) {
    } else if(!rates(r.returns)||!rates(r.benchmarkReturns))return false;
    const a=r.allocation;
    if(!a||!text(a.label,150)||!date(a.asOf,now)||!ref(a.source)||!Array.isArray(a.components)||!a.components.length||a.components.length>35||!a.components.every(c=>text(c.name,250)&&['equity','bonds','cash','other'].includes(c.role)&&Number.isFinite(c.weight)&&c.weight>=-5&&c.weight<=100)||Math.abs(a.components.reduce((s,c)=>s+c.weight,0)-100)>.21)return false;
-   if(r.mer&&(!Number.isFinite(r.mer.value)||r.mer.value<0||r.mer.value>10||r.mer.asOf&&!date(r.mer.asOf,now)||!ref(r.mer.source)))return false;
+   if(!r.mer||(!Number.isFinite(r.mer.value)||r.mer.value<0||r.mer.value>10||r.mer.asOf&&!date(r.mer.asOf,now)||!ref(r.mer.source)))return false;
    if(r.riskSource&&!ref(r.riskSource))return false;
    const old=previous?.portfolios.find(p=>p.bank===r.bank&&p.profile===r.profile);
-   if(old&&(old.name!==r.name||old.series!==r.series||old.fundCode!==r.fundCode||a.asOf<old.allocation.asOf||old.mer?.asOf&&r.mer?.asOf<old.mer.asOf))return false;
+   if(old&&(old.name!==r.name||old.series!==r.series||old.fundCode!==r.fundCode||a.asOf<old.allocation.asOf||old.mer?.asOf&&(!r.mer?.asOf||r.mer.asOf<old.mer.asOf)))return false;
   }
   const banks=new Set();
   for(const b of d.banks) {
    const o=b.outlook;
    if(!bankIds.includes(b.id)||banks.has(b.id)||!text(b.label,25)||!text(b.name,150)||!text(b.family,150)||!o||!date(o.asOf,now)||!text(o.title,250)||!text(o.summary)||!text(o.scope)||!text(o.stance,250)||!ref(o.source))return false;
+   const oldBank=previous?.banks.find(p=>p.id===b.id);
+   if(oldBank&&['label','name','family'].some(k=>oldBank[k]!==b[k]))return false;
    banks.add(b.id);
    if(o.mix!==null&&(!Array.isArray(o.mix)||o.mix.length>10||!o.mix.every(c=>text(c.name,150)&&Number.isFinite(c.weight)&&c.weight>=0&&c.weight<=100)||Math.abs(o.mix.reduce((s,c)=>s+c.weight,0)-100)>.21))return false;
    if(previous&&o.asOf<previous.banks.find(p=>p.id===b.id).outlook.asOf)return false;

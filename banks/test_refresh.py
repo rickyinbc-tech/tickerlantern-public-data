@@ -102,6 +102,27 @@ class PublicationTests(unittest.TestCase):
             with self.assertRaises(ValueError):b.allowed_url(url)
 
     def test_corra_requires_covered_business_day_gaps_not_arbitrary_endpoints(self):
-        with self.assertRaises(ValueError):b.corra(json.dumps({'observations':[{'d':'2015-12-31','CORRA':{'v':'5'}},{'d':'2025-12-31','CORRA':{'v':'5'}}]}).encode(),'2025-12-31')
+        with self.assertRaises(ValueError):b.corra(json.dumps({'seriesDetail':{'AVG.INTWO':{'label':'Canadian Overnight Repo Rate Average (CORRA)','metadata':{'unit':'Percent'}}},'observations':[{'d':'2015-12-31','AVG.INTWO':{'v':'5'}},{'d':'2025-12-31','AVG.INTWO':{'v':'5'}}]}).encode(),'2025-12-31')
+
+    def test_corra_compounds_actual_daily_series_and_day_count_for_all_periods(self):
+        end=dt.date(2025,12,31);start=dt.date(2015,12,30)
+        rows=[];day=start
+        while day<=end:
+            rows.append({'d':day.isoformat(),'AVG.INTWO':{'v':'5'}});day+=dt.timedelta(days=1)
+        raw={'seriesDetail':{'AVG.INTWO':{'label':'Canadian Overnight Repo Rate Average (CORRA)','metadata':{'unit':'Percent'}}},'observations':rows}
+        got=b.corra(json.dumps(raw).encode(),end.isoformat())
+        for years in b.PERIODS:
+            days=(end-end.replace(year=end.year-years)).days
+            self.assertAlmostEqual(got[str(years)],((1+.05/365)**(days/years)-1)*100,places=9)
+        raw['seriesDetail']['AVG.INTWO']['metadata']['unit']='Basis points'
+        with self.assertRaises(ValueError):b.corra(json.dumps(raw).encode(),end.isoformat())
+
+    def test_bmo_outlook_dates_ignore_invisible_separators_and_do_not_take_benchmark_weights(self):
+        old=SEED['banks'][2]['outlook']
+        html='<h1>BMO Macro Regime Model – Strategy Report (Q4 2026)</h1><p>All portfolio weights are as of market close on September 30,\u200b2026.</p><table><tr><th></th><th>Current Weight</th><th>Benchmark</th></tr><tr><td>Fixed Income</td><td>22%</td><td>30%</td></tr><tr><td>Equities</td><td>63%</td><td>60%</td></tr><tr><td>Alts/Hybrids</td><td>15%</td><td>10%</td></tr></table>'
+        got=b.outlook(html.encode(),'bmo',old,NOW)
+        self.assertEqual(got['asOf'],'2026-09-30')
+        self.assertEqual([c['weight'] for c in got['mix']],[22,63,15])
+        with self.assertRaises(ValueError):b.outlook(html.replace('22%','25%').encode(),'bmo',old,NOW)
 
 if __name__=='__main__':unittest.main()

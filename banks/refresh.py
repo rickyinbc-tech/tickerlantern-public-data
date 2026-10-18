@@ -368,6 +368,16 @@ def outlook_url(bank, old, sources):
 
 def outlook(raw, bank, previous, now, previous_sha=None):
     soup = BeautifulSoup(raw, 'html.parser')
+    # Some official sites publish the article body as structured JSON while the
+    # visible HTML is only a shell. Read plain Article JSON; never execute code.
+    structured=[]
+    for script in soup.select('script[type="application/ld+json"],script[type="application/json"]'):
+        try:
+            structured.append(json.loads(script.string or script.get_text()))
+        except (ValueError,TypeError):
+            pass
+    raw_dates=re.findall(DATE,clean(raw.decode('utf-8','replace')))[:5]
+    script_types=[(s.get('id'),s.get('type')) for s in soup.select('script')][:8]
     for el in soup(['script', 'style', 'nav', 'header', 'footer']):
         el.decompose()
     text = clean(soup.get_text(' ', strip=True))
@@ -380,6 +390,25 @@ def outlook(raw, bank, previous, now, previous_sha=None):
         title = meta.get('content', '') if meta else title
     if not title or not re.search({'rbc':'Global Investment Outlook', 'td':'Monthly Portfolio Outlook', 'scotia':'Monthly Investment Monitor', 'bmo':'Macro Regime Model', 'cibc':'Quarterly economic.*outlook'}[bank], title, re.I):
         raise ValueError('Outlook publication identity changed')
+    def article_body(value):
+        if isinstance(value,dict):
+            headline=value.get('headline') or value.get('title') or value.get('name')
+            body=value.get('articleBody')
+            if isinstance(headline,str) and norm(headline)==norm(title) and isinstance(body,str):
+                return clean(BeautifulSoup(body,'html.parser').get_text(' ',strip=True))
+            for child in value.values():
+                found=article_body(child)
+                if found:return found
+        if isinstance(value,list):
+            for child in value:
+                found=article_body(child)
+                if found:return found
+        return ''
+    for value in structured:
+        body=article_body(value)
+        if body:
+            text+=' '+body
+            break
     if bank == 'cibc':
         tag = soup.select_one('.publish-date')
         asof = date(tag.get_text(' ', strip=True)) if tag else None
@@ -389,7 +418,7 @@ def outlook(raw, bank, previous, now, previous_sha=None):
         asof = date(m[1]) if m else None
     if not asof:
         if bank=='bmo':
-            print(json.dumps({'diagnostic':'BMO explicit date absent','dateCandidates':re.findall(DATE,text)[:8],'dateMetadata':[(m.get('property') or m.get('name'),m.get('content')) for m in soup.select('meta[content]') if 'date' in (m.get('property','')+m.get('name','')).lower()]}),flush=True)
+            print(json.dumps({'diagnostic':'BMO explicit date absent','dateCandidates':re.findall(DATE,text)[:8],'rawDates':raw_dates,'scriptTypes':script_types,'dateMetadata':[(m.get('property') or m.get('name'),m.get('content')) for m in soup.select('meta[content]') if 'date' in (m.get('property','')+m.get('name','')).lower()]}),flush=True)
         raise ValueError('Explicit outlook date missing')
     valid_date(asof, now)
     if asof < previous['asOf']:
@@ -407,7 +436,7 @@ def outlook(raw, bank, previous, now, previous_sha=None):
         return {**previous,'title':title,'asOf':asof,'stance':'Published global balanced reference','summary':f'Global balanced reference: {values[0]:g}% equities, {values[1]:g}% bonds and {values[2]:g}% cash. This outlook mix is separate from the retail portfolio holdings.','mix':[{'name':k,'weight':v} for k,v in zip(['Equity','Bonds','Cash'],values)]}
     if bank=='bmo':
         for table in soup.find_all('table'):
-            if 'Current Weight' not in clean(table.get_text(' ',strip=True)):
+            if 'current weight' not in clean(table.get_text(' ',strip=True)).lower():
                 continue
             values={}
             for tr in table.select('tr'):
