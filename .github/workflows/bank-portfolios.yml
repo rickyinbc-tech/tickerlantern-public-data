@@ -1,0 +1,65 @@
+name: Refresh public bank portfolios
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 6 * * *'
+permissions:
+  contents: write
+# Share the writer lock with the financial publisher, which also stages data/.
+concurrency:
+  group: public-financial-refresh
+  cancel-in-progress: false
+jobs:
+  refresh-banks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: banks/requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install public document parsers
+        run: python -m pip install -r banks/requirements.txt
+      - name: Verify source parser and retention behaviour
+        run: python banks/test_refresh.py
+      - name: Stage last verified comparison
+        run: |
+          if [ -f data/bank-portfolios.json ]; then
+            cp data/bank-portfolios.json "$RUNNER_TEMP/banks-prior.json"
+          else
+            cp banks/seed.json "$RUNNER_TEMP/banks-prior.json"
+          fi
+          node banks/validate.mjs "$RUNNER_TEMP/banks-prior.json"
+      - name: Check official sources and validate the complete result
+        run: |
+          python -u banks/refresh.py "$RUNNER_TEMP/banks-prior.json" "$RUNNER_TEMP/banks-next.json"
+          node banks/validate.mjs "$RUNNER_TEMP/banks-next.json" "$RUNNER_TEMP/banks-prior.json"
+      - name: Publish public facts and dated check status
+        run: |
+          cp "$RUNNER_TEMP/banks-next.json" data/bank-portfolios.json
+          git config user.name "TickerLantern data refresh"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bank-portfolios.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh dated public bank portfolio comparison"
+            git push
+          fi
+      - name: Report actual coverage
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          d=json.loads(Path('data/bank-portfolios.json').read_text())
+          s=d['sync']
+          ready=sum(c['status']=='ready' for c in s['checks'])
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write(f"Bank comparison: {s['status']}. {ready}/{len(s['checks'])} checks validated.\n\nSource check: {s['checkedAt']}. Comparable return end: {d['returnAsOf']}.\n\n")
+              for c in s['checks']:
+                  if c['status']!='ready': f.write(f"- {c['label']}: {c['message']}\n")
+          if not ready: raise SystemExit('All sources unavailable; last verified data and failure status were retained.')
+          PY
