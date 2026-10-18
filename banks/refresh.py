@@ -172,10 +172,12 @@ def annual(raw, old, now):
     d = Document(raw, old['name'])
     if 'annual' not in d.text[:2000].lower() or 'management report' not in d.text[:2000].lower():
         raise ValueError('Expected the annual management report')
-    dates = re.findall(r'December\s+31,?\s+(20\d\d)', d.text[:4500])
+    # Cover/report heading controls the period, never a later forecast or fee date.
+    dates = re.findall(r'December\s+31,?\s+(20\d\d)', d.pages[0])
     if not dates:
         raise ValueError('Annual reporting date missing')
-    asof = valid_date(max(dates) + '-12-31', now)
+    heading=re.search(r'^(20\d\d) ANNUAL MANAGEMENT REPORT',d.pages[0],re.M)
+    asof = valid_date((heading[1] if heading else dates[0]) + '-12-31', now)
     bank = old['bank']
     chosen = None
     for i, full in enumerate(d.pages):
@@ -195,6 +197,9 @@ def annual(raw, old, now):
             if end and bank != 'td':
                 block = block[:end.start()]
             bench = rate_row(block, label)
+            end_dates=re.findall(r'ended on\s+December\s+31,?\s+(20\d\d)',clean(t),re.I)
+            if end_dates and any(y!=asof[:4] for y in end_dates):
+                raise ValueError('Return table and report period disagree')
             chosen = {'asOf': asof, 'returns': actual, 'benchmarkReturns': bench, 'page': i + 1}
             if bank == 'td' and old['profile']=='balanced':
                 if 'MSCI World Index (Net Dividend, C$)' not in t or 'FTSE Canada Universe Bond Index' not in t:
@@ -244,7 +249,7 @@ def annual(raw, old, now):
             continue
         if bank=='cibc' and re.search(r'Ratios and Supplemental Data[^\n]*Class A',t,re.I):
             m = re.search(r'Management Expense Ratio\d* \(.*?\)\s+('+NUMBER+r')',t,re.I)
-            if m and asof[:4] in t:
+            if m and re.search(r'\b'+asof[:4]+r'\s+'+str(int(asof[:4])-1)+r'\b',t):
                 chosen['mer']={'value':float(m[1]),'asOf':asof};chosen['merPage']=i+1
                 break
         m = re.search(r'Series A\nDec\.? 31,? ' + asof[:4] + r'\s+([^\n]+)', t[t.lower().index('ratios and supplemental data'):])
@@ -277,6 +282,10 @@ def fund_facts(raw, old, now):
     if not risk:
         raise ValueError('Risk rating missing')
     result['riskLabel'] = risk[1].capitalize()
+    expense=re.search(r'Management expense ratio \(MER\)(.+?)Trading expense ratio',tail,re.I)
+    disclosed=re.search(r'('+NUMBER+r')%\s*$',expense[1]) if expense else None
+    if not disclosed or float(disclosed[1])!=result['mer']['value']:
+        raise ValueError('MER disclosures do not reconcile')
     if old['bank'] != 'bmo':
         return result, len(d.pages)
     # BMO year labels are rotated. Pair each bar's label by its physical x position,

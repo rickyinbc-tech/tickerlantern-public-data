@@ -137,4 +137,19 @@ class PublicationTests(unittest.TestCase):
         bad='<h1>'+title+'</h1><script type="application/ld+json">'+json.dumps(ld)+'</script>'
         with self.assertRaises(ValueError):b.outlook(bad.encode(),'bmo',old,NOW)
 
+    def test_annual_heading_and_return_table_control_the_date_instead_of_later_forecasts(self):
+        old=next(r for r in SEED['portfolios'] if r['bank']=='rbc' and r['profile']=='balanced')
+        components=' '.join(str(c['weight'])+'% '+c['name'] for c in old['allocation']['components'])
+        class Doc:
+            pages=['2025 ANNUAL MANAGEMENT REPORT OF FUND PERFORMANCE\nDecember 31, 2025. Forecast through December 31, 2026.',
+                   'Annual Compound Returns ended on December 31, 2025\nThe benchmark is composed of: '+components+'\nSeries A 11.6 11.9 6.2 6.4 –\nBenchmark 13.8 14.3 8.1 8.1 –']
+            text='\n'.join(pages)
+            def column(self,i,side='left'):return self.pages[i]
+        with patch.object(b,'Document',return_value=Doc()):
+            got,pages=b.annual(b'unused',old,NOW)
+            self.assertEqual(got['asOf'],'2025-12-31')
+        bad=Doc();bad.pages=bad.pages.copy();bad.pages[1]=bad.pages[1].replace('December 31, 2025','December 31, 2024')
+        with patch.object(b,'Document',return_value=bad):
+            with self.assertRaisesRegex(ValueError,'period disagree'):b.annual(b'unused',old,NOW)
+
 if __name__=='__main__':unittest.main()
