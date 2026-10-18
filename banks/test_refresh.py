@@ -125,4 +125,16 @@ class PublicationTests(unittest.TestCase):
         self.assertEqual([c['weight'] for c in got['mix']],[22,63,15])
         with self.assertRaises(ValueError):b.outlook(html.replace('22%','25%').encode(),'bmo',old,NOW)
 
+    def test_structured_article_body_must_match_the_visible_publication_title(self):
+        old=SEED['banks'][2]['outlook']
+        title='BMO Macro Regime Model – Strategy Report (Q4 2026)'
+        body='<p>All portfolio weights are as of market close on September 30, 2026.</p><table><tr><th></th><th>Current Weight</th></tr><tr><td>Fixed Income</td><td>22%</td></tr><tr><td>Equities</td><td>63%</td></tr><tr><td>Alts/Hybrids</td><td>15%</td></tr></table>'
+        ld={'@type':'Article','headline':title,'articleBody':body}
+        html='<h1>'+title+'</h1><script type="application/ld+json">'+json.dumps(ld)+'</script>'
+        got=b.outlook(html.encode(),'bmo',old,NOW)
+        self.assertEqual([c['weight'] for c in got['mix']],[22,63,15])
+        ld['headline']='A different report'
+        bad='<h1>'+title+'</h1><script type="application/ld+json">'+json.dumps(ld)+'</script>'
+        with self.assertRaises(ValueError):b.outlook(bad.encode(),'bmo',old,NOW)
+
 if __name__=='__main__':unittest.main()

@@ -376,8 +376,6 @@ def outlook(raw, bank, previous, now, previous_sha=None):
             structured.append(json.loads(script.string or script.get_text()))
         except (ValueError,TypeError):
             pass
-    raw_dates=re.findall(DATE,clean(raw.decode('utf-8','replace')))[:5]
-    script_types=[(s.get('id'),s.get('type')) for s in soup.select('script')][:8]
     for el in soup(['script', 'style', 'nav', 'header', 'footer']):
         el.decompose()
     text = clean(soup.get_text(' ', strip=True))
@@ -395,7 +393,7 @@ def outlook(raw, bank, previous, now, previous_sha=None):
             headline=value.get('headline') or value.get('title') or value.get('name')
             body=value.get('articleBody')
             if isinstance(headline,str) and norm(headline)==norm(title) and isinstance(body,str):
-                return clean(BeautifulSoup(body,'html.parser').get_text(' ',strip=True))
+                return body
             for child in value.values():
                 found=article_body(child)
                 if found:return found
@@ -407,7 +405,9 @@ def outlook(raw, bank, previous, now, previous_sha=None):
     for value in structured:
         body=article_body(value)
         if body:
-            text+=' '+body
+            fragment=BeautifulSoup(body,'html.parser')
+            text+=' '+clean(fragment.get_text(' ',strip=True))
+            soup.append(fragment)
             break
     if bank == 'cibc':
         tag = soup.select_one('.publish-date')
@@ -417,8 +417,6 @@ def outlook(raw, bank, previous, now, previous_sha=None):
         m = re.search(prefix + DATE, text, re.I)
         asof = date(m[1]) if m else None
     if not asof:
-        if bank=='bmo':
-            print(json.dumps({'diagnostic':'BMO explicit date absent','dateCandidates':re.findall(DATE,text)[:8],'rawDates':raw_dates,'scriptTypes':script_types,'dateMetadata':[(m.get('property') or m.get('name'),m.get('content')) for m in soup.select('meta[content]') if 'date' in (m.get('property','')+m.get('name','')).lower()]}),flush=True)
         raise ValueError('Explicit outlook date missing')
     valid_date(asof, now)
     if asof < previous['asOf']:
