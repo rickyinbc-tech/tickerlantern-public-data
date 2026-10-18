@@ -30,12 +30,12 @@ HOSTS = {'funds.rbcgam.com', 'www.rbcgam.com', 'www.td.com', 'www.scotiafunds.co
 UA = 'TickerLanternBankData/1.0 (+https://tickerlantern.com)'
 MONTHS = {m.lower(): i for i, m in enumerate(['January','February','March','April','May','June','July','August','September','October','November','December'], 1)}
 MONTHS.update({k[:3]: v for k, v in list(MONTHS.items())})
-DATE = r'((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+\d{1,2},?\s+20\d\d)'
+DATE = r'((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+\d{1,2}(?:,\s*|\s+)20\d\d)'
 NUMBER = r'-?\d+(?:\.\d+)?'
 
 
 def clean(s):
-    return re.sub(r'\s+', ' ', s.replace('\u2212', '-').replace('\u2011', '-').replace('\u00ad', '')).strip()
+    return re.sub(r'\s+', ' ', s.translate({0x200B:None,0xFEFF:None,0x2060:None}).replace('\u2212', '-').replace('\u2011', '-').replace('\u00ad', '')).strip()
 
 
 def norm(s):
@@ -43,7 +43,7 @@ def norm(s):
 
 
 def date(s):
-    m = re.fullmatch(r'([A-Za-z]+)\.?\s+(\d{1,2}),?\s+(20\d\d)', clean(s))
+    m = re.fullmatch(r'([A-Za-z]+)\.?\s+(\d{1,2})(?:,\s*|\s+)(20\d\d)', clean(s))
     if not m:
         raise ValueError('Publication date missing')
     return dt.date(int(m[3]), MONTHS[m[1].lower()], int(m[2])).isoformat()
@@ -384,10 +384,12 @@ def outlook(raw, bank, previous, now, previous_sha=None):
         tag = soup.select_one('.publish-date')
         asof = date(tag.get_text(' ', strip=True)) if tag else None
     else:
-        prefix = {'rbc':r'Note:\s*As of\s+', 'td':r'Views as of\s+', 'scotia':r'(?:Total Return,\s*)?as at\s+', 'bmo':r'market close on\s+'}[bank]
+        prefix = {'rbc':r'Note:\s*As of\s+', 'td':r'Views as of\s+', 'scotia':r'(?:Total Return,\s*)?as at\s+', 'bmo':r'(?:market close on|portfolio weights are as of(?: market close on)?)\s+'}[bank]
         m = re.search(prefix + DATE, text, re.I)
         asof = date(m[1]) if m else None
     if not asof:
+        if bank=='bmo':
+            print(json.dumps({'diagnostic':'BMO explicit date absent','dateCandidates':re.findall(DATE,text)[:8],'dateMetadata':[(m.get('property') or m.get('name'),m.get('content')) for m in soup.select('meta[content]') if 'date' in (m.get('property','')+m.get('name','')).lower()]}),flush=True)
         raise ValueError('Explicit outlook date missing')
     valid_date(asof, now)
     if asof < previous['asOf']:
