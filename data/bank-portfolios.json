@@ -1,0 +1,2958 @@
+{
+  "schema": 1,
+  "reviewedAt": "2026-10-18T02:40:38.697Z",
+  "returnAsOf": "2025-12-31",
+  "sources": {
+    "cibc-income": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-i-en.pdf",
+      "title": "CIBC Managed Income Portfolio · 2025 annual MRFP",
+      "checkedAt": "2026-10-18T02:34:03.514253+00:00",
+      "sha256": "a9592e398fd8c23b75756333ca08d7882f5a617262fe6b8028b64377212d8f08",
+      "pages": 11
+    },
+    "cibc-conservative": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-ip-en.pdf",
+      "title": "CIBC Managed Income Plus Portfolio · 2025 annual MRFP",
+      "checkedAt": "2026-10-18T02:34:03.514253+00:00",
+      "sha256": "3b075934025eecc11e96517e3b37db55fecc496ede0327865c629e7d121e82e0",
+      "pages": 11
+    },
+    "cibc-balanced": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-b-en.pdf",
+      "title": "CIBC Managed Balanced Portfolio · 2025 annual MRFP",
+      "checkedAt": "2026-10-18T02:34:03.514253+00:00",
+      "sha256": "0324222949fc1649b0901292fc20f9f83fd4fecedc68ae1ff068f5a471fb9fb8",
+      "pages": 13
+    },
+    "cibc-growth": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-bg-en.pdf",
+      "title": "CIBC Managed Balanced Growth Portfolio · 2025 annual MRFP",
+      "checkedAt": "2026-10-18T02:34:03.514253+00:00",
+      "sha256": "8714e1f1fb66e9e683a167bdff25882d3646372287b53f23d2c6e295aae224fb",
+      "pages": 13
+    },
+    "cibc-equity": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-ag-en.pdf",
+      "title": "CIBC Managed Growth Plus Portfolio · 2025 annual MRFP",
+      "checkedAt": "2026-10-18T02:34:03.514253+00:00",
+      "sha256": "f52c2b853c9e6615d976430f11fb3f8fe0feaff03ddc861f2369122d851ae2ad",
+      "pages": 12
+    },
+    "bmo-outlook": {
+      "url": "https://www.bmoetfs.ca/articles/bmo-macro-regime-model-strategy-report-q4-2026",
+      "title": "BMO GAM · Macro Regime Model, Q4 2026",
+      "checkedAt": "2026-10-18T02:40:38.697Z",
+      "accessNote": "Reviewed official publicly indexed page; direct site access was blocked during verification."
+    },
+    "rbc-income@5ca11111a94a1c31": {
+      "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf209_e.pdf",
+      "title": "RBC Select Very Conservative Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "5ca11111a94a1c312f44df3891da04809540fb0552f7c299835f0f46dc85bc23",
+      "pages": 9
+    },
+    "rbc-monthly-income@2b1af6f34ecfe34f": {
+      "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf209_e.pdf",
+      "title": "RBC Select Very Conservative Portfolio · monthly profile",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "2b1af6f34ecfe34f6b9bdf76c7c5b62c7b2c9b641c0b0fbaeea421d06846075d",
+      "pages": 3
+    },
+    "rbc-conservative@89c1ffc70f01746a": {
+      "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf461_e.pdf",
+      "title": "RBC Select Conservative Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "89c1ffc70f01746a27d35365acb75aa6dd8c45161f642b44dbd7df201e40342a",
+      "pages": 9
+    },
+    "rbc-monthly-conservative@bbfcc31b76ff7817": {
+      "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf461_e.pdf",
+      "title": "RBC Select Conservative Portfolio · monthly profile",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "bbfcc31b76ff78170170b73dab58a51fd4e665e53b517c97d2dc85d851fad5b1",
+      "pages": 3
+    },
+    "rbc-balanced@f1ff0633ab86db6f": {
+      "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf460_e.pdf",
+      "title": "RBC Select Balanced Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "f1ff0633ab86db6ff5e92aae32bdf7fee592dd1023409eda00ff11167a0f8b2c",
+      "pages": 9
+    },
+    "rbc-monthly-balanced@e3e16ef7080d36ec": {
+      "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf460_e.pdf",
+      "title": "RBC Select Balanced Portfolio · monthly profile",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "e3e16ef7080d36ec8748ebbea02559383ca7cfbfc20fa9d3d8671d8033c4a0b4",
+      "pages": 3
+    },
+    "rbc-growth@7dd531ad09d33c6f": {
+      "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf459_e.pdf",
+      "title": "RBC Select Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "7dd531ad09d33c6f76bffffa40bf9716e17a1d5afcd8310eb7ad20b018b6e3b8",
+      "pages": 9
+    },
+    "rbc-monthly-growth@d089ff5e16e9fe79": {
+      "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf459_e.pdf",
+      "title": "RBC Select Growth Portfolio · monthly profile",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "d089ff5e16e9fe799a6413c43721a082b6c4c70543582de2981c987bc409a27a",
+      "pages": 3
+    },
+    "rbc-equity@fc5850b8cce59857": {
+      "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf592_e.pdf",
+      "title": "RBC Select Aggressive Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "fc5850b8cce598571c8aa6c84b3496dd11230abe406f85a91f1e8d29fb0d6965",
+      "pages": 8
+    },
+    "rbc-monthly-equity@32852b5c0a242b77": {
+      "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf592_e.pdf",
+      "title": "RBC Select Aggressive Growth Portfolio · monthly profile",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "32852b5c0a242b77660b5f03c9e98b4cd0feba9a7250cb922066fe0f5a80e6ac",
+      "pages": 3
+    },
+    "scotia-income@64b1373f7e547486": {
+      "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedIncomePort.pdf",
+      "title": "Scotia Selected Income Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "64b1373f7e5474869890f52e135e47dcef625f16e50704985c1e8960ffca5fa3",
+      "pages": 8
+    },
+    "scotia-conservative@4859ef63cf495e13": {
+      "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedBalIncomePort.pdf",
+      "title": "Scotia Selected Balanced Income Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "4859ef63cf495e13b06057186bb8eb515e2f96a90efc047839302094c0365adc",
+      "pages": 8
+    },
+    "scotia-balanced@97c9919931fa89d6": {
+      "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedBalGrowthPort.pdf",
+      "title": "Scotia Selected Balanced Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "97c9919931fa89d665a16bbb11ad5035cf5170dc34a1ad0019d9678eaa468e78",
+      "pages": 8
+    },
+    "scotia-growth@26d87137b64b9c55": {
+      "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedGrowthPort.pdf",
+      "title": "Scotia Selected Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "26d87137b64b9c555f49e67d724d890adf90fc46362099abc7aeeac48e3b2b75",
+      "pages": 8
+    },
+    "scotia-equity@ed068d1f2aad7ef5": {
+      "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedMaxGrowthPort.pdf",
+      "title": "Scotia Selected Maximum Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "ed068d1f2aad7ef565e0ac2eca929bd56555fa148eb99f7d46a4a8caf008343a",
+      "pages": 8
+    },
+    "cibc-income@a9592e398fd8c23b": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-i-en.pdf",
+      "title": "CIBC Managed Income Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "a9592e398fd8c23b75756333ca08d7882f5a617262fe6b8028b64377212d8f08",
+      "pages": 11
+    },
+    "cibc-conservative@3b075934025eecc1": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-ip-en.pdf",
+      "title": "CIBC Managed Income Plus Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "3b075934025eecc11e96517e3b37db55fecc496ede0327865c629e7d121e82e0",
+      "pages": 11
+    },
+    "cibc-balanced@0324222949fc1649": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-b-en.pdf",
+      "title": "CIBC Managed Balanced Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "0324222949fc1649b0901292fc20f9f83fd4fecedc68ae1ff068f5a471fb9fb8",
+      "pages": 13
+    },
+    "cibc-growth@8714e1f1fb66e9e6": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-bg-en.pdf",
+      "title": "CIBC Managed Balanced Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "8714e1f1fb66e9e683a167bdff25882d3646372287b53f23d2c6e295aae224fb",
+      "pages": 13
+    },
+    "cibc-equity@f52c2b853c9e6615": {
+      "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-ag-en.pdf",
+      "title": "CIBC Managed Growth Plus Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "f52c2b853c9e6615d976430f11fb3f8fe0feaff03ddc861f2369122d851ae2ad",
+      "pages": 12
+    },
+    "td-income@4803df6d12b7b0a2": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfcsvincae-en.pdf",
+      "title": "TD Comfort Conservative Income Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "4803df6d12b7b0a2f8bd889216fb731c4bf33c05306010e8217381f1987e6497",
+      "pages": 8
+    },
+    "td-ff-income@30f794944aaa5d5a": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb2440e-en.pdf",
+      "title": "TD Comfort Conservative Income Portfolio · Investor Series Fund Facts",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "30f794944aaa5d5a1b228f4f7bc79df5f1d9c3c4de2b445c1b63eac60ea09ff3",
+      "pages": 3
+    },
+    "td-conservative@ccc928038f6cd2ae": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfbincae-en.pdf",
+      "title": "TD Comfort Balanced Income Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "ccc928038f6cd2ae5254297f349443648ce6dd7eb8c5ebe5e1a7c616ab8cd82d",
+      "pages": 9
+    },
+    "td-ff-conservative@a00c14494e6b9c06": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb885e-en.pdf",
+      "title": "TD Comfort Balanced Income Portfolio · Investor Series Fund Facts",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "a00c14494e6b9c0639e119fe5b972c72aa3d879a977650f23f295625d7020549",
+      "pages": 3
+    },
+    "td-balanced@61e8f934994761db": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfbgwae-en.pdf",
+      "title": "TD Comfort Balanced Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "61e8f934994761db25ae19dce74713b59ce0b621219112f195789a14cb4e61dc",
+      "pages": 9
+    },
+    "td-ff-balanced@a6ba143e0ecf18e3": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb887e-en.pdf",
+      "title": "TD Comfort Balanced Growth Portfolio · Investor Series Fund Facts",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "a6ba143e0ecf18e358cd76a9b7f9ef5a18d040ba0c3ae6cfde429883c742cd00",
+      "pages": 3
+    },
+    "td-growth@33652075cb491bdd": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfgwtae-en.pdf",
+      "title": "TD Comfort Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "33652075cb491bddc00ac713350262b47fbbdf022a12d52738bb576d0977a07a",
+      "pages": 9
+    },
+    "td-ff-growth@6238d5ec461c581f": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb888e-en.pdf",
+      "title": "TD Comfort Growth Portfolio · Investor Series Fund Facts",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "6238d5ec461c581f454f2a1a365f80891d10d540dca13767ded6f0c7b15be8ad",
+      "pages": 3
+    },
+    "td-equity@ae618169c82073cb": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfaggwae-en.pdf",
+      "title": "TD Comfort Aggressive Growth Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "ae618169c82073cb2a2ded9ab5c88c4fa679e4c3aefeccd68b7da5faa4d83545",
+      "pages": 9
+    },
+    "td-ff-equity@5fb56c87d72d1484": {
+      "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb889e-en.pdf",
+      "title": "TD Comfort Aggressive Growth Portfolio · Investor Series Fund Facts",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "5fb56c87d72d14849a68a69d620431992aa042583a4d6fbc8cc9d7bbcd986823",
+      "pages": 3
+    },
+    "bmo-ff-Income@146dc2725e5d5a75": {
+      "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Income_ETF_Portfolio-EN-Series_A.pdf",
+      "title": "BMO Income ETF Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "146dc2725e5d5a7591ae3eb143362a760ccd8a5fd6d287673e755bb7392c2c61",
+      "pages": 3
+    },
+    "bmo-ff-Conservative@1dc96360221b1969": {
+      "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Conservative_ETF_Portfolio-EN-Series_A.pdf",
+      "title": "BMO Conservative ETF Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "1dc96360221b1969ed7ff60554f3d3e2f648226368f215b99e9e7ef8c2ec13bf",
+      "pages": 3
+    },
+    "bmo-ff-Balanced@cf07cbbab6740972": {
+      "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Balanced_ETF_Portfolio-EN-Series_A.pdf",
+      "title": "BMO Balanced ETF Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "cf07cbbab67409727d9298e0b4e9a05b23b4aeb8a1b39dac863a4118f201a344",
+      "pages": 3
+    },
+    "bmo-ff-Growth@8ae4363441c73f3e": {
+      "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Growth_ETF_Portfolio-EN-Series_A.pdf",
+      "title": "BMO Growth ETF Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "8ae4363441c73f3e1a274d3b094af585d1521cd6f05e09fce058b73bbb3321d0",
+      "pages": 3
+    },
+    "bmo-ff-Equity_Growth@543695c1b0da8536": {
+      "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Equity_Growth_ETF_Portfolio-EN-Series_A.pdf",
+      "title": "BMO Equity Growth ETF Portfolio · annual performance 2025-12-31",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "543695c1b0da8536def0a592c8b82f3e96ca9113984096029aea47c26bef432b",
+      "pages": 3
+    },
+    "corra@ae99e07ed006960b": {
+      "url": "https://www.bankofcanada.ca/valet/observations/group/CORRA/json?start_date=2015-12-30&end_date=2025-12-31",
+      "title": "Bank of Canada · historical daily CORRA",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "ae99e07ed006960ba808bcc5d42c50061bef0ab2397e46baf25dda62f15a1708"
+    },
+    "rbc-outlook@285f910e873056fd": {
+      "url": "https://www.rbcgam.com/en/ca/article/executive-summary-fall-2026/detail",
+      "title": "RBC · Global Investment Outlook - Fall 2026",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "285f910e873056fd858eec7d65dab819c4c9845ea8dcdc0b382ec3774961e0fe"
+    },
+    "td-outlook@b243281e97768dd1": {
+      "url": "https://www.td.com/ca/en/asset-management/insights/articles/monthly-portfolio-outlook",
+      "title": "TD · Monthly Portfolio Outlook · October 2026",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "b243281e97768dd18bfe8eee724f5d065cac58e6eee409dab00b8ddbc644674c"
+    },
+    "scotia-outlook@005e4f3e76207835": {
+      "url": "https://www.scotiafunds.com/en/home/news-insights/report.mim-october-2026.html",
+      "title": "Scotia · Monthly Investment Monitor · October 2026",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "005e4f3e762078353293b3be34c227ce55b7eec97a07c5f8c6f7af49e482c06d"
+    },
+    "cibc-outlook@7e745dbd622320ea": {
+      "url": "https://www.cibc.com/en/gam/insights/markets-and-economy/quarterly-economic-market-outlook.html",
+      "title": "CIBC · Perspectives: Quarterly economic and market outlook — Summer 2026",
+      "checkedAt": "2026-10-18T04:03:25.276382Z",
+      "sha256": "7e745dbd622320ea3917c53efd42e37917e9d9ca128a0d5b7495dcd698905601"
+    }
+  },
+  "portfolios": [
+    {
+      "bank": "rbc",
+      "profile": "income",
+      "name": "RBC Select Very Conservative Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 6.3,
+        "3": 6.8,
+        "5": 2.4,
+        "10": 3.4
+      },
+      "returnSource": {
+        "id": "rbc-income@5ca11111a94a1c31",
+        "page": 8
+      },
+      "benchmarkReturns": {
+        "1": 7.6,
+        "3": 8.5,
+        "5": 3.3,
+        "10": 4.5
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-income@5ca11111a94a1c31",
+          "page": 8
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 73.0,
+            "role": "bonds"
+          },
+          {
+            "name": "S&P/TSX Capped Composite Total Return Index",
+            "weight": 10.0,
+            "role": "equity"
+          },
+          {
+            "name": "S&P 500 Total Return Index (CAD)",
+            "weight": 8.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Europe Total Return Net Index (CAD)",
+            "weight": 3.5,
+            "role": "equity"
+          },
+          {
+            "name": "FTSE Canada 30 Day TBill Index",
+            "weight": 2.0,
+            "role": "cash"
+          },
+          {
+            "name": "MSCI Japan Total Return Net Index (CAD)",
+            "weight": 1.9,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI AC Asia Pacific ex-Japan Total Return Net Index (CAD)",
+            "weight": 1.6,
+            "role": "equity"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.69,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-income@5ca11111a94a1c31",
+          "page": 6
+        }
+      },
+      "riskLabel": "Low",
+      "riskSource": {
+        "id": "rbc-monthly-income@2b1af6f34ecfe34f",
+        "page": 1
+      }
+    },
+    {
+      "bank": "rbc",
+      "profile": "conservative",
+      "name": "RBC Select Conservative Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 8.5,
+        "3": 9.1,
+        "5": 4.3,
+        "10": 4.7
+      },
+      "returnSource": {
+        "id": "rbc-conservative@89c1ffc70f01746a",
+        "page": 8
+      },
+      "benchmarkReturns": {
+        "1": 10.3,
+        "3": 11.0,
+        "5": 5.4,
+        "10": 6.0
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-conservative@89c1ffc70f01746a",
+          "page": 8
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 58.0,
+            "role": "bonds"
+          },
+          {
+            "name": "S&P 500 Total Return Index (CAD)",
+            "weight": 15.0,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Capped Composite Total Return Index",
+            "weight": 13.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Europe Total Return Net Index (CAD)",
+            "weight": 6.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Japan Total Return Net Index (CAD)",
+            "weight": 3.25,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI AC Asia Pacific ex-Japan Total Return Net Index (CAD)",
+            "weight": 2.75,
+            "role": "equity"
+          },
+          {
+            "name": "FTSE Canada 30 Day TBill Index",
+            "weight": 2.0,
+            "role": "cash"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.7,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-conservative@89c1ffc70f01746a",
+          "page": 6
+        }
+      },
+      "riskLabel": "Low to medium",
+      "riskSource": {
+        "id": "rbc-monthly-conservative@bbfcc31b76ff7817",
+        "page": 1
+      }
+    },
+    {
+      "bank": "rbc",
+      "profile": "balanced",
+      "name": "RBC Select Balanced Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 11.6,
+        "3": 11.9,
+        "5": 6.2,
+        "10": 6.4
+      },
+      "returnSource": {
+        "id": "rbc-balanced@f1ff0633ab86db6f",
+        "page": 8
+      },
+      "benchmarkReturns": {
+        "1": 13.8,
+        "3": 14.3,
+        "5": 8.1,
+        "10": 8.1
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-balanced@f1ff0633ab86db6f",
+          "page": 8
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 38.0,
+            "role": "bonds"
+          },
+          {
+            "name": "S&P 500 Total Return Index (CAD)",
+            "weight": 25.0,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Capped Composite Total Return Index",
+            "weight": 15.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Europe Total Return Net Index (CAD)",
+            "weight": 7.5,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Emerging Markets Total Return Net Index (CAD)",
+            "weight": 5.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Japan Total Return Net Index (CAD)",
+            "weight": 4.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI AC Asia Pacific ex-Japan Total Return Net Index (CAD)",
+            "weight": 3.5,
+            "role": "equity"
+          },
+          {
+            "name": "FTSE Canada 30 Day TBill Index",
+            "weight": 2.0,
+            "role": "cash"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.94,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-balanced@f1ff0633ab86db6f",
+          "page": 6
+        }
+      },
+      "riskLabel": "Low to medium",
+      "riskSource": {
+        "id": "rbc-monthly-balanced@e3e16ef7080d36ec",
+        "page": 1
+      }
+    },
+    {
+      "bank": "rbc",
+      "profile": "growth",
+      "name": "RBC Select Growth Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 14.0,
+        "3": 13.6,
+        "5": 7.7,
+        "10": 7.5
+      },
+      "returnSource": {
+        "id": "rbc-growth@7dd531ad09d33c6f",
+        "page": 8
+      },
+      "benchmarkReturns": {
+        "1": 16.9,
+        "3": 16.8,
+        "5": 10.0,
+        "10": 9.5
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-growth@7dd531ad09d33c6f",
+          "page": 8
+        },
+        "components": [
+          {
+            "name": "S&P 500 Total Return Index (CAD)",
+            "weight": 30.0,
+            "role": "equity"
+          },
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 23.0,
+            "role": "bonds"
+          },
+          {
+            "name": "S&P/TSX Capped Composite Total Return Index",
+            "weight": 18.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Europe Total Return Net Index (CAD)",
+            "weight": 9.5,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Emerging Markets Total Return Net Index (CAD)",
+            "weight": 8.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Japan Total Return Net Index (CAD)",
+            "weight": 5.1,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI AC Asia Pacific ex-Japan Total Return Net Index (CAD)",
+            "weight": 4.4,
+            "role": "equity"
+          },
+          {
+            "name": "FTSE Canada 30 Day TBill Index",
+            "weight": 2.0,
+            "role": "cash"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.03,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-growth@7dd531ad09d33c6f",
+          "page": 6
+        }
+      },
+      "riskLabel": "Low to medium",
+      "riskSource": {
+        "id": "rbc-monthly-growth@d089ff5e16e9fe79",
+        "page": 1
+      }
+    },
+    {
+      "bank": "rbc",
+      "profile": "equity",
+      "name": "RBC Select Aggressive Growth Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 17.9,
+        "3": 17.3,
+        "5": 10.8,
+        "10": 9.4
+      },
+      "returnSource": {
+        "id": "rbc-equity@fc5850b8cce59857",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 22.0,
+        "3": 20.9,
+        "5": 13.6,
+        "10": 12.0
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-equity@fc5850b8cce59857",
+          "page": 7
+        },
+        "components": [
+          {
+            "name": "S&P 500 Total Return Index (CAD)",
+            "weight": 38.0,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Capped Composite Total Return Index",
+            "weight": 29.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Emerging Markets Total Return Net Index (CAD)",
+            "weight": 11.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Europe Total Return Net Index (CAD)",
+            "weight": 10.0,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI Japan Total Return Net Index (CAD)",
+            "weight": 5.4,
+            "role": "equity"
+          },
+          {
+            "name": "MSCI AC Asia Pacific ex-Japan Total Return Net Index (CAD)",
+            "weight": 4.6,
+            "role": "equity"
+          },
+          {
+            "name": "FTSE Canada 30 Day TBill Index",
+            "weight": 2.0,
+            "role": "cash"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.13,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "rbc-equity@fc5850b8cce59857",
+          "page": 5
+        }
+      },
+      "riskLabel": "Medium",
+      "riskSource": {
+        "id": "rbc-monthly-equity@32852b5c0a242b77",
+        "page": 1
+      }
+    },
+    {
+      "bank": "scotia",
+      "profile": "income",
+      "name": "Scotia Selected Income Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 5.9,
+        "3": 6.5,
+        "5": 1.9,
+        "10": 2.9
+      },
+      "returnSource": {
+        "id": "scotia-income@64b1373f7e547486",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 6.8,
+        "3": 8.7,
+        "5": 3.2,
+        "10": 4.5
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-income@64b1373f7e547486",
+          "page": 7
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 75.0,
+            "role": "bonds"
+          },
+          {
+            "name": "Solactive GBS Developed Markets Large & Mid Cap Index (C$)",
+            "weight": 18.75,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Composite Index",
+            "weight": 6.25,
+            "role": "equity"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.77,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-income@64b1373f7e547486",
+          "page": 6
+        }
+      },
+      "riskLabel": null,
+      "benchmarkNote": "The report also shows an old blended benchmark. These are the report’s labelled Blended Benchmark returns; see the source for historical definition changes."
+    },
+    {
+      "bank": "scotia",
+      "profile": "conservative",
+      "name": "Scotia Selected Balanced Income Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 7.4,
+        "3": 7.4,
+        "5": 2.9,
+        "10": 3.6
+      },
+      "returnSource": {
+        "id": "scotia-conservative@4859ef63cf495e13",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 9.3,
+        "3": 11.2,
+        "5": 5.4,
+        "10": 6.1
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-conservative@4859ef63cf495e13",
+          "page": 7
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 60.0,
+            "role": "bonds"
+          },
+          {
+            "name": "Solactive GBS Developed Markets Large & Mid Cap Index (C$)",
+            "weight": 30.0,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Composite Index",
+            "weight": 10.0,
+            "role": "equity"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.88,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-conservative@4859ef63cf495e13",
+          "page": 6
+        }
+      },
+      "riskLabel": null,
+      "benchmarkNote": "The report also shows an old blended benchmark. These are the report’s labelled Blended Benchmark returns; see the source for historical definition changes."
+    },
+    {
+      "bank": "scotia",
+      "profile": "balanced",
+      "name": "Scotia Selected Balanced Growth Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 9.5,
+        "3": 9.4,
+        "5": 4.7,
+        "10": 5.4
+      },
+      "returnSource": {
+        "id": "scotia-balanced@97c9919931fa89d6",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 12.7,
+        "3": 14.7,
+        "5": 8.4,
+        "10": 8.2
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-balanced@97c9919931fa89d6",
+          "page": 7
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 40.0,
+            "role": "bonds"
+          },
+          {
+            "name": "Solactive GBS Developed Markets Large & Mid Cap Index (C$)",
+            "weight": 45.0,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Composite Index",
+            "weight": 15.0,
+            "role": "equity"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.0,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-balanced@97c9919931fa89d6",
+          "page": 6
+        }
+      },
+      "riskLabel": null,
+      "benchmarkNote": "The report also shows an old blended benchmark. These are the report’s labelled Blended Benchmark returns; see the source for historical definition changes."
+    },
+    {
+      "bank": "scotia",
+      "profile": "growth",
+      "name": "Scotia Selected Growth Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 11.6,
+        "3": 11.4,
+        "5": 6.1,
+        "10": 6.9
+      },
+      "returnSource": {
+        "id": "scotia-growth@26d87137b64b9c55",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 15.3,
+        "3": 17.3,
+        "5": 10.6,
+        "10": 9.7
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-growth@26d87137b64b9c55",
+          "page": 7
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 25.0,
+            "role": "bonds"
+          },
+          {
+            "name": "Solactive GBS Developed Markets Large & Mid Cap Index (C$)",
+            "weight": 56.25,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Composite Index",
+            "weight": 18.75,
+            "role": "equity"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.11,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-growth@26d87137b64b9c55",
+          "page": 6
+        }
+      },
+      "riskLabel": null,
+      "benchmarkNote": "The report also shows an old blended benchmark. These are the report’s labelled Blended Benchmark returns; see the source for historical definition changes."
+    },
+    {
+      "bank": "scotia",
+      "profile": "equity",
+      "name": "Scotia Selected Maximum Growth Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 12.6,
+        "3": 12.8,
+        "5": 7.2,
+        "10": 7.9
+      },
+      "returnSource": {
+        "id": "scotia-equity@ed068d1f2aad7ef5",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 18.0,
+        "3": 20.0,
+        "5": 12.9,
+        "10": 11.3
+      },
+      "allocation": {
+        "label": "Published benchmark",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-equity@ed068d1f2aad7ef5",
+          "page": 7
+        },
+        "components": [
+          {
+            "name": "FTSE Canada Universe Bond Index",
+            "weight": 10.0,
+            "role": "bonds"
+          },
+          {
+            "name": "Solactive GBS Developed Markets Large & Mid Cap Index (C$)",
+            "weight": 67.5,
+            "role": "equity"
+          },
+          {
+            "name": "S&P/TSX Composite Index",
+            "weight": 22.5,
+            "role": "equity"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.23,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "scotia-equity@ed068d1f2aad7ef5",
+          "page": 5
+        }
+      },
+      "riskLabel": null,
+      "benchmarkNote": "The report also shows an old blended benchmark. These are the report’s labelled Blended Benchmark returns; see the source for historical definition changes."
+    },
+    {
+      "bank": "cibc",
+      "profile": "income",
+      "name": "CIBC Managed Income Portfolio",
+      "series": "Class A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 5.3,
+        "3": 6.8,
+        "5": 2.5,
+        "10": 2.9
+      },
+      "returnSource": {
+        "id": "cibc-income@a9592e398fd8c23b",
+        "page": 9
+      },
+      "benchmarkReturns": {
+        "1": 8.1,
+        "3": 8.9,
+        "5": 3.8,
+        "10": 4.8
+      },
+      "allocation": {
+        "label": "Strategic policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-income@a9592e398fd8c23b",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Equity securities — policy target",
+            "weight": 25.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income securities — policy target",
+            "weight": 75.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.81,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-income@a9592e398fd8c23b",
+          "page": 4
+        }
+      },
+      "riskLabel": "Low",
+      "benchmarkComponents": [
+        {
+          "name": "FTSE Canada Universe Overall Bond Index",
+          "weight": 37.5
+        },
+        {
+          "name": "FTSE Canada All Corporate Bond Index",
+          "weight": 20.0
+        },
+        {
+          "name": "FTSE Canada Short Term Overall Bond Index",
+          "weight": 10.0
+        },
+        {
+          "name": "S&P/TSX Composite Index",
+          "weight": 8.0
+        },
+        {
+          "name": "MSCI EAFE Index",
+          "weight": 7.0
+        },
+        {
+          "name": "S&P 500 Index",
+          "weight": 7.0
+        },
+        {
+          "name": "FTSE World Government Bond Index (Hedged to CAD)",
+          "weight": 3.9
+        },
+        {
+          "name": "MSCI Emerging Markets Index (Net)",
+          "weight": 2.0
+        },
+        {
+          "name": "Credit Suisse Leveraged Loan Index (USD)",
+          "weight": 1.8
+        },
+        {
+          "name": "ICE BofA BB-B US Cash Pay High Yield Index (Hedged to CAD)",
+          "weight": 1.8
+        },
+        {
+          "name": "Russell 2500 Index",
+          "weight": 1.0
+        }
+      ],
+      "riskSource": {
+        "id": "cibc-income",
+        "page": 1
+      }
+    },
+    {
+      "bank": "cibc",
+      "profile": "conservative",
+      "name": "CIBC Managed Income Plus Portfolio",
+      "series": "Class A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 6.5,
+        "3": 8.1,
+        "5": 3.7,
+        "10": 3.9
+      },
+      "returnSource": {
+        "id": "cibc-conservative@3b075934025eecc1",
+        "page": 9
+      },
+      "benchmarkReturns": {
+        "1": 10.8,
+        "3": 11.4,
+        "5": 6.0,
+        "10": 6.4
+      },
+      "allocation": {
+        "label": "Strategic policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-conservative@3b075934025eecc1",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Equity securities — policy target",
+            "weight": 40.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income securities — policy target",
+            "weight": 60.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.2,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-conservative@3b075934025eecc1",
+          "page": 4
+        }
+      },
+      "riskLabel": "Low",
+      "benchmarkComponents": [
+        {
+          "name": "FTSE Canada Universe Overall Bond Index",
+          "weight": 19.5
+        },
+        {
+          "name": "S&P 500 Index",
+          "weight": 13.5
+        },
+        {
+          "name": "MSCI EAFE Index",
+          "weight": 12.0
+        },
+        {
+          "name": "FTSE World Government Bond Index (Hedged to CAD)",
+          "weight": 11.0
+        },
+        {
+          "name": "S&P/TSX Composite Index",
+          "weight": 10.5
+        },
+        {
+          "name": "FTSE Canada All Corporate Bond Index",
+          "weight": 10.5
+        },
+        {
+          "name": "FTSE Canada Short Term Overall Bond Index",
+          "weight": 8.0
+        },
+        {
+          "name": "Credit Suisse Leveraged Loan Index (USD)",
+          "weight": 5.5
+        },
+        {
+          "name": "ICE BofA BB-B US Cash Pay High Yield Index (Hedged to CAD)",
+          "weight": 5.5
+        },
+        {
+          "name": "MSCI Emerging Markets Index (Net)",
+          "weight": 2.5
+        },
+        {
+          "name": "Russell 2500 Index",
+          "weight": 1.5
+        }
+      ],
+      "riskSource": {
+        "id": "cibc-conservative",
+        "page": 1
+      }
+    },
+    {
+      "bank": "cibc",
+      "profile": "balanced",
+      "name": "CIBC Managed Balanced Portfolio",
+      "series": "Class A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 8.2,
+        "3": 10.3,
+        "5": 5.3,
+        "10": 5.3
+      },
+      "returnSource": {
+        "id": "cibc-balanced@0324222949fc1649",
+        "page": 10
+      },
+      "benchmarkReturns": {
+        "1": 14.4,
+        "3": 14.8,
+        "5": 8.9,
+        "10": 8.6
+      },
+      "allocation": {
+        "label": "Strategic policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-balanced@0324222949fc1649",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Equity securities — policy target",
+            "weight": 60.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income securities — policy target",
+            "weight": 40.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.26,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-balanced@0324222949fc1649",
+          "page": 4
+        }
+      },
+      "riskLabel": "Low to medium",
+      "benchmarkComponents": [
+        {
+          "name": "S&P 500 Index",
+          "weight": 22.5
+        },
+        {
+          "name": "S&P/TSX Composite Index",
+          "weight": 16.5
+        },
+        {
+          "name": "FTSE Canada Universe Overall Bond Index",
+          "weight": 14.0
+        },
+        {
+          "name": "MSCI EAFE Index",
+          "weight": 8.0
+        },
+        {
+          "name": "FTSE Canada All Corporate Bond Index",
+          "weight": 7.5
+        },
+        {
+          "name": "Credit Suisse Leveraged Loan Index (USD)",
+          "weight": 5.0
+        },
+        {
+          "name": "ICE BofA BB-B US Cash Pay High Yield Index (Hedged to CAD)",
+          "weight": 5.0
+        },
+        {
+          "name": "FTSE Canada Short Term Overall Bond Index",
+          "weight": 5.0
+        },
+        {
+          "name": "MSCI Europe Index",
+          "weight": 4.7
+        },
+        {
+          "name": "FTSE World Government Bond Index (Hedged to CAD)",
+          "weight": 3.5
+        },
+        {
+          "name": "MSCI Emerging Markets Index (Net)",
+          "weight": 3.5
+        },
+        {
+          "name": "Russell 2500 Index",
+          "weight": 2.5
+        },
+        {
+          "name": "MSCI All Country Asia Pacific Index",
+          "weight": 2.3
+        }
+      ],
+      "riskSource": {
+        "id": "cibc-balanced",
+        "page": 1
+      }
+    },
+    {
+      "bank": "cibc",
+      "profile": "growth",
+      "name": "CIBC Managed Balanced Growth Portfolio",
+      "series": "Class A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 9.7,
+        "3": 11.5,
+        "5": 6.0,
+        "10": 6.1
+      },
+      "returnSource": {
+        "id": "cibc-growth@8714e1f1fb66e9e6",
+        "page": 10
+      },
+      "benchmarkReturns": {
+        "1": 17.4,
+        "3": 17.1,
+        "5": 10.8,
+        "10": 9.9
+      },
+      "allocation": {
+        "label": "Strategic policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-growth@8714e1f1fb66e9e6",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Equity securities — policy target",
+            "weight": 75.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income securities — policy target",
+            "weight": 25.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.46,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-growth@8714e1f1fb66e9e6",
+          "page": 4
+        }
+      },
+      "riskLabel": "Low to medium",
+      "benchmarkComponents": [
+        {
+          "name": "S&P 500 Index",
+          "weight": 27.0
+        },
+        {
+          "name": "S&P/TSX Composite Index",
+          "weight": 21.0
+        },
+        {
+          "name": "FTSE Canada Universe Overall Bond Index",
+          "weight": 9.0
+        },
+        {
+          "name": "MSCI Europe Index",
+          "weight": 8.0
+        },
+        {
+          "name": "MSCI EAFE Index",
+          "weight": 7.0
+        },
+        {
+          "name": "MSCI Emerging Markets Index (Net)",
+          "weight": 5.0
+        },
+        {
+          "name": "FTSE Canada All Corporate Bond Index",
+          "weight": 4.5
+        },
+        {
+          "name": "MSCI All Country Asia Pacific Index",
+          "weight": 4.0
+        },
+        {
+          "name": "Credit Suisse Leveraged Loan Index (USD)",
+          "weight": 3.2
+        },
+        {
+          "name": "ICE BofA BB-B US Cash Pay High Yield Index (Hedged to CAD)",
+          "weight": 3.2
+        },
+        {
+          "name": "FTSE Canada Short Term Overall Bond Index",
+          "weight": 3.0
+        },
+        {
+          "name": "Russell 2500 Index",
+          "weight": 3.0
+        },
+        {
+          "name": "FTSE World Government Bond Index (Hedged to CAD)",
+          "weight": 2.1
+        }
+      ],
+      "riskSource": {
+        "id": "cibc-growth",
+        "page": 1
+      }
+    },
+    {
+      "bank": "cibc",
+      "profile": "equity",
+      "name": "CIBC Managed Growth Plus Portfolio",
+      "series": "Class A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 12.1,
+        "3": 13.6,
+        "5": 7.9,
+        "10": 7.7
+      },
+      "returnSource": {
+        "id": "cibc-equity@f52c2b853c9e6615",
+        "page": 10
+      },
+      "benchmarkReturns": {
+        "1": 21.0,
+        "3": 20.0,
+        "5": 12.9,
+        "10": 11.5
+      },
+      "allocation": {
+        "label": "Strategic policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-equity@f52c2b853c9e6615",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Equity securities — policy target",
+            "weight": 95.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income securities — policy target",
+            "weight": 5.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.48,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "cibc-equity@f52c2b853c9e6615",
+          "page": 4
+        }
+      },
+      "riskLabel": "Medium",
+      "benchmarkComponents": [
+        {
+          "name": "S&P 500 Index",
+          "weight": 33.0
+        },
+        {
+          "name": "S&P/TSX Composite Index",
+          "weight": 24.0
+        },
+        {
+          "name": "MSCI EAFE Index",
+          "weight": 10.0
+        },
+        {
+          "name": "MSCI Europe Index",
+          "weight": 10.0
+        },
+        {
+          "name": "MSCI Emerging Markets Index (Net)",
+          "weight": 8.0
+        },
+        {
+          "name": "MSCI All Country Asia Pacific Index",
+          "weight": 6.0
+        },
+        {
+          "name": "Russell 2500 Index",
+          "weight": 4.0
+        },
+        {
+          "name": "FTSE Canada Universe Overall Bond Index",
+          "weight": 3.5
+        },
+        {
+          "name": "FTSE Canada All Corporate Bond Index",
+          "weight": 1.5
+        }
+      ],
+      "riskSource": {
+        "id": "cibc-equity",
+        "page": 1
+      }
+    },
+    {
+      "bank": "td",
+      "profile": "income",
+      "name": "TD Comfort Conservative Income Portfolio",
+      "series": "Investor Series",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 4.8,
+        "3": 6.5,
+        "5": 1.8,
+        "10": 2.7
+      },
+      "returnSource": {
+        "id": "td-income@4803df6d12b7b0a2",
+        "page": 6
+      },
+      "benchmarkReturns": {
+        "1": 5.9,
+        "3": 7.8,
+        "5": 2.5,
+        "10": 4.0
+      },
+      "allocation": {
+        "label": "Neutral policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-income@4803df6d12b7b0a2",
+          "page": 2
+        },
+        "components": [
+          {
+            "name": "Equities — neutral target",
+            "weight": 20.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income — neutral target",
+            "weight": 80.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.53,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-ff-income@30f794944aaa5d5a",
+          "page": 1
+        }
+      },
+      "riskLabel": "Low",
+      "fundCode": "TDB2440",
+      "riskSource": {
+        "id": "td-ff-income@30f794944aaa5d5a",
+        "page": 1
+      },
+      "benchmarkComponents": [
+        {
+          "name": "FTSE Canada Universe Bond Index",
+          "weight": 80.0
+        },
+        {
+          "name": "MSCI World Index (Net Dividend, CAD)",
+          "weight": 15.0
+        },
+        {
+          "name": "S&P/TSX Composite Total Return Index",
+          "weight": 5.0
+        }
+      ]
+    },
+    {
+      "bank": "td",
+      "profile": "conservative",
+      "name": "TD Comfort Balanced Income Portfolio",
+      "series": "Investor Series",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 5.6,
+        "3": 7.3,
+        "5": 2.6,
+        "10": 3.3
+      },
+      "returnSource": {
+        "id": "td-conservative@ccc928038f6cd2ae",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 7.6,
+        "3": 9.5,
+        "5": 4.0,
+        "10": 5.0
+      },
+      "allocation": {
+        "label": "Neutral policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-conservative@ccc928038f6cd2ae",
+          "page": 2
+        },
+        "components": [
+          {
+            "name": "Equities — neutral target",
+            "weight": 30.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income — neutral target",
+            "weight": 70.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.75,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-ff-conservative@a00c14494e6b9c06",
+          "page": 1
+        }
+      },
+      "riskLabel": "Low to medium",
+      "fundCode": "TDB885",
+      "riskSource": {
+        "id": "td-ff-conservative@a00c14494e6b9c06",
+        "page": 1
+      },
+      "benchmarkComponents": [
+        {
+          "name": "FTSE Canada Universe Bond Index",
+          "weight": 70.0
+        },
+        {
+          "name": "MSCI World Index (Net Dividend, CAD)",
+          "weight": 22.0
+        },
+        {
+          "name": "S&P/TSX Composite Total Return Index",
+          "weight": 8.0
+        }
+      ]
+    },
+    {
+      "bank": "td",
+      "profile": "balanced",
+      "name": "TD Comfort Balanced Growth Portfolio",
+      "series": "Investor Series",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 8.0,
+        "3": 10.7,
+        "5": 6.0,
+        "10": 5.5
+      },
+      "returnSource": {
+        "id": "td-balanced@61e8f934994761db",
+        "page": 8
+      },
+      "benchmarkReturns": {
+        "1": 12.7,
+        "3": 14.6,
+        "5": 8.4,
+        "10": 8.1
+      },
+      "allocation": {
+        "label": "Neutral policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-balanced@61e8f934994761db",
+          "page": 2
+        },
+        "components": [
+          {
+            "name": "Equities — neutral target",
+            "weight": 60.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income — neutral target",
+            "weight": 40.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.02,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-ff-balanced@a6ba143e0ecf18e3",
+          "page": 1
+        }
+      },
+      "riskLabel": "Low to medium",
+      "fundCode": "TDB887",
+      "riskSource": {
+        "id": "td-ff-balanced@a6ba143e0ecf18e3",
+        "page": 1
+      },
+      "benchmarkComponents": [
+        {
+          "name": "FTSE Canada Universe Bond Index",
+          "weight": 40.0
+        },
+        {
+          "name": "MSCI World Index (Net Dividend, CAD)",
+          "weight": 43.5
+        },
+        {
+          "name": "S&P/TSX Composite Total Return Index",
+          "weight": 16.5
+        }
+      ]
+    },
+    {
+      "bank": "td",
+      "profile": "growth",
+      "name": "TD Comfort Growth Portfolio",
+      "series": "Investor Series",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 10.0,
+        "3": 13.1,
+        "5": 8.5,
+        "10": 6.9
+      },
+      "returnSource": {
+        "id": "td-growth@33652075cb491bdd",
+        "page": 8
+      },
+      "benchmarkReturns": {
+        "1": 16.3,
+        "3": 18.1,
+        "5": 11.4,
+        "10": 10.2
+      },
+      "allocation": {
+        "label": "Neutral policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-growth@33652075cb491bdd",
+          "page": 2
+        },
+        "components": [
+          {
+            "name": "Equities — neutral target",
+            "weight": 80.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income — neutral target",
+            "weight": 20.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.13,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-ff-growth@6238d5ec461c581f",
+          "page": 1
+        }
+      },
+      "riskLabel": "Low to medium",
+      "fundCode": "TDB888",
+      "riskSource": {
+        "id": "td-ff-growth@6238d5ec461c581f",
+        "page": 1
+      },
+      "benchmarkComponents": [
+        {
+          "name": "FTSE Canada Universe Bond Index",
+          "weight": 20.0
+        },
+        {
+          "name": "MSCI World Index (Net Dividend, CAD)",
+          "weight": 57.5
+        },
+        {
+          "name": "S&P/TSX Composite Total Return Index",
+          "weight": 22.5
+        }
+      ]
+    },
+    {
+      "bank": "td",
+      "profile": "equity",
+      "name": "TD Comfort Aggressive Growth Portfolio",
+      "series": "Investor Series",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 12.1,
+        "3": 15.3,
+        "5": 10.6,
+        "10": 8.2
+      },
+      "returnSource": {
+        "id": "td-equity@ae618169c82073cb",
+        "page": 7
+      },
+      "benchmarkReturns": {
+        "1": 20.1,
+        "3": 21.6,
+        "5": 14.5,
+        "10": 12.3
+      },
+      "allocation": {
+        "label": "Neutral policy target",
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-equity@ae618169c82073cb",
+          "page": 2
+        },
+        "components": [
+          {
+            "name": "Equities — neutral target",
+            "weight": 100.0,
+            "role": "equity"
+          },
+          {
+            "name": "Fixed income — neutral target",
+            "weight": 0.0,
+            "role": "bonds"
+          }
+        ]
+      },
+      "mer": {
+        "value": 2.23,
+        "asOf": "2025-12-31",
+        "source": {
+          "id": "td-ff-equity@5fb56c87d72d1484",
+          "page": 1
+        }
+      },
+      "riskLabel": "Medium",
+      "fundCode": "TDB889",
+      "riskSource": {
+        "id": "td-ff-equity@5fb56c87d72d1484",
+        "page": 1
+      },
+      "benchmarkComponents": [
+        {
+          "name": "MSCI World Index (Net Dividend, CAD)",
+          "weight": 70.0
+        },
+        {
+          "name": "S&P/TSX Composite Total Return Index",
+          "weight": 30.0
+        }
+      ]
+    },
+    {
+      "bank": "bmo",
+      "profile": "income",
+      "name": "BMO Income ETF Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 7.0
+      },
+      "returnSource": {
+        "id": "bmo-ff-Income@146dc2725e5d5a75",
+        "page": 2
+      },
+      "benchmarkReturns": null,
+      "allocation": {
+        "label": "Holdings snapshot — fund categories",
+        "asOf": "2026-03-31",
+        "source": {
+          "id": "bmo-ff-Income@146dc2725e5d5a75",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Canadian Fixed Income Funds",
+            "role": "bonds",
+            "weight": 37.8
+          },
+          {
+            "name": "U.S. Fixed Income Funds",
+            "role": "bonds",
+            "weight": 21.8
+          },
+          {
+            "name": "U.S. Equity Funds",
+            "role": "equity",
+            "weight": 9.6
+          },
+          {
+            "name": "Canadian Equity Fund",
+            "role": "equity",
+            "weight": 6.9
+          },
+          {
+            "name": "Emerging Markets Fixed Income Fund",
+            "role": "bonds",
+            "weight": 6.4
+          },
+          {
+            "name": "International Equity Funds",
+            "role": "equity",
+            "weight": 6.2
+          },
+          {
+            "name": "Global Equity Fund",
+            "role": "equity",
+            "weight": 4.8
+          },
+          {
+            "name": "Commodity Funds",
+            "role": "other",
+            "weight": 2.8
+          },
+          {
+            "name": "Emerging Markets Equity Fund",
+            "role": "equity",
+            "weight": 2.3
+          },
+          {
+            "name": "Cash/Receivables /Payables",
+            "role": "cash",
+            "weight": 0.8
+          },
+          {
+            "name": "Other",
+            "role": "other",
+            "weight": 0.6
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.66,
+        "asOf": "2025-09-30",
+        "source": {
+          "id": "bmo-ff-Income@146dc2725e5d5a75",
+          "page": 3
+        }
+      },
+      "riskLabel": "Low",
+      "calendar": {
+        "2016": 3.2,
+        "2017": 2.7,
+        "2018": -1.6,
+        "2019": 8.6,
+        "2020": 7.3,
+        "2021": 0.8,
+        "2022": -12.4,
+        "2023": 7.8,
+        "2024": 6.3,
+        "2025": 7.0
+      },
+      "returnNote": "1Y is the published 2025 calendar return. 3Y / 5Y / 10Y are approximate CAGRs compounded from rounded published calendar returns, marked ≈. The Fund Facts’ separate trailing average return is not substituted.",
+      "allocationNote": "The reviewed Fund Facts quantify holdings, not a neutral benchmark. Do not treat commodity funds or net receivables as cash or apply these weights as a pure equity/bond policy mix.",
+      "fundCode": "BMO70701",
+      "riskSource": {
+        "id": "bmo-ff-Income@146dc2725e5d5a75",
+        "page": 1
+      }
+    },
+    {
+      "bank": "bmo",
+      "profile": "conservative",
+      "name": "BMO Conservative ETF Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 8.9
+      },
+      "returnSource": {
+        "id": "bmo-ff-Conservative@1dc96360221b1969",
+        "page": 2
+      },
+      "benchmarkReturns": null,
+      "allocation": {
+        "label": "Holdings snapshot — fund categories",
+        "asOf": "2026-03-31",
+        "source": {
+          "id": "bmo-ff-Conservative@1dc96360221b1969",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Canadian Fixed Income Funds",
+            "role": "bonds",
+            "weight": 32.9
+          },
+          {
+            "name": "U.S. Fixed Income Funds",
+            "role": "bonds",
+            "weight": 16.0
+          },
+          {
+            "name": "U.S. Equity Funds",
+            "role": "equity",
+            "weight": 13.7
+          },
+          {
+            "name": "Canadian Equity Fund",
+            "role": "equity",
+            "weight": 10.2
+          },
+          {
+            "name": "International Equity Funds",
+            "role": "equity",
+            "weight": 8.4
+          },
+          {
+            "name": "Global Equity Fund",
+            "role": "equity",
+            "weight": 6.5
+          },
+          {
+            "name": "Emerging Markets Fixed Income Fund",
+            "role": "bonds",
+            "weight": 4.3
+          },
+          {
+            "name": "Emerging Markets Equity Fund",
+            "role": "equity",
+            "weight": 3.6
+          },
+          {
+            "name": "Commodity Funds",
+            "role": "other",
+            "weight": 2.8
+          },
+          {
+            "name": "Cash/Receivables /Payables",
+            "role": "cash",
+            "weight": 0.7
+          },
+          {
+            "name": "Other",
+            "role": "other",
+            "weight": 0.9
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.67,
+        "asOf": "2025-09-30",
+        "source": {
+          "id": "bmo-ff-Conservative@1dc96360221b1969",
+          "page": 3
+        }
+      },
+      "riskLabel": "Low to medium",
+      "calendar": {
+        "2016": 5.0,
+        "2017": 4.0,
+        "2018": -2.3,
+        "2019": 10.6,
+        "2020": 7.6,
+        "2021": 3.4,
+        "2022": -12.0,
+        "2023": 8.7,
+        "2024": 8.7,
+        "2025": 8.9
+      },
+      "returnNote": "1Y is the published 2025 calendar return. 3Y / 5Y / 10Y are approximate CAGRs compounded from rounded published calendar returns, marked ≈. The Fund Facts’ separate trailing average return is not substituted.",
+      "allocationNote": "The reviewed Fund Facts quantify holdings, not a neutral benchmark. Do not treat commodity funds or net receivables as cash or apply these weights as a pure equity/bond policy mix.",
+      "fundCode": "BMO70702",
+      "riskSource": {
+        "id": "bmo-ff-Conservative@1dc96360221b1969",
+        "page": 1
+      }
+    },
+    {
+      "bank": "bmo",
+      "profile": "balanced",
+      "name": "BMO Balanced ETF Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 12.0
+      },
+      "returnSource": {
+        "id": "bmo-ff-Balanced@cf07cbbab6740972",
+        "page": 2
+      },
+      "benchmarkReturns": null,
+      "allocation": {
+        "label": "Holdings snapshot — fund categories",
+        "asOf": "2026-03-31",
+        "source": {
+          "id": "bmo-ff-Balanced@cf07cbbab6740972",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "Canadian Fixed Income Funds",
+            "role": "bonds",
+            "weight": 20.6
+          },
+          {
+            "name": "U.S. Equity Funds",
+            "role": "equity",
+            "weight": 19.8
+          },
+          {
+            "name": "Canadian Equity Fund",
+            "role": "equity",
+            "weight": 15.3
+          },
+          {
+            "name": "International Equity Funds",
+            "role": "equity",
+            "weight": 13.1
+          },
+          {
+            "name": "U.S. Fixed Income Funds",
+            "role": "bonds",
+            "weight": 9.8
+          },
+          {
+            "name": "Global Equity Fund",
+            "role": "equity",
+            "weight": 9.3
+          },
+          {
+            "name": "Emerging Markets Equity Fund",
+            "role": "equity",
+            "weight": 4.8
+          },
+          {
+            "name": "Commodity Funds",
+            "role": "other",
+            "weight": 3.4
+          },
+          {
+            "name": "Emerging Markets Fixed Income Fund",
+            "role": "bonds",
+            "weight": 2.5
+          },
+          {
+            "name": "Cash/Receivables /Payables",
+            "role": "cash",
+            "weight": 0.7
+          },
+          {
+            "name": "Other",
+            "role": "other",
+            "weight": 0.7
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.72,
+        "asOf": "2025-09-30",
+        "source": {
+          "id": "bmo-ff-Balanced@cf07cbbab6740972",
+          "page": 3
+        }
+      },
+      "riskLabel": "Low to medium",
+      "calendar": {
+        "2016": 6.4,
+        "2017": 6.8,
+        "2018": -3.0,
+        "2019": 13.3,
+        "2020": 7.7,
+        "2021": 7.5,
+        "2022": -11.5,
+        "2023": 10.2,
+        "2024": 13.0,
+        "2025": 12.0
+      },
+      "returnNote": "1Y is the published 2025 calendar return. 3Y / 5Y / 10Y are approximate CAGRs compounded from rounded published calendar returns, marked ≈. The Fund Facts’ separate trailing average return is not substituted.",
+      "allocationNote": "The reviewed Fund Facts quantify holdings, not a neutral benchmark. Do not treat commodity funds or net receivables as cash or apply these weights as a pure equity/bond policy mix.",
+      "fundCode": "BMO70703",
+      "riskSource": {
+        "id": "bmo-ff-Balanced@cf07cbbab6740972",
+        "page": 1
+      }
+    },
+    {
+      "bank": "bmo",
+      "profile": "growth",
+      "name": "BMO Growth ETF Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 14.9
+      },
+      "returnSource": {
+        "id": "bmo-ff-Growth@8ae4363441c73f3e",
+        "page": 2
+      },
+      "benchmarkReturns": null,
+      "allocation": {
+        "label": "Holdings snapshot — fund categories",
+        "asOf": "2026-03-31",
+        "source": {
+          "id": "bmo-ff-Growth@8ae4363441c73f3e",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "U.S. Equity Funds",
+            "role": "equity",
+            "weight": 26.0
+          },
+          {
+            "name": "Canadian Equity Fund",
+            "role": "equity",
+            "weight": 20.5
+          },
+          {
+            "name": "International Equity Funds",
+            "role": "equity",
+            "weight": 17.9
+          },
+          {
+            "name": "Global Equity Fund",
+            "role": "equity",
+            "weight": 12.4
+          },
+          {
+            "name": "Canadian Fixed Income Funds",
+            "role": "bonds",
+            "weight": 9.7
+          },
+          {
+            "name": "Emerging Markets Equity Funds",
+            "role": "equity",
+            "weight": 5.6
+          },
+          {
+            "name": "U.S. Fixed Income Funds",
+            "role": "bonds",
+            "weight": 4.6
+          },
+          {
+            "name": "Commodity Fund",
+            "role": "other",
+            "weight": 1.1
+          },
+          {
+            "name": "Emerging Markets Fixed Income Fund",
+            "role": "bonds",
+            "weight": 1.1
+          },
+          {
+            "name": "Cash/Receivables /Payables",
+            "role": "cash",
+            "weight": 1.0
+          },
+          {
+            "name": "Other",
+            "role": "other",
+            "weight": 0.1
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.72,
+        "asOf": "2025-09-30",
+        "source": {
+          "id": "bmo-ff-Growth@8ae4363441c73f3e",
+          "page": 3
+        }
+      },
+      "riskLabel": "Low to medium",
+      "calendar": {
+        "2016": 7.0,
+        "2017": 9.2,
+        "2018": -4.0,
+        "2019": 15.7,
+        "2020": 7.5,
+        "2021": 12.4,
+        "2022": -11.0,
+        "2023": 11.3,
+        "2024": 17.3,
+        "2025": 14.9
+      },
+      "returnNote": "1Y is the published 2025 calendar return. 3Y / 5Y / 10Y are approximate CAGRs compounded from rounded published calendar returns, marked ≈. The Fund Facts’ separate trailing average return is not substituted.",
+      "allocationNote": "The reviewed Fund Facts quantify holdings, not a neutral benchmark. Do not treat commodity funds or net receivables as cash or apply these weights as a pure equity/bond policy mix.",
+      "fundCode": "BMO70704",
+      "riskSource": {
+        "id": "bmo-ff-Growth@8ae4363441c73f3e",
+        "page": 1
+      }
+    },
+    {
+      "bank": "bmo",
+      "profile": "equity",
+      "name": "BMO Equity Growth ETF Portfolio",
+      "series": "Series A",
+      "currency": "CAD",
+      "asOf": "2025-12-31",
+      "returns": {
+        "1": 17.0
+      },
+      "returnSource": {
+        "id": "bmo-ff-Equity_Growth@543695c1b0da8536",
+        "page": 2
+      },
+      "benchmarkReturns": null,
+      "allocation": {
+        "label": "Holdings snapshot — fund categories",
+        "asOf": "2026-03-31",
+        "source": {
+          "id": "bmo-ff-Equity_Growth@543695c1b0da8536",
+          "page": 1
+        },
+        "components": [
+          {
+            "name": "U.S. Equity Funds",
+            "role": "equity",
+            "weight": 31.3
+          },
+          {
+            "name": "Canadian Equity Fund",
+            "role": "equity",
+            "weight": 24.9
+          },
+          {
+            "name": "International Equity Funds",
+            "role": "equity",
+            "weight": 22.2
+          },
+          {
+            "name": "Global Equity Fund",
+            "role": "equity",
+            "weight": 13.7
+          },
+          {
+            "name": "Emerging Markets Equity Funds",
+            "role": "equity",
+            "weight": 6.7
+          },
+          {
+            "name": "Cash/Receivables /Payables",
+            "role": "cash",
+            "weight": 0.9
+          },
+          {
+            "name": "Money Market Investments",
+            "role": "other",
+            "weight": 0.2
+          },
+          {
+            "name": "Purchased Call Option Contracts",
+            "role": "other",
+            "weight": 0.1
+          },
+          {
+            "name": "Purchased Put Option Contracts",
+            "role": "other",
+            "weight": 0.1
+          },
+          {
+            "name": "Written Covered Call Option Contracts",
+            "role": "other",
+            "weight": 0.0
+          },
+          {
+            "name": "Other",
+            "role": "other",
+            "weight": -0.1
+          }
+        ]
+      },
+      "mer": {
+        "value": 1.77,
+        "asOf": "2025-09-30",
+        "source": {
+          "id": "bmo-ff-Equity_Growth@543695c1b0da8536",
+          "page": 3
+        }
+      },
+      "riskLabel": "Low to medium",
+      "calendar": {
+        "2016": 7.3,
+        "2017": 13.0,
+        "2018": -5.0,
+        "2019": 17.8,
+        "2020": 7.6,
+        "2021": 16.0,
+        "2022": -10.5,
+        "2023": 12.6,
+        "2024": 20.1,
+        "2025": 17.0
+      },
+      "returnNote": "1Y is the published 2025 calendar return. 3Y / 5Y / 10Y are approximate CAGRs compounded from rounded published calendar returns, marked ≈. The Fund Facts’ separate trailing average return is not substituted.",
+      "allocationNote": "The reviewed Fund Facts quantify holdings, not a neutral benchmark. Do not treat commodity funds or net receivables as cash or apply these weights as a pure equity/bond policy mix.",
+      "fundCode": "BMO70705",
+      "riskSource": {
+        "id": "bmo-ff-Equity_Growth@543695c1b0da8536",
+        "page": 1
+      }
+    }
+  ],
+  "reference": {
+    "asOf": "2025-12-31",
+    "equity": {
+      "name": "MSCI World Index (Net Dividend, CAD)",
+      "returns": {
+        "1": 15.4,
+        "3": 21.6,
+        "5": 13.8,
+        "10": 12.0
+      },
+      "source": {
+        "id": "td-balanced@61e8f934994761db",
+        "page": 8
+      }
+    },
+    "bonds": {
+      "name": "FTSE Canada Universe Bond Index",
+      "returns": {
+        "1": 2.6,
+        "3": 4.5,
+        "5": -0.4,
+        "10": 1.9
+      },
+      "source": {
+        "id": "td-balanced@61e8f934994761db",
+        "page": 8
+      }
+    },
+    "cash": {
+      "name": "CORRA compounded cash proxy (CAD)",
+      "returns": {
+        "1": 2.761622897201188,
+        "3": 4.105693891897766,
+        "5": 2.8678120806764795,
+        "10": 1.9213713118690245
+      },
+      "source": {
+        "id": "corra@ae99e07ed006960b"
+      },
+      "note": "Derived from daily CORRA using ACT/365 accrual across business-day gaps; not an investable deposit return or an official total-return index. The 10Y window spans the June 2020 methodology change."
+    },
+    "method": "Buy-and-hold terminal-wealth blend; no rebalancing, fees or taxes. Equity and bond component CAGRs are the rounded published CAD total-return index figures. CORRA is a calculated overnight cash proxy. No intervening return path is inferred."
+  },
+  "banks": [
+    {
+      "id": "rbc",
+      "label": "RBC",
+      "name": "Royal Bank of Canada",
+      "family": "Select Portfolios",
+      "outlook": {
+        "title": "Global Investment Outlook - Fall 2026",
+        "asOf": "2026-09-01",
+        "scope": "RBC GAM · recommended global balanced investor mix",
+        "stance": "Published global balanced reference",
+        "summary": "Global balanced reference: 61% equities, 37.5% bonds and 1.5% cash. This outlook mix is separate from the retail portfolio holdings.",
+        "mix": [
+          {
+            "name": "Equity",
+            "weight": 61.0
+          },
+          {
+            "name": "Bonds",
+            "weight": 37.5
+          },
+          {
+            "name": "Cash",
+            "weight": 1.5
+          }
+        ],
+        "source": {
+          "id": "rbc-outlook@285f910e873056fd"
+        }
+      }
+    },
+    {
+      "id": "td",
+      "label": "TD",
+      "name": "The Toronto-Dominion Bank",
+      "family": "Comfort Portfolios",
+      "outlook": {
+        "title": "Monthly Portfolio Outlook · October 2026",
+        "asOf": "2026-10-02",
+        "scope": "TDAM / Wealth Asset Allocation Committee · 12–18 month views",
+        "stance": "Equities modest overweight",
+        "summary": "Modest overweight equities and private markets / alternatives; modest underweight fixed income. These are directional views: the reviewed page does not supply comparable five-profile target weights.",
+        "mix": null,
+        "source": {
+          "id": "td-outlook@b243281e97768dd1"
+        }
+      }
+    },
+    {
+      "id": "bmo",
+      "label": "BMO",
+      "name": "Bank of Montreal",
+      "family": "ETF Portfolios · mutual funds",
+      "outlook": {
+        "title": "Macro Regime Model · Q4 2026",
+        "asOf": "2026-09-30",
+        "scope": "BMO GAM ETF & Alternatives Strategy · separate model portfolio",
+        "stance": "Equity overweight, with more downside buffers",
+        "summary": "The model allocates 63% equities, 22% fixed income and 15% alternatives. It reduces equity downside exposure and keeps bonds underweight. This model is separate from the retail ETF Portfolio funds compared above.",
+        "mix": [
+          {
+            "name": "Equity",
+            "weight": 63
+          },
+          {
+            "name": "Fixed income",
+            "weight": 22
+          },
+          {
+            "name": "Alternatives",
+            "weight": 15
+          }
+        ],
+        "source": {
+          "id": "bmo-outlook"
+        }
+      }
+    },
+    {
+      "id": "scotia",
+      "label": "Scotia",
+      "name": "The Bank of Nova Scotia",
+      "family": "Selected Portfolios",
+      "outlook": {
+        "title": "Monthly Investment Monitor · October 2026",
+        "asOf": "2026-09-30",
+        "scope": "Scotia GAM · multi-asset manager commentary / September market review",
+        "stance": "Diversification and flexible positioning",
+        "summary": "Managers emphasise corporate fundamentals, diversification and flexibility through changing trade conditions. The reviewed monitor does not disclose numerical target allocations for the five profiles.",
+        "mix": null,
+        "source": {
+          "id": "scotia-outlook@005e4f3e76207835"
+        }
+      }
+    },
+    {
+      "id": "cibc",
+      "label": "CIBC",
+      "name": "Canadian Imperial Bank of Commerce",
+      "family": "Managed Portfolios",
+      "outlook": {
+        "title": "Perspectives: Quarterly economic and market outlook — Summer 2026",
+        "asOf": "2026-08-26",
+        "scope": "CIBC GAM · publication date / observation date shown; open source for full positioning",
+        "stance": "Latest publisher outlook",
+        "summary": "Publisher excerpt: “Explore our Summer 2026 outlook, featuring a tactical equity overweight, a neutral U.S. dollar view, and broadening global market opportunities.…”",
+        "mix": null,
+        "source": {
+          "id": "cibc-outlook@7e745dbd622320ea"
+        },
+        "summaryKind": "excerpt"
+      }
+    }
+  ],
+  "sync": {
+    "schema": 1,
+    "cadenceHours": 24,
+    "status": "partial",
+    "checkedAt": "2026-10-18T04:03:25.276382Z",
+    "updatedAt": "2026-10-18T04:03:25.276382Z",
+    "checks": [
+      {
+        "id": "rbc-income",
+        "label": "RBC Select Very Conservative Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-income-risk",
+        "label": "RBC Select Very Conservative Portfolio · risk",
+        "status": "ready",
+        "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-conservative",
+        "label": "RBC Select Conservative Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-conservative-risk",
+        "label": "RBC Select Conservative Portfolio · risk",
+        "status": "ready",
+        "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-balanced",
+        "label": "RBC Select Balanced Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-balanced-risk",
+        "label": "RBC Select Balanced Portfolio · risk",
+        "status": "ready",
+        "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-growth",
+        "label": "RBC Select Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-growth-risk",
+        "label": "RBC Select Growth Portfolio · risk",
+        "status": "ready",
+        "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-equity",
+        "label": "RBC Select Aggressive Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-equity-risk",
+        "label": "RBC Select Aggressive Growth Portfolio · risk",
+        "status": "ready",
+        "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "scotia-income",
+        "label": "Scotia Selected Income Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "scotia-conservative",
+        "label": "Scotia Selected Balanced Income Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "scotia-balanced",
+        "label": "Scotia Selected Balanced Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "scotia-growth",
+        "label": "Scotia Selected Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "scotia-equity",
+        "label": "Scotia Selected Maximum Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cibc-income",
+        "label": "CIBC Managed Income Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cibc-conservative",
+        "label": "CIBC Managed Income Plus Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cibc-balanced",
+        "label": "CIBC Managed Balanced Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cibc-growth",
+        "label": "CIBC Managed Balanced Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cibc-equity",
+        "label": "CIBC Managed Growth Plus Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-income",
+        "label": "TD Comfort Conservative Income Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-income-facts",
+        "label": "TD Comfort Conservative Income Portfolio · fees / risk",
+        "status": "ready",
+        "message": "Retail Fund Facts identity, MER and risk validated.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-conservative",
+        "label": "TD Comfort Balanced Income Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-conservative-facts",
+        "label": "TD Comfort Balanced Income Portfolio · fees / risk",
+        "status": "ready",
+        "message": "Retail Fund Facts identity, MER and risk validated.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-balanced",
+        "label": "TD Comfort Balanced Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-balanced-facts",
+        "label": "TD Comfort Balanced Growth Portfolio · fees / risk",
+        "status": "ready",
+        "message": "Retail Fund Facts identity, MER and risk validated.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-growth",
+        "label": "TD Comfort Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-growth-facts",
+        "label": "TD Comfort Growth Portfolio · fees / risk",
+        "status": "ready",
+        "message": "Retail Fund Facts identity, MER and risk validated.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-equity",
+        "label": "TD Comfort Aggressive Growth Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-equity-facts",
+        "label": "TD Comfort Aggressive Growth Portfolio · fees / risk",
+        "status": "ready",
+        "message": "Retail Fund Facts identity, MER and risk validated.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "bmo-income",
+        "label": "BMO Income ETF Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "bmo-conservative",
+        "label": "BMO Conservative ETF Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "bmo-balanced",
+        "label": "BMO Balanced ETF Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "bmo-growth",
+        "label": "BMO Growth ETF Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "bmo-equity",
+        "label": "BMO Equity Growth ETF Portfolio",
+        "status": "ready",
+        "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cohort",
+        "label": "Comparable return cohort / common mix",
+        "status": "ready",
+        "message": "25 retail portfolios and common CAD reference validated at 2025-12-31.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "rbc-outlook",
+        "label": "RBC · latest outlook",
+        "status": "ready",
+        "message": "Official index, publication identity and explicit date checked.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "td-outlook",
+        "label": "TD · latest outlook",
+        "status": "ready",
+        "message": "Official index, publication identity and explicit date checked.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "bmo-outlook",
+        "label": "BMO · latest outlook",
+        "status": "retained",
+        "message": "Explicit outlook date missing. Last verified data retained.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": null
+      },
+      {
+        "id": "scotia-outlook",
+        "label": "Scotia · latest outlook",
+        "status": "ready",
+        "message": "Official index, publication identity and explicit date checked.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      },
+      {
+        "id": "cibc-outlook",
+        "label": "CIBC · latest outlook",
+        "status": "ready",
+        "message": "Official index, publication identity and explicit date checked.",
+        "checkedAt": "2026-10-18T04:03:25.276382Z",
+        "lastSuccessAt": "2026-10-18T04:03:25.276382Z"
+      }
+    ]
+  }
+}
