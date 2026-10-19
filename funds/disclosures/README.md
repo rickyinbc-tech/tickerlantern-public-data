@@ -36,7 +36,7 @@ checks have their own independent provenance.
 Workflow `389619379` is active, daily **06:43 UTC**, sharing concurrency group
 `public-financial-refresh` with the existing data publishers. Initial manual run:
 https://github.com/rickyinbc-tech/tickerlantern-public-data/actions/runs/39285363549.
-The run completed successfully at 2026-10-19T16:40:25Z. The actual public feed was read
+The run completed successfully at 2026-10-19T16:26:36Z (aggregate success verified at 16:40:25Z). The actual public feed was read
 back: both sources ready, all 191 remote holding-pack hashes verified, and a
 457-position exact-accession sample loaded in the real client. Original source/check receipts are retained
 as GitHub artifacts for 14 days, separate from the persistent public objects.
