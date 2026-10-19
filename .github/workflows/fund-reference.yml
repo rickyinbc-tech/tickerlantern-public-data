@@ -1,0 +1,70 @@
+name: Refresh public fund reference
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 5 * * *'
+permissions:
+  contents: write
+# All publishers share the existing writer lock; unrelated data stays intact.
+concurrency:
+  group: public-financial-refresh
+  cancel-in-progress: false
+jobs:
+  refresh-fund-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify reference parsing and last-success retention
+        run: python funds/test_refresh.py -v
+      - name: Refresh complete official SEC reference files
+        env:
+          SEC_USER_AGENT: TickerLantern Fund Research (https://tickerlantern.com; support@tickerlantern.com)
+        run: |
+          python -u funds/refresh.py data/fund-reference.json "$RUNNER_TEMP/fund-reference-next.json" --raw-directory "$RUNNER_TEMP/fund-reference-raw"
+      - name: Preserve original public sources and source hashes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fund-reference-sources-${{ github.run_id }}
+          path: ${{ runner.temp }}/fund-reference-raw/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Publish verified reference and explicit source-check status
+        run: |
+          python - <<'PY'
+          import importlib.util, json, os
+          from pathlib import Path
+          spec=importlib.util.spec_from_file_location('fund_reference','funds/refresh.py')
+          module=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          data=json.loads((Path(os.environ['RUNNER_TEMP'])/'fund-reference-next.json').read_text())
+          module.publish(data,Path('data/fund-reference.json'))
+          PY
+          git config user.name "TickerLantern data refresh"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fund-reference.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh dated public SEC fund reference"
+            git push
+          fi
+      - name: Report actual coverage and fail if all requests failed
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data=json.loads(Path('data/fund-reference.json').read_text())
+          ready=sum(check['status']=='ready' for check in data['sync']['checks'])
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as summary:
+              summary.write(f"Fund reference: {data['sync']['status']}; {ready}/2 source checks validated.\n\n")
+              summary.write(f"Native SEC series: {data['stats']['series']}; class records: {data['stats']['classes']}; ticker references: {data['stats']['tickerReferences']}. These are reference identities, not complete financial data or all mutual funds.\n\n")
+              for check in data['sync']['checks']:
+                  summary.write(f"- {check['id']}: {check['status']} — {check['message']}\n")
+          if not ready:
+              raise SystemExit('All fund-reference source checks failed; explicit error status and any last verified components were published.')
+          PY
