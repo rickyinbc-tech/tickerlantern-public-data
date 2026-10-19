@@ -1,0 +1,108 @@
+name: Refresh GLEIF fund identities
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '13 6 * * *'
+permissions:
+  contents: write
+# All publishers use the same writer lock; the commit touches only this source.
+concurrency:
+  group: public-financial-refresh
+  cancel-in-progress: false
+jobs:
+  refresh-gleif-fund-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify identity, pagination, dates and last-success retention
+        run: |
+          python funds/test_gleif_catalog.py -v
+          python funds/test_gleif_refresh.py -v
+      - name: Restore verified, resumable source pages
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/gleif-source-pages
+          key: gleif-source-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            gleif-source-v1-${{ runner.os }}-
+      - name: Refresh complete dated official GLEIF directory
+        id: refresh
+        continue-on-error: true
+        run: |
+          python -u funds/gleif_refresh.py data/gleif-fund-catalog.json.bin "$RUNNER_TEMP/gleif-next.json" \
+            --cache "$RUNNER_TEMP/gleif-source-pages" \
+            --public-gzip data/gleif-fund-catalog.json.bin \
+            --public-index data/gleif-fund-catalog-index.json
+      - name: Preserve original source pages, hashes and candidate snapshot
+        if: always() && steps.refresh.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: gleif-fund-sources-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/gleif-source-pages/
+            ${{ runner.temp }}/gleif-next.json
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Retain resumable checkpoints after interrupted or failed source checks
+        if: always() && steps.refresh.outcome != 'skipped'
+        run: |
+          python - <<'PY'
+          import os, re, shutil
+          from pathlib import Path
+          root = Path(os.environ['RUNNER_TEMP'])/'gleif-source-pages'
+          versions = sorted((p for p in root.iterdir() if p.is_dir() and re.fullmatch(r'\d{8}T\d{6}Z', p.name)), reverse=True) if root.exists() else []
+          for path in versions[2:]:
+              shutil.rmtree(path)
+          probes = root/'probes'
+          old = sorted((p for p in probes.iterdir() if p.is_dir()), key=lambda p: p.stat().st_mtime, reverse=True) if probes.exists() else []
+          for path in old[2:]:
+              shutil.rmtree(path)
+          PY
+      - name: Save verified checkpoints for the next run
+        if: always() && steps.refresh.outcome != 'skipped'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/gleif-source-pages
+          key: gleif-source-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Publish verified catalog or explicit failed-refresh status
+        if: always() && steps.refresh.outcome != 'skipped'
+        run: |
+          test -f "$RUNNER_TEMP/gleif-next.json"
+          test -f data/gleif-fund-catalog-index.json
+          git config user.name "TickerLantern data refresh"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/gleif-fund-catalog-index.json
+          if test -f data/gleif-fund-catalog.json.bin; then
+            git add data/gleif-fund-catalog.json.bin
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh dated CC0 GLEIF fund identities and source status"
+            git push
+          fi
+      - name: Report actual coverage and require a complete successful refresh
+        if: always() && steps.refresh.outcome != 'skipped'
+        env:
+          REFRESH_OUTCOME: ${{ steps.refresh.outcome }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          candidate = json.loads((Path(os.environ['RUNNER_TEMP'])/'gleif-next.json').read_text())
+          index = json.loads(Path('data/gleif-fund-catalog-index.json').read_text())
+          if index['sync']['checkedAt'] != candidate['sync']['checkedAt']:
+              raise SystemExit('Published status is not from this source check.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write(f"GLEIF source check: {index['sync']['status']}; Golden Copy: {index['sourceAsOf']}.\n\n")
+              summary.write(f"Published Canadian-address FUND identities: {index['stats']['validated']} / source-declared {index['stats']['declared_source_records']}. This is an identity directory, not all Canadian products/series or financial-data completeness.\n\n")
+              summary.write(f"Last successful complete check: {index['sync']['lastSuccessAt']}; current check: {index['sync']['checkedAt']}.\n\n")
+              if index['sync'].get('error'):
+                  summary.write(f"Source error: {index['sync']['error']}\n\n")
+          if index['sync']['status'] != 'ready' or os.environ['REFRESH_OUTCOME'] != 'success':
+              raise SystemExit('Incomplete source refresh; last successful bytes retained and explicit status published.')
+          PY
