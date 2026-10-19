@@ -1,0 +1,64 @@
+name: Refresh public fund disclosures
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 6 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: public-financial-refresh
+  cancel-in-progress: false
+jobs:
+  refresh-disclosures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify parsers, source isolation and last-good retention
+        run: |
+          python -m unittest discover -s funds/disclosures/test -p '*_test.py'
+          python funds/disclosures/scripts/fund-publisher/test_disclosure_refresh.py
+      - name: Check fresh official ZIPs and prepare immutable disclosure objects
+        env:
+          SEC_USER_AGENT: TickerLantern Fund Research (https://tickerlantern.com; support@tickerlantern.com)
+        run: |
+          python -u funds/disclosures/scripts/fund-publisher/disclosure_refresh.py --output data/fund-disclosures --work "$RUNNER_TEMP/fund-disclosure-source-check"
+      - name: Preserve original sources, hashes and check receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fund-disclosure-sources-${{ github.run_id }}
+          path: ${{ runner.temp }}/fund-disclosure-source-check/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Publish validated objects and explicit source failure status
+        run: |
+          git config user.name "TickerLantern data refresh"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fund-disclosures
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh bounded SEC fund disclosure batches"
+            git push
+          fi
+      - name: Report actual source outcomes
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data=json.loads(Path('data/fund-disclosures/index.json').read_text())
+          failures=[]
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as summary:
+              summary.write('Latest N-MFP and N-CEN batches only. N-PORT, historical backfills, Canadian product coverage and unavailable financial fields are separate.\n\n')
+              for kind, meta in data['sources'].items():
+                  status=meta['sync']['status']
+                  summary.write(f"- {kind}: {status}; source counts {meta.get('counts')}; last success {meta['sync'].get('lastSuccessAt')}.\n")
+                  if status!='ready':
+                      failures.append(kind+': '+meta['sync'].get('error','unknown source error'))
+          if failures:
+              raise SystemExit('Source checks failed; any valid previous objects and explicit error statuses were preserved: '+'; '.join(failures))
+          PY
