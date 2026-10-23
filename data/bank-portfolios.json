@@ -47,265 +47,259 @@
     "rbc-income@5ca11111a94a1c31": {
       "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf209_e.pdf",
       "title": "RBC Select Very Conservative Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "5ca11111a94a1c312f44df3891da04809540fb0552f7c299835f0f46dc85bc23",
       "pages": 9
     },
     "rbc-conservative@89c1ffc70f01746a": {
       "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf461_e.pdf",
       "title": "RBC Select Conservative Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "89c1ffc70f01746a27d35365acb75aa6dd8c45161f642b44dbd7df201e40342a",
       "pages": 9
     },
     "rbc-balanced@f1ff0633ab86db6f": {
       "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf460_e.pdf",
       "title": "RBC Select Balanced Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "f1ff0633ab86db6ff5e92aae32bdf7fee592dd1023409eda00ff11167a0f8b2c",
       "pages": 9
     },
     "rbc-growth@7dd531ad09d33c6f": {
       "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf459_e.pdf",
       "title": "RBC Select Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "7dd531ad09d33c6f76bffffa40bf9716e17a1d5afcd8310eb7ad20b018b6e3b8",
       "pages": 9
     },
     "rbc-equity@fc5850b8cce59857": {
       "url": "https://funds.rbcgam.com/pdf/mrfp/annual/rbf592_e.pdf",
       "title": "RBC Select Aggressive Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "fc5850b8cce598571c8aa6c84b3496dd11230abe406f85a91f1e8d29fb0d6965",
       "pages": 8
     },
     "scotia-income@64b1373f7e547486": {
       "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedIncomePort.pdf",
       "title": "Scotia Selected Income Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "64b1373f7e5474869890f52e135e47dcef625f16e50704985c1e8960ffca5fa3",
       "pages": 8
     },
     "scotia-conservative@4859ef63cf495e13": {
       "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedBalIncomePort.pdf",
       "title": "Scotia Selected Balanced Income Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "4859ef63cf495e13b06057186bb8eb515e2f96a90efc047839302094c0365adc",
       "pages": 8
     },
     "scotia-balanced@97c9919931fa89d6": {
       "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedBalGrowthPort.pdf",
       "title": "Scotia Selected Balanced Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "97c9919931fa89d665a16bbb11ad5035cf5170dc34a1ad0019d9678eaa468e78",
       "pages": 8
     },
     "scotia-growth@26d87137b64b9c55": {
       "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedGrowthPort.pdf",
       "title": "Scotia Selected Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "26d87137b64b9c555f49e67d724d890adf90fc46362099abc7aeeac48e3b2b75",
       "pages": 8
     },
     "scotia-equity@ed068d1f2aad7ef5": {
       "url": "https://www.scotiafunds.com/content/dam/scotiafunds/documents/annual-mrfps/SelectedMaxGrowthPort.pdf",
       "title": "Scotia Selected Maximum Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "ed068d1f2aad7ef565e0ac2eca929bd56555fa148eb99f7d46a4a8caf008343a",
       "pages": 8
     },
     "cibc-income@a9592e398fd8c23b": {
       "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-i-en.pdf",
       "title": "CIBC Managed Income Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "a9592e398fd8c23b75756333ca08d7882f5a617262fe6b8028b64377212d8f08",
       "pages": 11
     },
     "cibc-conservative@3b075934025eecc1": {
       "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-ip-en.pdf",
       "title": "CIBC Managed Income Plus Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "3b075934025eecc11e96517e3b37db55fecc496ede0327865c629e7d121e82e0",
       "pages": 11
     },
     "cibc-balanced@0324222949fc1649": {
       "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-b-en.pdf",
       "title": "CIBC Managed Balanced Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "0324222949fc1649b0901292fc20f9f83fd4fecedc68ae1ff068f5a471fb9fb8",
       "pages": 13
     },
     "cibc-growth@8714e1f1fb66e9e6": {
       "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-bg-en.pdf",
       "title": "CIBC Managed Balanced Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "8714e1f1fb66e9e683a167bdff25882d3646372287b53f23d2c6e295aae224fb",
       "pages": 13
     },
     "cibc-equity@f52c2b853c9e6615": {
       "url": "https://www.cibc.com/content/dam/personal_banking/investments/pdfs/mutual_funds/articles/fund-mrfp-annual/mrfp-mps-ag-en.pdf",
       "title": "CIBC Managed Growth Plus Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "f52c2b853c9e6615d976430f11fb3f8fe0feaff03ddc861f2369122d851ae2ad",
       "pages": 12
     },
     "td-income@4803df6d12b7b0a2": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfcsvincae-en.pdf",
       "title": "TD Comfort Conservative Income Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "4803df6d12b7b0a2f8bd889216fb731c4bf33c05306010e8217381f1987e6497",
       "pages": 8
     },
     "td-ff-income@30f794944aaa5d5a": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb2440e-en.pdf",
       "title": "TD Comfort Conservative Income Portfolio · Investor Series Fund Facts",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "30f794944aaa5d5a1b228f4f7bc79df5f1d9c3c4de2b445c1b63eac60ea09ff3",
       "pages": 3
     },
     "td-conservative@ccc928038f6cd2ae": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfbincae-en.pdf",
       "title": "TD Comfort Balanced Income Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "ccc928038f6cd2ae5254297f349443648ce6dd7eb8c5ebe5e1a7c616ab8cd82d",
       "pages": 9
     },
     "td-ff-conservative@a00c14494e6b9c06": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb885e-en.pdf",
       "title": "TD Comfort Balanced Income Portfolio · Investor Series Fund Facts",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "a00c14494e6b9c0639e119fe5b972c72aa3d879a977650f23f295625d7020549",
       "pages": 3
     },
     "td-balanced@61e8f934994761db": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfbgwae-en.pdf",
       "title": "TD Comfort Balanced Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "61e8f934994761db25ae19dce74713b59ce0b621219112f195789a14cb4e61dc",
       "pages": 9
     },
     "td-ff-balanced@a6ba143e0ecf18e3": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb887e-en.pdf",
       "title": "TD Comfort Balanced Growth Portfolio · Investor Series Fund Facts",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "a6ba143e0ecf18e358cd76a9b7f9ef5a18d040ba0c3ae6cfde429883c742cd00",
       "pages": 3
     },
     "td-growth@33652075cb491bdd": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfgwtae-en.pdf",
       "title": "TD Comfort Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "33652075cb491bddc00ac713350262b47fbbdf022a12d52738bb576d0977a07a",
       "pages": 9
     },
     "td-ff-growth@6238d5ec461c581f": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb888e-en.pdf",
       "title": "TD Comfort Growth Portfolio · Investor Series Fund Facts",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "6238d5ec461c581f454f2a1a365f80891d10d540dca13767ded6f0c7b15be8ad",
       "pages": 3
     },
     "td-equity@ae618169c82073cb": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/mftmrfpcomfaggwae-en.pdf",
       "title": "TD Comfort Aggressive Growth Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "ae618169c82073cb2a2ded9ab5c88c4fa679e4c3aefeccd68b7da5faa4d83545",
       "pages": 9
     },
     "td-ff-equity@5fb56c87d72d1484": {
       "url": "https://www.td.com/content/dam/tdam/ca/en/pdf/tdb889e-en.pdf",
       "title": "TD Comfort Aggressive Growth Portfolio · Investor Series Fund Facts",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "5fb56c87d72d14849a68a69d620431992aa042583a4d6fbc8cc9d7bbcd986823",
       "pages": 3
     },
     "bmo-ff-Income@146dc2725e5d5a75": {
       "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Income_ETF_Portfolio-EN-Series_A.pdf",
       "title": "BMO Income ETF Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "146dc2725e5d5a7591ae3eb143362a760ccd8a5fd6d287673e755bb7392c2c61",
       "pages": 3
     },
     "bmo-ff-Conservative@1dc96360221b1969": {
       "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Conservative_ETF_Portfolio-EN-Series_A.pdf",
       "title": "BMO Conservative ETF Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "1dc96360221b1969ed7ff60554f3d3e2f648226368f215b99e9e7ef8c2ec13bf",
       "pages": 3
     },
     "bmo-ff-Balanced@cf07cbbab6740972": {
       "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Balanced_ETF_Portfolio-EN-Series_A.pdf",
       "title": "BMO Balanced ETF Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "cf07cbbab67409727d9298e0b4e9a05b23b4aeb8a1b39dac863a4118f201a344",
       "pages": 3
     },
     "bmo-ff-Growth@8ae4363441c73f3e": {
       "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Growth_ETF_Portfolio-EN-Series_A.pdf",
       "title": "BMO Growth ETF Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "8ae4363441c73f3e1a274d3b094af585d1521cd6f05e09fce058b73bbb3321d0",
       "pages": 3
     },
     "bmo-ff-Equity_Growth@543695c1b0da8536": {
       "url": "https://fundfacts.bmo.com/RetailEnglish/BMO_Equity_Growth_ETF_Portfolio-EN-Series_A.pdf",
       "title": "BMO Equity Growth ETF Portfolio · annual performance 2025-12-31",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "543695c1b0da8536def0a592c8b82f3e96ca9113984096029aea47c26bef432b",
       "pages": 3
     },
     "corra@ae99e07ed006960b": {
       "url": "https://www.bankofcanada.ca/valet/observations/group/CORRA/json?start_date=2015-12-30&end_date=2025-12-31",
       "title": "Bank of Canada · historical daily CORRA",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "ae99e07ed006960ba808bcc5d42c50061bef0ab2397e46baf25dda62f15a1708"
     },
     "td-outlook@b243281e97768dd1": {
       "url": "https://www.td.com/ca/en/asset-management/insights/articles/monthly-portfolio-outlook",
       "title": "TD · Monthly Portfolio Outlook",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "b243281e97768dd18bfe8eee724f5d065cac58e6eee409dab00b8ddbc644674c"
     },
     "rbc-monthly-income@c2aeeb8db64b5e1a": {
       "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf209_e.pdf",
       "title": "RBC Select Very Conservative Portfolio · monthly profile",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "c2aeeb8db64b5e1a11627030350528e93b07a810c318e840e31a8b31818cc8f2",
       "pages": 3
     },
     "rbc-monthly-conservative@ec75f6bea500d693": {
       "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf461_e.pdf",
       "title": "RBC Select Conservative Portfolio · monthly profile",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "ec75f6bea500d693cec727ada950a71159f44f892beb2ccc998cbca77b619916",
       "pages": 3
     },
     "rbc-monthly-balanced@02ea2e4b71fe2577": {
       "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf460_e.pdf",
       "title": "RBC Select Balanced Portfolio · monthly profile",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "02ea2e4b71fe2577ae7d7cfd2089ed69c211ae151637d12c67d74e8a42856902",
       "pages": 3
     },
     "rbc-monthly-growth@54fda5aa2d9092cf": {
       "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf459_e.pdf",
       "title": "RBC Select Growth Portfolio · monthly profile",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "54fda5aa2d9092cface0ed9fedc0111088b5beb820da1c05152672287a1830bd",
       "pages": 3
     },
     "rbc-monthly-equity@141af78e3ee2b47d": {
       "url": "https://www.rbcgam.com/documents/fund-pages/monthly/rbf592_e.pdf",
       "title": "RBC Select Aggressive Growth Portfolio · monthly profile",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
       "sha256": "141af78e3ee2b47da36f1dc069ad1252ebebca4abe47a422d669e390210770b9",
       "pages": 3
-    },
-    "scotia-outlook@774884c8551205f6": {
-      "url": "https://www.scotiafunds.com/en/home/news-insights/report.mim-october-2026.html",
-      "title": "Scotia · Monthly Investment Monitor - October 2026",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
-      "sha256": "774884c8551205f68cfec2a32ad0791802b47cca200287d8f1599ff1c2ed50fa"
     },
     "rbc-outlook@8537c63538773cad": {
       "url": "https://www.rbcgam.com/en/ca/article/executive-summary-fall-2026/detail",
@@ -313,11 +307,17 @@
       "checkedAt": "2026-10-22T12:31:05.484743Z",
       "sha256": "8537c63538773cad6fcb91296714454a1d53048dcd8115d88c1ca4b03c37b3d6"
     },
-    "cibc-outlook@9e732f9ea5b51f68": {
+    "scotia-outlook@2c3ef149b43d9819": {
+      "url": "https://www.scotiafunds.com/en/home/news-insights/report.mim-october-2026.html",
+      "title": "Scotia · Monthly Investment Monitor - October 2026",
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
+      "sha256": "2c3ef149b43d9819089dff66279e03bf731c3f8f62c75f720873923b1e53078b"
+    },
+    "cibc-outlook@0d832bdcb51a1d9c": {
       "url": "https://www.cibc.com/en/gam/insights/markets-and-economy/quarterly-economic-market-outlook.html",
       "title": "CIBC · Perspectives: Quarterly economic and market outlook — Summer 2026",
-      "checkedAt": "2026-10-22T12:31:05.484743Z",
-      "sha256": "9e732f9ea5b51f68f285d122cc4990b580c7762739e1a57c12e7a0857c53c4c9"
+      "checkedAt": "2026-10-23T12:11:26.260570Z",
+      "sha256": "0d832bdcb51a1d9ca3eb0ef782c7ffd04bffc091f80ee567e0e7a3ed31f8cc1c"
     }
   },
   "portfolios": [
@@ -2596,7 +2596,7 @@
         "summary": "Publisher excerpt: “September saw broad weakness across equity and fixed income markets as investors navigated a challenging macroeconomic backdrop. Rising bond yields, persistent inflation concerns and…”",
         "mix": null,
         "source": {
-          "id": "scotia-outlook@774884c8551205f6"
+          "id": "scotia-outlook@2c3ef149b43d9819"
         },
         "summaryKind": "excerpt"
       }
@@ -2614,7 +2614,7 @@
         "summary": "Publisher excerpt: “Explore our Summer 2026 outlook, featuring a tactical equity overweight, a neutral U.S. dollar view, and broadening global market opportunities.…”",
         "mix": null,
         "source": {
-          "id": "cibc-outlook@9e732f9ea5b51f68"
+          "id": "cibc-outlook@0d832bdcb51a1d9c"
         },
         "summaryKind": "excerpt"
       }
@@ -2624,303 +2624,303 @@
     "schema": 1,
     "cadenceHours": 24,
     "status": "partial",
-    "checkedAt": "2026-10-22T12:31:05.484743Z",
-    "updatedAt": "2026-10-22T12:31:05.484743Z",
+    "checkedAt": "2026-10-23T12:11:26.260570Z",
+    "updatedAt": "2026-10-23T12:11:26.260570Z",
     "checks": [
       {
         "id": "rbc-income",
         "label": "RBC Select Very Conservative Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-income-risk",
         "label": "RBC Select Very Conservative Portfolio · risk",
         "status": "ready",
         "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-conservative",
         "label": "RBC Select Conservative Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-conservative-risk",
         "label": "RBC Select Conservative Portfolio · risk",
         "status": "ready",
         "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-balanced",
         "label": "RBC Select Balanced Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-balanced-risk",
         "label": "RBC Select Balanced Portfolio · risk",
         "status": "ready",
         "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-growth",
         "label": "RBC Select Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-growth-risk",
         "label": "RBC Select Growth Portfolio · risk",
         "status": "ready",
         "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-equity",
         "label": "RBC Select Aggressive Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-equity-risk",
         "label": "RBC Select Aggressive Growth Portfolio · risk",
         "status": "ready",
         "message": "Monthly profile identity and risk label validated; annual returns stay separate.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "scotia-income",
         "label": "Scotia Selected Income Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "scotia-conservative",
         "label": "Scotia Selected Balanced Income Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "scotia-balanced",
         "label": "Scotia Selected Balanced Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "scotia-growth",
         "label": "Scotia Selected Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "scotia-equity",
         "label": "Scotia Selected Maximum Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cibc-income",
         "label": "CIBC Managed Income Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cibc-conservative",
         "label": "CIBC Managed Income Plus Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cibc-balanced",
         "label": "CIBC Managed Balanced Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cibc-growth",
         "label": "CIBC Managed Balanced Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cibc-equity",
         "label": "CIBC Managed Growth Plus Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-income",
         "label": "TD Comfort Conservative Income Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-income-facts",
         "label": "TD Comfort Conservative Income Portfolio · fees / risk",
         "status": "ready",
         "message": "Retail Fund Facts identity, MER and risk validated.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-conservative",
         "label": "TD Comfort Balanced Income Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-conservative-facts",
         "label": "TD Comfort Balanced Income Portfolio · fees / risk",
         "status": "ready",
         "message": "Retail Fund Facts identity, MER and risk validated.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-balanced",
         "label": "TD Comfort Balanced Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-balanced-facts",
         "label": "TD Comfort Balanced Growth Portfolio · fees / risk",
         "status": "ready",
         "message": "Retail Fund Facts identity, MER and risk validated.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-growth",
         "label": "TD Comfort Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-growth-facts",
         "label": "TD Comfort Growth Portfolio · fees / risk",
         "status": "ready",
         "message": "Retail Fund Facts identity, MER and risk validated.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-equity",
         "label": "TD Comfort Aggressive Growth Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "td-equity-facts",
         "label": "TD Comfort Aggressive Growth Portfolio · fees / risk",
         "status": "ready",
         "message": "Retail Fund Facts identity, MER and risk validated.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "bmo-income",
         "label": "BMO Income ETF Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "bmo-conservative",
         "label": "BMO Conservative ETF Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "bmo-balanced",
         "label": "BMO Balanced ETF Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "bmo-growth",
         "label": "BMO Growth ETF Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "bmo-equity",
         "label": "BMO Equity Growth ETF Portfolio",
         "status": "ready",
         "message": "Official annual returns validated at 2025-12-31; graphs advance only with the complete common-date cohort.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cohort",
         "label": "Comparable return cohort / common mix",
         "status": "ready",
         "message": "25 retail portfolios and common CAD reference validated at 2025-12-31.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "rbc-outlook",
         "label": "RBC · latest outlook",
-        "status": "ready",
-        "message": "Official index, publication identity and explicit date checked.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
+        "status": "retained",
+        "message": "Latest outlook link not found on official index. Last verified data retained.",
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
         "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
       },
       {
@@ -2928,15 +2928,15 @@
         "label": "TD · latest outlook",
         "status": "ready",
         "message": "Official index, publication identity and explicit date checked.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "bmo-outlook",
         "label": "BMO · latest outlook",
         "status": "retained",
         "message": "Explicit outlook date missing. Last verified data retained.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
         "lastSuccessAt": null
       },
       {
@@ -2944,16 +2944,16 @@
         "label": "Scotia · latest outlook",
         "status": "ready",
         "message": "Official index, publication identity and explicit date checked.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       },
       {
         "id": "cibc-outlook",
         "label": "CIBC · latest outlook",
         "status": "ready",
         "message": "Official index, publication identity and explicit date checked.",
-        "checkedAt": "2026-10-22T12:31:05.484743Z",
-        "lastSuccessAt": "2026-10-22T12:31:05.484743Z"
+        "checkedAt": "2026-10-23T12:11:26.260570Z",
+        "lastSuccessAt": "2026-10-23T12:11:26.260570Z"
       }
     ]
   }
